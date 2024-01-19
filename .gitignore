@@ -1,0 +1,15 @@
+# Intellij
+.idea
+*.iml
+*.ipr
+
+# Node
+dist
+node_modules
+
+#Yarn
+.yarn
+
+.env.local
+luxe-jahia-demo-v*
+/.idea/
