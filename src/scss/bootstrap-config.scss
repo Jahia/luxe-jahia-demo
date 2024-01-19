@@ -1,0 +1,46 @@
+
+// COLORS
+// TODO: Use css custom properties instead, for demo purpose.
+$color-darkBlue: #1B1A4E;
+$color-darkBlue60:#767695;
+$color-darkBlue40: #A4A3B8;
+$color-gold: #C29B40;
+$color-gold-rgb: '194, 155, 64';
+$color-gray: #F6F6F6;
+$color-dark: #393847;
+$color-dark-rgb: '57, 56, 71';
+
+$font-family-display: 'Playfair Display', serif;
+$font-family-base:'Inter', 'Helvetica', sans-serif;
+
+$green: #62b569;
+$red: #cc1818;
+$yellow: #fdf05e;
+$cyan: #16cacf;
+
+
+$shadow-box: 4px 6px 17px 15px rgba(35, 33, 110, 0.10);
+
+// Configure bootstrap theme
+$primary: $color-gold;
+$color-hovered: $color-darkBlue40;
+
+$paragraph-margin-bottom: 2rem;
+
+
+// FONTS
+$link-color: $color-gold;
+
+
+$hr-border-color: $color-gold;
+
+
+
+$navbar-light-color: $color-darkBlue;
+$navbar-light-hover-color: $color-hovered;
+$nav-link-font-size: 18px;
+
+
+// Dropdown
+$dropdown-link-hover-color: $color-hovered;
+$dropdown-padding-y: 0;

@@ -1,0 +1,34 @@
+.lux-site-footer {
+    background-color: $color-darkBlue;
+    color: $color-gray;
+    padding-top: 40px;
+
+    a {
+        color: rgba($color-gray, .8);
+        text-decoration: none;
+        font-size: 16px;
+        border: 0;
+
+        &:hover {
+            color: $color-gray;
+            border-bottom: 2px solid $color-gold;
+        }
+    }
+}
+
+.lux-site-footer_disclaimer {
+    font-size: 12px;
+    opacity: .6;
+
+    a {
+        font-size: inherit;
+
+        // &:hover {
+        //     color: currentColor;
+        // }
+    }
+}
+
+.luxsite-footer_disclaimer_seprator {
+    margin: 0 8px;
+}

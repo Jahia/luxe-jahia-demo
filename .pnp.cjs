@@ -36,7 +36,9 @@ const RAW_RUNTIME_STATE =
           ["@jahia/js-server-engine", "npm:1.2.0"],\
           ["@jahia/scripts", "npm:1.3.3"],\
           ["babel-loader", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:8.3.0"],\
+          ["bootstrap", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.3.2"],\
           ["clean-webpack-plugin", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:4.0.0"],\
+          ["clsx", "npm:2.1.0"],\
           ["copy-webpack-plugin", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:10.2.4"],\
           ["dotenv-cli", "npm:4.1.1"],\
           ["eslint", "npm:8.45.0"],\
@@ -45,6 +47,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:4.6.0"],\
           ["extra-watch-webpack-plugin", "npm:1.0.3"],\
           ["graphql", "npm:16.7.1"],\
+          ["prop-types", "npm:15.8.1"],\
           ["react", "npm:17.0.2"],\
           ["styled-jsx", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.1.2"],\
           ["webpack", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.88.2"],\
@@ -4792,6 +4795,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["bootstrap", [\
+      ["npm:5.3.2", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/bootstrap-npm-5.3.2-20b391b636-10c0.zip/node_modules/bootstrap/",\
+        "packageDependencies": [\
+          ["bootstrap", "npm:5.3.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.3.2", {\
+        "packageLocation": "./.yarn/__virtual__/bootstrap-virtual-c2b6159fe4/6/.yarn/berry/cache/bootstrap-npm-5.3.2-20b391b636-10c0.zip/node_modules/bootstrap/",\
+        "packageDependencies": [\
+          ["bootstrap", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.3.2"],\
+          ["@popperjs/core", null],\
+          ["@types/popperjs__core", null]\
+        ],\
+        "packagePeers": [\
+          "@popperjs/core",\
+          "@types/popperjs__core"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["brace-expansion", [\
       ["npm:1.1.11", {\
         "packageLocation": "../../.yarn/berry/cache/brace-expansion-npm-1.1.11-fb95eb05ad-10c0.zip/node_modules/brace-expansion/",\
@@ -5095,6 +5120,15 @@ const RAW_RUNTIME_STATE =
           ["is-plain-object", "npm:2.0.4"],\
           ["kind-of", "npm:6.0.3"],\
           ["shallow-clone", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["clsx", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/clsx-npm-2.1.0-29d286e1de-10c0.zip/node_modules/clsx/",\
+        "packageDependencies": [\
+          ["clsx", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8223,7 +8257,9 @@ const RAW_RUNTIME_STATE =
           ["@jahia/js-server-engine", "npm:1.2.0"],\
           ["@jahia/scripts", "npm:1.3.3"],\
           ["babel-loader", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:8.3.0"],\
+          ["bootstrap", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.3.2"],\
           ["clean-webpack-plugin", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:4.0.0"],\
+          ["clsx", "npm:2.1.0"],\
           ["copy-webpack-plugin", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:10.2.4"],\
           ["dotenv-cli", "npm:4.1.1"],\
           ["eslint", "npm:8.45.0"],\
@@ -8232,6 +8268,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:4.6.0"],\
           ["extra-watch-webpack-plugin", "npm:1.0.3"],\
           ["graphql", "npm:16.7.1"],\
+          ["prop-types", "npm:15.8.1"],\
           ["react", "npm:17.0.2"],\
           ["styled-jsx", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.1.2"],\
           ["webpack", "virtual:51bb26b009fcc22840cc1b6de0981c61392267b17065a9a7cf496a692768231e25c84b8a4768bd6cb98d09f2ed7e107ce626b49af464ed301319f78688f504f8#npm:5.88.2"],\

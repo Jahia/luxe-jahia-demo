@@ -1,7 +1,8 @@
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <jmix = 'http://www.jahia.org/jahia/mix/1.0'>
-<luxeJahiaDemo = 'http://www.acme.org/luxe-jahia-demo/nt/1.0'>
-<luxeJahiaDemomix = 'http://www.acme.org/luxe-jahia-demo/mix/1.0'>
 
-[luxeJahiaDemo:hello] > jnt:content, jmix:droppableContent
+<luxe = 'http://www.jahia.org/jahia/demo/luxe/nt/1.0'>
+<luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
+
+[luxe:hello] > jnt:content, jmix:droppableContent
  - textHello (string) = 'Hello world !' i18n

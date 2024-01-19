@@ -1,0 +1,39 @@
+// Bootstrap configuration
+@import "bootstrap-config";
+
+// Import all of Bootstrap's CSS
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Custom Bootstrap CSS
+@import "bootstrap-custom";
+
+@import "components";
+@import "contentTypes";
+
+
+.lux-cover {
+    position: relative;
+}
+
+.lux-cover_img {
+    border-radius: 0;
+}
+
+.lux-cover_caption {
+    position: absolute;
+    bottom: 33%;
+    left: 120px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, .8);
+    padding: 32px;
+    max-width: 450px;
+    font-size: 40px;
+    line-height: 1.2;
+    font-family: $font-family-display;
+}
+
+.lux-richtext {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}

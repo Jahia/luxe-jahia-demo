@@ -1,19 +1,18 @@
 import React from 'react';
 import {JArea} from '@jahia/js-server-engine';
+import {MainLayout} from '../layouts';
 
 export const PageHome = () => {
-    return (<>
-        <head>
-            <title>Home</title>
-        </head>
-        <body>
+    return (
+        <MainLayout
+            head={<meta name="description" content="hello"/>}
+        >
             <h1>Home Template</h1>
-            <main>
-                <JArea name="pagecontent" />
-            </main>
-        </body>
-    </>);
-}
+            <JArea name="pagecontent"/>
+        </MainLayout>
+
+    );
+};
 
 PageHome.jahiaComponent = {
     id: 'page_home',
@@ -21,4 +20,4 @@ PageHome.jahiaComponent = {
     name: 'home',
     displayName: 'Home React template',
     componentType: 'template'
-}
+};

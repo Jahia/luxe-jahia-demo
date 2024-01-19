@@ -1,0 +1,17 @@
+@use "sass:map";
+
+.lux-image_wrapper {
+    &:not(:first-child) {
+        margin-top: map.get($spacers, "3");
+    }
+}
+.lux-image {
+    max-width: 100%;
+    width: auto;
+    max-height: 400px;
+}
+
+.lux-image_full {
+    width: 100%;
+    max-height: 700px;
+}
