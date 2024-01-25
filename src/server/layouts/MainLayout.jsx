@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Footer, Head} from '../';
+import {Footer, Head} from '../components';
+// Import {JAddResources} from '@jahia/js-server-engine';
 
 export const MainLayout = ({head, navigation, main, footer, children}) => {
     return (
@@ -25,5 +26,6 @@ MainLayout.propTypes = {
     head: PropTypes.element,
     navigation: PropTypes.element.isRequired,
     main: PropTypes.element.isRequired,
-    footer: PropTypes.element
+    footer: PropTypes.element,
+    children: PropTypes.element
 };

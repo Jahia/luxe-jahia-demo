@@ -1,6 +1,6 @@
 import React from 'react';
 import {JArea} from '@jahia/js-server-engine';
-import {MainLayout} from '../layouts';
+import {MainLayout} from '../../layouts';
 
 export const PageHome = () => {
     return (

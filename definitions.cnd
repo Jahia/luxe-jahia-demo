@@ -4,5 +4,17 @@
 <luxe = 'http://www.jahia.org/jahia/demo/luxe/nt/1.0'>
 <luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
 
-[luxe:hello] > jnt:content, jmix:droppableContent
+//jmix:editorialContent
+[luxemix:luxeContent] > jmix:droppableContent mixin
+
+[luxe:hello] > jnt:content, luxemix:luxeContent
  - textHello (string) = 'Hello world !' i18n
+
+[luxe:header] > jnt:content, luxemix:luxeContent
+ - title (string) primary i18n
+ - teaser (string) i18n
+ - image (weakreference, picker[type='image'])
+
+[luxe:highlightNumber] > jnt:content, luxemix:luxeContent
+ - text (string) primary i18n
+ - number (long)
