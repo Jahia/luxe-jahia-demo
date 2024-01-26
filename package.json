@@ -6,7 +6,7 @@
   "scripts": {
     "build-server": "webpack --mode=development",
     "build-client": "webpack --mode=development --config webpack.client.js",
-    "build": "yarn build-server && yarn build-client",
+    "build": "yarn build-client && yarn build-server",
     "deploy": "jahia-deploy pack",
     "watch": "yarn build --env deploy=true --watch",
     "lint": "eslint .",
