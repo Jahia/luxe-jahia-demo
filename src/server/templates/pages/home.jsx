@@ -7,7 +7,6 @@ export const PageHome = () => {
         <MainLayout
             head={<meta name="description" content="hello"/>}
         >
-            <h1>Home Template</h1>
             <JArea name="pagecontent"/>
         </MainLayout>
 
