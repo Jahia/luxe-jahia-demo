@@ -1,3 +1,4 @@
+<j = 'http://www.jahia.org/jahia/1.0'>
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <jmix = 'http://www.jahia.org/jahia/mix/1.0'>
 
@@ -18,3 +19,11 @@
 [luxe:highlightNumber] > jnt:content, luxemix:luxeContent
  - text (string) primary i18n
  - number (long)
+
+[jnt:section] > jnt:content, jmix:layoutComponentContent, mix:title
+ - j:alignment (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
+ + * (jmix:droppableContent) = jmix:droppableContent
+
+[jnt:rowCols] > jnt:content, jmix:layoutComponentContent
+ - j:colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
+ + * (jmix:droppableContent) = jmix:droppableContent

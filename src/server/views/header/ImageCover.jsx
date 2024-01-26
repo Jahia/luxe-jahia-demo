@@ -20,7 +20,7 @@ export const ImageCover = () => {
 };
 
 ImageCover.jahiaComponent = {
-    id: 'default',
+    id: 'imageCoverCmp',
     nodeType: 'luxe:header',
     displayName: 'Image Cover',
     componentType: 'view'

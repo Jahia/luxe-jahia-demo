@@ -18,7 +18,7 @@ HighlightNumber.propTypes = {
 };
 
 HighlightNumber.jahiaComponent = {
-    id: 'default',
+    id: 'highlightNumberCmp',
     nodeType: 'luxe:highlightNumber',
     displayName: 'Default',
     componentType: 'view'
