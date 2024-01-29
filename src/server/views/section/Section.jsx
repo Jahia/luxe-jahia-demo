@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {JRender, JAddContentButtons, useServerContext, getNodeProps, getChildNodes} from '@jahia/js-server-engine';
-import clsx from 'clsx';
+import {
+    useServerContext,
+    getNodeProps,
+    JArea
+} from '@jahia/js-server-engine';
 
 const getAlign = align => {
     switch (align) {
@@ -12,21 +15,13 @@ const getAlign = align => {
     }
 };
 
-export const Section = ({className, ...props}) => {
+export const Section = ({className}) => {
     const {currentNode} = useServerContext();
     const content = getNodeProps(currentNode, ['j:alignment']);
-    const subContents = getChildNodes(currentNode);
-
     return (
         <section className={className}>
             <div className="container">
-                {subContents.map(subContent => (
-                    <div key={subContent.getIdentifier()} className={clsx('row', getAlign(content['j:alignment']))}>
-                        <JRender node={subContent} {...props} view="default"/>
-                    </div>
-                    )
-                )}
-                <JAddContentButtons/>
+                <JArea name="section" alignment={getAlign(content['j:alignment'])}/>
             </div>
         </section>
     );
