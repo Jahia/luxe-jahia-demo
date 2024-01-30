@@ -28,7 +28,7 @@ export const NavMenu = () => {
         >
             <div className="container-fluid gap-5">
                 <a href="/" className="navbar-brand">
-                    <img src={nav.brandImage.getUrl()} alt="" width="100px"/>
+                    <img src={nav.brandImage?.getUrl()} alt="" width="100px"/>
                 </a>
                 <button
                     className="navbar-toggler"

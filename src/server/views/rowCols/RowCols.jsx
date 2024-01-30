@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     useServerContext,
     getNodeProps,
@@ -9,28 +8,24 @@ import clsx from 'clsx';
 
 export const RowCols = () => {
     const {currentNode} = useServerContext();
-    const content = getNodeProps(currentNode, ['j:colsNumber']);
-    const limit = isNaN(parseInt(content['j:colsNumber'], 10)) ? 1 : parseInt(content['j:colsNumber'], 10);
+    const content = getNodeProps(currentNode, ['colsNumber']);
+    const limit = isNaN(parseInt(content.colsNumber, 10)) ? 1 : parseInt(content.colsNumber, 10);
     const cols = Array.from(Array(limit).keys());
     return (
-        <div className={clsx('row')}>
+        <>
             {cols.map(col => (
                 <div key={col} className={clsx('col')}>
                     <JArea name={`${currentNode.getName()}-col-${col}`}/>
                 </div>
             )
             )}
-        </div>
+        </>
     );
-};
-
-RowCols.propTypes = {
-    alignment: PropTypes.string
 };
 
 RowCols.jahiaComponent = {
     id: 'rowColsCmp',
-    nodeType: 'jnt:rowCols',
-    displayName: 'Default',
+    nodeType: 'luxe:rowCols',
+    name: 'default',
     componentType: 'view'
 };

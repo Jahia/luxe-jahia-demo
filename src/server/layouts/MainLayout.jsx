@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import {Footer, Head} from '../components';
 import {JAddContentButtons, JRender} from '@jahia/js-server-engine';
 
-export const navArea = {
+const navArea = {
     name: 'navArea',
-    nodeType: 'jnt:absoluteArea'
-    // Properties: {
-    //     limit: 1
-    // }
+    nodeType: 'jnt:absoluteArea',
+    properties: {
+        'j:allowedTypes': ['luxe:navMenu'],
+        'j:numberOfItems': '1',
+        'j:level': '0'
+    }
 };
 
 export const MainLayout = ({head, footer, children}) => {
@@ -21,6 +23,7 @@ export const MainLayout = ({head, footer, children}) => {
             <body>
                 <JRender content={navArea}/>
                 <JAddContentButtons/>
+                {/* <JAddContentButtons nodeTypes="luxe:navMenu"/> */}
                 <main>
                     {children}
                 </main>

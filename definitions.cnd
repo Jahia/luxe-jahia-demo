@@ -21,10 +21,6 @@
  - brandImage (weakreference, picker[type='image']) < 'jmix:image'
  - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
 
-
-[luxe:hello] > jnt:content, luxemix:luxeContent
- - textHello (string) = 'Hello world !' i18n
-
 [luxe:header] > jnt:content, luxemix:luxeContent
  - title (string) primary i18n
  - teaser (string) i18n
@@ -34,10 +30,9 @@
  - text (string) primary i18n
  - number (long)
 
-[jnt:section] > jnt:content, jmix:layoutComponentContent, mix:title
- - j:alignment (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
- + * (jmix:droppableContent) = jmix:droppableContent
+[luxe:section] > jnt:contentList, luxemix:luxeContent, mix:title
+ - alignment (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
 
-[jnt:rowCols] > jnt:content, jmix:layoutComponentContent
- - j:colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
+[luxe:rowCols] > jnt:content, luxemix:luxeContent
+ - colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
  + * (jmix:droppableContent) = jmix:droppableContent
