@@ -31,11 +31,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
-      - name: Setup corepack
-        run: corepack enable
       - uses: jahia/jahia-modules-action/build-npm@BACKLOG-21836
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
