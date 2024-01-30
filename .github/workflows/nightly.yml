@@ -24,9 +24,9 @@ jobs:
       - uses: jahia/jahia-modules-action/integration-tests@v2
         with:
           module_id: luxe-jahia-demo
-          testrail_project: SAML Module
+          testrail_project: Demo Site NPM
           tests_manifest: provisioning-manifest-snapshot.yml
-          jahia_image: jahia/jahia-discovery-dev:8-SNAPSHOT
+          jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
           should_use_build_artifacts: false
           should_skip_artifacts: true
           should_skip_notifications: false
