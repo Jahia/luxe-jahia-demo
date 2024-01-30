@@ -7,16 +7,16 @@ import {
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
-export const RowCols = ({alignment}) => {
+export const RowCols = () => {
     const {currentNode} = useServerContext();
     const content = getNodeProps(currentNode, ['j:colsNumber']);
     const limit = isNaN(parseInt(content['j:colsNumber'], 10)) ? 1 : parseInt(content['j:colsNumber'], 10);
     const cols = Array.from(Array(limit).keys());
     return (
-        <div className={clsx('row', alignment)}>
+        <div className={clsx('row')}>
             {cols.map(col => (
                 <div key={col} className={clsx('col')}>
-                    <JArea name={`col-${col}`}/>
+                    <JArea name={`${currentNode.getName()}-col-${col}`}/>
                 </div>
             )
             )}

@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Footer, Head} from '../components';
+import {JAddContentButtons, JRender} from '@jahia/js-server-engine';
 
-export const MainLayout = ({head, navigation, footer, children}) => {
+export const navArea = {
+    name: 'navArea',
+    nodeType: 'jnt:absoluteArea'
+    // Properties: {
+    //     limit: 1
+    // }
+};
+
+export const MainLayout = ({head, footer, children}) => {
     return (
         <>
             <Head>
@@ -10,7 +19,8 @@ export const MainLayout = ({head, navigation, footer, children}) => {
                 {head}
             </Head>
             <body>
-                {navigation}
+                <JRender content={navArea}/>
+                <JAddContentButtons/>
                 <main>
                     {children}
                 </main>
@@ -23,7 +33,6 @@ export const MainLayout = ({head, navigation, footer, children}) => {
 
 MainLayout.propTypes = {
     head: PropTypes.element,
-    navigation: PropTypes.element.isRequired,
     footer: PropTypes.element,
-    children: PropTypes.element
+    children: PropTypes.node
 };

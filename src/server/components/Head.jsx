@@ -12,5 +12,5 @@ export const Head = ({children}) => {
 };
 
 Head.propTypes = {
-    children: PropTypes.element
+    children: PropTypes.node
 };

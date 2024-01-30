@@ -6,22 +6,22 @@ import {
     JArea
 } from '@jahia/js-server-engine';
 
-const getAlign = align => {
-    switch (align) {
-        case 'left': return 'align-items-start';
-        case 'center': return 'align-items-center';
-        case 'right': return 'align-items-end';
-        default: return '';
-    }
-};
+// Const getAlign = align => {
+//     switch (align) {
+//         case 'left': return 'align-items-start';
+//         case 'center': return 'align-items-center';
+//         case 'right': return 'align-items-end';
+//         default: return '';
+//     }
+// };
 
 export const Section = ({className}) => {
     const {currentNode} = useServerContext();
-    const content = getNodeProps(currentNode, ['j:alignment']);
+    // Const content = getNodeProps(currentNode, ['j:alignment']);
     return (
         <section className={className}>
             <div className="container">
-                <JArea name="section" alignment={getAlign(content['j:alignment'])}/>
+                <JArea name={`${currentNode.getName()}-row`}/>
             </div>
         </section>
     );
