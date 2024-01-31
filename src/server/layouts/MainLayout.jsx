@@ -1,19 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Footer, Head} from '../components';
-import {JAddContentButtons, JRender} from '@jahia/js-server-engine';
+import {Footer, Head, NavMenu} from '../components';
+import {JAddContentButtons, JRender, useServerContext} from '@jahia/js-server-engine';
 
-const navArea = {
-    name: 'navArea',
-    nodeType: 'jnt:absoluteArea',
+// Const navArea = {
+//     name: 'navArea',
+//     nodeType: 'jnt:absoluteArea',
+//     properties: {
+//         'j:allowedTypes': ['luxe:navMenu'],
+//         'j:numberOfItems': '1',
+//         'j:level': '0'
+//     }
+// };
+
+const navMenu = {
+    name: 'navMenu',
+    nodeType: 'luxe:navMenu',
+    mixins: ['jmix:renderable'],
     properties: {
-        'j:allowedTypes': ['luxe:navMenu'],
-        'j:numberOfItems': '1',
-        'j:level': '0'
+        base: 'home',
+        maxDepth: '2',
+        startLevel: '0',
+        menuItemView: 'menuElement'
     }
 };
 
+// Const navMainArea = {
+//     name: 'navMainArea',
+//     nodeType: 'jnt:Area',
+//     properties: {
+//         allowedTypes: ['luxe:navMenu'],
+//         numberOfItems: '1'
+//     }
+// };
+
 export const MainLayout = ({head, footer, children}) => {
+    // Const {renderContext} = useServerContext();
+    // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
     return (
         <>
             <Head>
@@ -21,8 +44,9 @@ export const MainLayout = ({head, footer, children}) => {
                 {head}
             </Head>
             <body>
-                <JRender content={navArea}/>
-                <JAddContentButtons/>
+                <NavMenu/>
+                {/* <JRender content={navMenu}/> */}
+                {/* <JAddContentButtons/> */}
                 {/* <JAddContentButtons nodeTypes="luxe:navMenu"/> */}
                 <main>
                     {children}

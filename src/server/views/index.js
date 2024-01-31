@@ -1,7 +1,7 @@
 export * from './header';
 export * from './section';
-export * from './rowCols';
+export * from './cols';
 export * from './highlightNumber';
-export * from './navMenu';
+// Export * from './navMenu';
 export * from './contentList';
 

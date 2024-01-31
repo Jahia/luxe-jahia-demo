@@ -3,17 +3,20 @@ import {useServerContext, getNodeProps} from '@jahia/js-server-engine';
 
 export const ImageCover = () => {
     const {currentNode} = useServerContext();
-    const content = getNodeProps(currentNode, ['title', 'image']);
+    const header = getNodeProps(currentNode, ['title', 'image']);
     return (
         <header className="lux-cover">
-            <img
-                src={content.image.getUrl()}
-                alt=""
-                className="lux-cover_img"
-                height="695px"
-            />
+            {header.image && (
+                <img
+                    src={header.image.getUrl()}
+                    alt=""
+                    className="lux-cover_img"
+                    height="695px"
+                />
+            )}
+
             <h2 className="lux-cover_caption">
-                {content.title}
+                {header.title}
             </h2>
         </header>
     );
@@ -22,6 +25,6 @@ export const ImageCover = () => {
 ImageCover.jahiaComponent = {
     id: 'imageCoverCmp',
     nodeType: 'luxe:header',
-    displayName: 'Image Cover',
+    name: 'default',
     componentType: 'view'
 };

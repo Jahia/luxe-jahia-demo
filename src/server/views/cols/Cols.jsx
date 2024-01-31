@@ -6,7 +6,7 @@ import {
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
-export const RowCols = () => {
+export const Cols = () => {
     const {currentNode} = useServerContext();
     const content = getNodeProps(currentNode, ['colsNumber']);
     const limit = isNaN(parseInt(content.colsNumber, 10)) ? 1 : parseInt(content.colsNumber, 10);
@@ -23,8 +23,8 @@ export const RowCols = () => {
     );
 };
 
-RowCols.jahiaComponent = {
-    id: 'rowColsCmp',
+Cols.jahiaComponent = {
+    id: 'colsCmp',
     nodeType: 'luxe:rowCols',
     name: 'default',
     componentType: 'view'

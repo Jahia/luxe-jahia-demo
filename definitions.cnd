@@ -8,21 +8,21 @@
 //jmix:editorialContent
 [luxemix:luxeContent] > jmix:droppableContent mixin
 
-[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeContent
- orderable
- - base (string,choicelist) nofulltext < 'home', 'currentPage'
- - maxDepth (long) = 2 mandatory
- - startLevel (long) = 0 mandatory
- - menuItemView (string,choicelist[templates='jmix:navMenuItem,menuItem',resourceBundle,image]) = menuElement nofulltext
+//[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeContent
+// orderable
+// - base (string,choicelist) nofulltext < 'home', 'currentPage'
+// - maxDepth (long) = 2 mandatory
+// - startLevel (long) = 0 mandatory
+// - menuItemView (string,choicelist[templates='jmix:navMenuItem,menuItem',resourceBundle,image]) = menuElement nofulltext
 
-[luxemix:brand] mixin
- extends = luxe:navMenu
- - brandText (string) i18n
- - brandImage (weakreference, picker[type='image']) < 'jmix:image'
- - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
+//[luxemix:brand] mixin
+// extends = luxe:navMenu
+// - brandText (string) i18n
+// - brandImage (weakreference, picker[type='image']) < 'jmix:image'
+// - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
 
 [luxe:header] > jnt:content, luxemix:luxeContent
- - title (string) primary i18n
+ - title (string) primary i18n mandatory
  - teaser (string) i18n
  - image (weakreference, picker[type='image'])
 
@@ -33,6 +33,19 @@
 [luxe:section] > jnt:contentList, luxemix:luxeContent, mix:title
  - alignment (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
 
-[luxe:rowCols] > jnt:content, luxemix:luxeContent
+[luxe:cols] > jnt:content, luxemix:luxeContent
  - colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
  + * (jmix:droppableContent) = jmix:droppableContent
+
+[luxe:estate] > jnt:content, jmix:mainResource, luxemix:luxeContent
+ - title (string) primary i18n mandatory
+ - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+ - price (long) mandatory
+ - gallery (weakreference, picker[type='image']) multiple mandatory
+// - country (string,choicelist[resourceBundle]) = 'fr' autocreated < 'fr', 'uk', 'de'
+ - type (string,choicelist[resourceBundle]) = 'house' autocreated mandatory < 'house', 'apartment', 'building'
+ - surface (long) = 45 autocreated mandatory
+ - rooms (long) = 2 autocreated mandatory
+ - bedrooms (long) = 1 autocreated mandatory
+ - bathrooms (long) = 1 autocreated mandatory
+ - options (string,choicelist[resourceBundle]) multiple < 'garage', 'swimmingPool', 'garden', 'balcony'
