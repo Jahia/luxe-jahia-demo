@@ -74,7 +74,7 @@ jobs:
         with:
           module_id: luxe-jahia-demo
           testrail_project: Demo Site NPM
-          tests_manifest: provisioning-manifest-snapshot.yml
+          tests_manifest: provisioning-manifest-build.yml
           jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
           should_use_build_artifacts: true
           should_skip_artifacts: true
