@@ -1,14 +1,13 @@
-@import "bootstrap-config";
+// @import "bootstrap-config";
 
 // Import all of Bootstrap's CSS
-@import "../../node_modules/bootstrap/scss/bootstrap";
+// @import "../../node_modules/bootstrap/scss/bootstrap";
 
 // Custom Bootstrap CSS
-@import "bootstrap-custom";
+// @import "bootstrap-custom";
 
-@import "partials";
-@import "components";
-
+// @import "contentTypes";
+// @import "components";
 
 body {
     scroll-behavior: smooth;
@@ -104,7 +103,7 @@ body {
   
   /* Layout */
   @media (min-width: 1200px) {
-    body {
+    .page-cheatsheet {
       display: grid;
       grid-template-rows: auto;
       grid-template-columns: 1fr 4fr 1fr;
@@ -122,10 +121,10 @@ body {
       grid-column: 1 / span 3;
     }
   
-    .bd-aside,
-    .bd-cheatsheet {
-      padding-top: 4rem;
-    }
+    // .bd-aside,
+    // .bd-cheatsheet {
+    //   padding-top: 4rem;
+    // }
   
     /**
      * 1. Too bad only Firefox supports subgrids ATM
@@ -147,8 +146,9 @@ body {
   
     .bd-cheatsheet section,
     .bd-cheatsheet section > h2 {
-      top: 2rem;
+      top: 0;
       scroll-margin-top: 2rem;
+      background-color: #fff;
     }
   
     .bd-cheatsheet section > h2::before {

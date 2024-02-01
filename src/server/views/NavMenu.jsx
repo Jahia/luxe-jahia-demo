@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jBuildNavMenu, jUrl} from '@jahia/js-server-engine';
+import {useServerContext, jBuildNavMenu, jUrl} from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
 const navMenu = {
@@ -20,7 +20,7 @@ export const NavMenu = () => {
         navMenu.startLevel
     );
 
-    const logo = jUrl({value: `${modulePath}/images/logo-luxe.svg`});
+    const logo = jUrl({value: `${modulePath}/assets/images/logo-luxe.svg`});
     const currentPath = currentNode.getPath();
     const home = renderContext.getSite().getHome();
 
@@ -63,17 +63,6 @@ export const NavMenu = () => {
                                 >
                                     {node.getDisplayableName()}
                                 </a>
-                                {/* <Link */}
-                                {/*    to={key === activePage ? '' : `/${key}`} */}
-                                {/*    // Aria-current={ */}
-                                {/*    //     key === activePage ? 'page' : null */}
-                                {/*    // } */}
-                                {/*    className={clsx('nav-link', { */}
-                                {/*        active: key === activePage */}
-                                {/*    })} */}
-                                {/* > */}
-                                {/*    {pages[key]} */}
-                                {/* </Link> */}
                             </li>
                         ))}
                     </ul>

@@ -24,6 +24,11 @@
 }
 
 
+dd {
+    margin-bottom: 0;
+    font-weight: 100;
+}
+
 main a,
 footer a {
     transition: all .2s ease-in-out;
@@ -169,7 +174,6 @@ section {
 .page-link {
     width: 40px;
     border-radius: 16px;
-    color: red;
     text-align: center;
 }
 

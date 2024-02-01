@@ -10,6 +10,18 @@
 @import "components";
 @import "contentTypes";
 
+// @import "cheatsheet";
+
+.lux-icon {
+    width: 24px;
+    height: 24px;
+}
+
+//.lux-404page {
+//    height: 95vh;
+//    background: url(../assets/img/bg-404.jpg) no-repeat;
+//    background-size: cover;
+//}
 
 .lux-cover {
     position: relative;
@@ -36,4 +48,8 @@
     max-width: 800px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.lux-diamond {
+    font-size: 11px;
 }

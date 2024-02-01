@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Footer, Head, NavMenu} from '../components';
+import {Footer, Head} from '../components';
 import {JAddContentButtons, JRender, useServerContext} from '@jahia/js-server-engine';
+import {NavMenu} from '../views';
 
 // Const navArea = {
 //     name: 'navArea',
@@ -13,17 +14,17 @@ import {JAddContentButtons, JRender, useServerContext} from '@jahia/js-server-en
 //     }
 // };
 
-const navMenu = {
-    name: 'navMenu',
-    nodeType: 'luxe:navMenu',
-    mixins: ['jmix:renderable'],
-    properties: {
-        base: 'home',
-        maxDepth: '2',
-        startLevel: '0',
-        menuItemView: 'menuElement'
-    }
-};
+// const navMenu = {
+//     name: 'navMenu',
+//     nodeType: 'luxe:navMenu',
+//     mixins: ['jmix:renderable'],
+//     properties: {
+//         base: 'home',
+//         maxDepth: '2',
+//         startLevel: '0',
+//         menuItemView: 'menuElement'
+//     }
+// };
 
 // Const navMainArea = {
 //     name: 'navMainArea',

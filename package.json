@@ -13,7 +13,10 @@
     "test": "yarn lint"
   },
   "jahia": {
+    "required-version": "8.2.0.0-SNAPSHOT",
     "module-type": "templatesSet",
+    "module-dependencies": "default",
+    "static-resources": "/assets",
     "server": "dist/main.js"
   },
   "dependencies": {
@@ -29,6 +32,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
+    "@heroicons/react": "^2.1.1",
     "@jahia/eslint-config": "^2.1.2",
     "@jahia/scripts": "^1.3.3",
     "babel-loader": "^8.2.3",
