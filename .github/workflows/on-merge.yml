@@ -66,22 +66,22 @@ jobs:
       - uses: KengoTODA/actions-setup-docker-compose@main
         with:
           version: '1.29.2'
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: jahia/jahia-modules-action/integration-tests@v2
         with:
           module_id: luxe-jahia-demo
           testrail_project: Demo Site NPM
           tests_manifest: provisioning-manifest-snapshot.yml
           jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
-          should_use_build_artifacts: false
+          should_use_build_artifacts: true
           should_skip_artifacts: true
           should_skip_notifications: false
           should_skip_testrail: false
           should_skip_zencrepes: false
-          github_artifact_name: saml-standalone-snapshot-artifacts-${{ github.run_number }}
+          github_artifact_name: luxe-standalone-snapshot-artifacts-${{ github.run_number }}
           bastion_ssh_private_key: ${{ secrets.BASTION_SSH_PRIVATE_KEY_JAHIACI }}
           jahia_license: ${{ secrets.JAHIA_LICENSE_8X_FULL }}
           docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
