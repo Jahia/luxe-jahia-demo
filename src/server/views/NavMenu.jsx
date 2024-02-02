@@ -20,7 +20,7 @@ export const NavMenu = () => {
         navMenu.startLevel
     );
 
-    const logo = jUrl({value: `${modulePath}/assets/images/logo-luxe.svg`});
+    const logo = jUrl({value: `${modulePath}/assets/logo-luxe.svg`});
     const currentPath = currentNode.getPath();
     const home = renderContext.getSite().getHome();
 

@@ -16,7 +16,7 @@
     "required-version": "8.2.0.0-SNAPSHOT",
     "module-type": "templatesSet",
     "module-dependencies": "default",
-    "static-resources": "/assets",
+    "static-resources": "/assets,/css,/javascript",
     "server": "dist/main.js"
   },
   "dependencies": {

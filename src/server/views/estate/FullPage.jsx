@@ -5,6 +5,8 @@ import {EstateMainView} from '../../components';
 export const FullPage = () => {
     const {currentNode, currentResource} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
+    const isBackBtnEnabled = currentResource.getModuleParams().get('isBackBtnEnabled') === 'true';
+
     const parent = currentNode.getParent();
     const estate = getNodeProps(currentNode, [
         'title',
@@ -35,7 +37,8 @@ export const FullPage = () => {
             bathrooms: estate.bathrooms,
             options: estate.options,
             locale,
-            parent}}
+            parent,
+            isBackBtnEnabled}}
         />
     );
 };

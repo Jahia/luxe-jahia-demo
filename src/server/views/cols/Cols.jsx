@@ -25,7 +25,7 @@ export const Cols = () => {
 
 Cols.jahiaComponent = {
     id: 'colsCmp',
-    nodeType: 'luxe:rowCols',
+    nodeType: 'luxe:cols',
     name: 'default',
     componentType: 'view'
 };

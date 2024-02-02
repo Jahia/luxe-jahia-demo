@@ -8,7 +8,7 @@ export const EstateMain = () => {
         <MainLayout
             head={<meta name="description" content="content template"/>}
         >
-            <JRender node={currentNode}/>
+            <JRender node={currentNode} view="default" parameters={{isBackBtnEnabled: 'true'}}/>
         </MainLayout>
 
     );
@@ -19,5 +19,6 @@ EstateMain.jahiaComponent = {
     nodeType: 'luxe:estate',
     name: 'main',
     displayName: 'Main',
-    componentType: 'template'
+    componentType: 'template',
+    default: 'true'
 };

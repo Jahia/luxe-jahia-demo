@@ -6,6 +6,7 @@ export const Head = ({children}) => {
         <head>
             <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
             <JAddResources type="css" resources="main.css"/>
+            <JAddResources type="javascript" resources="script.js"/>
             {children}
         </head>
     );
