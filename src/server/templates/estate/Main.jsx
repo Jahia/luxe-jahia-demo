@@ -20,5 +20,7 @@ EstateMain.jahiaComponent = {
     name: 'main',
     displayName: 'Main',
     componentType: 'template',
-    default: 'true'
+    properties: {
+        default: 'true'
+    }
 };

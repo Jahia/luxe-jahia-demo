@@ -19,16 +19,16 @@ export const EstateMainView = ({
     parent,
     isBackBtnEnabled
 }) => {
-    // const btnProps = {
-    //     'x-on:click': 'alert(\'holalala\')'
-    // };
+    const btnProps = {
+        'x-on:click': 'alert(\'holalala\')'
+    };
     return (
         <>
             <section className="container">
                 <div className="d-flex mb-4">
                     {isBackBtnEnabled && parent && (
                         <button
-                            {/*{...btnProps}*/}
+                            {...btnProps}
                             className="btn btn-light btn-lg me-4 _backToParentPage"
                             // OnClick={() => { // TODO this is moved to script.js event based on _backToParentPage
                             //     console.log('helllo world');

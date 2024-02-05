@@ -16,20 +16,20 @@ const getAlign = align => {
     }
 };
 
-const Row = ({content, alignment}) => (
-    <div className={clsx('row', getAlign(alignment))}>
+const Row = ({content, arrangement}) => (
+    <div className={clsx('row', getAlign(arrangement))}>
         <JRender node={content}/>
     </div>
 );
 
 Row.propTypes = {
     content: PropTypes.object.isRequired,
-    alignment: PropTypes.string.isRequired
+    arrangement: PropTypes.string.isRequired
 };
 
 export const Section = () => {
     const {currentNode} = useServerContext();
-    const section = getNodeProps(currentNode, ['alignment']);
+    const section = getNodeProps(currentNode, ['arrangement']);
     const sectionContents = getChildNodes(currentNode);
     return (
         <section>
@@ -38,7 +38,7 @@ export const Section = () => {
                     <Row key={content.getIdentifier()}
                          {...{
                                  content,
-                                 alignment: section.alignment
+                             arrangement: section.arrangement
                              }}
                         />
 
@@ -46,7 +46,7 @@ export const Section = () => {
                 <JAddContentButtons/>
                 {/* <JArea name={`${currentNode.getName()}-row`} */}
                 {/*       areaView="ContentListRow" */}
-                {/*       parameters={{alignment: getAlign(section.alignment)}}/> */}
+                {/*       parameters={{arrangement: getAlign(section.arrangement)}}/> */}
             </div>
         </section>
     );
