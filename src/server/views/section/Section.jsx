@@ -7,8 +7,8 @@ import {
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
-const getAlign = align => {
-    switch (align) {
+const getArrangement = arrangement => {
+    switch (arrangement) {
         case 'left': return 'align-items-start';
         case 'center': return 'align-items-center';
         case 'right': return 'align-items-end';
@@ -17,7 +17,7 @@ const getAlign = align => {
 };
 
 const Row = ({content, arrangement}) => (
-    <div className={clsx('row', getAlign(arrangement))}>
+    <div className={clsx('row', getArrangement(arrangement))}>
         <JRender node={content}/>
     </div>
 );
@@ -34,14 +34,19 @@ export const Section = () => {
     return (
         <section>
             <div className="container">
-                {sectionContents.map(content => (
-                    <Row key={content.getIdentifier()}
-                         {...{
-                                 content,
-                             arrangement: section.arrangement
-                             }}
-                        />
+                {/* {sectionContents.map(content => ( */}
+                {/*    <Row key={content.getIdentifier()} */}
+                {/*         {...{ */}
+                {/*                 content, */}
+                {/*             arrangement: section.arrangement */}
+                {/*             }} */}
+                {/*        /> */}
 
+                {/* ))} */}
+                {sectionContents.map(content => (
+                    <JRender key={content.getIdentifier()}
+                             node={content}
+                             parameters={{arrangement: getArrangement(section.arrangement)}}/>
                 ))}
                 <JAddContentButtons/>
                 {/* <JArea name={`${currentNode.getName()}-row`} */}

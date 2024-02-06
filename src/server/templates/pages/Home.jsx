@@ -7,7 +7,8 @@ export const Home = () => {
         <MainLayout
             head={<meta name="description" content="hello"/>}
         >
-            <JArea name="pagecontent"/>
+            <JArea name="heading" allowedTypes={['luxe:header']} numberOfItems={1}/>
+            <JArea name="main" allowedTypes={['luxe:section']}/>
         </MainLayout>
 
     );

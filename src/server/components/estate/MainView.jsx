@@ -51,10 +51,10 @@ export const EstateMainView = ({
                 <div className="row gap-5">
                     <div className="col">
                         {/* eslint-disable-next-line react/no-danger */}
-                        <div dangerouslySetInnerHTML={{
+                        <unwanteddiv dangerouslySetInnerHTML={{
                             __html: description
                         }}
-                             className="lux-richText"/>
+                                     className="lux-richText"/>
                     </div>
                     <div className="col">
                         <p className="display-5 text-primary fw-medium">
