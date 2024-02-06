@@ -110,7 +110,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
-      - uses: jahia/jahia-modules-action/publish@v2
+      - uses: jahia/jahia-modules-action/publish-npm@v2
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
