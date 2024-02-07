@@ -1,2 +1,2 @@
 export * from './Home';
-// Export * from './Destination';
+export * from './Destinations';

@@ -46,6 +46,6 @@ export const FullPage = () => {
 FullPage.jahiaComponent = {
     id: 'fullPageCmp',
     nodeType: 'luxe:estate',
-    name: 'default',
+    name: 'fullPage',
     componentType: 'view'
 };

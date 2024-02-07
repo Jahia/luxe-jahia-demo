@@ -31,6 +31,6 @@ export const Card = () => {
 Card.jahiaComponent = {
     id: 'cardCmp',
     nodeType: 'luxe:estate',
-    name: 'Card',
+    name: 'default',
     componentType: 'view'
 };
