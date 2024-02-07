@@ -8,7 +8,7 @@ export const EstateMain = () => {
         <MainLayout
             head={<meta name="description" content="content template"/>}
         >
-            <JRender node={currentNode} view="default" parameters={{isBackBtnEnabled: 'true'}}/>
+            <JRender node={currentNode} parameters={{isBackBtnEnabled: 'true'}}/>
         </MainLayout>
 
     );

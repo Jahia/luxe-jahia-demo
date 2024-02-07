@@ -20,7 +20,7 @@ export const TextIllustrated = () => {
             <div className="col">
                 <img
                     src={image?.getUrl() || `${modulePath}/assets/img/img-placeholder.jpg`}
-                    alt={image?.getDisplayableName()}
+                    alt={image?.getDisplayableName() || 'placeholder'}
                     height="480px"
                 />
             </div>
