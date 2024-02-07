@@ -16,8 +16,8 @@ export const Default = () => {
     jAddCacheDependency({node: imageNode});
 
     const image = {
-        src: image?.getUrl() || `${modulePath}/assets/img/img-placeholder.jpg`,
-        alt: image?.getDisplayableName() || 'placeholder'
+        src: imageNode?.getUrl() || `${modulePath}/assets/img/img-placeholder.jpg`,
+        alt: imageNode?.getDisplayableName() || 'placeholder'
     };
     return (
         <TextIllustrated {...{
