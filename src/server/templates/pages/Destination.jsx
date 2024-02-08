@@ -2,12 +2,12 @@ import React from 'react';
 import {JArea} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 
-export const Destinations = () => {
+export const Destination = () => {
     return (
         <MainLayout>
             <JArea name="heading"
                    allowedTypes={['luxe:header']}
-                   subNodesView="mainHeader-textUp"
+                   subNodesView="mainHeader-textDown"
                    numberOfItems={1}/>
             <section>
                 <div className="container">
@@ -18,9 +18,12 @@ export const Destinations = () => {
             </section>
             <section>
                 <div className="container">
-                    <JArea name="related-destinations"
-                           allowedTypes={['luxe:textIllustrated']}
-                           numberOfItems={1}/>
+                    <JArea name="related-destinations" allowedTypes={['']}/>
+                </div>
+            </section>
+            <section>
+                <div className="container">
+                    <JArea name="related-agencies" allowedTypes={['']}/>
                 </div>
             </section>
         </MainLayout>
@@ -28,10 +31,10 @@ export const Destinations = () => {
     );
 };
 
-Destinations.jahiaComponent = {
-    id: 'pageDestinationsCmp',
+Destination.jahiaComponent = {
+    id: 'pageDestinationCmp',
     nodeType: 'jnt:page',
-    name: 'destinations',
-    displayName: 'Destinations',
+    name: 'destination',
+    displayName: 'Destination',
     componentType: 'template'
 };

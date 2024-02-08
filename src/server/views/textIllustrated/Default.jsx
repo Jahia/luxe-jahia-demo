@@ -10,21 +10,21 @@ import {TextIllustrated} from '../../components';
 export const Default = () => {
     const {currentNode, renderContext} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
-    const textIllustrated = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
+    const textI9d = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
 
-    const imageNode = textIllustrated.image;
-    jAddCacheDependency({node: imageNode});
+    if (textI9d.image) {
+        jAddCacheDependency({node: textI9d.image});
+    }
 
-    const image = {
-        src: imageNode?.getUrl() || `${modulePath}/assets/img/img-placeholder.jpg`,
-        alt: imageNode?.getDisplayableName() || 'placeholder'
-    };
     return (
         <TextIllustrated {...{
-            title: textIllustrated.title,
-            text: textIllustrated.text,
-            arrangement: textIllustrated.arrangement,
-            image
+            title: textI9d.title,
+            text: textI9d.text,
+            arrangement: textI9d.arrangement,
+            image: {
+                src: textI9d.image?.getUrl() || `${modulePath}/assets/img/img-placeholder.jpg`,
+                alt: textI9d.image?.getDisplayableName() || 'placeholder'
+            }
         }}/>
     );
 };

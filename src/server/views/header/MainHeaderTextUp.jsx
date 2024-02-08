@@ -1,10 +1,15 @@
 import React from 'react';
-import {useServerContext, getNodeProps} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
 import {Figure, PageHeader} from '../../components';
 
-export const MainHeader = () => {
+export const MainHeaderTextUp = () => {
     const {currentNode} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
+
+    if (header.image) {
+        jAddCacheDependency({node: header.image});
+    }
+
     return (
         <>
             <section className="container">
@@ -13,19 +18,22 @@ export const MainHeader = () => {
                     description={header.teaser}
                 />
             </section>
+
+            {header.image &&
             <section className="container">
                 <div className="row">
-                    <Figure imgURL={header.image?.getUrl()} layout="imgFull"/>
+                    <Figure src={header.image.getUrl()}
+                            alt={header.image.getDisplayableName()}
+                            layout="imgFull"/>
                 </div>
-            </section>
-
+            </section>}
         </>
     );
 };
 
-MainHeader.jahiaComponent = {
-    id: 'mainHeaderCmp',
+MainHeaderTextUp.jahiaComponent = {
+    id: 'mainHeaderTextUpCmp',
     nodeType: 'luxe:header',
-    name: 'mainHeader',
+    name: 'mainHeader-textUp',
     componentType: 'view'
 };

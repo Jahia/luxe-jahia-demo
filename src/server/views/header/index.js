@@ -1,2 +1,3 @@
 export * from './ImageCover';
-export * from './MainHeader';
+export * from './MainHeaderTextUp';
+export * from './MainHeaderTextDown';

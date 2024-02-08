@@ -17,7 +17,7 @@ export const Card = () => {
 
     return (
         <a href={jUrl({path: currentNode.getPath()})} className="lux-propertyItem">
-            <img src={image.getUrl()} alt={estate.title} height="265"/>
+            <img src={image.getUrl()} alt={image.getDisplayableName()} height="265"/>
             <h4 className="my-2">{estate.title}</h4>
             <p className="lux-propertyItem_informations">
                 {estate.bedrooms} chambres <span className="lux-diamond">✦</span>{' '}

@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {ChevronLeftIcon} from '@heroicons/react/24/solid';
 import {Figure, PageHeader} from '../';
-import {jUrl} from '@jahia/js-server-engine';
 
 export const EstateMainView = ({
     title,
@@ -17,7 +16,7 @@ export const EstateMainView = ({
     options,
     locale,
     parent,
-    isBackBtnEnabled
+    isBackBtnEnabled = false
 }) => {
     const btnProps = {
         'x-on:click': 'alert(\'holalala\')'
@@ -45,7 +44,9 @@ export const EstateMainView = ({
                         className="pb-0"
                     />
                 </div>
-                <Figure imgURL={image.getUrl()} layout="imgFull"/>
+                <Figure src={image.getUrl()}
+                        alt={image.getDisplayableName()}
+                        layout="imgFull"/>
             </section>
             <section className="container">
                 <div className="row gap-5">
@@ -138,8 +139,4 @@ EstateMainView.propTypes = {
     locale: PropTypes.string.isRequired,
     parent: PropTypes.object,
     isBackBtnEnabled: PropTypes.bool
-};
-
-EstateMainView.defaultProps = {
-    isBackBtnEnabled: false
 };
