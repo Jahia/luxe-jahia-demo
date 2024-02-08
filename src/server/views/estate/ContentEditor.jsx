@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react';
-import {useServerContext, getNodeProps, jUrl, jAddCacheDependency, JAddResources} from '@jahia/js-server-engine';
-import {ChevronLeftIcon} from '@heroicons/react/24/solid';
-import {EstateMainView, Figure, PageHeader} from '../../components';
+import {useServerContext, getNodeProps, jAddCacheDependency, JAddResources} from '@jahia/js-server-engine';
+import {EstateMainView} from '../../components';
 
 export const ContentEditor = () => {
     const {currentNode, currentResource} = useServerContext();
@@ -21,6 +20,7 @@ export const ContentEditor = () => {
 
     const image = estate.gallery[0];
     jAddCacheDependency({node: image});
+
     return (
         <>
             <JAddResources type="css" resources="main.css"/>

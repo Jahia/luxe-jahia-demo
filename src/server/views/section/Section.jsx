@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
     useServerContext,
     getNodeProps,
-    JArea, JRender, JAddContentButtons, getChildNodes
+    JRender, JAddContentButtons, getChildNodes
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
@@ -34,32 +34,16 @@ export const Section = () => {
     return (
         <section>
             <div className="container">
-                {/* {sectionContents.map(content => ( */}
-                {/*    <Row key={content.getIdentifier()} */}
-                {/*         {...{ */}
-                {/*                 content, */}
-                {/*             arrangement: section.arrangement */}
-                {/*             }} */}
-                {/*        /> */}
-
-                {/* ))} */}
                 {sectionContents.map(content => (
                     <JRender key={content.getIdentifier()}
                              node={content}
                              parameters={{arrangement: getArrangement(section.arrangement)}}/>
                 ))}
                 <JAddContentButtons/>
-                {/* <JArea name={`${currentNode.getName()}-row`} */}
-                {/*       areaView="ContentListRow" */}
-                {/*       parameters={{arrangement: getAlign(section.arrangement)}}/> */}
             </div>
         </section>
     );
 };
-
-// Section.propTypes = {
-//     className: PropTypes.string
-// };
 
 Section.jahiaComponent = {
     id: 'sectionCmp',

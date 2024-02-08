@@ -12,12 +12,16 @@ const CSSfigcaption = {
 };
 
 export const Figure = ({
-    imgURL,
-    altText,
+    src,
+    alt,
     layout = 'imgCentered',
     caption,
     className
 }) => {
+    if (!src) {
+        return null;
+    }
+
     return (
         <div
             className={clsx(
@@ -36,8 +40,8 @@ export const Figure = ({
                 })}
             >
                 <img
-                    src={imgURL}
-                    alt={altText}
+                    src={src}
+                    alt={alt}
                     width={layout === 'imgFull' ? '100%' : `${defaultWidth}px`}
                     className={clsx('lux-image', {
                         'lux-image_full': layout === 'imgFull'
@@ -54,8 +58,8 @@ export const Figure = ({
 };
 
 Figure.propTypes = {
-    imgURL: PropTypes.string.isRequired,
-    altText: PropTypes.string,
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string,
     caption: PropTypes.string,
     layout: PropTypes.oneOf(['imgLeft', 'imgRight', 'imgFull']),
     className: PropTypes.string
