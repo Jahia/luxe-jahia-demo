@@ -1,0 +1,211 @@
+@import "bootstrap-config";
+
+:root {
+    // --bs-font-sans-serif: #{$font-family-base};
+    --bs-body-color: #{$color-dark};
+    --bs-body-font-size: 1.25rem;
+    --bs-body-line-height: 1.75;
+    --bs-secondary-color: #{$color-darkBlue60};
+    --bs-emphasis-color: #{$color-dark};
+    --bs-dark-bg-subtle: #{$color-gray};
+    --bs-border-color: #{$color-darkBlue40};
+    --bs-border-radius: 8px;
+    --bs-heading-color: #{$color-darkBlue};
+    --bs-secondary-bg: #{$color-gray};
+    --bs-tertiary-bg: #{$color-gray};
+}
+
+.row {
+    --bs-gutter-x: 2rem;
+
+    &:not(:only-child) {
+        padding-bottom: 2rem;
+    }
+
+    // Page Builder fix
+    > div:not([class*="col"]) {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: O;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-0.5 * var(--bs-gutter-x));
+        margin-left: calc(-0.5 * var(--bs-gutter-x));
+
+        > * {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 100%;
+            padding-right: calc(var(--bs-gutter-x) * 0.5);
+            padding-left: calc(var(--bs-gutter-x) * 0.5);
+            margin-top: var(--bs-gutter-y);
+        }
+    }
+}
+
+
+dd {
+    margin-bottom: 0;
+    font-weight: 100;
+}
+
+main a,
+footer a {
+    transition: all .2s ease-in-out;
+}
+
+.display-1,
+.display-2,
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4 {
+    font-family: $font-family-display;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+h5 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+main {
+    h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4 {
+        margin-bottom: 2rem;
+        &:not(:first-child) {
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+p {
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+figcaption {
+    font-size: 18px;
+    font-style: italic;
+    color: $color-darkBlue60;
+    padding: 16px 0;
+}
+
+main img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+section {
+    padding: 40px 0;
+}
+
+.badge {
+    --bs-badge-font-weight: 400;
+    // font-family: $font-family-base;
+}
+
+.breadcrumb {
+    --bs-breadcrumb-item-active-color: #{$color-gold};
+    --bs-breadcrumb-divider-color: #{$color-darkBlue40};
+}
+
+.breadcrumb-item a {
+    color: var(--bs-body-color);
+    text-decoration: none;
+    
+    &:hover {
+        color: $color-darkBlue60;
+    }
+}
+
+.dropdown .btn::after {
+    color: $color-darkBlue40;
+}
+.dropdown-menu {
+    --bs-dropdown-link-hover-color: #{$color-gold};
+}
+
+.table {
+    --bs-table-striped-bg: #{$color-gray};
+    --bs-table-border-color: rgba(#{$color-gold-rgb}, .4);
+}
+
+// .form-control {
+//     border-color: $color-darkBlue40;    
+// }
+
+.btn {
+    --bs-btn-disabled-color: inherit;
+}
+
+.btn-primary {
+    --bs-btn-color: #{$color-gray};
+    --bs-btn-hover-bg: rgba(#{$color-gold-rgb}, .6);
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-hover-color: #{$color-darkBlue};
+}
+
+.navbar {
+    --bs-navbar-active-color: #{$color-gold};
+
+}
+
+.nav {
+    --bs-nav-link-color: var(--bs-body-color);
+}
+.nav-link {
+    font-weight: 500;
+
+    &:not(.active) {
+        cursor: pointer;
+    }
+
+    &.active {
+        color: $color-gold;
+        position: relative;
+
+        &::after {
+            position: absolute;
+            content: "✦";
+            text-align: center;
+            font-size: 16px;
+            bottom: -15px;
+            right: 0;
+            left: 0;    
+        }
+    }
+}
+
+.nav-tabs {
+    --bs-nav-tabs-link-active-color: #{$color-gold};
+}
+
+
+// Pagination
+.page-link {
+    width: 40px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.pagination {
+    --bs-pagination-border-width: 0;
+}
+
+.accordion-button {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.list-group-item {
+    --bs-list-group-border-color: rgba(#{$color-gold-rgb}, .4);
+}

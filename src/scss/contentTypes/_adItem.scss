@@ -1,0 +1,29 @@
+.lux-propertyItem {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    transform: scale(1);
+    transition: all .2s ease-in;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: $shadow-box;
+    }
+
+    & > * {
+        margin-bottom: 0;
+    }
+}
+
+
+.lux-propertyItem_informations {
+    font-size: 16px;
+    color: rgba($color-dark, .4);
+}
+
+.lux-propertyItem_price {
+    font-size: 18px;
+    color: $color-gold;
+}

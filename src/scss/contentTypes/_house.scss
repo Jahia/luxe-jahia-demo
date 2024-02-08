@@ -1,0 +1,19 @@
+.lux-house_informations {
+    font-size: 18px;
+}
+
+.lux-house_information_row {
+    border-bottom: 1px solid $color-gold;
+    padding: 4px 0;
+}
+
+.lux-house_information_key {
+    margin-bottom: 0;
+    font-weight: 200;
+    flex: 1;
+}
+
+.lux-house_information_value {
+    font-weight: bold;
+    flex: 1;
+}

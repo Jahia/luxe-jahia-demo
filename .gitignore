@@ -15,7 +15,9 @@ node_modules
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.pnp.*
 
 .env.local
 luxe-jahia-demo-v*
-/.idea/
+
+assets/css
