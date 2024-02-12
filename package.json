@@ -17,7 +17,19 @@
     "module-type": "templatesSet",
     "module-dependencies": "default",
     "static-resources": "/assets,/css,/javascript",
-    "server": "dist/main.js"
+    "server": "dist/main.js",
+    "maven": {
+      "groupId": "org.jahia.modules.npm",
+      "distributionManagement": {
+        "repository": {
+          "id": "jahia-releases",
+          "url": "https://devtools.jahia.com/nexus/content/repositories/jahia-releases"
+        },
+        "snapshotRepository": {
+          "id": "jahia-snapshots",
+          "url": "https://devtools.jahia.com/nexus/content/repositories/jahia-snapshots"
+        }
+      }
   },
   "dependencies": {
     "@apollo/client": "3.5.5",
