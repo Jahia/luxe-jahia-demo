@@ -30,6 +30,7 @@
           "url": "https://devtools.jahia.com/nexus/content/repositories/jahia-snapshots"
         }
       }
+    }
   },
   "dependencies": {
     "@apollo/client": "3.5.5",
