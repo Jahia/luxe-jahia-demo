@@ -9,7 +9,9 @@ import clsx from 'clsx';
 export const Cols = () => {
     const {currentNode, currentResource} = useServerContext();
     const content = getNodeProps(currentNode, ['colsNumber']);
-    const limit = isNaN(parseInt(content.colsNumber, 10)) ? 1 : parseInt(content.colsNumber, 10);
+    const colsNumber = Number(content.colsNumber);
+    const limit = isNaN(colsNumber) ? 1 : colsNumber;
+    // Create an array of integers from 0 to 'limit - 1'
     const cols = Array.from(Array(limit).keys());
 
     const arrangement = currentResource.getModuleParams().get('arrangement');
@@ -17,7 +19,7 @@ export const Cols = () => {
         <div className={clsx('row', arrangement)}>
             {cols.map(col => (
                 <div key={col} className={clsx('col')}>
-                    <JArea name={`${currentNode.getName()}-col-${col}`}/>
+                    <JArea name={`${currentNode.getName()}-col-${col}`} areaAsSubNode={true}/>
                 </div>
             )
             )}

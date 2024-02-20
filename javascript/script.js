@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', () => {
     Array.from(document.getElementsByClassName('_backToParentPage')).map(elt => {
         elt.addEventListener('click', () => {
             history.back();
