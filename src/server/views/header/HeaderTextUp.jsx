@@ -32,7 +32,7 @@ export const HeaderTextUp = () => {
 };
 
 HeaderTextUp.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_header_HeaderTextUp',
+    id: 'luxeJahiaDemo_views_header_textUp',
     nodeType: 'luxe:header',
     name: 'textUp',
     componentType: 'view'

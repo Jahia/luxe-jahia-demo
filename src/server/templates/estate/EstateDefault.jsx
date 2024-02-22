@@ -15,12 +15,9 @@ export const EstateDefault = () => {
 };
 
 EstateDefault.jahiaComponent = {
-    id: 'luxeJahiaDemo_templates_estate_EstateDefault',
+    id: 'luxeJahiaDemo_templates_estate_default',
     nodeType: 'luxe:estate',
-    name: 'main',
+    name: 'default',
     displayName: 'Main',
-    componentType: 'template',
-    properties: {
-        default: 'true'
-    }
+    componentType: 'template'
 };

@@ -29,7 +29,7 @@ export const EstateDefault = () => {
 };
 
 EstateDefault.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_estate_EstateDefault',
+    id: 'luxeJahiaDemo_views_estate_default',
     nodeType: 'luxe:estate',
     name: 'default',
     componentType: 'view'

@@ -15,7 +15,7 @@ export const PageHome = () => {
 };
 
 PageHome.jahiaComponent = {
-    id: 'luxeJahiaDemo_templates_page_PageHome',
+    id: 'luxeJahiaDemo_templates_page_home',
     nodeType: 'jnt:page',
     name: 'home',
     displayName: 'Home',

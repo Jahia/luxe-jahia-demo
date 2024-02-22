@@ -98,7 +98,7 @@ export const NavMenuDefault = () => {
 };
 
 NavMenuDefault.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_navMenu_NavMenuDefault',
+    id: 'luxeJahiaDemo_views_navMenu_default',
     nodeType: 'luxe:navMenu',
     displayName: 'Nav Menu',
     componentType: 'view'
