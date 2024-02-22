@@ -1,3 +1,3 @@
-export * from './Home';
-export * from './Destinations';
-export * from './Destination';
+export * from './PageHome';
+export * from './PageDestinations';
+export * from './PageDestination';

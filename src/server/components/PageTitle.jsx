@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-export const PageHeader = ({title, description, className}) => {
+export const PageTitle = ({title, description, className}) => {
     return (
         <hgroup className={clsx('row', 'mb-0', className)}>
             <h1 className="mb-0">{title}</h1>
@@ -13,7 +13,7 @@ export const PageHeader = ({title, description, className}) => {
     );
 };
 
-PageHeader.propTypes = {
+PageTitle.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     className: PropTypes.string

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {ChevronLeftIcon} from '@heroicons/react/24/solid';
-import {Figure, PageHeader} from '../';
+import {Figure, PageTitle} from '../';
 
 export const EstateMainView = ({
     title,
@@ -39,7 +39,7 @@ export const EstateMainView = ({
                         </button>
                     )}
 
-                    <PageHeader
+                    <PageTitle
                         title={title}
                         className="pb-0"
                     />

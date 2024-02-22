@@ -1,29 +1,23 @@
 import React from 'react';
-import {useServerContext, jBuildNavMenu, jUrl} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, jBuildNavMenu, jUrl} from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
-const navMenu = {
-    base: 'home',
-    maxDepth: '1',
-    startLevel: '0',
-    menuItemView: 'menuElement'
-};
-
-export const NavMenu = () => {
+export const NavMenuDefault = () => {
+    // Const {currentResource} = useServerContext();
     const {currentNode, renderContext} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
 
-    const menu = jBuildNavMenu(
-        navMenu.maxDepth,
-        navMenu.base,
-        navMenu.menuItemView,
-        navMenu.startLevel
-    );
+    // Const nav = getNodeProps(currentResource.getNode(), [
+    const nav = getNodeProps(currentNode, [
+        'base',
+        'maxDepth',
+        'startLevel',
+        'menuItemView'
+        // 'brandText',
+        // 'brandImage'
+    ]);
 
-    const logo = jUrl({value: `${modulePath}/assets/logo-luxe.svg`});
-    const currentPath = currentNode.getPath();
-    const home = renderContext.getSite().getHome();
-
+    const menu = jBuildNavMenu(nav.maxDepth, nav.base, nav.menuItemView, nav.startLevel);
     return (
         <nav
             className={clsx(
@@ -35,8 +29,9 @@ export const NavMenu = () => {
             )}
         >
             <div className="container-fluid gap-5">
-                <a href={jUrl({path: home.getPath()})} className="navbar-brand">
-                    <img src={logo} alt="" width="100px"/>
+                <a href="/" className="navbar-brand">
+                    {/* <img src={nav.brandImage?.getUrl()} alt="" width="100px"/> */}
+                    <img src={jUrl({value: `${modulePath}/images/logo-luxe.svg`})} alt="" width="100px"/>
                 </a>
                 <button
                     className="navbar-toggler"
@@ -54,15 +49,19 @@ export const NavMenu = () => {
                     className="collapse navbar-collapse"
                 >
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
-                        {menu.map(({node}) => (
-                            <li key={node.getIdentifier()} className="nav-item">
-                                <a href={jUrl({path: node.getPath()})}
-                                   className={clsx('nav-link', {
-                                       active: currentPath.includes(node.getPath())
-                                   })}
-                                >
-                                    {node.getDisplayableName()}
-                                </a>
+                        {menu.map(page => (
+                            <li key={page.node.getIdentifier()} className="nav-item">
+                                {/* <Link */}
+                                {/*    to={key === activePage ? '' : `/${key}`} */}
+                                {/*    // Aria-current={ */}
+                                {/*    //     key === activePage ? 'page' : null */}
+                                {/*    // } */}
+                                {/*    className={clsx('nav-link', { */}
+                                {/*        active: key === activePage */}
+                                {/*    })} */}
+                                {/* > */}
+                                {/*    {pages[key]} */}
+                                {/* </Link> */}
                             </li>
                         ))}
                     </ul>
@@ -98,8 +97,8 @@ export const NavMenu = () => {
     );
 };
 
-NavMenu.jahiaComponent = {
-    id: 'navMenuCmp',
+NavMenuDefault.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_navMenu_NavMenuDefault',
     nodeType: 'luxe:navMenu',
     displayName: 'Nav Menu',
     componentType: 'view'

@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {useServerContext, getNodeProps, jAddCacheDependency, JAddResources} from '@jahia/js-server-engine';
 import {EstateMainView} from '../../components';
 
-export const ContentEditor = () => {
+export const EstateCm = () => {
     const {currentNode, currentResource} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const estate = getNodeProps(currentNode, [
@@ -42,8 +42,8 @@ export const ContentEditor = () => {
     );
 };
 
-ContentEditor.jahiaComponent = {
-    id: 'contentEditorCmp',
+EstateCm.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_estate_EstateCm',
     nodeType: 'luxe:estate',
     name: 'cm',
     componentType: 'view'

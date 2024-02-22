@@ -2,7 +2,7 @@ import React from 'react';
 import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
 import {Figure} from '../../components';
 
-export const MainHeaderTextDown = () => {
+export const HeaderTextDown = () => {
     const {currentNode} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
 
@@ -33,9 +33,9 @@ export const MainHeaderTextDown = () => {
     );
 };
 
-MainHeaderTextDown.jahiaComponent = {
-    id: 'mainHeaderTextDownCmp',
+HeaderTextDown.jahiaComponent = {
+    id: 'luxJahiaDemo_views_header_HeaderTextDown',
     nodeType: 'luxe:header',
-    name: 'mainHeader-textDown',
+    name: 'textDown',
     componentType: 'view'
 };

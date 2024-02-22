@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {JAddResources} from '@jahia/js-server-engine';
-export const Head = ({children}) => {
+export const HtmlHead = ({children}) => {
     return (
         <head>
             <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
@@ -14,6 +14,6 @@ export const Head = ({children}) => {
     );
 };
 
-Head.propTypes = {
+HtmlHead.propTypes = {
     children: PropTypes.node
 };

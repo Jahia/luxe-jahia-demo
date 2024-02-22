@@ -1,1 +1,1 @@
-export * from './Cols';
+export * from './ColsDefault';

@@ -2,7 +2,7 @@ import React from 'react';
 import {JArea} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 
-export const Destination = () => {
+export const PageDestination = () => {
     return (
         <MainLayout>
             <JArea name="heading"
@@ -31,8 +31,8 @@ export const Destination = () => {
     );
 };
 
-Destination.jahiaComponent = {
-    id: 'pageDestinationCmp',
+PageDestination.jahiaComponent = {
+    id: 'luxeJahiaDemo_templates_page_PageDestination',
     nodeType: 'jnt:page',
     name: 'destination',
     displayName: 'Destination',

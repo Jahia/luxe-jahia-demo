@@ -27,7 +27,7 @@ Row.propTypes = {
     arrangement: PropTypes.string.isRequired
 };
 
-export const Section = () => {
+export const SectionDefault = () => {
     const {currentNode} = useServerContext();
     const section = getNodeProps(currentNode, ['arrangement']);
     const sectionContents = getChildNodes(currentNode);
@@ -45,8 +45,8 @@ export const Section = () => {
     );
 };
 
-Section.jahiaComponent = {
-    id: 'sectionCmp',
+SectionDefault.jahiaComponent = {
+    id: 'luxJahiaDemo_views_section_SectionDefault',
     nodeType: 'luxe:section',
     name: 'default',
     componentType: 'view'

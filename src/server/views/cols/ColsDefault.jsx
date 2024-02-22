@@ -6,7 +6,7 @@ import {
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
-export const Cols = () => {
+export const ColsDefault = () => {
     const {currentNode, currentResource} = useServerContext();
     const content = getNodeProps(currentNode, ['colsNumber']);
     const colsNumber = Number(content.colsNumber);
@@ -27,8 +27,8 @@ export const Cols = () => {
     );
 };
 
-Cols.jahiaComponent = {
-    id: 'colsCmp',
+ColsDefault.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_cols_ColsDefault',
     nodeType: 'luxe:cols',
     name: 'default',
     componentType: 'view'

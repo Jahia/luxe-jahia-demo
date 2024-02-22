@@ -1,7 +1,7 @@
 import React from 'react';
 import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
 
-export const ImageCover = () => {
+export const HeaderDefault = () => {
     const {currentNode} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'image']);
 
@@ -27,8 +27,8 @@ export const ImageCover = () => {
     );
 };
 
-ImageCover.jahiaComponent = {
-    id: 'imageCoverCmp',
+HeaderDefault.jahiaComponent = {
+    id: 'luxJahiaDemo_views_header_HeaderDefault',
     nodeType: 'luxe:header',
     name: 'default',
     componentType: 'view'

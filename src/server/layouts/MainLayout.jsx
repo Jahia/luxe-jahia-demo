@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Footer, Head} from '../components';
+import {HtmlFooter, HtmlHead} from '../components';
 import {JAddContentButtons, JRender, useServerContext} from '@jahia/js-server-engine';
-import {NavMenu} from '../views';
+import {NavMenuDefault} from '../views';
 
 // Const navArea = {
 //     name: 'navArea',
@@ -40,19 +40,19 @@ export const MainLayout = ({head, footer, children}) => {
     // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
     return (
         <>
-            <Head>
+            <HtmlHead>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 {head}
-            </Head>
+            </HtmlHead>
             <body>
-                <NavMenu/>
+                <NavMenuDefault/>
                 {/* <JRender content={navMenu}/> */}
                 {/* <JAddContentButtons/> */}
                 {/* <JAddContentButtons nodeTypes="luxe:navMenu"/> */}
                 <main>
                     {children}
                 </main>
-                <Footer/>
+                <HtmlFooter/>
             </body>
 
         </>

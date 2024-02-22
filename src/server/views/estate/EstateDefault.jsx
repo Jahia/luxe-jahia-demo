@@ -1,7 +1,7 @@
 import React from 'react';
 import {useServerContext, getNodeProps, jAddCacheDependency, jUrl} from '@jahia/js-server-engine';
 
-export const Card = () => {
+export const EstateDefault = () => {
     const {currentNode, currentResource} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const estate = getNodeProps(currentNode, [
@@ -28,8 +28,8 @@ export const Card = () => {
     );
 };
 
-Card.jahiaComponent = {
-    id: 'cardCmp',
+EstateDefault.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_estate_EstateDefault',
     nodeType: 'luxe:estate',
     name: 'default',
     componentType: 'view'

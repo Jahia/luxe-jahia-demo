@@ -1,3 +1,3 @@
-export * from './ImageCover';
-export * from './MainHeaderTextUp';
-export * from './MainHeaderTextDown';
+export * from './HeaderDefault';
+export * from './HeaderTextUp';
+export * from './HeaderTextDown';

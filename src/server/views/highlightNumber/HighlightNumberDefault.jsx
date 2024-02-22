@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useServerContext, getNodeProps} from '@jahia/js-server-engine';
 import clsx from 'clsx';
-export const HighlightNumber = ({className}) => {
+
+export const HighlightNumberDefault = ({className}) => {
     const {currentNode, currentResource} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const content = getNodeProps(currentNode, ['text', 'number']);
@@ -14,12 +15,12 @@ export const HighlightNumber = ({className}) => {
     );
 };
 
-HighlightNumber.propTypes = {
+HighlightNumberDefault.propTypes = {
     className: PropTypes.string
 };
 
-HighlightNumber.jahiaComponent = {
-    id: 'highlightNumberCmp',
+HighlightNumberDefault.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_highlightNumber_HighlightNumberDefault',
     nodeType: 'luxe:highlightNumber',
     displayName: 'Default',
     componentType: 'view'

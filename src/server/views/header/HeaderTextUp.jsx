@@ -1,8 +1,8 @@
 import React from 'react';
 import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
-import {Figure, PageHeader} from '../../components';
+import {Figure, PageTitle} from '../../components';
 
-export const MainHeaderTextUp = () => {
+export const HeaderTextUp = () => {
     const {currentNode} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
 
@@ -13,7 +13,7 @@ export const MainHeaderTextUp = () => {
     return (
         <>
             <section className="container">
-                <PageHeader
+                <PageTitle
                     title={header.title}
                     description={header.teaser}
                 />
@@ -31,9 +31,9 @@ export const MainHeaderTextUp = () => {
     );
 };
 
-MainHeaderTextUp.jahiaComponent = {
-    id: 'mainHeaderTextUpCmp',
+HeaderTextUp.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_header_HeaderTextUp',
     nodeType: 'luxe:header',
-    name: 'mainHeader-textUp',
+    name: 'textUp',
     componentType: 'view'
 };

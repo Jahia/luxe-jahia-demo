@@ -7,7 +7,7 @@ import {
 
 import {TextIllustrated} from '../../components';
 
-export const Default = () => {
+export const TextIllustratedDefault = () => {
     const {currentNode, renderContext} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const textI9d = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
@@ -29,8 +29,8 @@ export const Default = () => {
     );
 };
 
-Default.jahiaComponent = {
-    id: 'defaultTextIllustratedCmp',
+TextIllustratedDefault.jahiaComponent = {
+    id: 'luxJahiaDemo_views_textIllustrated_TextIllustratedDefault',
     nodeType: 'luxe:textIllustrated',
     name: 'default',
     componentType: 'view'

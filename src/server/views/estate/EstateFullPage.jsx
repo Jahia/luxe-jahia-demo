@@ -2,7 +2,7 @@ import React from 'react';
 import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
 import {EstateMainView} from '../../components';
 
-export const FullPage = () => {
+export const EstateFullPage = () => {
     const {currentNode, currentResource} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const isBackBtnEnabled = currentResource.getModuleParams().get('isBackBtnEnabled') === 'true';
@@ -43,8 +43,8 @@ export const FullPage = () => {
     );
 };
 
-FullPage.jahiaComponent = {
-    id: 'fullPageCmp',
+EstateFullPage.jahiaComponent = {
+    id: 'luxeJahiaDemo_views_estate_EstateFullPage',
     nodeType: 'luxe:estate',
     name: 'fullPage',
     componentType: 'view'

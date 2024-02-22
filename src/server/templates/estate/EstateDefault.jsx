@@ -2,7 +2,7 @@ import React from 'react';
 import {JRender, useServerContext} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 
-export const EstateMain = () => {
+export const EstateDefault = () => {
     const {currentNode} = useServerContext();
     return (
         <MainLayout
@@ -14,8 +14,8 @@ export const EstateMain = () => {
     );
 };
 
-EstateMain.jahiaComponent = {
-    id: 'estateMainTemplateCmp',
+EstateDefault.jahiaComponent = {
+    id: 'luxeJahiaDemo_templates_estate_EstateDefault',
     nodeType: 'luxe:estate',
     name: 'main',
     displayName: 'Main',

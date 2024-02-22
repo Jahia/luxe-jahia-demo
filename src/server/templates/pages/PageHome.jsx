@@ -2,7 +2,7 @@ import React from 'react';
 import {JArea} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 
-export const Home = () => {
+export const PageHome = () => {
     return (
         <MainLayout
             head={<meta name="description" content="hello"/>}
@@ -14,8 +14,8 @@ export const Home = () => {
     );
 };
 
-Home.jahiaComponent = {
-    id: 'homeCmp',
+PageHome.jahiaComponent = {
+    id: 'luxeJahiaDemo_templates_page_PageHome',
     nodeType: 'jnt:page',
     name: 'home',
     displayName: 'Home',

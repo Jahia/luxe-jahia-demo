@@ -1,1 +1,1 @@
-export * from './highlightNumber';
+export * from './HighlightNumberDefault';

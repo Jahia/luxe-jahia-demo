@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-export const Footer = ({className, ...props}) => {
+export const HtmlFooter = ({className, ...props}) => {
     return (
         <footer className={clsx('lux-site-footer', className)} {...props}>
             <div className="container">
@@ -64,6 +64,6 @@ export const Footer = ({className, ...props}) => {
     );
 };
 
-Footer.propTypes = {
+HtmlFooter.propTypes = {
     className: PropTypes.string
 };
