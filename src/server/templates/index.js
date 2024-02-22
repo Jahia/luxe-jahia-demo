@@ -1,2 +1,2 @@
-export * from './pages';
+export * from './page';
 export * from './estate';
