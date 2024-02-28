@@ -28,7 +28,6 @@ export const ColsDefault = () => {
 };
 
 ColsDefault.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_cols_default',
     nodeType: 'luxe:cols',
     name: 'default',
     componentType: 'view'

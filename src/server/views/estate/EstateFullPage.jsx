@@ -44,7 +44,6 @@ export const EstateFullPage = () => {
 };
 
 EstateFullPage.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_estate_fullPage',
     nodeType: 'luxe:estate',
     name: 'fullPage',
     componentType: 'view'

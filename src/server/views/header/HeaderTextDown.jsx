@@ -34,7 +34,6 @@ export const HeaderTextDown = () => {
 };
 
 HeaderTextDown.jahiaComponent = {
-    id: 'luxJahiaDemo_views_header_textDown',
     nodeType: 'luxe:header',
     name: 'textDown',
     componentType: 'view'
