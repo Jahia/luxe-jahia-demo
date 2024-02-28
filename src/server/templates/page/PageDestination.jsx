@@ -32,7 +32,6 @@ export const PageDestination = () => {
 };
 
 PageDestination.jahiaComponent = {
-    id: 'luxeJahiaDemo_templates_page_destination',
     nodeType: 'jnt:page',
     name: 'destination',
     displayName: 'Destination',

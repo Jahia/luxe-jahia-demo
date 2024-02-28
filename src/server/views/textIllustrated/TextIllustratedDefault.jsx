@@ -30,7 +30,6 @@ export const TextIllustratedDefault = () => {
 };
 
 TextIllustratedDefault.jahiaComponent = {
-    id: 'luxJahiaDemo_views_textIllustrated_default',
     nodeType: 'luxe:textIllustrated',
     name: 'default',
     componentType: 'view'

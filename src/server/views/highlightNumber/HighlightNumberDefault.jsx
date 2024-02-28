@@ -20,7 +20,6 @@ HighlightNumberDefault.propTypes = {
 };
 
 HighlightNumberDefault.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_highlightNumber_default',
     nodeType: 'luxe:highlightNumber',
     displayName: 'Default',
     componentType: 'view'

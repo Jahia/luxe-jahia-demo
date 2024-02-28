@@ -28,7 +28,6 @@ export const HeaderDefault = () => {
 };
 
 HeaderDefault.jahiaComponent = {
-    id: 'luxJahiaDemo_views_header_default',
     nodeType: 'luxe:header',
     name: 'default',
     componentType: 'view'

@@ -43,7 +43,6 @@ export const EstateCm = () => {
 };
 
 EstateCm.jahiaComponent = {
-    id: 'luxeJahiaDemo_views_estate_cm',
     nodeType: 'luxe:estate',
     name: 'cm',
     componentType: 'view'

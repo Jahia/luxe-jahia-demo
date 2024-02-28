@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {JAddContentButtons, JRender, useServerContext} from '@jahia/js-server-engine';
+import {JAddContentButtons, JRender, useServerContext, JAbsoluteArea} from '@jahia/js-server-engine';
 import {NavMenuDefault} from '../views';
 
 // Const navArea = {
@@ -45,10 +45,7 @@ export const MainLayout = ({head, footer, children}) => {
                 {head}
             </HtmlHead>
             <body>
-                <NavMenuDefault/>
-                {/* <JRender content={navMenu}/> */}
-                {/* <JAddContentButtons/> */}
-                {/* <JAddContentButtons nodeTypes="luxe:navMenu"/> */}
+                <JAbsoluteArea name='navArea' allowedTypes={["luxe:navMenu"]} level={0} numberOfItems={1} /> 
                 <main>
                     {children}
                 </main>

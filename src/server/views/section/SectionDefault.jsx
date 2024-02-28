@@ -46,7 +46,6 @@ export const SectionDefault = () => {
 };
 
 SectionDefault.jahiaComponent = {
-    id: 'luxJahiaDemo_views_section_default',
     nodeType: 'luxe:section',
     name: 'default',
     componentType: 'view'
