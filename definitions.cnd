@@ -75,6 +75,7 @@
  - phone (string)
  - email (string)
  + * (luxe:realtor) = luxe:realtor
+ + * (luxe:estate) = luxe:estate
 
  [luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent
   - firstName (string) mandatory
