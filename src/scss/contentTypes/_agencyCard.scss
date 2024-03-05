@@ -1,0 +1,23 @@
+.lux-agencyCard {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    transform: scale(1);
+    transition: all .2s ease-in;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: $shadow-box;
+    }
+
+    & > * {
+        margin-bottom: 0;
+    }
+}
+
+.lux-agencyCard_image {
+    width: 200px;
+    height: 200px;
+}

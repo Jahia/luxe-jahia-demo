@@ -1,0 +1,17 @@
+.lux-agentCard {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    max-width: 250px;
+
+    & > * {
+        margin-bottom: 0;
+    }
+}
+
+.lux-agentCard_informations {
+    font-size: 16px;
+    // TODO: use a bootstrap class instead of specific CSS
+    color: rgba($color-dark, .4);
+}
