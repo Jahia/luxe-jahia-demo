@@ -1,12 +1,14 @@
 import React from 'react';
-import { useServerContext, getNodeProps, jUrl, JAddContentButtons } from '@jahia/js-server-engine';
+import { useServerContext, getNodeProps, jUrl, JAddContentButtons, jAddCacheDependency } from '@jahia/js-server-engine';
 
 export const agencyCard = () => {
     const { currentNode } = useServerContext();
     const content = getNodeProps(currentNode, ['image', 'name', 'address', 'phone']);
+    jAddCacheDependency({node: content.image});
     return (
         <a className="lux-agencyCard d-flex" href={jUrl({path: currentNode.getPath()})}>
             <img src={jUrl({path: content.image.getPath()})}
+                alt={content.image.getDisplayableName() || 'placeholder'}
                 className="lux-agencyCard_image me-4"
                 height="200"
                 width="200"/>

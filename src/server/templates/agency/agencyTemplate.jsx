@@ -7,21 +7,19 @@ import { useServerContext, getNodeProps, jUrl, getChildNodes, JAddContentButtons
 export const agency = () => {
     const {currentNode} = useServerContext();
     const props = getNodeProps(currentNode, ['name', 'description', 'image', 'creationDate', 'languages', 'address', 'email', 'phone']);
-    const childs = getChildNodes(currentNode);
-    const realtors = childs.filter(child => child.getNodeTypes().includes('luxe:realtor'));
-    const estates = childs.filter(child => child.getNodeTypes().includes('luxe:estate'));
+    const childs = getChildNodes(currentNode, 50);
     const data = [
         {
-            k: "Nombre d’experts",
-            v: `${realtors.length}`,
+            title: "Nombre d’experts",
+            value: `${childs.filter(child => child.isNodeType('luxe:realtor')).length}`,
         },
         {
-            k: "Date de création",
-            v: `${new Date(props.creationDate).getFullYear()}`,
+            title: "Date de création",
+            value: `${new Date(props.creationDate).getFullYear()}`,
         },
         {
-            k: "Langues parlées",
-            v: props.languages.join(', ')
+            title: "Langues parlées",
+            value: props.languages.join(', ')
         },
     ];
     return (
@@ -35,7 +33,7 @@ export const agency = () => {
                     />
                 </section>
                 <section>
-                    <Table data={data} />
+                    <Table rows={data} />
                 </section>
                 <section>
                     <HeadingSection title="contact" />
@@ -75,8 +73,8 @@ export const agency = () => {
                 <section>
                     <HeadingSection title="Nos experts" />
                     <Row type="grid" grid="4" gutter="medium">
-                        {realtors.map((realtor) => (
-                            <JRender path={realtor.getPath()}/>
+                        {childs.filter(child => child.isNodeType('luxe:realtor')).map((realtor, key) => (
+                            <JRender path={realtor.getPath()} key={key}/>
                         ))}
                     </Row>
                     <JAddContentButtons />
@@ -84,8 +82,8 @@ export const agency = () => {
                 <section>
                     <HeadingSection title="Propriétés exclusives de l’agence"/>
                     <Row type="grid" grid="3" gutter="none" columnSpacing="none">
-                        {estates.map((estate) => (
-                            <JRender path={estate.getPath()}/>
+                        {childs.filter(child => child.isNodeType('luxe:estate')).map((estate, key) => (
+                            <JRender path={estate.getPath()} key={key}/>
                         ))}
                     </Row>
                 </section>

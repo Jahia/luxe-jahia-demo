@@ -30,7 +30,7 @@ Row.propTypes = {
 export const SectionDefault = () => {
     const {currentNode} = useServerContext();
     const section = getNodeProps(currentNode, ['arrangement']);
-    const sectionContents = getChildNodes(currentNode);
+    const sectionContents = getChildNodes(currentNode, 100);
     return (
         <section>
             <div className="container">

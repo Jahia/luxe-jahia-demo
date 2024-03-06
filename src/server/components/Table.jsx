@@ -9,13 +9,13 @@ import clsx from "clsx";
 //     },
 // ];
 
-export const Table = ({ data = [], className, ...props }) => {
+export const Table = ({ rows = [], className, ...props }) => {
     return (
         <dl className="lux-table">
-            {data.map((row) => (
-                <div key={row.k} className="lux-table_row d-flex">
-                    <dt className="lux-table_key">{row.k}</dt>
-                    <dd className="lux-table_value">{row.v}</dd>
+            {rows.map((row) => (
+                <div key={row.title} className="lux-table_row d-flex">
+                    <dt className="lux-table_key">{row.title}</dt>
+                    <dd className="lux-table_value">{row.value}</dd>
                 </div>
             ))}
         </dl>
@@ -23,10 +23,10 @@ export const Table = ({ data = [], className, ...props }) => {
 };
 
 Table.propTypes = {
-    data: PropTypes.arrayOf(
+    rows: PropTypes.arrayOf(
         PropTypes.shape({
-            k: PropTypes.string.isRequired,
-            v: PropTypes.element.isRequired,
+            title: PropTypes.string.isRequired,
+            value: PropTypes.element.isRequired,
         })
     ).isRequired,
     className: PropTypes.string,
