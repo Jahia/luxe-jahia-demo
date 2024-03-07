@@ -17,6 +17,7 @@ node_modules
 !.yarn/versions
 .pnp.*
 
+.env
 .env.local
 luxe-jahia-demo-v*
 

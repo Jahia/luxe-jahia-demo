@@ -1,28 +1,33 @@
 import React from 'react';
-import {useServerContext, jBuildNavMenu, jUrl} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, jBuildNavMenu, jUrl, jAddCacheDependency} from '@jahia/js-server-engine';
 import clsx from 'clsx';
-
-const navMenu = {
-    base: 'home',
-    maxDepth: '1',
-    startLevel: '0',
-    menuItemView: 'menuElement'
-};
 
 export const NavMenuDefault = () => {
     const {currentNode, renderContext} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+
+    const nav = getNodeProps(currentNode, [
+        'base',
+        'maxDepth',
+        'startLevel',
+        'menuItemView',
+        'brandText',
+        'brandImage'
+    ]);
 
     const menu = jBuildNavMenu(
-        navMenu.maxDepth,
-        navMenu.base,
-        navMenu.menuItemView,
-        navMenu.startLevel
+        nav.maxDepth,
+        nav.base,
+        nav.menuItemView,
+        nav.startLevel
     );
 
-    const logo = jUrl({value: `${modulePath}/assets/logo-luxe.svg`});
-    const currentPath = currentNode.getPath();
+    const mainPath = renderContext.getMainResource().getPath();
+    const siteName = renderContext.getSite().getName();
     const home = renderContext.getSite().getHome();
+
+    if (nav.brandImage) {
+        jAddCacheDependency({node: nav.brandImage});
+    }
 
     return (
         <nav
@@ -36,7 +41,11 @@ export const NavMenuDefault = () => {
         >
             <div className="container-fluid gap-5">
                 <a href={jUrl({path: home.getPath()})} className="navbar-brand">
-                    <img src={logo} alt="" width="100px"/>
+                    {nav.brandImage &&
+                        <img src={nav.brandImage?.getUrl()}
+                             alt={`Logo-${siteName}`}
+                             width="100px"/>}
+                    {nav.brandText}
                 </a>
                 <button
                     className="navbar-toggler"
@@ -58,8 +67,8 @@ export const NavMenuDefault = () => {
                             <li key={node.getIdentifier()} className="nav-item">
                                 <a href={jUrl({path: node.getPath()})}
                                    className={clsx('nav-link', {
-                                       active: currentPath.includes(node.getPath())
-                                   })}
+                                           active: mainPath.includes(node.getPath())
+                                       })}
                                 >
                                     {node.getDisplayableName()}
                                 </a>
