@@ -2,16 +2,20 @@ import React from 'react';
 import { MainLayout } from '../../layouts';
 import { ContentHeader, Table } from '../../components';
 import { Row, HeadingSection } from '../../contentTypes';
-import { useServerContext, getNodeProps, jUrl, getChildNodes, JAddContentButtons, JRender } from '@jahia/js-server-engine';
+import { useServerContext, getNodeProps, jUrl, getChildNodes, JAddContentButtons, JRender, jAddCacheDependency } from '@jahia/js-server-engine';
 
 export const agency = () => {
-    const {currentNode} = useServerContext();
+    const {currentNode, renderContext} = useServerContext();
     const props = getNodeProps(currentNode, ['name', 'description', 'image', 'creationDate', 'languages', 'address', 'email', 'phone']);
     const childs = getChildNodes(currentNode, 50);
+    const realtors = childs.filter(child => child.isNodeType('luxe:realtor'));
+    const estates = childs.filter(child => child.isNodeType('luxe:estate'));
+    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    jAddCacheDependency({node: props.image});
     const data = [
         {
             title: "Nombre d’experts",
-            value: `${childs.filter(child => child.isNodeType('luxe:realtor')).length}`,
+            value: `${realtors.length}`,
         },
         {
             title: "Date de création",
@@ -28,7 +32,7 @@ export const agency = () => {
                 <section>
                     <ContentHeader 
                         title={props.name}
-                        imgURL={jUrl({path: props.image.getPath()})}
+                        imgURL={(props.image?.getPath() && jUrl({path: props.image.getPath()})) || jUrl({value: modulePath + '/assets/img/img-placeholder.jpg'})}
                         description={props.description}
                     />
                 </section>
@@ -73,7 +77,7 @@ export const agency = () => {
                 <section>
                     <HeadingSection title="Nos experts" />
                     <Row type="grid" grid="4" gutter="medium">
-                        {childs.filter(child => child.isNodeType('luxe:realtor')).map((realtor, key) => (
+                        {realtors.map((realtor, key) => (
                             <JRender path={realtor.getPath()} key={key}/>
                         ))}
                     </Row>
@@ -82,7 +86,7 @@ export const agency = () => {
                 <section>
                     <HeadingSection title="Propriétés exclusives de l’agence"/>
                     <Row type="grid" grid="3" gutter="none" columnSpacing="none">
-                        {childs.filter(child => child.isNodeType('luxe:estate')).map((estate, key) => (
+                        {estates.map((estate, key) => (
                             <JRender path={estate.getPath()} key={key}/>
                         ))}
                     </Row>
