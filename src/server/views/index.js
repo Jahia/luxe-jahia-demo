@@ -5,3 +5,5 @@ export * from './highlightNumber';
 export * from './navMenu';
 export * from './estate';
 export * from './textIllustrated';
+export * from './agencyCard';
+export * from './realtor';
