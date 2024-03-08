@@ -8,8 +8,18 @@ export const realtorCard = () => {
     jAddCacheDependency({node: props.image});
     return (
         <a href="#" className="lux-agentCard d-flex flex-column">
-            {(props.image?.getPath() && <img src={jUrl({path: props.image.getPath()})} alt={props.image.getDisplayableName() || 'placeholder'}className='luxe-agentCard_image' width="250px" height="250px" />)
-                 || <img src={jUrl({value: modulePath + '/assets/img/img-placeholder.jpg'})} className='luxe-agentCard_image' width="250px" height="250px" />}
+            {(props.image &&
+                <img 
+                    src={jUrl({path: props.image.getPath()})}
+                    className='luxe-agentCard_image'
+                    width="250px"
+                    height="250px" />) ||
+                <img
+                    src={jUrl({value: modulePath + '/assets/img/img-placeholder.jpg'})}
+                    className='luxe-agentCard_image'
+                    width="250px"
+                    height="250px" />
+            }
             <div className="lux-agentCard_informations d-flex py-3 flex-column justify-content-center">
                 <h4 className="my-0">{props.firstName} {props.lastName}</h4>
                 <p className="m-0">{props.jobPosition}</p>

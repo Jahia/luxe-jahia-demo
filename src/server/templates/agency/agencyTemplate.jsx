@@ -32,7 +32,7 @@ export const agency = () => {
                 <section>
                     <ContentHeader 
                         title={props.name}
-                        imgURL={(props.image?.getPath() && jUrl({path: props.image.getPath()})) || jUrl({value: modulePath + '/assets/img/img-placeholder.jpg'})}
+                        imgURL={(props.image && jUrl({path: props.image.getPath()})) || jUrl({value: modulePath + '/assets/img/img-placeholder.jpg'})}
                         description={props.description}
                     />
                 </section>
