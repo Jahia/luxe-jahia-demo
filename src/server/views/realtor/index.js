@@ -1,1 +1,1 @@
-export * from './realtorCard';
+export * from './RealtorCard';
