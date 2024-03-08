@@ -15,11 +15,11 @@
  - startLevel (long) = 0 mandatory
  - menuItemView (string,choicelist[templates='jmix:navMenuItem,menuItem',resourceBundle,image]) = menuElement nofulltext
 
-//[luxemix:brand] mixin
-// extends = luxe:navMenu
-// - brandText (string) i18n
-// - brandImage (weakreference, picker[type='image']) < 'jmix:image'
-// - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
+[luxemix:brand] mixin
+ extends = luxe:navMenu
+ - brandText (string) i18n
+ - brandImage (weakreference, picker[type='image']) < 'jmix:image'
+ - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
 
 [luxemix:destination] mixin
  extends = jnt:page

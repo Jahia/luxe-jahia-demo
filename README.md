@@ -10,3 +10,14 @@ If you don't use default configuration for the Docker container name or for Jahi
 
 You can find the documentation on how to use this module on the [Jahia Academy](https://academy.jahia.com/get-started/developers/templating) templating tutorial.
 # luxe-jahia-demo
+
+# Build
+if not created, create a `.env` file with the following variables (adjust the values to your env) :
+```shell
+JAHIA_USER=username:password
+JAHIA_HOST=http://localhost:8080
+JAHIA_DOCKER_NAME=jahia
+JAHIA_DEPLOY_METHOD=curl
+```
+
+`JAHIA_DEPLOY_METHOD` could be **curl** or **docker**
