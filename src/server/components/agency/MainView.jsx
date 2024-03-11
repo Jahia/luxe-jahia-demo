@@ -17,14 +17,18 @@ export const AgencyMainView = ({
     return (
         <>
             <section>
-                <ContentHeader
-                    title={name}
-                    image={image}
-                    description={description}
-                />
+                <div className="container">
+                    <ContentHeader
+                        title={name}
+                        image={image}
+                        description={description}
+                    />
+                </div>
             </section>
             <section>
-                <Table rows={data}/>
+                <div className="container">
+                    <Table rows={data}/>
+                </div>
             </section>
             <section>
                 <div className="container">
@@ -57,8 +61,10 @@ export const AgencyMainView = ({
                                 Prendre rendez-vous
                             </button>
                         </div>
-                        <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
-                            map here
+                        <div className="col">
+                            <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
+                                map here
+                            </div>
                         </div>
                     </div>
                 </div>

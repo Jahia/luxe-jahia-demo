@@ -26,7 +26,10 @@ export const ContentHeader = ({
                 </h1>
                 {description && (
                     <article className="lux-contentHeader_description bg-secondary">
-                        {description}
+                        {/* eslint-disable-next-line react/no-danger */}
+                        <unwanteddiv dangerouslySetInnerHTML={{
+                            __html: description
+                        }}/>
                     </article>
                 )}
             </div>

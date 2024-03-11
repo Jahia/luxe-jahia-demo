@@ -33,7 +33,7 @@ export const AgencyCm = () => {
 
     const data = [
         {
-            title: 'Nombre d’experts',
+            title: 'Nombre d\'experts',
             value: `${realtors.length}`
         },
         {
@@ -60,18 +60,20 @@ export const AgencyCm = () => {
     return (
         <>
             <JAddResources type="css" resources="main.css"/>
-            <AgencyMainView {...{
-            name: agency,
-            description: agency,
-            image,
-            data,
-            address: agency.address,
-            phone: agency.phone,
-            email: agency.email,
-            realtors,
-            estates,
-            locale}}
-            />
+            <main>
+                <AgencyMainView {...{
+                    name: agency.name,
+                    description: agency.description,
+                    image,
+                    data,
+                    address: agency.address,
+                    phone: agency.phone,
+                    email: agency.email,
+                    realtors,
+                    estates,
+                    locale}}
+                />
+            </main>
         </>
     );
 };

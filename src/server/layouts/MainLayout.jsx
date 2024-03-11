@@ -45,7 +45,7 @@ export const MainLayout = ({head, footer, children}) => {
                 {head}
             </HtmlHead>
             <body>
-                <JAbsoluteArea name='navArea' allowedTypes={["luxe:navMenu"]} level={0} numberOfItems={1} /> 
+                <JAbsoluteArea name="navArea" allowedTypes={['luxe:navMenu']} level="0" numberOfItems="1"/>
                 <main>
                     {children}
                 </main>

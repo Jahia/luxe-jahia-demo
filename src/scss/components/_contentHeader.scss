@@ -1,0 +1,21 @@
+$description-offset: 50px;
+
+.lux-contentHeader_title {
+    height: 350px;
+    text-wrap: balance;
+    line-height: 1; // TODO: Manage it with the class `display-2`
+}
+
+.lux-contentHeader_image {
+    width: 500px;
+    height: 500px;
+}
+
+.lux-contentHeader_description {
+    padding: 80px;
+    font-size: 1.5rem;
+    z-index: -1;
+    width: calc(100% + $description-offset);
+    margin-left: calc($description-offset * -1);
+    border-radius: 16px; 
+}

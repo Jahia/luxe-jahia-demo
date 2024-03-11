@@ -27,7 +27,7 @@ export const AgencyFullPage = () => {
 
     const data = [
         {
-            title: 'Nombre d’experts',
+            title: 'Nombre d\'experts',
             value: `${realtors.length}`
         },
         {
@@ -53,8 +53,8 @@ export const AgencyFullPage = () => {
 
     return (
         <AgencyMainView {...{
-            name: agency,
-            description: agency,
+            name: agency.name,
+            description: agency.description,
             image,
             data,
             address: agency.address,

@@ -18,7 +18,7 @@ Table.propTypes = {
     rows: PropTypes.arrayOf(
         PropTypes.shape({
             title: PropTypes.string.isRequired,
-            value: PropTypes.element.isRequired
+            value: PropTypes.string.isRequired
         })
     ).isRequired,
     className: PropTypes.string
