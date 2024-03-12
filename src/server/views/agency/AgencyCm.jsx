@@ -4,14 +4,17 @@ import {
     getNodeProps,
     jAddCacheDependency,
     getChildNodes,
-    JAddResources
+    JAddResources, getNodesByJCRQuery
 } from '@jahia/js-server-engine';
 import {AgencyMainView} from '../../components/agency';
+
+const MAX_ESTATE = 3;
 
 export const AgencyCm = () => {
     const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const currentNodePath = currentNode.getPath();
 
     const agency = getNodeProps(currentNode, [
         'name',
@@ -27,10 +30,14 @@ export const AgencyCm = () => {
     const realtors = getChildNodes(currentNode, -1, 0, child => {
         return child.isNodeType('luxe:realtor');
     });
-    const estates = getChildNodes(currentNode, 50, 0, child => {
-        return child.isNodeType('luxe:estate');
-    });
 
+    const query = `SELECT *
+                   from [luxe:estate] as estate
+                   where isdescendantnode('${currentNodePath}')
+                   order by estate.[jcr:created] DESC`;
+    jAddCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`});
+
+    const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
     const data = [
         {
             title: 'Nombre d\'experts',

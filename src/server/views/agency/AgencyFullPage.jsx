@@ -1,11 +1,21 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jAddCacheDependency, getChildNodes} from '@jahia/js-server-engine';
-import {AgencyMainView} from '../../components/agency';
+import {
+    useServerContext,
+    getNodeProps,
+    jAddCacheDependency,
+    getChildNodes,
+    getNodesByJCRQuery
+} from '@jahia/js-server-engine';
 
+import {AgencyMainView} from '../../components/agency';
+import todoI18n from '../../temp/locales/fr';
+
+const MAX_ESTATE = 6;
 export const AgencyFullPage = () => {
     const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const currentNodePath = currentNode.getPath();
 
     const agency = getNodeProps(currentNode, [
         'name',
@@ -21,21 +31,26 @@ export const AgencyFullPage = () => {
     const realtors = getChildNodes(currentNode, -1, 0, child => {
         return child.isNodeType('luxe:realtor');
     });
-    const estates = getChildNodes(currentNode, 50, 0, child => {
-        return child.isNodeType('luxe:estate');
-    });
+
+    const query = `SELECT *
+                   from [luxe:estate] as estate
+                   where isdescendantnode('${currentNodePath}')
+                   order by estate.[jcr:created] DESC`;
+    jAddCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`});
+
+    const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
     const data = [
         {
-            title: 'Nombre d\'experts',
+            title: todoI18n.table.data.nbRealtor,
             value: `${realtors.length}`
         },
         {
-            title: 'Date de création',
-            value: new Date(agency.creationDate).getFullYear() || '-'
+            title: todoI18n.table.data.creationDate,
+            value: new Date(agency.creationDate).getFullYear().toString(10) || '-'
         },
         {
-            title: 'Langues parlées',
+            title: todoI18n.table.data.spokenLanguage,
             value: agency.languages.join(', ')
         }
     ];

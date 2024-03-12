@@ -7,3 +7,4 @@ export * from './estate';
 export * from './textIllustrated';
 export * from './agency';
 export * from './realtor';
+export * from './jcrQuery';

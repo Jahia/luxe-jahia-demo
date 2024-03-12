@@ -1,10 +1,10 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../';
-import {JAddContentButtons, JRender} from '@jahia/js-server-engine';
+import {JRender} from '@jahia/js-server-engine';
 import todoI18n from '../../temp/locales/fr';
 
-export const AgencyMainView = ({
+export const RealtorMainView = ({
     name,
     description,
     image,
@@ -12,7 +12,6 @@ export const AgencyMainView = ({
     address,
     phone,
     email,
-    realtors,
     estates
 }) => {
     return (
@@ -65,18 +64,7 @@ export const AgencyMainView = ({
                 </Row>
             </Section>
             <Section>
-                <HeadingSection title={todoI18n.section.heading.experts}/>
-                <Row className="row-cols-4 g-3">
-                    {realtors.map(realtor => (
-                        <Col key={realtor.getIdentifier()}>
-                            <JRender node={realtor}/>
-                        </Col>
-                    ))}
-                </Row>
-                {/* <JAddContentButtons nodeTypes={['luxe:realtor']}/> */}
-            </Section>
-            <Section>
-                <HeadingSection title={todoI18n.section.heading.exclusiveAgencyEstates}/>
+                <HeadingSection title={todoI18n.section.heading.exclusiveEstates}/>
                 <Row className="row-cols-3 g-0">
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
@@ -89,7 +77,7 @@ export const AgencyMainView = ({
     );
 };
 
-AgencyMainView.propTypes = {
+RealtorMainView.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.shape({
@@ -100,6 +88,5 @@ AgencyMainView.propTypes = {
     address: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
-    realtors: PropTypes.array,
     estates: PropTypes.array
 };

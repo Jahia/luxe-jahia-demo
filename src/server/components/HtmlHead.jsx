@@ -4,8 +4,9 @@ import {JAddResources} from '@jahia/js-server-engine';
 export const HtmlHead = ({children}) => {
     return (
         <head>
+            <meta charSet="utf-8"/>
             <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
-            <script type="text/javascript" src="https://unpkg.com/alpinejs" defer="true"/>
+            <script defer type="text/javascript" src="https://unpkg.com/alpinejs"/>
             <JAddResources type="css" resources="main.css"/>
             <JAddResources type="javascript" resources="script.js"/>
 

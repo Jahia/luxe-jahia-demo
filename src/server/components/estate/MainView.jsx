@@ -106,19 +106,20 @@ export const EstateMainView = ({
                                         {bathrooms}
                                     </dd>
                                 </div>
-                                <div className="lux-house_information_row d-flex">
-                                    {options?.map(option => (
-                                        <Fragment key={option}>
-                                            <dt className="lux-house_information_key">
-                                                {option}
-                                            </dt>
-                                            <dd className="lux-house_information_value">
-                                                Oui
-                                            </dd>
-                                        </Fragment>
-                                ))}
+                                {options &&
+                                    <div className="lux-house_information_row d-flex">
+                                        {options.map(option => (
+                                            <Fragment key={option}>
+                                                <dt className="lux-house_information_key">
+                                                    {option}
+                                                </dt>
+                                                <dd className="lux-house_information_value">
+                                                    Oui
+                                                </dd>
+                                            </Fragment>
+                                    ))}
 
-                                </div>
+                                    </div>}
                             </dl>
                             {/* <AgentItem imgURL={profile1} name="Robert Fox"/> */}
                         </div>
