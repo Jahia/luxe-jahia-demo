@@ -1,30 +1,27 @@
 import React from 'react';
 import {JArea} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
+import {Row, Section} from '../../components';
 
 export const PageDestinations = () => {
     return (
         <MainLayout>
             <JArea name="heading"
                    allowedTypes={['luxe:header']}
-                   subNodesView="mainHeader-textUp"
+                   subNodesView="textUp"
                    numberOfItems={1}/>
-            <section>
-                <div className="container">
-                    <div className="row lux-richtext">
-                        <JArea name="main" allowedTypes={['jnt:bigText']}/>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div className="container">
-                    <JArea name="related-destinations"
-                           allowedTypes={['luxe:textIllustrated']}
+            <Section>
+                <Row className="lux-richtext">
+                    <JArea name="main"
+                           allowedTypes={['jnt:bigText']}
                            numberOfItems={1}/>
-                </div>
-            </section>
+                </Row>
+            </Section>
+            <Section>
+                <JArea name="related-destinations"
+                       allowedTypes={['luxe:textIllustrated', 'luxe:navMenu']}/>
+            </Section>
         </MainLayout>
-
     );
 };
 
