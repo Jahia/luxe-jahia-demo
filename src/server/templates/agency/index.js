@@ -1,1 +1,1 @@
-export * from './agencyTemplate.jsx';
+export * from './AgencyDefault';

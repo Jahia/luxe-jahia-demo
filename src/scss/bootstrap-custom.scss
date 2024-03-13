@@ -18,14 +18,14 @@
 .row {
     --bs-gutter-x: 2rem;
 
-    &:not(:only-child) {
+    &:not(:only-child, :last-child) {
         padding-bottom: 2rem;
     }
 
     // Page Builder fix
-    > div:not([class*="col"]) {
+    > .jahia-template-gxt  {
+        --bs-gutter-y: 0;
         --bs-gutter-x: 1.5rem;
-        --bs-gutter-y: O;
         display: flex;
         flex-wrap: wrap;
         margin-top: calc(-1 * var(--bs-gutter-y));
@@ -34,15 +34,20 @@
 
         > * {
             flex-shrink: 0;
-            width: 100%;
+            width:100%;
             max-width: 100%;
             padding-right: calc(var(--bs-gutter-x) * 0.5);
             padding-left: calc(var(--bs-gutter-x) * 0.5);
             margin-top: var(--bs-gutter-y);
+
         }
     }
 }
 
+address a {
+    text-decoration: none;
+    color: inherit;
+}
 
 dd {
     margin-bottom: 0;

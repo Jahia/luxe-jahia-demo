@@ -1,0 +1,30 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+
+export const Row = ({
+    rowClassName,
+    colClassName,
+    children
+}) => {
+    return (
+        <div
+            className={clsx(
+                'row',
+                rowClassName
+            )}
+        >
+            {React.Children.map(children, content => (
+                <div className={clsx('col', colClassName)}>
+                    {content}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+Row.propTypes = {
+    rowClassName: PropTypes.string,
+    colClassName: PropTypes.string,
+    children: PropTypes.node.isRequired
+};

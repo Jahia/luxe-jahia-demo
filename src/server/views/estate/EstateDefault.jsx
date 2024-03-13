@@ -16,14 +16,14 @@ export const EstateDefault = () => {
     jAddCacheDependency({node: image});
 
     return (
-        <a href={jUrl({path: currentNode.getPath()})} className="lux-propertyItem">
+        <a href={jUrl({path: currentNode.getPath()})} className="lux-estateCard">
             <img src={image.getUrl()} alt={image.getDisplayableName()} height="265"/>
             <h4 className="my-2">{estate.title}</h4>
-            <p className="lux-propertyItem_informations">
+            <p className="lux-estateCard_informations">
                 {estate.bedrooms} chambres <span className="lux-diamond">✦</span>{' '}
                 {estate.surface.toLocaleString(locale)}m<sup>2</sup>
             </p>
-            <strong className="lux-propertyItem_price">{estate.price.toLocaleString(locale)}€</strong>
+            <strong className="lux-estateCard_price">{estate.price.toLocaleString(locale)}€</strong>
         </a>
     );
 };
