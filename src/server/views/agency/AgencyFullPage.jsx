@@ -25,12 +25,9 @@ export const AgencyFullPage = () => {
         'languages',
         'address',
         'email',
-        'phone'
+        'phone',
+        'realtors'
     ]);
-
-    const realtors = getChildNodes(currentNode, -1, 0, child => {
-        return child.isNodeType('luxe:realtor');
-    });
 
     const query = `SELECT *
                    from [luxe:estate] as estate
@@ -75,7 +72,7 @@ export const AgencyFullPage = () => {
             address: agency.address,
             phone: agency.phone,
             email: agency.email,
-            realtors,
+            realtors: agency.realtors,
             estates,
             locale}}
         />
