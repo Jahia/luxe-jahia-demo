@@ -6,13 +6,13 @@
 <luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
 
 //jmix:editorialContent
-[luxemix:luxeMainContent] > jmix:droppableContent mixin
+[luxemix:luxeContent] > jmix:droppableContent mixin
 
 [luxemix:queryContent] mixin
 
 
 
-[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeMainContent
+[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeContent
  orderable
  - base (string,choicelist) nofulltext < 'home', 'currentPage'
  - maxDepth (long) = 2 mandatory
@@ -33,19 +33,19 @@
  - enableEstates (boolean) = true
  - enableAgencies (boolean) = true
 
-[luxe:header] > jnt:content, luxemix:luxeMainContent
+[luxe:header] > jnt:content, luxemix:luxeContent
  - title (string) primary i18n mandatory
  - teaser (string) i18n
- - image (weakreference, picker[type='image'])
+ - image (weakreference, picker[type='image']) < 'jmix:image'
 
-[luxe:highlightNumber] > jnt:content, luxemix:luxeMainContent
+[luxe:highlightNumber] > jnt:content, luxemix:luxeContent
  - text (string) primary i18n
  - number (long)
 
-[luxe:section] > jnt:contentList, luxemix:luxeMainContent, mix:title
+[luxe:section] > jnt:contentList, luxemix:luxeContent, mix:title
  - arrangement (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
 
-[luxe:cols] > jnt:content, luxemix:luxeMainContent
+[luxe:cols] > jnt:content, luxemix:luxeContent
  - colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
  + * (jmix:droppableContent) = jmix:droppableContent
 
@@ -53,7 +53,7 @@
  - title (string) primary i18n mandatory
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - price (long) mandatory
- - gallery (weakreference, picker[type='image']) multiple mandatory
+ - images (weakreference, picker[type='image']) multiple mandatory < 'jmix:image'
  - country (string,choicelist[country]) = 'FR' autocreated
  - type (string,choicelist[resourceBundle]) = 'house' autocreated mandatory < 'house', 'apartment', 'building'
  - surface (long) = 45 autocreated mandatory
@@ -62,38 +62,38 @@
  - bathrooms (long) = 1 autocreated mandatory
  - options (string,choicelist[resourceBundle]) multiple < 'garage', 'swimmingPool', 'garden', 'balcony'
 
-[luxe:textIllustrated] > jnt:content, luxemix:luxeMainContent
+[luxe:textIllustrated] > jnt:content, luxemix:luxeContent
  - title (string) primary i18n mandatory
  - text (string,richtext[ckeditor.toolbar='Basic']) i18n mandatory
- - image (weakreference, picker[type='image'])
+ - image (weakreference, picker[type='image']) mandatory < jmix:image
  - arrangement (string,choicelist[resourceBundle]) = 'left' < 'right', 'left'
 
-[luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeMainContent, luxemix:queryContent
+[luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - name (string) primary i18n mandatory
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - image (weakreference, picker[type='image']) mandatory
+ - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
  - creationDate (date)
  - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
  - country (string,choicelist[country]) = 'FR' autocreated
  - address (string)
  - phone (string)
  - email (string)
- + * (luxe:realtor) = luxe:realtor
+ - realtors (weakreference) multiple mandatory < 'luxe:realtor'
  + * (luxe:estate) = luxe:estate
 
-[luxe:realtor] > jnt:content, jmix:mainResource, luxemix:queryContent
+[luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - firstName (string) mandatory
  - lastName (string) primary mandatory
- - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'director', 'senior'
+ - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'senior', 'director'
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - image (weakreference, picker[type='image'])
+ - image (weakreference, picker[type='image']) < 'jmix:image'
  - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
- - experience (long) = 1 autocreated mandatory
- - phone (string) = '+33 6 123 456' autocreated mandatory
+ - yOfExperience (long) = 1 autocreated mandatory
+ - phone (string) = '+33 6 123 456' autocreated mandatory indexed=no
  - email (string) = 'agent@luxe.com' autocreated mandatory
 
 
-[luxe:jcrQuery] > jnt:content, luxemix:luxeMainContent, jmix:list, jmix:renderableList, mix:title, jmix:cache
+[luxe:jcrQuery] > jnt:content, luxemix:luxeContent, jmix:list, jmix:renderableList, mix:title, jmix:cache
 - type (string, choicelist[subnodetypes = 'jnt:page,luxemix:queryContent',resourceBundle]) indexed=no mandatory
 - criteria (string,choicelist[resourceBundle]) = 'jcr:created' autocreated indexed=no < 'jcr:created','jcr:lastModified','j:lastPublished'
 - sortDirection (string, choicelist[resourceBundle]) = 'asc' autocreated indexed=no < 'asc','desc'

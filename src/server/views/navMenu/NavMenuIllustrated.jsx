@@ -52,7 +52,13 @@ export const NavMenuIllustrated = () => {
         nav.startLevel
     );
     // Todo filter to flatten and remove jnt:navMenuText
-    // menu.filter({node});
+    // menu.filter(({node, children}) => {
+    //     if (node.isNodeType('jnt:navMenuText')) {
+    //         return flatten(children);
+    //     }
+    //
+    //     return node;
+    // });
     return (
         <>
             {menu.map(({node}, index) => (
