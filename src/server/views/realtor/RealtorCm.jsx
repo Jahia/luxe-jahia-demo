@@ -30,7 +30,7 @@ export const RealtorCm = () => {
         'description',
         'image',
         'languages',
-        'experience',
+        'yOfExperience',
         'email',
         'phone'
     ]);
@@ -54,7 +54,7 @@ export const RealtorCm = () => {
         },
         {
             title: todoI18n.table.data.yOfExperience,
-            value: `${realtor.experience}`
+            value: `${realtor.yOfExperience}`
         }
     ];
 
