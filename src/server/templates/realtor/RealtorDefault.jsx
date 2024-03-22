@@ -2,7 +2,7 @@ import React from 'react';
 import {MainLayout} from '../../layouts';
 import {
     useServerContext,
-    JRender
+    Render
 } from '@jahia/js-server-engine';
 
 export const RealtorDefault = () => {
@@ -10,7 +10,7 @@ export const RealtorDefault = () => {
 
     return (
         <MainLayout>
-            <JRender node={currentNode} view="fullPage"/>
+            <Render node={currentNode} view="fullPage"/>
         </MainLayout>
     );
 };

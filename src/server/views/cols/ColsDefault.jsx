@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    JArea
+    Area
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
@@ -19,7 +19,7 @@ export const ColsDefault = () => {
         <div className={clsx('row', arrangement)}>
             {cols.map(col => (
                 <div key={col} className={clsx('col')}>
-                    <JArea name={`${currentNode.getName()}-col-${col}`} areaAsSubNode={true}/>
+                    <Area areaAsSubNode name={`${currentNode.getName()}-col-${col}`}/>
                 </div>
             )
             )}

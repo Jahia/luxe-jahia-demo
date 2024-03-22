@@ -1,9 +1,9 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server} from '@jahia/js-server-engine';
 import {EstateMainView} from '../../components';
 
 export const EstateFullPage = () => {
-    const {currentNode, currentResource} = useServerContext();
+    const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const isBackBtnEnabled = currentResource.getModuleParams().get('isBackBtnEnabled') === 'true';
 
@@ -22,7 +22,7 @@ export const EstateFullPage = () => {
     ]);
 
     const image = estate.gallery[0];
-    jAddCacheDependency({node: image});
+    server.render.addCacheDependency({node: image}, renderContext);
 
     return (
         <EstateMainView {...{

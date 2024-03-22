@@ -1,5 +1,5 @@
 import React from 'react';
-import {JRender, useServerContext} from '@jahia/js-server-engine';
+import {Render, useServerContext} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 
 export const EstateDefault = () => {
@@ -8,7 +8,7 @@ export const EstateDefault = () => {
         <MainLayout
             head={<meta name="description" content="content template"/>}
         >
-            <JRender node={currentNode} view="fullPage" parameters={{isBackBtnEnabled: 'true'}}/>
+            <Render node={currentNode} view="fullPage" parameters={{isBackBtnEnabled: 'true'}}/>
         </MainLayout>
 
     );

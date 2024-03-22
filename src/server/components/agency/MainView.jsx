@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../';
-import {JAddContentButtons, JRender} from '@jahia/js-server-engine';
+import {Render} from '@jahia/js-server-engine';
 import todoI18n from '../../temp/locales/fr';
 
 export const AgencyMainView = ({
@@ -69,18 +69,18 @@ export const AgencyMainView = ({
                 <Row className="row-cols-4 g-3">
                     {realtors.map(realtor => (
                         <Col key={realtor.getIdentifier()}>
-                            <JRender node={realtor}/>
+                            <Render node={realtor}/>
                         </Col>
                     ))}
                 </Row>
-                {/* <JAddContentButtons nodeTypes={['luxe:realtor']}/> */}
+                {/* <AddContentButtons nodeTypes={['luxe:realtor']}/> */}
             </Section>
             <Section>
                 <HeadingSection title={todoI18n.section.heading.exclusiveAgencyEstates}/>
                 <Row className="row-cols-3 g-0">
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
-                            <JRender node={estate}/>
+                            <Render node={estate}/>
                         </Col>
                     ))}
                 </Row>
