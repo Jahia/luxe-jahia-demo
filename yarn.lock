@@ -1596,6 +1596,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.23.9":
+  version: 7.24.1
+  resolution: "@babel/runtime@npm:7.24.1"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/500c6a99ddd84f37c7bc5dbc84777af47b1372b20e879941670451d55484faf18a673c5ebee9ca2b0f36208a729417873b35b1b92e76f811620f6adf7b8cb0f1
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.8.4":
   version: 7.23.9
   resolution: "@babel/runtime@npm:7.23.9"
@@ -1799,18 +1808,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/js-server-engine@npm:^1.2.10":
-  version: 1.2.10
-  resolution: "@jahia/js-server-engine@npm:1.2.10"
+"@jahia/js-server-engine@npm:^1.2.13":
+  version: 1.2.13
+  resolution: "@jahia/js-server-engine@npm:1.2.13"
   dependencies:
     "@apollo/client": "npm:^3.5.5"
     dayjs: "npm:^1.10.4"
     graphql: "npm:^16.0.1"
     handlebars: "npm:^4.7.7"
     handlebars-utils: "npm:^1.0.6"
+    i18next: "npm:^23.10.1"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
-  checksum: 10c0/2d72f3af9c3fdbb356fdd9876eea0bf0fcd45edf7ecf85f8743909c4f8d1ad1c91e4672fbc88165e78640e234cc81abde06df74feb41f2297c3c298991c7d5fc
+    react-i18next: "npm:^14.1.0"
+  checksum: 10c0/2669e4160ad49ff61ea1da638dca4974c6dc83954ded961e225c14beda186cb3e08745657ccab8ebd6285d4b79c0de4a34590e41c57b7eef406ccb72ab538ac5
   languageName: node
   linkType: hard
 
@@ -5179,6 +5190,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-parse-stringify@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "html-parse-stringify@npm:3.0.1"
+  dependencies:
+    void-elements: "npm:3.1.0"
+  checksum: 10c0/159292753d48b84d216d61121054ae5a33466b3db5b446e2ffc093ac077a411a99ce6cbe0d18e55b87cf25fa3c5a86c4d8b130b9719ec9b66623259000c72c15
+  languageName: node
+  linkType: hard
+
 "http-cache-semantics@npm:^4.1.1":
   version: 4.1.1
   resolution: "http-cache-semantics@npm:4.1.1"
@@ -6101,7 +6121,7 @@ __metadata:
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/data-helper": "npm:1.0.4"
     "@jahia/eslint-config": "npm:^2.1.2"
-    "@jahia/js-server-engine": "npm:^1.2.10"
+    "@jahia/js-server-engine": "npm:^1.2.13"
     "@jahia/scripts": "npm:^1.3.3"
     babel-loader: "npm:^8.2.3"
     bootstrap: "npm:^5.3.2"
@@ -7205,6 +7225,24 @@ __metadata:
     react: ^16.8.0
     react-dom: ^16.8.0
   checksum: 10c0/4711044e00102d7a8638d9bd2cf5e12528b1bd773dbcc74f1035d3d1339961b93a323aea583a4565a62183f4f58396b792f8d0dcc317d135e799f33458f79c20
+  languageName: node
+  linkType: hard
+
+"react-i18next@npm:^14.1.0":
+  version: 14.1.0
+  resolution: "react-i18next@npm:14.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.9"
+    html-parse-stringify: "npm:^3.0.1"
+  peerDependencies:
+    i18next: ">= 23.2.3"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10c0/d3e2d1e5183068a7a23f2fefc432d61546baef0afef176929a1a7b33489e5b3a2a892745a4424327c4bd3ab02ee3a6a4e450b57c2598393032a1efdbe57f8841
   languageName: node
   linkType: hard
 
@@ -8818,6 +8856,13 @@ __metadata:
     spdx-correct: "npm:^3.0.0"
     spdx-expression-parse: "npm:^3.0.0"
   checksum: 10c0/7b91e455a8de9a0beaa9fe961e536b677da7f48c9a493edf4d4d4a87fd80a7a10267d438723364e432c2fcd00b5650b5378275cded362383ef570276e6312f4f
+  languageName: node
+  linkType: hard
+
+"void-elements@npm:3.1.0":
+  version: 3.1.0
+  resolution: "void-elements@npm:3.1.0"
+  checksum: 10c0/0b8686f9f9aa44012e9bd5eabf287ae0cde409b9a2854c5a2335cb83920c957668ac5876e3f0d158dd424744ac411a7270e64128556b451ed3bec875ef18534d
   languageName: node
   linkType: hard
 

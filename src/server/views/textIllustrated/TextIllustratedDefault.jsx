@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jAddCacheDependency
+    server
 } from '@jahia/js-server-engine';
 
 import {TextIllustrated} from '../../components';
@@ -13,7 +13,7 @@ export const TextIllustratedDefault = () => {
     const textI9d = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
 
     if (textI9d.image) {
-        jAddCacheDependency({node: textI9d.image});
+        server.render.addCacheDependency({node: textI9d.image}, renderContext);
     }
 
     return (

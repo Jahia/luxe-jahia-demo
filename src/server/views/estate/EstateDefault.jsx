@@ -1,8 +1,8 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jAddCacheDependency, jUrl} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-engine';
 
 export const EstateDefault = () => {
-    const {currentNode, currentResource} = useServerContext();
+    const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const estate = getNodeProps(currentNode, [
         'title',
@@ -13,10 +13,10 @@ export const EstateDefault = () => {
     ]);
 
     const image = estate.gallery[0];
-    jAddCacheDependency({node: image});
+    server.render.addCacheDependency({node: image}, renderContext);
 
     return (
-        <a href={jUrl({path: currentNode.getPath()})} className="lux-estateCard">
+        <a href={buildUrl({path: currentNode.getPath()}, renderContext, currentResource)} className="lux-estateCard">
             <img src={image.getUrl()} alt={image.getDisplayableName()} height="265"/>
             <h4 className="my-2">{estate.title}</h4>
             <p className="lux-estateCard_informations">

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../';
-import {JRender} from '@jahia/js-server-engine';
+import {Render} from '@jahia/js-server-engine';
 import todoI18n from '../../temp/locales/fr';
 
 export const RealtorMainView = ({
@@ -68,7 +68,7 @@ export const RealtorMainView = ({
                 <Row className="row-cols-3 g-0">
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
-                            <JRender node={estate}/>
+                            <Render node={estate}/>
                         </Col>
                     ))}
                 </Row>

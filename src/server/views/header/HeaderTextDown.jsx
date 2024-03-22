@@ -1,13 +1,13 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jAddCacheDependency} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server} from '@jahia/js-server-engine';
 import {Figure} from '../../components';
 
 export const HeaderTextDown = () => {
-    const {currentNode} = useServerContext();
+    const {currentNode, renderContext} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
 
     if (header.image) {
-        jAddCacheDependency({node: header.image});
+        server.render.addCacheDependency({node: header.image}, renderContext);
     }
 
     return (

@@ -1,8 +1,8 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jUrl, jAddCacheDependency} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-engine';
 
 export const RealtorCard = () => {
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const realtor = getNodeProps(currentNode, [
         'firstName',
@@ -17,13 +17,13 @@ export const RealtorCard = () => {
     };
 
     if (realtor.image) {
-        jAddCacheDependency({node: realtor.image});
+        server.render.addCacheDependency({node: realtor.image}, renderContext);
         image.src = realtor.image.getUrl();
         image.alt = `Portrait of ${realtor.firstName} ${realtor.lastName}`;
     }
 
     return (
-        <a href={jUrl({path: currentNode.getPath()})} className="lux-agentCard d-flex flex-column">
+        <a href={buildUrl({path: currentNode.getPath()}, renderContext, currentResource)} className="lux-agentCard d-flex flex-column">
             <img className="lux-agentCard_image"
                  src={image.src}
                  alt={image.alt}

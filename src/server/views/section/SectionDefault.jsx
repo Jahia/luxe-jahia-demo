@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     useServerContext,
     getNodeProps,
-    JRender, JAddContentButtons, getChildNodes
+    Render, AddContentButtons, getChildNodes
 } from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
@@ -18,7 +18,7 @@ const getArrangement = arrangement => {
 
 const Row = ({content, arrangement}) => (
     <div className={clsx('row', getArrangement(arrangement))}>
-        <JRender node={content}/>
+        <Render node={content}/>
     </div>
 );
 
@@ -35,11 +35,11 @@ export const SectionDefault = () => {
         <section>
             <div className="container">
                 {sectionContents.map(content => (
-                    <JRender key={content.getIdentifier()}
-                             node={content}
-                             parameters={{arrangement: getArrangement(section.arrangement)}}/>
+                    <Render key={content.getIdentifier()}
+                            node={content}
+                            parameters={{arrangement: getArrangement(section.arrangement)}}/>
                 ))}
-                <JAddContentButtons/>
+                <AddContentButtons/>
             </div>
         </section>
     );

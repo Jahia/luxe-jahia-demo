@@ -1,5 +1,5 @@
 import React from 'react';
-import {JArea} from '@jahia/js-server-engine';
+import {Area} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 
 export const PageHome = () => {
@@ -7,8 +7,8 @@ export const PageHome = () => {
         <MainLayout
             head={<meta name="description" content="hello"/>}
         >
-            <JArea name="heading" allowedTypes={['luxe:header']} numberOfItems={1}/>
-            <JArea name="main" allowedTypes={['luxe:section']}/>
+            <Area name="heading" allowedTypes={['luxe:header']} numberOfItems={1}/>
+            <Area name="main" allowedTypes={['luxe:section']}/>
         </MainLayout>
 
     );
