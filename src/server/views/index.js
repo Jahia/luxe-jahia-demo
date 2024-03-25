@@ -7,3 +7,4 @@ export * from './estate';
 export * from './textIllustrated';
 export * from './agencyCard';
 export * from './realtor';
+export * from './loginForm';

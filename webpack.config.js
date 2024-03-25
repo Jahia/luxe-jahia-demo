@@ -80,7 +80,7 @@ module.exports = env => {
                 rules: [
                     {
                         test: /\.jsx$/,
-                        include: [path.join(__dirname, 'src/server')],
+                        include: [path.join(__dirname, 'src/server'), path.join(__dirname, 'src/client')],
                         use: {
                             loader: 'babel-loader',
                             options: {

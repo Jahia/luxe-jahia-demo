@@ -87,3 +87,5 @@
   - experience (long) = 1 autocreated mandatory
   - phone (string) = '+33 6 123 456' autocreated mandatory
   - email (string) = 'agent@luxe.com' autocreated mandatory
+
+ [luxe:loginForm] > jnt:content, jmix:mainResource, luxemix:luxeContent
