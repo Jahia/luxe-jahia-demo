@@ -38,7 +38,7 @@ export const AgencyCm = () => {
     const data = [
         {
             title: 'Nombre d\'experts',
-            value: `${realtors.length}`
+            value: `${agency?.realtors.length}`
         },
         {
             title: 'Date de création',

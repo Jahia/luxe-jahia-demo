@@ -40,7 +40,7 @@ export const AgencyFullPage = () => {
     const data = [
         {
             title: todoI18n.table.data.nbRealtor,
-            value: `${realtors.length}`
+            value: `${agency.realtors?.length || 0}`
         },
         {
             title: todoI18n.table.data.creationDate,

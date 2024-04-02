@@ -5,8 +5,7 @@
 <luxe = 'http://www.jahia.org/jahia/demo/luxe/nt/1.0'>
 <luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
 
-//jmix:editorialContent
-[luxemix:luxeContent] > jmix:droppableContent mixin
+[luxemix:luxeContent] > jmix:droppableContent, jmix:editorialContent mixin
 
 [luxemix:queryContent] mixin
 
@@ -78,7 +77,7 @@
  - address (string)
  - phone (string)
  - email (string)
- - realtors (weakreference) multiple mandatory < 'luxe:realtor'
+ - realtors (weakreference) multiple < 'luxe:realtor'
  + * (luxe:estate) = luxe:estate
 
 [luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
