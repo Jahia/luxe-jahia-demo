@@ -7,12 +7,12 @@ export const EstateDefault = () => {
     const estate = getNodeProps(currentNode, [
         'title',
         'price',
-        'gallery',
+        'images',
         'surface',
         'bedrooms'
     ]);
 
-    const image = estate.gallery[0];
+    const image = estate.images[0];
     server.render.addCacheDependency({node: image}, renderContext);
 
     return (

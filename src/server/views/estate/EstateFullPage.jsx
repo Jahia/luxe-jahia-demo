@@ -12,7 +12,7 @@ export const EstateFullPage = () => {
         'title',
         'description',
         'price',
-        'gallery',
+        'images',
         'type',
         'surface',
         'rooms',
@@ -21,7 +21,7 @@ export const EstateFullPage = () => {
         'options'
     ]);
 
-    const image = estate.gallery[0];
+    const image = estate.images[0];
     server.render.addCacheDependency({node: image}, renderContext);
 
     return (

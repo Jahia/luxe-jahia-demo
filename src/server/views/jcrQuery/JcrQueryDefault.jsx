@@ -21,6 +21,7 @@ export const JcrQueryDefault = () => {
     ]);
     const asContent = 'content';
     const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
+
     const filter = luxeQuery.filter?.reduce((condition, categoryNode, index) =>
         `${condition} ${index === 0 ? '' : 'OR'} ${asContent}.[j:defaultCategory] = '${categoryNode.getIdentifier()}'`
     , '') || '';

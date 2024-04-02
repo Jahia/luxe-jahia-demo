@@ -22,5 +22,11 @@ export default {
             spokenLanguage: 'Langues parlées'
         }
 
+    },
+    link: {
+        labels: {
+            knowMore: 'En savoir plus'
+        }
+
     }
 };

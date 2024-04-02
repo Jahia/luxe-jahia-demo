@@ -90,7 +90,12 @@ module.exports = env => {
                         test: /\.scss$/,
                         use: [
                             MiniCssExtractPlugin.loader,
-                            'css-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    url: false
+                                }
+                            },
                             'sass-loader'
                         ]
                     }
@@ -135,19 +140,6 @@ module.exports = env => {
                                 ]
                             }
                         }
-                    },
-                    {
-                        test: /\.s[ac]ss$/i,
-                        use: [
-                            'style-loader',
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    modules: true
-                                }
-                            },
-                            'sass-loader'
-                        ]
                     }
                 ]
             },

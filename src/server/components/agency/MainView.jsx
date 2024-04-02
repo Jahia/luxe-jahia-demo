@@ -67,7 +67,7 @@ export const AgencyMainView = ({
             <Section>
                 <HeadingSection title={todoI18n.section.heading.experts}/>
                 <Row className="row-cols-4 g-3">
-                    {realtors.map(realtor => (
+                    {realtors?.map(realtor => (
                         <Col key={realtor.getIdentifier()}>
                             <Render node={realtor}/>
                         </Col>
