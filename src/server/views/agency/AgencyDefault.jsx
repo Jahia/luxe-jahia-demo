@@ -2,12 +2,12 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jUrl,
-    jAddCacheDependency
+    buildUrl,
+    server
 } from '@jahia/js-server-engine';
 
 export const AgencyDefault = () => {
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const agency = getNodeProps(currentNode, [
         'name',
@@ -22,13 +22,13 @@ export const AgencyDefault = () => {
     };
 
     if (agency.image) {
-        jAddCacheDependency({node: agency.image});
+        server.render.addCacheDependency({node: agency.image}, renderContext);
         image.src = agency.image.getUrl();
         image.alt = `View of the agency ${agency.name}`;
     }
 
     return (
-        <a className="lux-agencyCard d-flex" href={jUrl({path: currentNode.getPath()})}>
+        <a className="lux-agencyCard d-flex" href={buildUrl({path: currentNode.getPath()}, renderContext, currentResource)}>
             <img className="lux-agencyCard_image me-4"
                  src={image.src}
                  alt={image.alt}

@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jAddCacheDependency,
+    server,
     getNodesByJCRQuery
 } from '@jahia/js-server-engine';
 import todoI18n from '../../temp/locales/fr';
@@ -38,7 +38,7 @@ export const RealtorFullPage = () => {
                    from [luxe:estate] as estate
                    where isdescendantnode('${agencyNodePath}')
                    order by estate.[jcr:created] DESC`;
-    jAddCacheDependency({flushOnPathMatchingRegexp: `${agencyNodePath}/.*`});
+    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${agencyNodePath}/.*`}, renderContext);
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
@@ -63,7 +63,7 @@ export const RealtorFullPage = () => {
     };
 
     if (realtor.image) {
-        jAddCacheDependency({node: realtor.image});
+        server.render.addCacheDependency({node: realtor.image}, renderContext);
         image.src = realtor.image.getUrl();
         image.alt = `Portrait of the agent ${realtor.firstName} ${realtor.lastName}`;
     }

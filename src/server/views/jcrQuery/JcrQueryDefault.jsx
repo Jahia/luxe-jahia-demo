@@ -2,14 +2,14 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jAddCacheDependency,
-    JRender,
+    server,
+    Render,
     getNodesByJCRQuery
 } from '@jahia/js-server-engine';
 import {HeadingSection} from '../../components';
 
 export const JcrQueryDefault = () => {
-    const {currentNode} = useServerContext();
+    const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
         'type',
         'criteria',
@@ -32,7 +32,7 @@ export const JcrQueryDefault = () => {
                    ${queryFilter}
                    ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
 
-    jAddCacheDependency({flushOnPathMatchingRegexp: `${descendantPath}/.*`});
+    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${descendantPath}/.*`}, renderContext);
 
     const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, luxeQuery.maxItems || -1);
 
@@ -43,7 +43,7 @@ export const JcrQueryDefault = () => {
                 {queryContent && queryContent.map(node => {
                         return (
                             <div key={node.getIdentifier()} className="col g-0">
-                                <JRender node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
                             </div>
                         );
                     })}

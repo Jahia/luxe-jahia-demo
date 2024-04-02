@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
-import {useServerContext, getNodeProps, jAddCacheDependency, JAddResources} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server, AddResources} from '@jahia/js-server-engine';
 import {EstateMainView} from '../../components';
 
 export const EstateCm = () => {
-    const {currentNode, currentResource} = useServerContext();
+    const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const estate = getNodeProps(currentNode, [
         'title',
@@ -19,11 +19,11 @@ export const EstateCm = () => {
     ]);
 
     const image = estate.images[0];
-    jAddCacheDependency({node: image});
+    server.render.addCacheDependency({node: image}, renderContext);
 
     return (
         <>
-            <JAddResources type="css" resources="main.css"/>
+            <AddResources type="css" resources="main.css"/>
             <EstateMainView {...{
                 title: estate.title,
                 description: estate.description,

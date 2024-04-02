@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jAddCacheDependency,
+    server,
     getChildNodes,
     getNodesByJCRQuery
 } from '@jahia/js-server-engine';
@@ -33,7 +33,7 @@ export const AgencyFullPage = () => {
                    from [luxe:estate] as estate
                    where isdescendantnode('${currentNodePath}')
                    order by estate.[jcr:created] DESC`;
-    jAddCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`});
+    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`}, renderContext);
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
@@ -58,7 +58,7 @@ export const AgencyFullPage = () => {
     };
 
     if (agency.image) {
-        jAddCacheDependency({node: agency.image});
+        server.render.addCacheDependency({node: agency.image}, renderContext);
         image.src = agency.image.getUrl();
         image.alt = `View of the agency ${agency.name}`;
     }

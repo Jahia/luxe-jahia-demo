@@ -1,24 +1,24 @@
 import React from 'react';
-import {JArea} from '@jahia/js-server-engine';
+import {Area} from '@jahia/js-server-engine';
 import {MainLayout} from '../../layouts';
 import {Row, Section} from '../../components';
 
 export const PageDestinations = () => {
     return (
         <MainLayout>
-            <JArea name="heading"
+            <Area name="heading"
                    allowedTypes={['luxe:header']}
                    subNodesView="textUp"
                    numberOfItems={1}/>
             <Section>
                 <Row className="lux-richtext">
-                    <JArea name="main"
+                    <Area name="main"
                            allowedTypes={['jnt:bigText']}
                            numberOfItems={1}/>
                 </Row>
             </Section>
             <Section>
-                <JArea name="related-destinations"
+                <Area name="related-destinations"
                        allowedTypes={['luxe:textIllustrated', 'luxe:navMenu']}/>
             </Section>
         </MainLayout>

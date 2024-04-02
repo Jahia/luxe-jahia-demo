@@ -2,9 +2,9 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jAddCacheDependency,
+    server,
     getChildNodes,
-    JAddResources, getNodesByJCRQuery
+    AddResources, getNodesByJCRQuery
 } from '@jahia/js-server-engine';
 import {AgencyMainView} from '../../components/agency';
 
@@ -32,7 +32,7 @@ export const AgencyCm = () => {
                    from [luxe:estate] as estate
                    where isdescendantnode('${currentNodePath}')
                    order by estate.[jcr:created] DESC`;
-    jAddCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`});
+    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`}, renderContext);
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
     const data = [
@@ -56,14 +56,14 @@ export const AgencyCm = () => {
     };
 
     if (agency.image) {
-        jAddCacheDependency({node: agency.image});
+        server.render.addCacheDependency({node: agency.image}, renderContext);
         image.src = agency.image.getUrl();
         image.alt = `View of the agency ${agency.name}`;
     }
 
     return (
         <>
-            <JAddResources type="css" resources="main.css"/>
+            <AddResources type="css" resources="main.css"/>
             <main>
                 <AgencyMainView {...{
                     name: agency.name,

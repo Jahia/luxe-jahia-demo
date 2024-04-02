@@ -2,9 +2,9 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    jAddCacheDependency,
+    server,
     getNodesByJCRQuery,
-    JAddResources
+    AddResources
 } from '@jahia/js-server-engine';
 import todoI18n from '../../temp/locales/fr';
 import {RealtorMainView} from '../../components/realtor';
@@ -39,7 +39,7 @@ export const RealtorCm = () => {
                    from [luxe:estate] as estate
                    where isdescendantnode('${agencyNodePath}')
                    order by estate.[jcr:created] DESC`;
-    jAddCacheDependency({flushOnPathMatchingRegexp: `${agencyNodePath}/.*`});
+    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${agencyNodePath}/.*`}, renderContext);
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
@@ -64,14 +64,14 @@ export const RealtorCm = () => {
     };
 
     if (realtor.image) {
-        jAddCacheDependency({node: realtor.image});
+        server.render.addCacheDependency({node: realtor.image}, renderContext);
         image.src = realtor.image.getUrl();
         image.alt = `Portrait of the agent ${realtor.firstName} ${realtor.lastName}`;
     }
 
     return (
         <>
-            <JAddResources type="css" resources="main.css"/>
+            <AddResources type="css" resources="main.css"/>
             <main>
                 <RealtorMainView {...{
                     name: `${realtor.firstName} ${realtor.lastName}`,

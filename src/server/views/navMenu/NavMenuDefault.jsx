@@ -1,9 +1,9 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jBuildNavMenu, jUrl, jAddCacheDependency} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, buildNavMenu, buildUrl, server} from '@jahia/js-server-engine';
 import clsx from 'clsx';
 
 export const NavMenuDefault = () => {
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
 
     const nav = getNodeProps(currentNode, [
         'base',
@@ -14,11 +14,13 @@ export const NavMenuDefault = () => {
         'brandImage'
     ]);
 
-    const menu = jBuildNavMenu(
+    const menu = buildNavMenu(
         nav.maxDepth,
         nav.base,
         nav.menuItemView,
-        nav.startLevel
+        nav.startLevel,
+        renderContext,
+        currentResource
     );
 
     const mainPath = renderContext.getMainResource().getPath();
@@ -26,7 +28,7 @@ export const NavMenuDefault = () => {
     const home = renderContext.getSite().getHome();
 
     if (nav.brandImage) {
-        jAddCacheDependency({node: nav.brandImage});
+        server.render.addCacheDependency({node: nav.brandImage}, renderContext);
     }
 
     return (
@@ -40,7 +42,7 @@ export const NavMenuDefault = () => {
             )}
         >
             <div className="container-fluid gap-5">
-                <a href={jUrl({path: home.getPath()})} className="navbar-brand">
+                <a href={buildUrl({path: home.getPath()}, renderContext, currentResource)} className="navbar-brand">
                     {nav.brandImage &&
                         <img src={nav.brandImage?.getUrl()}
                              alt={`Logo-${siteName}`}
@@ -65,7 +67,7 @@ export const NavMenuDefault = () => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
                         {menu.map(({node, selected}) => (
                             <li key={node.getIdentifier()} className="nav-item">
-                                <a href={jUrl({path: node.getPath()})}
+                                <a href={buildUrl({path: node.getPath()}, renderContext, currentResource)}
                                    className={clsx('nav-link', {
                                        active: selected || mainPath.includes(node.getPath())
                                    })}

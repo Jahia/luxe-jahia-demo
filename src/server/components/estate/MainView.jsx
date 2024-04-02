@@ -33,7 +33,7 @@ export const EstateMainView = ({
                                 className="btn btn-light btn-lg me-4 _backToParentPage"
                                 // OnClick={() => { // TODO this is moved to script.js event based on _backToParentPage
                                 //     console.log('helllo world');
-                                //     window.location.href = jUrl({path: parent.getPath()});
+                                //     window.location.href = buildUrl({path: parent.getPath()}, renderContext, currentResource);
                                 //     return false;
                                 // }}
                             >
