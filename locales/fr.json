@@ -1,5 +1,18 @@
 {
   "agency": {
     "nbRealtor" : "Number d'agents"
+  },
+  "login": {
+    "login": "Connection",
+    "logout": "Déconnection",
+    "badCreds": "Erreur: Nom d'utilisateur ou mot de passe incorrect",
+    "unknowError": "Erreur: Une erreur s'est produite",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "liveWorkspace": "Espace de travail en live",
+    "previewWorkspace": "Espace de travail en preview",
+    "editWorkspace": "Espace de travail en édition",
+    "contributeWorkspace": "Espace de travail en contribution"
   }
 }

@@ -1,5 +1,18 @@
 {
   "agency": {
     "nbRealtor" : "Number of Realtor"
+  },
+  "login": {
+    "login": "Login",
+    "logout": "Logout",
+    "badCreds": "Error: username or password incorrect",
+    "unknowError": "Error: An error occured",
+    "username": "Username",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "liveWorkspace": "Live workspace",
+    "previewWorkspace": "Preview workspace",
+    "editWorkspace": "Edit workspace",
+    "contributeWorkspace": "Contribute workspace"
   }
 }
