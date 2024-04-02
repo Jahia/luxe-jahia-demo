@@ -29,7 +29,7 @@ export const RealtorFullPage = () => {
         'description',
         'image',
         'languages',
-        'experience',
+        'yOfExperience',
         'email',
         'phone'
     ]);
@@ -53,7 +53,7 @@ export const RealtorFullPage = () => {
         },
         {
             title: todoI18n.table.data.yOfExperience,
-            value: `${realtor.experience}`
+            value: `${realtor.yOfExperience}`
         }
     ];
 

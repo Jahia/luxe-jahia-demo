@@ -9,7 +9,7 @@ export const EstateCm = () => {
         'title',
         'description',
         'price',
-        'gallery',
+        'images',
         'type',
         'surface',
         'rooms',
@@ -18,7 +18,7 @@ export const EstateCm = () => {
         'options'
     ]);
 
-    const image = estate.gallery[0];
+    const image = estate.images[0];
     server.render.addCacheDependency({node: image}, renderContext);
 
     return (

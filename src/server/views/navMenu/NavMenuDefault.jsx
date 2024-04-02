@@ -65,11 +65,11 @@ export const NavMenuDefault = () => {
                     className="collapse navbar-collapse"
                 >
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
-                        {menu.map(({node}) => (
+                        {menu.map(({node, selected}) => (
                             <li key={node.getIdentifier()} className="nav-item">
                                 <a href={buildUrl({path: node.getPath()}, renderContext, currentResource)}
                                    className={clsx('nav-link', {
-                                       active: mainPath.includes(node.getPath())
+                                       active: selected || mainPath.includes(node.getPath())
                                    })}
                                 >
                                     {node.getDisplayableName()}
@@ -111,6 +111,6 @@ export const NavMenuDefault = () => {
 
 NavMenuDefault.jahiaComponent = {
     nodeType: 'luxe:navMenu',
-    displayName: 'Nav Menu',
+    displayName: 'Navbar Nav Menu',
     componentType: 'view'
 };

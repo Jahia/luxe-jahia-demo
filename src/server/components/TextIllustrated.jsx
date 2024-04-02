@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import clsx from 'clsx';
+import {Col, Row} from './grid';
 
 export const TextIllustrated = ({title, text, arrangement, image, link}) => {
     return (
-        <div className={clsx('row', 'gap-5')}>
-            <div className="col">
+        <Row className="gap-5">
+            <Col>
                 <img
                     src={image.src}
                     alt={image.alt}
                     height="480px"
                 />
-            </div>
-            <div
+            </Col>
+            <Col
                 className={clsx(
-                    'col',
                     'd-flex',
                     'flex-column',
                     'align-center',
@@ -29,8 +28,8 @@ export const TextIllustrated = ({title, text, arrangement, image, link}) => {
                     __html: text
                 }}/>
                 {link && <a href={link.href}>{link.label}</a>}
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 };
 
@@ -38,7 +37,13 @@ TextIllustrated.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     arrangement: PropTypes.string.isRequired,
-    image: PropTypes.object.isRequired,
-    link: PropTypes.object
+    image: PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        alt: PropTypes.string.isRequired
+    }).isRequired,
+    link: PropTypes.shape({
+        href: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+    }).isRequired
 
 };
