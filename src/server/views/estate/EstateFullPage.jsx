@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {useServerContext, getNodeProps, server} from '@jahia/js-server-engine';
 import {Col, Figure, PageTitle, Row, Section} from '../../components';
 import {ChevronLeftIcon} from '@heroicons/react/24/solid';
