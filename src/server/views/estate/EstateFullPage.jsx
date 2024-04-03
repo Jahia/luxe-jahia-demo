@@ -102,20 +102,18 @@ export const EstateFullPage = () => {
                                     {estate.bathrooms}
                                 </dd>
                             </div>
-                            {estate.options &&
-                            <div className="lux-house_information_row d-flex">
-                                {estate.options.map(option => (
-                                    <Fragment key={option}>
-                                        <dt className="lux-house_information_key">
-                                            {option}
-                                        </dt>
-                                        <dd className="lux-house_information_value">
-                                            Oui
-                                        </dd>
-                                    </Fragment>
-                                        ))}
-
-                            </div>}
+                            {estate.options && estate.options.map(option => (
+                                <div key={option} className="lux-house_information_row d-flex">
+                                    <dt className="lux-house_information_key">
+                                        {option}
+                                    </dt>
+                                    <dd className="lux-house_information_value  d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" width="24px" height="24px">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                                        </svg>
+                                    </dd>
+                                </div>
+                            ))}
                         </dl>
                         {/* <AgentItem imgURL={profile1} name="Robert Fox"/> */}
                     </Col>
