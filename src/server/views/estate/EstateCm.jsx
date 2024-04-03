@@ -1,44 +1,15 @@
-import React, {Fragment} from 'react';
-import {useServerContext, getNodeProps, server, AddResources} from '@jahia/js-server-engine';
-import {EstateMainView} from '../../components';
+import React from 'react';
+import {useServerContext, AddResources, Render} from '@jahia/js-server-engine';
 
 export const EstateCm = () => {
-    const {currentNode, currentResource, renderContext} = useServerContext();
-    const locale = currentResource.getLocale().getLanguage();
-    const estate = getNodeProps(currentNode, [
-        'title',
-        'description',
-        'price',
-        'images',
-        'type',
-        'surface',
-        'rooms',
-        'bedrooms',
-        'bathrooms',
-        'options'
-    ]);
-
-    const image = estate.images[0];
-    server.render.addCacheDependency({node: image}, renderContext);
-
+    const {currentNode} = useServerContext();
     return (
         <>
             <AddResources type="css" resources="main.css"/>
-            <EstateMainView {...{
-                title: estate.title,
-                description: estate.description,
-                price: estate.price,
-                image,
-                type: estate.type,
-                surface: estate.surface,
-                rooms: estate.rooms,
-                bedrooms: estate.bedrooms,
-                bathrooms: estate.bathrooms,
-                options: estate.options,
-                locale}}
-            />
+            <main>
+                <Render node={currentNode} view="fullPage"/>
+            </main>
         </>
-
     );
 };
 

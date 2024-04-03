@@ -3,25 +3,33 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getNodesByJCRQuery
+    getNodesByJCRQuery, Render
 } from '@jahia/js-server-engine';
 import todoI18n from '../../temp/locales/fr';
-import {RealtorMainView} from '../../components/realtor';
+// Import {RealtorMainView} from '../../components/realtor';
+import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
 
 const MAX_ESTATE = 6;
 
 export const RealtorFullPage = () => {
-    const {currentNode, currentResource, renderContext} = useServerContext();
-    const locale = currentResource.getLocale().getLanguage();
+    const {currentNode, renderContext} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
 
-    const agencyNode = currentNode.getParent();
-    const agencyNodePath = agencyNode.getPath();
+    const refBy = currentNode.getWeakReferences();
+    const refByNode = [];
+    while (refBy.hasNext()) {
+        refByNode.push(refBy.next().getParent());
+    }
 
-    const agency = getNodeProps(agencyNode, [
-        'name',
-        'address'
-    ]);
+    const agencies = refByNode.map(agencyNode => {
+        return {
+            ...getNodeProps(agencyNode, [
+                'name',
+                'address'
+            ]),
+            id: agencyNode.getIdentifier()
+        };
+    });
 
     const realtor = getNodeProps(currentNode, [
         'firstName',
@@ -34,18 +42,39 @@ export const RealtorFullPage = () => {
         'phone'
     ]);
 
+    const queryRefinement = refByNode.reduce((refinement, agencyNode, index) => {
+        if (index === 0) {
+            refinement = 'WHERE ';
+        }
+
+        if (index > 0) {
+            refinement = `${refinement}  OR `;
+        }
+
+        return `${refinement} isdescendantnode('${agencyNode.getPath()}')`;
+    }, '');
+
     const query = `SELECT *
-                   from [luxe:estate] as estate
-                   where isdescendantnode('${agencyNodePath}')
-                   order by estate.[jcr:created] DESC`;
-    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${agencyNodePath}/.*`}, renderContext);
+                   FROM [luxe:estate] AS estate
+                    ${queryRefinement}
+                   ORDER BY estate.[jcr:created] DESC`;
+
+    refByNode.forEach(agencyNode =>
+        server.render.addCacheDependency({flushOnPathMatchingRegexp: `${agencyNode.getPath()}/.*`}, renderContext)
+    );
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
     const data = [
         {
             title: todoI18n.table.data.agency,
-            value: agency.name
+            value: agencies.reduce((value, {name}, index) => {
+                if (index === 0) {
+                    return name;
+                }
+
+                return `${value} / ${name}`;
+            }, '')
         },
         {
             title: todoI18n.table.data.spokenLanguage,
@@ -69,17 +98,65 @@ export const RealtorFullPage = () => {
     }
 
     return (
-        <RealtorMainView {...{
-            name: `${realtor.firstName} ${realtor.lastName}`,
-            description: realtor.description,
-            image,
-            data,
-            address: agency.address,
-            phone: realtor.phone,
-            email: realtor.email,
-            estates,
-            locale}}
-        />
+        <>
+            <Section>
+                <ContentHeader
+                    title={`${realtor.firstName} ${realtor.lastName}`}
+                    image={image}
+                    description={realtor.description}
+                />
+            </Section>
+            <Section>
+                <Table rows={data}/>
+            </Section>
+            <Section>
+                <HeadingSection title={todoI18n.section.heading.contact}/>
+                <Row>
+                    <Col>
+                        <address>
+                            <div className="d-flex flex-column mb-4">
+                                <strong>{todoI18n.section.contact.address}</strong>
+                                {agencies.map(({address, id}) => <span key={id}>{address}</span>)}
+                            </div>
+                            <div className="d-flex flex-column mb-4">
+                                <strong>{todoI18n.section.contact.phone}</strong>
+                                <a href={`tel:${realtor.phone}`}>
+                                    {realtor.phone}
+                                </a>
+                            </div>
+                            <div className="d-flex flex-column mb-4">
+                                <strong>{todoI18n.section.contact.email}</strong>
+                                <a href={`mailto:${realtor.email}`}>
+                                    {realtor.email}
+                                </a>
+                            </div>
+                        </address>
+                        <button type="button"
+                                className="btn btn-primary btn-lg w-100"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalContact"
+                        >
+                            {todoI18n.section.contact.btn}
+                        </button>
+                    </Col>
+                    <Col>
+                        <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
+                            map here
+                        </div>
+                    </Col>
+                </Row>
+            </Section>
+            <Section>
+                <HeadingSection title={todoI18n.section.heading.exclusiveEstates}/>
+                <Row className="row-cols-3 g-0">
+                    {estates.map(estate => (
+                        <Col key={estate.getIdentifier()} className="g-0">
+                            <Render node={estate}/>
+                        </Col>
+                    ))}
+                </Row>
+            </Section>
+        </>
     );
 };
 
