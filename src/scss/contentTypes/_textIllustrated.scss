@@ -1,1 +1,28 @@
-// empty
+.lux-textIllustrated {
+    & + & {
+        margin-top: 40px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .lux-textIllustrated {
+        position: relative;
+        overflow: hidden;
+        padding: 24px;
+        border-radius: 16px;
+    }
+
+    .lux-textIllustrated_image {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: .15;
+        padding: 0;
+
+        img {border-radius: 0;}
+    }
+
+    .lux-textIllustrated_text.col {
+        padding: 0 !important;
+    }
+}

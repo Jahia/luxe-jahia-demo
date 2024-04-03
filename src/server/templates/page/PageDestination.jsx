@@ -13,7 +13,7 @@ export const PageDestination = () => {
             <Section>
                 <Row className="lux-richtext">
                     <Area name="main"
-                           allowedTypes={['jnt:bigText']}
+                           allowedTypes={['jnt:bigText']} numberOfItems={1}
                            numberOfItems={1}/>
                 </Row>
             </Section>

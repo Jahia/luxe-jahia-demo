@@ -38,8 +38,8 @@
  - image (weakreference, picker[type='image']) < 'jmix:image'
 
 [luxe:highlightNumber] > jnt:content, luxemix:luxeContent
- - number (long)
  - text (string) primary i18n
+ - number (long)
 
 [luxe:section] > jnt:contentList, luxemix:luxeContent, mix:title
  - arrangement (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
@@ -48,7 +48,7 @@
  - colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
  + * (jmix:droppableContent) = jmix:droppableContent
 
-[luxe:estate] > jnt:content, jmix:mainResource, luxemix:queryContent, luxemix:luxeContent
+[luxe:estate] > jnt:content, jmix:mainResource, luxemix:queryContent
  - title (string) primary i18n mandatory
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - price (long) mandatory
