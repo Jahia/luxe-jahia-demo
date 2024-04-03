@@ -100,5 +100,5 @@
 - startNode (weakreference)
 - filter (weakreference, category[autoSelectParent=false]) multiple
 
-[luxe:loginForm] > jnt:contentList, luxemix:luxeMainContent, mix:title
+[luxe:loginForm] > jnt:contentList, luxemix:luxeContent, mix:title
  - j:displayRememberMeButton (boolean)
