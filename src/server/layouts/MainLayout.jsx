@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {AbsoluteArea} from '@jahia/js-server-engine';
+import {AbsoluteArea} from '@jahia/js-server-core';
 
 // Const navArea = {
 //     name: 'navArea',

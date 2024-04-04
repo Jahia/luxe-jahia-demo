@@ -73,9 +73,9 @@ module.exports = env => {
                 path: path.resolve(__dirname, 'dist')
             },
             externals: {
-                '@jahia/js-server-engine': 'jsServerEngineLibraryBuilder.getLibrary()',
-                react: 'jsServerEngineLibraryBuilder.getSharedLibrary(\'react\')',
-                'styled-jsx/style': 'jsServerEngineLibraryBuilder.getSharedLibrary(\'styled-jsx\')'
+                '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
+                react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
+                'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')'
             },
             resolve: {
                 mainFields: ['module', 'main'],

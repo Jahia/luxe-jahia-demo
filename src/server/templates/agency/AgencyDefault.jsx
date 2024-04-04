@@ -3,7 +3,7 @@ import {MainLayout} from '../../layouts';
 import {
     useServerContext,
     Render
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 
 export const AgencyDefault = () => {
     const {currentNode} = useServerContext();

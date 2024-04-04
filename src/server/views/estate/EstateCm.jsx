@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, AddResources, Render} from '@jahia/js-server-engine';
+import {useServerContext, AddResources, Render} from '@jahia/js-server-core';
 
 export const EstateCm = () => {
     const {currentNode} = useServerContext();

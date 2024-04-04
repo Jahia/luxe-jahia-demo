@@ -4,7 +4,7 @@ import {
     getNodeProps,
     server,
     getNodesByJCRQuery, Render
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 import todoI18n from '../../temp/locales/fr';
 // Import {RealtorMainView} from '../../components/realtor';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';

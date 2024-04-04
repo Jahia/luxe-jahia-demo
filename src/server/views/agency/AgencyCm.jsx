@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     AddResources, Render, useServerContext
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 
 export const AgencyCm = () => {
     const {currentNode} = useServerContext();

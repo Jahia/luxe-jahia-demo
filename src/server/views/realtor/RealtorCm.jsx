@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     AddResources, Render
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 
 export const RealtorCm = () => {
     const {currentNode} = useServerContext();
