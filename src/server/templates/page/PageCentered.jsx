@@ -1,5 +1,5 @@
 import React from 'react';
-import {Area} from '@jahia/js-server-engine';
+import {Area} from '@jahia/js-server-core';
 import {MainLayout} from '../../layouts';
 
 export const PageCentered = () => {
