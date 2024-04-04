@@ -8,7 +8,7 @@ import {
 } from '@jahia/js-server-engine';
 import {HeadingSection} from '../../components';
 
-export const JcrQueryDefault = () => {
+export const JcrQueryInline = () => {
     const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
         'jcr:title',
@@ -43,21 +43,13 @@ export const JcrQueryDefault = () => {
             {luxeQuery['jcr:title'] &&
                 <HeadingSection title={luxeQuery['jcr:title']}/>
             }
-            <div className="row row-cols-3 g-0">
-                {queryContent && queryContent.map(node => {
-                        return (
-                            <div key={node.getIdentifier()} className="col g-0">
-                                <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
-                            </div>
-                        );
-                    })}
-            </div>
+            {queryContent.map(node => { return <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>})}
         </>
     );
 };
 
-JcrQueryDefault.jahiaComponent = {
+JcrQueryInline.jahiaComponent = {
     nodeType: 'luxe:jcrQuery',
-    name: 'default',
+    name: 'inline',
     componentType: 'view'
 };

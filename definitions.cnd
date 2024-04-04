@@ -99,4 +99,3 @@
 - maxItems (long) indexed=no
 - startNode (weakreference)
 - filter (weakreference, category[autoSelectParent=false]) multiple
-- render (string,choicelist[resourceBundle]) = 'columns' < 'columns', 'raw'
