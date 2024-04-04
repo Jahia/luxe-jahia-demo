@@ -34,7 +34,7 @@ import {AbsoluteArea} from '@jahia/js-server-engine';
 //     }
 // };
 
-export const MainLayout = ({head, footer, children}) => {
+export const MainLayout = ({head, footer, className, children}) => {
     // Const {renderContext} = useServerContext();
     // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
     return (
@@ -45,7 +45,7 @@ export const MainLayout = ({head, footer, children}) => {
             </HtmlHead>
             <body>
                 <AbsoluteArea name="navArea" allowedTypes={['luxe:navMenu']} level="0" numberOfItems="1"/>
-                <main>
+                <main className={className}>
                     {children}
                 </main>
                 <HtmlFooter/>
@@ -58,5 +58,6 @@ export const MainLayout = ({head, footer, children}) => {
 MainLayout.propTypes = {
     head: PropTypes.element,
     footer: PropTypes.element,
-    children: PropTypes.node
+    children: PropTypes.node,
+    className: PropTypes.string
 };

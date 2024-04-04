@@ -18,7 +18,8 @@ export const JcrQueryDefault = () => {
         'maxItems',
         'startNode',
         'filter',
-        'j:subNodesView'
+        'j:subNodesView',
+        'render'
     ]);
     const asContent = 'content';
     const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
@@ -41,15 +42,22 @@ export const JcrQueryDefault = () => {
         <>
             {luxeQuery['jcr:title'] &&
                 <HeadingSection title={luxeQuery['jcr:title']}/>}
-            <div className="row row-cols-3 g-0">
-                {queryContent && queryContent.map(node => {
-                        return (
-                            <div key={node.getIdentifier()} className="col g-0">
-                                <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
-                            </div>
-                        );
-                    })}
-            </div>
+            {luxeQuery.render === 'columns' &&
+                <div className="row row-cols-3 g-0">
+                    {queryContent && queryContent.map(node => {
+                            return (
+                                <div key={node.getIdentifier()} className="col g-0">
+                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                </div>
+                            );
+                        })}
+                </div>
+            }
+            {luxeQuery.render === 'raw' && 
+                <>
+                    {queryContent.map(node => { return <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>})}
+                </>
+            }
         </>
     );
 };
