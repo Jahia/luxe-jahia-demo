@@ -18,8 +18,7 @@ export const JcrQueryInline = () => {
         'maxItems',
         'startNode',
         'filter',
-        'j:subNodesView',
-        'render'
+        'j:subNodesView'
     ]);
     const asContent = 'content';
     const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
