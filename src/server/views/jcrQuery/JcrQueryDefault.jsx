@@ -5,7 +5,7 @@ import {
     server,
     Render,
     getNodesByJCRQuery
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 import {HeadingSection} from '../../components';
 
 export const JcrQueryDefault = () => {

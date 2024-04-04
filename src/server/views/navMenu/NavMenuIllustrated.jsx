@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jBuildNavMenu, jAddCacheDependency, jUrl} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, jBuildNavMenu, jAddCacheDependency, jUrl} from '@jahia/js-server-core';
 import {Section, TextIllustrated} from '../../components';
 import PropTypes from 'prop-types';
 import todoI18n from '../../temp/locales/fr';

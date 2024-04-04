@@ -4,7 +4,7 @@ import {
     getNodeProps,
     buildUrl,
     server
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 
 export const AgencyDefault = () => {
     const {currentNode, renderContext, currentResource} = useServerContext();

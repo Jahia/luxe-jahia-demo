@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
 
 export const EstateDefault = () => {
     const {currentNode, currentResource, renderContext} = useServerContext();

@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     server
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 
 import {TextIllustrated} from '../../components';
 

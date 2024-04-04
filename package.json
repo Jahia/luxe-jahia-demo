@@ -35,7 +35,7 @@
   "dependencies": {
     "@apollo/client": "3.5.5",
     "@jahia/data-helper": "1.0.4",
-    "@jahia/js-server-engine": "^1.2.14",
+    "@jahia/js-server-core": "^1.2.14",
     "bootstrap": "^5.3.2",
     "graphql": "^16.7.1",
     "i18next": "^23.10.1",

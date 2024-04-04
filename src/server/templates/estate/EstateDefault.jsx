@@ -1,5 +1,5 @@
 import React from 'react';
-import {Render, useServerContext} from '@jahia/js-server-engine';
+import {Render, useServerContext} from '@jahia/js-server-core';
 import {MainLayout} from '../../layouts';
 
 export const EstateDefault = () => {
