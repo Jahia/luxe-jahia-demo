@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
 
 export const HeaderDefault = () => {
     const {currentNode, renderContext} = useServerContext();

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AddResources} from '@jahia/js-server-engine';
+import {AddResources} from '@jahia/js-server-core';
 export const HtmlHead = ({children}) => {
     return (
         <head>

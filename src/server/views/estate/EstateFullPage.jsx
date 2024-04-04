@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
 import {Col, Figure, PageTitle, Row, Section} from '../../components';
 import {ChevronLeftIcon} from '@heroicons/react/24/solid';
 
