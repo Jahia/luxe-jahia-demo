@@ -5,8 +5,9 @@ export const HtmlHead = ({children}) => {
     return (
         <head>
             <meta charSet="utf-8"/>
-            <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
-            <script defer type="text/javascript" src="https://unpkg.com/alpinejs"/>
+            {/* TODO: Add favicon */}
+            {/* <AddResources type="image/png" resources="/img/favicon-32x32.png"/>
+            <AddResources type="image/png" resources="/img/favicon-16x16.png"/> */}
             <AddResources type="css" resources="main.css"/>
             <AddResources type="javascript" resources="script.js"/>
 

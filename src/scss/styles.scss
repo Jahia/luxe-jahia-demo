@@ -49,11 +49,11 @@
     font-family: $font-family-display;
 }
 
-// .lux-richtext {
-//     max-width: 800px;
-//     margin-right: auto;
-//     margin-left: auto;
-// }
+.lux-richtext {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 .lux-article > *:not(.lux-image_wrapper) {
     max-width: 800px;
