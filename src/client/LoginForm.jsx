@@ -1,7 +1,47 @@
 import React from 'react';
 import {useState} from 'react'
-import {login} from './loginRequest';
 import {useTranslation} from 'react-i18next';
+
+const login = (
+    username,
+    password,
+    rememberMe,
+    setUser,
+    setLoggedIn,
+    setIncorrectLogin,
+    setUnknownError,
+    close) => {
+    const body = [
+        'username=' + username,
+        'password=' + password
+    ];
+    if(rememberMe) body.push('useCookie=on');
+    fetch('/cms/login?restMode=true', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'allow-redirects': 'false'
+        },
+        body: body.join('&')
+    }).then(response => {
+        try {
+            response.body.getReader().read().then(({value}) => {
+                const decodedValue = new TextDecoder().decode(value);
+                if(decodedValue === 'OK') {
+                    close();
+                    setUser(username);
+                    setLoggedIn(true);
+                } else if(decodedValue === 'unauthorized') {
+                    setIncorrectLogin(true)
+                } else {
+                    throw new Error;
+                }
+            });
+        }catch(e) {
+            setUnknownError(true);
+        }
+    });
+}
 
 const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
     const {t} = useTranslation();
