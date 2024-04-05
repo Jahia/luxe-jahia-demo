@@ -27,4 +27,4 @@ css/*.jpg
 css/main.*
 
 javascript/main.js
-javascript/client/*.js
+javascript/client/*
