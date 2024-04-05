@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useServerContext, getNodeProps} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps} from '@jahia/js-server-core';
 import clsx from 'clsx';
 
 export const HighlightNumberDefault = ({className}) => {

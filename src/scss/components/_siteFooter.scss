@@ -1,7 +1,11 @@
 .lux-site-footer {
     background-color: $color-darkBlue;
-    color: $color-gray;
     padding-top: 40px;
+    color: $color-gray;
+    
+    h5 {
+        color: $color-gray;
+    }
 
     a {
         color: rgba($color-gray, .8);

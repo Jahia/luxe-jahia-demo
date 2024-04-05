@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-core';
 
 export const RealtorCard = () => {
     const {currentNode, renderContext, currentResource} = useServerContext();

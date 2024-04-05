@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, buildUrl, server} from '@jahia/js-server-engine';
+import {useServerContext, getNodeProps, buildNavMenu, buildUrl, server} from '@jahia/js-server-core';
 import clsx from 'clsx';
 
 export const NavMenuDefault = () => {

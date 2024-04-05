@@ -3,12 +3,11 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getChildNodes,
-    getNodesByJCRQuery
-} from '@jahia/js-server-engine';
+    getNodesByJCRQuery, Render
+} from '@jahia/js-server-core';
 
-import {AgencyMainView} from '../../components/agency';
 import todoI18n from '../../temp/locales/fr';
+import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
 
 const MAX_ESTATE = 6;
 export const AgencyFullPage = () => {
@@ -64,18 +63,76 @@ export const AgencyFullPage = () => {
     }
 
     return (
-        <AgencyMainView {...{
-            name: agency.name,
-            description: agency.description,
-            image,
-            data,
-            address: agency.address,
-            phone: agency.phone,
-            email: agency.email,
-            realtors: agency.realtors,
-            estates,
-            locale}}
-        />
+        <>
+            <Section>
+                <ContentHeader
+                    title={agency.name}
+                    image={image}
+                    description={agency.description}
+                />
+            </Section>
+            <Section>
+                <Table rows={data}/>
+            </Section>
+            <Section>
+                <HeadingSection title={todoI18n.section.heading.contact}/>
+                <Row>
+                    <Col>
+                        <address>
+                            <div className="d-flex flex-column mb-4">
+                                <strong>{todoI18n.section.contact.address}</strong>
+                                <span>{agency.address}</span>
+                            </div>
+                            <div className="d-flex flex-column mb-4">
+                                <strong>{todoI18n.section.contact.phone}</strong>
+                                <a href={`tel:${agency.phone}`}>
+                                    {agency.phone}
+                                </a>
+                            </div>
+                            <div className="d-flex flex-column mb-4">
+                                <strong>{todoI18n.section.contact.email}</strong>
+                                <a href={`mailto:${agency.email}`}>
+                                    {agency.email}
+                                </a>
+                            </div>
+                        </address>
+                        <button type="button"
+                                className="btn btn-primary btn-lg w-100"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalContact"
+                        >
+                            {todoI18n.section.contact.btn}
+                        </button>
+                    </Col>
+                    <Col>
+                        <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
+                            map here
+                        </div>
+                    </Col>
+                </Row>
+            </Section>
+            <Section>
+                <HeadingSection title={todoI18n.section.heading.experts}/>
+                <Row className="row-cols-4 g-3">
+                    {agency.realtors?.map(realtor => (
+                        <Col key={realtor.getIdentifier()}>
+                            <Render node={realtor}/>
+                        </Col>
+                    ))}
+                </Row>
+                {/* <AddContentButtons nodeTypes={['luxe:realtor']}/> */}
+            </Section>
+            <Section>
+                <HeadingSection title={todoI18n.section.heading.exclusiveAgencyEstates}/>
+                <Row className="row-cols-3 g-0">
+                    {estates.map(estate => (
+                        <Col key={estate.getIdentifier()} className="g-0">
+                            <Render node={estate}/>
+                        </Col>
+                    ))}
+                </Row>
+            </Section>
+        </>
     );
 };
 

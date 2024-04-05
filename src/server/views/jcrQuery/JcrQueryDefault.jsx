@@ -5,12 +5,13 @@ import {
     server,
     Render,
     getNodesByJCRQuery
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 import {HeadingSection} from '../../components';
 
 export const JcrQueryDefault = () => {
     const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
+        'jcr:title',
         'type',
         'criteria',
         'sortDirection',
@@ -38,7 +39,9 @@ export const JcrQueryDefault = () => {
 
     return (
         <>
-            <HeadingSection title={currentNode.getDisplayableName()}/>
+            {luxeQuery['jcr:title'] &&
+                <HeadingSection title={luxeQuery['jcr:title']}/>
+            }
             <div className="row row-cols-3 g-0">
                 {queryContent && queryContent.map(node => {
                         return (

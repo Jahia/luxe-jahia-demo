@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     Area
-} from '@jahia/js-server-engine';
+} from '@jahia/js-server-core';
 import clsx from 'clsx';
 
 export const ColsDefault = () => {

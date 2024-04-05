@@ -1,6 +1,6 @@
 import * as jahiaViews from './views';
 import * as jahiaTemplates from './templates';
-import {registerJahiaComponents} from '@jahia/js-server-engine';
+import {registerJahiaComponents} from '@jahia/js-server-core';
 // Import './scss/styles.scss';
 
 // import i18next from 'i18next';

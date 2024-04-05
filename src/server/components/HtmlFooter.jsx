@@ -29,7 +29,7 @@ export const HtmlFooter = ({className}) => {
                         </li>
                     </ul>
                 </Col>
-                <Col className="col-3">
+                {/* <Col className="col-3">
                     <h5>Join us</h5>
                     <ul className="list-inline">
                         <li className="list-inline-item">
@@ -42,7 +42,7 @@ export const HtmlFooter = ({className}) => {
                             <a href="#">Github</a>
                         </li>
                     </ul>
-                </Col>
+                </Col> */}
             </Row>
             <Row className="lux-site-footer_disclaimer pb-3">
                 <Col>
