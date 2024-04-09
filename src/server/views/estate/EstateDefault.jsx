@@ -1,7 +1,9 @@
 import React from 'react';
 import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
+import {useTranslation} from 'react-i18next';
 
 export const EstateDefault = () => {
+    const {t} = useTranslation();
     const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const estate = getNodeProps(currentNode, [
@@ -20,8 +22,8 @@ export const EstateDefault = () => {
             <img src={image.getUrl()} alt={image.getDisplayableName()} height="265"/>
             <h4 className="my-2">{estate.title}</h4>
             <p className="lux-estateCard_informations">
-                {estate.bedrooms} chambres <span className="lux-diamond">✦</span>{' '}
-                {estate.surface.toLocaleString(locale)}m<sup>2</sup>
+                {estate.bedrooms} {t('estate.bedrooms.label')} <span className="lux-diamond">✦</span>{' '}
+                {estate.surface.toLocaleString(locale)} m<sup>2</sup>
             </p>
             <strong className="lux-estateCard_price">{estate.price.toLocaleString(locale)}€</strong>
         </a>
