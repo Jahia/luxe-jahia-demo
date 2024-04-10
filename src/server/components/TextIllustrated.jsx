@@ -44,6 +44,5 @@ TextIllustrated.propTypes = {
     link: PropTypes.shape({
         href: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired
-    }).isRequired
-
+    })
 };
