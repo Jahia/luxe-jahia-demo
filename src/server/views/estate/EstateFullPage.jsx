@@ -119,7 +119,7 @@ export const EstateFullPage = () => {
                     </Col>
                 </Row>
             </Section>
-            <Section>TODO: Biens similaire</Section>
+            {/* <Section>TODO: Biens similaire</Section> */}
         </>
     );
 };
