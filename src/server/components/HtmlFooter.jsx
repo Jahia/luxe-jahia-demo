@@ -48,13 +48,13 @@ export const HtmlFooter = ({className}) => {
                 </Col> */}
             </Row>
             <Row className="lux-site-footer_disclaimer pb-3">
-                <Col>
-                    <a href="#">Privacy Policy</a>
-                    <span className="lux-site-footer_disclaimer_seprator">
-                        /
-                    </span>
-                    <a href="#">Terms of Use</a>
-                </Col>
+                {/* <Col> */}
+                {/*    <a href="#">Privacy Policy</a> */}
+                {/*    <span className="lux-site-footer_disclaimer_seprator"> */}
+                {/*        / */}
+                {/*    </span> */}
+                {/*    <a href="#">Terms of Use</a> */}
+                {/* </Col> */}
                 <Col className="text-end">
                     <span>
                         {t('footer.copyright', {currentDate: new Date().getFullYear()})}
