@@ -30,13 +30,13 @@
     }
   },
   "footer": {
-    "resources": "resources",
-    "academy": "academy",
+    "resources": "ressources",
+    "academy": "académie",
     "tutorial": "tutoriel",
     "sourceCode": "code source",
     "backOffice" : "back-office",
     "connection" : "connexion",
-    "copyright" : "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
+    "copyright" : "copyrights © 2002-{{currentDate}} tous droits réservés par Jahia Solutions Group SA"
   },
   "realtor": {
     "jobPosition": {
