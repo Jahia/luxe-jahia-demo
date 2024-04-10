@@ -1,5 +1,7 @@
 
 .lux-heading_title {
+    @extend %capitalize;
+
     &:after {
         content: "✦";
         color: $color-gold;

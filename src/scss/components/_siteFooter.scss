@@ -4,10 +4,14 @@
     color: $color-gray;
     
     h5 {
+        @extend %capitalize;
+
         color: $color-gray;
     }
 
     a {
+        @extend %capitalize;
+
         color: rgba($color-gray, .8);
         text-decoration: none;
         font-size: 16px;

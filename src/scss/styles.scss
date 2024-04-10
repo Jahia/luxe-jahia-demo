@@ -7,6 +7,8 @@
 // Custom Bootstrap CSS
 @import "bootstrap-custom";
 
+@import "mixins";
+
 @import "components";
 @import "contentTypes";
 
@@ -67,4 +69,8 @@
 
 .lux-aside {
     min-width: 280px;
+}
+
+.lux-capitalize {
+    @extend %capitalize;
 }

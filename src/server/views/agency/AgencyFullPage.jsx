@@ -80,24 +80,24 @@ export const AgencyFullPage = () => {
                     <Col>
                         <address>
                             <div className="d-flex flex-column mb-4">
-                                <strong className="luxe-capitalize">{t('section.contact.address')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.address')}</strong>
                                 <span>{agency.address}</span>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong className="luxe-capitalize">{t('section.contact.phone')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.phone')}</strong>
                                 <a href={`tel:${agency.phone}`}>
                                     {agency.phone}
                                 </a>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong className="luxe-capitalize">{t('section.contact.email')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.email')}</strong>
                                 <a href={`mailto:${agency.email}`}>
                                     {agency.email}
                                 </a>
                             </div>
                         </address>
                         <button type="button"
-                                className="btn btn-primary btn-lg w-100 luxe-capitalize"
+                                className="btn btn-primary btn-lg w-100 lux-capitalize"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalContact"
                         >

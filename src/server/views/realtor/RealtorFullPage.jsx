@@ -115,24 +115,24 @@ export const RealtorFullPage = () => {
                     <Col>
                         <address>
                             <div className="d-flex flex-column mb-4">
-                                <strong>{t('section.contact.address')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.address')}</strong>
                                 {agencies.map(({address, id}) => <span key={id}>{address}</span>)}
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong>{t('section.contact.phone')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.phone')}</strong>
                                 <a href={`tel:${realtor.phone}`}>
                                     {realtor.phone}
                                 </a>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong>{t('section.contact.email')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.email')}</strong>
                                 <a href={`mailto:${realtor.email}`}>
                                     {realtor.email}
                                 </a>
                             </div>
                         </address>
                         <button type="button"
-                                className="btn btn-primary btn-lg w-100"
+                                className="btn btn-primary btn-lg w-100 lux-capitalize"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalContact"
                         >
