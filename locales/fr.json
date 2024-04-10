@@ -28,7 +28,15 @@
         "it" : "italien"
       }
     }
-
+  },
+  "footer": {
+    "resources": "resources",
+    "academy": "academy",
+    "tutorial": "tutoriel",
+    "sourceCode": "code source",
+    "backOffice" : "back-office",
+    "connection" : "connexion",
+    "copyright" : "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
   },
   "realtor": {
     "jobPosition": {
