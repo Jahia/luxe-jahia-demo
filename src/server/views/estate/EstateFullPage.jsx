@@ -2,8 +2,10 @@ import React from 'react';
 import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
 import {Col, Figure, PageTitle, Row, Section} from '../../components';
 import {ChevronLeftIcon} from '@heroicons/react/24/solid';
+import {useTranslation} from 'react-i18next';
 
 export const EstateFullPage = () => {
+    const {t} = useTranslation();
     const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
     const isBackBtnEnabled = currentResource.getModuleParams().get('isBackBtnEnabled') === 'true';
@@ -64,23 +66,23 @@ export const EstateFullPage = () => {
                         <dl className="lux-house_informations">
                             <div className="lux-house_information_row d-flex">
                                 <dt className="lux-house_information_key">
-                                    Type
+                                    {t('estate.type.label')}
                                 </dt>
                                 <dd className="lux-house_information_value">
-                                    {estate.type}
+                                    {t(`estate.type.${estate.type}`)}
                                 </dd>
                             </div>
                             <div className="lux-house_information_row d-flex">
                                 <dt className="lux-house_information_key">
-                                    Superficie
+                                    {t('estate.surface.label')}
                                 </dt>
                                 <dd className="lux-house_information_value">
-                                    {estate.surface.toLocaleString(locale)}m<sup>2</sup>
+                                    {estate.surface.toLocaleString(locale)} m<sup>2</sup>
                                 </dd>
                             </div>
                             <div className="lux-house_information_row d-flex">
                                 <dt className="lux-house_information_key">
-                                    Pièces
+                                    {t('estate.rooms.label')}
                                 </dt>
                                 <dd className="lux-house_information_value">
                                     {estate.rooms}
@@ -88,7 +90,7 @@ export const EstateFullPage = () => {
                             </div>
                             <div className="lux-house_information_row d-flex">
                                 <dt className="lux-house_information_key">
-                                    Chambres
+                                    {t('estate.bedrooms.label')}
                                 </dt>
                                 <dd className="lux-house_information_value">
                                     {estate.bedrooms}
@@ -96,7 +98,7 @@ export const EstateFullPage = () => {
                             </div>
                             <div className="lux-house_information_row d-flex">
                                 <dt className="lux-house_information_key">
-                                    Salles de bain
+                                    {t('estate.bathrooms.label')}
                                 </dt>
                                 <dd className="lux-house_information_value">
                                     {estate.bathrooms}
@@ -105,7 +107,7 @@ export const EstateFullPage = () => {
                             {estate.options && estate.options.map(option => (
                                 <div key={option} className="lux-house_information_row d-flex">
                                     <dt className="lux-house_information_key">
-                                        {option}
+                                        {t(`estate.options.${option}`)}
                                     </dt>
                                     <dd className="lux-house_information_value  d-flex align-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" width="24px" height="24px">
@@ -119,7 +121,7 @@ export const EstateFullPage = () => {
                     </Col>
                 </Row>
             </Section>
-            <Section>TODO: Biens similaire</Section>
+            {/* <Section>TODO: Biens similaire</Section> */}
         </>
     );
 };

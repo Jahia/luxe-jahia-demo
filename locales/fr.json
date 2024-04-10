@@ -1,5 +1,84 @@
 {
-  "agency": {
-    "nbRealtor" : "Number d'agents"
+  "section": {
+    "heading": {
+      "contact": "contact",
+      "experts": "nos experts",
+      "exclusiveAgencyEstates": "propriétés exclusives de l'agence",
+      "exclusiveEstates": "propriétés exclusives"
+    },
+    "contact": {
+      "address": "adresse",
+      "phone": "téléphone",
+      "email": "courriel",
+      "btn": "prendre rendez-vous"
+    }
+  },
+  "table": {
+    "data": {
+      "agency": "agence",
+      "yOfExperience": "années d'expériences",
+      "nbRealtor": "nombre d'experts",
+      "creationDate": "date de création",
+      "spokenLanguage": {
+        "label": "langues parlées",
+        "fr": "français",
+        "en": "anlgais",
+        "es": "espagnol",
+        "de" : "allemand",
+        "it" : "italien"
+      }
+    }
+  },
+  "footer": {
+    "resources": "ressources",
+    "academy": "académie",
+    "tutorial": "tutoriel",
+    "sourceCode": "code source",
+    "backOffice" : "back-office",
+    "connection" : "connexion",
+    "copyright" : "copyrights © 2002-{{currentDate}} tous droits réservés par Jahia Solutions Group SA"
+  },
+  "realtor": {
+    "jobPosition": {
+      "junior" : "agent junior",
+      "senior" : "agent senior",
+      "director" : "directeur d'agence"
+    }
+  },
+  "estate" : {
+    "type" : {
+      "label" : "type",
+      "house" : "maison",
+      "apartment" : "appartement",
+      "building" : "immeuble"
+    },
+    "surface" : {
+      "label": "superficie"
+    },
+    "rooms" : {
+      "label" : "pièces",
+      "numberOf" : "nombre de pièces"
+    },
+    "bedrooms" : {
+      "label" : "chambres",
+      "numberOf" : "nombre de chambres"
+    },
+    "bathrooms" : {
+      "label" : "salles de bains",
+      "numberOf" : "nombre de salles de bains"
+    },
+    "options" : {
+      "label" : "options",
+      "garage" : "garage",
+      "swimmingPool" : "piscine",
+      "garden" : "jardin",
+      "balcony" : "balcon"
+    }
+  },
+  "link": {
+    "labels": {
+      "knowMore": "en savoir plus"
+    }
+
   }
 }

@@ -1,0 +1,83 @@
+{
+  "section": {
+    "heading": {
+      "contact": "contacto",
+      "experts": "nuestros expertos",
+      "exclusiveAgencyEstates": "propiedades exclusivas de la agencia",
+      "exclusiveEstates": "propiedades exclusivas"
+    },
+    "contact": {
+      "address": "dirección",
+      "phone": "teléfono",
+      "email": "correo electrónico",
+      "btn": "concertar una cita"
+    }
+  },
+  "table": {
+    "data": {
+      "agency": "agencia",
+      "yOfExperience": "años de experiencia",
+      "nbRealtor": "número de expertos",
+      "creationDate": "fecha de creación",
+      "spokenLanguage": {
+        "label": "idiomas hablados",
+        "fr": "francés",
+        "en": "inglés",
+        "es": "español",
+        "de": "alemán",
+        "it": "italiano"
+      }
+    }
+  },
+  "footer": {
+    "resources": "recursos",
+    "academy": "academia",
+    "tutorial": "tutorial",
+    "sourceCode": "código fuente",
+    "backOffice": "back-office",
+    "connection": "conexión",
+    "copyright": "derechos de autor © 2002-{{currentDate}} Todos los derechos reservados por Jahia Solutions Group SA"
+  },
+  "realtor": {
+    "jobPosition": {
+      "junior": "agente junior",
+      "senior": "agente senior",
+      "director": "director de agencia"
+    }
+  },
+  "estate": {
+    "type": {
+      "label": "tipo",
+      "house": "casa",
+      "apartment": "apartamento",
+      "building": "edificio"
+    },
+    "surface": {
+      "label": "superficie"
+    },
+    "rooms": {
+      "label": "habitaciones",
+      "numberOf": "número de habitaciones"
+    },
+    "bedrooms": {
+      "label": "dormitorios",
+      "numberOf": "número de dormitorios"
+    },
+    "bathrooms": {
+      "label": "baños",
+      "numberOf": "número de baños"
+    },
+    "options": {
+      "label": "opciones",
+      "garage": "garaje",
+      "swimmingPool": "piscina",
+      "garden": "jardín",
+      "balcony": "balcón"
+    }
+  },
+  "link": {
+    "labels": {
+      "knowMore": "saber más"
+    }
+  }
+}
