@@ -2,9 +2,10 @@ import React from 'react';
 import {useServerContext, getNodeProps, jBuildNavMenu, jAddCacheDependency, jUrl} from '@jahia/js-server-core';
 import {Section, TextIllustrated} from '../../components';
 import PropTypes from 'prop-types';
-import todoI18n from '../../temp/locales/fr';
+import {useTranslation} from 'react-i18next';
 
 const NavMenuItem = ({pageNode, arrangement}) => {
+    const {t} = useTranslation();
     const {renderContext} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const page = getNodeProps(pageNode, ['jcr:title', 'subtitle', 'image']);
@@ -23,7 +24,7 @@ const NavMenuItem = ({pageNode, arrangement}) => {
             },
             link: {
                 href: jUrl({path: pageNode.getPath()}),
-                label: todoI18n.link.labels.knowMore
+                label: t('link.labels.knowMore')
             }
         }}/>
     );

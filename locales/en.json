@@ -1,5 +1,83 @@
 {
-  "agency": {
-    "nbRealtor" : "Number of Realtor"
+  "section": {
+    "heading": {
+      "contact": "contact",
+      "experts": "our experts",
+      "exclusiveAgencyEstates": "agency's exclusive properties",
+      "exclusiveEstates": "exclusive properties"
+    },
+    "contact": {
+      "address": "address",
+      "phone": "phone",
+      "email": "email",
+      "btn": "make an appointment"
+    }
+  },
+  "table": {
+    "data": {
+      "agency": "agency",
+      "yOfExperience": "years of experience",
+      "nbRealtor": "number of experts",
+      "creationDate": "creation date",
+      "spokenLanguage": {
+        "label": "spoken languages",
+        "fr": "French",
+        "en": "English",
+        "es": "Spanish",
+        "de": "German",
+        "it": "Italian"
+      }
+    }
+  },
+  "footer": {
+    "resources": "resources",
+    "academy": "academy",
+    "tutorial": "tutorial",
+    "sourceCode": "source code",
+    "backOffice": "back-office",
+    "connection": "connection",
+    "copyright": "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
+  },
+  "realtor": {
+    "jobPosition": {
+      "junior": "junior agent",
+      "senior": "senior agent",
+      "director": "agency director"
+    }
+  },
+  "estate": {
+    "type": {
+      "label": "type",
+      "house": "house",
+      "apartment": "apartment",
+      "building": "building"
+    },
+    "surface": {
+      "label": "area"
+    },
+    "rooms": {
+      "label": "rooms",
+      "numberOf": "number of rooms"
+    },
+    "bedrooms": {
+      "label": "bedrooms",
+      "numberOf": "number of bedrooms"
+    },
+    "bathrooms": {
+      "label": "bathrooms",
+      "numberOf": "number of bathrooms"
+    },
+    "options": {
+      "label": "options",
+      "garage": "garage",
+      "swimmingPool": "swimming pool",
+      "garden": "garden",
+      "balcony": "balcony"
+    }
+  },
+  "link": {
+    "labels": {
+      "knowMore": "know more"
+    }
   }
 }

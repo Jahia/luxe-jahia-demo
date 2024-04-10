@@ -1,7 +1,9 @@
 import React from 'react';
 import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-core';
+import {useTranslation} from 'react-i18next';
 
 export const RealtorCard = () => {
+    const {t} = useTranslation();
     const {currentNode, renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const realtor = getNodeProps(currentNode, [
@@ -32,7 +34,7 @@ export const RealtorCard = () => {
 
             <div className="lux-agentCard_informations d-flex py-3 flex-column justify-content-center">
                 <h4 className="my-0">{realtor.firstName} {realtor.lastName}</h4>
-                <p className="m-0">{realtor.jobPosition}</p>
+                <p className="m-0">{t(`realtor.jobPosition.${realtor.jobPosition}`)}</p>
             </div>
         </a>
     );

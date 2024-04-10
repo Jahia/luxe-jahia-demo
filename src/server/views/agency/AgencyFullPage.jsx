@@ -6,13 +6,13 @@ import {
     getNodesByJCRQuery, Render
 } from '@jahia/js-server-core';
 
-import todoI18n from '../../temp/locales/fr';
+import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
 
 const MAX_ESTATE = 6;
 export const AgencyFullPage = () => {
-    const {currentNode, currentResource, renderContext} = useServerContext();
-    const locale = currentResource.getLocale().getLanguage();
+    const {t} = useTranslation();
+    const {currentNode, renderContext} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const currentNodePath = currentNode.getPath();
 
@@ -38,16 +38,16 @@ export const AgencyFullPage = () => {
 
     const data = [
         {
-            title: todoI18n.table.data.nbRealtor,
+            title: t('table.data.nbRealtor'),
             value: `${agency.realtors?.length || 0}`
         },
         {
-            title: todoI18n.table.data.creationDate,
+            title: t('table.data.creationDate'),
             value: new Date(agency.creationDate).getFullYear().toString(10) || '-'
         },
         {
-            title: todoI18n.table.data.spokenLanguage,
-            value: agency.languages.join(', ')
+            title: t('table.data.spokenLanguage.label'),
+            value: agency.languages?.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
         }
     ];
 
@@ -75,33 +75,33 @@ export const AgencyFullPage = () => {
                 <Table rows={data}/>
             </Section>
             <Section>
-                <HeadingSection title={todoI18n.section.heading.contact}/>
+                <HeadingSection title={t('section.heading.contact')}/>
                 <Row>
                     <Col>
                         <address>
                             <div className="d-flex flex-column mb-4">
-                                <strong>{todoI18n.section.contact.address}</strong>
+                                <strong className="luxe-capitalize">{t('section.contact.address')}</strong>
                                 <span>{agency.address}</span>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong>{todoI18n.section.contact.phone}</strong>
+                                <strong className="luxe-capitalize">{t('section.contact.phone')}</strong>
                                 <a href={`tel:${agency.phone}`}>
                                     {agency.phone}
                                 </a>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong>{todoI18n.section.contact.email}</strong>
+                                <strong className="luxe-capitalize">{t('section.contact.email')}</strong>
                                 <a href={`mailto:${agency.email}`}>
                                     {agency.email}
                                 </a>
                             </div>
                         </address>
                         <button type="button"
-                                className="btn btn-primary btn-lg w-100"
+                                className="btn btn-primary btn-lg w-100 luxe-capitalize"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalContact"
                         >
-                            {todoI18n.section.contact.btn}
+                            {t('section.contact.btn')}
                         </button>
                     </Col>
                     <Col>
@@ -112,7 +112,7 @@ export const AgencyFullPage = () => {
                 </Row>
             </Section>
             <Section>
-                <HeadingSection title={todoI18n.section.heading.experts}/>
+                <HeadingSection title={t('section.heading.experts')}/>
                 <Row className="row-cols-4 g-3">
                     {agency.realtors?.map(realtor => (
                         <Col key={realtor.getIdentifier()}>
@@ -123,7 +123,7 @@ export const AgencyFullPage = () => {
                 {/* <AddContentButtons nodeTypes={['luxe:realtor']}/> */}
             </Section>
             <Section>
-                <HeadingSection title={todoI18n.section.heading.exclusiveAgencyEstates}/>
+                <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
                 <Row className="row-cols-3 g-0">
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
