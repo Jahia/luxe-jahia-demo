@@ -10,6 +10,15 @@ import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
 
 const MAX_ESTATE = 6;
+
+const getAgencyLanguage = (agency) => {
+    if(Array.isArray(agency.realtors))
+        return new Set(agency.realtors.flatMap( realtor => {
+            realtor = getNodeProps(realtor,['languages']);
+            return realtor.languages || [];
+        }))
+    return agency.country.toLowerCase();
+}
 export const AgencyFullPage = () => {
     const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
@@ -21,7 +30,8 @@ export const AgencyFullPage = () => {
         'description',
         'image',
         'creationDate',
-        'languages',
+        'languages',//todo remove
+        'country',
         'address',
         'email',
         'phone',
@@ -47,6 +57,7 @@ export const AgencyFullPage = () => {
         },
         {
             title: t('table.data.spokenLanguage.label'),
+            value:
             value: agency.languages?.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
         }
     ];
