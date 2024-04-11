@@ -77,7 +77,8 @@
   },
   "link": {
     "labels": {
-      "knowMore": "saber más"
+      "knowMore": "saber más",
+      "readMore": "seguir leyendo"
     }
   }
 }

@@ -15,8 +15,9 @@ const getSiteLanguageAsLocales = renderContext => {
 
 export const LanguageSwitcher = () => {
     const {renderContext, currentResource} = useServerContext();
-    const currentLocaleCode = currentResource.getLocale().getLanguage();
-    const currentLocaleName = currentResource.getLocale().getDisplayLanguage();
+    const currentLocale = currentResource.getLocale();
+    const currentLocaleCode = currentLocale.getLanguage();
+    const currentLocaleName = currentLocale.getDisplayLanguage(currentLocale);
     const siteLocales = getSiteLanguageAsLocales(renderContext);
 
     const mainResourceNodePath = renderContext.getMainResource().getNode().getPath();
