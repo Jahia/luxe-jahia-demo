@@ -1,16 +1,16 @@
 import React from 'react';
-import {useServerContext, getNodeProps, jBuildNavMenu, jAddCacheDependency, jUrl} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildNavMenu, server, buildUrl} from '@jahia/js-server-core';
 import {Section, TextIllustrated} from '../../components';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 
 const NavMenuItem = ({pageNode, arrangement}) => {
     const {t} = useTranslation();
-    const {renderContext} = useServerContext();
+    const {renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const page = getNodeProps(pageNode, ['jcr:title', 'subtitle', 'image']);
     if (page.image) {
-        jAddCacheDependency({node: page.image});
+        server.render.addCacheDependency({node: page.image}, renderContext);
     }
 
     return (
@@ -23,8 +23,8 @@ const NavMenuItem = ({pageNode, arrangement}) => {
                 alt: page.image?.getDisplayableName() || 'placeholder'
             },
             link: {
-                href: jUrl({path: pageNode.getPath()}),
-                label: t('link.labels.knowMore')
+                href: buildUrl({path: pageNode.getPath()}, renderContext, currentResource),
+                label: t('link.labels.readMore')
             }
         }}/>
     );
@@ -35,9 +35,9 @@ NavMenuItem.propTypes = {
     arrangement: PropTypes.string.isRequired
 };
 
-const arrangement = ['left', 'right'];
+const arrangement = ['right', 'left'];
 export const NavMenuIllustrated = () => {
-    const {currentNode} = useServerContext();
+    const {currentNode, currentResource, renderContext} = useServerContext();
 
     const nav = getNodeProps(currentNode, [
         'base',
@@ -46,23 +46,37 @@ export const NavMenuIllustrated = () => {
         'menuItemView'
     ]);
 
-    const menu = jBuildNavMenu(
+    // Remove content in the menu which is not a jnt:page and get jnt:page under jnt:navMenuText
+    // Return an array of jnt:page node
+    const flatMapMe = array =>
+        array.flatMap(({node, children}) => {
+            if (node.isNodeType('jnt:navMenuText')) {
+                if (!children) {
+                    return [];
+                } // Depends of the maxDepth props
+
+                return flatMapMe(children); // Recursively flat map the children
+            }
+
+            if (node.isNodeType('jnt:page')) {
+                return [node]; // Return node in an array to match the expected structure
+            }
+
+            return []; // Return an empty array if none of the conditions match
+        });
+
+    const menu = flatMapMe(buildNavMenu(
         nav.maxDepth,
         nav.base,
         nav.menuItemView,
-        nav.startLevel
-    );
-    // Todo filter to flatten and remove jnt:navMenuText
-    // menu.filter(({node, children}) => {
-    //     if (node.isNodeType('jnt:navMenuText')) {
-    //         return flatten(children);
-    //     }
-    //
-    //     return node;
-    // });
+        nav.startLevel,
+        renderContext,
+        currentResource
+    ));
+
     return (
         <>
-            {menu.map(({node}, index) => (
+            {menu.map((node, index) => (
                 <Section key={node.getIdentifier()}>
                     <NavMenuItem pageNode={node} arrangement={arrangement[index % 2]}/>
                 </Section>

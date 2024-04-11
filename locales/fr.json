@@ -77,7 +77,8 @@
   },
   "link": {
     "labels": {
-      "knowMore": "en savoir plus"
+      "knowMore": "en savoir plus",
+      "readMore": "en savoir plus"
     }
 
   }
