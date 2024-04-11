@@ -11,14 +11,18 @@ import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../com
 
 const MAX_ESTATE = 6;
 
-const getAgencyLanguage = (agency) => {
-    if(Array.isArray(agency.realtors))
-        return new Set(agency.realtors.flatMap( realtor => {
-            realtor = getNodeProps(realtor,['languages']);
-            return realtor.languages || [];
-        }))
-    return agency.country.toLowerCase();
-}
+const getAgencyLanguage = (agency, renderContext) => {
+    if (Array.isArray(agency.realtors)) {
+        return new Set(agency.realtors.flatMap(realtor => {
+            server.render.addCacheDependency({node: realtor}, renderContext);
+            const props = getNodeProps(realtor, ['languages']);
+            return props.languages || [];
+        }));
+    }
+
+    return [agency.country.toLowerCase()];
+};
+
 export const AgencyFullPage = () => {
     const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
@@ -30,13 +34,13 @@ export const AgencyFullPage = () => {
         'description',
         'image',
         'creationDate',
-        'languages',//todo remove
         'country',
         'address',
         'email',
         'phone',
         'realtors'
     ]);
+    const languages = [...getAgencyLanguage(agency, renderContext)];
 
     const query = `SELECT *
                    from [luxe:estate] as estate
@@ -57,8 +61,7 @@ export const AgencyFullPage = () => {
         },
         {
             title: t('table.data.spokenLanguage.label'),
-            value:
-            value: agency.languages?.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
+            value: languages.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
         }
     ];
 

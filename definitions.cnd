@@ -72,7 +72,6 @@
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
  - creationDate (date, DatePicker)
- - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
  - country (string,choicelist[country]) = 'FR' autocreated
  - address (string)
  - phone (string)
@@ -81,6 +80,7 @@
  + * (luxe:estate) = luxe:estate
 
 [luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
+ - fullName (string) hidden
  - firstName (string) mandatory
  - lastName (string) primary mandatory
  - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'senior', 'director'

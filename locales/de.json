@@ -1,78 +1,79 @@
 {
   "section": {
     "heading": {
-      "contact": "Kontakt",
+      "contact": "kontakt",
       "experts": "unsere Experten",
       "exclusiveAgencyEstates": "exklusive Agenturimmobilien",
       "exclusiveEstates": "exklusive Immobilien"
     },
     "contact": {
-      "address": "Adresse",
-      "phone": "Telefon",
-      "email": "E-Mail",
+      "address": "adresse",
+      "phone": "telefon",
+      "email": "e-Mail",
       "btn": "einen Termin vereinbaren"
     }
   },
   "table": {
     "data": {
-      "agency": "Agentur",
-      "yOfExperience": "Jahre Erfahrung",
-      "nbRealtor": "Anzahl der Experten",
-      "creationDate": "Gründungsdatum",
+      "agency": "agentur",
+      "yOfExperience": "jahre erfahrung",
+      "nbRealtor": "anzahl der experten",
+      "creationDate": "gründungsdatum",
       "spokenLanguage": {
-        "label": "gesprochene Sprachen",
-        "fr": "Französisch",
-        "en": "Englisch",
-        "es": "Spanisch",
-        "de": "Deutsch",
-        "it": "Italienisch"
+        "label": "gesprochene sprachen",
+        "fr": "französisch",
+        "en": "englisch",
+        "es": "spanisch",
+        "de": "deutsch",
+        "it": "italienisch",
+        "us": "englisch"
       }
     }
   },
   "footer": {
-    "resources": "Ressourcen",
-    "academy": "Akademie",
-    "tutorial": "Anleitung",
-    "sourceCode": "Quellcode",
-    "backOffice": "Backoffice",
-    "connection": "Verbindung",
-    "copyright": "Urheberrechte © 2002-{{currentDate}} Alle Rechte vorbehalten von Jahia Solutions Group SA"
+    "resources": "ressourcen",
+    "academy": "akademie",
+    "tutorial": "anleitung",
+    "sourceCode": "quellcode",
+    "backOffice": "backoffice",
+    "connection": "verbindung",
+    "copyright": "urheberrechte © 2002-{{currentDate}} alle rechte vorbehalten von Jahia Solutions Group SA"
   },
   "realtor": {
     "jobPosition": {
-      "junior": "Junior-Makler",
-      "senior": "Senior-Makler",
-      "director": "Agenturdirektor"
+      "junior": "junior-makler",
+      "senior": "senior-makler",
+      "director": "agenturdirektor"
     }
   },
   "estate": {
     "type": {
-      "label": "Typ",
-      "house": "Haus",
-      "apartment": "Wohnung",
-      "building": "Gebäude"
+      "label": "typ",
+      "house": "haus",
+      "apartment": "wohnung",
+      "building": "gebäude"
     },
     "surface": {
-      "label": "Fläche"
+      "label": "fläche"
     },
     "rooms": {
-      "label": "Zimmer",
-      "numberOf": "Anzahl der Zimmer"
+      "label": "zimmer",
+      "numberOf": "anzahl der zimmer"
     },
     "bedrooms": {
-      "label": "Schlafzimmer",
-      "numberOf": "Anzahl der Schlafzimmer"
+      "label": "schlafzimmer",
+      "numberOf": "anzahl der schlafzimmer"
     },
     "bathrooms": {
-      "label": "Badezimmer",
-      "numberOf": "Anzahl der Badezimmer"
+      "label": "badezimmer",
+      "numberOf": "anzahl der badezimmer"
     },
     "options": {
-      "label": "Optionen",
-      "garage": "Garage",
-      "swimmingPool": "Schwimmbad",
-      "garden": "Garten",
-      "balcony": "Balkon"
+      "label": "optionen",
+      "garage": "garage",
+      "swimmingPool": "schwimmbad",
+      "garden": "garten",
+      "balcony": "balkon"
     }
   },
   "link": {
