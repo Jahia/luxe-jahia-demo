@@ -68,3 +68,10 @@
 .lux-aside {
     min-width: 280px;
 }
+
+// Utilities
+.luxe-capitalize {
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}

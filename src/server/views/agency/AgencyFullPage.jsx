@@ -105,9 +105,9 @@ export const AgencyFullPage = () => {
                         </button>
                     </Col>
                     <Col>
-                        <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
+                        {/* <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
                             map here
-                        </div>
+                        </div> */}
                     </Col>
                 </Row>
             </Section>

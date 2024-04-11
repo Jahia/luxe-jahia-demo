@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {AbsoluteArea} from '@jahia/js-server-core';
+import {AbsoluteArea, AddResources} from '@jahia/js-server-core';
 
 // Const navArea = {
 //     name: 'navArea',
@@ -49,6 +49,7 @@ export const MainLayout = ({head, footer, className, children}) => {
                     {children}
                 </main>
                 <HtmlFooter/>
+                <AddResources type="javascript" resources="bootstrap.bundle.min.js"/>
             </body>
 
         </>
