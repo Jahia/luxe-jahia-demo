@@ -21,11 +21,12 @@
       "creationDate": "creation date",
       "spokenLanguage": {
         "label": "spoken languages",
-        "fr": "French",
-        "en": "English",
-        "es": "Spanish",
-        "de": "German",
-        "it": "Italian"
+        "fr": "french",
+        "en": "english",
+        "es": "spanish",
+        "de": "german",
+        "it": "italian",
+        "us": "english"
       }
     }
   },
