@@ -1,6 +1,6 @@
 import React from 'react';
 import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
-import {Figure} from '../../components';
+import {Figure, Row} from '../../components';
 
 export const HeaderTextDown = () => {
     const {currentNode, renderContext} = useServerContext();
@@ -11,25 +11,22 @@ export const HeaderTextDown = () => {
     }
 
     return (
-        <>
+        <header className="container py-4 py-md-5 mb-5">
             {header.image &&
-            <section className="container">
-                <div className="row">
+                <Row>
                     <Figure src={header.image.getUrl()}
                             alt={header.image.getDisplayableName()}
                             layout="imgFull"/>
-                </div>
-            </section>}
+                </Row>
+            }
 
-            <section className="container">
-                <hgroup className="row text-center">
-                    <h1 className="display-1">{header.title}</h1>
-                    <p className="h2 mt-0">
-                        {header.teaser}
-                    </p>
-                </hgroup>
-            </section>
-        </>
+            <hgroup className="row text-center">
+                <h1 className="display-1 mb-0">{header.title}</h1>
+                <p className="h2 mt-0">
+                    {header.teaser}
+                </p>
+            </hgroup>
+        </header>
     );
 };
 

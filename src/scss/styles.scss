@@ -7,12 +7,14 @@
 // Custom Bootstrap CSS
 @import "bootstrap-custom";
 
+@import "mixins";
+
 @import "components";
 @import "contentTypes";
 
 // @import "cheatsheet";
 .lux-centeredLayout {
-    width: 900px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -55,7 +57,7 @@
     margin-left: auto;
 }
 
-.lux-article > *:not(.lux-image_wrapper) {
+.lux-article > *:not(.lux-figure) {
     max-width: 800px;
     margin-right: auto;
     margin-left: auto;
@@ -69,9 +71,30 @@
     min-width: 280px;
 }
 
-// Utilities
-.luxe-capitalize {
-    &::first-letter {
-        text-transform: uppercase;
-    }
+.lux-capitalize {
+    @extend %capitalize;
 }
+
+.lux-hasDiamond {
+    @extend %hasDiamond;
+}
+
+// Uncomment to play with breakpoint to manage responsive
+// @include media-breakpoint-down(sm) {
+//     body {
+//         background: yellow;
+//     }
+// }
+
+// @include media-breakpoint-down(md) {
+//     main {
+//         border: 5px solid blue;
+//     }
+// }
+
+// @include media-breakpoint-down(lg) {
+//     main {
+//         outline: 5px solid red;
+//         outline-offset: -20px;
+//     }
+// }

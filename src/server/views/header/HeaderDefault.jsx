@@ -10,7 +10,7 @@ export const HeaderDefault = () => {
     }
 
     return (
-        <header className="lux-cover">
+        <section className="lux-cover">
             {header.image && (
                 <img
                     src={header.image.getUrl()}
@@ -20,10 +20,10 @@ export const HeaderDefault = () => {
                 />
             )}
 
-            <h2 className="lux-cover_caption">
+            <h1 className="lux-cover_caption">
                 {header.title}
-            </h2>
-        </header>
+            </h1>
+        </section>
     );
 };
 

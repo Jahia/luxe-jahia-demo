@@ -1,0 +1,35 @@
+%capitalize {
+    display: inline-block;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+%card {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    transform: scale(1);
+    transition: all .2s ease-in;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: $shadow-box;
+    }
+
+    & > * {
+        margin-bottom: 0;
+    }
+}
+
+%hasDiamond {
+    &:after {
+        content: "✦";
+        color: $color-gold;
+        font-size: .4em;
+        margin-left: 4px;
+    }
+}

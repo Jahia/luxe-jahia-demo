@@ -1,6 +1,6 @@
 import React from 'react';
 import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
-import {Figure, PageTitle} from '../../components';
+import {Figure, PageTitle, Row} from '../../components';
 
 export const HeaderTextUp = () => {
     const {currentNode, renderContext} = useServerContext();
@@ -12,21 +12,21 @@ export const HeaderTextUp = () => {
 
     return (
         <>
-            <section className="container">
-                <PageTitle
-                    title={header.title}
-                    description={header.teaser}
-                />
-            </section>
-
-            {header.image &&
-            <section className="container">
-                <div className="row">
-                    <Figure src={header.image.getUrl()}
-                            alt={header.image.getDisplayableName()}
-                            layout="imgFull"/>
-                </div>
-            </section>}
+            <header className="container d-flex flex-column py-2 py-md-4 gap-3">
+                <Row>
+                    <PageTitle
+                        title={header.title}
+                        description={header.teaser}
+                        />
+                </Row>
+                {header.image &&
+                    <Row>
+                        <Figure src={header.image.getUrl()}
+                                alt={header.image.getDisplayableName()}
+                                layout="imgFull"/>
+                    </Row>
+                }
+            </header>
         </>
     );
 };

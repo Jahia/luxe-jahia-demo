@@ -94,24 +94,24 @@ export const AgencyFullPage = () => {
                     <Col>
                         <address>
                             <div className="d-flex flex-column mb-4">
-                                <strong className="luxe-capitalize">{t('section.contact.address')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.address')}</strong>
                                 <span>{agency.address}</span>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong className="luxe-capitalize">{t('section.contact.phone')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.phone')}</strong>
                                 <a href={`tel:${agency.phone}`}>
                                     {agency.phone}
                                 </a>
                             </div>
                             <div className="d-flex flex-column mb-4">
-                                <strong className="luxe-capitalize">{t('section.contact.email')}</strong>
+                                <strong className="lux-capitalize">{t('section.contact.email')}</strong>
                                 <a href={`mailto:${agency.email}`}>
                                     {agency.email}
                                 </a>
                             </div>
                         </address>
                         <button type="button"
-                                className="btn btn-primary btn-lg w-100 luxe-capitalize"
+                                className="btn btn-primary btn-lg w-100 lux-capitalize"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalContact"
                         >
@@ -127,9 +127,9 @@ export const AgencyFullPage = () => {
             </Section>
             <Section>
                 <HeadingSection title={t('section.heading.experts')}/>
-                <Row className="row-cols-4 g-3">
+                <Row className="row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-3">
                     {agency.realtors?.map(realtor => (
-                        <Col key={realtor.getIdentifier()}>
+                        <Col key={realtor.getIdentifier()} className="g-0">
                             <Render node={realtor}/>
                         </Col>
                     ))}
@@ -138,7 +138,7 @@ export const AgencyFullPage = () => {
             </Section>
             <Section>
                 <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
-                <Row className="row-cols-3 g-0">
+                <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
                             <Render node={estate}/>

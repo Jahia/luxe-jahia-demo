@@ -34,7 +34,7 @@ export const RealtorCard = () => {
 
             <div className="lux-agentCard_informations d-flex py-3 flex-column justify-content-center">
                 <h4 className="my-0">{realtor.firstName} {realtor.lastName}</h4>
-                <p className="m-0">{t(`realtor.jobPosition.${realtor.jobPosition}`)}</p>
+                <p className="m-0 lux-capitalize">{t(`realtor.jobPosition.${realtor.jobPosition}`)}</p>
             </div>
         </a>
     );

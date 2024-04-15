@@ -1,6 +1,6 @@
 @use "sass:map";
 
-.lux-image_wrapper {
+.lux-figure {
     &:not(:first-child) {
         margin-top: map.get($spacers, "3");
     }

@@ -1,9 +1,5 @@
 
 .lux-heading_title {
-    &:after {
-        content: "✦";
-        color: $color-gold;
-        font-size: .4em;
-        margin-left: 4px;
-    }
+    @extend %capitalize;
+    @extend %hasDiamond;
 }

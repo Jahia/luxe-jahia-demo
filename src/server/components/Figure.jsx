@@ -23,37 +23,33 @@ export const Figure = ({
     }
 
     return (
-        <div
+        <figure
             className={clsx(
-                'lux-image_wrapper',
-                'container',
+                {
+                'd-flex':
+                    layout === 'imgLeft' ||
+                    layout === 'imgRight' ||
+                    layout === 'imgCentered'
+                },
+                'lux-figure',
                 'mb-3',
                 className
             )}
         >
-            <figure
-                className={clsx({
-                    'd-flex':
-                        layout === 'imgLeft' ||
-                        layout === 'imgRight' ||
-                        layout === 'imgCentered'
+            <img
+                src={src}
+                alt={alt}
+                width={layout === 'imgFull' ? '100%' : `${defaultWidth}px`}
+                className={clsx('lux-image', {
+                    'lux-image_full': layout === 'imgFull'
                 })}
-            >
-                <img
-                    src={src}
-                    alt={alt}
-                    width={layout === 'imgFull' ? '100%' : `${defaultWidth}px`}
-                    className={clsx('lux-image', {
-                        'lux-image_full': layout === 'imgFull'
-                    })}
-                />
-                {caption && (
-                    <figcaption className={clsx(CSSfigcaption[layout])}>
-                        {caption}
-                    </figcaption>
-                )}
-            </figure>
-        </div>
+            />
+            {caption && (
+                <figcaption className={clsx(CSSfigcaption[layout])}>
+                    {caption}
+                </figcaption>
+            )}
+        </figure>
     );
 };
 
