@@ -106,8 +106,7 @@ module.exports = env => {
             plugins: [
                 new ExtraWatchWebpackPlugin({
                     files: [
-                        'src/client/**/*',
-                        'src/server/**/*',
+                        'src/**/*',
                         'images/**/*',
                         'css/**/*',
                         'javascript/**/*',
