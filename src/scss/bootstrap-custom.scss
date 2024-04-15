@@ -250,3 +250,7 @@ section {
 .list-group-item {
     --bs-list-group-border-color: rgba(#{$color-gold-rgb}, .4);
 }
+
+.dropdown-item {
+    @extend %capitalize;
+}
