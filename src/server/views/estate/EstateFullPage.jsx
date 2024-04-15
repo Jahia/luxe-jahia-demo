@@ -30,28 +30,27 @@ export const EstateFullPage = () => {
     return (
         <>
             <Section>
-                <div className="d-flex mb-4">
+                <header className="d-flex mb-5">
                     {isBackBtnEnabled && parent && (
-                    <button
-                                type="button"
-                                className="btn btn-light btn-lg me-4 _backToParentPage"
-                    >
-                        <ChevronLeftIcon className="lux-icon"/>
-                    </button>
-                        )}
+                        <button
+                            type="button"
+                            className="btn btn-light btn-lg me-4 _backToParentPage"
+                        >
+                            <ChevronLeftIcon className="lux-icon"/>
+                        </button>
+                    )}
 
                     <PageTitle
-                            title={estate.title}
-                            className="pb-0"
-                        />
-                </div>
-                <Figure src={image.getUrl()}
-                        alt={image.getDisplayableName()}
-                        layout="imgFull"/>
-
-            </Section>
-            <Section>
-                <Row className="gap-5">
+                        title={estate.title}
+                        className="pb-0"
+                    />
+                </header>
+                <Row>
+                    <Figure src={image.getUrl()}
+                            alt={image.getDisplayableName()}
+                            layout="imgFull"/>
+                </Row>
+                <Row className="row-cols-1 row-cols-lg-2 g-5">
                     <Col>
                         {/* eslint-disable-next-line react/no-danger */}
                         <unwanteddiv dangerouslySetInnerHTML={{

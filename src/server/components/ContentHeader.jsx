@@ -11,7 +11,7 @@ export const ContentHeader = ({
 }) => {
     return (
         <header
-            className={clsx('container', 'd-flex', 'mb-0', 'pb-0', className)}
+            className={clsx('lux-contentHeader', 'container', 'd-flex', 'flex-column', 'flex-lg-row', 'mb-0', 'pb-0', className)}
             {...props}
         >
             <img className="lux-contentHeader_image"
