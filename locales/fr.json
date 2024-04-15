@@ -84,7 +84,8 @@
 
   },
   "query": {
-    "noResult": "Aucun résultat retourné pour cette requête"
+    "noResult": "Aucun résultat retourné pour cette requête",
+    "catIsMissing": "Une catégorie a été supprimée ou est manquante, veuillez revoir la requête : '{{queryName}}'"
   }
 
 }
