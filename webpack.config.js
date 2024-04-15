@@ -113,11 +113,11 @@ module.exports = env => {
                 path: path.resolve(__dirname, 'dist')
             },
             externals: {
-                '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
-                react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
-                'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
-                'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
-                i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')'
+              '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
+              react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
+              'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
+              i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')',
+              'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
             },
             resolve: {
                 mainFields: ['module', 'main'],
@@ -146,6 +146,7 @@ module.exports = env => {
             plugins: [
                 new ExtraWatchWebpackPlugin({
                     files: [
+                        'src/client/**/*',
                         'src/server/**/*',
                         'images/**/*',
                         'css/**/*',

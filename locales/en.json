@@ -1,18 +1,85 @@
 {
-  "agency": {
-    "nbRealtor" : "Number of Realtor"
+  "section": {
+    "heading": {
+      "contact": "contact",
+      "experts": "our experts",
+      "exclusiveAgencyEstates": "agency's exclusive properties",
+      "exclusiveEstates": "exclusive properties"
+    },
+    "contact": {
+      "address": "address",
+      "phone": "phone",
+      "email": "email",
+      "btn": "make an appointment"
+    }
   },
-  "login": {
-    "login": "Login",
-    "logout": "Logout",
-    "badCreds": "Error: username or password incorrect",
-    "unknowError": "Error: An error occured",
-    "username": "Username",
-    "password": "Password",
-    "rememberMe": "Remember me",
-    "liveWorkspace": "Live workspace",
-    "previewWorkspace": "Preview workspace",
-    "editWorkspace": "Edit workspace",
-    "contributeWorkspace": "Contribute workspace"
+  "table": {
+    "data": {
+      "agency": "agency",
+      "yOfExperience": "years of experience",
+      "nbRealtor": "number of experts",
+      "creationDate": "creation date",
+      "spokenLanguage": {
+        "label": "spoken languages",
+        "fr": "french",
+        "en": "english",
+        "es": "spanish",
+        "de": "german",
+        "it": "italian",
+        "us": "english"
+      }
+    }
+  },
+  "footer": {
+    "resources": "resources",
+    "academy": "academy",
+    "tutorial": "tutorial",
+    "sourceCode": "source code",
+    "backOffice": "back-office",
+    "connection": "connection",
+    "copyright": "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
+  },
+  "realtor": {
+    "jobPosition": {
+      "junior": "junior agent",
+      "senior": "senior agent",
+      "director": "agency director"
+    }
+  },
+  "estate": {
+    "type": {
+      "label": "type",
+      "house": "house",
+      "apartment": "apartment",
+      "building": "building"
+    },
+    "surface": {
+      "label": "area"
+    },
+    "rooms": {
+      "label": "rooms",
+      "numberOf": "number of rooms"
+    },
+    "bedrooms": {
+      "label": "bedrooms",
+      "numberOf": "number of bedrooms"
+    },
+    "bathrooms": {
+      "label": "bathrooms",
+      "numberOf": "number of bathrooms"
+    },
+    "options": {
+      "label": "options",
+      "garage": "garage",
+      "swimmingPool": "swimming pool",
+      "garden": "garden",
+      "balcony": "balcony"
+    }
+  },
+  "link": {
+    "labels": {
+      "knowMore": "know more",
+      "readMore": "read more"
+    }
   }
 }

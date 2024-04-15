@@ -1,6 +1,7 @@
 import React from 'react';
 import {useServerContext, getNodeProps, buildNavMenu, buildUrl, server} from '@jahia/js-server-core';
 import clsx from 'clsx';
+import {LanguageSwitcher} from './LanguageSwitcher';
 
 export const NavMenuDefault = () => {
     const {currentNode, renderContext, currentResource} = useServerContext();
@@ -78,32 +79,7 @@ export const NavMenuDefault = () => {
                         ))}
                     </ul>
                 </div>
-                <div className="dropdown">
-                    <button
-                        className="btn dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        Français
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li>
-                            <a
-                                href="#"
-                                className="dropdown-item active"
-                                aria-current="true"
-                            >
-                                Français
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="dropdown-item">
-                                English
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <LanguageSwitcher/>
             </div>
         </nav>
     );

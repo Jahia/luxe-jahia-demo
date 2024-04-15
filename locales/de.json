@@ -1,0 +1,86 @@
+{
+  "section": {
+    "heading": {
+      "contact": "kontakt",
+      "experts": "unsere Experten",
+      "exclusiveAgencyEstates": "exklusive Agenturimmobilien",
+      "exclusiveEstates": "exklusive Immobilien"
+    },
+    "contact": {
+      "address": "adresse",
+      "phone": "telefon",
+      "email": "e-Mail",
+      "btn": "einen Termin vereinbaren"
+    }
+  },
+  "table": {
+    "data": {
+      "agency": "agentur",
+      "yOfExperience": "jahre erfahrung",
+      "nbRealtor": "anzahl der experten",
+      "creationDate": "gründungsdatum",
+      "spokenLanguage": {
+        "label": "gesprochene sprachen",
+        "fr": "französisch",
+        "en": "englisch",
+        "es": "spanisch",
+        "de": "deutsch",
+        "it": "italienisch",
+        "us": "englisch"
+      }
+    }
+  },
+  "footer": {
+    "resources": "ressourcen",
+    "academy": "akademie",
+    "tutorial": "anleitung",
+    "sourceCode": "quellcode",
+    "backOffice": "backoffice",
+    "connection": "verbindung",
+    "copyright": "urheberrechte © 2002-{{currentDate}} alle rechte vorbehalten von Jahia Solutions Group SA"
+  },
+  "realtor": {
+    "jobPosition": {
+      "junior": "junior-makler",
+      "senior": "senior-makler",
+      "director": "agenturdirektor"
+    }
+  },
+  "estate": {
+    "type": {
+      "label": "typ",
+      "house": "haus",
+      "apartment": "wohnung",
+      "building": "gebäude"
+    },
+    "surface": {
+      "label": "fläche"
+    },
+    "rooms": {
+      "label": "zimmer",
+      "numberOf": "anzahl der zimmer"
+    },
+    "bedrooms": {
+      "label": "schlafzimmer",
+      "numberOf": "anzahl der schlafzimmer"
+    },
+    "bathrooms": {
+      "label": "badezimmer",
+      "numberOf": "anzahl der badezimmer"
+    },
+    "options": {
+      "label": "optionen",
+      "garage": "garage",
+      "swimmingPool": "schwimmbad",
+      "garden": "garten",
+      "balcony": "balkon"
+    }
+  },
+  "link": {
+    "labels": {
+      "knowMore": "mehr erfahren",
+      "readMore": "weiterlesen"
+
+    }
+  }
+}
