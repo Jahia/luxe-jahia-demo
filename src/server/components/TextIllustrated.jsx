@@ -5,8 +5,8 @@ import {Col, Row} from './grid';
 
 export const TextIllustrated = ({title, text, arrangement, image, link}) => {
     return (
-        <Row className="gap-5">
-            <Col>
+        <Row className="lux-textIllustrated gap-5">
+            <Col className="lux-textIllustrated_image">
                 <img
                     src={image.src}
                     alt={image.alt}
@@ -19,10 +19,11 @@ export const TextIllustrated = ({title, text, arrangement, image, link}) => {
                     'flex-column',
                     'align-center',
                     'justify-content-center',
+                    'lux-textIllustrated_text',
                     {'order-first': arrangement === 'right'}
                 )}
             >
-                <h2 className="mb-4">{title}</h2>
+                <h2 className="mb-4 lux-hasDiamond">{title}</h2>
                 {/* eslint-disable-next-line react/no-danger */}
                 <unwanteddiv dangerouslySetInnerHTML={{
                     __html: text

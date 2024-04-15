@@ -42,7 +42,7 @@ export const JcrQueryDefault = () => {
             {luxeQuery['jcr:title'] &&
                 <HeadingSection title={luxeQuery['jcr:title']}/>
             }
-            <div className="row row-cols-3 g-0">
+            <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
                 {queryContent && queryContent.map(node => {
                         return (
                             <div key={node.getIdentifier()} className="col g-0">

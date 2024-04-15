@@ -113,9 +113,9 @@ export const AgencyFullPage = () => {
             </Section>
             <Section>
                 <HeadingSection title={t('section.heading.experts')}/>
-                <Row className="row-cols-4 g-3">
+                <Row className="row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-3">
                     {agency.realtors?.map(realtor => (
-                        <Col key={realtor.getIdentifier()}>
+                        <Col key={realtor.getIdentifier()} className="g-0">
                             <Render node={realtor}/>
                         </Col>
                     ))}
@@ -124,7 +124,7 @@ export const AgencyFullPage = () => {
             </Section>
             <Section>
                 <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
-                <Row className="row-cols-3 g-0">
+                <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
                             <Render node={estate}/>

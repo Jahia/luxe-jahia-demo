@@ -1,13 +1,5 @@
 .lux-agentCard {
-    display: block;
-    border-radius: 16px;
-    text-decoration: none;
-    color: inherit;
-    max-width: 250px;
-
-    & > * {
-        margin-bottom: 0;
-    }
+    @extend %card;
 }
 
 .lux-agentCard_informations {

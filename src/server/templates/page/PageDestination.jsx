@@ -17,9 +17,11 @@ export const PageDestination = () => {
                            numberOfItems={1}/>
                 </Row>
             </Section>
+            {/* TODO: do not display section if no destinations */}
             <Section>
                 <Area name="related-destinations" allowedTypes={['']}/>
             </Section>
+            {/* TODO: do not display section if no agencies */}
             <Section>
                 <Area name="related-agencies" allowedTypes={['']}/>
             </Section>
