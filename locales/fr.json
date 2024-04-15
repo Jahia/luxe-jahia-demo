@@ -25,7 +25,8 @@
         "en": "anlgais",
         "es": "espagnol",
         "de" : "allemand",
-        "it" : "italien"
+        "it" : "italien",
+        "us": "anlgais"
       }
     }
   },
@@ -77,7 +78,8 @@
   },
   "link": {
     "labels": {
-      "knowMore": "en savoir plus"
+      "knowMore": "en savoir plus",
+      "readMore": "en savoir plus"
     }
 
   }

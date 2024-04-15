@@ -10,6 +10,19 @@ import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
 
 const MAX_ESTATE = 6;
+
+const getAgencyLanguage = (agency, renderContext) => {
+    if (Array.isArray(agency.realtors)) {
+        return new Set(agency.realtors.flatMap(realtor => {
+            server.render.addCacheDependency({node: realtor}, renderContext);
+            const props = getNodeProps(realtor, ['languages']);
+            return props.languages || [];
+        }));
+    }
+
+    return [agency.country.toLowerCase()];
+};
+
 export const AgencyFullPage = () => {
     const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
@@ -21,12 +34,13 @@ export const AgencyFullPage = () => {
         'description',
         'image',
         'creationDate',
-        'languages',
+        'country',
         'address',
         'email',
         'phone',
         'realtors'
     ]);
+    const languages = [...getAgencyLanguage(agency, renderContext)];
 
     const query = `SELECT *
                    from [luxe:estate] as estate
@@ -47,7 +61,7 @@ export const AgencyFullPage = () => {
         },
         {
             title: t('table.data.spokenLanguage.label'),
-            value: agency.languages?.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
+            value: languages.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
         }
     ];
 
@@ -105,9 +119,9 @@ export const AgencyFullPage = () => {
                         </button>
                     </Col>
                     <Col>
-                        <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
+                        {/* <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
                             map here
-                        </div>
+                        </div> */}
                     </Col>
                 </Row>
             </Section>
