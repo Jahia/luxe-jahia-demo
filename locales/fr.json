@@ -82,5 +82,9 @@
       "readMore": "en savoir plus"
     }
 
+  },
+  "query": {
+    "noResult": "Aucun résultat retourné pour cette requête"
   }
+
 }

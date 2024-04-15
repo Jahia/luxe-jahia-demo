@@ -81,5 +81,8 @@
       "knowMore": "know more",
       "readMore": "read more"
     }
+  },
+  "query": {
+    "noResult": "No result returned for this query"
   }
 }

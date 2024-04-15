@@ -7,8 +7,10 @@ import {
     getNodesByJCRQuery
 } from '@jahia/js-server-core';
 import {HeadingSection} from '../../components';
+import {useTranslation} from 'react-i18next';
 
 export const JcrQueryInline = () => {
+    const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
         'jcr:title',
@@ -40,9 +42,12 @@ export const JcrQueryInline = () => {
     return (
         <>
             {luxeQuery['jcr:title'] &&
-                <HeadingSection title={luxeQuery['jcr:title']}/>
-            }
-            {queryContent.map(node => { return <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>})}
+                <HeadingSection title={luxeQuery['jcr:title']}/>}
+
+            {queryContent && queryContent.map(node =>
+                <Render key={node.getIdentifier()} node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+            )}
+            {(!queryContent || queryContent.length === 0) && <em>{t('query.noResult')}</em>}
         </>
     );
 };

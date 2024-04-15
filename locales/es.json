@@ -81,5 +81,9 @@
       "knowMore": "saber más",
       "readMore": "seguir leyendo"
     }
+  },
+  "query": {
+    "noResult": "No se devolvió ningún resultado para esta consulta"
   }
+
 }

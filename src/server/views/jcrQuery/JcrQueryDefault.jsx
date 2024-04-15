@@ -7,8 +7,10 @@ import {
     getNodesByJCRQuery
 } from '@jahia/js-server-core';
 import {HeadingSection} from '../../components';
+import {useTranslation} from 'react-i18next';
 
 export const JcrQueryDefault = () => {
+    const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
         'jcr:title',
@@ -40,17 +42,19 @@ export const JcrQueryDefault = () => {
     return (
         <>
             {luxeQuery['jcr:title'] &&
-                <HeadingSection title={luxeQuery['jcr:title']}/>
-            }
-            <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
-                {queryContent && queryContent.map(node => {
-                        return (
-                            <div key={node.getIdentifier()} className="col g-0">
-                                <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
-                            </div>
-                        );
-                    })}
-            </div>
+                <HeadingSection title={luxeQuery['jcr:title']}/>}
+
+            {queryContent && queryContent.length > 0 &&
+                <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+                    {queryContent.map(node => {
+                            return (
+                                <div key={node.getIdentifier()} className="col g-0">
+                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                </div>
+                            );
+                        })}
+                </div>}
+            {(!queryContent || queryContent.length === 0) && <em>{t('query.noResult')}</em>}
         </>
     );
 };

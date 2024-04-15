@@ -82,5 +82,8 @@
       "readMore": "weiterlesen"
 
     }
+  },
+  "query": {
+    "noResult": "Kein Ergebnis für diese Anfrage zurückgegeben"
   }
 }
