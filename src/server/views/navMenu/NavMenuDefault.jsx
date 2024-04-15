@@ -88,5 +88,8 @@ export const NavMenuDefault = () => {
 NavMenuDefault.jahiaComponent = {
     nodeType: 'luxe:navMenu',
     displayName: 'Navbar Nav Menu',
-    componentType: 'view'
+    componentType: 'view',
+    properties: {
+        'cache.mainResource': 'true'
+    }
 };

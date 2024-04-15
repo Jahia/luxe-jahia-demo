@@ -90,5 +90,8 @@ NavMenuIllustrated.jahiaComponent = {
     nodeType: 'luxe:navMenu',
     name: 'navIllustrated',
     displayName: 'Nav Illustrated',
-    componentType: 'view'
+    componentType: 'view',
+    properties: {
+        'cache.mainResource': 'true'
+    }
 };
