@@ -1,30 +1,43 @@
 import React from 'react';
-import {Area} from '@jahia/js-server-core';
+import {Area, getNodeProps, Render, useServerContext} from '@jahia/js-server-core';
 import {MainLayout} from '../../layouts';
 import {Row, Section} from '../../components';
 
 export const PageDestination = () => {
+    const {currentNode} = useServerContext();
+    const page = getNodeProps(currentNode, ['enableEstates', 'enableAgencies']);
     return (
         <MainLayout>
             <Area name="heading"
-                   allowedTypes={['luxe:header']}
-                   subNodesView="textDown"
-                   numberOfItems={1}/>
+                  allowedTypes={['luxe:header']}
+                  subNodesView="textDown"
+                  numberOfItems={1}/>
             <Section>
                 <Row className="lux-richtext">
                     <Area name="main"
-                           allowedTypes={['jnt:bigText']} numberOfItems={1}
-                           numberOfItems={1}/>
+                          allowedTypes={['jnt:bigText']}
+                          numberOfItems={1}/>
                 </Row>
             </Section>
-            {/* TODO: do not display section if no destinations */}
-            <Section>
-                <Area name="related-destinations" allowedTypes={['']}/>
-            </Section>
-            {/* TODO: do not display section if no agencies */}
-            <Section>
-                <Area name="related-agencies" allowedTypes={['']}/>
-            </Section>
+            {page.enableEstates &&
+                <Render node={currentNode}
+                        view="relatedContent"
+                        parameters={{
+                            nodeType: 'luxe:estate',
+                            maxItems: 6,
+                            label: 'page.relatedContent.estateSelection',
+                            descendantPath: '/contents/agencies'
+                }}/>}
+
+            {page.enableAgencies &&
+                <Render node={currentNode}
+                        view="relatedContent"
+                        parameters={{
+                            nodeType: 'luxe:agency',
+                            maxItems: 3,
+                            label: 'page.relatedContent.agencies',
+                            descendantPath: '/contents/agencies'
+                        }}/>}
         </MainLayout>
 
     );
