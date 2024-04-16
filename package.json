@@ -67,6 +67,7 @@
     "sass-loader": "^14.0.0",
     "style-loader": "^3.3.4",
     "styled-jsx": "^5.1.2",
+    "typescript": "^5.4.4",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
     "webpack-shell-plugin-next": "^2.3.1"
@@ -75,5 +76,5 @@
     "node": ">=16.0.0",
     "yarn": ">=3.0.0"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.1"
 }
