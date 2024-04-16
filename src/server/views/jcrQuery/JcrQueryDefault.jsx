@@ -7,8 +7,11 @@ import {
     getNodesByJCRQuery
 } from '@jahia/js-server-core';
 import {HeadingSection} from '../../components';
+import {useTranslation} from 'react-i18next';
+import {buildQuery} from './utils';
 
 export const JcrQueryDefault = () => {
+    const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
         'jcr:title',
@@ -20,37 +23,28 @@ export const JcrQueryDefault = () => {
         'filter',
         'j:subNodesView'
     ]);
-    const asContent = 'content';
-    const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
-
-    const filter = luxeQuery.filter?.reduce((condition, categoryNode, index) =>
-        `${condition} ${index === 0 ? '' : 'OR'} ${asContent}.[j:defaultCategory] = '${categoryNode.getIdentifier()}'`
-    , '') || '';
-    const queryFilter = filter.trim().length > 0 ? `AND (${filter})` : '';
-
-    const jcrQuery = `SELECT * FROM [${luxeQuery.type}] AS ${asContent}
-                   WHERE ISDESCENDANTNODE('${descendantPath}')
-                   ${queryFilter}
-                   ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
-
-    server.render.addCacheDependency({flushOnPathMatchingRegexp: `${descendantPath}/.*`}, renderContext);
-
+    const {jcrQuery, warn} = buildQuery({luxeQuery, t, server, currentNode, renderContext});
     const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, luxeQuery.maxItems || -1);
 
     return (
         <>
             {luxeQuery['jcr:title'] &&
-                <HeadingSection title={luxeQuery['jcr:title']}/>
-            }
-            <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
-                {queryContent && queryContent.map(node => {
-                        return (
-                            <div key={node.getIdentifier()} className="col g-0">
-                                <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
-                            </div>
-                        );
-                    })}
-            </div>
+                <HeadingSection title={luxeQuery['jcr:title']}/>}
+            {renderContext.isEditMode() && warn &&
+                <div className="alert alert-warning" role="alert">{warn}</div>}
+
+            {queryContent && queryContent.length > 0 &&
+                <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+                    {queryContent.map(node => {
+                            return (
+                                <div key={node.getIdentifier()} className="col g-0">
+                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                </div>
+                            );
+                        })}
+                </div>}
+            {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() &&
+                <div className="alert alert-dark" role="alert">{t('query.noResult')}</div>}
         </>
     );
 };
