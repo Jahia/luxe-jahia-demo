@@ -61,8 +61,7 @@ export const AgencyFullPage = () => {
         },
         {
             title: t('table.data.spokenLanguage.label'),
-            value: languages.map(language => t(`table.data.spokenLanguage.${language}`)).join(', '),
-            valueClassName: 'text-capitalize'
+            value: languages.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
         }
     ];
 

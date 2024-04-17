@@ -7,7 +7,7 @@ export const Table = ({rows = [], className}) => {
             {rows.map(row => (
                 <div key={row.title} className="lux-table_row d-flex">
                     <dt className="lux-table_key">{row.title}</dt>
-                    <dd className={clsx('lux-table_value', row.valueClassName)}>{row.value}</dd>
+                    <dd className="lux-table_value text-capitalize">{row.value}</dd>
                 </div>
             ))}
         </dl>
@@ -18,8 +18,7 @@ Table.propTypes = {
     rows: PropTypes.arrayOf(
         PropTypes.shape({
             title: PropTypes.string.isRequired,
-            value: PropTypes.string.isRequired,
-            valueClassName: PropTypes.string
+            value: PropTypes.string.isRequired
         })
     ).isRequired,
     className: PropTypes.string
