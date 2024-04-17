@@ -81,5 +81,15 @@
       "knowMore": "saber más",
       "readMore": "seguir leyendo"
     }
+  },
+  "query": {
+    "noResult": "No se devolvió ningún resultado para esta consulta",
+    "catIsMissing": "Una categoría fue eliminada o está faltante, por favor revise la consulta : '{{queryName}}'"
+  },
+  "page":{
+    "relatedContent":{
+      "estateSelection": "Nuestra selección de bienes inmuebles",
+      "agencies": "Agencias locales"
+    }
   }
 }

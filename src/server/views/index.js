@@ -9,3 +9,4 @@ export * from './agency';
 export * from './realtor';
 export * from './jcrQuery';
 export * from './loginForm';
+export * from './page';

@@ -80,7 +80,16 @@
     "labels": {
       "knowMore": "mehr erfahren",
       "readMore": "weiterlesen"
-
+    }
+  },
+  "query": {
+    "noResult": "Kein Ergebnis für diese Anfrage zurückgegeben",
+    "catIsMissing": "Eine Kategorie wurde entfernt oder fehlt, bitte überprüfen Sie die Anfrage : '{{queryName}}'"
+  },
+  "page":{
+    "relatedContent":{
+      "estateSelection": "Unsere Auswahl an Immobilien",
+      "agencies": "Lokale Agenturen"
     }
   }
 }

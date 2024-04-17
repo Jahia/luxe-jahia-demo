@@ -25,7 +25,7 @@ export const LanguageSwitcher = () => {
     return (
         <div className="dropdown">
             <button
-                className="btn dropdown-toggle"
+                className="btn dropdown-toggle lux-capitalize"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -42,7 +42,7 @@ export const LanguageSwitcher = () => {
                         <li key={locale}>
                             <a
                                 href={url}
-                                className={clsx('dropdown-item', {active: isCurrent})}
+                                className={clsx('dropdown-item', 'lux-capitalize', {active: isCurrent})}
                                 aria-current={isCurrent}
                             >
                                 {localeName}

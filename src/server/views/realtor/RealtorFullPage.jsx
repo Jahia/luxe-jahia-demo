@@ -78,7 +78,8 @@ export const RealtorFullPage = () => {
         },
         {
             title: t('table.data.spokenLanguage.label'),
-            value: realtor.languages?.map(language => t(`table.data.spokenLanguage.${language}`)).join(', ')
+            value: realtor.languages?.map(language => t(`table.data.spokenLanguage.${language}`)).join(', '),
+            valueClassName: 'text-capitalize'
         },
         {
             title: t('table.data.yOfExperience'),

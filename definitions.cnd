@@ -11,7 +11,7 @@
 
 
 
-[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeContent
+[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeContent, jmix:navMenuComponent
  orderable
  - base (string,choicelist) nofulltext < 'home', 'currentPage'
  - maxDepth (long) = 2 mandatory

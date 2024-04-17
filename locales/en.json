@@ -93,5 +93,15 @@
       "knowMore": "know more",
       "readMore": "read more"
     }
+  },
+  "query": {
+    "noResult": "No result returned for this query",
+    "catIsMissing": "One category was removed or is missing, please review the query  : '{{queryName}}'"
+  },
+  "page":{
+    "relatedContent":{
+      "estateSelection": "Our selection of real estate properties",
+      "agencies": "Local agencies"
+    }
   }
 }

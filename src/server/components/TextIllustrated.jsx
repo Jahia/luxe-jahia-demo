@@ -28,7 +28,7 @@ export const TextIllustrated = ({title, text, arrangement, image, link}) => {
                 <unwanteddiv dangerouslySetInnerHTML={{
                     __html: text
                 }}/>
-                {link && <a href={link.href}>{link.label}</a>}
+                {link && <a className="lux-capitalize" href={link.href}>{link.label}</a>}
             </Col>
         </Row>
     );
