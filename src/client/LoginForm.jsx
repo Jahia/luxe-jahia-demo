@@ -102,9 +102,9 @@ const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
                     />    
                 </div>
                 {showRememberMe &&
-                    <div>
-                        <input type="checkbox" name="remember" id="remember" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
-                        <label htmlFor="remember">{t('login.rememberMe')}</label>
+                    <div className="form-check">
+                        <input id="remember" type="checkbox" name="remember" className="form-check-input me-2" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
+                        <label htmlFor="remember" className="form-check-label lux-capitalize">{t('login.rememberMe')}</label>
                     </div>
                 }
             </form>

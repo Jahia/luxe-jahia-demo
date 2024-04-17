@@ -42,14 +42,15 @@
   "login": {
     "login": "login",
     "logout": "logout",
-    "badCreds": "Error: Username or password incorrect",
-    "unknowError": "error: An error occured",
+    "badCreds": "Username or password incorrect",
+    "unknowError": "An error occured",
     "username": "Username",
     "password": "Password",
     "rememberMe": "remember me",
     "liveWorkspace": "live",
     "previewWorkspace": "preview",
-    "editWorkspace": "edit"
+    "editWorkspace": "edit",
+    "editModeWarning": "Login is disabled on edit mode"
   },
   "realtor": {
     "jobPosition": {

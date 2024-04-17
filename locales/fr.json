@@ -42,14 +42,15 @@
   "login": {
     "login": "connection",
     "logout": "se déconnecter",
-    "badCreds": "Erreur: Nom d'utilisateur ou mot de passe incorrect",
-    "unknowError": "Error: Une erreur s'est produite",
+    "badCreds": "Nom d'utilisateur ou mot de passe incorrect",
+    "unknowError": "Une erreur s'est produite",
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
     "rememberMe": "se souvenir de moi",
     "liveWorkspace": "live",
     "previewWorkspace": "aperçu",
-    "editWorkspace": "éditer"
+    "editWorkspace": "éditer",
+    "editModeWarning": "La connection est désactivé en contribution"
   },
   "realtor": {
     "jobPosition": {
