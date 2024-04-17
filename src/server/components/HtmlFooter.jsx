@@ -23,13 +23,13 @@ export const HtmlFooter = ({className}) => {
                     <h5>{t('footer.resources')}</h5>
                     <ul className="list-unstyled">
                         <li>
-                            <a href="">{t('footer.academy')}</a>
+                            <a href="https://academy.jahia.com/home" target="_blank">{t('footer.academy')}</a>
                         </li>
                         <li>
-                            <a href="">{t('footer.tutorial')}</a>
+                            <a href="https://academy.jahia.com/get-started" target="_blank">{t('footer.tutorial')}</a>
                         </li>
                         <li>
-                            <a href="">{t('footer.sourceCode')}</a>
+                            <a href="https://github.com/Jahia/luxe-jahia-demo/" target="_blank">{t('footer.sourceCode')}</a>
                         </li>
                     </ul>
                 </Col>
