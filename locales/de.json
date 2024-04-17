@@ -50,7 +50,7 @@
     "liveWorkspace": "live",
     "previewWorkspace": "vorschau",
     "editWorkspace": "bearbeiten",
-    "editModeWarning": "Die Anmeldung ist im Bearbeitungsmodus deaktiviert"
+    "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert"
   },
   "realtor": {
     "jobPosition": {

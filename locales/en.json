@@ -50,7 +50,7 @@
     "liveWorkspace": "live",
     "previewWorkspace": "preview",
     "editWorkspace": "edit",
-    "editModeWarning": "Login is disabled on edit mode"
+    "editModeWarning": "Login is disabled in Page Builder"
   },
   "realtor": {
     "jobPosition": {
