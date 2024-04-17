@@ -49,7 +49,7 @@ const submitLogin = (
     });
 };
 
-const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe}) => {
+const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
     const {t} = useTranslation();
 
     const [incorrectLogin, setIncorrectLogin] = useState(false);
@@ -114,24 +114,15 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe}) => {
                     />
                 </div>
                 {isShowRememberMe &&
-                    <div>
-                        <input
-                            id="remember"
-                            type="checkbox"
-                            name="remember"
-                            className="form-check-input me-2"
-                            defaultChecked={rememberMe}
-                            onChange={() => setRememberMe(!rememberMe)}
-                        />
-                        <label htmlFor="remember" className="form-check-label lux-capitalize">{t('login.rememberMe')}</label>
-                    </div>}
+                    <div className="form-check">
+                        <input id="remember" type="checkbox" name="remember" className="form-check-input me-2" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
+                        <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('login.rememberMe')}</label>
+                    </div>
+                }
             </form>
             <footer className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button"
-                        form="loginForm"
-                        className="btn btn-primary lux-capitalize"
-                        onClick={() => submitLogin(username,
+                <button type="button" className="btn btn-secondary" onClick={close}>Cancel</button>
+                <button type="button" form="loginForm" className="btn btn-primary lux-capitalize" onClick={() => submitLogin(username,
                     password,
                     rememberMe,
                     setUser,

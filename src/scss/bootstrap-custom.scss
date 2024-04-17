@@ -259,3 +259,18 @@ section {
 .modal {
     color: var(--bs-body-color);
 }
+
+.lux-dialog {
+    border: 0;
+    background-color: transparent;
+    max-width: 500px;
+    
+    &[open] {
+        display: block;
+    }
+
+    &::backdrop {
+        background-color: $color-darkBlue;
+        opacity: .4;
+    }
+}

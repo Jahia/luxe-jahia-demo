@@ -7,14 +7,23 @@ import PropTypes from 'prop-types';
 
 const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowRememberMe}) => {
     const {t} = useTranslation();
-    const popupRef = useRef(null);
+    const modalRef = useRef(null);
     const [user, setUser] = useState(userHydrated);
     const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
+    const showModal = () => {
+        modalRef.current.showModal();
+    }
+
     const closeModal = () => {
-        popupRef.current.classList.remove('show');
-        document.getElementsByClassName('modal-backdrop')[0].classList.remove('show');
-    };
+        modalRef.current.close();
+    }
+
+    const handleOverlayClick = (event) => {
+        if (event.target === modalRef.current) {
+            modalRef.current.close();
+        }
+    }
 
     const logout = () => {
         fetch('/cms/logout');
@@ -49,7 +58,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     ) : (
         <>
             <h5>{t('footer.backOffice')}</h5>
-            <div ref={popupRef} id="loginModal" className="modal fade" tabIndex="-1">
+            <dialog id="loginModal" className="lux-dialog modal" ref={modalRef} onClick={event => handleOverlayClick(event)}>
                 <div className="modal-dialog" aria-labelledby="loginModalTitle">
                     <LoginForm
                         close={closeModal}
@@ -58,18 +67,16 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
                         setLoggedIn={setLoggedIn}
                     />
                 </div>
-            </div>
+            </dialog>
             <button
                 type="button"
-                className="d-block btn btn-link p-0 lux-capitalize border-0"
-                data-bs-toggle="modal"
-                data-bs-target="#loginModal"
-            >
-                {t('login.login')}
+                onClick={showModal}
+                className="d-block btn btn-link p-0 lux-capitalize border-0">
+                    {t('login.login')}
             </button>
         </>
     );
-};
+}
 
 LoginComponent.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
