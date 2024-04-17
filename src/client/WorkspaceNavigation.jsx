@@ -37,15 +37,15 @@ const WorkspaceNavigation = ({urls, mode, nodePath}) => {
         }
         getPermissions();
     },[]);
-    if(isLoading) return;
+
+    if (isLoading) return;
+
     return (
-        <nav>
-            <ul>
-                {mode != 'live' && <li><a href={urls.liveUrl}>{t('login.liveWorkspace')}</a></li>}
-                {mode != 'preview' && hasJcontentPermission && <li><a href={urls.previewUrl}>{t('login.previewWorkspace')}</a></li>}
-                {mode != 'edit' && hasJcontentPermission && <li><a href={urls.editUrl}>{t('login.editWorkspace')}</a></li>}
-            </ul>
-        </nav>
+        <>
+            {mode !== 'live' && <li><a href={urls.liveUrl}>{t('login.liveWorkspace')}</a></li>}
+            {mode !== 'preview' && hasJcontentPermission && <li><a href={urls.previewUrl}>{t('login.previewWorkspace')}</a></li>}
+            {mode !== 'edit' && hasJcontentPermission && <li><a href={urls.editUrl}>{t('login.editWorkspace')}</a></li>}
+        </>
     );
 }
 

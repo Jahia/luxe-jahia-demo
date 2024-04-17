@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react'
 import {useTranslation} from 'react-i18next';
 
-const login = (
+const submitLogin = (
     username,
     password,
     rememberMe,
@@ -11,11 +11,14 @@ const login = (
     setIncorrectLogin,
     setUnknownError,
     close) => {
+
     const body = [
         'username=' + username,
         'password=' + password
     ];
+
     if(rememberMe) body.push('useCookie=on');
+
     fetch('/cms/login?restMode=true', {
         method: 'POST',
         headers: {
@@ -52,27 +55,74 @@ const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
     const [rememberMe, setRememberMe] = useState(false);
 
     return (
-        <>
-            <h1>{t('login.login')}</h1>
-            <form>
-                {incorrectLogin && <p className="errorMessage">{t('login.badCreds')}</p>}
-                {unknownError && <p className="errorMessage">{t('login.unknownError')}</p>}
-                <input type="name" name="username" placeholder={t('login.username')} onChange={e => setUsername(e.target.value)} autoFocus/>
-                <input type="password" name="password" placeholder={t('login.password')} onChange={e => setPassword(e.target.value)}/>
-                {showRememberMe && <div>
-                    <input type="checkbox" name="remember" id="remember" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
-                    <label htmlFor="remember">{t('login.rememberMe')}</label>
-                </div>}
-                <button type="button" onClick={() => login(username,
+        <div className="modal-content">
+            <header className="modal-header">
+                <h2 id="loginModalTitle" className="lux-capitalize">{t('login.login')}</h2>
+            </header>
+            <form
+                id="loginForm"
+                className="modal-body d-flex flex-column gap-3"
+                // onKeyPress={event => {
+                //     if (event.key === 'Enter') {
+                //         submitLogin(
+                //             username,
+                //             password,
+                //             rememberMe,
+                //             setUser,
+                //             setLoggedIn,
+                //             setIncorrectLogin,
+                //             setUnknownError,
+                //             close
+                //         )
+                //     }
+                // }}
+            >
+                {incorrectLogin && <p className="alert alert-danger fs-6" role="alert">{t('login.badCreds')}</p>}
+                {unknownError && <p className="alert alert-danger fs-6" role="alert">{t('login.unknownError')}</p>}
+                <div>
+                    <label htmlFor="inputUser" className="form-label fs-6">{t('login.username')}</label>
+                    <input
+                        id="inputUser"
+                        type="text"
+                        name="username"
+                        placeholder="irina"
+                        className="form-control"
+                        onChange={e => setUsername(e.target.value)}
+                        autoFocus
+                        />
+                </div>
+                <div>
+                    <label htmlFor="inputPassword" className="form-label fs-6">{t('login.password')}</label>
+                    <input
+                        id="inputPassword"
+                        type="password"
+                        name="password"
+                        className="form-control"
+                        onChange={e => setPassword(e.target.value)}
+                    />    
+                </div>
+                {showRememberMe &&
+                    <div>
+                        <input type="checkbox" name="remember" id="remember" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
+                        <label htmlFor="remember">{t('login.rememberMe')}</label>
+                    </div>
+                }
+            </form>
+            <footer className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" form="loginForm" className="btn btn-primary lux-capitalize" onClick={() => submitLogin(username,
                     password,
                     rememberMe,
                     setUser,
                     setLoggedIn,
                     setIncorrectLogin,
                     setUnknownError,
-                    close)}>{t('login.login')}</button>
-            </form>
-        </>
+                    close)}
+                >
+                        {t('login.login')}
+                </button>
+            </footer>
+        </div>
     )
 }
 

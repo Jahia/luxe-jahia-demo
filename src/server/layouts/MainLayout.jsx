@@ -51,7 +51,6 @@ export const MainLayout = ({head, footer, className, children}) => {
                 <HtmlFooter/>
                 <AddResources type="javascript" resources="bootstrap.bundle.min.js"/>
             </body>
-
         </>
     );
 };

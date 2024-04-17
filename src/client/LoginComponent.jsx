@@ -1,5 +1,5 @@
 import React from 'react';
-import {useRef, useState} from 'react';
+import {useRef, useState, useEffect} from 'react';
 import LoginForm from './LoginForm';
 import WorkspaceNavigation from './WorkspaceNavigation';
 import {useTranslation} from 'react-i18next';
@@ -10,12 +10,9 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, showRem
     const [user, setUser] = useState(userHydrated);
     const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
-    const showPopup = () => {
-        popupRef.current.showModal();
-    }
-
-    const closePopup = () => {
-        popupRef.current.close();
+    const closeModal = () => {
+        popupRef.current.classList.remove("show");
+        document.getElementsByClassName("modal-backdrop")[0].classList.remove("show");
     }
 
     const logout = () => {
@@ -23,21 +20,32 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, showRem
         setLoggedIn(false);
     }
 
- return loggedIn ? (
+    if (mode === "edit") {
+        return <div className="alert alert-dark fs-6" role="alert">Login is disabled on edit mode</div>
+    }
+
+    return loggedIn ? (
         <>
-            <h3>{user}</h3>
-            <WorkspaceNavigation urls={urls} mode={mode} nodePath={nodePath}/>
-            <button onClick={logout}>{t('login.logout')}</button>
+            <h5>{user}</h5>
+            <ul className="list-unstyled">
+                <WorkspaceNavigation urls={urls} mode={mode} nodePath={nodePath}/>
+                <li>
+                    <button onClick={logout} className="d-block btn btn-link p-0 lux-capitalize border-0">{t('login.logout')}</button>
+                </li>
+            </ul>
         </>
     ) : (
         <>
-            <dialog className='loginPopup' ref={popupRef}>
-                <LoginForm close={closePopup} setUser={setUser} setLoggedIn={setLoggedIn} showRememberMe={showRememberMe}/>
-            </dialog>
-            <button onClick={showPopup}>{t('login.login')}</button>
+            <h5>{t('footer.backOffice')}</h5>
+            <div id="loginModal" className="modal fade" tabIndex="-1" ref={popupRef}>
+                <div className="modal-dialog" aria-labelledby="loginModalTitle">
+                    <LoginForm close={closeModal} setUser={setUser} setLoggedIn={setLoggedIn} showRememberMe={showRememberMe}/>
+                </div>
+            </div>
+            <button className="d-block btn btn-link p-0 lux-capitalize border-0" data-bs-toggle="modal" data-bs-target="#loginModal">{t('login.login')}</button>
         </>
     );
-
+    
 
 
 }

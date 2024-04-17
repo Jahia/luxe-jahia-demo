@@ -39,6 +39,18 @@
     "connection" : "connexion",
     "copyright" : "copyrights © 2002-{{currentDate}} tous droits réservés par Jahia Solutions Group SA"
   },
+  "login": {
+    "login": "connection",
+    "logout": "se déconnecter",
+    "badCreds": "Erreur: Nom d'utilisateur ou mot de passe incorrect",
+    "unknowError": "Error: Une erreur s'est produite",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "rememberMe": "se souvenir de moi",
+    "liveWorkspace": "live",
+    "previewWorkspace": "aperçu",
+    "editWorkspace": "éditer"
+  },
   "realtor": {
     "jobPosition": {
       "junior" : "agent junior",

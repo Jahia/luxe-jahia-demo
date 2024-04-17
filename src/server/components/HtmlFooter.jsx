@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {Col, Row, Section} from './grid';
 import {useTranslation} from 'react-i18next';
+import {LoginForm} from '../views/loginForm';
 
 export const HtmlFooter = ({className}) => {
     const {t} = useTranslation();
@@ -10,7 +11,7 @@ export const HtmlFooter = ({className}) => {
     return (
         <Section component="footer" className={clsx('lux-site-footer', className)}>
             <Row>
-                <Col className="col-3">
+                <Col className="col-4">
                     <h5>{t('footer.resources')}</h5>
                     <ul className="list-unstyled">
                         <li>
@@ -24,13 +25,9 @@ export const HtmlFooter = ({className}) => {
                         </li>
                     </ul>
                 </Col>
-                <Col>
-                    <h5>{t('footer.backOffice')}</h5>
-                    <ul className="list-unstyled">
-                        <li>
-                            <a href="#">{t('footer.connection')}</a>
-                        </li>
-                    </ul>
+                <Col className="col-5">
+                    {/* <h5>{t('footer.backOffice')}</h5> */}
+                    <LoginForm />
                 </Col>
                 {/* <Col className="col-3">
                     <h5>Join us</h5>
