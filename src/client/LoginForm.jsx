@@ -66,20 +66,6 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
             <form
                 id="loginForm"
                 className="modal-body d-flex flex-column gap-3"
-                // OnKeyPress={event => {
-                //     if (event.key === 'Enter') {
-                //         submitLogin(
-                //             username,
-                //             password,
-                //             rememberMe,
-                //             setUser,
-                //             setLoggedIn,
-                //             setIncorrectLogin,
-                //             setUnknownError,
-                //             close
-                //         )
-                //     }
-                // }}
             >
                 {incorrectLogin &&
                     <p className="alert alert-danger fs-6" role="alert">
@@ -111,6 +97,20 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                         name="password"
                         className="form-control"
                         onChange={e => setPassword(e.target.value)}
+                        onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                submitLogin(
+                                    username,
+                                    password,
+                                    rememberMe,
+                                    setUser,
+                                    setLoggedIn,
+                                    setIncorrectLogin,
+                                    setUnknownError,
+                                    close
+                                )
+                            }
+                        }}
                     />
                 </div>
                 {isShowRememberMe &&
