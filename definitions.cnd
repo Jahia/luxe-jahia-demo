@@ -101,4 +101,4 @@
 - filter (weakreference, category[autoSelectParent=false]) multiple
 
 [luxe:loginForm] > jnt:content, luxemix:luxeContent, mix:title
- - j:displayRememberMeButton (boolean)
+ - j:displayRememberMeButton (boolean) = true autocreated

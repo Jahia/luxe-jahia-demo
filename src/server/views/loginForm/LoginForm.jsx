@@ -5,6 +5,7 @@ import LoginComponent from '../../../client/LoginComponent';
 export const LoginForm = () => {
     const {renderContext, currentNode} = useServerContext();
     const props = getNodeProps(currentNode, ['j:displayRememberMeButton']);
+
     const isLoggedIn = renderContext.isLoggedIn();
     const userHydrated = renderContext.getUser().getName();
     // URL management
@@ -14,7 +15,8 @@ export const LoginForm = () => {
     const urls = {liveUrl, previewUrl, editUrl};
 
     const mode = renderContext.getMode();
-    const nodePath = currentNode.getPath();
+    const mainPath = renderContext.getMainResource().getNode().getPath();
+
     return (
         <HydrateInBrowser
             child={LoginComponent}
@@ -23,8 +25,8 @@ export const LoginForm = () => {
                 userHydrated,
                 urls,
                 mode,
-                nodePath,
-                isShowRememberMe: props['j:displayRememberMeButton']
+                nodePath: mainPath,
+                isShowRememberMe: Boolean(props['j:displayRememberMeButton'])
             }}
         />
     );

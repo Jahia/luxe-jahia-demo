@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {Col, Row, Section} from './grid';
 import {useTranslation} from 'react-i18next';
-import {LoginForm} from '../views/loginForm';
+import {Render} from '@jahia/js-server-core';
+
+const loginForm = {
+    name: 'loginForm',
+    nodeType: 'luxe:loginForm',
+    properties: {
+        'j:displayRememberMeButton': 'true'
+    }
+};
 
 export const HtmlFooter = ({className}) => {
     const {t} = useTranslation();
@@ -27,7 +35,8 @@ export const HtmlFooter = ({className}) => {
                 </Col>
                 <Col className="col-5">
                     {/* <h5>{t('footer.backOffice')}</h5> */}
-                    <LoginForm />
+                    <Render content={loginForm}/>
+                    {/* <LoginForm/> */}
                 </Col>
                 {/* <Col className="col-3">
                     <h5>Join us</h5>

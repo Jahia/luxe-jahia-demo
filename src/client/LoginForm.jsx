@@ -94,13 +94,13 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe}) => {
                 <div>
                     <label htmlFor="inputUser" className="form-label fs-6">{t('login.username')}</label>
                     <input
+                        autoFocus
                         id="inputUser"
                         type="text"
                         name="username"
-                        placeholder="irina"
+                        placeholder="robin"
                         className="form-control"
                         onChange={e => setUsername(e.target.value)}
-                        autoFocus
                         />
                 </div>
                 <div>
@@ -111,7 +111,7 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe}) => {
                         name="password"
                         className="form-control"
                         onChange={e => setPassword(e.target.value)}
-                    />    
+                    />
                 </div>
                 {isShowRememberMe &&
                     <div>

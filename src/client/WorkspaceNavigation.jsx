@@ -23,7 +23,7 @@ const hasPermission = async (permission, path) => {
     });
 
     const data = await response.json();
-    return data.data.jcr.nodeByPath.site.hasPermission;
+    return data.data.jcr.nodeByPath.site?.hasPermission;
 };
 
 const WorkspaceNavigation = ({urls, mode, nodePath}) => {
