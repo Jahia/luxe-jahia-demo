@@ -1,5 +1,6 @@
 import React from 'react';
-import {useState} from 'react'
+import PropTypes from 'prop-types';
+import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 
 const submitLogin = (
@@ -11,13 +12,14 @@ const submitLogin = (
     setIncorrectLogin,
     setUnknownError,
     close) => {
-
     const body = [
         'username=' + username,
         'password=' + password
     ];
 
-    if(rememberMe) body.push('useCookie=on');
+    if (rememberMe) {
+        body.push('useCookie=on');
+    }
 
     fetch('/cms/login?restMode=true', {
         method: 'POST',
@@ -30,24 +32,26 @@ const submitLogin = (
         try {
             response.body.getReader().read().then(({value}) => {
                 const decodedValue = new TextDecoder().decode(value);
-                if(decodedValue === 'OK') {
+                if (decodedValue === 'OK') {
                     close();
                     setUser(username);
                     setLoggedIn(true);
-                } else if(decodedValue === 'unauthorized') {
-                    setIncorrectLogin(true)
+                } else if (decodedValue === 'unauthorized') {
+                    setIncorrectLogin(true);
                 } else {
-                    throw new Error;
+                    throw new Error();
                 }
             });
-        }catch(e) {
+        } catch (e) {
+            console.error('Login form error : ', e);
             setUnknownError(true);
         }
     });
-}
+};
 
-const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
+const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe}) => {
     const {t} = useTranslation();
+
     const [incorrectLogin, setIncorrectLogin] = useState(false);
     const [unknownError, setUnknownError] = useState(false);
     const [username, setUsername] = useState('');
@@ -62,7 +66,7 @@ const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
             <form
                 id="loginForm"
                 className="modal-body d-flex flex-column gap-3"
-                // onKeyPress={event => {
+                // OnKeyPress={event => {
                 //     if (event.key === 'Enter') {
                 //         submitLogin(
                 //             username,
@@ -77,8 +81,16 @@ const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
                 //     }
                 // }}
             >
-                {incorrectLogin && <p className="alert alert-danger fs-6" role="alert">{t('login.badCreds')}</p>}
-                {unknownError && <p className="alert alert-danger fs-6" role="alert">{t('login.unknownError')}</p>}
+                {incorrectLogin &&
+                    <p className="alert alert-danger fs-6" role="alert">
+                        {t('login.badCreds')}
+                    </p>}
+
+                {unknownError &&
+                    <p className="alert alert-danger fs-6" role="alert">
+                        {t('login.unknownError')}
+                    </p>}
+
                 <div>
                     <label htmlFor="inputUser" className="form-label fs-6">{t('login.username')}</label>
                     <input
@@ -101,16 +113,25 @@ const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
                         onChange={e => setPassword(e.target.value)}
                     />    
                 </div>
-                {showRememberMe &&
-                    <div className="form-check">
-                        <input id="remember" type="checkbox" name="remember" className="form-check-input me-2" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
+                {isShowRememberMe &&
+                    <div>
+                        <input
+                            id="remember"
+                            type="checkbox"
+                            name="remember"
+                            className="form-check-input me-2"
+                            defaultChecked={rememberMe}
+                            onChange={() => setRememberMe(!rememberMe)}
+                        />
                         <label htmlFor="remember" className="form-check-label lux-capitalize">{t('login.rememberMe')}</label>
-                    </div>
-                }
+                    </div>}
             </form>
             <footer className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" form="loginForm" className="btn btn-primary lux-capitalize" onClick={() => submitLogin(username,
+                <button type="button"
+                        form="loginForm"
+                        className="btn btn-primary lux-capitalize"
+                        onClick={() => submitLogin(username,
                     password,
                     rememberMe,
                     setUser,
@@ -119,11 +140,18 @@ const LoginForm = ({close, setUser, setLoggedIn, showRememberMe}) => {
                     setUnknownError,
                     close)}
                 >
-                        {t('login.login')}
+                    {t('login.login')}
                 </button>
             </footer>
         </div>
-    )
-}
+    );
+};
+
+LoginForm.propTypes = {
+    close: PropTypes.func.isRequired,
+    setUser: PropTypes.func.isRequired,
+    setLoggedIn: PropTypes.func.isRequired,
+    isShowRememberMe: PropTypes.bool.isRequired
+};
 
 export default LoginForm;

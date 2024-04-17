@@ -7,17 +7,28 @@ export const LoginForm = () => {
     const props = getNodeProps(currentNode, ['j:displayRememberMeButton']);
     const isLoggedIn = renderContext.isLoggedIn();
     const userHydrated = renderContext.getUser().getName();
+    // URL management
     const liveUrl = renderContext.getURLGenerator().getLive();
     const previewUrl = renderContext.getURLGenerator().getPreview();
     const editUrl = renderContext.getURLGenerator().getEdit();
-    const contributeUrl = renderContext.getURLGenerator().getContribute();
-    const urls = {liveUrl, previewUrl, editUrl, contributeUrl};
-    let mode = renderContext.getMode();
+    const urls = {liveUrl, previewUrl, editUrl};
+
+    const mode = renderContext.getMode();
     const nodePath = currentNode.getPath();
     return (
-            <HydrateInBrowser child={LoginComponent} props={{isLoggedIn, userHydrated, urls, mode, nodePath, showRememberMe: props['j:displayRememberMeButton']}}/>
+        <HydrateInBrowser
+            child={LoginComponent}
+            props={{
+                isLoggedIn,
+                userHydrated,
+                urls,
+                mode,
+                nodePath,
+                isShowRememberMe: props['j:displayRememberMeButton']
+            }}
+        />
     );
-}
+};
 
 LoginForm.jahiaComponent = {
     nodeType: 'luxe:loginForm',
@@ -25,4 +36,4 @@ LoginForm.jahiaComponent = {
     properties: {
         'cache.perUser': 'true'
     }
-}
+};
