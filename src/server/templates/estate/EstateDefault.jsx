@@ -8,7 +8,7 @@ export const EstateDefault = () => {
         <MainLayout
             head={<meta name="description" content="content template"/>}
         >
-            <Render node={currentNode} view="fullPage" parameters={{isBackBtnEnabled: 'true'}}/>
+            <Render node={currentNode} view="fullPage"/>
         </MainLayout>
 
     );

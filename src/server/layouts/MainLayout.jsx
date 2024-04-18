@@ -3,17 +3,7 @@ import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
 import {AbsoluteArea, AddResources} from '@jahia/js-server-core';
 
-// Const navArea = {
-//     name: 'navArea',
-//     nodeType: 'jnt:absoluteArea',
-//     properties: {
-//         'j:allowedTypes': ['luxe:navMenu'],
-//         'j:numberOfItems': '1',
-//         'j:level': '0'
-//     }
-// };
-
-// const navMenu = {
+// Const navMenu = {
 //     name: 'navMenu',
 //     nodeType: 'luxe:navMenu',
 //     mixins: ['jmix:renderable'],
@@ -25,16 +15,7 @@ import {AbsoluteArea, AddResources} from '@jahia/js-server-core';
 //     }
 // };
 
-// Const navMainArea = {
-//     name: 'navMainArea',
-//     nodeType: 'jnt:Area',
-//     properties: {
-//         allowedTypes: ['luxe:navMenu'],
-//         numberOfItems: '1'
-//     }
-// };
-
-export const MainLayout = ({head, footer, className, children}) => {
+export const MainLayout = ({head, className, children}) => {
     // Const {renderContext} = useServerContext();
     // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
     return (
@@ -57,7 +38,6 @@ export const MainLayout = ({head, footer, className, children}) => {
 
 MainLayout.propTypes = {
     head: PropTypes.element,
-    footer: PropTypes.element,
     children: PropTypes.node,
     className: PropTypes.string
 };
