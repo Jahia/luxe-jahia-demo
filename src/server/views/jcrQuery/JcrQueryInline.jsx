@@ -28,10 +28,11 @@ export const JcrQueryInline = () => {
 
     return (
         <>
-            {renderContext.isEditMode() && warn &&
-                <p className="text-warning">{warn}</p>}
             {luxeQuery['jcr:title'] &&
                 <HeadingSection title={luxeQuery['jcr:title']}/>}
+
+            {renderContext.isEditMode() && warn &&
+            <div className="alert alert-warning" role="alert">{warn}</div>}
 
             {queryContent && queryContent.map(node =>
                 <Render key={node.getIdentifier()} node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>

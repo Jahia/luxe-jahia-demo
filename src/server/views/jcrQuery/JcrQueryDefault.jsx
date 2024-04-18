@@ -6,7 +6,7 @@ import {
     Render,
     getNodesByJCRQuery
 } from '@jahia/js-server-core';
-import {HeadingSection} from '../../components';
+import {Col, HeadingSection, Row} from '../../components';
 import {useTranslation} from 'react-i18next';
 import {buildQuery} from './utils';
 
@@ -34,15 +34,15 @@ export const JcrQueryDefault = () => {
                 <div className="alert alert-warning" role="alert">{warn}</div>}
 
             {queryContent && queryContent.length > 0 &&
-                <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+                <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
                     {queryContent.map(node => {
                             return (
-                                <div key={node.getIdentifier()} className="col g-0">
+                                <Col key={node.getIdentifier()} className="g-0">
                                     <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
-                                </div>
+                                </Col>
                             );
                         })}
-                </div>}
+                </Row>}
             {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() &&
                 <div className="alert alert-dark" role="alert">{t('query.noResult')}</div>}
         </>
