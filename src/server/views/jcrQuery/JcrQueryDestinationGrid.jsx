@@ -9,36 +9,7 @@ import {
 import {Col, HeadingSection, Row} from '../../components';
 import {useTranslation} from 'react-i18next';
 import {buildQuery} from './utils';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
-
-const RowEq = ({children}) => {
-    return (
-        <Row>
-            <Col>
-                {children}
-            </Col>
-        </Row>
-    );
-};
-
-RowEq.propTypes = {
-    children: PropTypes.node
-};
-
-const Row48 = ({children}) => {
-    return (
-        <Row>
-            <Col>
-                {children}
-            </Col>
-        </Row>
-    );
-};
-
-Row48.propTypes = {
-    children: PropTypes.node
-};
 
 export const JcrQueryDestinationGrid = () => {
     const {t} = useTranslation();
