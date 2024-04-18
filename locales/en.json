@@ -35,9 +35,22 @@
     "academy": "academy",
     "tutorial": "tutorial",
     "sourceCode": "source code",
-    "backOffice": "back-office",
+    "backOffice": "Manage website",
     "connection": "connection",
     "copyright": "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
+  },
+  "login": {
+    "login": "login",
+    "logout": "logout",
+    "badCreds": "Username or password incorrect",
+    "unknowError": "An error occured",
+    "username": "Username",
+    "password": "Password",
+    "rememberMe": "remember me",
+    "liveWorkspace": "live",
+    "previewWorkspace": "preview",
+    "editWorkspace": "edit",
+    "editModeWarning": "Login is disabled in Page Builder"
   },
   "realtor": {
     "jobPosition": {

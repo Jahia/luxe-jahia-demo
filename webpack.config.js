@@ -1,10 +1,84 @@
+const fs = require('fs');
 const path = require('path');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const componentsDir = './src/client';
+const exposes = {};
+fs.readdirSync(componentsDir).forEach(file => {
+    const componentName = path.basename(file, path.extname(file));
+    exposes[componentName] = path.resolve(componentsDir, file);
+});
+
 module.exports = env => {
     let configs = [
+        {
+            entry: {
+                'luxe-jahia-demo': path.resolve(__dirname, './src/client/index')
+            },
+            output: {
+                path: path.resolve(__dirname, 'javascript/client')
+            },
+            resolve: {
+                mainFields: ['module', 'main'],
+                extensions: ['.mjs', '.js', '.jsx']
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.jsx$/,
+                        include: [path.join(__dirname, 'src/client')],
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [
+                                    ['@babel/preset-env', {modules: false, targets: {safari: '7', ie: '10'}}],
+                                    '@babel/preset-react'
+                                ],
+                                plugins: [
+                                    'styled-jsx/babel'
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            devtool: 'inline-source-map',
+            mode: 'development',
+            plugins: [
+                new ModuleFederationPlugin({
+                    name: 'luxe-jahia-demo',       
+                    library: {type: 'assign', name: 'window.appShell = (typeof appShell === "undefined" ? {} : appShell); window.appShell[\'luxe-jahia-demo\']'},
+                    filename: '../client/remote.js',
+                    exposes: exposes,
+                    shared: {
+                        react: {
+                            requiredVersion: '^18.2.0',
+                            singleton: true
+                        },
+                        'react-i18next': {},
+                        'i18next': {}
+                    }
+                }),
+                new ExtraWatchWebpackPlugin({
+                    files: [
+                        'src/**/*',
+                        'components/**/*',
+                        'views/**/*',
+                        'images/**/*',
+                        'css/**/*',
+                        'javascript/**/*',
+                        'locales/**/*.json',
+                        'resources/**/*.properties',
+                        'definitions.cnd',
+                        'import.xml',
+                        'package.json'
+                    ]
+                })
+            ]
+        },
         {
             entry: './src/scss/styles.scss',
             output: {
@@ -33,40 +107,6 @@ module.exports = env => {
         },
         {
             entry: {
-                main: './src/client'
-            },
-            output: {
-                path: path.resolve(__dirname, 'javascript')
-            },
-            resolve: {
-                mainFields: ['module', 'main'],
-                extensions: ['.mjs', '.js', '.jsx']
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.jsx$/,
-                        include: [path.join(__dirname, 'src/client')],
-                        use: {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: [
-                                    ['@babel/preset-env', { modules: false, targets: { safari: '7', ie: '10' } }],
-                                    '@babel/preset-react'
-                                ],
-                                plugins: [
-                                    'styled-jsx/babel'
-                                ]
-                            }
-                        }
-                    }
-                ]
-            },
-            devtool: 'inline-source-map',
-            mode: 'development'
-        },
-        {
-            entry: {
                 main: path.resolve(__dirname, 'src/server')
             },
             output: {
@@ -87,7 +127,7 @@ module.exports = env => {
                 rules: [
                     {
                         test: /\.jsx$/,
-                        include: [path.join(__dirname, 'src/server')],
+                        include: [path.join(__dirname, 'src/server'), path.join(__dirname, 'src/client')],
                         use: {
                             loader: 'babel-loader',
                             options: {

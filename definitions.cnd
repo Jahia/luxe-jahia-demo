@@ -99,3 +99,6 @@
 - maxItems (long) indexed=no
 - startNode (weakreference)
 - filter (weakreference, category[autoSelectParent=false]) multiple
+
+[luxe:loginForm] > jnt:content, luxemix:luxeContent, mix:title
+ - j:displayRememberMeButton (boolean) = true autocreated

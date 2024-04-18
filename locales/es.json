@@ -35,9 +35,22 @@
     "academy": "academia",
     "tutorial": "tutorial",
     "sourceCode": "código fuente",
-    "backOffice": "back-office",
+    "backOffice": "administrar sitio web",
     "connection": "conexión",
     "copyright": "derechos de autor © 2002-{{currentDate}} Todos los derechos reservados por Jahia Solutions Group SA"
+  },
+  "login": {
+    "login": "acceso",
+    "logout": "cerrar sesión",
+    "badCreds": "Usuario o contraseña incorrectos",
+    "unknowError": "Ocurrió un error",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "rememberMe": "acuérdate de mí",
+    "liveWorkspace": "live",
+    "previewWorkspace": "avance",
+    "editWorkspace": "editar",
+    "editModeWarning": "El inicio de sesión está desactivado en Page Builder"
   },
   "realtor": {
     "jobPosition": {

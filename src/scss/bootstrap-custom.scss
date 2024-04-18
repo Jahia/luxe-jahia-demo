@@ -175,6 +175,10 @@ section {
     --bs-dropdown-link-hover-color: #{$color-gold};
 }
 
+.dropdown-item {
+    @extend %capitalize;
+}
+
 .table {
     --bs-table-striped-bg: #{$color-gray};
     --bs-table-border-color: rgba(#{$color-gold-rgb}, .4);
@@ -251,6 +255,22 @@ section {
     --bs-list-group-border-color: rgba(#{$color-gold-rgb}, .4);
 }
 
-.dropdown-item {
-    @extend %capitalize;
+// Modal
+.modal {
+    color: var(--bs-body-color);
+}
+
+.lux-dialog {
+    border: 0;
+    background-color: transparent;
+    max-width: 500px;
+    
+    &[open] {
+        display: block;
+    }
+
+    &::backdrop {
+        background-color: $color-darkBlue;
+        opacity: .4;
+    }
 }
