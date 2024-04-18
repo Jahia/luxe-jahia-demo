@@ -5,7 +5,7 @@ export const HtmlHead = ({children}) => {
     return (
         <head>
             <meta charSet="utf-8"/>
-            <link rel="icon" type="image/png" href="/modules/luxe-jahia-demo/img/favicon.png"/>
+            <link rel="icon" type="image/png" href="/modules/luxe-jahia-demo/assets/favicon-32x32.png"/>
             <AddResources type="css" resources="main.css"/>
             {children}
         </head>

@@ -2,7 +2,7 @@ import React from 'react';
 import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 
-export const RealtorCard = () => {
+export const RealtorDefault = () => {
     const {t} = useTranslation();
     const {currentNode, renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
@@ -40,7 +40,7 @@ export const RealtorCard = () => {
     );
 };
 
-RealtorCard.jahiaComponent = {
+RealtorDefault.jahiaComponent = {
     nodeType: 'luxe:realtor',
     name: 'default',
     componentType: 'view'

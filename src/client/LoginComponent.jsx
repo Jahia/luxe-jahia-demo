@@ -13,17 +13,17 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
 
     const showModal = () => {
         modalRef.current.showModal();
-    }
+    };
 
     const closeModal = () => {
         modalRef.current.close();
-    }
+    };
 
-    const handleOverlayClick = (event) => {
+    const handleOverlayClick = event => {
         if (event.target === modalRef.current) {
             modalRef.current.close();
         }
-    }
+    };
 
     const logout = () => {
         fetch('/cms/logout');
@@ -58,11 +58,11 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     ) : (
         <>
             <h5>{t('footer.backOffice')}</h5>
-            <dialog id="loginModal" className="lux-dialog modal" ref={modalRef} onClick={event => handleOverlayClick(event)}>
+            <dialog ref={modalRef} id="loginModal" className="lux-dialog modal" onClick={event => handleOverlayClick(event)}>
                 <div className="modal-dialog" aria-labelledby="loginModalTitle">
                     <LoginForm
                         close={closeModal}
-                        showRememberMe={isShowRememberMe}
+                        isShowRememberMe={isShowRememberMe}
                         setUser={setUser}
                         setLoggedIn={setLoggedIn}
                     />
@@ -70,13 +70,14 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
             </dialog>
             <button
                 type="button"
+                className="d-block btn btn-link p-0 lux-capitalize border-0"
                 onClick={showModal}
-                className="d-block btn btn-link p-0 lux-capitalize border-0">
-                    {t('login.login')}
+            >
+                {t('login.login')}
             </button>
         </>
     );
-}
+};
 
 LoginComponent.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
