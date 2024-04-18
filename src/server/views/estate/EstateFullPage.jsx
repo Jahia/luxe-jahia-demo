@@ -8,9 +8,7 @@ export const EstateFullPage = () => {
     const {t} = useTranslation();
     const {currentNode, currentResource, renderContext} = useServerContext();
     const locale = currentResource.getLocale().getLanguage();
-    const isBackBtnEnabled = currentResource.getModuleParams().get('isBackBtnEnabled') === 'true';
 
-    const parent = currentNode.getParent();
     const estate = getNodeProps(currentNode, [
         'title',
         'description',
@@ -31,15 +29,6 @@ export const EstateFullPage = () => {
         <>
             <Section>
                 <header className="d-flex mb-5">
-                    {isBackBtnEnabled && parent && (
-                        <button
-                            type="button"
-                            className="btn btn-light btn-lg me-4 _backToParentPage"
-                        >
-                            <ChevronLeftIcon className="lux-icon"/>
-                        </button>
-                    )}
-
                     <PageTitle
                         title={estate.title}
                         className="pb-0"
