@@ -2,7 +2,17 @@
 <content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
     <modules jcr:primaryType="jnt:modules">
         <luxe-jahia-demo>
-            <home j:isHomePage="true" j:templateName="home" jcr:primaryType="jnt:page">
+            <home j:isHomePage="true"
+                  j:templateName="home"
+                  jcr:primaryType="jnt:page">
+                <j:translation_fr jcr:language="fr"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:mixinTypes="mix:title"
+                                  jcr:title="Accueil" />
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  jcr:mixinTypes="mix:title"
+                                  jcr:title="Home" />
             </home>
         </luxe-jahia-demo>
     </modules>
