@@ -1810,9 +1810,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/js-server-core@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "@jahia/js-server-core@npm:0.0.5"
+"@jahia/js-server-core@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@jahia/js-server-core@npm:0.0.7"
   dependencies:
     "@apollo/client": "npm:^3.5.5"
     dayjs: "npm:^1.10.4"
@@ -1823,7 +1823,7 @@ __metadata:
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
     react-i18next: "npm:^14.1.0"
-  checksum: 10c0/486ba094268e89cd15b429ac82e484fcfa4291c68ff4836c9eb94bb4d50eb5eb88b3b5f1881509868fbc7d696a636036c8068b6b0a72ab22973e15be9aba1486
+  checksum: 10c0/c10304ad3f0fb4cf67b5f6bfb73985daeb4dd73504f93fbe6e9025e95d9b76657eb12669725c0c9d2b9b4201980e898ff3fa2333032fb7cef7c5ecf45d7c55d1
   languageName: node
   linkType: hard
 
@@ -6123,7 +6123,7 @@ __metadata:
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/data-helper": "npm:1.0.4"
     "@jahia/eslint-config": "npm:^2.1.2"
-    "@jahia/js-server-core": "npm:^0.0.5"
+    "@jahia/js-server-core": "npm:^0.0.7"
     "@jahia/scripts": "npm:^1.3.3"
     babel-loader: "npm:^8.2.3"
     bootstrap: "npm:^5.3.2"
