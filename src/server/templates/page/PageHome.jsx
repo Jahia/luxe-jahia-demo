@@ -5,7 +5,12 @@ import {MainLayout} from '../../layouts';
 export const PageHome = () => {
     return (
         <MainLayout
-            head={<meta name="description" content="hello"/>}
+            head={
+                <>
+                    <title>LuXE Demo</title>
+                    <meta name="description" content="luXE: demonstration website created by Jahia. Jahia the best user experience"/>
+                </>
+            }
         >
             <Area name="heading" allowedTypes={['luxe:header']} numberOfItems={1}/>
             <Area name="main" allowedTypes={['luxe:section']}/>
