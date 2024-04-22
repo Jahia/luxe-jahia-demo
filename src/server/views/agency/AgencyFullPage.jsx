@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getNodesByJCRQuery, Render
+    getNodesByJCRQuery, Render, AddContentButtons, Area
 } from '@jahia/js-server-core';
 
 import {useTranslation} from 'react-i18next';
@@ -134,18 +134,21 @@ export const AgencyFullPage = () => {
                         </Col>
                     ))}
                 </Row>
-                {/* <AddContentButtons nodeTypes={['luxe:realtor']}/> */}
             </Section>
-            <Section>
-                <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
-                <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
-                    {estates.map(estate => (
-                        <Col key={estate.getIdentifier()} className="g-0">
-                            <Render node={estate}/>
-                        </Col>
-                    ))}
-                </Row>
-            </Section>
+            {/* <Section> */}
+            {/*    <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/> */}
+            {/*    <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0"> */}
+            {/*        {estates.map(estate => ( */}
+            {/*            <Col key={estate.getIdentifier()} className="g-0"> */}
+            {/*                <Render node={estate}/> */}
+            {/*            </Col> */}
+            {/*        ))} */}
+            {/*        <Area editable path={currentNode.getPath() + '/estates'} allowedTypes={['luxe:estate']}/> */}
+            {/*        /!* <AddContentButtons nodeTypes="luxe:estate"/> *!/ */}
+            {/*    </Row> */}
+            {/* </Section> */}
+            <Area editable path={currentNode.getPath() + '/estates'} allowedTypes={['luxe:estate']} areaView="Estates" subNodesView="default"/>
+
         </>
     );
 };

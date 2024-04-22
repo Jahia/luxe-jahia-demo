@@ -78,6 +78,7 @@
  - email (string)
  - realtors (weakreference) multiple < 'luxe:realtor'
  + * (luxe:estate) = luxe:estate
+ + estates (jnt:contentList)
 
 [luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - fullName (string) hidden
