@@ -25,7 +25,7 @@ export const MainLayout = ({head, className, children}) => {
                 {head}
             </HtmlHead>
             <body>
-                <AbsoluteArea name="navArea" allowedTypes={['luxe:navMenu']} level="0" numberOfItems="1"/>
+                <AbsoluteArea name="navArea" allowedTypes={['luxe:navMenu']} numberOfItems="1"/>
                 <main className={className}>
                     {children}
                 </main>
