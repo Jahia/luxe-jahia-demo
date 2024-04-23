@@ -48,7 +48,9 @@ export const AgencyFullPage = () => {
                    order by estate.[jcr:created] DESC`;
     server.render.addCacheDependency({flushOnPathMatchingRegexp: `${currentNodePath}/.*`}, renderContext);
 
-    const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
+    // Const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
+
+    const estateAreaPath = `${currentNode.getPath()}/estates`;
 
     const data = [
         {
@@ -147,8 +149,12 @@ export const AgencyFullPage = () => {
             {/*        /!* <AddContentButtons nodeTypes="luxe:estate"/> *!/ */}
             {/*    </Row> */}
             {/* </Section> */}
-            <Area editable path={currentNode.getPath() + '/estates'} allowedTypes={['luxe:estate']} areaView="Estates" subNodesView="default"/>
-
+            <Section>
+                <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
+                {/* <Area editable path={estateAreaPath} allowedTypes={['luxe:estate']} areaView="Estates" subNodesView="default"/> */}
+                {/* <Area path={estateAreaPath} allowedTypes={['luxe:estate']}/> */}
+                <Render path={estateAreaPath} view="Estates"/>
+            </Section>
         </>
     );
 };

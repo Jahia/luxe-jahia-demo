@@ -15,18 +15,14 @@ export const ContentListEstate = () => {
     const subNodesView = currentResource.getModuleParams().get('subNodesView');
 
     return (
-        <Section>
-            <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
-            <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
-                {estates.map(estate => (
-                    <Col key={estate.getIdentifier()} className="g-0">
-                        <Render node={estate} view={subNodesView || 'default'}/>
-                    </Col>
-                ))}
-
-                <AddContentButtons nodeTypes="luxe:estate"/>
-            </Row>
-        </Section>
+        <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+            {estates.map(estate => (
+                <Col key={estate.getIdentifier()} className="g-0">
+                    <Render node={estate} view={subNodesView || 'default'}/>
+                </Col>
+            ))}
+            <AddContentButtons childName="estates" nodeTypes="luxe:estate"/>
+        </Row>
     );
 };
 
