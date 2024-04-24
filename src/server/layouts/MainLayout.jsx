@@ -22,9 +22,6 @@ export const MainLayout = ({head, className, children}) => {
         <>
             <HtmlHead>
                 {head}
-                {/* {renderContext.isEditMode() && 
-                    <AddResources type="css" resources="edit-mode.css"/>
-                } */}
             </HtmlHead>
             <body>
                 <AbsoluteArea name="navArea" allowedTypes={['luxe:navMenu']} numberOfItems="1"/>
