@@ -16,13 +16,15 @@ import {AbsoluteArea, AddResources} from '@jahia/js-server-core';
 // };
 
 export const MainLayout = ({head, className, children}) => {
-    // Const {renderContext} = useServerContext();
+    // const {renderContext} = useServerContext();
     // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
     return (
         <>
             <HtmlHead>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 {head}
+                {/* {renderContext.isEditMode() && 
+                    <AddResources type="css" resources="edit-mode.css"/>
+                } */}
             </HtmlHead>
             <body>
                 <AbsoluteArea name="navArea" allowedTypes={['luxe:navMenu']} numberOfItems="1"/>
