@@ -1,7 +1,6 @@
 @import "bootstrap-config";
 
 :root {
-    // --bs-font-sans-serif: #{$font-family-base};
     --bs-body-color: #{$color-dark};
     --bs-body-font-size: 1.25rem;
     --bs-body-line-height: 1.75;
@@ -60,8 +59,6 @@
             margin-top: 24px;
         }
     }
-
-
 }
 
 

@@ -80,7 +80,10 @@ module.exports = env => {
             ]
         },
         {
-            entry: './src/scss/styles.scss',
+            entry: {
+                main: './src/scss/styles.scss',
+                editMode: ['./src/scss/edit-mode.scss']
+            },
             output: {
                 path: path.resolve(__dirname, 'css')
             },
