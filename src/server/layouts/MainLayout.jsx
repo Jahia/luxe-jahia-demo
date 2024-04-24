@@ -16,7 +16,7 @@ import {AbsoluteArea, AddResources} from '@jahia/js-server-core';
 // };
 
 export const MainLayout = ({head, className, children}) => {
-    // const {renderContext} = useServerContext();
+    // Const {renderContext} = useServerContext();
     // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
     return (
         <>
