@@ -1,15 +1,13 @@
 import React from 'react';
-import {useServerContext, AddResources, Render} from '@jahia/js-server-core';
+import {useServerContext, Render} from '@jahia/js-server-core';
+import {CMPreview} from '../../components';
 
 export const EstateCm = () => {
     const {currentNode} = useServerContext();
     return (
-        <>
-            <AddResources type="css" resources="main.css"/>
-            <main>
-                <Render node={currentNode} view="fullPage"/>
-            </main>
-        </>
+        <CMPreview>
+            <Render node={currentNode} view="fullPage"/>
+        </CMPreview>
     );
 };
 

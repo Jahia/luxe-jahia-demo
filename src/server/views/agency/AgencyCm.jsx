@@ -1,17 +1,15 @@
 import React from 'react';
 import {
-    AddResources, Render, useServerContext
+    Render, useServerContext
 } from '@jahia/js-server-core';
+import {CMPreview} from '../../components';
 
 export const AgencyCm = () => {
     const {currentNode} = useServerContext();
     return (
-        <>
-            <AddResources type="css" resources="main.css"/>
-            <main>
-                <Render node={currentNode} view="fullPage"/>
-            </main>
-        </>
+        <CMPreview>
+            <Render node={currentNode} view="fullPage"/>
+        </CMPreview>
     );
 };
 

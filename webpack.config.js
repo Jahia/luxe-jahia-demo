@@ -81,11 +81,11 @@ module.exports = env => {
         },
         {
             entry: {
-                main: './src/scss/styles.scss',
+                styles: './src/scss/styles.scss',
                 editMode: ['./src/scss/edit-mode.scss']
             },
             output: {
-                path: path.resolve(__dirname, 'css')
+                path: path.resolve(__dirname, 'dist/css')
             },
             module: {
                 rules: [
