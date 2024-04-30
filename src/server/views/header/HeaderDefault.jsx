@@ -1,8 +1,8 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
 
 export const HeaderDefault = () => {
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'image']);
 
     if (header.image) {
@@ -13,7 +13,7 @@ export const HeaderDefault = () => {
         <section className="lux-cover">
             {header.image && (
                 <img
-                    src={header.image.getUrl()}
+                    src={buildUrl({value: header.image.getUrl()}, renderContext, currentResource)}
                     alt={header.image.getDisplayableName()}
                     className="lux-cover_img"
                     height="695px"

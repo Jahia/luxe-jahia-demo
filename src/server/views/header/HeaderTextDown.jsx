@@ -1,9 +1,9 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
 import {Figure, Row} from '../../components';
 
 export const HeaderTextDown = () => {
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
 
     if (header.image) {
@@ -14,11 +14,10 @@ export const HeaderTextDown = () => {
         <header className="container py-4 py-md-5 mb-5">
             {header.image &&
                 <Row>
-                    <Figure src={header.image.getUrl()}
+                    <Figure src={buildUrl({value: header.image.getUrl()}, renderContext, currentResource)}
                             alt={header.image.getDisplayableName()}
                             layout="imgFull"/>
-                </Row>
-            }
+                </Row>}
 
             <hgroup className="row text-center">
                 <h1 className="display-1 mb-0">{header.title}</h1>

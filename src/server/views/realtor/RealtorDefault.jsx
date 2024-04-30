@@ -20,7 +20,7 @@ export const RealtorDefault = () => {
 
     if (realtor.image) {
         server.render.addCacheDependency({node: realtor.image}, renderContext);
-        image.src = realtor.image.getUrl();
+        image.src = buildUrl({value: realtor.image.getUrl()}, renderContext, currentResource);
         image.alt = `Portrait of ${realtor.firstName} ${realtor.lastName}`;
     }
 
