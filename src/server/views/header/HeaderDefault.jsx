@@ -11,14 +11,15 @@ export const HeaderDefault = () => {
 
     return (
         <section className="lux-cover">
-            {header.image && (
+            {/* If you use one of our external DAM plugins, you can specify the image width or height
+            to enable live image resizing performed by the DAM provider. */}
+            {header.image &&
                 <img
                     src={buildUrl({value: header.image.getUrl(['width:1920'])}, renderContext, currentResource)}
                     alt={header.image.getDisplayableName()}
                     className="lux-cover_img"
                     height="695px"
-                />
-            )}
+                />}
 
             <h1 className="lux-cover_caption">
                 {header.title}
