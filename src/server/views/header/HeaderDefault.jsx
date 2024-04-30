@@ -13,7 +13,7 @@ export const HeaderDefault = () => {
         <section className="lux-cover">
             {header.image && (
                 <img
-                    src={buildUrl({value: header.image.getUrl()}, renderContext, currentResource)}
+                    src={buildUrl({value: header.image.getUrl(['width:1920'])}, renderContext, currentResource)}
                     alt={header.image.getDisplayableName()}
                     className="lux-cover_img"
                     height="695px"
