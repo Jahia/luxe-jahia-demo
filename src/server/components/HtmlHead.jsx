@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {AddResources, useServerContext} from '@jahia/js-server-core';
-import {cssPath, modulePath} from '../config';
+import {getCssPath} from '../config';
 
 export const HtmlHead = ({children}) => {
     const {renderContext} = useServerContext();
+    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const cssPath = getCssPath(modulePath);
 
     return (
         <head>
