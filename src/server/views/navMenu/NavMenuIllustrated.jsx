@@ -17,7 +17,7 @@ const NavMenuItem = ({pageNode, arrangement}) => {
 
     if (page.image) {
         image.src = buildUrl({value: page.image.getUrl()}, renderContext, currentResource);
-        image.alt = `Destination ${page['jcr:title']}`;
+        image.alt = t('alt.destination', {dest: page['jcr:title']});
 
         server.render.addCacheDependency({node: page.image}, renderContext);
     }

@@ -105,5 +105,11 @@
       "estateSelection": "Notre sélection de biens immobiliers",
       "agencies": "Agences locales"
     }
+  },
+  "alt": {
+    "destination" : "Destination {{dest}}",
+    "estate": "Vue du bien immobilier : {{estate}}",
+    "realtor": "Portrait de l'agent : {{realtor}}",
+    "agency": "Vue de l'agence : {{agency}}"
   }
 }

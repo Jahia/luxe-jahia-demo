@@ -7,19 +7,19 @@ export const PageDestinations = () => {
     return (
         <MainLayout>
             <Area name="heading"
-                   allowedTypes={['luxe:header']}
-                   subNodesView="textUp"
-                   numberOfItems={1}/>
+                  allowedTypes={['luxe:header']}
+                  subNodesView="textUp"
+                  numberOfItems={1}/>
             <Section>
                 <Row className="lux-richtext">
                     <Area name="main"
-                           allowedTypes={['jnt:bigText']}
-                           numberOfItems={1}/>
+                          allowedTypes={['jnt:bigText']}
+                          numberOfItems={1}/>
                 </Row>
             </Section>
             <Section>
                 <Area name="related-destinations"
-                       allowedTypes={['luxe:textIllustrated', 'luxe:navMenu']}/>
+                      allowedTypes={['luxe:textIllustrated', 'luxe:navMenu']}/>
             </Section>
         </MainLayout>
     );

@@ -23,7 +23,7 @@ export const EstateDefault = () => {
     if (estate.images[0]) {
         const _image = estate.images[0];
         image.src = buildUrl({value: _image.getUrl()}, renderContext, currentResource);
-        image.alt = `View of the real estate ${estate.title}`;
+        image.alt = t('alt.estate', {estate: estate.title});
 
         server.render.addCacheDependency({node: _image}, renderContext);
     }

@@ -72,7 +72,7 @@ export const AgencyFullPage = () => {
 
     if (agency.image) {
         image.src = buildUrl({value: agency.image.getUrl()}, renderContext, currentResource);
-        image.alt = `View of the agency ${agency.name}`;
+        image.alt = t('alt.agency', {agency: agency.name});
 
         server.render.addCacheDependency({node: agency.image}, renderContext);
     }
