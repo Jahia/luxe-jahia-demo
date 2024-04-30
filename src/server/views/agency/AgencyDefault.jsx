@@ -22,9 +22,10 @@ export const AgencyDefault = () => {
     };
 
     if (agency.image) {
-        server.render.addCacheDependency({node: agency.image}, renderContext);
-        image.src = agency.image.getUrl();
+        image.src = buildUrl({value: agency.image.getUrl()}, renderContext, currentResource);
         image.alt = `View of the agency ${agency.name}`;
+
+        server.render.addCacheDependency({node: agency.image}, renderContext);
     }
 
     return (

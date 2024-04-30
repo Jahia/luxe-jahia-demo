@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getNodesByJCRQuery, Render
+    getNodesByJCRQuery, Render, buildUrl
 } from '@jahia/js-server-core';
 
 import {useTranslation} from 'react-i18next';
@@ -25,7 +25,7 @@ const getAgencyLanguage = (agency, renderContext) => {
 
 export const AgencyFullPage = () => {
     const {t} = useTranslation();
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const currentNodePath = currentNode.getPath();
 
@@ -71,9 +71,10 @@ export const AgencyFullPage = () => {
     };
 
     if (agency.image) {
-        server.render.addCacheDependency({node: agency.image}, renderContext);
-        image.src = agency.image.getUrl();
+        image.src = buildUrl({value: agency.image.getUrl()}, renderContext, currentResource);
         image.alt = `View of the agency ${agency.name}`;
+
+        server.render.addCacheDependency({node: agency.image}, renderContext);
     }
 
     return (
