@@ -4,5 +4,5 @@ tests
 dist
 webpack.config.js
 css/main.js
-javascript/main.js
+public/assets/javascript/main.js
 *.min.js

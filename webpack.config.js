@@ -85,7 +85,7 @@ module.exports = env => {
                 editMode: ['./src/scss/edit-mode.scss']
             },
             output: {
-                path: path.resolve(__dirname, 'dist/css')
+                path: path.resolve(__dirname, 'public/dist/css')
             },
             module: {
                 rules: [
@@ -113,7 +113,7 @@ module.exports = env => {
                 main: path.resolve(__dirname, 'src/server')
             },
             output: {
-                path: path.resolve(__dirname, 'dist')
+                path: path.resolve(__dirname, 'public/dist')
             },
             externals: {
               '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
