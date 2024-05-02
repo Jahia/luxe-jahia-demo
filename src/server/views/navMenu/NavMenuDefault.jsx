@@ -45,7 +45,7 @@ export const NavMenuDefault = () => {
             <div className="container-fluid gap-5">
                 <a href={buildUrl({path: home.getPath()}, renderContext, currentResource)} className="navbar-brand">
                     {nav.brandImage &&
-                        <img src={nav.brandImage?.getUrl()}
+                        <img src={buildUrl({value: nav.brandImage.getUrl()}, renderContext, currentResource)}
                              alt={`Logo-${siteName}`}
                              width="100px"/>}
                     {nav.brandText}

@@ -9,7 +9,16 @@ const NavMenuItem = ({pageNode, arrangement}) => {
     const {renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const page = getNodeProps(pageNode, ['jcr:title', 'subtitle', 'image']);
+
+    const image = {
+        src: `${modulePath}/assets/img/agency-placeholder.jpg`,
+        alt: 'Placeholder'
+    };
+
     if (page.image) {
+        image.src = buildUrl({value: page.image.getUrl()}, renderContext, currentResource);
+        image.alt = t('alt.destination', {dest: page['jcr:title']});
+
         server.render.addCacheDependency({node: page.image}, renderContext);
     }
 
@@ -18,10 +27,7 @@ const NavMenuItem = ({pageNode, arrangement}) => {
             title: page['jcr:title'],
             text: page.subtitle,
             arrangement,
-            image: {
-                src: page.image?.getUrl() || `${modulePath}/assets/img/img-placeholder.jpg`,
-                alt: page.image?.getDisplayableName() || 'placeholder'
-            },
+            image,
             link: {
                 href: buildUrl({path: pageNode.getPath()}, renderContext, currentResource),
                 label: t('link.labels.readMore')

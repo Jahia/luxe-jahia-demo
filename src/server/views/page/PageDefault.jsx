@@ -15,9 +15,10 @@ export const PageDefault = () => {
     };
 
     if (page.image) {
+        image.src = buildUrl({value: page.image.getUrl()}, renderContext, currentResource);
+        image.alt = page.image.getDisplayableName();
+
         server.render.addCacheDependency({node: page.image}, renderContext);
-        image.src = page.image.getUrl();
-        image.alt = `Destination ${page['jcr:title']}`;
     }
 
     return (

@@ -1,11 +1,12 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
 import {Col, Figure, PageTitle, Row, Section} from '../../components';
 import {useTranslation} from 'react-i18next';
 
 export const EstateFullPage = () => {
     const {t} = useTranslation();
     const {currentNode, currentResource, renderContext} = useServerContext();
+    const modulePath = renderContext.getURLGenerator().getCurrentModule();
     const locale = currentResource.getLocale().getLanguage();
 
     const estate = getNodeProps(currentNode, [
@@ -21,8 +22,18 @@ export const EstateFullPage = () => {
         'options'
     ]);
 
-    const image = estate.images[0];
-    server.render.addCacheDependency({node: image}, renderContext);
+    const image = {
+        src: `${modulePath}/assets/img/img-placeholder.jpg`,
+        alt: 'Placeholder'
+    };
+
+    if (estate.images[0]) {
+        const _image = estate.images[0];
+        image.src = buildUrl({value: _image.getUrl()}, renderContext, currentResource);
+        image.alt = t('alt.estate', {estate: estate.title});
+
+        server.render.addCacheDependency({node: _image}, renderContext);
+    }
 
     return (
         <>
@@ -34,8 +45,8 @@ export const EstateFullPage = () => {
                     />
                 </header>
                 <Row>
-                    <Figure src={image.getUrl()}
-                            alt={image.getDisplayableName()}
+                    <Figure src={image.src}
+                            alt={image.alt}
                             layout="imgFull"/>
                 </Row>
                 <Row className="row-cols-1 row-cols-lg-2 g-5">

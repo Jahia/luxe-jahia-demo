@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getNodesByJCRQuery, Render
+    getNodesByJCRQuery, Render, buildUrl
 } from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
@@ -12,7 +12,7 @@ const MAX_ESTATE = 6;
 
 export const RealtorFullPage = () => {
     const {t} = useTranslation();
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode, renderContext, currentResource} = useServerContext();
     const modulePath = renderContext.getURLGenerator().getCurrentModule();
 
     const refBy = currentNode.getWeakReferences();
@@ -94,8 +94,8 @@ export const RealtorFullPage = () => {
 
     if (realtor.image) {
         server.render.addCacheDependency({node: realtor.image}, renderContext);
-        image.src = realtor.image.getUrl();
-        image.alt = `Portrait of the agent ${realtor.firstName} ${realtor.lastName}`;
+        image.src = buildUrl({value: realtor.image.getUrl()}, renderContext, currentResource);
+        image.alt = t('alt.realtor', {realtor: `${realtor.firstName} ${realtor.lastName}`});
     }
 
     return (

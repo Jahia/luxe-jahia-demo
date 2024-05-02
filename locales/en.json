@@ -104,5 +104,11 @@
       "estateSelection": "Our selection of real estate properties",
       "agencies": "Local agencies"
     }
+  },
+  "alt": {
+    "destination" : "Destination {{dest}}",
+    "estate": "`View of the real estate : {{estate}}",
+    "realtor": "Portrait of the agent : {{realtor}}",
+    "agency": "View of the agency : {{agency}}"
   }
 }
