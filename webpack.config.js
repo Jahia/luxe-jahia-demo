@@ -7,6 +7,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const componentsDir = './src/client';
 const exposes = {};
+const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
+
+/** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
+const cycloneDxWebpackPluginOptions = {
+    specVersion: '1.5',
+    rootComponentType: 'library',
+    outputLocation: './bom'
+};
 fs.readdirSync(componentsDir).forEach(file => {
     const componentName = path.basename(file, path.extname(file));
     exposes[componentName] = path.resolve(componentsDir, file);
@@ -76,7 +84,8 @@ module.exports = env => {
                         'import.xml',
                         'package.json'
                     ]
-                })
+                }),
+                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
         {
@@ -105,7 +114,8 @@ module.exports = env => {
                 ]
             },
             plugins: [
-                new MiniCssExtractPlugin({ filename: '[name].css' })
+                new MiniCssExtractPlugin({ filename: '[name].css' }),
+                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
         {
@@ -160,7 +170,8 @@ module.exports = env => {
                         'import.xml',
                         'package.json'
                     ]
-                })
+                }),
+                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ],
             devtool: 'inline-source-map',
             mode: 'development'
