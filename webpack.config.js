@@ -81,35 +81,6 @@ module.exports = env => {
         },
         {
             entry: {
-                styles: './src/scss/styles.scss',
-                editMode: ['./src/scss/edit-mode.scss']
-            },
-            output: {
-                path: path.resolve(__dirname, 'dist/css')
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.scss$/,
-                        use: [
-                            MiniCssExtractPlugin.loader,
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    url: false
-                                }
-                            },
-                            'sass-loader'
-                        ]
-                    }
-                ]
-            },
-            plugins: [
-                new MiniCssExtractPlugin({ filename: '[name].css' })
-            ]
-        },
-        {
-            entry: {
                 main: path.resolve(__dirname, 'src/server')
             },
             output: {

@@ -6,9 +6,11 @@
   "scripts": {
     "build": "webpack --mode=development",
     "build:production": "webpack --mode=production",
+    "build:sass": "yarn sass",
     "deploy": "jahia-deploy pack",
-    "watch": "yarn build --env deploy=true --watch",
+    "watch": "yarn sass --watch & yarn build --env deploy=true --watch",
     "lint": "eslint .",
+    "sass": "sass --style=compressed src/scss:dist/css",
     "test": "yarn lint",
     "postinstall": "yarn dlx @yarnpkg/sdks vscode"
   },

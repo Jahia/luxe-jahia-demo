@@ -16,7 +16,7 @@ export const HtmlHead = ({children}) => {
             <AddResources type="css" resources={`${cssPath}/styles.css`}/>
             {/* Styles specific for Edit Mode (Page Composer) */}
             {renderContext.isEditMode() &&
-                <AddResources type="css" resources={`${cssPath}/editMode.css`}/>}
+                <AddResources type="css" resources={`${cssPath}/edit-mode.css`}/>}
             {children}
         </head>
     );

@@ -9,8 +9,6 @@
 
 [luxemix:queryContent] mixin
 
-
-
 [luxe:navMenu] > jnt:content, mix:title, luxemix:luxeContent, jmix:navMenuComponent
  orderable
  - base (string,choicelist) nofulltext < 'home', 'currentPage'
