@@ -13,12 +13,12 @@ export const TextIllustratedDefault = () => {
     const textI9d = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
 
     const image = {
-        src: `${modulePath}/assets/img/img-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/img-placeholder.jpg`}, renderContext, currentResource),
         alt: 'placeholder'
     };
 
     if (textI9d.image) {
-        image.src = buildUrl({value: textI9d.image.getUrl()}, renderContext, currentResource);
+        image.src = textI9d.image.getUrl();
         image.alt = textI9d.image.getDisplayableName();
 
         server.render.addCacheDependency({node: textI9d.image}, renderContext);

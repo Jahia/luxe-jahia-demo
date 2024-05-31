@@ -1,9 +1,9 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
 import {Figure, PageTitle, Row} from '../../components';
 
 export const HeaderTextUp = () => {
-    const {currentNode, renderContext, currentResource} = useServerContext();
+    const {currentNode, renderContext} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
 
     if (header.image) {
@@ -20,7 +20,7 @@ export const HeaderTextUp = () => {
             </Row>
             {header.image &&
             <Row>
-                <Figure src={buildUrl({value: header.image.getUrl()}, renderContext, currentResource)}
+                <Figure src={header.image.getUrl()}
                         alt={header.image.getDisplayableName()}
                         layout="imgFull"/>
             </Row>}

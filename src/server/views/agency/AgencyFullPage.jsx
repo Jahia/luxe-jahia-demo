@@ -3,7 +3,9 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getNodesByJCRQuery, Render, buildUrl
+    getNodesByJCRQuery,
+    Render,
+    buildUrl
 } from '@jahia/js-server-core';
 
 import {useTranslation} from 'react-i18next';
@@ -66,12 +68,12 @@ export const AgencyFullPage = () => {
     ];
 
     const image = {
-        src: `${modulePath}/assets/img/agency-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/agency-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (agency.image) {
-        image.src = buildUrl({value: agency.image.getUrl()}, renderContext, currentResource);
+        image.src = agency.image.getUrl();
         image.alt = t('alt.agency', {agency: agency.name});
 
         server.render.addCacheDependency({node: agency.image}, renderContext);
