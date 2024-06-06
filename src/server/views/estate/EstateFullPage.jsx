@@ -23,13 +23,13 @@ export const EstateFullPage = () => {
     ]);
 
     const image = {
-        src: `${modulePath}/assets/img/img-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/img-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (estate.images[0]) {
         const _image = estate.images[0];
-        image.src = buildUrl({value: _image.getUrl()}, renderContext, currentResource);
+        image.src = _image.getUrl();
         image.alt = t('alt.estate', {estate: estate.title});
 
         server.render.addCacheDependency({node: _image}, renderContext);

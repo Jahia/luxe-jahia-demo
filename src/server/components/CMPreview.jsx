@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AddResources, useServerContext} from '@jahia/js-server-core';
+import {AddResources, buildUrl, useServerContext} from '@jahia/js-server-core';
 import {getCssPath} from '../config';
 
 export const CMPreview = ({className, children}) => {
-    const {renderContext} = useServerContext();
+    const {renderContext, currentResource} = useServerContext();
     const cssPath = getCssPath(renderContext.getURLGenerator().getCurrentModule());
 
     return (
         <>
-            <AddResources type="css" resources={`${cssPath}/styles.css`}/>
+            <AddResources type="css" resources={buildUrl({value: `${cssPath}/styles.css`}, renderContext, currentResource)}/>
             <main className={className}>
                 {children}
             </main>

@@ -10,19 +10,19 @@ export const PageDefault = () => {
     ]);
 
     const image = {
-        src: `${modulePath}/assets/img/img-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/img-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (page.image) {
-        image.src = buildUrl({value: page.image.getUrl()}, renderContext, currentResource);
+        image.src = page.image.getUrl();
         image.alt = page.image.getDisplayableName();
 
         server.render.addCacheDependency({node: page.image}, renderContext);
     }
 
     return (
-        <a href={buildUrl({path: currentNode.getPath()}, renderContext, currentResource)}>
+        <a href={currentNode.getUrl()}>
             <figure className="lux-card">
                 <img className="lux-card_img"
                      src={image.src}

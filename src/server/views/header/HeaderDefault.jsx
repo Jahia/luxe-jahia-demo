@@ -1,8 +1,8 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
 
 export const HeaderDefault = () => {
-    const {currentNode, renderContext, currentResource} = useServerContext();
+    const {currentNode, renderContext} = useServerContext();
     const header = getNodeProps(currentNode, ['title', 'image']);
 
     if (header.image) {
@@ -15,7 +15,7 @@ export const HeaderDefault = () => {
             to enable live image resizing performed by the DAM provider. */}
             {header.image &&
                 <img
-                    src={buildUrl({value: header.image.getUrl(['width:1920'])}, renderContext, currentResource)}
+                    src={header.image.getUrl(['width:1920'])}
                     alt={header.image.getDisplayableName()}
                     className="lux-cover_img"
                     height="695px"

@@ -19,19 +19,19 @@ export const AgencyDefault = () => {
     ]);
 
     const image = {
-        src: `${modulePath}/assets/img/agency-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/agency-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (agency.image) {
-        image.src = buildUrl({value: agency.image.getUrl()}, renderContext, currentResource);
+        image.src = agency.image.getUrl();
         image.alt = t('alt.agency', {agency: agency.name});
 
         server.render.addCacheDependency({node: agency.image}, renderContext);
     }
 
     return (
-        <a className="lux-agencyCard d-flex" href={buildUrl({path: currentNode.getPath()}, renderContext, currentResource)}>
+        <a className="lux-agencyCard d-flex" href={currentNode.getUrl()}>
             <img className="lux-agencyCard_image me-4"
                  src={image.src}
                  alt={image.alt}

@@ -11,12 +11,12 @@ const NavMenuItem = ({pageNode, arrangement}) => {
     const page = getNodeProps(pageNode, ['jcr:title', 'subtitle', 'image']);
 
     const image = {
-        src: `${modulePath}/assets/img/agency-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/agency-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (page.image) {
-        image.src = buildUrl({value: page.image.getUrl()}, renderContext, currentResource);
+        image.src = page.image.getUrl();
         image.alt = t('alt.destination', {dest: page['jcr:title']});
 
         server.render.addCacheDependency({node: page.image}, renderContext);
@@ -29,7 +29,7 @@ const NavMenuItem = ({pageNode, arrangement}) => {
             arrangement,
             image,
             link: {
-                href: buildUrl({path: pageNode.getPath()}, renderContext, currentResource),
+                href: pageNode.getUrl(),
                 label: t('link.labels.readMore')
             }
         }}/>

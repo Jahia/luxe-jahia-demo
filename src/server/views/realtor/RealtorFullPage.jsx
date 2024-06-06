@@ -3,7 +3,9 @@ import {
     useServerContext,
     getNodeProps,
     server,
-    getNodesByJCRQuery, Render, buildUrl
+    getNodesByJCRQuery,
+    Render,
+    buildUrl
 } from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
@@ -88,13 +90,13 @@ export const RealtorFullPage = () => {
     ];
 
     const image = {
-        src: `${modulePath}/assets/img/agent-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/agent-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (realtor.image) {
         server.render.addCacheDependency({node: realtor.image}, renderContext);
-        image.src = buildUrl({value: realtor.image.getUrl()}, renderContext, currentResource);
+        image.src = realtor.image.getUrl();
         image.alt = t('alt.realtor', {realtor: `${realtor.firstName} ${realtor.lastName}`});
     }
 

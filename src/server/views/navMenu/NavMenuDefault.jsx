@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, buildUrl, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildNavMenu, server} from '@jahia/js-server-core';
 import clsx from 'clsx';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
@@ -43,9 +43,9 @@ export const NavMenuDefault = () => {
             )}
         >
             <div className="container-fluid gap-5">
-                <a href={buildUrl({path: home.getPath()}, renderContext, currentResource)} className="navbar-brand">
+                <a href={home.getUrl()} className="navbar-brand">
                     {nav.brandImage &&
-                        <img src={buildUrl({value: nav.brandImage.getUrl()}, renderContext, currentResource)}
+                        <img src={nav.brandImage.getUrl()}
                              alt={`Logo-${siteName}`}
                              width="100px"/>}
                     {nav.brandText}
@@ -68,7 +68,7 @@ export const NavMenuDefault = () => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
                         {menu.map(({node, selected}) => (
                             <li key={node.getIdentifier()} className="nav-item">
-                                <a href={buildUrl({path: node.getPath()}, renderContext, currentResource)}
+                                <a href={node.getUrl()}
                                    className={clsx('nav-link', {
                                        active: selected || mainPath.includes(node.getPath())
                                    })}

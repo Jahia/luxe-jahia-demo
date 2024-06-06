@@ -14,18 +14,18 @@ export const RealtorDefault = () => {
     ]);
 
     const image = {
-        src: `${modulePath}/assets/img/agent-placeholder.jpg`,
+        src: buildUrl({value: `${modulePath}/assets/img/agent-placeholder.jpg`}, renderContext, currentResource),
         alt: 'Placeholder'
     };
 
     if (realtor.image) {
         server.render.addCacheDependency({node: realtor.image}, renderContext);
-        image.src = buildUrl({value: realtor.image.getUrl()}, renderContext, currentResource);
+        image.src = realtor.image.getUrl();
         image.alt = t('alt.realtor', {realtor: `${realtor.firstName} ${realtor.lastName}`});
     }
 
     return (
-        <a href={buildUrl({path: currentNode.getPath()}, renderContext, currentResource)} className="lux-agentCard d-flex flex-column">
+        <a href={currentNode.getUrl()} className="lux-agentCard d-flex flex-column">
             <img className="lux-agentCard_image"
                  src={image.src}
                  alt={image.alt}
