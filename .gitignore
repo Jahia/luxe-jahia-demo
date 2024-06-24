@@ -22,9 +22,9 @@ yarn-error.log
 .env.local
 luxe-jahia-demo-v*
 
-assets/css
+public/assets/css
 css/*.jpg
 css/main.*
 
-javascript/main.js
-javascript/client/*
+public/javascript/main.js
+public/javascript/client/*
