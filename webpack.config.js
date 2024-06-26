@@ -118,6 +118,7 @@ module.exports = env => {
             plugins: [
                 // This plugin extracts CSS into separate files
                 new MiniCssExtractPlugin({ filename: '[name].css' }),
+                // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
@@ -175,6 +176,7 @@ module.exports = env => {
                         'package.json'
                     ]
                 }),
+                // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ],
             devtool: 'inline-source-map',
