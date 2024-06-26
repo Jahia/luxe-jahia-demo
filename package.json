@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode=development",
-    "build:production": "webpack --mode=production",
+    "build": "webpack --mode=development --env deploy",
+    "build:production": "webpack --mode=production --env deploy",
     "deploy": "jahia-deploy pack",
-    "watch": "yarn build --env deploy=true --watch",
+    "watch": "yarn build --watch",
     "lint": "eslint .",
     "test": "yarn lint",
     "postinstall": "yarn dlx @yarnpkg/sdks vscode"
