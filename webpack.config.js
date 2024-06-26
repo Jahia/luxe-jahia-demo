@@ -9,6 +9,7 @@ const componentsDir = './src/client';
 const exposes = {};
 
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
+
 /** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
 const cycloneDxWebpackPluginOptions = {
     specVersion: '1.4',
@@ -87,7 +88,8 @@ module.exports = env => {
                         'import.xml',
                         'package.json'
                     ]
-                })
+                }),
+                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
         {
