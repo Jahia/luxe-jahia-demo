@@ -89,6 +89,7 @@ module.exports = env => {
                         'package.json'
                     ]
                 }),
+                // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
