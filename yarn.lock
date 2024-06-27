@@ -1682,16 +1682,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cyclonedx/webpack-plugin@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "@cyclonedx/webpack-plugin@npm:3.11.0"
+"@cyclonedx/webpack-plugin@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "@cyclonedx/webpack-plugin@npm:3.12.0"
   dependencies:
     "@cyclonedx/cyclonedx-library": "npm:^6.6.0"
     normalize-package-data: "npm:^3||^4||^5||^6"
     xmlbuilder2: "npm:^3.0.2"
   peerDependencies:
     webpack: ^5
-  checksum: 10c0/003eac70ed8797365f765b4101349c43f5dcbcaa43101a424d9ace37ee6bd9a644b70d249ecb0c6259aae48146a1011112ef44bff26ddfaa82c15f9c65cf64f2
+  checksum: 10c0/dbd44d6ecdbbbad5afe5e034e53511fae4d2ef97110c7469e5231335faed4aa27480437dd30175fe5533bb5720508ef2bee96dcb87506ffd0887b9d27d7f0b0d
   languageName: node
   linkType: hard
 
@@ -6423,7 +6423,7 @@ __metadata:
     "@babel/core": "npm:^7.16.0"
     "@babel/preset-env": "npm:^7.16.4"
     "@babel/preset-react": "npm:^7.16.0"
-    "@cyclonedx/webpack-plugin": "npm:^3.11.0"
+    "@cyclonedx/webpack-plugin": "npm:^3.12.0"
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/data-helper": "npm:1.0.4"
     "@jahia/eslint-config": "npm:^2.1.2"
