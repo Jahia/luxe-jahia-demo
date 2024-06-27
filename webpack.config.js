@@ -187,6 +187,22 @@ module.exports = env => {
         }
     ];
 
+    let config = configs[configs.length - 1];
+    if (!config.plugins) {
+        config.plugins = [];
+    }
+
+    if (env.pack) {
+        // This plugin allows you to run any shell commands before or after webpack builds.
+        const webpackShellPlugin = new WebpackShellPluginNext({
+            onAfterDone: {
+                scripts: ['yarn jahia-pack']
+            }
+        });
+        config.plugins.push(webpackShellPlugin);
+
+    }
+
     if (env.deploy) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
@@ -194,12 +210,6 @@ module.exports = env => {
                 scripts: ['yarn jahia-deploy']
             }
         });
-
-        let config = configs[configs.length - 1];
-        if (!config.plugins) {
-            config.plugins = [];
-        }
-
         config.plugins.push(webpackShellPlugin);
     }
 
