@@ -9,6 +9,11 @@ const componentsDir = './src/client';
 const exposes = {};
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
 
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {ProvidePlugin} = require('webpack');
+
+
 /** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
 const cycloneDxWebpackPluginOptions = {
     specVersion: '1.4',
@@ -22,6 +27,7 @@ fs.readdirSync(componentsDir).forEach(file => {
 
 module.exports = env => {
     let configs = [
+        // Config for src/client
         {
             entry: {
                 'luxe-jahia-demo': path.resolve(__dirname, './src/client/index')
@@ -57,7 +63,7 @@ module.exports = env => {
             mode: 'development',
             plugins: [
                 new ModuleFederationPlugin({
-                    name: 'luxe-jahia-demo',       
+                    name: 'luxe-jahia-demo',
                     library: {type: 'assign', name: 'window.appShell = (typeof appShell === "undefined" ? {} : appShell); window.appShell[\'luxe-jahia-demo\']'},
                     filename: '../client/remote.js',
                     exposes: exposes,
@@ -118,6 +124,7 @@ module.exports = env => {
                 new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
+        // Config for src/server
         {
             entry: {
                 main: path.resolve(__dirname, 'src/server')
@@ -126,11 +133,11 @@ module.exports = env => {
                 path: path.resolve(__dirname, 'dist')
             },
             externals: {
-              '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
-              react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
-              'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
-              i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')',
-              'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
+                '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
+                react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
+                'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
+                i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')',
+                'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
             },
             resolve: {
                 mainFields: ['module', 'main'],
@@ -175,7 +182,63 @@ module.exports = env => {
             ],
             devtool: 'inline-source-map',
             mode: 'development'
+        },
+        // Config for external js/css :
+        {
+            entry: {
+                main: {
+                    import: path.resolve(__dirname, 'src/javascript/jqueryWebpackDemo'),
+                }
+            },
+            output: {
+                path: path.resolve(__dirname, 'dist/'),
+                filename: '[name].asset-webpack-example.bundle.js',
+                chunkFilename: '[name].asset-webpack-example.[chunkhash:6].js'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.css$/i,
+                        use: ["style-loader","css-loader"],
+                    },
+                    {
+                        test: /\.scss$/,
+                        use: [
+                            MiniCssExtractPlugin.loader,
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    url: false
+                                }
+                            },
+                            'sass-loader'
+                        ]
+                    }
+                ]
+            },
+            plugins: [
+                new ProvidePlugin({
+                    'window.jQuery': 'jquery',
+                    'window.$': 'jquery',
+                    'jQuery': 'jquery',
+                    '$': 'jquery',
+                }),
+                new CleanWebpackPlugin({verbose: false}),
+                new CopyWebpackPlugin({patterns: [{from: './package.json', to: ''}]}),
+            ],
+            resolve: {
+                alias: {
+                    'jquery': 'jquery/src/jquery',
+                    'jquery-ui': 'jquery-ui/dist/jquery-ui'
+                },
+                modules: [
+                    path.resolve(__dirname, 'src/javascript'),
+                    path.resolve(__dirname, 'node_modules')
+                ]
+            },
+            mode: 'development'
         }
+
     ];
 
     const webpackShellPlugin = new WebpackShellPluginNext({

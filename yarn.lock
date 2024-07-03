@@ -6109,6 +6109,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jquery-ui@npm:^1.13.2":
+  version: 1.13.3
+  resolution: "jquery-ui@npm:1.13.3"
+  dependencies:
+    jquery: "npm:>=1.8.0 <4.0.0"
+  checksum: 10c0/d6c9b330e42ecd90cbf687ebd77c3f6572a4ef151c9572375fd82efe1dc4af21c0a568095af540805cbe1a1bea50306cfb6d12bff5297d646ae3d2fe3d6c54da
+  languageName: node
+  linkType: hard
+
+"jquery@npm:>=1.8.0 <4.0.0, jquery@npm:^3.7":
+  version: 3.7.1
+  resolution: "jquery@npm:3.7.1"
+  checksum: 10c0/808cfbfb758438560224bf26e17fcd5afc7419170230c810dd11f5c1792e2263e2970cca8d659eb84fcd9acc301edb6d310096e450277d54be4f57071b0c82d9
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -6443,6 +6459,8 @@ __metadata:
     extra-watch-webpack-plugin: "npm:^1.0.3"
     graphql: "npm:^16.7.1"
     i18next: "npm:^23.10.1"
+    jquery: "npm:^3.7"
+    jquery-ui: "npm:^1.13.2"
     mini-css-extract-plugin: "npm:^2.7.7"
     prop-types: "npm:^15.8.1"
     react: "npm:^17.0.2"
