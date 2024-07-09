@@ -125,7 +125,7 @@ module.exports = (env, mode) => {
                 new MiniCssExtractPlugin({ filename: '[name].css' }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
-                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
         {
@@ -184,7 +184,7 @@ module.exports = (env, mode) => {
                 }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
-                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ],
             devtool: 'inline-source-map',
             mode: 'development'
@@ -204,7 +204,6 @@ module.exports = (env, mode) => {
             }
         });
         config.plugins.push(webpackShellPlugin);
-
     }
 
     if (env.deploy) {
