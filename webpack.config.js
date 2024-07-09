@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const componentsDir = './src/client';
 const exposes = {};
+
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
 
 /** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
@@ -15,6 +16,7 @@ const cycloneDxWebpackPluginOptions = {
     rootComponentType: 'library',
     outputLocation: './bom'
 };
+
 fs.readdirSync(componentsDir).forEach(file => {
     const componentName = path.basename(file, path.extname(file));
     exposes[componentName] = path.resolve(componentsDir, file);
@@ -56,8 +58,9 @@ module.exports = (env, mode) => {
             devtool: 'inline-source-map',
             mode: 'development',
             plugins: [
+                // This plugin allows a build to provide or consume modules with other independent builds at runtime.
                 new ModuleFederationPlugin({
-                    name: 'luxe-jahia-demo',       
+                    name: 'luxe-jahia-demo',
                     library: {type: 'assign', name: 'window.appShell = (typeof appShell === "undefined" ? {} : appShell); window.appShell[\'luxe-jahia-demo\']'},
                     filename: '../client/remote.js',
                     exposes: exposes,
@@ -70,6 +73,7 @@ module.exports = (env, mode) => {
                         'i18next': {}
                     }
                 }),
+                // This plugin help you to attach extra files or dirs to webpack's watch system
                 new ExtraWatchWebpackPlugin({
                     files: [
                         'src/**/*',
@@ -85,8 +89,10 @@ module.exports = (env, mode) => {
                         'package.json'
                     ]
                 }),
-                // Deactivate CycloneDx plugin in watch mode
+                // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
+                // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+
             ]
         },
         {
@@ -115,8 +121,10 @@ module.exports = (env, mode) => {
                 ]
             },
             plugins: [
+                // This plugin extracts CSS into separate files
                 new MiniCssExtractPlugin({ filename: '[name].css' }),
-                // Deactivate CycloneDx plugin in watch mode
+                // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
+                // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
@@ -128,11 +136,11 @@ module.exports = (env, mode) => {
                 path: path.resolve(__dirname, 'dist')
             },
             externals: {
-              '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
-              react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
-              'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
-              i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')',
-              'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
+                '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
+                react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
+                'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
+                i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')',
+                'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
             },
             resolve: {
                 mainFields: ['module', 'main'],
@@ -159,6 +167,7 @@ module.exports = (env, mode) => {
                 ]
             },
             plugins: [
+                // This plugin help you to attach extra files or dirs to webpack's watch system
                 new ExtraWatchWebpackPlugin({
                     files: [
                         'src/**/*',
@@ -173,7 +182,8 @@ module.exports = (env, mode) => {
                         'package.json'
                     ]
                 }),
-                // Deactivate CycloneDx plugin in watch mode
+                // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
+                // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ],
             devtool: 'inline-source-map',
@@ -181,18 +191,28 @@ module.exports = (env, mode) => {
         }
     ];
 
-    const webpackShellPlugin = new WebpackShellPluginNext({
-        onAfterDone: {
-            scripts: ['yarn jahia-deploy pack']
-        }
-    });
+    let config = configs[configs.length - 1];
+    if (!config.plugins) {
+        config.plugins = [];
+    }
+
+    if (env.pack) {
+        // This plugin allows you to run any shell commands before or after webpack builds.
+        const webpackShellPlugin = new WebpackShellPluginNext({
+            onAfterDone: {
+                scripts: ['yarn jahia-pack']
+            }
+        });
+        config.plugins.push(webpackShellPlugin);
+    }
 
     if (env.deploy) {
-        let config = configs[configs.length - 1];
-        if (!config.plugins) {
-            config.plugins = [];
-        }
-
+        // This plugin allows you to run any shell commands before or after webpack builds.
+        const webpackShellPlugin = new WebpackShellPluginNext({
+            onAfterDone: {
+                scripts: ['yarn jahia-deploy']
+            }
+        });
         config.plugins.push(webpackShellPlugin);
     }
 
