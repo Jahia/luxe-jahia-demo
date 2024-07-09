@@ -22,7 +22,7 @@ fs.readdirSync(componentsDir).forEach(file => {
     exposes[componentName] = path.resolve(componentsDir, file);
 });
 
-module.exports = env => {
+module.exports = (env, mode) => {
     let configs = [
         {
             entry: {
@@ -90,7 +90,9 @@ module.exports = env => {
                     ]
                 }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
-                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                // It needs to be deactivated in watch mode
+                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+
             ]
         },
         {
@@ -122,6 +124,7 @@ module.exports = env => {
                 // This plugin extracts CSS into separate files
                 new MiniCssExtractPlugin({ filename: '[name].css' }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
+                // It needs to be deactivated in watch mode
                 new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
@@ -180,6 +183,7 @@ module.exports = env => {
                     ]
                 }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
+                // It needs to be deactivated in watch mode
                 new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ],
             devtool: 'inline-source-map',
