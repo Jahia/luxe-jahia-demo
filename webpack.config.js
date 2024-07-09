@@ -20,7 +20,7 @@ fs.readdirSync(componentsDir).forEach(file => {
     exposes[componentName] = path.resolve(componentsDir, file);
 });
 
-module.exports = env => {
+module.exports = (env, mode) => {
     let configs = [
         {
             entry: {
@@ -85,7 +85,8 @@ module.exports = env => {
                         'package.json'
                     ]
                 }),
-                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                // Deactivate CycloneDx plugin in watch mode
+                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
         {
@@ -115,7 +116,8 @@ module.exports = env => {
             },
             plugins: [
                 new MiniCssExtractPlugin({ filename: '[name].css' }),
-                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                // Deactivate CycloneDx plugin in watch mode
+                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
         {
@@ -171,7 +173,8 @@ module.exports = env => {
                         'package.json'
                     ]
                 }),
-                new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                // Deactivate CycloneDx plugin in watch mode
+                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ],
             devtool: 'inline-source-map',
             mode: 'development'
