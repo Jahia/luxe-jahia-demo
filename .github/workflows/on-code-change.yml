@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
       - uses: jahia/jahia-modules-action/update-signature@v2
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
@@ -27,7 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
       - uses: jahia/jahia-modules-action/build-npm@v2
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
@@ -50,7 +48,6 @@ jobs:
         with:
           node-version: 'lts/*'
       - uses: actions/checkout@v4
-      - run: corepack enable
       - uses: jahia/jahia-modules-action/integration-tests@v2
         with:
           testrail_project: Demo Site NPM
