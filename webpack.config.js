@@ -5,9 +5,6 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const componentsDir = './src/client';
-const exposes = {};
-
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
 
 /** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
@@ -17,6 +14,10 @@ const cycloneDxWebpackPluginOptions = {
     outputLocation: './bom'
 };
 
+const componentsDir = './src/client';
+const exposes = {};
+
+// Read all client-side components and add them to an array for later use
 fs.readdirSync(componentsDir).forEach(file => {
     const componentName = path.basename(file, path.extname(file));
     exposes[componentName] = path.resolve(componentsDir, file);
@@ -24,6 +25,8 @@ fs.readdirSync(componentsDir).forEach(file => {
 
 module.exports = (env, mode) => {
     let configs = [
+        // Config for jahia's client-side components (HydrateInBrowser or RenderInBrowser), can be removed if no client side components
+        // More info here : https://academy.jahia.com/documentation/jahia/jahia-8/developer/javascript-module-development/client-side-javascript
         {
             entry: {
                 'luxe-jahia-demo': path.resolve(__dirname, './src/client/index')
@@ -95,6 +98,7 @@ module.exports = (env, mode) => {
 
             ]
         },
+        // Config for bundling and minifying scss files into css files
         {
             entry: {
                 styles: './src/scss/styles.scss',
@@ -128,6 +132,7 @@ module.exports = (env, mode) => {
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
+        // Config for jahia's server-side source code (components using server side rendering)
         {
             entry: {
                 main: path.resolve(__dirname, 'src/server')
@@ -191,11 +196,13 @@ module.exports = (env, mode) => {
         }
     ];
 
+    // Get the last config of the array :
     let config = configs[configs.length - 1];
     if (!config.plugins) {
         config.plugins = [];
     }
 
+    // Jahia-pack is a custom jahia script that makes a tgz package of the module's bundle
     if (env.pack) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
@@ -206,6 +213,7 @@ module.exports = (env, mode) => {
         config.plugins.push(webpackShellPlugin);
     }
 
+    // Jahia-deploy is a custom jahia script that makes a tgz package of the module's bundle and deploy it to jahia via curl.
     if (env.deploy) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
