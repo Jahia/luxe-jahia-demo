@@ -17,7 +17,8 @@ const cycloneDxWebpackPluginOptions = {
 const componentsDir = './src/client';
 const exposes = {};
 
-// Read all client-side components and add them to an array for later use
+// Read all files in the client components directory in order to expose them with webpack module federation more easily
+// Those components are exposed in order to be hydrate/rendered on the client side
 fs.readdirSync(componentsDir).forEach(file => {
     const componentName = path.basename(file, path.extname(file));
     exposes[componentName] = path.resolve(componentsDir, file);
@@ -95,7 +96,6 @@ module.exports = (env, mode) => {
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
-
             ]
         },
         // Config for bundling and minifying scss files into css files
@@ -202,7 +202,7 @@ module.exports = (env, mode) => {
         config.plugins = [];
     }
 
-    // Jahia-pack is a custom jahia script that makes a tgz package of the module's bundle
+    // jahia-pack is a custom jahia script that makes a tgz package of the module's bundle
     if (env.pack) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
@@ -213,7 +213,7 @@ module.exports = (env, mode) => {
         config.plugins.push(webpackShellPlugin);
     }
 
-    // Jahia-deploy is a custom jahia script that makes a tgz package of the module's bundle and deploy it to jahia via curl.
+    // jahia-deploy is a custom jahia script that makes a tgz package of the module's bundle and deploy it to jahia via curl.
     if (env.deploy) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
