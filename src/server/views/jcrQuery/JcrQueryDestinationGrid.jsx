@@ -4,7 +4,7 @@ import {
     getNodeProps,
     server,
     Render,
-    getNodesByJCRQuery
+    getNodesByJCRQuery, defineJahiaComponent
 } from '@jahia/js-server-core';
 import {Col, HeadingSection, Row} from '../../components';
 import {useTranslation} from 'react-i18next';
@@ -83,8 +83,8 @@ export const JcrQueryDestinationGrid = () => {
     );
 };
 
-JcrQueryDestinationGrid.jahiaComponent = {
+JcrQueryDestinationGrid.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:jcrQuery',
     name: 'destination-grid',
     componentType: 'view'
-};
+});

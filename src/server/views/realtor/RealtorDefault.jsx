@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildUrl, server, defineJahiaComponent} from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 
 export const RealtorDefault = () => {
@@ -40,8 +40,8 @@ export const RealtorDefault = () => {
     );
 };
 
-RealtorDefault.jahiaComponent = {
+RealtorDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:realtor',
     name: 'default',
     componentType: 'view'
-};
+});

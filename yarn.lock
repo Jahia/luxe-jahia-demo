@@ -1849,20 +1849,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/js-server-core@npm:^0.0.7":
-  version: 0.0.7
-  resolution: "@jahia/js-server-core@npm:0.0.7"
+"@jahia/js-server-core@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@jahia/js-server-core@npm:0.0.11"
   dependencies:
     "@apollo/client": "npm:^3.5.5"
     dayjs: "npm:^1.10.4"
     graphql: "npm:^16.0.1"
-    handlebars: "npm:^4.7.7"
-    handlebars-utils: "npm:^1.0.6"
     i18next: "npm:^23.10.1"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
     react-i18next: "npm:^14.1.0"
-  checksum: 10c0/c10304ad3f0fb4cf67b5f6bfb73985daeb4dd73504f93fbe6e9025e95d9b76657eb12669725c0c9d2b9b4201980e898ff3fa2333032fb7cef7c5ecf45d7c55d1
+  checksum: 10c0/94761ff047ffbf434be1eaa5754f737c262aa4f6c7b30f701d22b13972af31aff641486b1186078c342530e0e813ed2d892f6ff65c993d1ac7679ad1222b4965
   languageName: node
   linkType: hard
 
@@ -5269,34 +5267,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars-utils@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "handlebars-utils@npm:1.0.6"
-  dependencies:
-    kind-of: "npm:^6.0.0"
-    typeof-article: "npm:^0.1.1"
-  checksum: 10c0/fb0df75d7451e18403363a2f46bcc5200fb3295709811ae3bc33d6ad50cf5376bbdd213e727f46c788791bf97bf5b29a353e2a28b4bc6b2399999d824abbd488
-  languageName: node
-  linkType: hard
-
-"handlebars@npm:^4.7.7":
-  version: 4.7.8
-  resolution: "handlebars@npm:4.7.8"
-  dependencies:
-    minimist: "npm:^1.2.5"
-    neo-async: "npm:^2.6.2"
-    source-map: "npm:^0.6.1"
-    uglify-js: "npm:^3.1.4"
-    wordwrap: "npm:^1.0.0"
-  dependenciesMeta:
-    uglify-js:
-      optional: true
-  bin:
-    handlebars: bin/handlebars
-  checksum: 10c0/7aff423ea38a14bb379316f3857fe0df3c5d66119270944247f155ba1f08e07a92b340c58edaa00cfe985c21508870ee5183e0634dcb53dd405f35c93ef7f10d
-  languageName: node
-  linkType: hard
-
 "hard-rejection@npm:^2.1.0":
   version: 2.1.0
   resolution: "hard-rejection@npm:2.1.0"
@@ -6242,7 +6212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kind-of@npm:^3.0.2, kind-of@npm:^3.0.3, kind-of@npm:^3.1.0, kind-of@npm:^3.2.0":
+"kind-of@npm:^3.0.2, kind-of@npm:^3.0.3, kind-of@npm:^3.2.0":
   version: 3.2.2
   resolution: "kind-of@npm:3.2.2"
   dependencies:
@@ -6260,7 +6230,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kind-of@npm:^6.0.0, kind-of@npm:^6.0.2, kind-of@npm:^6.0.3":
+"kind-of@npm:^6.0.2, kind-of@npm:^6.0.3":
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 10c0/61cdff9623dabf3568b6445e93e31376bee1cdb93f8ba7033d86022c2a9b1791a1d9510e026e6465ebd701a6dd2f7b0808483ad8838341ac52f003f512e0b4c4
@@ -6427,7 +6397,7 @@ __metadata:
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/data-helper": "npm:1.0.4"
     "@jahia/eslint-config": "npm:^2.1.2"
-    "@jahia/js-server-core": "npm:^0.0.7"
+    "@jahia/js-server-core": "npm:^0.0.11"
     "@jahia/scripts": "npm:^1.3.3"
     babel-loader: "npm:^8.2.3"
     bootstrap: "npm:^5.3.2"
@@ -6671,7 +6641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
+"minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.6":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 10c0/19d3fcdca050087b84c2029841a093691a91259a47def2f18222f41e7645a0b7c44ef4b40e88a1e58a40c84d2ef0ee6047c55594d298146d0eb3f6b737c20ce6
@@ -8540,7 +8510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map@npm:^0.6.0, source-map@npm:^0.6.1, source-map@npm:~0.6.1":
+"source-map@npm:^0.6.0, source-map@npm:~0.6.1":
   version: 0.6.1
   resolution: "source-map@npm:0.6.1"
   checksum: 10c0/ab55398007c5e5532957cb0beee2368529618ac0ab372d789806f5718123cc4367d57de3904b4e6a4170eb5a0b0f41373066d02ca0735a0c4d75c7d328d3e011
@@ -9202,15 +9172,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typeof-article@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "typeof-article@npm:0.1.1"
-  dependencies:
-    kind-of: "npm:^3.1.0"
-  checksum: 10c0/e58b0fcb741e3988deb3966f93550e3565b7cc9b6b8ba92da798c1bece9e3c1f680d6eaadc2723f6200ba05cf20193dc9f3447a04c06b7c4e2077e16f0fffefa
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^5.4.4":
   version: 5.4.4
   resolution: "typescript@npm:5.4.4"
@@ -9228,15 +9189,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/1fa41b9964a9ff0ed913b339c90b46031b2d2da3cb1a192af516610733f7f1d5f7f9754a8e22b9ac7076d3d8aedd2c4f84db3f113bad060eac3a95962443a1bf
-  languageName: node
-  linkType: hard
-
-"uglify-js@npm:^3.1.4":
-  version: 3.17.4
-  resolution: "uglify-js@npm:3.17.4"
-  bin:
-    uglifyjs: bin/uglifyjs
-  checksum: 10c0/8b7fcdca69deb284fed7d2025b73eb747ce37f9aca6af53422844f46427152d5440601b6e2a033e77856a2f0591e4167153d5a21b68674ad11f662034ec13ced
   languageName: node
   linkType: hard
 
@@ -9626,13 +9578,6 @@ __metadata:
   version: 1.2.5
   resolution: "word-wrap@npm:1.2.5"
   checksum: 10c0/e0e4a1ca27599c92a6ca4c32260e8a92e8a44f4ef6ef93f803f8ed823f486e0889fc0b93be4db59c8d51b3064951d25e43d434e95dc8c960cc3a63d65d00ba20
-  languageName: node
-  linkType: hard
-
-"wordwrap@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "wordwrap@npm:1.0.0"
-  checksum: 10c0/7ed2e44f3c33c5c3e3771134d2b0aee4314c9e49c749e37f464bf69f2bcdf0cbf9419ca638098e2717cff4875c47f56a007532f6111c3319f557a2ca91278e92
   languageName: node
   linkType: hard
 

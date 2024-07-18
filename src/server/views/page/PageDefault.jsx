@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildUrl, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildUrl, server, defineJahiaComponent} from '@jahia/js-server-core';
 
 export const PageDefault = () => {
     const {currentNode, renderContext, currentResource} = useServerContext();
@@ -35,8 +35,8 @@ export const PageDefault = () => {
     );
 };
 
-PageDefault.jahiaComponent = {
+PageDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'jnt:page',
     name: 'default',
     componentType: 'view'
-};
+});

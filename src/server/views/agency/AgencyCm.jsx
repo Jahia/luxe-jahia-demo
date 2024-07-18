@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+    defineJahiaComponent,
     Render, useServerContext
 } from '@jahia/js-server-core';
 import {CMPreview} from '../../components';
+
 
 export const AgencyCm = () => {
     const {currentNode} = useServerContext();
@@ -13,8 +15,8 @@ export const AgencyCm = () => {
     );
 };
 
-AgencyCm.jahiaComponent = {
+AgencyCm.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:agency',
     name: 'cm',
     componentType: 'view'
-};
+});

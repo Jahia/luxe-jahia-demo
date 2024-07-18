@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useServerContext, getNodeProps} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, defineJahiaComponent} from '@jahia/js-server-core';
 import clsx from 'clsx';
 
 export const HighlightNumberDefault = ({className}) => {
@@ -19,8 +19,9 @@ HighlightNumberDefault.propTypes = {
     className: PropTypes.string
 };
 
-HighlightNumberDefault.jahiaComponent = {
+HighlightNumberDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:highlightNumber',
+    name: 'highlightNumber',
     displayName: 'Default',
     componentType: 'view'
-};
+});

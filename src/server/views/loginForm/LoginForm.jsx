@@ -1,5 +1,5 @@
 import React from 'react';
-import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server-core';
+import {HydrateInBrowser, useServerContext, getNodeProps, defineJahiaComponent} from '@jahia/js-server-core';
 import LoginComponent from '../../../client/LoginComponent';
 
 export const LoginForm = () => {
@@ -32,10 +32,11 @@ export const LoginForm = () => {
     );
 };
 
-LoginForm.jahiaComponent = {
+LoginForm.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:loginForm',
     componentType: 'view',
+    name:'loginForm',
     properties: {
         'cache.perUser': 'true'
     }
-};
+});

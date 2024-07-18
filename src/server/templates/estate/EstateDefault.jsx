@@ -1,5 +1,5 @@
 import React from 'react';
-import {Render, useServerContext} from '@jahia/js-server-core';
+import {defineJahiaComponent, Render, useServerContext} from '@jahia/js-server-core';
 import {MainLayout} from '../../layouts';
 
 export const EstateDefault = () => {
@@ -14,8 +14,8 @@ export const EstateDefault = () => {
     );
 };
 
-EstateDefault.jahiaComponent = {
+EstateDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:estate',
     name: 'default',
     componentType: 'template'
-};
+});

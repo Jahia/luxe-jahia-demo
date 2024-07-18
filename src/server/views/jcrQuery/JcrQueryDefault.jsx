@@ -4,7 +4,7 @@ import {
     getNodeProps,
     server,
     Render,
-    getNodesByJCRQuery
+    getNodesByJCRQuery, defineJahiaComponent
 } from '@jahia/js-server-core';
 import {Col, HeadingSection, Row} from '../../components';
 import {useTranslation} from 'react-i18next';
@@ -49,8 +49,8 @@ export const JcrQueryDefault = () => {
     );
 };
 
-JcrQueryDefault.jahiaComponent = {
+JcrQueryDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:jcrQuery',
     name: 'default',
     componentType: 'view'
-};
+});

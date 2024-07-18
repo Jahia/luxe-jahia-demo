@@ -1,5 +1,5 @@
 import React from 'react';
-import {Area, getNodeProps, Render, useServerContext} from '@jahia/js-server-core';
+import {Area, defineJahiaComponent, getNodeProps, Render, useServerContext} from '@jahia/js-server-core';
 import {MainLayout} from '../../layouts';
 import {Row, Section} from '../../components';
 
@@ -43,9 +43,9 @@ export const PageDestination = () => {
     );
 };
 
-PageDestination.jahiaComponent = {
+PageDestination.jahiaComponent = defineJahiaComponent({
     nodeType: 'jnt:page',
     name: 'destination',
     displayName: 'Destination',
     componentType: 'template'
-};
+});

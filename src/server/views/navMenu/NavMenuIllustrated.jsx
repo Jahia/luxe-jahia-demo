@@ -92,7 +92,7 @@ export const NavMenuIllustrated = () => {
     );
 };
 
-NavMenuIllustrated.jahiaComponent = {
+NavMenuIllustrated.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:navMenu',
     name: 'navIllustrated',
     displayName: 'Nav Illustrated',
@@ -100,4 +100,4 @@ NavMenuIllustrated.jahiaComponent = {
     properties: {
         'cache.mainResource': 'true'
     }
-};
+});
