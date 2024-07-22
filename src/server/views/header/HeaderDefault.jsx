@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, defineJahiaComponent} from '@jahia/js-server-core';
 
 export const HeaderDefault = () => {
     const {currentNode, renderContext} = useServerContext();
@@ -28,8 +28,8 @@ export const HeaderDefault = () => {
     );
 };
 
-HeaderDefault.jahiaComponent = {
+HeaderDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:header',
     name: 'default',
     componentType: 'view'
-};
+});

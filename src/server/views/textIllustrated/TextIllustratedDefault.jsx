@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    server, buildUrl
+    server, buildUrl, defineJahiaComponent
 } from '@jahia/js-server-core';
 
 import {TextIllustrated} from '../../components';
@@ -34,8 +34,8 @@ export const TextIllustratedDefault = () => {
     );
 };
 
-TextIllustratedDefault.jahiaComponent = {
+TextIllustratedDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:textIllustrated',
     name: 'default',
     componentType: 'view'
-};
+});

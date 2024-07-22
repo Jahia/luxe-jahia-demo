@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildNavMenu, server, defineJahiaComponent} from '@jahia/js-server-core';
 import clsx from 'clsx';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
@@ -85,11 +85,11 @@ export const NavMenuDefault = () => {
     );
 };
 
-NavMenuDefault.jahiaComponent = {
+NavMenuDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:navMenu',
     displayName: 'Navbar Nav Menu',
     componentType: 'view',
     properties: {
         'cache.mainResource': 'true'
     }
-};
+});

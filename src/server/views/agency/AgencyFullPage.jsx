@@ -5,7 +5,8 @@ import {
     server,
     getNodesByJCRQuery,
     Render,
-    buildUrl
+    buildUrl,
+    defineJahiaComponent
 } from '@jahia/js-server-core';
 
 import {useTranslation} from 'react-i18next';
@@ -153,8 +154,8 @@ export const AgencyFullPage = () => {
     );
 };
 
-AgencyFullPage.jahiaComponent = {
+AgencyFullPage.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:agency',
     name: 'fullPage',
     componentType: 'view'
-};
+});

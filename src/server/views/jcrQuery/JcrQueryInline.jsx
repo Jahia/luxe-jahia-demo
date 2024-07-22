@@ -4,7 +4,8 @@ import {
     getNodeProps,
     server,
     Render,
-    getNodesByJCRQuery
+    getNodesByJCRQuery,
+    defineJahiaComponent
 } from '@jahia/js-server-core';
 import {HeadingSection} from '../../components';
 import {useTranslation} from 'react-i18next';
@@ -43,8 +44,8 @@ export const JcrQueryInline = () => {
     );
 };
 
-JcrQueryInline.jahiaComponent = {
+JcrQueryInline.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:jcrQuery',
     name: 'inline',
     componentType: 'view'
-};
+});

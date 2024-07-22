@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     buildUrl,
-    server
+    server, defineJahiaComponent
 } from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 
@@ -40,6 +40,7 @@ export const AgencyDefault = () => {
 
             <div className="d-flex flex-column justify-content-center flex-fill">
                 <h2 className="my-0 lux-capitalize">{agency.name}</h2>
+                <h3>Blblblbl aa azd azd </h3>
                 {agency.address && <p className="m-0">{agency.address}</p>}
                 {agency.phone && <p className="m-0">{agency.phone}</p>}
             </div>
@@ -47,8 +48,8 @@ export const AgencyDefault = () => {
     );
 };
 
-AgencyDefault.jahiaComponent = {
+AgencyDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:agency',
     name: 'default',
     componentType: 'view'
-};
+});

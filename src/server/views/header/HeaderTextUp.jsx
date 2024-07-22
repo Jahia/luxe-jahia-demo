@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, defineJahiaComponent} from '@jahia/js-server-core';
 import {Figure, PageTitle, Row} from '../../components';
 
 export const HeaderTextUp = () => {
@@ -28,8 +28,8 @@ export const HeaderTextUp = () => {
     );
 };
 
-HeaderTextUp.jahiaComponent = {
+HeaderTextUp.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:header',
     name: 'textUp',
     componentType: 'view'
-};
+});
