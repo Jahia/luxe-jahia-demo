@@ -1,8 +1,8 @@
 import React from 'react';
 import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server-core';
-import LoginComponent from '../../../client/form/login/LoginComponent';
+import LoginComponent from '../../../../client/form/login/LoginComponent';
 
-export const LoginForm = () => {
+export const LoginFormDefault = () => {
     const {renderContext, currentNode} = useServerContext();
     const props = getNodeProps(currentNode, ['j:displayRememberMeButton']);
 
@@ -32,8 +32,10 @@ export const LoginForm = () => {
     );
 };
 
-LoginForm.jahiaComponent = {
-    nodeType: 'luxe:loginForm',
+LoginFormDefault.jahiaComponent = {
+    nodeType: 'luxe:form',
+    name: 'default',
+    displayName: 'default (hydrate)',
     componentType: 'view',
     properties: {
         'cache.perUser': 'true'

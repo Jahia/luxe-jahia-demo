@@ -39,17 +39,19 @@
     "connection": "verbindung",
     "copyright": "urheberrechte © 2002-{{currentDate}} alle rechte vorbehalten von Jahia Solutions Group SA"
   },
-  "login": {
-    "login": "anmeldung",
-    "logout": "ausloggen",
-    "badCreds": "Benutzername oder Passwort falsch",
-    "unknowError": "Es ist ein Fehler aufgetreten",
-    "username": "Nutzername",
-    "password": "Password",
-    "rememberMe": "Passwort",
-    "liveWorkspace": "live",
-    "previewWorkspace": "vorschau",
-    "editWorkspace": "bearbeiten",
+  "form": {
+    "login": {
+      "login": "anmeldung",
+      "logout": "ausloggen",
+      "badCreds": "Benutzername oder Passwort falsch",
+      "unknowError": "Es ist ein Fehler aufgetreten",
+      "username": "Nutzername",
+      "password": "Password",
+      "rememberMe": "Passwort",
+      "liveWorkspace": "live",
+      "previewWorkspace": "vorschau",
+      "editWorkspace": "bearbeiten"
+    },
     "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert"
   },
   "realtor": {

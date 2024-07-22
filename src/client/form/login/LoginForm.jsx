@@ -49,7 +49,7 @@ const submitLogin = (
     });
 };
 
-const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
+const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe = true}) => {
     const {t} = useTranslation();
 
     const [incorrectLogin, setIncorrectLogin] = useState(false);
@@ -61,7 +61,7 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
     return (
         <div className="modal-content">
             <header className="modal-header">
-                <h2 id="loginModalTitle" className="lux-capitalize">{t('login.login')}</h2>
+                <h2 id="loginModalTitle" className="lux-capitalize">{t('form.login.login')}</h2>
             </header>
             <form
                 id="loginForm"
@@ -69,16 +69,16 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
             >
                 {incorrectLogin &&
                     <p className="alert alert-danger fs-6" role="alert">
-                        {t('login.badCreds')}
+                        {t('form.login.badCreds')}
                     </p>}
 
                 {unknownError &&
                     <p className="alert alert-danger fs-6" role="alert">
-                        {t('login.unknownError')}
+                        {t('form.login.unknownError')}
                     </p>}
 
                 <div>
-                    <label htmlFor="inputUser" className="form-label fs-6">{t('login.username')}</label>
+                    <label htmlFor="inputUser" className="form-label fs-6">{t('form.login.username')}</label>
                     <input
                         autoFocus
                         id="inputUser"
@@ -90,7 +90,7 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                         />
                 </div>
                 <div>
-                    <label htmlFor="inputPassword" className="form-label fs-6">{t('login.password')}</label>
+                    <label htmlFor="inputPassword" className="form-label fs-6">{t('form.login.password')}</label>
                     <input
                         id="inputPassword"
                         type="password"
@@ -108,7 +108,7 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                                     setIncorrectLogin,
                                     setUnknownError,
                                     close
-                                )
+                                );
                             }
                         }}
                     />
@@ -116,13 +116,15 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                 {isShowRememberMe &&
                     <div className="form-check">
                         <input id="remember" type="checkbox" name="remember" className="form-check-input me-2" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
-                        <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('login.rememberMe')}</label>
-                    </div>
-                }
+                        <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('form.login.rememberMe')}</label>
+                    </div>}
             </form>
             <footer className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={close}>Cancel</button>
-                <button type="button" form="loginForm" className="btn btn-primary lux-capitalize" onClick={() => submitLogin(username,
+                <button type="button"
+                        form="loginForm"
+                        className="btn btn-primary lux-capitalize"
+                        onClick={() => submitLogin(username,
                     password,
                     rememberMe,
                     setUser,
@@ -131,7 +133,7 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                     setUnknownError,
                     close)}
                 >
-                    {t('login.login')}
+                    {t('form.login.login')}
                 </button>
             </footer>
         </div>
