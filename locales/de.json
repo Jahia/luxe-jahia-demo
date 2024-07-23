@@ -44,7 +44,6 @@
       "login": "anmeldung",
       "logout": "ausloggen",
       "badCreds": "Benutzername oder Passwort falsch",
-      "unknowError": "Es ist ein Fehler aufgetreten",
       "username": "Nutzername",
       "password": "Password",
       "rememberMe": "Passwort",
@@ -52,7 +51,8 @@
       "previewWorkspace": "vorschau",
       "editWorkspace": "bearbeiten"
     },
-    "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert"
+    "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert",
+    "unknownError": "Es ist ein Fehler aufgetreten"
   },
   "realtor": {
     "jobPosition": {

@@ -8,6 +8,7 @@ export const MainRessourceDefault = () => {
         <MainLayout
             head={<meta name="description" content="content template"/>}
         >
+            <h1>Main</h1>
             <Render node={currentNode} view="fullPage"/>
         </MainLayout>
 

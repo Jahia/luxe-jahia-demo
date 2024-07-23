@@ -3,13 +3,14 @@ import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server
 import ContactComponent from '../../../../client/form/contact/ContactComponent';
 
 export const ContactFormDefault = () => {
-    const {currentNode} = useServerContext();
+    const {renderContext, currentNode} = useServerContext();
     const form = getNodeProps(currentNode, ['target', 'feedbackMsg']);
+    const mode = renderContext.getMode();
 
     return (
         <HydrateInBrowser
             child={ContactComponent}
-            props={{...form}}
+            props={{...form, mode}}
         />
     );
 };

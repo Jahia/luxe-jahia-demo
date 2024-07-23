@@ -10,6 +10,7 @@ export const AgencyDefault = () => {
 
     return (
         <MainLayout>
+            <h1>Estate</h1>
             <Render node={currentNode} view="fullPage"/>
         </MainLayout>
     );

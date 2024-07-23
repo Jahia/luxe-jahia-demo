@@ -44,7 +44,6 @@
       "login": "connection",
       "logout": "se déconnecter",
       "badCreds": "Nom d'utilisateur ou mot de passe incorrect",
-      "unknowError": "Une erreur s'est produite",
       "username": "Nom d'utilisateur",
       "password": "Mot de passe",
       "rememberMe": "se souvenir de moi",
@@ -52,7 +51,8 @@
       "previewWorkspace": "aperçu",
       "editWorkspace": "éditer"
     },
-    "editModeWarning": "La connexion est désactivée dans Page Builder"
+    "editModeWarning": "La connexion est désactivée dans Page Builder",
+    "unknownError": "Une erreur s'est produite"
   },
   "realtor": {
     "jobPosition": {

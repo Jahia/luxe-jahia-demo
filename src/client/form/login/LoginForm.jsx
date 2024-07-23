@@ -74,7 +74,7 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe = true}) => {
 
                 {unknownError &&
                     <p className="alert alert-danger fs-6" role="alert">
-                        {t('form.login.unknownError')}
+                        {t('form.unknownError')}
                     </p>}
 
                 <div>
