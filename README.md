@@ -22,7 +22,7 @@ JAHIA_DEPLOY_METHOD=curl
 
 `JAHIA_DEPLOY_METHOD` could be **curl** or **docker**
 
-# Test 
+# Run
 
 1) Enable corepack if needed : 
 
