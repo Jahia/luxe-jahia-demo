@@ -143,6 +143,7 @@ module.exports = (env, mode) => {
                 path: path.resolve(__dirname, 'dist')
             },
             externals: {
+                // Those libraries are supplied to webpack at runtime (by the npm-module-engine project), and are not packaged in the output bundle
                 '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
                 react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
                 'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
