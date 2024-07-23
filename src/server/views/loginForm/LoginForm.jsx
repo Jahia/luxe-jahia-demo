@@ -1,6 +1,6 @@
 import React from 'react';
 import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server-core';
-import LoginComponent from '../../../client/form/login/LoginComponent';
+import LoginComponent from '../../../client/LoginComponent';
 
 export const LoginForm = () => {
     const {renderContext, currentNode} = useServerContext();

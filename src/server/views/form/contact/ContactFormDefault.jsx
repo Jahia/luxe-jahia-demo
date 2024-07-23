@@ -1,6 +1,6 @@
 import React from 'react';
 import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server-core';
-import ContactComponent from '../../../../client/form/contact/ContactComponent';
+import ContactComponent from '../../../../client/ContactComponent';
 
 export const ContactFormDefault = () => {
     const {renderContext, currentNode} = useServerContext();

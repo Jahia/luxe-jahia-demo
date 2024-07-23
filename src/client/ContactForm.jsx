@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Col, Row, Section} from '../../../server/components';
+import {Col, Row, Section} from '../server/components';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
-import LoginForm from '../login/LoginForm';
+import LoginForm from './LoginForm';
 
 const submitContact = (
     target,
