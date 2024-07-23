@@ -5,9 +5,6 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const componentsDir = './src/client';
-const exposes = {};
-
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
 
 /** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
@@ -17,6 +14,11 @@ const cycloneDxWebpackPluginOptions = {
     outputLocation: './bom'
 };
 
+const componentsDir = './src/client';
+const exposes = {};
+
+// Read all files in the client components directory in order to expose them with webpack module federation more easily
+// Those components are exposed in order to be hydrate/rendered on the client side
 fs.readdirSync(componentsDir).forEach(file => {
     const componentName = path.basename(file, path.extname(file));
     exposes[componentName] = path.resolve(componentsDir, file);
@@ -24,6 +26,9 @@ fs.readdirSync(componentsDir).forEach(file => {
 
 module.exports = (env, mode) => {
     let configs = [
+        // Config for jahia's client-side components (HydrateInBrowser or RenderInBrowser)
+        // This config can be removed if the module doesn't contain client-side components
+        // More info here : https://academy.jahia.com/documentation/jahia/jahia-8/developer/javascript-module-development/client-side-javascript
         {
             entry: {
                 'luxe-jahia-demo': path.resolve(__dirname, './src/client/index')
@@ -92,9 +97,9 @@ module.exports = (env, mode) => {
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
-
             ]
         },
+        // Config for bundling and minifying scss files into css files
         {
             entry: {
                 styles: './src/scss/styles.scss',
@@ -128,6 +133,8 @@ module.exports = (env, mode) => {
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
+        // Config for jahia's server-side components (using SSR) and source code
+        // Those components have access to jahia's custom types and functions (https://academy.jahia.com/documentation/jahia/jahia-8/developer/javascript-module-development/javascript-modules-reference-documentation)
         {
             entry: {
                 main: path.resolve(__dirname, 'src/server')
@@ -191,11 +198,13 @@ module.exports = (env, mode) => {
         }
     ];
 
+    // Get the last config of the array :
     let config = configs[configs.length - 1];
     if (!config.plugins) {
         config.plugins = [];
     }
 
+    // 'jahia-pack' is a custom jahia script that makes a tgz package of the module's bundle
     if (env.pack) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
@@ -206,6 +215,7 @@ module.exports = (env, mode) => {
         config.plugins.push(webpackShellPlugin);
     }
 
+    // 'jahia-deploy' is a custom jahia script that makes a tgz package of the module's bundle and deploy it to jahia via curl.
     if (env.deploy) {
         // This plugin allows you to run any shell commands before or after webpack builds.
         const webpackShellPlugin = new WebpackShellPluginNext({
