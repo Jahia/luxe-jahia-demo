@@ -21,3 +21,22 @@ JAHIA_DEPLOY_METHOD=curl
 ```
 
 `JAHIA_DEPLOY_METHOD` could be **curl** or **docker**
+
+# Test 
+
+1) Enable corepack if needed : 
+
+`yarn enable corepack`
+
+2) Instruct yarn to use the 4.x version if needed :
+
+``yarn set version stable``
+
+3) Install the dependencies :
+
+``yarn``
+
+4) Build and run the project :
+
+``yarn watch``
+
