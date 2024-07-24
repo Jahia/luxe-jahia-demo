@@ -35,6 +35,7 @@ export const LoginForm = () => {
 LoginForm.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:loginForm',
     componentType: 'view',
+    name: 'default',
     properties: {
         'cache.perUser': 'true'
     }

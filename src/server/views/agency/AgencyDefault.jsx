@@ -40,7 +40,6 @@ export const AgencyDefault = () => {
 
             <div className="d-flex flex-column justify-content-center flex-fill">
                 <h2 className="my-0 lux-capitalize">{agency.name}</h2>
-                <h3>Blblblbl aa azd azd </h3>
                 {agency.address && <p className="m-0">{agency.address}</p>}
                 {agency.phone && <p className="m-0">{agency.phone}</p>}
             </div>

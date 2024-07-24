@@ -45,9 +45,9 @@ export const NavMenuDefault = () => {
             <div className="container-fluid gap-5">
                 <a href={home.getUrl()} className="navbar-brand">
                     {nav.brandImage &&
-                        <img src={nav.brandImage.getUrl()}
-                             alt={`Logo-${siteName}`}
-                             width="100px"/>}
+                    <img src={nav.brandImage.getUrl()}
+                         alt={`Logo-${siteName}`}
+                         width="100px"/>}
                     {nav.brandText}
                 </a>
                 <button
@@ -88,6 +88,7 @@ export const NavMenuDefault = () => {
 NavMenuDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:navMenu',
     displayName: 'Navbar Nav Menu',
+    name: 'default',
     componentType: 'view',
     properties: {
         'cache.mainResource': 'true'
