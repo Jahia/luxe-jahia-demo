@@ -12,7 +12,7 @@ If you don't use default configuration for the Docker container name or for Jahi
 
 You can find the documentation on how to use this module on the [Jahia Academy](https://academy.jahia.com/get-started/developers/templating) templating tutorial.
 
-# Run
+## Run
 
 1) Enable Corepack if needed : 
 
@@ -26,7 +26,7 @@ You can find the documentation on how to use this module on the [Jahia Academy](
 
 ``yarn watch``
 
-# How to upgrade yarn version to latest stable
+## How to upgrade yarn version to latest stable
 
 This command will upgrade yarn  to the latest stable release and update the yarn installer in .yarn/releases
 
