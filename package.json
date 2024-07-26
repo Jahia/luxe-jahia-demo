@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode=development --env pack",
-    "build:production": "webpack --mode=production --env pack",
+    "build": "webpack --mode=development && jahia-pack",
+    "build:production": "webpack --mode=production && jahia-pack",
     "deploy": "jahia-deploy",
-    "watch": "webpack --mode=development --env deploy --watch",
+    "watch": "webpack --mode=development --watch",
     "lint": "eslint .",
     "test": "yarn lint"
   },
