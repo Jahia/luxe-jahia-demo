@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, defineJahiaComponent} from '@jahia/js-server-core';
 import {Figure, Row} from '../../components';
 
 export const HeaderTextDown = () => {
@@ -29,8 +29,8 @@ export const HeaderTextDown = () => {
     );
 };
 
-HeaderTextDown.jahiaComponent = {
+HeaderTextDown.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:header',
     name: 'textDown',
     componentType: 'view'
-};
+});

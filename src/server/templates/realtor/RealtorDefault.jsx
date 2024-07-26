@@ -2,7 +2,8 @@ import React from 'react';
 import {MainLayout} from '../../layouts';
 import {
     useServerContext,
-    Render
+    Render,
+    defineJahiaComponent
 } from '@jahia/js-server-core';
 
 export const RealtorDefault = () => {
@@ -15,8 +16,8 @@ export const RealtorDefault = () => {
     );
 };
 
-RealtorDefault.jahiaComponent = {
+RealtorDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:realtor',
     name: 'default',
     componentType: 'template'
-};
+});

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, server} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildNavMenu, server, defineJahiaComponent} from '@jahia/js-server-core';
 import clsx from 'clsx';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
@@ -45,9 +45,9 @@ export const NavMenuDefault = () => {
             <div className="container-fluid gap-5">
                 <a href={home.getUrl()} className="navbar-brand">
                     {nav.brandImage &&
-                        <img src={nav.brandImage.getUrl()}
-                             alt={`Logo-${siteName}`}
-                             width="100px"/>}
+                    <img src={nav.brandImage.getUrl()}
+                         alt={`Logo-${siteName}`}
+                         width="100px"/>}
                     {nav.brandText}
                 </a>
                 <button
@@ -85,11 +85,12 @@ export const NavMenuDefault = () => {
     );
 };
 
-NavMenuDefault.jahiaComponent = {
+NavMenuDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:navMenu',
     displayName: 'Navbar Nav Menu',
+    name: 'default',
     componentType: 'view',
     properties: {
         'cache.mainResource': 'true'
     }
-};
+});

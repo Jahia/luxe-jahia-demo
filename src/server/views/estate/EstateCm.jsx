@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, Render} from '@jahia/js-server-core';
+import {useServerContext, Render, defineJahiaComponent} from '@jahia/js-server-core';
 import {CMPreview} from '../../components';
 
 export const EstateCm = () => {
@@ -11,8 +11,8 @@ export const EstateCm = () => {
     );
 };
 
-EstateCm.jahiaComponent = {
+EstateCm.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:estate',
     name: 'cm',
     componentType: 'view'
-};
+});

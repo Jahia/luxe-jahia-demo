@@ -5,7 +5,8 @@ import {
     server,
     getNodesByJCRQuery,
     Render,
-    buildUrl
+    buildUrl,
+    defineJahiaComponent
 } from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
@@ -163,8 +164,8 @@ export const RealtorFullPage = () => {
     );
 };
 
-RealtorFullPage.jahiaComponent = {
+RealtorFullPage.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:realtor',
     name: 'fullPage',
     componentType: 'view'
-};
+});

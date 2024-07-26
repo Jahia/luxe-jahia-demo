@@ -3,7 +3,7 @@ import {
     useServerContext,
     getNodeProps,
     buildUrl,
-    server
+    server, defineJahiaComponent
 } from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 
@@ -47,8 +47,8 @@ export const AgencyDefault = () => {
     );
 };
 
-AgencyDefault.jahiaComponent = {
+AgencyDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:agency',
     name: 'default',
     componentType: 'view'
-};
+});

@@ -2,7 +2,8 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    Area
+    Area,
+    defineJahiaComponent
 } from '@jahia/js-server-core';
 import clsx from 'clsx';
 
@@ -27,8 +28,8 @@ export const ColsDefault = () => {
     );
 };
 
-ColsDefault.jahiaComponent = {
+ColsDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:cols',
     name: 'default',
     componentType: 'view'
-};
+});
