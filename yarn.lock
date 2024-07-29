@@ -6415,7 +6415,7 @@ __metadata:
     i18next: "npm:^23.10.1"
     mini-css-extract-plugin: "npm:^2.7.7"
     prop-types: "npm:^15.8.1"
-    react: "npm:^17.0.2"
+    react: "npm:^18.2.0"
     react-i18next: "npm:^14.1.0"
     sass: "npm:^1.70.0"
     sass-loader: "npm:^14.0.0"
@@ -7653,16 +7653,6 @@ __metadata:
   bin:
     react2dts: cli.js
   checksum: 10c0/a64611e79a0b1e2e741a468822bc3743977ec314845f9999539418858d308e3ee3487933e00a7e7ef33a37570c311ff404b3b6b5d407f3d186372ca3d011e57d
-  languageName: node
-  linkType: hard
-
-"react@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "react@npm:17.0.2"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    object-assign: "npm:^4.1.1"
-  checksum: 10c0/07ae8959acf1596f0550685102fd6097d461a54a4fd46a50f88a0cd7daaa97fdd6415de1dcb4bfe0da6aa43221a6746ce380410fa848acc60f8ac41f6649c148
   languageName: node
   linkType: hard
 

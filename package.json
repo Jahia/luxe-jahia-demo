@@ -4,13 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode=development --env pack",
-    "build:production": "webpack --mode=production --env pack",
+    "build": "webpack --mode=development && jahia-pack",
+    "build:production": "webpack --mode=production && jahia-pack",
     "deploy": "jahia-deploy",
-    "watch": "webpack --mode=development --env deploy --watch",
+    "watch": "webpack --mode=development --watch",
     "lint": "eslint .",
-    "test": "yarn lint",
-    "postinstall": "yarn dlx @yarnpkg/sdks vscode"
+    "test": "yarn lint"
   },
   "jahia": {
     "required-version": "8.2.0.0-SNAPSHOT",
@@ -39,7 +38,7 @@
     "bootstrap": "^5.3.2",
     "graphql": "^16.7.1",
     "i18next": "^23.10.1",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-i18next": "^14.1.0"
   },
   "devDependencies": {
@@ -74,8 +73,8 @@
     "webpack-shell-plugin-next": "^2.3.1"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "yarn": ">=3.0.0"
+    "node": ">=18.0.0",
+    "yarn": ">=4.0.0"
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.3.1"
 }
