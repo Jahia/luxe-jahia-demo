@@ -12,17 +12,31 @@ If you don't use default configuration for the Docker container name or for Jahi
 
 You can find the documentation on how to use this module on the [Jahia Academy](https://academy.jahia.com/get-started/developers/templating) templating tutorial.
 
-## Run
+# Build and deploy
 
-1) Enable Corepack if needed : 
+1) if not created, create a `.env` file with the following variables (adjust the values to your env) :
+```shell
+JAHIA_USER=username:password
+JAHIA_HOST=http://localhost:8080
+JAHIA_DOCKER_NAME=jahia
+JAHIA_DEPLOY_METHOD=docker
+```
+
+`JAHIA_DEPLOY_METHOD` could be **curl** or **docker**
+
+2) Enable Corepack if needed : 
 
 `enable corepack`
 
-2) Install the dependencies :
+3) Install the dependencies :
 
-``yarn``
+``yarn install``
 
-3) Build and run the project :
+4) Build and deploy the project :
+
+``yarn build && yarn deploy``
+
+4) Automatically build and deploy the project on file changes :
 
 ``yarn watch``
 
