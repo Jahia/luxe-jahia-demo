@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@jahia/js-server-core": "^0.0.12",
+    "bootstrap": "^5.3.3",
     "graphql": "^16.7.1",
     "i18next": "^23.10.1",
     "react": "^18.2.0",
