@@ -172,6 +172,10 @@ module.exports = (env, mode) => {
     // Also an additional sleep is added to avoid watch triggering too much in a short time
     // (Feel free to adjust the sleep time according to your needs)
     if (mode.watch) {
+
+         // sleep time in seconds, can be adjusted
+        const sleepTime = 5;
+
         configs.push({
             name: 'watch',
             mode: 'development',
@@ -201,7 +205,7 @@ module.exports = (env, mode) => {
                         scripts: [
                             'yarn jahia-pack',
                             'yarn jahia-deploy',
-                            'sleep 5', // sleep for 5 seconds, can be adjusted
+                            process.platform === 'win32' ? 'timeout ' + sleepTime : 'sleep ' + sleepTime,
                         ],
                         blocking: true,
                         parallel: false
