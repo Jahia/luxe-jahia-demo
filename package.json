@@ -15,7 +15,7 @@
     "required-version": "8.2.0.0-SNAPSHOT",
     "module-type": "templatesSet",
     "module-dependencies": "default",
-    "static-resources": "/assets,/css,/javascript,/icons,/img,/dist",
+    "static-resources": "/dist,/public,/configuration",
     "server": "dist/main.js",
     "maven": {
       "groupId": "org.jahia.modules.npm",
