@@ -10,7 +10,7 @@ const ContactComponent = ({target, feedbackMsg, mode}) => {
     const [unknownError, setUnknownError] = useState(false);
 
     if (mode === 'edit') {
-        return <div className="alert alert-dark fs-6" role="alert">{t('form.editModeWarning')}</div>;
+        return <div className="alert alert-dark fs-6" role="alert">{t('form.contact.editModeWarning')}</div>;
     }
 
     if (showFeedback) {

@@ -1,8 +1,5 @@
 {
   "name": "luxe:form",
-  "displayName": "",
-  "description": "",
-  "dynamic": false,
   "fields": [
     {
       "name": "formType",

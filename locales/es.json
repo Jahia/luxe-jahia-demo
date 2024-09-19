@@ -49,9 +49,9 @@
       "rememberMe": "acuérdate de mí",
       "liveWorkspace": "live",
       "previewWorkspace": "avance",
-      "editWorkspace": "editar"
+      "editWorkspace": "editar",
+      "editModeWarning": "El inicio de sesión está desactivado en Page Builder"
     },
-    "editModeWarning": "El inicio de sesión está desactivado en Page Builder",
     "unknownError": "Ocurrió un error"
   },
   "realtor": {

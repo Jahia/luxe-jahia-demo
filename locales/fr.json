@@ -49,9 +49,17 @@
       "rememberMe": "se souvenir de moi",
       "liveWorkspace": "live",
       "previewWorkspace": "aperçu",
-      "editWorkspace": "éditer"
+      "editWorkspace": "éditer",
+      "editModeWarning": "La connexion est désactivée dans Page Builder"
     },
-    "editModeWarning": "La connexion est désactivée dans Page Builder",
+    "contact": {
+      "firstname": "prénom",
+      "lastname": "nom",
+      "email": "courriel",
+      "msg": "votre message",
+      "submit": "envoyer",
+      "editModeWarning": "Le formulaire de contact est désactivée dans Page Builder"
+    },
     "unknownError": "Une erreur s'est produite"
   },
   "realtor": {

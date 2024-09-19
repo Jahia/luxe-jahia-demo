@@ -8,19 +8,24 @@ export const ContactFormDefault = () => {
     const mode = renderContext.getMode();
 
     return (
-        <HydrateInBrowser
-            child={ContactComponent}
-            props={{...form, mode}}
-        />
+        <>
+            <h2>Hello 26 !</h2>
+            {/* <HydrateInBrowser */}
+            {/*    child={ContactComponent} */}
+            {/*    props={{...form, mode}} */}
+            {/* /> */}
+        </>
+
     );
 };
 
 ContactFormDefault.jahiaComponent = {
-    nodeType: 'luxe:form',
+    nodeType: 'luxemix:contactForm',
+    // NodeType: 'luxe:form',
     name: 'default',
     displayName: 'default (hydrate)',
-    componentType: 'view',
-    properties: {
-        'cache.perUser': 'true'
-    }
+    componentType: 'view'
+    // Properties: {
+    //     'cache.perUser': 'true'
+    // }
 };

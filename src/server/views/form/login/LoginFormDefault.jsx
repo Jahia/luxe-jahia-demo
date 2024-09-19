@@ -33,7 +33,7 @@ export const LoginFormDefault = () => {
 };
 
 LoginFormDefault.jahiaComponent = {
-    nodeType: 'luxe:form',
+    nodeType: 'luxemix:loginForm',
     name: 'default',
     displayName: 'default (hydrate)',
     componentType: 'view',

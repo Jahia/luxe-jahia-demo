@@ -49,9 +49,9 @@
       "rememberMe": "Passwort",
       "liveWorkspace": "live",
       "previewWorkspace": "vorschau",
-      "editWorkspace": "bearbeiten"
+      "editWorkspace": "bearbeiten",
+      "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert"
     },
-    "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert",
     "unknownError": "Es ist ein Fehler aufgetreten"
   },
   "realtor": {

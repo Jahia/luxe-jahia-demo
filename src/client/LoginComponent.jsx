@@ -31,7 +31,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     };
 
     if (mode === 'edit') {
-        return <div className="alert alert-dark fs-6" role="alert">{t('form.editModeWarning')}</div>;
+        return <div className="alert alert-dark fs-6" role="alert">{t('form.login.editModeWarning')}</div>;
     }
 
     return loggedIn ? (

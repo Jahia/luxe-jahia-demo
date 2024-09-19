@@ -114,5 +114,5 @@
  - feedbackMsg (string,richtext[ckeditor.toolbar='Light']) i18n
 
 [luxe:form] > jnt:content, luxemix:luxeContent, mix:title
- - formType (string) indexed=no
+ - formType (string, choicelist) indexed=no
 // - formView (string, choicelist[templates=subnodes,resourceBundle,image,dependentProperties='formType']) nofulltext

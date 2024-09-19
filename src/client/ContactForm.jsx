@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import {Col, Row, Section} from '../server/components';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
-import LoginForm from './LoginForm';
 
 const submitContact = (
     target,
@@ -42,16 +40,14 @@ const ContactForm = ({target, setShowFeedback, setUnknownError}) => {
     const [message, setMessage] = useState('');
 
     return (
-        <Section>
-            <Row>
-                <Col>
-                    <form
-                        id="contactForm"
-                        className="modal-body d-flex flex-column gap-3"
-                    >
-                        <div>
-                            <label htmlFor="inputContactFirstName" className="form-label fs-6">{t('form.contact.firstname')}</label>
-                            <input
+
+        <form
+            id="contactForm"
+            className="modal-body d-flex flex-column gap-3"
+        >
+            <div>
+                <label htmlFor="inputContactFirstName" className="form-label fs-6">{t('form.contact.firstname')}</label>
+                <input
                                 autoFocus
                                 id="inputContactFirstName"
                                 type="text"
@@ -60,10 +56,10 @@ const ContactForm = ({target, setShowFeedback, setUnknownError}) => {
                                 className="form-control"
                                 onChange={e => setFirstname(e.target.value)}
                             />
-                        </div>
-                        <div>
-                            <label htmlFor="inputContactLastName" className="form-label fs-6">{t('form.contact.lastname')}</label>
-                            <input
+            </div>
+            <div>
+                <label htmlFor="inputContactLastName" className="form-label fs-6">{t('form.contact.lastname')}</label>
+                <input
                                 id="inputContactLastName"
                                 type="text"
                                 name="contact-lastname"
@@ -71,46 +67,42 @@ const ContactForm = ({target, setShowFeedback, setUnknownError}) => {
                                 className="form-control"
                                 onChange={e => setLastname(e.target.value)}
                             />
-                        </div>
-                        <div>
-                            <label htmlFor="inputContactEmail" className="form-label fs-6">{t('form.contact.lastname')}</label>
-                            <input
+            </div>
+            <div>
+                <label htmlFor="inputContactEmail" className="form-label fs-6">{t('form.contact.email')}</label>
+                <input
                                 id="inputContactEmail"
                                 type="email"
                                 name="contact-email"
-                                placeholder={t('form.contact.lastname')}
+                                placeholder={t('form.contact.email')}
                                 className="form-control"
                                 onChange={e => setEmail(e.target.value)}
                             />
-                        </div>
-                        <div>
-                            <label htmlFor="inputContactMsg" className="form-label fs-6">{t('form.contact.msg')}</label>
-                            <textarea
+            </div>
+            <div>
+                <label htmlFor="inputContactMsg" className="form-label fs-6">{t('form.contact.msg')}</label>
+                <textarea
                                 id="inputContactMsg"
                                 name="contact-message"
                                 placeholder={t('form.contact.msg')}
                                 className="form-control"
                                 onChange={e => setMessage(e.target.value)}
                             />
-                        </div>
-                        <button type="button"
-                                form="contactForm"
-                                className="btn btn-primary lux-capitalize"
-                                onClick={() => submitContact(target,
+            </div>
+            <button type="button"
+                    form="contactForm"
+                    className="btn btn-primary lux-capitalize"
+                    onClick={() => submitContact(target,
                                     firstname,
                                     lastname,
                                     email,
                                     message,
                                     setShowFeedback,
                                     setUnknownError)}
-                        >
-                            {t('form.login.login')}
-                        </button>
-                    </form>
-                </Col>
-            </Row>
-        </Section>
-
+            >
+                {t('form.contact.submit')}
+            </button>
+        </form>
     );
 };
 

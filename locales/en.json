@@ -49,9 +49,17 @@
       "rememberMe": "remember me",
       "liveWorkspace": "live",
       "previewWorkspace": "preview",
-      "editWorkspace": "edit"
+      "editWorkspace": "edit",
+      "editModeWarning": "Login is disabled in Page Builder"
     },
-    "editModeWarning": "Login is disabled in Page Builder",
+    "contact": {
+      "firstname": "firstname",
+      "lastname": "lastname",
+      "email": "email",
+      "msg": "your message",
+      "submit": "submit",
+      "editModeWarning": "Contact form disabled in Page Builder"
+    },
     "unknownError": "An error occured"
   },
   "realtor": {
