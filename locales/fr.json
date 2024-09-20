@@ -61,11 +61,6 @@
       "editModeWarning": "Le formulaire de contact est désactivée dans Page Builder",
       "sendMessageError": "Oups ! Désolé, {{name}}.<br/> Un problème est survenu avec votre message. Le code d'état est {{status}}.",
       "sendMessageAgain": "renvoyer le message"
-
-
-
-
-
     },
     "unknownError": "Une erreur s'est produite"
   },
