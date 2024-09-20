@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, server, buildUrl} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildNavMenu, server, buildUrl, defineJahiaComponent} from '@jahia/js-server-core';
 import {Section, TextIllustrated} from '../../components';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
@@ -92,7 +92,7 @@ export const NavMenuIllustrated = () => {
     );
 };
 
-NavMenuIllustrated.jahiaComponent = {
+NavMenuIllustrated.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:navMenu',
     name: 'navIllustrated',
     displayName: 'Nav Illustrated',
@@ -100,4 +100,4 @@ NavMenuIllustrated.jahiaComponent = {
     properties: {
         'cache.mainResource': 'true'
     }
-};
+});

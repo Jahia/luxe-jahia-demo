@@ -1,5 +1,5 @@
 import React from 'react';
-import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server-core';
+import {HydrateInBrowser, useServerContext, getNodeProps, RenderInBrowser} from '@jahia/js-server-core';
 import ContactComponent from '../../../../client/ContactComponent';
 
 export const ContactFormDefault = () => {
@@ -9,8 +9,12 @@ export const ContactFormDefault = () => {
 
     return (
         <>
-            <h2>Hello 26 !</h2>
-            {/* <HydrateInBrowser */}
+            {/* <h2>Hello 27 !</h2> */}
+            <HydrateInBrowser
+                child={ContactComponent}
+                props={{...form, mode}}
+             />
+            {/* <RenderInBrowser */}
             {/*    child={ContactComponent} */}
             {/*    props={{...form, mode}} */}
             {/* /> */}
@@ -21,7 +25,6 @@ export const ContactFormDefault = () => {
 
 ContactFormDefault.jahiaComponent = {
     nodeType: 'luxemix:contactForm',
-    // NodeType: 'luxe:form',
     name: 'default',
     displayName: 'default (hydrate)',
     componentType: 'view'

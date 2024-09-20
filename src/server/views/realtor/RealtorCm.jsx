@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     useServerContext,
-    Render
+    Render,
+    defineJahiaComponent
 } from '@jahia/js-server-core';
 import {CMPreview} from '../../components';
 
@@ -15,8 +16,8 @@ export const RealtorCm = () => {
     );
 };
 
-RealtorCm.jahiaComponent = {
+RealtorCm.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:realtor',
     name: 'cm',
     componentType: 'view'
-};
+});

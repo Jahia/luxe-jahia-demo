@@ -23,7 +23,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module'
     },
-    ignorePatterns: ['dist'],
+    ignorePatterns: ['dist', 'css', 'javascript'],
     rules: {
     }
 };

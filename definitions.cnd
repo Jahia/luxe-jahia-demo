@@ -111,7 +111,7 @@
 [luxemix:contactForm] > jmix:dynamicFieldset mixin
  extends = luxe:form
  - target (string) = 'luxe.jahia.com' autocreated
- - feedbackMsg (string,richtext[ckeditor.toolbar='Light']) i18n
+ - feedbackMsg (string,richtext) i18n
 
 [luxe:form] > jnt:content, luxemix:luxeContent, mix:title
  - formType (string, choicelist) indexed=no

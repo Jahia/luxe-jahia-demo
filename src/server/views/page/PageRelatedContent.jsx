@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {HeadingSection, Section} from '../../components';
-import {getNodeProps, getNodesByJCRQuery, Render, server, useServerContext} from '@jahia/js-server-core';
+import {getNodeProps, getNodesByJCRQuery, Render, server, useServerContext, defineJahiaComponent} from '@jahia/js-server-core';
 
 export const PageRelatedContent = () => {
     const {t} = useTranslation();
@@ -48,8 +48,8 @@ export const PageRelatedContent = () => {
     );
 };
 
-PageRelatedContent.jahiaComponent = {
+PageRelatedContent.jahiaComponent = defineJahiaComponent({
     nodeType: 'jnt:page',
     name: 'relatedContent',
     componentType: 'view'
-};
+});

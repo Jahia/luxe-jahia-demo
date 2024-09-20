@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server, buildUrl} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, buildUrl, defineJahiaComponent} from '@jahia/js-server-core';
 import {Col, Figure, PageTitle, Row, Section} from '../../components';
 import {useTranslation} from 'react-i18next';
 
@@ -124,8 +124,8 @@ export const EstateFullPage = () => {
     );
 };
 
-EstateFullPage.jahiaComponent = {
+EstateFullPage.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:estate',
     name: 'fullPage',
     componentType: 'view'
-};
+});

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Area} from '@jahia/js-server-core';
+import {Area, defineJahiaComponent} from '@jahia/js-server-core';
 import {MainLayout} from '../../layouts';
 
 export const PageCentered = () => {
@@ -12,9 +12,9 @@ export const PageCentered = () => {
     );
 };
 
-PageCentered.jahiaComponent = {
+PageCentered.jahiaComponent = defineJahiaComponent({
     nodeType: 'jnt:page',
     name: 'centered',
     displayName: 'Centered',
     componentType: 'template'
-};
+});

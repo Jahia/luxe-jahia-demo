@@ -2,29 +2,27 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 
-const submitContact = (
+const submitContact = ({
     target,
-    firstname,
-    lastname,
-    email,
-    message,
-    setShowFeedback,
-    setUnknownError) => {
+    body,
+    setFeedback,
+    setUnknownError}) => {
     fetch(target || '/luxe/contact', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'allow-redirects': 'false'
         },
-        body: {
-            firstname,
-            lastname,
-            email,
-            message
-        }
-    }).then(response => {
+        body: JSON.stringify(body)
+    }).then(({ok, status}) => {
         try {
-            setShowFeedback(true);
+            setFeedback({
+                show: true,
+                msgProps: body,
+                // Note remove Hardcoded value
+                ok: true,
+                status: 200
+            });
         } catch (e) {
             console.error('Contact form error : ', e);
             setUnknownError(true);
@@ -32,12 +30,14 @@ const submitContact = (
     });
 };
 
-const ContactForm = ({target, setShowFeedback, setUnknownError}) => {
+const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
     const {t} = useTranslation();
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const [firstname, setFirstname] = useState(prefill.firstname);
+    const [lastname, setLastname] = useState(prefill.lastname);
+    const [email, setEmail] = useState(prefill.email);
+    const [message, setMessage] = useState(prefill.message);
+
+    const isFormValid = firstname && lastname && email && message && mode !== 'edit';
 
     return (
 
@@ -46,59 +46,72 @@ const ContactForm = ({target, setShowFeedback, setUnknownError}) => {
             className="modal-body d-flex flex-column gap-3"
         >
             <div>
-                <label htmlFor="inputContactFirstName" className="form-label fs-6">{t('form.contact.firstname')}</label>
+                <label htmlFor="inputContactFirstName" className="form-label fs-6 lux-capitalize">{t('form.contact.firstname')}</label>
                 <input
-                                autoFocus
-                                id="inputContactFirstName"
-                                type="text"
-                                name="contact-firstname"
-                                placeholder={t('form.contact.firstname')}
-                                className="form-control"
-                                onChange={e => setFirstname(e.target.value)}
+                    autoFocus
+                    required
+                    id="inputContactFirstName"
+                    defaultValue={firstname}
+                    type="text"
+                    name="contact-firstname"
+                    placeholder={t('form.contact.firstname')}
+                    className="form-control"
+                    onChange={e => setFirstname(e.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="inputContactLastName" className="form-label fs-6 lux-capitalize">{t('form.contact.lastname')}</label>
+                <input
+                    required
+                    id="inputContactLastName"
+                    defaultValue={lastname}
+                    type="text"
+                    name="contact-lastname"
+                    placeholder={t('form.contact.lastname')}
+                    className="form-control"
+                    onChange={e => setLastname(e.target.value)}
                             />
             </div>
             <div>
-                <label htmlFor="inputContactLastName" className="form-label fs-6">{t('form.contact.lastname')}</label>
+                <label htmlFor="inputContactEmail" className="form-label fs-6 lux-capitalize">{t('form.contact.email')}</label>
                 <input
-                                id="inputContactLastName"
-                                type="text"
-                                name="contact-lastname"
-                                placeholder={t('form.contact.lastname')}
-                                className="form-control"
-                                onChange={e => setLastname(e.target.value)}
+                    required
+                    id="inputContactEmail"
+                    defaultValue={email}
+                    type="email"
+                    name="contact-email"
+                    placeholder={t('form.contact.email')}
+                    className="form-control"
+                    onChange={e => setEmail(e.target.value)}
                             />
             </div>
             <div>
-                <label htmlFor="inputContactEmail" className="form-label fs-6">{t('form.contact.email')}</label>
-                <input
-                                id="inputContactEmail"
-                                type="email"
-                                name="contact-email"
-                                placeholder={t('form.contact.email')}
-                                className="form-control"
-                                onChange={e => setEmail(e.target.value)}
-                            />
-            </div>
-            <div>
-                <label htmlFor="inputContactMsg" className="form-label fs-6">{t('form.contact.msg')}</label>
+                <label htmlFor="inputContactMsg" className="form-label fs-6 lux-capitalize">{t('form.contact.msg')}</label>
                 <textarea
-                                id="inputContactMsg"
-                                name="contact-message"
-                                placeholder={t('form.contact.msg')}
-                                className="form-control"
-                                onChange={e => setMessage(e.target.value)}
+                    required
+                    id="inputContactMsg"
+                    defaultValue={message}
+                    name="contact-message"
+                    placeholder={t('form.contact.msg')}
+                    className="form-control"
+                    onChange={e => setMessage(e.target.value)}
                             />
             </div>
             <button type="button"
                     form="contactForm"
                     className="btn btn-primary lux-capitalize"
-                    onClick={() => submitContact(target,
-                                    firstname,
-                                    lastname,
-                                    email,
-                                    message,
-                                    setShowFeedback,
-                                    setUnknownError)}
+                    disabled={!isFormValid}
+                    onClick={() => submitContact({
+                            target,
+                            body: {
+                                firstname,
+                                lastname,
+                                email,
+                                message
+                            },
+                            setFeedback,
+                            setUnknownError
+                    })}
             >
                 {t('form.contact.submit')}
             </button>
@@ -108,8 +121,15 @@ const ContactForm = ({target, setShowFeedback, setUnknownError}) => {
 
 ContactForm.propTypes = {
     target: PropTypes.string,
-    setShowFeedback: PropTypes.func.isRequired,
-    setUnknownError: PropTypes.func.isRequired
+    prefill: PropTypes.shape({
+        firstname: PropTypes.string,
+        lastname: PropTypes.string,
+        email: PropTypes.string,
+        message: PropTypes.string
+    }),
+    setFeedback: PropTypes.func.isRequired,
+    setUnknownError: PropTypes.func.isRequired,
+    mode: PropTypes.string.isRequired
 };
 
 export default ContactForm;

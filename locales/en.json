@@ -58,7 +58,9 @@
       "email": "email",
       "msg": "your message",
       "submit": "submit",
-      "editModeWarning": "Contact form disabled in Page Builder"
+      "editModeWarning": "Contact form disabled in Page Builder",
+      "sendMessageError": "Oops! Sorry, {{name}}.<br/> Something went wrong with your message. The status code is {{status}}.",
+      "sendMessageAgain": "send the message again"
     },
     "unknownError": "An error occured"
   },

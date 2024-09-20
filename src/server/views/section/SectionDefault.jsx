@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     useServerContext,
     getNodeProps,
-    Render, AddContentButtons, getChildNodes
+    Render, AddContentButtons, getChildNodes, defineJahiaComponent
 } from '@jahia/js-server-core';
 import clsx from 'clsx';
 
@@ -45,8 +45,8 @@ export const SectionDefault = () => {
     );
 };
 
-SectionDefault.jahiaComponent = {
+SectionDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:section',
     name: 'default',
     componentType: 'view'
-};
+});

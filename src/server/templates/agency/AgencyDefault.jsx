@@ -2,7 +2,7 @@ import React from 'react';
 import {MainLayout} from '../../layouts';
 import {
     useServerContext,
-    Render
+    Render, defineJahiaComponent
 } from '@jahia/js-server-core';
 
 export const AgencyDefault = () => {
@@ -15,8 +15,8 @@ export const AgencyDefault = () => {
     );
 };
 
-AgencyDefault.jahiaComponent = {
+AgencyDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:agency',
     name: 'default',
     componentType: 'template'
-};
+});
