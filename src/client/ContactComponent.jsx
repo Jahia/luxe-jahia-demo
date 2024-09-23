@@ -3,38 +3,7 @@ import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import PropTypes from 'prop-types';
 import ContactForm from './ContactForm';
-
-// Const prefillWithUserContext = (cxs, setPrefill) => {
-//     const contextServerPublicUrl = window.digitalData.contextServerPublicUrl;
-//     const body = {
-//         requiredProfileProperties: ['firstname', 'lastname', 'email'],
-//         sessionId: cxs.sessionId,
-//         source: {
-//             itemId: window.digitalData.page.pageInfo.pageID,
-//             itemType: 'page',
-//             scope: window.digitalData.scope
-//         }
-//     };
-//     fetch(`${contextServerPublicUrl}/context.json`, {
-//         method: 'post',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'allow-redirects': 'false'
-//         },
-//         body: JSON.stringify(body)
-//     }).then(response => {
-//         if (response.status === 200) {
-//             const {firstname, lastname, email} = response.data.requiredProfileProperties;
-//             setPrefill({firstname, lastname, email});
-//         } else {
-//             console.log('Failed to retrieve user profile: ');
-//             console.error(response);
-//         }
-//     }).catch(error => {
-//         console.log('Error in the call to retrieve user profiles data: ');
-//         console.error(error);
-//     });
-// };
+import {getCookie, prefillWithUserContext} from './ContactUtils';
 
 const ContactComponent = ({target, feedbackMsg, mode}) => {
     const {t} = useTranslation();
@@ -48,21 +17,18 @@ const ContactComponent = ({target, feedbackMsg, mode}) => {
         }
     }, [feedback]);
 
-    // UseEffect(() => {
-    //     if (window.cxs) {
-    //         prefillWithUserContext(window.cxs, setPrefill);
-    //     }
-    // }, [window]);
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.digitalData) {
+            const sessionId = window.cxs?.sessionId || getCookie('wem-session-id');
+            prefillWithUserContext(sessionId, setPrefill);
+        }
+    }, []);
 
     const handleRedo = e => {
         e.preventDefault();
         setFeedback({show: false, msgProps: {}});
         return false;
     };
-
-    // If (mode === 'edit') {
-    //     return <div className="alert alert-dark fs-6" role="alert">{t('form.contact.editModeWarning')}</div>;
-    // }
 
     if (feedback.show) {
         const {firstname, lastname, email, message} = feedback.msgProps;

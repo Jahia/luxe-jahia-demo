@@ -1,34 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
-
-const submitContact = ({
-    target,
-    body,
-    setFeedback,
-    setUnknownError}) => {
-    fetch(target || '/luxe/contact', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'allow-redirects': 'false'
-        },
-        body: JSON.stringify(body)
-    }).then(({ok, status}) => {
-        try {
-            setFeedback({
-                show: true,
-                msgProps: body,
-                // Note remove Hardcoded value
-                ok: true,
-                status: 200
-            });
-        } catch (e) {
-            console.error('Contact form error : ', e);
-            setUnknownError(true);
-        }
-    });
-};
+import {submitContact} from './ContactUtils';
 
 const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
     const {t} = useTranslation();
@@ -38,6 +11,20 @@ const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
     const [message, setMessage] = useState(prefill.message);
 
     const isFormValid = firstname && lastname && email && message && mode !== 'edit';
+
+    useEffect(() => {
+        if (prefill && prefill.firstname) {
+            setFirstname(prefill.firstname);
+        }
+
+        if (prefill && prefill.lastname) {
+            setLastname(prefill.lastname);
+        }
+
+        if (prefill && prefill.email) {
+            setEmail(prefill.email);
+        }
+    }, [prefill]);
 
     return (
 
