@@ -39,18 +39,30 @@
     "connection" : "connexion",
     "copyright" : "copyrights © 2002-{{currentDate}} tous droits réservés par Jahia Solutions Group SA"
   },
-  "login": {
-    "login": "connection",
-    "logout": "se déconnecter",
-    "badCreds": "Nom d'utilisateur ou mot de passe incorrect",
-    "unknowError": "Une erreur s'est produite",
-    "username": "Nom d'utilisateur",
-    "password": "Mot de passe",
-    "rememberMe": "se souvenir de moi",
-    "liveWorkspace": "live",
-    "previewWorkspace": "aperçu",
-    "editWorkspace": "éditer",
-    "editModeWarning": "La connexion est désactivée dans Page Builder"
+  "form": {
+    "login": {
+      "login": "connection",
+      "logout": "se déconnecter",
+      "badCreds": "Nom d'utilisateur ou mot de passe incorrect",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "rememberMe": "se souvenir de moi",
+      "liveWorkspace": "live",
+      "previewWorkspace": "aperçu",
+      "editWorkspace": "éditer",
+      "editModeWarning": "La connexion est désactivée dans Page Builder"
+    },
+    "contact": {
+      "firstname": "prénom",
+      "lastname": "nom",
+      "email": "courriel",
+      "msg": "votre message",
+      "submit": "envoyer",
+      "editModeWarning": "Le formulaire de contact est désactivée dans Page Builder",
+      "sendMessageError": "Oups ! Désolé, {{name}}.<br/> Un problème est survenu avec votre message. Le code d'état est {{status}}.",
+      "sendMessageAgain": "renvoyer le message"
+    },
+    "unknownError": "Une erreur s'est produite"
   },
   "realtor": {
     "jobPosition": {

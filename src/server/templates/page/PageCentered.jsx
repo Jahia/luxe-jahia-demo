@@ -15,6 +15,6 @@ export const PageCentered = () => {
 PageCentered.jahiaComponent = defineJahiaComponent({
     nodeType: 'jnt:page',
     name: 'centered',
-    displayName: 'CenteredPage',
+    displayName: 'Centered',
     componentType: 'template'
 });

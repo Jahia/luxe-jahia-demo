@@ -12,7 +12,7 @@
     "test": "yarn lint"
   },
   "jahia": {
-    "required-version": "8.2.0.0-SNAPSHOT",
+    "required-version": "8.2.0.0",
     "module-type": "templatesSet",
     "module-dependencies": "default",
     "static-resources": "/assets,/css,/javascript,/icons,/img,/dist",
@@ -32,7 +32,7 @@
     }
   },
   "dependencies": {
-    "@jahia/js-server-core": "^0.0.12",
+    "@jahia/js-server-core": "^0.0.13",
     "bootstrap": "^5.3.3",
     "graphql": "^16.7.1",
     "i18next": "^23.10.1",

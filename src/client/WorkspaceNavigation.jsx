@@ -48,17 +48,17 @@ const WorkspaceNavigation = ({urls, mode, nodePath}) => {
         <>
             {mode !== 'live' &&
                 <li>
-                    <a href={urls.liveUrl}>{t('login.liveWorkspace')}</a>
+                    <a href={urls.liveUrl}>{t('form.login.liveWorkspace')}</a>
                 </li>}
 
             {mode !== 'preview' && hasJcontentPermission &&
                 <li>
-                    <a href={urls.previewUrl}>{t('login.previewWorkspace')}</a>
+                    <a href={urls.previewUrl}>{t('form.login.previewWorkspace')}</a>
                 </li>}
 
             {mode !== 'edit' && hasJcontentPermission &&
                 <li>
-                    <a href={urls.editUrl}>{t('login.editWorkspace')}</a>
+                    <a href={urls.editUrl}>{t('form.login.editWorkspace')}</a>
                 </li>}
         </>
     );
