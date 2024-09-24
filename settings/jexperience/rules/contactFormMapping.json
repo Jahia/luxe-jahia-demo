@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "id": "form-mapping__LuxeContactForm",
+    "name": "Contact Form",
+    "description": "Mapp contact form field to jExp",
+    "scope": "luxe",
+    "systemTags": [
+      "formMappingRule"
+    ]
+  },
+  "priority": -1,
+  "condition": {
+    "type": "booleanCondition",
+    "parameterValues": {
+      "operator": "and",
+      "subConditions": [
+        {
+          "parameterValues": {
+            "formId": "contactForm"
+          },
+          "type": "formEventCondition"
+        },
+        {
+          "parameterValues": {
+            "operator": "or",
+            "subConditions": [
+              {
+                "parameterValues": {
+                  "path": "/sites/luxe/home/contact-us"
+                },
+                "type": "sourceEventPropertyCondition"
+              },
+              {
+                "parameterValues": {
+                  "scope": "luxe"
+                },
+                "type": "sourceEventPropertyCondition"
+              }
+            ]
+          },
+          "type": "booleanCondition"
+        }
+      ]
+    }
+  },
+  "actions": [
+    {
+      "parameterValues": {
+        "setPropertyName": "properties(email)",
+        "setPropertyStrategy": "alwaysSet",
+        "setPropertyValue": "eventProperty::flattenedProperties(fields)(contact-email)"
+      },
+      "type": "setPropertyAction"
+    },
+    {
+      "parameterValues": {
+        "setPropertyName": "properties(message)",
+        "setPropertyStrategy": "alwaysSet",
+        "setPropertyValue": "eventProperty::flattenedProperties(fields)(contact-message)"
+      },
+      "type": "setPropertyAction"
+    },
+    {
+      "parameterValues": {
+        "setPropertyName": "properties(firstName)",
+        "setPropertyStrategy": "alwaysSet",
+        "setPropertyValue": "eventProperty::flattenedProperties(fields)(contact-firstName)"
+      },
+      "type": "setPropertyAction"
+    },
+    {
+      "parameterValues": {
+        "setPropertyName": "properties(lastName)",
+        "setPropertyStrategy": "alwaysSet",
+        "setPropertyValue": "eventProperty::flattenedProperties(fields)(contact-lastName)"
+      },
+      "type": "setPropertyAction"
+    }
+  ]
+}
