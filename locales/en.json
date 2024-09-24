@@ -53,8 +53,8 @@
       "editModeWarning": "Login is disabled in Page Builder"
     },
     "contact": {
-      "firstname": "firstname",
-      "lastname": "lastname",
+      "firstName": "firstName",
+      "lastName": "lastName",
       "email": "email",
       "msg": "your message",
       "submit": "submit",

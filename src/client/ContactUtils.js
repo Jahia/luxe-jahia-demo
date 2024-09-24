@@ -35,8 +35,8 @@ export const prefillWithUserContext = (sessionId, setPrefill) => {
 
         return response.json();
     }).then(data => {
-        const {firstName: firstname, lastName: lastname, email} = data.profileProperties;
-        setPrefill({firstname, lastname, email});
+        const {firstName, lastName, email} = data.profileProperties;
+        setPrefill({firstName, lastName, email});
     }).catch(error => {
         console.log('Error in the call to retrieve user profiles data: ');
         console.error(error);
@@ -44,19 +44,25 @@ export const prefillWithUserContext = (sessionId, setPrefill) => {
 };
 
 export const submitContact = ({
+    form,
     target,
     body,
     setFeedback,
     setUnknownError}) => {
-    fetch(target || '/luxe/contact', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'allow-redirects': 'false'
-        },
-        body: JSON.stringify(body)
-    }).then(({ok, status}) => {
-        try {
+    // If user wants to use its own process to manage the data
+    if (target) {
+        fetch(target, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'allow-redirects': 'false'
+            },
+            body: JSON.stringify(body)
+        }).then(({ok, status}) => {
+            if (status !== 200) {
+                throw new Error(`HTTP error! status: ${status}`);
+            }
+
             setFeedback({
                 show: true,
                 msgProps: body,
@@ -64,9 +70,36 @@ export const submitContact = ({
                 ok, // : true,
                 status// : 200
             });
-        } catch (e) {
-            console.error('Contact form error : ', e);
+        }).catch(error => {
+            console.error('Contact form error : ', error);
             setUnknownError(true);
-        }
-    });
+        });
+    }
+
+    // By default, form info are sync with jExp if exist
+    if (window.wem) {
+        const contactFormEvent = window.wem.buildFormEvent('contactForm');
+        contactFormEvent.flattenedProperties = {
+            fields: window.wem._extractFormData(form)
+        };
+
+        window.wem.collectEvent(contactFormEvent, function ({status}) {
+            if (status !== 200) {
+                throw new Error(`HTTP error! status: ${status}`);
+            }
+
+            if (!target) {
+                setFeedback({
+                    show: true,
+                    msgProps: body,
+                    // Note remove Hardcoded value
+                    ok: true,
+                    status// : 200
+                });
+            }
+        }, function (xhr) {
+            console.error('oups something get wrong with jExp: ', xhr);
+        });
+    }
 };
+

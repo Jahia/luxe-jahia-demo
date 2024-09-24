@@ -53,8 +53,8 @@
       "editModeWarning": "La connexion est désactivée dans Page Builder"
     },
     "contact": {
-      "firstname": "prénom",
-      "lastname": "nom",
+      "firstName": "prénom",
+      "lastName": "nom",
       "email": "courriel",
       "msg": "votre message",
       "submit": "envoyer",

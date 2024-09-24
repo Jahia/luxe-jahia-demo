@@ -31,8 +31,8 @@ const ContactComponent = ({target, feedbackMsg, mode}) => {
     };
 
     if (feedback.show) {
-        const {firstname, lastname, email, message} = feedback.msgProps;
-        const name = `${firstname} ${lastname}`;
+        const {firstName, lastName, email, message} = feedback.msgProps;
+        const name = `${firstName} ${lastName}`;
         if (feedback.ok || feedback.status === 200) {
             const personalizedFeedbackMsg = feedbackMsg
                 .replace('$name', name)

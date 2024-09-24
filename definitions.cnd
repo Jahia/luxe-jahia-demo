@@ -110,7 +110,7 @@
 
 [luxemix:contactForm] > jmix:dynamicFieldset mixin
  extends = luxe:form
- - target (string) = 'luxe.jahia.com' autocreated
+ - target (string)
  - feedbackMsg (string,richtext) i18n
 
 [luxe:form] > jnt:content, luxemix:luxeContent, mix:title

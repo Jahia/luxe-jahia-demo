@@ -1,24 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import {submitContact} from './ContactUtils';
 
 const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
     const {t} = useTranslation();
-    const [firstname, setFirstname] = useState(prefill.firstname);
-    const [lastname, setLastname] = useState(prefill.lastname);
+    const [firstName, setFirstname] = useState(prefill.firstName);
+    const [lastName, setLastname] = useState(prefill.lastName);
     const [email, setEmail] = useState(prefill.email);
     const [message, setMessage] = useState(prefill.message);
+    // Const formRef = useRef(null);
 
-    const isFormValid = firstname && lastname && email && message && mode !== 'edit';
+    const isFormValid = firstName && lastName && email && message && mode !== 'edit';
 
     useEffect(() => {
-        if (prefill && prefill.firstname) {
-            setFirstname(prefill.firstname);
+        if (prefill && prefill.firstName) {
+            setFirstname(prefill.firstName);
         }
 
-        if (prefill && prefill.lastname) {
-            setLastname(prefill.lastname);
+        if (prefill && prefill.lastName) {
+            setLastname(prefill.lastName);
         }
 
         if (prefill && prefill.email) {
@@ -33,28 +34,28 @@ const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
             className="modal-body d-flex flex-column gap-3"
         >
             <div>
-                <label htmlFor="inputContactFirstName" className="form-label fs-6 lux-capitalize">{t('form.contact.firstname')}</label>
+                <label htmlFor="inputContactFirstName" className="form-label fs-6 lux-capitalize">{t('form.contact.firstName')}</label>
                 <input
                     autoFocus
                     required
                     id="inputContactFirstName"
-                    defaultValue={firstname}
+                    defaultValue={firstName}
                     type="text"
-                    name="contact-firstname"
-                    placeholder={t('form.contact.firstname')}
+                    name="contact-firstName"
+                    placeholder={t('form.contact.firstName')}
                     className="form-control"
                     onChange={e => setFirstname(e.target.value)}
                 />
             </div>
             <div>
-                <label htmlFor="inputContactLastName" className="form-label fs-6 lux-capitalize">{t('form.contact.lastname')}</label>
+                <label htmlFor="inputContactLastName" className="form-label fs-6 lux-capitalize">{t('form.contact.lastName')}</label>
                 <input
                     required
                     id="inputContactLastName"
-                    defaultValue={lastname}
+                    defaultValue={lastName}
                     type="text"
-                    name="contact-lastname"
-                    placeholder={t('form.contact.lastname')}
+                    name="contact-lastName"
+                    placeholder={t('form.contact.lastName')}
                     className="form-control"
                     onChange={e => setLastname(e.target.value)}
                             />
@@ -88,16 +89,17 @@ const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
                     form="contactForm"
                     className="btn btn-primary lux-capitalize"
                     disabled={!isFormValid}
-                    onClick={() => submitContact({
-                            target,
-                            body: {
-                                firstname,
-                                lastname,
-                                email,
-                                message
-                            },
-                            setFeedback,
-                            setUnknownError
+                    onClick={e => submitContact({
+                        form: e.target.form,
+                        target,
+                        body: {
+                            firstName,
+                            lastName,
+                            email,
+                            message
+                        },
+                        setFeedback,
+                        setUnknownError
                     })}
             >
                 {t('form.contact.submit')}
@@ -109,8 +111,8 @@ const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
 ContactForm.propTypes = {
     target: PropTypes.string,
     prefill: PropTypes.shape({
-        firstname: PropTypes.string,
-        lastname: PropTypes.string,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
         email: PropTypes.string,
         message: PropTypes.string
     }),
