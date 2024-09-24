@@ -35,8 +35,7 @@ export const prefillWithUserContext = (sessionId, setPrefill) => {
 
         return response.json();
     }).then(data => {
-        const {firstName, lastName, email} = data.profileProperties;
-        setPrefill({firstName, lastName, email});
+        setPrefill(data.profileProperties);
     }).catch(error => {
         console.log('Error in the call to retrieve user profiles data: ');
         console.error(error);

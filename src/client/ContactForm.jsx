@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import {submitContact} from './ContactUtils';
 
-const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
+const ContactForm = ({target, prefill = {}, setFeedback, setUnknownError, mode}) => {
     const {t} = useTranslation();
     const [firstName, setFirstname] = useState(prefill.firstName);
     const [lastName, setLastname] = useState(prefill.lastName);
@@ -14,16 +14,18 @@ const ContactForm = ({target, prefill, setFeedback, setUnknownError, mode}) => {
     const isFormValid = firstName && lastName && email && message && mode !== 'edit';
 
     useEffect(() => {
-        if (prefill && prefill.firstName) {
-            setFirstname(prefill.firstName);
+        const {firstName, lastName, email} = prefill;
+
+        if (firstName) {
+            setFirstname(firstName);
         }
 
-        if (prefill && prefill.lastName) {
-            setLastname(prefill.lastName);
+        if (lastName) {
+            setLastname(lastName);
         }
 
-        if (prefill && prefill.email) {
-            setEmail(prefill.email);
+        if (email) {
+            setEmail(email);
         }
     }, [prefill]);
 
