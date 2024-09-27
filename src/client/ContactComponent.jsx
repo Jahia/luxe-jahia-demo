@@ -68,7 +68,7 @@ const ContactComponent = ({target, feedbackMsg, mode}) => {
     if (unknownError) {
         return (
             <p className="alert alert-danger fs-6" role="alert">
-                {t('form.unknownError')}
+                {t('form.unknownError')} et voilà
             </p>
         );
     }

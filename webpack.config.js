@@ -6,6 +6,8 @@ const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
 
+const {dependencies, name : moduleName} = require('./package.json');
+
 // This is the configuration for the CycloneDX Webpack plugin, used for SBOM generation
 /** @type {import('@cyclonedx/webpack-plugin').CycloneDxWebpackPluginOptions} */
 const cycloneDxWebpackPluginOptions = {
@@ -14,12 +16,15 @@ const cycloneDxWebpackPluginOptions = {
     outputLocation: './bom'
 };
 
-// This code is related to scanning for client components, in order to expose them correctly in the ModuleFederationPlugin
+// Read all files in the client components directory in order to expose them with webpack module federation more easily
+// Those components are exposed in order to be hydrate/rendered client sideconst componentsDir = './src/client';
 const componentsDir = './src/client';
 const exposes = {};
 fs.readdirSync(componentsDir).forEach(file => {
+  if (file !== 'index.js') {
     const componentName = path.basename(file, path.extname(file));
     exposes[componentName] = path.resolve(componentsDir, file);
+  }
 });
 
 module.exports = (env, mode) => {
@@ -30,7 +35,7 @@ module.exports = (env, mode) => {
         {
             name: 'client',
             entry: {
-                'luxe-jahia-demo': path.resolve(__dirname, './src/client/index')
+                [moduleName]: path.resolve(__dirname, './src/client/index')
             },
             output: {
                 path: path.resolve(__dirname, 'javascript/client')
@@ -59,7 +64,6 @@ module.exports = (env, mode) => {
                     }
                 ]
             },
-            devtool: 'inline-source-map',
             plugins: [
                 // This plugin allows a build to provide or consume modules with other independent builds at runtime.
                 new ModuleFederationPlugin({
@@ -69,17 +73,19 @@ module.exports = (env, mode) => {
                     exposes: exposes,
                     shared: {
                         react: {
-                            requiredVersion: '^18.2.0',
+                            requiredVersion: dependencies.react,
                             singleton: true
                         },
                         'react-i18next': {},
-                        'i18next': {}
+                        i18next: {}
                     }
                 }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
-            ]
+            ],
+            devtool: 'inline-source-map',
+            mode: 'development'
         },
         // Config for bundling and minifying scss files into css files
         {
@@ -142,7 +148,10 @@ module.exports = (env, mode) => {
                 rules: [
                     {
                         test: /\.jsx$/,
-                        include: [path.join(__dirname, 'src/server'), path.join(__dirname, 'src/client')],
+                        include: [
+                            path.join(__dirname, 'src/server'),
+                            path.join(__dirname, 'src/client')
+                        ],
                         use: {
                             loader: 'babel-loader',
                             options: {
