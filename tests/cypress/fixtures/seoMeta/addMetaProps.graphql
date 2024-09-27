@@ -1,0 +1,54 @@
+mutation addMetaProps($pathOrId: String!, $imageUuid: String!) {
+    jcr {
+        mutateNode(pathOrId: $pathOrId) {
+            addMixins(mixins:["jmix:seoHtmlHead"])
+            setPropertiesBatch(properties: [
+                {
+                    name: "jcr:description",
+                    type: STRING,
+                    value: "description en",
+                    language: "en"
+                },
+                {
+                    name: "jcr:description",
+                    type: STRING,
+                    value: "description fr",
+                    language: "fr"
+                },
+                {
+                    name: "seoKeywords",
+                    type: STRING,
+                    values: [
+                        "en1",
+                        "en2"
+                    ],
+                    language: "en"
+                },
+                {
+                    name: "seoKeywords",
+                    type: STRING,
+                    values: [
+                        "fr1",
+                        "fr2"
+                    ],
+                    language: "fr"
+                },
+                {
+                    name: "openGraphImage",
+                    type: WEAKREFERENCE,
+                    value: $imageUuid
+                }
+            ]) {
+                path
+            }
+            addChild(name: "nonMetaPage",
+                primaryNodeType: "jnt:page",
+                properties: [
+                    { name: "jcr:title", language: "en", value: "Page test 1" },
+                    { name: "j:templateName", value: "home" }
+            ]) {
+                uuid
+            }
+        }
+    }
+}
