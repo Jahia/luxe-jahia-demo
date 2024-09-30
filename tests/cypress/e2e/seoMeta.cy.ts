@@ -1,4 +1,4 @@
-import {createSite, deleteSite, publishAndWaitJobEnding, getNodeByPath} from '@jahia/cypress';
+import {createSite, deleteSite, publishAndWaitJobEnding} from '@jahia/cypress';
 import {uploadFile} from '../fixtures/seoMeta/uploadFile';
 
 describe('SEO meta test', () => {

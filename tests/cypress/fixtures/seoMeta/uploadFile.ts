@@ -1,4 +1,4 @@
-export const uploadFile = (fixturePath: string, parentPath: string, name: string, mimeType: string) => {
+export const uploadFile = (fixturePath: string, parentPath: string, name: string, mimeType: string): Cypress.Chainable => {
     return cy.fixture(fixturePath, 'binary')
         .then(image => {
             const blob = Cypress.Blob.binaryStringToBlob(image, mimeType);
