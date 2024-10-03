@@ -75,7 +75,7 @@ describe('SEO meta test', () => {
         cy.logout();
     });
 
-    it('should not contain meta tags for non-exsiting meta values', () => {
+    it('should not contain meta tags for non-existing meta values', () => {
         cy.visit(`/sites/${siteKey}/home/nonMetaPage.html`);
 
         testOgMetaTags('title', 'Page test 1');
