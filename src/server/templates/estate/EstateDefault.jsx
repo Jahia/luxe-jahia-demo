@@ -5,12 +5,9 @@ import {MainLayout} from '../../layouts';
 export const EstateDefault = () => {
     const {currentNode} = useServerContext();
     return (
-        <MainLayout
-            head={<meta name="description" content="content template"/>}
-        >
+        <MainLayout>
             <Render node={currentNode} view="fullPage"/>
         </MainLayout>
-
     );
 };
 

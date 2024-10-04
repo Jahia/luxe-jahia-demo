@@ -8,7 +8,6 @@ export const PageHome = () => {
             head={
                 <>
                     <title>LuXE Demo</title>
-                    <meta name="description" content="luXE: demonstration website created by Jahia. Jahia the best user experience"/>
                 </>
             }
         >
