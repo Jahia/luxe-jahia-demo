@@ -12,6 +12,7 @@
     "test": "yarn lint"
   },
   "jahia": {
+    "snapshot": true,
     "required-version": "8.2.0.0-SNAPSHOT",
     "module-type": "templatesSet",
     "module-dependencies": "default",

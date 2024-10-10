@@ -71,3 +71,4 @@ jobs:
         with:
           dependencytrack_hostname: ${{ vars.DEPENDENCYTRACK_HOSTNAME }}
           dependencytrack_apikey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
+          sbom_artifacts: 'build-artifacts'
