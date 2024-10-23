@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-    useServerContext,
+    defineJahiaComponent,
     getNodeProps,
-    server,
     getNodesByJCRQuery,
     Render,
-    buildUrl,
-    defineJahiaComponent
+    server,
+    useServerContext,
+    useUrlBuilder
 } from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
@@ -15,8 +15,8 @@ const MAX_ESTATE = 6;
 
 export const RealtorFullPage = () => {
     const {t} = useTranslation();
-    const {currentNode, renderContext, currentResource} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {currentNode, renderContext} = useServerContext();
+    const {buildStaticUrl} = useUrlBuilder();
 
     const refBy = currentNode.getWeakReferences();
     const refByNode = [];
@@ -91,7 +91,7 @@ export const RealtorFullPage = () => {
     ];
 
     const image = {
-        src: buildUrl({value: `${modulePath}/assets/img/agent-placeholder.jpg`}, renderContext, currentResource),
+        src: buildStaticUrl({assetPath: 'img/agent-placeholder.jpg'}),
         alt: 'Placeholder'
     };
 

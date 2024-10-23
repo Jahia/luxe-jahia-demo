@@ -89,7 +89,7 @@ module.exports = (env, mode) => {
                 editMode: ['./src/scss/edit-mode.scss']
             },
             output: {
-                path: path.resolve(__dirname, 'dist/css')
+                path: path.resolve(__dirname, 'static/dist')
             },
             module: {
                 rules: [
