@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AddResources, buildUrl, useServerContext} from '@jahia/js-server-core';
-import {getCssPath} from '../config';
+import {AddResources, useUrlBuilder} from '@jahia/js-server-core';
 
 export const CMPreview = ({className, children}) => {
-    const {renderContext, currentResource} = useServerContext();
-    const cssPath = getCssPath(renderContext.getURLGenerator().getCurrentModule());
+    const {buildStaticUrl} = useUrlBuilder();
 
     return (
         <>
-            <AddResources type="css" resources={buildUrl({value: `${cssPath}/styles.css`}, renderContext, currentResource)}/>
+            <AddResources type="css" resources={buildStaticUrl({assetPath: 'dist/styles.css'})}/>
             <main className={className}>
                 {children}
             </main>

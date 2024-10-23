@@ -1,12 +1,12 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server, buildUrl, defineJahiaComponent} from '@jahia/js-server-core';
+import {defineJahiaComponent, getNodeProps, server, useServerContext, useUrlBuilder} from '@jahia/js-server-core';
 import {Col, Figure, PageTitle, Row, Section} from '../../components';
 import {useTranslation} from 'react-i18next';
 
 export const EstateFullPage = () => {
     const {t} = useTranslation();
     const {currentNode, currentResource, renderContext} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {buildStaticUrl} = useUrlBuilder();
     const locale = currentResource.getLocale().getLanguage();
 
     const estate = getNodeProps(currentNode, [
@@ -23,7 +23,7 @@ export const EstateFullPage = () => {
     ]);
 
     const image = {
-        src: buildUrl({value: `${modulePath}/assets/img/img-placeholder.jpg`}, renderContext, currentResource),
+        src: buildStaticUrl({assetPath: 'img/img-placeholder.jpg'}),
         alt: 'Placeholder'
     };
 
