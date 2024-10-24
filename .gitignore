@@ -30,3 +30,5 @@ javascript/main.js
 javascript/client/*
 /.settings/
 /.project
+
+.DS_Store

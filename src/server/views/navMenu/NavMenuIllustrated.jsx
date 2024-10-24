@@ -1,17 +1,24 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, server, buildUrl, defineJahiaComponent} from '@jahia/js-server-core';
+import {
+    buildNavMenu,
+    defineJahiaComponent,
+    getNodeProps,
+    server,
+    useServerContext,
+    useUrlBuilder
+} from '@jahia/js-server-core';
 import {Section, TextIllustrated} from '../../components';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 
 const NavMenuItem = ({pageNode, arrangement}) => {
     const {t} = useTranslation();
-    const {renderContext, currentResource} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {renderContext} = useServerContext();
+    const {buildStaticUrl} = useUrlBuilder();
     const page = getNodeProps(pageNode, ['jcr:title', 'subtitle', 'image']);
 
     const image = {
-        src: buildUrl({value: `${modulePath}/assets/img/agency-placeholder.jpg`}, renderContext, currentResource),
+        src: buildStaticUrl({assetPath: 'img/agency-placeholder.jpg'}),
         alt: 'Placeholder'
     };
 
