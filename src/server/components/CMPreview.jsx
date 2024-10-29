@@ -7,7 +7,7 @@ export const CMPreview = ({className, children}) => {
 
     return (
         <>
-            <AddResources type="css" resources={buildStaticUrl({assetPath: 'dist/styles.css'})}/>
+            <AddResources type="css" resources={buildStaticUrl({assetPath: 'css/styles.css'})}/>
             <main className={className}>
                 {children}
             </main>

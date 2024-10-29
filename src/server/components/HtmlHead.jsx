@@ -14,10 +14,10 @@ export const HtmlHead = ({children}) => {
             <SeoMetaTags/>
 
             <link rel="icon" type="image/png" href={buildStaticUrl({assetPath: 'favicon-32x32.png'})}/>
-            <AddResources type="css" resources={buildStaticUrl({assetPath: 'dist/styles.css'})}/>
+            <AddResources type="css" resources={buildStaticUrl({assetPath: 'css/styles.css'})}/>
             {/* Styles specific for Edit Mode (Page Composer) */}
             {renderContext.isEditMode() &&
-                <AddResources type="css" resources={buildStaticUrl({assetPath: 'dist/editMode.css'})}/>}
+                <AddResources type="css" resources={buildStaticUrl({assetPath: 'css/editMode.css'})}/>}
             {children}
         </head>
     );
