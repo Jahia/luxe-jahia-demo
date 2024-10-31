@@ -1,19 +1,15 @@
 import React from 'react';
-import {
-    useServerContext,
-    getNodeProps,
-    server, buildUrl, defineJahiaComponent
-} from '@jahia/js-server-core';
+import {defineJahiaComponent, getNodeProps, server, useServerContext, useUrlBuilder} from '@jahia/js-server-core';
 
 import {TextIllustrated} from '../../components';
 
 export const TextIllustratedDefault = () => {
-    const {currentNode, renderContext, currentResource} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {currentNode, renderContext} = useServerContext();
+    const {buildStaticUrl} = useUrlBuilder();
     const textI9d = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
 
     const image = {
-        src: buildUrl({value: `${modulePath}/assets/img/img-placeholder.jpg`}, renderContext, currentResource),
+        src: buildStaticUrl({assetPath: 'img/img-placeholder.jpg'}),
         alt: 'placeholder'
     };
 

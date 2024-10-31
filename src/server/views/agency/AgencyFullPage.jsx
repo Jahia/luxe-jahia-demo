@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-    useServerContext,
+    defineJahiaComponent,
     getNodeProps,
-    server,
     getNodesByJCRQuery,
     Render,
-    buildUrl,
-    defineJahiaComponent
+    server,
+    useServerContext,
+    useUrlBuilder
 } from '@jahia/js-server-core';
 
 import {useTranslation} from 'react-i18next';
@@ -28,8 +28,8 @@ const getAgencyLanguage = (agency, renderContext) => {
 
 export const AgencyFullPage = () => {
     const {t} = useTranslation();
-    const {currentNode, renderContext, currentResource} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {currentNode, renderContext} = useServerContext();
+    const {buildStaticUrl} = useUrlBuilder();
     const currentNodePath = currentNode.getPath();
 
     const agency = getNodeProps(currentNode, [
@@ -69,7 +69,7 @@ export const AgencyFullPage = () => {
     ];
 
     const image = {
-        src: buildUrl({value: `${modulePath}/assets/img/agency-placeholder.jpg`}, renderContext, currentResource),
+        src: buildStaticUrl({assetPath: 'img/agency-placeholder.jpg'}),
         alt: 'Placeholder'
     };
 

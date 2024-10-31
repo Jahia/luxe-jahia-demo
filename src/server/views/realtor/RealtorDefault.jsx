@@ -1,11 +1,11 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildUrl, server, defineJahiaComponent} from '@jahia/js-server-core';
+import {defineJahiaComponent, getNodeProps, server, useServerContext, useUrlBuilder} from '@jahia/js-server-core';
 import {useTranslation} from 'react-i18next';
 
 export const RealtorDefault = () => {
     const {t} = useTranslation();
-    const {currentNode, renderContext, currentResource} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {currentNode, renderContext} = useServerContext();
+    const {buildStaticUrl} = useUrlBuilder();
     const realtor = getNodeProps(currentNode, [
         'firstName',
         'lastName',
@@ -14,7 +14,7 @@ export const RealtorDefault = () => {
     ]);
 
     const image = {
-        src: buildUrl({value: `${modulePath}/assets/img/agent-placeholder.jpg`}, renderContext, currentResource),
+        src: buildStaticUrl({assetPath: 'img/agent-placeholder.jpg'}),
         alt: 'Placeholder'
     };
 
