@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
@@ -22,6 +23,13 @@ fs.readdirSync(componentsDir).forEach(file => {
     exposes[componentName] = path.resolve(componentsDir, file);
 });
 
+const buildOutput = path.resolve(__dirname, 'dist/build');
+const filesToCopyAsIs = ['static/', 'settings/', 'package.json', 'yarn.lock'];
+const copyAsIsPatterns = filesToCopyAsIs.map(dir => ({
+    from: dir,
+    to: path.join(buildOutput, dir)
+}));
+
 module.exports = (env, mode) => {
     let configs = [
         // Config for jahia's client-side components (HydrateInBrowser or RenderInBrowser)
@@ -33,7 +41,7 @@ module.exports = (env, mode) => {
                 'luxe-jahia-demo': path.resolve(__dirname, './src/client/index')
             },
             output: {
-                path: path.resolve(__dirname, 'javascript/client')
+                path: path.join(buildOutput, 'javascript/client')
             },
             resolve: {
                 mainFields: ['module', 'main'],
@@ -64,7 +72,10 @@ module.exports = (env, mode) => {
                 // This plugin allows a build to provide or consume modules with other independent builds at runtime.
                 new ModuleFederationPlugin({
                     name: 'luxe-jahia-demo',
-                    library: {type: 'assign', name: 'window.appShell = (typeof appShell === "undefined" ? {} : appShell); window.appShell[\'luxe-jahia-demo\']'},
+                    library: {
+                        type: 'assign',
+                        name: 'window.appShell = (typeof appShell === "undefined" ? {} : appShell); window.appShell[\'luxe-jahia-demo\']'
+                    },
                     filename: '../client/remote.js',
                     exposes: exposes,
                     shared: {
@@ -81,6 +92,14 @@ module.exports = (env, mode) => {
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
             ]
         },
+        {
+            name: 'copy-as-is',
+            plugins: [
+                new CopyWebpackPlugin({
+                    patterns: copyAsIsPatterns
+                })
+            ]
+        },
         // Config for bundling and minifying scss files into css files
         {
             name: 'css',
@@ -89,7 +108,7 @@ module.exports = (env, mode) => {
                 editMode: ['./src/scss/edit-mode.scss']
             },
             output: {
-                path: path.resolve(__dirname, 'static/dist')
+                path: path.join(buildOutput, 'static/css')
             },
             module: {
                 rules: [
@@ -110,7 +129,7 @@ module.exports = (env, mode) => {
             },
             plugins: [
                 // This plugin extracts CSS into separate files
-                new MiniCssExtractPlugin({ filename: '[name].css' }),
+                new MiniCssExtractPlugin({filename: '[name].css'}),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
                 !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
@@ -124,7 +143,7 @@ module.exports = (env, mode) => {
                 main: path.resolve(__dirname, 'src/server')
             },
             output: {
-                path: path.resolve(__dirname, 'dist')
+                path: buildOutput
             },
             externals: {
                 // Those libraries are supplied to webpack at runtime (by the npm-module-engine project), and are not packaged in the output bundle
@@ -147,7 +166,7 @@ module.exports = (env, mode) => {
                             loader: 'babel-loader',
                             options: {
                                 presets: [
-                                    ['@babel/preset-env', { modules: false, targets: { safari: '7', ie: '10' } }],
+                                    ['@babel/preset-env', {modules: false, targets: {safari: '7', ie: '10'}}],
                                     '@babel/preset-react'
                                 ],
                                 plugins: [
@@ -173,13 +192,13 @@ module.exports = (env, mode) => {
     // (Feel free to adjust the sleep time according to your needs)
     if (mode.watch) {
 
-         // sleep time in seconds, can be adjusted
+        // sleep time in seconds, can be adjusted
         const sleepTime = 5;
 
         configs.push({
             name: 'watch',
             mode: 'development',
-            dependencies: ['client', 'css', 'server'], // wait for all webpack configs to be done
+            dependencies: ['client', 'css', 'server', 'copy-as-is'], // wait for all webpack configs to be done
             entry: {},
             output: {},
             plugins: [
@@ -188,16 +207,9 @@ module.exports = (env, mode) => {
                     // It should include all files that are not already part of any webpack build
                     // Also do not watch for webpack generated files places, it can cause infinite loops of watch triggers
                     // for example, if your css is generated by webpack compiling scss, then:
-                    // - do not add extra watch for 'css/**/*' -> it's the output of webpack scss build
+                    // - do not add extra watch for 'dist/build/static/css/**/*' -> it's the output of webpack scss build
                     // - do not add extra watch for 'src/scss/**/*' either, as it's already watched by webpack related config.
                     files: [
-                        'images/**/*',
-                        'locales/**/*.json',
-                        'resources/**/*.properties',
-                        'settings/**/*',
-                        'definitions.cnd',
-                        'import.xml',
-                        'package.json'
                     ]
                 }),
                 new WebpackShellPluginNext({
@@ -214,6 +226,13 @@ module.exports = (env, mode) => {
             ],
         });
     }
+
+    // Ensure no default entry points are used
+    configs.forEach(config => {
+        if (!config.entry) {
+            config.entry = {};
+        }
+    });
 
     return configs;
 };
