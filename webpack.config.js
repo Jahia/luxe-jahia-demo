@@ -5,6 +5,7 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 const {CycloneDxWebpackPlugin} = require('@cyclonedx/webpack-plugin');
 
 // This is the configuration for the CycloneDX Webpack plugin, used for SBOM generation
@@ -30,7 +31,23 @@ const copyAsIsPatterns = filesToCopyAsIs.map(dir => ({
     to: path.join(buildOutput, dir)
 }));
 
-module.exports = (env, mode) => {
+
+module.exports = (env, argv) => {
+    const isDevelopment = argv.mode === 'development';
+    const mode = isDevelopment ? 'development' : 'production';
+    console.log('Building in', mode, 'mode...');
+    let optimization = isDevelopment ? {} : {
+        minimizer: [
+            // This is required to make hydration working, as its implementation relies on the class name of the React component.
+            // See InBrowser.jsx in js-server-core for details
+            new TerserPlugin({
+                terserOptions: {
+                    keep_classnames: true,
+                    keep_fnames: true
+                }
+            })
+        ]
+    };
     let configs = [
         // Config for jahia's client-side components (HydrateInBrowser or RenderInBrowser)
         // This config can be removed if the module doesn't contain client-side components
@@ -60,14 +77,15 @@ module.exports = (env, mode) => {
                                     '@babel/preset-react'
                                 ],
                                 plugins: [
-                                    'styled-jsx/babel'
-                                ]
+                                    'styled-jsx/babel',
+                                    !isDevelopment && 'transform-react-remove-prop-types'
+                                ].filter(Boolean)
                             }
                         }
                     }
                 ]
             },
-            devtool: 'inline-source-map',
+            devtool: isDevelopment ? 'inline-source-map' : 'source-map',
             plugins: [
                 // This plugin allows a build to provide or consume modules with other independent builds at runtime.
                 new ModuleFederationPlugin({
@@ -89,8 +107,8 @@ module.exports = (env, mode) => {
                 }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
-                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
-            ]
+                !argv.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+            ].filter(Boolean)
         },
         {
             name: 'copy-as-is',
@@ -132,8 +150,8 @@ module.exports = (env, mode) => {
                 new MiniCssExtractPlugin({filename: '[name].css'}),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
-                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
-            ]
+                !argv.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+            ].filter(Boolean),
         },
         // Config for jahia's server-side components (using SSR) and source code
         // Those components have access to jahia's custom types and functions (https://academy.jahia.com/documentation/jahia/jahia-8/developer/javascript-module-development/javascript-modules-reference-documentation)
@@ -170,8 +188,9 @@ module.exports = (env, mode) => {
                                     '@babel/preset-react'
                                 ],
                                 plugins: [
-                                    'styled-jsx/babel'
-                                ]
+                                    'styled-jsx/babel',
+                                    !isDevelopment && 'transform-react-remove-prop-types'
+                                ].filter(Boolean)
                             }
                         }
                     }
@@ -180,24 +199,23 @@ module.exports = (env, mode) => {
             plugins: [
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
-                !mode.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
-            ],
-            devtool: 'inline-source-map',
-            mode: 'development'
+                !argv.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+            ].filter(Boolean),
+            devtool: isDevelopment ? 'inline-source-map' : 'source-map',
+            optimization: optimization
         }
     ];
 
     // In case of watch we add a final config that will do automatic shell commands to trigger the pack and deploy scripts
     // Also an additional sleep is added to avoid watch triggering too much in a short time
     // (Feel free to adjust the sleep time according to your needs)
-    if (mode.watch) {
+    if (argv.watch) {
 
         // sleep time in seconds, can be adjusted
         const sleepTime = 5;
 
         configs.push({
             name: 'watch',
-            mode: 'development',
             dependencies: ['client', 'css', 'server', 'copy-as-is'], // wait for all webpack configs to be done
             entry: {},
             output: {},
@@ -209,8 +227,7 @@ module.exports = (env, mode) => {
                     // for example, if your css is generated by webpack compiling scss, then:
                     // - do not add extra watch for 'dist/build/static/css/**/*' -> it's the output of webpack scss build
                     // - do not add extra watch for 'src/scss/**/*' either, as it's already watched by webpack related config.
-                    files: [
-                    ]
+                    files: []
                 }),
                 new WebpackShellPluginNext({
                     onAfterDone: {
@@ -227,11 +244,13 @@ module.exports = (env, mode) => {
         });
     }
 
-    // Ensure no default entry points are used
     configs.forEach(config => {
+        // Ensure no default entry points are used
         if (!config.entry) {
             config.entry = {};
         }
+        // Set the mode development/production
+        config.mode = mode
     });
 
     return configs;
