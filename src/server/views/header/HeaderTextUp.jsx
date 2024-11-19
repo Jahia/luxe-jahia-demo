@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, server, defineJahiaComponent} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, server, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import {Figure, PageTitle, Row} from '../../components';
 
 export const HeaderTextUp = () => {

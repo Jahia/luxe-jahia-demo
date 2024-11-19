@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, Render, defineJahiaComponent} from '@jahia/js-server-core';
+import {useServerContext, Render, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import {CMPreview} from '../../components';
 
 export const EstateCm = () => {

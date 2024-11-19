@@ -4,7 +4,7 @@ import {
     getNodeProps,
     Area,
     defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import clsx from 'clsx';
 
 export const ColsDefault = () => {

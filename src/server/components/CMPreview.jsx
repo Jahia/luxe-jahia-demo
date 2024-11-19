@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AddResources, useUrlBuilder} from '@jahia/js-server-core';
+import {AddResources, useUrlBuilder} from '@jahia/javascript-modules-library';
 
 export const CMPreview = ({className, children}) => {
     const {buildStaticUrl} = useUrlBuilder();

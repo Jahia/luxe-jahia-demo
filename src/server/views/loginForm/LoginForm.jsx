@@ -1,5 +1,5 @@
 import React from 'react';
-import {HydrateInBrowser, useServerContext, getNodeProps, defineJahiaComponent} from '@jahia/js-server-core';
+import {HydrateInBrowser, useServerContext, getNodeProps, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import LoginComponent from '../../../client/LoginComponent';
 
 export const LoginForm = () => {

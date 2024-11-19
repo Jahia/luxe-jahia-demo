@@ -7,7 +7,7 @@ import {
     server,
     useServerContext,
     useUrlBuilder
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import {useTranslation} from 'react-i18next';
 import {Col, ContentHeader, HeadingSection, Row, Section, Table} from '../../components';
 

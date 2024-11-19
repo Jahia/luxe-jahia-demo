@@ -4,7 +4,7 @@ import {
     getNodeProps,
     useUrlBuilder,
     server, defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import {useTranslation} from 'react-i18next';
 
 export const AgencyDefault = () => {

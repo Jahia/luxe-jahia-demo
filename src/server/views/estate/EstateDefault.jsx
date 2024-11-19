@@ -1,5 +1,5 @@
 import React from 'react';
-import {defineJahiaComponent, getNodeProps, server, useServerContext, useUrlBuilder} from '@jahia/js-server-core';
+import {defineJahiaComponent, getNodeProps, server, useServerContext, useUrlBuilder} from '@jahia/javascript-modules-library';
 import {useTranslation} from 'react-i18next';
 
 export const EstateDefault = () => {
