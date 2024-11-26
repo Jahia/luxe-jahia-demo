@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "@jahia/javascript-modules-library": "/Users/baptistegrimaud/Documents/code/jahia/BACKLOG-23366-javascript-modules/javascript-modules/javascript-modules-library/target/javascript-modules-library-0.0.1-SNAPSHOT.tgz",
+    "@jahia/javascript-modules-library": "^0.0.4",
     "bootstrap": "^5.3.3",
     "graphql": "^16.7.1",
     "i18next": "^23.10.1",
