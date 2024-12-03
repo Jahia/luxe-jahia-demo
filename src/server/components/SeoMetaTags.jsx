@@ -1,5 +1,5 @@
 import React from 'react';
-import {buildUrl, getNodeProps, useServerContext} from '@jahia/js-server-core';
+import {buildUrl, getNodeProps, useServerContext} from '@jahia/javascript-modules-library';
 
 export const SeoMetaTags = () => {
     const {currentNode, currentResource, renderContext} = useServerContext();

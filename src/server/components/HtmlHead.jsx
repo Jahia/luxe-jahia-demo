@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AddResources, useServerContext, useUrlBuilder} from '@jahia/js-server-core';
+import {AddResources, useServerContext, useUrlBuilder} from '@jahia/javascript-modules-library';
 import {SeoMetaTags} from './SeoMetaTags';
 
 export const HtmlHead = ({children}) => {

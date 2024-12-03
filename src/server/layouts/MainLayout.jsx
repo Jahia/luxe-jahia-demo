@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {AbsoluteArea, AddResources} from '@jahia/js-server-core';
+import {AbsoluteArea, AddResources} from '@jahia/javascript-modules-library';
 
 // Const navMenu = {
 //     name: 'navMenu',

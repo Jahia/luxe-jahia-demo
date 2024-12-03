@@ -1,15 +1,11 @@
 import React from 'react';
-import {Area, defineJahiaComponent} from '@jahia/js-server-core';
+import {Area, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import {MainLayout} from '../../layouts';
 
 export const PageHome = () => {
     return (
         <MainLayout
-            head={
-                <>
-                    <title>LuXE Demo</title>
-                </>
-            }
+            head={<title>LuXE Demo</title>}
         >
             <Area name="heading" allowedTypes={['luxe:header']} numberOfItems={1}/>
             <Area name="main" allowedTypes={['luxe:section']}/>

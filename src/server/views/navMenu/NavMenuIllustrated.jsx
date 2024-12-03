@@ -6,7 +6,7 @@ import {
     server,
     useServerContext,
     useUrlBuilder
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import {Section, TextIllustrated} from '../../components';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';

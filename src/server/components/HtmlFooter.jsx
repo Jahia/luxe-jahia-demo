@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {Col, Row, Section} from './grid';
 import {useTranslation} from 'react-i18next';
-import {Render} from '@jahia/js-server-core';
+import {Render} from '@jahia/javascript-modules-library';
 
 const loginForm = {
     name: 'loginForm',

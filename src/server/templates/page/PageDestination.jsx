@@ -1,5 +1,5 @@
 import React from 'react';
-import {Area, getNodeProps, Render, useServerContext, defineJahiaComponent} from '@jahia/js-server-core';
+import {Area, getNodeProps, Render, useServerContext, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import {MainLayout} from '../../layouts';
 import {Row, Section} from '../../components';
 

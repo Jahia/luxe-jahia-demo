@@ -1,0 +1,5 @@
+# uninstall the old npm-modules-engine module during the transition to the replacement module: javascript-modules-engine
+- uninstallBundle:
+    - 'mvn:org.jahia.modules/npm-modules-engine'
+- installBundle:
+    - 'mvn:org.jahia.modules/javascript-modules-engine'

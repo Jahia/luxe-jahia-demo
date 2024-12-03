@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
     let optimization = isDevelopment ? {} : {
         minimizer: [
             // This is required to make hydration working, as its implementation relies on the class name of the React component.
-            // See InBrowser.jsx in js-server-core for details
+            // See InBrowser.jsx in javascript-modules-library for details
             new TerserPlugin({
                 terserOptions: {
                     keep_classnames: true,
@@ -165,11 +165,11 @@ module.exports = (env, argv) => {
             },
             externals: {
                 // Those libraries are supplied to webpack at runtime (by the npm-module-engine project), and are not packaged in the output bundle
-                '@jahia/js-server-core': 'jsServerCoreLibraryBuilder.getLibrary()',
-                react: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react\')',
-                'react-i18next': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'react-i18next\')',
-                i18next: 'jsServerCoreLibraryBuilder.getSharedLibrary(\'i18next\')',
-                'styled-jsx/style': 'jsServerCoreLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
+                '@jahia/javascript-modules-library': 'javascriptModulesLibraryBuilder.getLibrary()',
+                react: 'javascriptModulesLibraryBuilder.getSharedLibrary(\'react\')',
+                'react-i18next': 'javascriptModulesLibraryBuilder.getSharedLibrary(\'react-i18next\')',
+                i18next: 'javascriptModulesLibraryBuilder.getSharedLibrary(\'i18next\')',
+                'styled-jsx/style': 'javascriptModulesLibraryBuilder.getSharedLibrary(\'styled-jsx\')',
             },
             resolve: {
                 mainFields: ['module', 'main'],

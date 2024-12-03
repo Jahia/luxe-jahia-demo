@@ -1,5 +1,5 @@
 import React from 'react';
-import {buildUrl, useServerContext} from '@jahia/js-server-core';
+import {buildUrl, useServerContext} from '@jahia/javascript-modules-library';
 import clsx from 'clsx';
 
 const getSiteLanguageAsLocales = renderContext => {

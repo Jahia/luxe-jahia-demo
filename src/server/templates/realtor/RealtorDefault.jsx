@@ -4,7 +4,7 @@ import {
     useServerContext,
     Render,
     defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 
 export const RealtorDefault = () => {
     const {currentNode} = useServerContext();

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Render, useServerContext, defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import {CMPreview} from '../../components';
 
 export const AgencyCm = () => {

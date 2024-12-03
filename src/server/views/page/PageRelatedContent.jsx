@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {HeadingSection, Section} from '../../components';
-import {getNodeProps, getNodesByJCRQuery, Render, server, useServerContext, defineJahiaComponent} from '@jahia/js-server-core';
+import {getNodeProps, getNodesByJCRQuery, Render, server, useServerContext, defineJahiaComponent} from '@jahia/javascript-modules-library';
 
 export const PageRelatedContent = () => {
     const {t} = useTranslation();

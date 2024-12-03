@@ -3,7 +3,7 @@ import {
     useServerContext,
     Render,
     defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import {CMPreview} from '../../components';
 
 export const RealtorCm = () => {

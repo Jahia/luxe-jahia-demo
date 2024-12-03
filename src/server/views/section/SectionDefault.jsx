@@ -4,7 +4,7 @@ import {
     useServerContext,
     getNodeProps,
     Render, AddContentButtons, getChildNodes, defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import clsx from 'clsx';
 
 const getArrangement = arrangement => {

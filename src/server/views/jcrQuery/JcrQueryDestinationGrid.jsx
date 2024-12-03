@@ -6,7 +6,7 @@ import {
     Render,
     getNodesByJCRQuery,
     defineJahiaComponent
-} from '@jahia/js-server-core';
+} from '@jahia/javascript-modules-library';
 import {Col, HeadingSection, Row} from '../../components';
 import {useTranslation} from 'react-i18next';
 import {buildQuery} from './utils';

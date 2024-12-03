@@ -1,5 +1,5 @@
 import React from 'react';
-import {useServerContext, getNodeProps, buildNavMenu, server, defineJahiaComponent} from '@jahia/js-server-core';
+import {useServerContext, getNodeProps, buildNavMenu, server, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import clsx from 'clsx';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
