@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@jahia/cypress": "^3.17.7",
+    "@jahia/cypress": "^3.34.0",
     "@jahia/eslint-config": "^2.1.2",
     "@jahia/jahia-reporter": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
