@@ -11,7 +11,8 @@ const submitLogin = (
     setLoggedIn,
     setIncorrectLogin,
     setUnknownError,
-    close) => {
+    close,
+    siteKey) => {
     const body = [
         'username=' + username,
         'password=' + password
@@ -21,7 +22,7 @@ const submitLogin = (
         body.push('useCookie=on');
     }
 
-    fetch('/cms/login?restMode=true', {
+    fetch('/cms/login?restMode=true' + (siteKey ? `&site=${siteKey}` : ''), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -49,7 +50,7 @@ const submitLogin = (
     });
 };
 
-const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
+const LoginForm = ({close, setUser, setLoggedIn, siteKey, isShowRememberMe = true}) => {
     const {t} = useTranslation();
 
     const [incorrectLogin, setIncorrectLogin] = useState(false);
@@ -107,8 +108,9 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                                     setLoggedIn,
                                     setIncorrectLogin,
                                     setUnknownError,
-                                    close
-                                )
+                                    close,
+                                    siteKey
+                                );
                             }
                         }}
                     />
@@ -117,19 +119,22 @@ const LoginForm = ({close, setUser, setLoggedIn, isShowRememberMe=true}) => {
                     <div className="form-check">
                         <input id="remember" type="checkbox" name="remember" className="form-check-input me-2" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
                         <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('login.rememberMe')}</label>
-                    </div>
-                }
+                    </div>}
             </form>
             <footer className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={close}>Cancel</button>
-                <button type="button" form="loginForm" className="btn btn-primary lux-capitalize" onClick={() => submitLogin(username,
+                <button type="button"
+                        form="loginForm"
+                        className="btn btn-primary lux-capitalize"
+                        onClick={() => submitLogin(username,
                     password,
                     rememberMe,
                     setUser,
                     setLoggedIn,
                     setIncorrectLogin,
                     setUnknownError,
-                    close)}
+                    close,
+                    siteKey)}
                 >
                     {t('login.login')}
                 </button>
@@ -142,7 +147,8 @@ LoginForm.propTypes = {
     close: PropTypes.func.isRequired,
     setUser: PropTypes.func.isRequired,
     setLoggedIn: PropTypes.func.isRequired,
-    isShowRememberMe: PropTypes.bool.isRequired
+    isShowRememberMe: PropTypes.bool.isRequired,
+    siteKey: PropTypes.string
 };
 
 export default LoginForm;

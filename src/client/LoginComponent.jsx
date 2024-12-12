@@ -5,7 +5,7 @@ import WorkspaceNavigation from './WorkspaceNavigation';
 import {useTranslation} from 'react-i18next';
 import PropTypes from 'prop-types';
 
-const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowRememberMe}) => {
+const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowRememberMe, siteKey}) => {
     const {t} = useTranslation();
     const modalRef = useRef(null);
     const [user, setUser] = useState(userHydrated);
@@ -65,6 +65,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
                         isShowRememberMe={isShowRememberMe}
                         setUser={setUser}
                         setLoggedIn={setLoggedIn}
+                        siteKey={siteKey}
                     />
                 </div>
             </dialog>
@@ -89,7 +90,8 @@ LoginComponent.propTypes = {
     }).isRequired,
     mode: PropTypes.string.isRequired,
     nodePath: PropTypes.string.isRequired,
-    isShowRememberMe: PropTypes.bool.isRequired
+    isShowRememberMe: PropTypes.bool.isRequired,
+    siteKey: PropTypes.string
 };
 
 export default LoginComponent;

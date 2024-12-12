@@ -26,7 +26,8 @@ export const LoginForm = () => {
                 urls,
                 mode,
                 nodePath: mainPath,
-                isShowRememberMe: Boolean(props['j:displayRememberMeButton'])
+                isShowRememberMe: Boolean(props['j:displayRememberMeButton']),
+                siteKey: renderContext.getSite().getSiteKey()
             }}
         />
     );
