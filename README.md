@@ -1,6 +1,6 @@
 # luxe-jahia-demo
 
-A simple Jahia NPM module created using the NPM module starter project template
+A simple Jahia Javascript module created using the [Jahia Javascript modules starter project template](https://github.com/Jahia/npm-create-module)
 
 ## Configuration
 
