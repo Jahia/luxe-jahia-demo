@@ -33,6 +33,7 @@
 .lux-cover {
     position: relative;
     min-height: 695px;
+    overflow: hidden; // Prevent the text from spilling over other sections
 }
 
 .lux-cover_img {
