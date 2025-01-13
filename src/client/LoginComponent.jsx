@@ -26,7 +26,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     };
 
     const logout = () => {
-        fetch('/cms/logout');
+        fetch(urls.logoutUrl);
         setLoggedIn(false);
     };
 
@@ -61,6 +61,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
             <dialog ref={modalRef} id="loginModal" className="lux-dialog modal" onClick={event => handleOverlayClick(event)}>
                 <div className="modal-dialog" aria-labelledby="loginModalTitle">
                     <LoginForm
+                        loginUrl={urls.loginUrl}
                         close={closeModal}
                         isShowRememberMe={isShowRememberMe}
                         setUser={setUser}
@@ -84,9 +85,8 @@ LoginComponent.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     userHydrated: PropTypes.string,
     urls: PropTypes.shape({
-        liveUrl: PropTypes.string.isRequired,
-        previewUrl: PropTypes.string.isRequired,
-        editUrl: PropTypes.string.isRequired
+        logoutUrl: PropTypes.string.isRequired,
+        loginUrl: PropTypes.string.isRequired
     }).isRequired,
     mode: PropTypes.string.isRequired,
     nodePath: PropTypes.string.isRequired,

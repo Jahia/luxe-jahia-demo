@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 
-const hasPermission = async (permission, path) => {
-    const response = await fetch('/modules/graphql', {
+const hasPermission = async (gqlUrl, permission, path) => {
+    const response = await fetch(gqlUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -29,11 +29,11 @@ const hasPermission = async (permission, path) => {
 const WorkspaceNavigation = ({urls, mode, nodePath}) => {
     const {t} = useTranslation();
     const [isLoading, setIsLoading] = useState(true);
-    const [hasJcontentPermission, setHasJcontentPermission] = useState(false);
+    const [hasJContentPermission, setHasJContentPermission] = useState(false);
 
     useEffect(() => {
         const getPermissions = async () => {
-            setHasJcontentPermission(await hasPermission('jContentAccess', nodePath));
+            setHasJContentPermission(await hasPermission(urls.gqlUrl ,'jContentAccess', nodePath));
             setIsLoading(false);
         };
 
@@ -51,12 +51,12 @@ const WorkspaceNavigation = ({urls, mode, nodePath}) => {
                     <a href={urls.liveUrl}>{t('login.liveWorkspace')}</a>
                 </li>}
 
-            {mode !== 'preview' && hasJcontentPermission &&
+            {mode !== 'preview' && hasJContentPermission &&
                 <li>
                     <a href={urls.previewUrl}>{t('login.previewWorkspace')}</a>
                 </li>}
 
-            {mode !== 'edit' && hasJcontentPermission &&
+            {mode !== 'edit' && hasJContentPermission &&
                 <li>
                     <a href={urls.editUrl}>{t('login.editWorkspace')}</a>
                 </li>}
@@ -68,7 +68,8 @@ WorkspaceNavigation.propTypes = {
     urls: PropTypes.shape({
         liveUrl: PropTypes.string.isRequired,
         previewUrl: PropTypes.string.isRequired,
-        editUrl: PropTypes.string.isRequired
+        editUrl: PropTypes.string.isRequired,
+        gqlUrl: PropTypes.string.isRequired
     }).isRequired,
     mode: PropTypes.string.isRequired,
     nodePath: PropTypes.string.isRequired
