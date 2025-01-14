@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {AbsoluteArea, AddResources, useServerContext} from '@jahia/javascript-modules-library';
+import {AbsoluteArea, AddResources, useUrlBuilder} from '@jahia/javascript-modules-library';
 
 export const MainLayout = ({head, className, children}) => {
-    const {renderContext} = useServerContext();
-    const modulePath = renderContext.getURLGenerator().getCurrentModule();
+    const {buildStaticUrl} = useUrlBuilder();
+    const bootstrap = buildStaticUrl({assetPath: 'javascript/bootstrap.bundle.min.js'});
     return (
         <>
             <HtmlHead>
@@ -17,7 +17,7 @@ export const MainLayout = ({head, className, children}) => {
                     {children}
                 </main>
                 <HtmlFooter/>
-                <AddResources type="javascript" resources={modulePath + '/static/javascript/bootstrap.bundle.min.js'}/>
+                <AddResources type="javascript" resources={bootstrap}/>
             </body>
         </>
     );
