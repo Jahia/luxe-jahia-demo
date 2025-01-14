@@ -1,23 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {AbsoluteArea, AddResources} from '@jahia/javascript-modules-library';
-
-// Const navMenu = {
-//     name: 'navMenu',
-//     nodeType: 'luxe:navMenu',
-//     mixins: ['jmix:renderable'],
-//     properties: {
-//         base: 'home',
-//         maxDepth: '2',
-//         startLevel: '0',
-//         menuItemView: 'menuElement'
-//     }
-// };
+import {AbsoluteArea, AddResources, useServerContext} from '@jahia/javascript-modules-library';
 
 export const MainLayout = ({head, className, children}) => {
-    // Const {renderContext} = useServerContext();
-    // navMainArea.path = `/sites/${renderContext.getSite().getName()}`;
+    const {renderContext} = useServerContext();
+    const modulePath = renderContext.getURLGenerator().getCurrentModule();
     return (
         <>
             <HtmlHead>
@@ -29,7 +17,7 @@ export const MainLayout = ({head, className, children}) => {
                     {children}
                 </main>
                 <HtmlFooter/>
-                <AddResources type="javascript" resources="bootstrap.bundle.min.js"/>
+                <AddResources type="javascript" resources={modulePath + '/static/javascript/bootstrap.bundle.min.js'}/>
             </body>
         </>
     );

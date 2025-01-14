@@ -4,13 +4,12 @@ import clsx from 'clsx';
 
 const getSiteLanguageAsLocales = renderContext => {
     const site = renderContext.getSite();
-    switch (true) {
-        case renderContext.isLiveMode():
-            return site.getActiveLiveLanguagesAsLocales().toArray();
 
-        default:
-            return site.getLanguagesAsLocales().toArray();
+    if (renderContext.isLiveMode()) {
+        return site.getActiveLiveLanguagesAsLocales().toArray();
     }
+
+    return site.getLanguagesAsLocales().toArray();
 };
 
 export const LanguageSwitcher = () => {
@@ -32,7 +31,7 @@ export const LanguageSwitcher = () => {
             >
                 {currentLocaleName}
             </button>
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu dropdown-menu-end">
                 {siteLocales?.map(locale => {
                     const localeCode = locale.getLanguage();
                     const localeName = locale.getDisplayLanguage(locale);
