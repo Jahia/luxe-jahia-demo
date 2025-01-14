@@ -3,54 +3,7 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 
-const submitLogin = (
-    username,
-    password,
-    rememberMe,
-    setUser,
-    setLoggedIn,
-    setIncorrectLogin,
-    setUnknownError,
-    close,
-    siteKey) => {
-    const body = [
-        'username=' + username,
-        'password=' + password
-    ];
-
-    if (rememberMe) {
-        body.push('useCookie=on');
-    }
-
-    fetch('/cms/login?restMode=true' + (siteKey ? `&site=${siteKey}` : ''), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-            'allow-redirects': 'false'
-        },
-        body: body.join('&')
-    }).then(response => {
-        try {
-            response.body.getReader().read().then(({value}) => {
-                const decodedValue = new TextDecoder().decode(value);
-                if (decodedValue === 'OK') {
-                    close();
-                    setUser(username);
-                    setLoggedIn(true);
-                } else if (decodedValue === 'unauthorized') {
-                    setIncorrectLogin(true);
-                } else {
-                    throw new Error();
-                }
-            });
-        } catch (e) {
-            console.error('Login form error : ', e);
-            setUnknownError(true);
-        }
-    });
-};
-
-const LoginForm = ({close, setUser, setLoggedIn, siteKey, isShowRememberMe = true}) => {
+const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememberMe = true}) => {
     const {t} = useTranslation();
 
     const [incorrectLogin, setIncorrectLogin] = useState(false);
@@ -58,6 +11,44 @@ const LoginForm = ({close, setUser, setLoggedIn, siteKey, isShowRememberMe = tru
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+
+    const login = () => {
+        const body = [
+            'username=' + username,
+            'password=' + password
+        ];
+
+        if (rememberMe) {
+            body.push('useCookie=on');
+        }
+
+        fetch(loginUrl + '?restMode=true' + (siteKey ? `&site=${siteKey}` : ''), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'allow-redirects': 'false'
+            },
+            body: body.join('&')
+        }).then(response => {
+            try {
+                response.body.getReader().read().then(({value}) => {
+                    const decodedValue = new TextDecoder().decode(value);
+                    if (decodedValue === 'OK') {
+                        close();
+                        setUser(username);
+                        setLoggedIn(true);
+                    } else if (decodedValue === 'unauthorized') {
+                        setIncorrectLogin(true);
+                    } else {
+                        throw new Error();
+                    }
+                });
+            } catch (e) {
+                console.error('Login form error : ', e);
+                setUnknownError(true);
+            }
+        });
+    };
 
     return (
         <div className="modal-content">
@@ -98,19 +89,9 @@ const LoginForm = ({close, setUser, setLoggedIn, siteKey, isShowRememberMe = tru
                         name="password"
                         className="form-control"
                         onChange={e => setPassword(e.target.value)}
-                        onKeyPress={event => {
+                        onKeyUp={event => {
                             if (event.key === 'Enter') {
-                                submitLogin(
-                                    username,
-                                    password,
-                                    rememberMe,
-                                    setUser,
-                                    setLoggedIn,
-                                    setIncorrectLogin,
-                                    setUnknownError,
-                                    close,
-                                    siteKey
-                                );
+                                login();
                             }
                         }}
                     />
@@ -126,15 +107,7 @@ const LoginForm = ({close, setUser, setLoggedIn, siteKey, isShowRememberMe = tru
                 <button type="button"
                         form="loginForm"
                         className="btn btn-primary lux-capitalize"
-                        onClick={() => submitLogin(username,
-                    password,
-                    rememberMe,
-                    setUser,
-                    setLoggedIn,
-                    setIncorrectLogin,
-                    setUnknownError,
-                    close,
-                    siteKey)}
+                        onClick={login}
                 >
                     {t('login.login')}
                 </button>
@@ -144,6 +117,7 @@ const LoginForm = ({close, setUser, setLoggedIn, siteKey, isShowRememberMe = tru
 };
 
 LoginForm.propTypes = {
+    loginUrl: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
     setUser: PropTypes.func.isRequired,
     setLoggedIn: PropTypes.func.isRequired,
