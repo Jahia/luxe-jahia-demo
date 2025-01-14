@@ -11,15 +11,17 @@ const hasPermission = async (gqlUrl, permission, path) => {
             accept: 'application/json'
         },
         body: JSON.stringify({
-            query: `query {
+            query: /* GraphQL */ `query ($path: String!, $permission: String!) {
                 jcr {
-                    nodeByPath(path: "${path}") {
+                    nodeByPath(path: $path) {
                         site {
-                            hasPermission(permissionName: "${permission}")
+                            hasPermission(permissionName: $permission)
                         }
                     }
                 }
-            }`})
+            }`,
+            variables: {path, permission}
+        })
     });
 
     const data = await response.json();
@@ -33,12 +35,12 @@ const WorkspaceNavigation = ({urls, mode, nodePath}) => {
 
     useEffect(() => {
         const getPermissions = async () => {
-            setHasJContentPermission(await hasPermission(urls.gqlUrl ,'jContentAccess', nodePath));
+            setHasJContentPermission(await hasPermission(urls.gqlUrl, 'jContentAccess', nodePath));
             setIsLoading(false);
         };
 
         getPermissions();
-    }, []);
+    }, [nodePath, urls.gqlUrl]);
 
     if (isLoading) {
         return null;
