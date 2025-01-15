@@ -12,42 +12,42 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
-    const login = () => {
-        const body = [
-            'username=' + username,
-            'password=' + password
-        ];
+    const login = async () => {
+        const params = new URLSearchParams();
+        params.set('restMode', 'true');
 
-        if (rememberMe) {
-            body.push('useCookie=on');
+        if (siteKey) {
+            params.set('site', siteKey);
         }
 
-        fetch(loginUrl + '?restMode=true' + (siteKey ? `&site=${siteKey}` : ''), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                'allow-redirects': 'false'
-            },
-            body: body.join('&')
-        }).then(response => {
-            try {
-                response.body.getReader().read().then(({value}) => {
-                    const decodedValue = new TextDecoder().decode(value);
-                    if (decodedValue === 'OK') {
-                        close();
-                        setUser(username);
-                        setLoggedIn(true);
-                    } else if (decodedValue === 'unauthorized') {
-                        setIncorrectLogin(true);
-                    } else {
-                        throw new Error();
-                    }
-                });
-            } catch (e) {
-                console.error('Login form error : ', e);
-                setUnknownError(true);
+        // Request must be sent as application/x-www-form-urlencoded
+        const body = new URLSearchParams();
+        body.set('username', username);
+        body.set('password', password);
+
+        if (rememberMe) {
+            body.set('useCookie', 'on');
+        }
+
+        try {
+            const response = await fetch(loginUrl + '?' + params.toString(), {
+                method: 'POST',
+                body
+            });
+            const value = await response.text();
+            if (value === 'OK') {
+                close();
+                setUser(username);
+                setLoggedIn(true);
+            } else if (value === 'unauthorized') {
+                setIncorrectLogin(true);
+            } else {
+                throw new Error('Unknown error: ' + value);
             }
-        });
+        } catch (error) {
+            console.error('Login form error: ', error);
+            setUnknownError(true);
+        }
     };
 
     return (

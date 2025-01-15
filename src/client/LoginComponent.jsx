@@ -25,8 +25,8 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
         }
     };
 
-    const logout = () => {
-        fetch(urls.logoutUrl);
+    const logout = async () => {
+        await fetch(urls.logoutUrl);
         setLoggedIn(false);
     };
 
