@@ -111,9 +111,7 @@ module.exports = (env, argv) => {
                 // This plugin will raise an error if a client file tries to import a server file
                 {
                     apply(compiler) {
-                        const clientFiles = path.resolve(__dirname, 'src/client')
                         const serverFiles = path.resolve(__dirname, 'src/server')
-
                         compiler.options.resolve.plugins ??= []
                         compiler.options.resolve.plugins.push({
                             apply(resolver) {
@@ -121,7 +119,7 @@ module.exports = (env, argv) => {
                                     if (!request.request || !request.context.issuer)
                                        return callback()
                                     const resolved = path.resolve(path.dirname(request.context.issuer), request.request)
-                                    if (resolved.startsWith(serverFiles) && request.context.issuer.startsWith(clientFiles)) {
+                                    if (resolved.startsWith(serverFiles)) {
                                         return callback(new Error(
                                             'Cannot import server file\n\t' +
                                             resolved +
