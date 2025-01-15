@@ -17,7 +17,7 @@
     "snapshot": true,
     "required-version": "8.2.0.0-SNAPSHOT",
     "module-type": "templatesSet",
-    "module-dependencies": "default",
+    "module-dependencies": "default,javascript-modules-engine",
     "static-resources": "/javascript,/client,/icons,/images",
     "server": "main.js",
     "maven": {
