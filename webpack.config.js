@@ -107,7 +107,34 @@ module.exports = (env, argv) => {
                 }),
                 // This plugin creates a CycloneDX Software Bill of Materials containing an aggregate of all bundled dependencies.
                 // It needs to be deactivated in watch mode
-                !argv.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions)
+                !argv.watch && new CycloneDxWebpackPlugin(cycloneDxWebpackPluginOptions),
+                // This plugin will raise an error if a client file tries to import a server file
+                {
+                    apply(compiler) {
+                        const clientFiles = path.resolve(__dirname, 'src/client')
+                        const serverFiles = path.resolve(__dirname, 'src/server')
+
+                        compiler.options.resolve.plugins ??= []
+                        compiler.options.resolve.plugins.push({
+                            apply(resolver) {
+                                resolver.getHook('resolve').tapAsync('PreventServerInClient', async (request, _, callback) => {
+                                    if (!request.request || !request.context.issuer)
+                                       return callback()
+                                    const resolved = path.resolve(path.dirname(request.context.issuer), request.request)
+                                    if (resolved.startsWith(serverFiles) && request.context.issuer.startsWith(clientFiles)) {
+                                        return callback(new Error(
+                                            'Cannot import server file\n\t' +
+                                            resolved +
+                                            '\nfrom client file\n\t' +
+                                            request.context.issuer
+                                        ))
+                                    }
+                                    return callback()
+                                })
+                            }
+                        })
+                    }
+                }
             ].filter(Boolean)
         },
         {
