@@ -20,7 +20,7 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
             params.set('site', siteKey);
         }
 
-        // Request will be sent as application/x-www-form-urlencoded
+        // Request must be sent as application/x-www-form-urlencoded
         const body = new URLSearchParams();
         body.set('username', username);
         body.set('password', password);
