@@ -11,7 +11,8 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     const [user, setUser] = useState(userHydrated);
     const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
-    const showModal = () => {
+    const showModal = event => {
+        event.preventDefault();
         modalRef.current.showModal();
     };
 
@@ -70,13 +71,15 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
                     />
                 </div>
             </dialog>
-            <button
-                type="button"
-                className="d-block btn btn-link p-0 lux-capitalize border-0"
-                onClick={showModal}
-            >
-                {t('login.login')}
-            </button>
+            <p>
+                <a
+                    href={urls.loginUrl}
+                    className="lux-capitalize"
+                    onClick={showModal}
+                >
+                    {t('login.login')}
+                </a>
+            </p>
         </>
     );
 };
