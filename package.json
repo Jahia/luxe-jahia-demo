@@ -36,11 +36,7 @@
   },
   "dependencies": {
     "@jahia/javascript-modules-library": "^0.0.4",
-    "bootstrap": "^5.3.3",
-    "graphql": "^16.7.1",
-    "i18next": "^23.10.1",
-    "react": "^18.2.0",
-    "react-i18next": "^14.1.0"
+    "bootstrap": "^5.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -63,8 +59,11 @@
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "latest",
     "extra-watch-webpack-plugin": "^1.0.3",
+    "i18next": "23.10.1",
     "mini-css-extract-plugin": "^2.7.7",
     "prop-types": "^15.8.1",
+    "react": "18.2.0",
+    "react-i18next": "14.1.0",
     "sass": "^1.70.0",
     "sass-loader": "^14.0.0",
     "style-loader": "^3.3.4",
