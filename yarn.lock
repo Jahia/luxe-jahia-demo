@@ -6052,7 +6052,7 @@ __metadata:
     sass: "npm:^1.70.0"
     sass-loader: "npm:^14.0.0"
     style-loader: "npm:^3.3.4"
-    styled-jsx: "npm:^5.1.2"
+    styled-jsx: "npm:5.1.2"
     terser-webpack-plugin: "npm:^5.3.10"
     typescript: "npm:^5.4.4"
     webpack: "npm:^5.64.4"
@@ -8334,7 +8334,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-jsx@npm:^5.1.2":
+"styled-jsx@npm:5.1.2":
   version: 5.1.2
   resolution: "styled-jsx@npm:5.1.2"
   dependencies:
