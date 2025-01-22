@@ -21,7 +21,7 @@
     "static-resources": "/javascript,/client,/icons,/images",
     "server": "main.js",
     "maven": {
-      "groupId": "org.jahia.modules.npm",
+      "groupId": "org.example.modules.npm",
       "distributionManagement": {
         "repository": {
           "id": "jahia-releases",
