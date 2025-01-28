@@ -14,12 +14,16 @@ export const HeaderDefault = () => {
             {/* If you use one of our external DAM plugins, you can specify the image width or height
             to enable live image resizing performed by the DAM provider. */}
             {header.image &&
-                <img
-                    src={header.image.getUrl(['width:1920'])}
-                    alt={header.image.getDisplayableName()}
-                    className="lux-cover_img"
-                    height="695px"
-                />}
+                <picture>
+                    <source media="(min-width: 960px)" srcSet={`${header.image.getUrl(['width:1920'])}?w=1920&h=695`}/>
+                    <source media="(min-width: 480px)" srcSet={`${header.image.getUrl(['width:960'])}?w=960&h=695`}/>
+                    <img
+                        src={`${header.image.getUrl(['width:480'])}?w=480&h=695`}
+                        alt={header.image.getDisplayableName()}
+                        className="lux-cover_img"
+                        height="695px"
+                    />
+                </picture>}
 
             <h1 className="lux-cover_caption">
                 {header.title}
