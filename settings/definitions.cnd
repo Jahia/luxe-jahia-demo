@@ -67,7 +67,7 @@
  - image (weakreference, picker[type='image']) mandatory < jmix:image
  - arrangement (string,choicelist[resourceBundle]) = 'left' < 'right', 'left'
 
-[luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
+[luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
  - name (string) primary i18n mandatory
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
