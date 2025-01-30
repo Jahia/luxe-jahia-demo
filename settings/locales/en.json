@@ -39,18 +39,30 @@
     "connection": "connection",
     "copyright": "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
   },
-  "login": {
-    "login": "login",
-    "logout": "logout",
-    "badCreds": "Username or password incorrect",
-    "unknowError": "An error occured",
-    "username": "Username",
-    "password": "Password",
-    "rememberMe": "remember me",
-    "liveWorkspace": "live",
-    "previewWorkspace": "preview",
-    "editWorkspace": "edit",
-    "editModeWarning": "Login is disabled in Page Builder"
+  "form": {
+    "login": {
+      "login": "login",
+      "logout": "logout",
+      "badCreds": "Username or password incorrect",
+      "username": "Username",
+      "password": "Password",
+      "rememberMe": "remember me",
+      "liveWorkspace": "live",
+      "previewWorkspace": "preview",
+      "editWorkspace": "edit",
+      "editModeWarning": "Login is disabled in Page Builder"
+    },
+    "contact": {
+      "firstName": "firstname",
+      "lastName": "lastname",
+      "email": "email",
+      "msg": "your message",
+      "submit": "submit",
+      "editModeWarning": "Contact form disabled in Page Builder",
+      "sendMessageError": "Oops! Sorry, {{name}}.<br/> Something went wrong with your message. The status code is {{status}}.",
+      "sendMessageAgain": "send the message again"
+    },
+    "unknownError": "An error occured"
   },
   "realtor": {
     "jobPosition": {
@@ -109,6 +121,7 @@
     "destination" : "Destination {{dest}}",
     "estate": "`View of the real estate : {{estate}}",
     "realtor": "Portrait of the agent : {{realtor}}",
-    "agency": "View of the agency : {{agency}}"
+    "agency": "View of the agency : {{agency}}",
+    "blog": "Illustration of the blog : {{blog}}"
   }
 }

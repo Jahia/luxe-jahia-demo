@@ -1,0 +1,18 @@
+<j = 'http://www.jahia.org/jahia/1.0'>
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+
+<luxe = 'http://www.jahia.org/jahia/demo/luxe/nt/1.0'>
+<luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
+
+[luxemix:loginForm] > jmix:dynamicFieldset mixin
+ extends = luxe:form
+ - j:displayRememberMeButton (boolean) = true autocreated
+
+[luxemix:contactForm] > jmix:dynamicFieldset mixin
+ extends = luxe:form
+ - target (string)
+ - feedbackMsg (string,richtext) i18n
+
+[luxe:form] > jnt:content, luxemix:luxeContent, mix:title
+ - formType (string, choicelist) indexed=no
