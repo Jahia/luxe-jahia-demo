@@ -4,12 +4,12 @@ import {MainLayout} from '../../layouts';
 
 export const PageFree = () => {
     const {currentNode} = useServerContext();
-    const page = getNodeProps(currentNode, [
+    const {'jcr:title': pageTitle} = getNodeProps(currentNode, [
         'jcr:title'
     ]);
     return (
         <MainLayout
-            head={<title>{page}</title>}
+            head={<title>{pageTitle}</title>}
         >
             <Area name="main"/>
         </MainLayout>

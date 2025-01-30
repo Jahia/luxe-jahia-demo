@@ -39,18 +39,30 @@
     "connection": "conexión",
     "copyright": "derechos de autor © 2002-{{currentDate}} Todos los derechos reservados por Jahia Solutions Group SA"
   },
-  "login": {
-    "login": "acceso",
-    "logout": "cerrar sesión",
-    "badCreds": "Usuario o contraseña incorrectos",
-    "unknowError": "Ocurrió un error",
-    "username": "Nombre de usuario",
-    "password": "Contraseña",
-    "rememberMe": "acuérdate de mí",
-    "liveWorkspace": "live",
-    "previewWorkspace": "avance",
-    "editWorkspace": "editar",
-    "editModeWarning": "El inicio de sesión está desactivado en Page Builder"
+  "form": {
+    "login": {
+      "login": "iniciar sesión",
+      "logout": "cerrar sesión",
+      "badCreds": "Nombre de usuario o contraseña incorrectos",
+      "username": "Nombre de usuario",
+      "password": "Contraseña",
+      "rememberMe": "recordarme",
+      "liveWorkspace": "en vivo",
+      "previewWorkspace": "previsualización",
+      "editWorkspace": "editar",
+      "editModeWarning": "El inicio de sesión está deshabilitado en Page Builder"
+    },
+    "contact": {
+      "firstName": "nombre",
+      "lastName": "apellido",
+      "email": "correo electrónico",
+      "msg": "tu mensaje",
+      "submit": "enviar",
+      "editModeWarning": "Formulario de contacto deshabilitado en Page Builder",
+      "sendMessageError": "¡Ups! Lo siento, {{name}}.<br/> Algo salió mal con tu mensaje. El código de estado es {{status}}.",
+      "sendMessageAgain": "enviar el mensaje nuevamente"
+    },
+    "unknownError": "Ocurrió un error"
   },
   "realtor": {
     "jobPosition": {

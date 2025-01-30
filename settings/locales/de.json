@@ -39,18 +39,30 @@
     "connection": "verbindung",
     "copyright": "urheberrechte © 2002-{{currentDate}} alle rechte vorbehalten von Jahia Solutions Group SA"
   },
-  "login": {
-    "login": "anmeldung",
-    "logout": "ausloggen",
-    "badCreds": "Benutzername oder Passwort falsch",
-    "unknowError": "Es ist ein Fehler aufgetreten",
-    "username": "Nutzername",
-    "password": "Password",
-    "rememberMe": "Passwort",
-    "liveWorkspace": "live",
-    "previewWorkspace": "vorschau",
-    "editWorkspace": "bearbeiten",
-    "editModeWarning": "Das Anmelden ist in Page Builder deaktiviert"
+  "form": {
+    "login": {
+      "login": "Anmelden",
+      "logout": "Abmelden",
+      "badCreds": "Benutzername oder Passwort ist falsch",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "rememberMe": "angemeldet bleiben",
+      "liveWorkspace": "live",
+      "previewWorkspace": "Vorschau",
+      "editWorkspace": "bearbeiten",
+      "editModeWarning": "Anmeldung im Page Builder deaktiviert"
+    },
+    "contact": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "msg": "Ihre Nachricht",
+      "submit": "absenden",
+      "editModeWarning": "Kontaktformular im Page Builder deaktiviert",
+      "sendMessageError": "Hoppla! Entschuldigung, {{name}}.<br/> Beim Senden Ihrer Nachricht ist etwas schiefgelaufen. Der Statuscode ist {{status}}.",
+      "sendMessageAgain": "Nachricht erneut senden"
+    },
+    "unknownError": "Ein Fehler ist aufgetreten"
   },
   "realtor": {
     "jobPosition": {
