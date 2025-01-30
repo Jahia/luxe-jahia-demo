@@ -30,7 +30,7 @@ jobs:
       - uses: jahia/jahia-modules-action/integration-tests@v2
         with:
           module_id: luxe-jahia-demo
-          tests_path: 'javascript-modules-engine/tests/'
+          tests_path: 'tests/'
           testrail_project:  Demo Site NPM
           tests_manifest: ${{ github.event.inputs.manifest }}
           jahia_image: ${{ github.event.inputs.jahia_image }}
