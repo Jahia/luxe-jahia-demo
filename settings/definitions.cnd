@@ -102,11 +102,17 @@
  - j:displayRememberMeButton (boolean) = true autocreated
 
 
+//TODO tester vue vs template faire blog_1 et blog_2 pour voir
 [luxe:blog] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
- - title (string) primary i18n mandatory
- - subtitle (string,textarea) i18n < '.{0,250}'
- - teaser (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
- - body (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+// - title (string) primary i18n mandatory
+// - subtitle (string,textarea) i18n < '.{0,250}'
+// - teaser (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+// - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
+// - body (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - country (string,choicelist[country]) = 'FR' autocreated mandatory
  - relatedBlogs (weakreference) multiple < 'luxe:blog'
+// + heading (luxe:header)
+// + main (jnt:bigText)
+// + headingList (jnt:contentList)
+// + headingDropContent (jmix:droppableContent)
+// + * (jmix:droppableContent)

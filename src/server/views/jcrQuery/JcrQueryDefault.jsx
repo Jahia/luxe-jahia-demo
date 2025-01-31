@@ -39,7 +39,7 @@ export const JcrQueryDefault = () => {
                     {queryContent.map(node => {
                             return (
                                 <Col key={node.getIdentifier()} className="g-0">
-                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'} editable={false}/>
                                 </Col>
                             );
                         })}
