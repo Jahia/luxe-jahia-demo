@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    AddContentButtons,
     defineJahiaComponent,
     getNodeProps,
     getNodesByJCRQuery,
@@ -134,7 +135,8 @@ export const AgencyFullPage = () => {
                 <Row className="row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-3">
                     {agency.realtors?.map(realtor => (
                         <Col key={realtor.getIdentifier()} className="g-0">
-                            <Render node={realtor}/>
+                            {/* <Render node={realtor}/> */}
+                            <Render path={realtor.getPath()}/>
                         </Col>
                     ))}
                 </Row>
@@ -143,6 +145,11 @@ export const AgencyFullPage = () => {
             <Section>
                 <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
                 <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+                    {renderContext.isEditMode() &&
+                    <Col key="addNewRealEstate" className="g-0">
+                        <AddContentButtons nodeTypes="luxe:estate"/>
+                    </Col>}
+
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
                             <Render node={estate}/>
