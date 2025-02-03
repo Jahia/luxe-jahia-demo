@@ -10,3 +10,5 @@ export * from './realtor';
 export * from './jcrQuery';
 export * from './loginForm';
 export * from './page';
+export * from './blog';
+export * from './area';

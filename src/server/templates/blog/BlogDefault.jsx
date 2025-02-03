@@ -19,21 +19,18 @@ export const BlogDefault = () => {
             {/*        parameters={{ */}
             {/*            nodeType: 'luxe:header' */}
             {/*        }}/> */}
-            <Area path="headings"
+            <Area path="heading"
                   allowedTypes={['luxe:header']}
                   subNodesView="textDown"
-                    areaType={}
-                  numberOfItems={1}/>
+                  areaType="luxe:areaHeading"/>
             <Section>
                 <Row className="lux-richtext">
-                    <Render path="main"
-                            parameters={{
-                                nodeType: 'jnt:bigText'
-                            }}/>
-                    {/* <Area name="main" */}
-                    {/*      allowedTypes={['jnt:bigText']} */}
-                    {/*      numberOfItems={1}/> */}
-                    <AddContentButtons/>
+                    {/* <Render path="main" */}
+                    {/*        parameters={{ */}
+                    {/*            nodeType: 'jnt:bigText' */}
+                    {/*        }}/> */}
+                    <Area name="main" areaType="luxe:areaMain"/>
+                    {/* <AddContentButtons/> */}
                 </Row>
             </Section>
             {/* {blog.relatedBlogs && */}
@@ -50,7 +47,7 @@ export const BlogDefault = () => {
 };
 
 BlogDefault.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:blog',
+    nodeType: 'luxe:blog_2',
     name: 'default',
     componentType: 'template'
 });

@@ -76,6 +76,12 @@
  - email (string)
  - realtors (weakreference) multiple < 'luxe:realtor'
  + * (luxe:estate) = luxe:estate
+ + estates (luxe:estates) = luxe:estates
+
+//jnt:contentList
+[luxe:estates] > jnt:content, jmix:list , jmix:hiddenType
+orderable
+ + * (luxe:header) = luxe:header
 
 [luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - fullName (string) hidden
@@ -103,7 +109,7 @@
 
 
 //TODO tester vue vs template faire blog_1 et blog_2 pour voir
-[luxe:blog] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
+[luxe:blog_1] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
 // - title (string) primary i18n mandatory
 // - subtitle (string,textarea) i18n < '.{0,250}'
 // - teaser (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
@@ -111,8 +117,21 @@
 // - body (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - country (string,choicelist[country]) = 'FR' autocreated mandatory
  - relatedBlogs (weakreference) multiple < 'luxe:blog'
-// + heading (luxe:header)
-// + main (jnt:bigText)
+ + heading (luxe:header)
+ + main (jnt:bigText)
 // + headingList (jnt:contentList)
 // + headingDropContent (jmix:droppableContent)
 // + * (jmix:droppableContent)
+
+[luxe:areaHeading] > jnt:content, jmix:list, jmix:hiddenType
+orderable
+ + content (luxe:header) = luxe:header
+
+[luxe:areaMain] > jnt:content, jmix:hiddenType
+ + * (jnt:bigText) = jnt:bigText
+
+[luxe:blog_2] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
+// + headingDropContent (jmix:droppableContent)
+ + heading (luxe:areaHeading)
+ + main (luxe:areaMain)
+
