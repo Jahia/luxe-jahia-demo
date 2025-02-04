@@ -123,15 +123,21 @@ orderable
 // + headingDropContent (jmix:droppableContent)
 // + * (jmix:droppableContent)
 
-[luxe:areaHeading] > jnt:content, jmix:list, jmix:hiddenType
-orderable
+[luxe:areaHeader] > jnt:content, jmix:hiddenType
  + content (luxe:header) = luxe:header
 
 [luxe:areaMain] > jnt:content, jmix:hiddenType
- + * (jnt:bigText) = jnt:bigText
+ + content (jnt:bigText) = jnt:bigText
 
 [luxe:blog_2] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
-// + headingDropContent (jmix:droppableContent)
- + heading (luxe:areaHeading)
+// - country (string,choicelist[country]) = 'FR' autocreated mandatory
+// - relatedBlogs (weakreference) multiple < 'luxe:blog'
+ + header (luxe:areaHeader)
  + main (luxe:areaMain)
 
+
+[luxe:blog_3] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
+ - country (string,choicelist[country]) = 'FR' autocreated mandatory
+ - relatedBlogs (weakreference) multiple < 'luxe:blog'
+ + header (luxe:header)
+ + main (jnt:bigText)

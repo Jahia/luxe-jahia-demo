@@ -5,8 +5,8 @@ import {
 
 export const AreaMain = () => (
     <>
-        <Render path="main"/>
-        <AddContentButtons nodeTypes="jnt:bigText" childName="main"/>
+        <Render path="content"/>
+        <AddContentButtons nodeTypes="jnt:bigText" childName="content"/>
     </>
 );
 

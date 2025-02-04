@@ -3,35 +3,21 @@ import {MainLayout} from '../../layouts';
 import {
     useServerContext,
     defineJahiaComponent,
-    Area,
-    Render, getNodeProps
+    Area, Render
+    // Render,  getNodeProps
 } from '@jahia/javascript-modules-library';
 import {Row, Section} from '../../components';
 
-export const BlogDefault = () => {
-    const {currentNode, renderContext} = useServerContext();
-    const {'j:defaultCategory': filter} = getNodeProps(currentNode, [
-        'j:defaultCategory'
-    ]);
-
-    const relatedBlog = {
-        name: 'relatedBlog',
-        nodeType: 'luxe:jcrQuery',
-        properties: {
-            criteria: 'j:lastPublished',
-            sortDirection: 'asc',
-            maxItems: '3',
-            // StartNode: currentNode.getNode(currentNode.getAncestor(2).getPath()),
-            filter,
-            'j:subNodesView': 'card'
-        }
-    };
-
+export const Blog3Default = () => {
+    const {currentNode} = useServerContext();
+    // Const blog = getNodeProps(currentNode, [
+    //     'relatedBlogs'
+    // ]);
     return (
         <MainLayout>
-            <Area path="header"
-                  areaType="luxe:areaHeader"
-                  subNodesView="textDown"
+            <Area path="heading"
+                  areaType="luxe:header"
+                  areaView="textDown"
               />
             {/* <Render path="heading" */}
             {/*        parameters={{ */}
@@ -40,7 +26,7 @@ export const BlogDefault = () => {
             <Section>
                 <Row className="lux-richtext">
                     <Area name="main"
-                          areaType="luxe:areaMain"
+                          areaType="jnt:bigText"
                     />
                     {/* <Render path="main" */}
                     {/*        parameters={{ */}
@@ -50,13 +36,15 @@ export const BlogDefault = () => {
                 </Row>
             </Section>
 
-            <Render content={relatedBlog}/>
+            <Render node={currentNode}
+                    view="relatedCard"
+            />
         </MainLayout>
     );
 };
 
-BlogDefault.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:blog_2',
+Blog3Default.jahiaComponent = defineJahiaComponent({
+    nodeType: 'luxe:blog_3',
     name: 'default',
     componentType: 'template'
 });

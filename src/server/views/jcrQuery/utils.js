@@ -1,7 +1,8 @@
 export const buildQuery = ({luxeQuery, t, server, currentNode, renderContext}) => {
     let warn = null;
     const asContent = 'content';
-    const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
+    // Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
+    const descendantPath = luxeQuery.startNode?.getPath() || `${currentNode.getResolveSite().getPath()}`;
 
     const filter = luxeQuery.filter?.reduce((condition, categoryNode, index) => {
     // If category is deleted, the filter contains "undefined" for the deleted category
