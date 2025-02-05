@@ -22,7 +22,9 @@ export const JcrQueryDestinationGrid = () => {
         'sortDirection',
         'maxItems',
         'startNode',
+        'excludeNodes',
         'filter',
+        'noResultText',
         'j:subNodesView'
     ]);
     const {jcrQuery, warn} = buildQuery({luxeQuery, t, server, currentNode, renderContext});

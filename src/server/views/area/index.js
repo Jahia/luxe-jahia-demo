@@ -1,2 +1,2 @@
-export * from './AreaHeading';
+export * from './AreaHeader';
 export * from './AreaMain';

@@ -15,9 +15,21 @@ export const buildQuery = ({luxeQuery, t, server, currentNode, renderContext}) =
     }, '') || '';
     const queryFilter = filter.trim().length > 0 ? `AND (${filter})` : '';
 
+    const excludeNodes = luxeQuery.excludeNodes?.reduce((condition, excludeNode, index) => {
+        // If category is deleted, the filter contains "undefined" for the deleted category
+        if (!excludeNode) {
+            warn = t('query.excludeIsMissing', {queryName: luxeQuery['jcr:title']});
+            return condition;
+        }
+
+        return `${condition} ${index === 0 ? '' : 'OR'} ${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}'`;
+    }, '') || '';
+    const queryExcludeNodes = excludeNodes.trim().length > 0 ? `AND (${excludeNodes})` : '';
+
     const jcrQuery = `SELECT * FROM [${luxeQuery.type}] AS ${asContent}
                    WHERE ISDESCENDANTNODE('${descendantPath}')
                    ${queryFilter}
+                   ${queryExcludeNodes}
                    ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
 
     server.render.addCacheDependency({flushOnPathMatchingRegexp: `${descendantPath}/.*`}, renderContext);

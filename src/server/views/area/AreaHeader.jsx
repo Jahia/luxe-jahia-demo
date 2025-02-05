@@ -3,7 +3,7 @@ import {
     defineJahiaComponent, Render, AddContentButtons
 } from '@jahia/javascript-modules-library';
 
-export const AreaHeading = () => (
+export const AreaHeader = () => (
     <>
         <Render path="content"
                 view="textDown"/>
@@ -11,8 +11,8 @@ export const AreaHeading = () => (
     </>
 );
 
-AreaHeading.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:areaHeading',
+AreaHeader.jahiaComponent = defineJahiaComponent({
+    nodeType: 'luxe:areaHeader',
     name: 'default',
     componentType: 'view'
 });
