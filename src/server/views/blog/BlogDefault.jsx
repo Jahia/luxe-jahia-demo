@@ -9,24 +9,30 @@ import {useTranslation} from 'react-i18next';
 
 export const BlogDefault = () => {
     const {t} = useTranslation();
-    const {currentNode, renderContext} = useServerContext();
     const {buildStaticUrl} = useUrlBuilder();
-    const blog = getNodeProps(currentNode, [
-        'title',
-        'teaser',
-        'image'
-    ]);
+    const {currentNode, renderContext} = useServerContext();
+    let blogHeader = {
+        title: t('blog.default.title'),
+        teaser: t('blog.default.teaser')
+    };
+
+    try {
+        const blogHeaderNode = currentNode.getNode('header/content');
+        blogHeader = getNodeProps(blogHeaderNode, ['title', 'teaser', 'image']);
+    } catch (e) {
+        console.warn(`no header defined for the blog : ${currentNode.getDisplayableName()} (${currentNode.getIdentifier()}) : ${e}`);
+    }
 
     const image = {
         src: buildStaticUrl({assetPath: 'img/img-placeholder.jpg'}),
         alt: 'Placeholder'
     };
 
-    if (blog.image) {
-        image.src = blog.image.getUrl();
-        image.alt = t('alt.blog', {blog: blog.title});
+    if (blogHeader.image) {
+        image.src = blogHeader.image.getUrl();
+        image.alt = t('alt.blog', {blog: blogHeader.title});
 
-        server.render.addCacheDependency({node: blog.image}, renderContext);
+        server.render.addCacheDependency({node: blogHeader.image}, renderContext);
     }
 
     return (
@@ -38,10 +44,10 @@ export const BlogDefault = () => {
                  height="200"/>
 
             <div className="d-flex flex-column justify-content-center flex-fill">
-                <h2 className="my-0 lux-capitalize">{blog.title}</h2>
+                <h2 className="my-0 lux-capitalize">{blogHeader.title}</h2>
                 {/* eslint-disable-next-line react/no-danger */}
                 <p dangerouslySetInnerHTML={{
-                    __html: blog.teaser
+                    __html: blogHeader.teaser
                 }}
                    className="m-0"
                  />

@@ -9,23 +9,33 @@ import {
 import {Row, Section} from '../../components';
 
 export const BlogDefault = () => {
-    const {currentNode, renderContext} = useServerContext();
+    const {currentNode} = useServerContext();
     const {'j:defaultCategory': filter} = getNodeProps(currentNode, [
         'j:defaultCategory'
     ]);
+    let startNode = currentNode.getAncestors().at(-2)?.getIdentifier();
+    if (!startNode) {
+        startNode = currentNode.getResolveSite().getIdentifier();
+    }
 
     const relatedBlog = {
         name: 'relatedBlog',
         nodeType: 'luxe:jcrQuery',
         properties: {
+            'jcr:title': 'Related Blogs',
+            type: currentNode.getPrimaryNodeTypeName(),
             criteria: 'j:lastPublished',
             sortDirection: 'asc',
             maxItems: '3',
-            // StartNode: currentNode.getNode(currentNode.getAncestor(2).getPath()),
-            filter,
+            startNode,
+            excludeNodes: [currentNode.getIdentifier()],
+            noResultText: 'Pas de related Blog !',
             'j:subNodesView': 'card'
         }
     };
+    if (Array.isArray(filter) && filter.length > 0) {
+        relatedBlog.properties.filter = filter.map(node => node.getIdentifier());
+    }
 
     return (
         <MainLayout>
@@ -49,14 +59,16 @@ export const BlogDefault = () => {
                     {/* <AddContentButtons/> */}
                 </Row>
             </Section>
+            <Section>
+                <Render content={relatedBlog}/>
+            </Section>
 
-            <Render content={relatedBlog}/>
         </MainLayout>
     );
 };
 
 BlogDefault.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:blog_2',
+    nodeType: 'luxe:blog',
     name: 'default',
     componentType: 'template'
 });
