@@ -1,14 +1,14 @@
 {
-  "nodeType": "luxe:header",
-  "priority": 1.0,
-  "sections": [
-    {
-      "name": "metadata",
-      "hidden": true
-    },
-    {
-      "name": "options",
-      "hidden": true
-    }
-  ]
+    "nodeType": "luxe:header",
+    "priority": 1.0,
+    "sections": [
+        {
+            "name": "metadata",
+            "requiredPermission": "hidden"
+        },
+        {
+            "name": "options",
+            "requiredPermission": "hidden"
+        }
+    ]
 }
