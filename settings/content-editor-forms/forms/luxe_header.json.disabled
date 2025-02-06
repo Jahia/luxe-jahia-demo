@@ -1,0 +1,12 @@
+{
+    "nodeType": "luxe:header",
+    "priority": 1.0,
+    "sections": [
+        {
+            "name": "metadata"
+        },
+        {
+            "name": "options"
+        }
+    ]
+}
