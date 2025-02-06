@@ -5,7 +5,7 @@ export const buildQuery = ({luxeQuery, t, server, currentNode, renderContext}) =
     const descendantPath = luxeQuery.startNode?.getPath() || `${currentNode.getResolveSite().getPath()}`;
 
     const filter = luxeQuery.filter?.reduce((condition, categoryNode, index) => {
-    // If category is deleted, the filter contains "undefined" for the deleted category
+        // If category is deleted, the filter contains "undefined" for the deleted category
         if (!categoryNode) {
             warn = t('query.catIsMissing', {queryName: luxeQuery['jcr:title']});
             return condition;
@@ -22,15 +22,18 @@ export const buildQuery = ({luxeQuery, t, server, currentNode, renderContext}) =
             return condition;
         }
 
-        return `${condition} ${index === 0 ? '' : 'OR'} ${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}'`;
+        // Const translationNodes = excludeNode.getI18Ns();
+        // const translationNode = translationNodes?.find(node => node['jcr:language'] === renderContext.getMainResourceLocale().getLanguage())?.getIdentifier();
+        const translationNode = excludeNode.getNode(`j:translation_${renderContext.getMainResourceLocale().getLanguage()}`);
+        const extraLanguageNode = translationNode ? `AND ${asContent}.[jcr:uuid] <> '${translationNode.getIdentifier()}'` : '';
+        return `${condition} ${index === 0 ? '' : 'OR'} (${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}' ${extraLanguageNode})`;
     }, '') || '';
     const queryExcludeNodes = excludeNodes.trim().length > 0 ? `AND (${excludeNodes})` : '';
 
-    const jcrQuery = `SELECT * FROM [${luxeQuery.type}] AS ${asContent}
-                   WHERE ISDESCENDANTNODE('${descendantPath}')
-                   ${queryFilter}
-                   ${queryExcludeNodes}
-                   ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
+    const jcrQuery = `SELECT *
+                      FROM [${luxeQuery.type}] AS ${asContent}
+                      WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
+                      ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
 
     server.render.addCacheDependency({flushOnPathMatchingRegexp: `${descendantPath}/.*`}, renderContext);
     return {jcrQuery, warn};

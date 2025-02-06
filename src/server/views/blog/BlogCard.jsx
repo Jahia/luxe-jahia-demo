@@ -18,7 +18,7 @@ export const BlogCard = () => {
         const blogHeaderNode = currentNode.getNode('header/content');
         blogHeader = getNodeProps(blogHeaderNode, ['title', 'teaser', 'image']);
     } catch (e) {
-        console.warn(`no header defined for the blog : ${currentNode.getDisplayableName()} (${currentNode.getIdentifier()}) : ${e}`);
+        console.info(`no header defined for the blog : ${currentNode.getDisplayableName()} (${currentNode.getIdentifier()}) : ${e}`);
     }
 
     const image = {
