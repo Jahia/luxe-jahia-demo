@@ -10,7 +10,7 @@ import {Row, Section} from '../../components';
 
 export const BlogDefault = () => {
     const {currentNode} = useServerContext();
-    const {'j:defaultCategory': filter} = getNodeProps(currentNode, [
+    const {'j:defaultCategory': categories} = getNodeProps(currentNode, [
         'j:defaultCategory'
     ]);
     let startNode = currentNode.getAncestors().at(-2)?.getIdentifier();
@@ -33,36 +33,38 @@ export const BlogDefault = () => {
             'j:subNodesView': 'card'
         }
     };
-    if (Array.isArray(filter) && filter.length > 0) {
-        relatedBlog.properties.filter = filter.map(node => node.getIdentifier());
+    if (Array.isArray(categories) && categories.length > 0) {
+        relatedBlog.properties.filter = categories.map(node => node.getIdentifier());
     }
 
     return (
         <MainLayout>
-            <Area path="header"
-                  areaType="luxe:areaHeader"
-                  subNodesView="textDown"
-              />
-            {/* <Render path="heading" */}
-            {/*        parameters={{ */}
-            {/*            nodeType: 'luxe:header' */}
-            {/*        }}/> */}
-            <Section>
-                <Row className="lux-richtext">
-                    <Area name="main"
-                          areaType="luxe:areaMain"
-                    />
-                    {/* <Render path="main" */}
-                    {/*        parameters={{ */}
-                    {/*            nodeType: 'jnt:bigText' */}
-                    {/*        }}/> */}
-                    {/* <AddContentButtons/> */}
-                </Row>
-            </Section>
-            <Section>
-                <Render content={relatedBlog}/>
-            </Section>
-
+            <article>
+                <Area path="header"
+                      areaType="luxe:areaHeader"
+                      subNodesView="textDown"
+                />
+                <Section>
+                    <Row className="lux-richtext">
+                        <Area name="main"
+                              areaType="luxe:areaMain"
+                        />
+                    </Row>
+                    {categories &&
+                        <div className="lux-richtext lux-category">
+                            {categories.map(node => (
+                                <Render key={node.getIdentifier()}
+                                        node={node}
+                                        view="badge"
+                                        editable="false"
+                            />
+))}
+                        </div>}
+                </Section>
+                <Section>
+                    <Render content={relatedBlog}/>
+                </Section>
+            </article>
         </MainLayout>
     );
 };
