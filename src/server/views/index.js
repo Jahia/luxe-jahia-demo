@@ -13,3 +13,4 @@ export * from './page';
 export * from './blog';
 export * from './area';
 export * from './category';
+export * from './article';

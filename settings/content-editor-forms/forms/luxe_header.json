@@ -3,10 +3,11 @@
     "priority": 1.0,
     "sections": [
         {
-            "name": "metadata"
+            "name": "content",
+            "expanded": true
         },
         {
-            "name": "options"
+            "name": "layout"
         }
     ]
 }

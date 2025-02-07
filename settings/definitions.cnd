@@ -34,6 +34,7 @@
  - title (string) primary i18n mandatory
  - teaser (string) i18n
  - image (weakreference, picker[type='image']) < 'jmix:image'
+ - date (date, DatePicker)
 
 [luxe:highlightNumber] > jnt:content, luxemix:luxeContent
  - text (string) primary i18n
@@ -119,7 +120,13 @@ orderable
  + header (luxe:areaHeader)
  + main (luxe:areaMain)
 
-//TODO tester vue vs template faire blog_1 et blog_2 pour voir
+
+
+[luxe:article] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, mix:title
+ + header (luxe:header)
+ + main (jnt:bigText)
+
+ //TODO tester vue vs template faire blog_1 et blog_2 pour voir
 [luxe:blog_1] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
 // - title (string) primary i18n mandatory
 // - subtitle (string,textarea) i18n < '.{0,250}'
