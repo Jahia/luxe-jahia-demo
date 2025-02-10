@@ -1649,9 +1649,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@file:/Users/baptistegrimaud/Documents/code/jahia/javascript-modules/javascript-modules-library/target/javascript-modules-library-0.4.0-SNAPSHOT.tgz::locator=luxe-jahia-demo%40workspace%3A.":
-  version: 0.4.0-SNAPSHOT
-  resolution: "@jahia/javascript-modules-library@file:/Users/baptistegrimaud/Documents/code/jahia/javascript-modules/javascript-modules-library/target/javascript-modules-library-0.4.0-SNAPSHOT.tgz#/Users/baptistegrimaud/Documents/code/jahia/javascript-modules/javascript-modules-library/target/javascript-modules-library-0.4.0-SNAPSHOT.tgz::hash=96c6be&locator=luxe-jahia-demo%40workspace%3A."
+"@jahia/javascript-modules-library@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@jahia/javascript-modules-library@npm:0.4.0"
   dependencies:
     dotenv: "npm:^16.4.7"
     graphql: "npm:^16.0.1"
@@ -1676,7 +1676,7 @@ __metadata:
       optional: true
   bin:
     jahia-deploy: bin/jahia-deploy.mjs
-  checksum: 10c0/637aea838ee1db6a2cfe7ffde878d0fe2653b69f623108004560fcfad3ca321a7c0823aeae4d6614d471679f934133e8cdd0c7310d4b7496994d3d4523c5c305
+  checksum: 10c0/bf70c8c9cefc1d54dc05734669431cc77b322cd7e4e323ced04cefb86942d56ad03733662bcf83f55b5e141247eeae8cc9b70d9607b2c6de8357a21841d5057d
   languageName: node
   linkType: hard
 
@@ -5009,7 +5009,7 @@ __metadata:
     "@cyclonedx/webpack-plugin": "npm:^3.12.0"
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/eslint-config": "npm:^2.1.2"
-    "@jahia/javascript-modules-library": /Users/baptistegrimaud/Documents/code/jahia/javascript-modules/javascript-modules-library/target/javascript-modules-library-0.4.0-SNAPSHOT.tgz
+    "@jahia/javascript-modules-library": "npm:^0.4.0"
     babel-loader: "npm:^8.2.3"
     babel-plugin-transform-react-remove-prop-types: "npm:^0.4.24"
     bootstrap: "npm:^5.3.3"
