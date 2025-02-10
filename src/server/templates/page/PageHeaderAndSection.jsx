@@ -2,21 +2,19 @@ import React from 'react';
 import {Area, defineJahiaComponent} from '@jahia/javascript-modules-library';
 import {MainLayout} from '../../layouts';
 
-export const PageHome = () => {
+export const PageHeaderAndSection = () => {
     return (
-        <MainLayout
-            head={<title>LuXE Demo</title>}
-        >
-            <Area name="heading" allowedTypes={['luxe:header']} numberOfItems={1}/>
+        <MainLayout>
+            <Area name="header" allowedTypes={['luxe:header']} numberOfItems={1}/>
             <Area name="main" allowedTypes={['luxe:section']}/>
         </MainLayout>
 
     );
 };
 
-PageHome.jahiaComponent = defineJahiaComponent({
+PageHeaderAndSection.jahiaComponent = defineJahiaComponent({
     nodeType: 'jnt:page',
     name: 'home',
-    displayName: 'Home',
+    displayName: 'Header & Sections (Home)',
     componentType: 'template'
 });

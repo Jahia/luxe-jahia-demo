@@ -3,3 +3,7 @@
     @extend %capitalize;
     @extend %hasDiamond;
 }
+
+header hgroup time {
+  color: var(--bs-secondary-color);
+}

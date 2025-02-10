@@ -1,11 +1,13 @@
 import React from 'react';
 import {
     useServerContext,
-    defineJahiaComponent, getNodeProps, server, useUrlBuilder
+    getNodeProps,
+    useUrlBuilder,
+    server, defineJahiaComponent
 } from '@jahia/javascript-modules-library';
 import {useTranslation} from 'react-i18next';
 
-export const ArticleCard = () => {
+export const ArticleDefault = () => {
     const {t} = useTranslation();
     const {buildStaticUrl} = useUrlBuilder();
     const {currentNode, renderContext} = useServerContext();
@@ -35,21 +37,28 @@ export const ArticleCard = () => {
     }
 
     return (
-        <a href={currentNode.getUrl()} className="lux-estateCard">
-            <img src={image.src}
+        <a className="lux-agencyCard d-flex" href={currentNode.getUrl()}>
+            <img className="lux-agencyCard_image me-4"
+                 src={image.src}
                  alt={image.alt}
-                 height="265"/>
-            <h4 className="my-2">{ArticleHeader.title}</h4>
-            <p className="lux-estateCard_informations">
-                {ArticleHeader.teaser}
-            </p>
+                 width="200"
+                 height="200"/>
+
+            <div className="d-flex flex-column justify-content-center flex-fill">
+                <h2 className="my-0 lux-capitalize">{ArticleHeader.title}</h2>
+                {/* eslint-disable-next-line react/no-danger */}
+                <p dangerouslySetInnerHTML={{
+                    __html: ArticleHeader.teaser
+                }}
+                   className="m-0"
+                 />
+            </div>
         </a>
     );
 };
 
-ArticleCard.jahiaComponent = defineJahiaComponent({
+ArticleDefault.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:article',
-    name: 'card',
-    displayName: 'Card',
+    name: 'default',
     componentType: 'view'
 });

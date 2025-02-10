@@ -23,6 +23,7 @@ export const SeoMetaTags = () => {
     ]) || {};
     const locale = currentResource.getLocale().getLanguage();
     const absOgImageUrl = openGraphImage?.getAbsoluteUrl(renderContext.getRequest());
+    const {'j:width': width, 'j:height': height} = getNodeProps(openGraphImage, ['j:width', 'j:height']);
 
     const getAbsoluteUrl = node => {
         const server = renderContext.getURLGenerator().getServer();
@@ -51,8 +52,10 @@ export const SeoMetaTags = () => {
             {absOgImageUrl &&
                 <>
                     <meta property="og:image" content={absOgImageUrl}/>
-                    <meta property="og:image:width" content={`${'1200'}px`}/>
-                    <meta property="og:image:height" content={`${'628'}px`}/>
+                    {width &&
+                    <meta property="og:image:width" content={`${width}px`}/>}
+                    {height &&
+                    <meta property="og:image:height" content={`${height}px`}/>}
                 </>}
         </>
     );

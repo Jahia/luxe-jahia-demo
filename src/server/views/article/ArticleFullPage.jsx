@@ -4,7 +4,6 @@ import {
     getNodeProps,
     defineJahiaComponent, Render, AddContentButtons
 } from '@jahia/javascript-modules-library';
-import {useTranslation} from 'react-i18next';
 import {Row, Section} from '../../components';
 
 export const ArticleFullPage = () => {
@@ -39,7 +38,7 @@ export const ArticleFullPage = () => {
     return (
         <article>
             <Render path="header"
-                    view="textDownFull"/>
+                    view="textDownAndDate"/>
             <AddContentButtons nodeTypes="luxe:header" childName="header"/>
             <Section>
                 <Row className="lux-richtext">
