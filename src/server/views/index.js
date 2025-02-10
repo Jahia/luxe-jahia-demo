@@ -14,3 +14,4 @@ export * from './blog';
 export * from './area';
 export * from './category';
 export * from './article';
+export * from './contentFolder';
