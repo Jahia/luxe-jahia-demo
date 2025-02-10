@@ -7,7 +7,7 @@
     "build:development": "webpack --mode=development && run pack",
     "build:production": "webpack && run pack",
     "build": "run build:production",
-    "pack": "cd dist/build && yarn pack --out package.tgz && mv package.tgz ..",
+    "pack": "mkdir -p dist/build && cd dist/build && yarn pack --out package.tgz && mv package.tgz ..",
     "clean": "rm -rf dist/",
     "deploy": "jahia-deploy",
     "watch": "webpack --mode=development --watch",

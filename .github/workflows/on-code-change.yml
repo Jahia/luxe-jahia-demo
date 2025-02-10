@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
-      - uses: jahia/jahia-modules-action/build-npm@update-packing-in-npm-builds
+      - uses: jahia/jahia-modules-action/build-npm@v2
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
