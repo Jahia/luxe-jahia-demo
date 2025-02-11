@@ -5,7 +5,10 @@ import {Row, Section} from '../../components';
 
 export const PageHeaderTextAndArticles = () => {
     const {renderContext} = useServerContext();
-    const articleFolderNode = renderContext.getSite().getNode('contents/magazine/need-triage');
+    // Const articleFolderNode = renderContext.getSite().getNode('contents/magazine/need-triage');
+    // const articleFolderNode = renderContext.getSite().getNode('contents/magazine');
+    const articleFolderNode = renderContext.getSite().getNode('contents/mag');
+
     // Const articleFolder = currentNode.getSession().getNode(`${renderContext.getSite()}/contents/magazine/need-triage`);
 
     // Const year = new Date().getFullYear();

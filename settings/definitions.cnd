@@ -146,3 +146,5 @@ orderable
  - relatedBlogs (weakreference) multiple < 'luxe:blog'
  + header (luxe:header)
  + main (jnt:bigText)
+
+[luxe:magazine] > jnt:contentFolder, luxemix:luxeContent, jmix:contributeMode
