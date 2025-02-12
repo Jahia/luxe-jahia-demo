@@ -125,6 +125,8 @@ orderable
 [luxe:article] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, mix:title
  + header (luxe:header)
  + main (jnt:bigText)
+ + relatedArticles (luxe:jcrQuery)
+ + relatedArticlesArea (jnt:contentList)
 
  //TODO tester vue vs template faire blog_1 et blog_2 pour voir
 [luxe:blog_1] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
@@ -147,4 +149,4 @@ orderable
  + header (luxe:header)
  + main (jnt:bigText)
 
-[luxe:magazine] > jnt:contentFolder, luxemix:luxeContent, jmix:contributeMode
+[luxe:magazine] > jnt:contentFolder, luxemix:luxeContent

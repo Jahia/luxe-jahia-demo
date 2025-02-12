@@ -5,19 +5,8 @@ import {Row, Section} from '../../components';
 
 export const PageHeaderTextAndArticles = () => {
     const {renderContext} = useServerContext();
-    // Const articleFolderNode = renderContext.getSite().getNode('contents/magazine/need-triage');
-    // const articleFolderNode = renderContext.getSite().getNode('contents/magazine');
-    const articleFolderNode = renderContext.getSite().getNode('contents/mag');
+    const articleFolderNode = renderContext.getSite().getNode('contents/blog');
 
-    // Const articleFolder = currentNode.getSession().getNode(`${renderContext.getSite()}/contents/magazine/need-triage`);
-
-    // Const year = new Date().getFullYear();
-    // const months = new Date().toLocaleDateString(
-    //     renderContext.getSite().getDefaultLanguage(),
-    //     {
-    //         month: 'long'
-    //     }
-    // ).toLowerCase();
     return (
         <MainLayout>
             <Area name="header"
@@ -32,17 +21,18 @@ export const PageHeaderTextAndArticles = () => {
                 </Row>
             </Section>
             <Section>
-                <Area name="main" numberOfItems="1"/>
-            </Section>
-            {renderContext.isEditMode() &&
-                <Section>
-                    {/* <Render path={`${renderContext.getSite()}/contents/magazine/${year}/${months}`} */}
-                    {/*        view="createArticle" */}
-                    {/* /> */}
+                {renderContext.isEditMode() &&
                     <Render node={articleFolderNode}
                             view="createArticle"
-                    />
-                </Section>}
+                    />}
+                <Area name="main" numberOfItems="1"/>
+                {renderContext.isEditMode() &&
+                    <Render node={articleFolderNode}
+                            view="createArticle"
+                    />}
+            </Section>
+
+            <Section/>
         </MainLayout>
     );
 };
