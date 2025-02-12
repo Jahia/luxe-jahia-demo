@@ -32,9 +32,10 @@
 
 [luxe:header] > jnt:content, luxemix:luxeContent
  - title (string) primary i18n mandatory
+ - subtitle (string) i18n
+ //to remove
  - teaser (string) i18n
  - image (weakreference, picker[type='image']) < 'jmix:image'
- - date (date, DatePicker)
 
 [luxe:highlightNumber] > jnt:content, luxemix:luxeContent
  - text (string) primary i18n
@@ -77,12 +78,6 @@
  - email (string)
  - realtors (weakreference) multiple < 'luxe:realtor'
  + * (luxe:estate) = luxe:estate
- + estates (luxe:estates) = luxe:estates
-
-//jnt:contentList
-[luxe:estates] > jnt:content, jmix:list , jmix:hiddenType
-orderable
- + * (luxe:header) = luxe:header
 
 [luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - fullName (string) hidden
@@ -95,7 +90,6 @@ orderable
  - yOfExperience (long) = 1 autocreated mandatory
  - phone (string) = '+33 6 123 456' autocreated mandatory indexed=no
  - email (string) = 'agent@luxe.com' autocreated mandatory
-
 
 [luxe:jcrQuery] > jnt:content, luxemix:luxeContent, jmix:list, jmix:renderableList, mix:title, jmix:cache
 - type (string, choicelist[subnodetypes = 'jnt:page,luxemix:queryContent',resourceBundle]) indexed=no mandatory
@@ -110,43 +104,10 @@ orderable
 [luxe:loginForm] > jnt:content, luxemix:luxeContent, mix:title
  - j:displayRememberMeButton (boolean) = true autocreated
 
-[luxe:areaHeader] > jnt:content, jmix:hiddenType
- + content (luxe:header) = luxe:header
-
-[luxe:areaMain] > jnt:content, jmix:hiddenType
- + content (jnt:bigText) = jnt:bigText
-
-[luxe:blog] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, mix:title
- + header (luxe:areaHeader)
- + main (luxe:areaMain)
-
-
-
-[luxe:article] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, mix:title
- + header (luxe:header)
- + main (jnt:bigText)
- + relatedArticles (luxe:jcrQuery)
- + relatedArticlesArea (jnt:contentList)
-
- //TODO tester vue vs template faire blog_1 et blog_2 pour voir
-[luxe:blog_1] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
-// - title (string) primary i18n mandatory
-// - subtitle (string,textarea) i18n < '.{0,250}'
-// - teaser (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
-// - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
-// - body (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - country (string,choicelist[country]) = 'FR' autocreated mandatory
- - relatedBlogs (weakreference) multiple < 'luxe:blog'
- + heading (luxe:header)
- + main (jnt:bigText)
-// + headingList (jnt:contentList)
-// + headingDropContent (jmix:droppableContent)
-// + * (jmix:droppableContent)
-
-[luxe:blog_3] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
- - country (string,choicelist[country]) = 'FR' autocreated mandatory
- - relatedBlogs (weakreference) multiple < 'luxe:blog'
- + header (luxe:header)
- + main (jnt:bigText)
-
-[luxe:magazine] > jnt:contentFolder, luxemix:luxeContent
+[luxe:blogPost] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
+ - title (string) primary i18n mandatory
+ - subtitle (string) i18n
+ - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
+ - body (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+ - date (date, DatePicker)
+ - relatedBlogs (weakreference) multiple < 'luxe:blogPost'
