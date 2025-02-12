@@ -13,15 +13,15 @@ global Logger logger
 global JCRContentUtils jcrUtils
 
 rule "Auto-split user activities node on creation and restrict contribute type"
-  salience 101
-  when
-    A new node is created
-        - it has the type luxe:magazine
-    The node has a parent
-        - the parent has the type jnt:contentFolder
-//        - its name is contents
-  then
-    Enable auto-splitting for subnodes of the node into folders of type jnt:contentFolder using configuration "date,jcr:created,yyyy;date,jcr:created,MMMM"
-//     jmix:contributeMode
-    Set the property j:contributeTypes of the node with the value "luxe:article"
+    salience 101
+    when
+        A new node is created
+            - it has the type luxe:magazine
+        The node has a parent
+            - the parent has the type jnt:contentFolder
+        //        - its name is contents
+    then
+        Enable auto-splitting for subnodes of the node into folders of type jnt:contentFolder using configuration "date,jcr:created,yyyy;date,jcr:created,MM"
+        Add the type jmix:contributeMode
+        Set the property j:contributeTypes of the node with the value "luxe:article"
 end

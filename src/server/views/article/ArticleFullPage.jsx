@@ -2,7 +2,7 @@ import React from 'react';
 import {
     useServerContext,
     getNodeProps,
-    defineJahiaComponent, Render, AddContentButtons
+    defineJahiaComponent, Render, AddContentButtons, Area
 } from '@jahia/javascript-modules-library';
 import {Row, Section} from '../../components';
 
@@ -35,6 +35,11 @@ export const ArticleFullPage = () => {
         relatedArticles.properties.filter = categories.map(node => node.getIdentifier());
     }
 
+    // Const relatedArticlesArea = {
+    //     name: 'relatedArticlesArea',
+    //     nodeType: 'jnt:area',
+    //     children: [relatedArticles]
+    // };
     return (
         <article>
             <Render path="header"
@@ -59,6 +64,10 @@ export const ArticleFullPage = () => {
             <Section>
                 <Render content={relatedArticles}/>
             </Section>
+            {/* <Section> */}
+            {/*    <Render content={relatedArticlesArea}/> */}
+            {/* </Section> */}
+
         </article>
     );
 };

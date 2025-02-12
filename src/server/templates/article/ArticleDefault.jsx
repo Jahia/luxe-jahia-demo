@@ -3,7 +3,7 @@ import {MainLayout} from '../../layouts';
 import {
     useServerContext,
     defineJahiaComponent,
-    Render
+    Render, Area
 } from '@jahia/javascript-modules-library';
 
 export const ArticleDefault = () => {
