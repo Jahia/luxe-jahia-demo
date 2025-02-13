@@ -4,7 +4,7 @@ import {Figure, PageTitle, Row} from '../../components';
 
 export const HeaderTextUp = () => {
     const {currentNode, renderContext} = useServerContext();
-    const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
+    const header = getNodeProps(currentNode, ['title', 'subtitle', 'image']);
 
     if (header.image) {
         server.render.addCacheDependency({node: header.image}, renderContext);
@@ -15,7 +15,7 @@ export const HeaderTextUp = () => {
             <Row>
                 <PageTitle
                         title={header.title}
-                        description={header.teaser}
+                        description={header.subtitle}
                         />
             </Row>
             {header.image &&

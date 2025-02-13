@@ -108,6 +108,6 @@
  - title (string) primary i18n mandatory
  - subtitle (string) i18n
  - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
- - body (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - date (date, DatePicker)
- - relatedBlogs (weakreference) multiple < 'luxe:blogPost'
+ - body (string,richtext) i18n mandatory
+ - date (date, DatePicker) = now() autocreated mandatory
+ - relatedBlogPosts (weakreference) multiple < luxe:blogPost

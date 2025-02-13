@@ -22,8 +22,6 @@ export const buildQuery = ({luxeQuery, t, server, currentNode, renderContext}) =
             return condition;
         }
 
-        // Const translationNodes = excludeNode.getI18Ns();
-        // const translationNode = translationNodes?.find(node => node['jcr:language'] === renderContext.getMainResourceLocale().getLanguage())?.getIdentifier();
         const translationNode = excludeNode.getNode(`j:translation_${renderContext.getMainResourceLocale().getLanguage()}`);
         const extraLanguageNode = translationNode ? `AND ${asContent}.[jcr:uuid] <> '${translationNode.getIdentifier()}'` : '';
         return `${condition} ${index === 0 ? '' : 'OR'} (${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}' ${extraLanguageNode})`;
