@@ -9,7 +9,9 @@ export * from './agency';
 export * from './realtor';
 export * from './jcrQuery';
 export * from './loginForm';
+export * from './form';
 export * from './page';
 export * from './blogPost';
 export * from './category';
 export * from './contentFolder';
+

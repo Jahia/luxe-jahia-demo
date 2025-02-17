@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {Col, Row, Section} from './grid';
 import {useTranslation} from 'react-i18next';
-import {Render} from '@jahia/javascript-modules-library';
+import {AbsoluteArea, Render} from '@jahia/javascript-modules-library';
+
+// Const loginForm = {
+//     name: 'loginForm',
+//     nodeType: 'luxe:loginForm',
+//     properties: {
+//         'j:displayRememberMeButton': 'true'
+//     }
+// };
 
 const loginForm = {
     name: 'loginForm',
-    nodeType: 'luxe:loginForm',
+    nodeType: ' luxe:form',
     properties: {
+        'jcr:mixinTypes': ['luxemix:loginForm'],
         'j:displayRememberMeButton': 'true'
     }
 };
@@ -35,32 +44,33 @@ export const HtmlFooter = ({className}) => {
                 </Col>
                 <Col className="col-5">
                     {/* <h5>{t('footer.backOffice')}</h5> */}
-                    <Render content={loginForm}/>
+                    {/* <Render content={loginForm}/> */}
                     {/* <LoginForm/> */}
                 </Col>
-                {/* <Col className="col-3">
-                    <h5>Join us</h5>
-                    <ul className="list-inline">
-                        <li className="list-inline-item">
-                            <a href="#">twitter</a>
-                        </li>
-                        <li className="list-inline-item">
-                            <a href="#">youtube</a>
-                        </li>
-                        <li className="list-inline-item">
-                            <a href="#">Github</a>
-                        </li>
-                    </ul>
-                </Col> */}
+                <Col className="col-3">
+                    {/* <h5>Join us</h5> */}
+                    {/* <ul className="list-inline"> */}
+                    {/*    <li className="list-inline-item"> */}
+                    {/*        <a href="#">twitter</a> */}
+                    {/*    </li> */}
+                    {/*    <li className="list-inline-item"> */}
+                    {/*        <a href="#">youtube</a> */}
+                    {/*    </li> */}
+                    {/*    <li className="list-inline-item"> */}
+                    {/*        <a href="#">Github</a> */}
+                    {/*    </li> */}
+                    {/* </ul> */}
+                </Col>
             </Row>
             <Row className="lux-site-footer_disclaimer pb-3">
-                {/* <Col> */}
-                {/*    <a href="#">Privacy Policy</a> */}
-                {/*    <span className="lux-site-footer_disclaimer_seprator"> */}
-                {/*        / */}
-                {/*    </span> */}
-                {/*    <a href="#">Terms of Use</a> */}
-                {/* </Col> */}
+                <Col>
+                    <AbsoluteArea name="footerNavArea" allowedTypes={['luxe:navMenu']} numberOfItems="1"/>
+                    {/* <a href="#">Privacy Policy</a> */}
+                    {/* <span className="lux-site-footer_disclaimer_seprator"> */}
+                    {/*    / */}
+                    {/* </span> */}
+                    {/* <a href="#">Terms of Use</a> */}
+                </Col>
                 <Col className="text-end">
                     <span>
                         {t('footer.copyright', {currentDate: new Date().getFullYear()})}

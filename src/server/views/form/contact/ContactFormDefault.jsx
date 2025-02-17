@@ -1,5 +1,5 @@
 import React from 'react';
-import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/js-server-core';
+import {HydrateInBrowser, useServerContext, getNodeProps} from '@jahia/javascript-modules-library';
 import ContactComponent from '../../../../client/ContactComponent';
 import {defineJahiaComponent} from '@jahia/javascript-modules-library';
 
