@@ -5,19 +5,11 @@ import {Col, Row, Section} from './grid';
 import {useTranslation} from 'react-i18next';
 import {AbsoluteArea, Render} from '@jahia/javascript-modules-library';
 
-// Const loginForm = {
-//     name: 'loginForm',
-//     nodeType: 'luxe:loginForm',
-//     properties: {
-//         'j:displayRememberMeButton': 'true'
-//     }
-// };
-
 const loginForm = {
     name: 'loginForm',
-    nodeType: ' luxe:form',
+    nodeType: 'luxe:form',
+    mixins: ['luxemix:loginForm'],
     properties: {
-        'jcr:mixinTypes': ['luxemix:loginForm'],
         'j:displayRememberMeButton': 'true'
     }
 };
@@ -44,7 +36,7 @@ export const HtmlFooter = ({className}) => {
                 </Col>
                 <Col className="col-5">
                     {/* <h5>{t('footer.backOffice')}</h5> */}
-                    {/* <Render content={loginForm}/> */}
+                    <Render content={loginForm}/>
                     {/* <LoginForm/> */}
                 </Col>
                 <Col className="col-3">
@@ -64,7 +56,8 @@ export const HtmlFooter = ({className}) => {
             </Row>
             <Row className="lux-site-footer_disclaimer pb-3">
                 <Col>
-                    <AbsoluteArea name="footerNavArea" allowedTypes={['luxe:navMenu']} numberOfItems="1"/>
+                    {/* numberOfItems="4" */}
+                    <AbsoluteArea name="footerNavLinkArea" areaType="jnt:linkList" allowedTypes={['jnt:nodeLink', 'jnt:externalLink']}/>
                     {/* <a href="#">Privacy Policy</a> */}
                     {/* <span className="lux-site-footer_disclaimer_seprator"> */}
                     {/*    / */}
