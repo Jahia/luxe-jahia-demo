@@ -164,7 +164,7 @@ module.exports = (env, argv) => {
                 path: buildOutput
             },
             externals: {
-                // Those libraries are supplied to webpack at runtime (by the npm-module-engine project), and are not packaged in the output bundle
+                // Those libraries are supplied to webpack at runtime (by the javascript-module-engine project), and are not packaged in the output bundle
                 '@jahia/javascript-modules-library': 'javascriptModulesLibraryBuilder.getLibrary()',
                 react: 'javascriptModulesLibraryBuilder.getSharedLibrary(\'react\')',
                 'react-i18next': 'javascriptModulesLibraryBuilder.getSharedLibrary(\'react-i18next\')',
