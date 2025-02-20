@@ -49,7 +49,7 @@ NavMenuItem.propTypes = {
 };
 
 const arrangement = ['right', 'left'];
-export const NavMenuIllustrated = () => {
+export const JcrQueryIllustrated = () => {
     const {currentNode, currentResource, renderContext} = useServerContext();
 
     const nav = getNodeProps(currentNode, [
@@ -99,7 +99,7 @@ export const NavMenuIllustrated = () => {
     );
 };
 
-NavMenuIllustrated.jahiaComponent = defineJahiaComponent({
+JcrQueryIllustrated.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:navMenu',
     name: 'navIllustrated',
     displayName: 'Nav Illustrated',

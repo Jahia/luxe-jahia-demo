@@ -53,7 +53,7 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
     return (
         <div className="modal-content">
             <header className="modal-header">
-                <h2 id="loginModalTitle" className="lux-capitalize">{t('login.login')}</h2>
+                <h2 id="loginModalTitle" className="lux-capitalize">{t('form.login.login')}</h2>
             </header>
             <form
                 id="loginForm"
@@ -61,16 +61,16 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
             >
                 {incorrectLogin &&
                     <p className="alert alert-danger fs-6" role="alert">
-                        {t('login.badCreds')}
+                        {t('form.login.badCreds')}
                     </p>}
 
                 {unknownError &&
                     <p className="alert alert-danger fs-6" role="alert">
-                        {t('login.unknownError')}
+                        {t('form.unknownError')}
                     </p>}
 
                 <div>
-                    <label htmlFor="inputUser" className="form-label fs-6">{t('login.username')}</label>
+                    <label htmlFor="inputUser" className="form-label fs-6">{t('form.login.username')}</label>
                     <input
                         autoFocus
                         id="inputUser"
@@ -82,7 +82,7 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
                         />
                 </div>
                 <div>
-                    <label htmlFor="inputPassword" className="form-label fs-6">{t('login.password')}</label>
+                    <label htmlFor="inputPassword" className="form-label fs-6">{t('form.login.password')}</label>
                     <input
                         id="inputPassword"
                         type="password"
@@ -99,7 +99,7 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
                 {isShowRememberMe &&
                     <div className="form-check">
                         <input id="remember" type="checkbox" name="remember" className="form-check-input me-2" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
-                        <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('login.rememberMe')}</label>
+                        <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('form.login.rememberMe')}</label>
                     </div>}
             </form>
             <footer className="modal-footer">
@@ -109,7 +109,7 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
                         className="btn btn-primary lux-capitalize"
                         onClick={login}
                 >
-                    {t('login.login')}
+                    {t('form.login.login')}
                 </button>
             </footer>
         </div>

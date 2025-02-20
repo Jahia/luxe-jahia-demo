@@ -12,7 +12,7 @@ import {useTranslation} from 'react-i18next';
 import {buildQuery} from './utils';
 import clsx from 'clsx';
 
-export const JcrQueryDestinationGrid = () => {
+export const JcrQueryTilesGrid = () => {
     const {t} = useTranslation();
     const {currentNode, renderContext} = useServerContext();
     const luxeQuery = getNodeProps(currentNode, [
@@ -22,7 +22,9 @@ export const JcrQueryDestinationGrid = () => {
         'sortDirection',
         'maxItems',
         'startNode',
+        'excludeNodes',
         'filter',
+        'noResultText',
         'j:subNodesView'
     ]);
     const {jcrQuery, warn} = buildQuery({luxeQuery, t, server, currentNode, renderContext});
@@ -52,10 +54,10 @@ export const JcrQueryDestinationGrid = () => {
                     {queryContent.map((row, index) => {
                         if (index % 2 === 0) {
                             return (
-                                <Row key={`${row[0].getIdentifier()}-${row[1].getIdentifier() || '0'}`}>
+                                <Row key={`${row[0].getIdentifier()}-${row[1]?.getIdentifier() || row[0].getIdentifier()}`}>
                                     {row.map(node => (
                                         <Col key={node.getIdentifier()}>
-                                            <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                            <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'} editable={false}/>
                                         </Col>
                                     ))}
                                 </Row>
@@ -63,7 +65,7 @@ export const JcrQueryDestinationGrid = () => {
                         }
 
                         return (
-                            <Row key={`${row[0].getIdentifier()}-${row[1].getIdentifier() || '0'}`}>
+                            <Row key={`${row[0].getIdentifier()}-${row[1]?.getIdentifier() || row[0].getIdentifier()}`}>
                                 {row.map((node, nodeIndex) => (
                                     <Col key={node.getIdentifier()}
                                          className={clsx({
@@ -71,7 +73,7 @@ export const JcrQueryDestinationGrid = () => {
                                                 'col-8': nodeIndex === 1
                                              })}
                                     >
-                                        <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                        <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'} editable={false}/>
                                     </Col>
                                     ))}
                             </Row>
@@ -84,8 +86,9 @@ export const JcrQueryDestinationGrid = () => {
     );
 };
 
-JcrQueryDestinationGrid.jahiaComponent = defineJahiaComponent({
+JcrQueryTilesGrid.jahiaComponent = defineJahiaComponent({
     nodeType: 'luxe:jcrQuery',
-    name: 'destination-grid',
+    name: 'tilesGrid',
+    displayName: 'Tiles Grid',
     componentType: 'view'
 });

@@ -4,7 +4,7 @@ import {Figure, Row} from '../../components';
 
 export const HeaderTextDown = () => {
     const {currentNode, renderContext} = useServerContext();
-    const header = getNodeProps(currentNode, ['title', 'teaser', 'image']);
+    const header = getNodeProps(currentNode, ['title', 'subtitle', 'image']);
 
     if (header.image) {
         server.render.addCacheDependency({node: header.image}, renderContext);
@@ -22,7 +22,7 @@ export const HeaderTextDown = () => {
             <hgroup className="row text-center">
                 <h1 className="display-1 mb-0">{header.title}</h1>
                 <p className="h2 mt-0">
-                    {header.teaser}
+                    {header.subtitle}
                 </p>
             </hgroup>
         </header>

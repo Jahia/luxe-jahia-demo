@@ -4,19 +4,18 @@ import {
     useServerContext,
     getNodeProps,
     defineJahiaComponent,
-    buildUrl
-} from '@jahia/javascript-modules-library';
-import LoginComponent from '../../../client/LoginComponent';
+    buildUrl} from '@jahia/javascript-modules-library';
+import LoginComponent from '../../../../client/LoginComponent';
 
-export const LoginForm = () => {
-    const {renderContext, currentNode, currentResource} = useServerContext();
-    const props = getNodeProps(currentNode, ['j:displayRememberMeButton']);
+export const LoginFormDefault = () => {
+    const {renderContext, currentResource, currentNode} = useServerContext();
+    const {'j:displayRememberMeButton': isShowRememberMe} = getNodeProps(currentNode, ['j:displayRememberMeButton']);
 
     const isLoggedIn = renderContext.isLoggedIn();
     const userHydrated = renderContext.getUser().getName();
     // URL management, usage of buildUrl ensure urls are correct (vanity, url rewriting, webapp context, etc.)
     const liveUrl = buildUrl({value: renderContext.getURLGenerator().getLive()}, renderContext, currentResource);
-    const previewUrl =  buildUrl({value: renderContext.getURLGenerator().getPreview()}, renderContext, currentResource);
+    const previewUrl = buildUrl({value: renderContext.getURLGenerator().getPreview()}, renderContext, currentResource);
     const editUrl = buildUrl({value: renderContext.getURLGenerator().getEdit()}, renderContext, currentResource);
     const gqlUrl = buildUrl({value: '/modules/graphql'}, renderContext, currentResource);
     const loginUrl = buildUrl({value: renderContext.getURLGenerator().getLogin()}, renderContext, currentResource);
@@ -35,17 +34,18 @@ export const LoginForm = () => {
                 urls,
                 mode,
                 nodePath: mainPath,
-                isShowRememberMe: Boolean(props['j:displayRememberMeButton']),
+                isShowRememberMe: Boolean(isShowRememberMe),
                 siteKey: renderContext.getSite().getSiteKey()
             }}
         />
     );
 };
 
-LoginForm.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:loginForm',
-    componentType: 'view',
+LoginFormDefault.jahiaComponent = defineJahiaComponent({
+    nodeType: 'luxemix:loginForm',
     name: 'default',
+    displayName: 'default (hydrate)',
+    componentType: 'view',
     properties: {
         'cache.perUser': 'true'
     }

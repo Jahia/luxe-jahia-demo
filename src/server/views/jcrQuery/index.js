@@ -1,3 +1,3 @@
 export * from './JcrQueryDefault';
 export * from './JcrQueryInline';
-export * from './JcrQueryDestinationGrid';
+export * from './JcrQueryTilesGrid';

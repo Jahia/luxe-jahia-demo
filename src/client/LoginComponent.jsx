@@ -32,7 +32,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     };
 
     if (mode === 'edit') {
-        return <div className="alert alert-dark fs-6" role="alert">{t('login.editModeWarning')}</div>;
+        return <div className="alert alert-dark fs-6" role="alert">{t('form.login.editModeWarning')}</div>;
     }
 
     return loggedIn ? (
@@ -51,7 +51,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
                         className="d-block btn btn-link p-0 lux-capitalize border-0"
                         onClick={logout}
                     >
-                        {t('login.logout')}
+                        {t('form.login.logout')}
                     </button>
                 </li>
             </ul>
@@ -77,7 +77,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
                     className="lux-capitalize"
                     onClick={showModal}
                 >
-                    {t('login.login')}
+                    {t('form.login.login')}
                 </a>
             </p>
         </>

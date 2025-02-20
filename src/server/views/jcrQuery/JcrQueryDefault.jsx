@@ -21,15 +21,18 @@ export const JcrQueryDefault = () => {
         'sortDirection',
         'maxItems',
         'startNode',
+        'excludeNodes',
         'filter',
+        'noResultText',
         'j:subNodesView'
     ]);
+    const noResultText = luxeQuery.noResultText ? t(luxeQuery.noResultText) : t('query.noResult');
     const {jcrQuery, warn} = buildQuery({luxeQuery, t, server, currentNode, renderContext});
     const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, luxeQuery.maxItems || -1);
 
     return (
         <>
-            {luxeQuery['jcr:title'] &&
+            {luxeQuery['jcr:title'] && queryContent && queryContent.length > 0 &&
                 <HeadingSection title={luxeQuery['jcr:title']}/>}
             {renderContext.isEditMode() && warn &&
                 <div className="alert alert-warning" role="alert">{warn}</div>}
@@ -39,13 +42,13 @@ export const JcrQueryDefault = () => {
                     {queryContent.map(node => {
                             return (
                                 <Col key={node.getIdentifier()} className="g-0">
-                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'}/>
+                                    <Render node={node} view={luxeQuery['j:subNodesView'] || 'default'} editable={false}/>
                                 </Col>
                             );
                         })}
                 </Row>}
             {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() &&
-                <div className="alert alert-dark" role="alert">{t('query.noResult')}</div>}
+                <div className="alert alert-dark" role="alert">{noResultText}</div>}
         </>
     );
 };

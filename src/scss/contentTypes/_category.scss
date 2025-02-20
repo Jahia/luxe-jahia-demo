@@ -1,0 +1,14 @@
+.lux-category {
+  display: flex;
+  border-top: 1px solid var(--bs-primary);
+  gap: 16px;
+  padding: 40px 0;
+  margin-top: 40px;
+
+  & > span {
+    background-color: var(--bs-secondary);
+    padding: 4px 16px;
+    border-radius: 8px;
+  }
+}
+
