@@ -15,6 +15,28 @@
           }
         }
       }
-    }
+    },
+      {
+          "name": "realtors",
+          "selectorType": "Picker",
+          "selectorOptionsMap": {
+              "type":"default",
+              "accordionItem": {
+                  "picker-pages": {
+                      "label": "Blog posts",
+                      "rootPath": "/sites/{site}/contents/realtors",
+                      "treeConfig": {
+                          "hideRoot": true
+                      }
+                  }
+              },
+              "pickerConfig": {
+                  "pickerDialog": {
+                      "displaySiteSwitcher": false,
+                      "displayTree": false
+                  }
+              }
+          }
+      }
   ]
 }

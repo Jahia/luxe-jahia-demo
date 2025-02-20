@@ -6,8 +6,9 @@ import {
     Render
 } from '@jahia/javascript-modules-library';
 
-export const ArticleDefault = () => {
+export const BlogPostDefault = () => {
     const {currentNode} = useServerContext();
+
     return (
         <MainLayout>
             <Render node={currentNode} view="fullPage"/>
@@ -15,8 +16,8 @@ export const ArticleDefault = () => {
     );
 };
 
-ArticleDefault.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:article',
+BlogPostDefault.jahiaComponent = defineJahiaComponent({
+    nodeType: 'luxe:blogPost',
     name: 'default',
     componentType: 'template'
 });

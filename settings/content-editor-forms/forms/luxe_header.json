@@ -8,15 +8,15 @@
         },
         {
             "name": "metadata",
-            "hide": true
+            "hide": false
         },
         {
             "name": "layout",
-            "hide": true
+            "hide": false
         },
         {
             "name": "options",
-            "hide": true
+            "hide": false
         }
     ]
 }

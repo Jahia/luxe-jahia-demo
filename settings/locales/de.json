@@ -1,126 +1,128 @@
 {
-  "section": {
-    "heading": {
-      "contact": "kontakt",
-      "experts": "unsere Experten",
-      "exclusiveAgencyEstates": "exklusive Agenturimmobilien",
-      "exclusiveEstates": "exklusive Immobilien"
+    "section": {
+        "heading": {
+            "contact": "Kontakt",
+            "experts": "unsere Experten",
+            "exclusiveAgencyEstates": "exklusive Objekte der Agentur",
+            "exclusiveEstates": "exklusive Objekte",
+            "relatedBlogPosts": "empfohlene Blogbeiträge"
+        },
+        "contact": {
+            "address": "Adresse",
+            "phone": "Telefon",
+            "email": "E-Mail",
+            "btn": "Termin vereinbaren"
+        }
     },
-    "contact": {
-      "address": "adresse",
-      "phone": "telefon",
-      "email": "e-Mail",
-      "btn": "einen Termin vereinbaren"
+    "table": {
+        "data": {
+            "agency": "Agentur",
+            "yOfExperience": "Jahre Erfahrung",
+            "nbRealtor": "Anzahl der Experten",
+            "creationDate": "Erstellungsdatum",
+            "spokenLanguage": {
+                "label": "gesprochene Sprachen",
+                "fr": "Französisch",
+                "en": "Englisch",
+                "es": "Spanisch",
+                "de": "Deutsch",
+                "it": "Italienisch",
+                "us": "Englisch"
+            }
+        }
+    },
+    "footer": {
+        "resources": "Ressourcen",
+        "academy": "Jahia Academy",
+        "tutorial": "Tutorial",
+        "sourceCode": "Quellcode",
+        "backOffice": "Website verwalten",
+        "connection": "Verbindung",
+        "copyright": "Copyrights © 2002-{{currentDate}} Alle Rechte vorbehalten von Jahia Solutions Group SA"
+    },
+    "form": {
+        "login": {
+            "login": "Anmelden",
+            "logout": "Abmelden",
+            "badCreds": "Benutzername oder Passwort falsch",
+            "username": "Benutzername",
+            "password": "Passwort",
+            "rememberMe": "angemeldet bleiben",
+            "liveWorkspace": "live",
+            "previewWorkspace": "Vorschau",
+            "editWorkspace": "Bearbeiten",
+            "editModeWarning": "Die Anmeldung ist im Page Builder deaktiviert"
+        },
+        "contact": {
+            "firstName": "Vorname",
+            "lastName": "Nachname",
+            "email": "E-Mail",
+            "msg": "Ihre Nachricht",
+            "submit": "Absenden",
+            "editModeWarning": "Das Kontaktformular ist im Page Builder deaktiviert",
+            "sendMessageError": "Hoppla! Entschuldigung, {{name}}.<br/> Etwas ist mit Ihrer Nachricht schiefgelaufen. Der Statuscode ist {{status}}.",
+            "sendMessageAgain": "Nachricht erneut senden"
+        },
+        "unknownError": "ein Fehler ist aufgetreten"
+    },
+    "realtor": {
+        "jobPosition": {
+            "junior": "Junior-Agent",
+            "senior": "Senior-Agent",
+            "director": "Agenturleiter"
+        }
+    },
+    "estate": {
+        "type": {
+            "label": "Typ",
+            "house": "Haus",
+            "apartment": "Wohnung",
+            "building": "Gebäude"
+        },
+        "surface": {
+            "label": "Fläche"
+        },
+        "rooms": {
+            "label": "Räume",
+            "numberOf": "Anzahl der Räume"
+        },
+        "bedrooms": {
+            "label": "Schlafzimmer",
+            "numberOf": "Anzahl der Schlafzimmer"
+        },
+        "bathrooms": {
+            "label": "Badezimmer",
+            "numberOf": "Anzahl der Badezimmer"
+        },
+        "options": {
+            "label": "Optionen",
+            "garage": "Garage",
+            "swimmingPool": "Schwimmbad",
+            "garden": "Garten",
+            "balcony": "Balkon"
+        }
+    },
+    "link": {
+        "labels": {
+            "knowMore": "mehr erfahren",
+            "readMore": "weiterlesen"
+        }
+    },
+    "query": {
+        "noResult": "für diese Abfrage wurden keine Ergebnisse zurückgegeben",
+        "catIsMissing": "eine Kategorie wurde entfernt oder fehlt, bitte überprüfen Sie die Abfrage: '{{queryName}}'",
+        "excludeIsMissing": "ein ausgeschlossener Knoten wurde entfernt oder fehlt, bitte überprüfen Sie die Abfrage: '{{queryName}}'"
+    },
+    "page": {
+        "relatedContent": {
+            "estateSelection": "unsere Auswahl an Immobilien",
+            "agencies": "lokale Agenturen"
+        }
+    },
+    "alt": {
+        "estate": "Ansicht der Immobilie: {{estate}}",
+        "realtor": "Porträt des Maklers: {{realtor}}",
+        "agency": "Ansicht der Agentur: {{agency}}",
+        "blog": "Illustration des Blogs: {{blog}}"
     }
-  },
-  "table": {
-    "data": {
-      "agency": "agentur",
-      "yOfExperience": "jahre erfahrung",
-      "nbRealtor": "anzahl der experten",
-      "creationDate": "gründungsdatum",
-      "spokenLanguage": {
-        "label": "gesprochene sprachen",
-        "fr": "französisch",
-        "en": "englisch",
-        "es": "spanisch",
-        "de": "deutsch",
-        "it": "italienisch",
-        "us": "englisch"
-      }
-    }
-  },
-  "footer": {
-    "resources": "ressourcen",
-    "academy": "jahia academy",
-    "tutorial": "anleitung",
-    "sourceCode": "quellcode",
-    "backOffice": "Website verwalten",
-    "connection": "verbindung",
-    "copyright": "urheberrechte © 2002-{{currentDate}} alle rechte vorbehalten von Jahia Solutions Group SA"
-  },
-  "form": {
-    "login": {
-      "login": "Anmelden",
-      "logout": "Abmelden",
-      "badCreds": "Benutzername oder Passwort ist falsch",
-      "username": "Benutzername",
-      "password": "Passwort",
-      "rememberMe": "angemeldet bleiben",
-      "liveWorkspace": "live",
-      "previewWorkspace": "Vorschau",
-      "editWorkspace": "bearbeiten",
-      "editModeWarning": "Anmeldung im Page Builder deaktiviert"
-    },
-    "contact": {
-      "firstName": "Vorname",
-      "lastName": "Nachname",
-      "email": "E-Mail",
-      "msg": "Ihre Nachricht",
-      "submit": "absenden",
-      "editModeWarning": "Kontaktformular im Page Builder deaktiviert",
-      "sendMessageError": "Hoppla! Entschuldigung, {{name}}.<br/> Beim Senden Ihrer Nachricht ist etwas schiefgelaufen. Der Statuscode ist {{status}}.",
-      "sendMessageAgain": "Nachricht erneut senden"
-    },
-    "unknownError": "Ein Fehler ist aufgetreten"
-  },
-  "realtor": {
-    "jobPosition": {
-      "junior": "junior-makler",
-      "senior": "senior-makler",
-      "director": "agenturdirektor"
-    }
-  },
-  "estate": {
-    "type": {
-      "label": "typ",
-      "house": "haus",
-      "apartment": "wohnung",
-      "building": "gebäude"
-    },
-    "surface": {
-      "label": "fläche"
-    },
-    "rooms": {
-      "label": "zimmer",
-      "numberOf": "anzahl der zimmer"
-    },
-    "bedrooms": {
-      "label": "schlafzimmer",
-      "numberOf": "anzahl der schlafzimmer"
-    },
-    "bathrooms": {
-      "label": "badezimmer",
-      "numberOf": "anzahl der badezimmer"
-    },
-    "options": {
-      "label": "optionen",
-      "garage": "garage",
-      "swimmingPool": "schwimmbad",
-      "garden": "garten",
-      "balcony": "balkon"
-    }
-  },
-  "link": {
-    "labels": {
-      "knowMore": "mehr erfahren",
-      "readMore": "weiterlesen"
-    }
-  },
-  "query": {
-    "noResult": "Kein Ergebnis für diese Anfrage zurückgegeben",
-    "catIsMissing": "Eine Kategorie wurde entfernt oder fehlt, bitte überprüfen Sie die Anfrage : '{{queryName}}'"
-  },
-  "page":{
-    "relatedContent":{
-      "estateSelection": "Unsere Auswahl an Immobilien",
-      "agencies": "Lokale Agenturen"
-    }
-  },
-  "alt": {
-    "destination" : "Zielort {{dest}}",
-    "estate": "Blick auf die Immobilie : {{estate}}",
-    "realtor": "Porträt des Maklers : {{realtor}}",
-    "agency": "Ansicht der Agentur : {{agency}}"
-  }
 }
