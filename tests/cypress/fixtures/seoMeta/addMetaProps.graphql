@@ -45,7 +45,7 @@ mutation addMetaProps($pathOrId: String!, $imageUuid: String!) {
                 primaryNodeType: "jnt:page",
                 properties: [
                     { name: "jcr:title", language: "en", value: "Page test 1" },
-                    { name: "j:templateName", value: "home" }
+                    { name: "j:templateName", value: "free" }
             ]) {
                 uuid
             }
