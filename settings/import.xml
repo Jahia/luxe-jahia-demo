@@ -3,7 +3,7 @@
     <modules jcr:primaryType="jnt:modules">
         <luxe-jahia-demo>
             <home j:isHomePage="true"
-                  j:templateName="home"
+                  j:templateName="free"
                   jcr:primaryType="jnt:page">
                 <j:translation_fr jcr:language="fr"
                                   jcr:primaryType="jnt:translation"

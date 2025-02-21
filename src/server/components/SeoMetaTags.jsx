@@ -23,6 +23,7 @@ export const SeoMetaTags = () => {
     ]) || {};
     const locale = currentResource.getLocale().getLanguage();
     const absOgImageUrl = openGraphImage?.getAbsoluteUrl(renderContext.getRequest());
+    const {'j:width': width, 'j:height': height} = getNodeProps(openGraphImage, ['j:width', 'j:height']);
 
     const getAbsoluteUrl = node => {
         const server = renderContext.getURLGenerator().getServer();
@@ -32,15 +33,30 @@ export const SeoMetaTags = () => {
 
     return (
         <>
-            {absOgImageUrl && <meta property="og:image" content={absOgImageUrl}/>}
-            {seoTitle && <meta property="og:title" content={seoTitle}/>}
-            <meta property="og:url" content={getAbsoluteUrl(currentNode)}/>
+            {seoTitle &&
+                <>
+                    <title>{seoTitle}</title>
+                    <meta property="og:title" content={seoTitle}/>
+                </>}
+            {/* <meta property="og:locale" content="website"/> */}
+            <meta property="og:type" content="website"/>
             {seoDescription &&
                 <>
                     <meta property="og:description" content={seoDescription.toLocaleString(locale) || seoDescription}/>
                     <meta name="description" content={seoDescription.toLocaleString(locale) || seoDescription}/>
                 </>}
-            {seoKeywords?.length && <meta name="keywords" content={seoKeywords.map(kw => kw.toLocaleString(locale)).join(',')}/>}
+            <meta property="og:url" content={getAbsoluteUrl(currentNode)}/>
+            <meta property="og:site_name" content={renderContext.getSite().getSiteKey()}/>
+            {seoKeywords?.length &&
+                <meta name="keywords" content={seoKeywords.map(kw => kw.toLocaleString(locale)).join(',')}/>}
+            {absOgImageUrl &&
+                <>
+                    <meta property="og:image" content={absOgImageUrl}/>
+                    {width &&
+                    <meta property="og:image:width" content={`${width}px`}/>}
+                    {height &&
+                    <meta property="og:image:height" content={`${height}px`}/>}
+                </>}
         </>
     );
 };
