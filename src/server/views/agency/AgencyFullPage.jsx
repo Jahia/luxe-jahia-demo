@@ -145,7 +145,7 @@ export const AgencyFullPage = () => {
                 <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
                     {renderContext.isEditMode() &&
                     <Col key="addNewRealEstate" className="g-0">
-                        <AddContentButtons editCheck id="tototo" nodeTypes="luxe:estate"/>
+                        <AddContentButtons nodeTypes="luxe:estate"/>
                     </Col>}
 
                     {estates.map(estate => (
