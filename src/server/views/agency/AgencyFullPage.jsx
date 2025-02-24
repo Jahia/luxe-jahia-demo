@@ -135,12 +135,10 @@ export const AgencyFullPage = () => {
                 <Row className="row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-3">
                     {agency.realtors?.map(realtor => (
                         <Col key={realtor.getIdentifier()} className="g-0">
-                            {/* <Render node={realtor}/> */}
-                            <Render path={realtor.getPath()}/>
+                            <Render node={realtor} editable={false}/>
                         </Col>
                     ))}
                 </Row>
-                {/* <AddContentButtons nodeTypes={['luxe:realtor']}/> */}
             </Section>
             <Section>
                 <HeadingSection title={t('section.heading.exclusiveAgencyEstates')}/>
@@ -152,7 +150,7 @@ export const AgencyFullPage = () => {
 
                     {estates.map(estate => (
                         <Col key={estate.getIdentifier()} className="g-0">
-                            <Render node={estate}/>
+                            <Render node={estate} editable={false}/>
                         </Col>
                     ))}
                 </Row>
