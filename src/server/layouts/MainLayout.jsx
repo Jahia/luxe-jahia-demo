@@ -17,8 +17,6 @@ import {AbsoluteArea, AddResources, useUrlBuilder} from '@jahia/javascript-modul
  * @constructor
  */
 export const MainLayout = ({head, className, children}) => {
-    const {buildStaticUrl} = useUrlBuilder();
-    const bootstrap = buildStaticUrl({assetPath: 'javascript/bootstrap.bundle.min.js'});
     return (
         <>
             <HtmlHead>
@@ -30,7 +28,6 @@ export const MainLayout = ({head, className, children}) => {
                     {children}
                 </main>
                 <HtmlFooter/>
-                <AddResources type="javascript" resources={bootstrap}/>
             </body>
         </>
     );

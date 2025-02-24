@@ -37,7 +37,6 @@ export const HtmlFooter = ({className}) => {
                 <Col className="col-5">
                     {/* <h5>{t('footer.backOffice')}</h5> */}
                     <Render content={loginForm}/>
-                    {/* <LoginForm/> */}
                 </Col>
                 <Col className="col-3">
                     {/* <h5>Join us</h5> */}
@@ -58,11 +57,6 @@ export const HtmlFooter = ({className}) => {
                 <Col>
                     {/* numberOfItems="4" */}
                     <AbsoluteArea name="footerNavLinkArea" areaType="jnt:linkList" allowedTypes={['jnt:nodeLink', 'jnt:externalLink']}/>
-                    {/* <a href="#">Privacy Policy</a> */}
-                    {/* <span className="lux-site-footer_disclaimer_seprator"> */}
-                    {/*    / */}
-                    {/* </span> */}
-                    {/* <a href="#">Terms of Use</a> */}
                 </Col>
                 <Col className="text-end">
                     <span>
