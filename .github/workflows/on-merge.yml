@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup corepack
         run: corepack enable
-      - uses: jahia/jahia-modules-action/build-npm@v2
+      - uses: jahia/jahia-modules-action/build-javascript@v2
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
@@ -68,7 +68,7 @@ jobs:
       - uses: jahia/jahia-modules-action/integration-tests@v2
         with:
           module_id: luxe-jahia-demo
-          testrail_project: Demo Site NPM
+          testrail_project: Demo Site Javascript Module
           tests_manifest: provisioning-manifest-build.yml
           jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
           jahia_license: ${{ secrets.JAHIA_LICENSE_8X_FULL }}
@@ -110,7 +110,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
-      - uses: jahia/jahia-modules-action/publish-npm@v2
+      - uses: jahia/jahia-modules-action/publish-javascript@v2
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}

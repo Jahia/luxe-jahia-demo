@@ -24,7 +24,7 @@ jobs:
       - uses: jahia/jahia-modules-action/integration-tests@v2
         with:
           module_id: luxe-jahia-demo
-          testrail_project: Demo Site NPM
+          testrail_project: Demo Site Javascript Module
           tests_manifest: provisioning-manifest-snapshot.yml
           jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
           should_use_build_artifacts: false

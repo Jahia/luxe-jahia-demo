@@ -33,7 +33,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
 
-      - uses: jahia/jahia-modules-action/release-npm@v2
+      - uses: jahia/jahia-modules-action/release-javascript@v2
         name: Release Module
         with:
           github_slug: Jahia/luxe-jahia-demo
