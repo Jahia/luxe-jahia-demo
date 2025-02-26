@@ -257,10 +257,25 @@ section {
     color: var(--bs-body-color);
 }
 
+.modal {
+    overflow: hidden;
+}
+
+.modal-content {
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.modal-body {
+    overflow: auto;
+}
+
 .lux-dialog {
     border: 0;
     background-color: transparent;
-    max-width: 500px;
+    overflow: hidden;
+    margin: 0;
+    // max-width: 500px;
     
     &[open] {
         display: block;
