@@ -59,7 +59,7 @@ const LoginComponent = ({isLoggedIn, userHydrated, urls, mode, nodePath, isShowR
     ) : (
         <>
             <h5>{t('footer.backOffice')}</h5>
-            <dialog ref={modalRef} id="loginModal" className="lux-dialog modal" onClick={event => handleOverlayClick(event)}>
+            <dialog ref={modalRef} id="loginModal" className="lux-dialog modal modal-xl" onClick={event => handleOverlayClick(event)}>
                 <div className="modal-dialog" aria-labelledby="loginModalTitle">
                     <LoginForm
                         loginUrl={urls.loginUrl}
