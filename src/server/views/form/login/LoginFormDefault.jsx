@@ -24,7 +24,7 @@ export const LoginFormDefault = () => {
 
     const mode = renderContext.getMode();
     const mainPath = renderContext.getMainResource().getNode().getPath();
-
+    // TODO see if we can get users profile public info here...
     return (
         <HydrateInBrowser
             child={LoginComponent}

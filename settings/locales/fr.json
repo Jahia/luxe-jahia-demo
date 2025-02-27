@@ -51,7 +51,34 @@
             "liveWorkspace": "live",
             "previewWorkspace": "aperçu",
             "editWorkspace": "édition",
-            "editModeWarning": "la connexion est désactivée dans Page Builder"
+            "editModeWarning": "la connexion est désactivée dans Page Builder",
+            "sections": {
+                "persona": {
+                    "title": "En tant que persona",
+                    "teaser": "Utiliser un utilisateur pré-configuré pour simuler différents cas d'utilisation."
+                },
+                "login": {
+                    "title": "En tant qu'utilisateur enregistré",
+                    "teaser": "Utiliser votre nom d'utilisateur et votre mot de passe pour vous connecter."
+                }
+            },
+            "userMocks": {
+                "pam": {
+                    "function": "Rédactrice au Département Communication",
+                    "description": "Je crée, optimise et gère activement des pages attrayantes pour le site Luxe.",
+                    "alt": "Avatar de l'utilisateur : {{username}}"
+                },
+                "penny": {
+                    "function": "Agent immobilier à l'US Luxe Agency",
+                    "description": "Je crée des contenus immobilier captivant pour mon agence sur le site Luxe.",
+                    "alt": "Avatar de l'utilisateur : {{username}}"
+                },
+                "robin": {
+                    "function": "Administrateur Jahia au Département IT",
+                    "description": "J'administre la plateforme Jahia, et veille à ce que le système soit correctement configuré et optimisé.",
+                    "alt": "Avatar de l'utilisateur : {{username}}"
+                }
+            }
         },
         "contact": {
             "firstName": "prénom",

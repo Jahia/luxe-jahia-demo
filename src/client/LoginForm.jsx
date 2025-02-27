@@ -3,6 +3,49 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import LoginCard from './LoginCard';
 import {useTranslation} from 'react-i18next';
+import {login} from './LoginUtils';
+
+const userMocks = [
+    {
+        username: 'pam',
+        password: 'password',
+        userinfo: {
+            fullname: 'Pam Pasteur',
+            function: 'form.login.userMocks.pam.function',
+            avatar: {
+                url: 'https://placehold.co/90x90',
+                alt: 'form.login.userMocks.pam.alt'
+            },
+            description: 'form.login.userMocks.pam.description'
+        }
+    },
+    {
+        username: 'penny',
+        password: 'password',
+        userinfo: {
+            fullname: 'Penny Galileo',
+            function: 'form.login.userMocks.penny.function',
+            avatar: {
+                url: 'https://placehold.co/90x90',
+                alt: 'form.login.userMocks.penny.alt'
+            },
+            description: 'form.login.userMocks.penny.description'
+        }
+    },
+    {
+        username: 'robin',
+        password: 'password',
+        userinfo: {
+            fullname: 'Robin Lovelace ',
+            function: 'form.login.userMocks.robin.function',
+            avatar: {
+                url: 'https://placehold.co/90x90',
+                alt: 'form.login.userMocks.robin.alt'
+            },
+            description: 'form.login.userMocks.robin.description'
+        }
+    }
+];
 
 const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememberMe = true}) => {
     const {t} = useTranslation();
@@ -13,43 +56,21 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
-    const login = async () => {
-        const params = new URLSearchParams();
-        params.set('restMode', 'true');
-
-        if (siteKey) {
-            params.set('site', siteKey);
-        }
-
-        // Request must be sent as application/x-www-form-urlencoded
-        const body = new URLSearchParams();
-        body.set('username', username);
-        body.set('password', password);
-
-        if (rememberMe) {
-            body.set('useCookie', 'on');
-        }
-
-        try {
-            const response = await fetch(loginUrl + '?' + params.toString(), {
-                method: 'POST',
-                body
-            });
-            const value = await response.text();
-            if (value === 'OK') {
-                close();
-                setUser(username);
-                setLoggedIn(true);
-            } else if (value === 'unauthorized') {
-                setIncorrectLogin(true);
-            } else {
-                throw new Error('Unknown error: ' + value);
-            }
-        } catch (error) {
-            console.error('Login form error: ', error);
-            setUnknownError(true);
-        }
+    const loginCommonProps = {
+        siteKey,
+        loginUrl,
+        setUser,
+        setLoggedIn,
+        setIncorrectLogin,
+        setUnknownError
     };
+
+    const handleLogin = () => login({
+        username,
+        password,
+        rememberMe,
+        ...loginCommonProps
+    });
 
     return (
         <div className="modal-content">
@@ -58,17 +79,16 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
             </header>
             <div className="modal-body d-flex flex-row p-6 gap-6">
                 <div className="d-flex flex-column w-50">
-                    <h3 className="m0">En tant que persona</h3>
-                    <p className="text-muted small">Utiliser un utilisateur pré-configurer pour simuler différents cas d’usages.</p>
+                    <h3 className="m0">{t('form.login.sections.persona.title')}</h3>
+                    <p className="text-muted small">{t('form.login.sections.persona.teaser')}</p>
                     <div className="d-flex flex-column gap-2">
-                        <LoginCard imgUrl="https://placehold.co/90x90" userName="pam" role="marketer" description="lalala"/>
-                        <LoginCard imgUrl="https://placehold.co/90x90" userName="robin" role="devloper" description="lalala"/>
-                        <LoginCard imgUrl="https://placehold.co/90x90" userName="toto" role="devloper" description="lalala"/>
+                        {userMocks?.map(user =>
+                            <LoginCard key={user.username} {...user} {...{loginCommonProps}}/>)}
                     </div>
                 </div>
                 <div className="w-50">
-                    <h3 className="m0">En tant qu&apos;utilisateur</h3>
-                    <p className="text-muted small">Utiliser vos identifants et mot de passe pour vous connecter.</p>
+                    <h3 className="m0">{t('form.login.sections.login.title')}</h3>
+                    <p className="text-muted small">{t('form.login.sections.login.teaser')}</p>
                     <form
                         id="loginForm"
                         className="d-flex flex-column gap-3"
@@ -105,7 +125,7 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
                                 onChange={e => setPassword(e.target.value)}
                                 onKeyUp={event => {
                                     if (event.key === 'Enter') {
-                                        login();
+                                        handleLogin();
                                     }
                                 }}
                             />
@@ -113,13 +133,13 @@ const LoginForm = ({loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememb
                         {isShowRememberMe &&
                             <div className="form-check d-flex align-items-center">
                                 <input id="remember" type="checkbox" name="remember" className="form-check-input me-2 mt-0" defaultChecked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
-                                <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('login.rememberMe')}</label>
+                                <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">{t('form.login.rememberMe')}</label>
                             </div>}
                         <button
                             type="button"
                             form="loginForm"
                             className="btn btn-primary lux-capitalize"
-                            onClick={login}
+                            onClick={handleLogin}
                         >
                             {t('form.login.login')}
                         </button>

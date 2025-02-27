@@ -51,7 +51,34 @@
             "liveWorkspace": "live",
             "previewWorkspace": "preview",
             "editWorkspace": "edit",
-            "editModeWarning": "login is disabled in Page Builder"
+            "editModeWarning": "login is disabled in Page Builder",
+            "sections": {
+                "persona": {
+                    "title": "As a persona",
+                    "teaser": "Use a pre-configured user to simulate different use cases."
+                },
+                "login": {
+                    "title": "As a registered user",
+                    "teaser": "Use your username and password to log in."
+                }
+            },
+            "userMocks": {
+                "pam": {
+                    "function": "Editor in the Communications Department",
+                    "description": "I actively create, optimize, and manage engaging pages for the Luxe website.",
+                    "alt": "User avatar: {{username}}"
+                },
+                "penny": {
+                    "function": "Realtor at the US Luxe Agency",
+                    "description": "I create compelling real estate contents for my agency on the Luxe website.",
+                    "alt": "User avatar: {{username}}"
+                },
+                "robin": {
+                    "function": "Jahia Administrator in the IT Department",
+                    "description": "I administer the Jahia platform, ensuring that the system is properly configured and optimized.",
+                    "alt": "User avatar: {{username}}"
+                }
+            }
         },
         "contact": {
             "firstName": "firstname",
