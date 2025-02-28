@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// Import PropTypes from 'prop-types';
 import {HtmlFooter, HtmlHead} from '../components';
-import {AbsoluteArea, AddResources, useUrlBuilder} from '@jahia/javascript-modules-library';
+import {AbsoluteArea} from '@jahia/javascript-modules-library';
 
 /**
  * @param head : element to enrich the html Head tag, e.g. :
@@ -33,8 +33,8 @@ export const MainLayout = ({head, className, children}) => {
     );
 };
 
-MainLayout.propTypes = {
-    head: PropTypes.element,
-    children: PropTypes.node,
-    className: PropTypes.string
-};
+// MainLayout.propTypes = {
+//     head: PropTypes.element,
+//     children: PropTypes.node,
+//     className: PropTypes.string
+// };

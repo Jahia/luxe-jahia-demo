@@ -1,37 +1,35 @@
 import React from 'react';
-import {defineJahiaComponent, getNodeProps, server, useServerContext, useUrlBuilder} from '@jahia/javascript-modules-library';
+import {jahiaComponent, server, useUrlBuilder} from '@jahia/javascript-modules-library';
 
 import {TextIllustrated} from '../../components';
 
-export const TextIllustratedDefault = () => {
-    const {currentNode, renderContext} = useServerContext();
-    const {buildStaticUrl} = useUrlBuilder();
-    const textI9d = getNodeProps(currentNode, ['title', 'text', 'image', 'arrangement']);
+jahiaComponent(
+    {
+        nodeType: 'luxe:textIllustrated',
+        name: 'default',
+        componentType: 'view'
+    },
+    ({title, text, image: imageNode, arrangement}, {renderContext}) => {
+        const {buildStaticUrl} = useUrlBuilder();
+        const image = {
+            src: buildStaticUrl({assetPath: 'img/img-placeholder.jpg'}),
+            alt: 'placeholder'
+        };
 
-    const image = {
-        src: buildStaticUrl({assetPath: 'img/img-placeholder.jpg'}),
-        alt: 'placeholder'
-    };
+        if (imageNode) {
+            image.src = imageNode.getUrl();
+            image.alt = imageNode.getDisplayableName();
 
-    if (textI9d.image) {
-        image.src = textI9d.image.getUrl();
-        image.alt = textI9d.image.getDisplayableName();
+            server.render.addCacheDependency({node: imageNode}, renderContext);
+        }
 
-        server.render.addCacheDependency({node: textI9d.image}, renderContext);
+        return (
+            <TextIllustrated {...{
+                title: title,
+                text: text,
+                arrangement: arrangement,
+                image
+            }}/>
+        );
     }
-
-    return (
-        <TextIllustrated {...{
-            title: textI9d.title,
-            text: textI9d.text,
-            arrangement: textI9d.arrangement,
-            image
-        }}/>
-    );
-};
-
-TextIllustratedDefault.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:textIllustrated',
-    name: 'default',
-    componentType: 'view'
-});
+);

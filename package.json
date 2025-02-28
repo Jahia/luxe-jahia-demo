@@ -1,16 +1,15 @@
 {
   "name": "luxe-jahia-demo",
   "version": "0.6.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build:development": "webpack --mode=development && run pack",
-    "build:production": "webpack && run pack",
+    "build:development": "vite build --mode=development && run pack",
+    "build:production": "yarn clean && vite build && run pack",
     "build": "run build:production",
     "pack": "mkdir -p dist/build && cd dist/build && yarn pack --out package.tgz && mv package.tgz ..",
     "clean": "rm -rf dist/",
     "deploy": "jahia-deploy",
-    "watch": "webpack --mode=development --watch",
+    "watch": "yarn clean && vite build --mode=development --watch",
     "lint": "eslint .",
     "test": "yarn lint"
   },
@@ -22,7 +21,7 @@
     "static-resources": "/javascript,/client,/icons,/images",
     "server": "main.js",
     "maven": {
-      "groupId": "org.jahia.modules.npm",
+      "groupId": "org.jahia.modules.javascript",
       "distributionManagement": {
         "repository": {
           "id": "jahia-releases",
@@ -36,7 +35,7 @@
     }
   },
   "dependencies": {
-    "@jahia/javascript-modules-library": "^0.4.0",
+    "@jahia/javascript-modules-library": "^0.5.1",
     "bootstrap": "^5.3.3"
   },
   "devDependencies": {
@@ -47,32 +46,20 @@
     "@cyclonedx/webpack-plugin": "^3.12.0",
     "@heroicons/react": "^2.1.1",
     "@jahia/eslint-config": "^2.1.2",
+    "@jahia/vite-plugin": "^0.5.1",
     "babel-loader": "^8.2.3",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "clean-webpack-plugin": "^4.0.0",
     "clsx": "^2.1.0",
-    "copy-webpack-plugin": "^10.0.0",
-    "css-loader": "^6.9.1",
-    "dotenv-cli": "^4.0.0",
     "eslint": "^8.43.0",
     "eslint-plugin-jest": "latest",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "latest",
     "extra-watch-webpack-plugin": "^1.0.3",
     "i18next": "23.10.1",
-    "mini-css-extract-plugin": "^2.7.7",
-    "prop-types": "^15.8.1",
-    "react": "18.2.0",
-    "react-i18next": "14.1.0",
-    "sass": "^1.70.0",
-    "sass-loader": "^14.0.0",
-    "style-loader": "^3.3.4",
-    "styled-jsx": "5.1.2",
-    "terser-webpack-plugin": "^5.3.10",
-    "typescript": "^5.4.4",
-    "webpack": "5.94.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-shell-plugin-next": "^2.3.1"
+    "react": "19.0.0",
+    "react-i18next": "15.4.1",
+    "styled-jsx": "^5.1.6",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0"
   },
   "engines": {
     "node": ">=18.0.0",
