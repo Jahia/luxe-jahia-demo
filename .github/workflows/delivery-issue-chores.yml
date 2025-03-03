@@ -3,10 +3,10 @@
 name: Delivery - Issue Chores
 
 on:
-  issues:
-  issue_comment:
+    issues:
+    issue_comment:
 
 jobs:
-  WF:
-    uses: Jahia/jahia-modules-action/.github/workflows/reusable-delivery-issue-chores.yml@v2
-    secrets: inherit
+    WF:
+        uses: Jahia/jahia-modules-action/.github/workflows/reusable-delivery-issue-chores.yml@v2
+        secrets: inherit

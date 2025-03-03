@@ -1,22 +1,22 @@
 {
-    "nodeType": "jnt:bigText",
-    "priority": 1.0,
-    "sections": [
-        {
-            "name": "content",
-            "expanded": true
-        },
-        {
-            "name": "metadata",
-            "hide": true
-        },
-        {
-            "name": "layout",
-            "hide": true
-        },
-        {
-            "name": "options",
-            "hide": true
-        }
-    ]
+	"nodeType": "jnt:bigText",
+	"priority": 1.0,
+	"sections": [
+		{
+			"name": "content",
+			"expanded": true
+		},
+		{
+			"name": "metadata",
+			"hide": true
+		},
+		{
+			"name": "layout",
+			"hide": true
+		},
+		{
+			"name": "options",
+			"hide": true
+		}
+	]
 }

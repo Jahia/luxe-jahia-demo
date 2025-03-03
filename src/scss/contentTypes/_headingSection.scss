@@ -1,7 +1,6 @@
-
 .lux-heading_title {
-    @extend %capitalize;
-    @extend %hasDiamond;
+  @extend %capitalize;
+  @extend %hasDiamond;
 }
 
 header hgroup time {

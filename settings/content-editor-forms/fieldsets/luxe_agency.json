@@ -1,42 +1,42 @@
 {
-  "name": "luxe:agency",
-  "fields": [
-    {
-      "name": "image",
-      "selectorType": "Picker",
-      "selectorOptionsMap": {
-        "type":"image",
-        "accordionItem": {
-          "picker-media": {
-            "rootPath": "/sites/{site}/files",
-            "treeConfig": {
-              "hideRoot": false
-            }
-          }
-        }
-      }
-    },
-      {
-          "name": "realtors",
-          "selectorType": "Picker",
-          "selectorOptionsMap": {
-              "type":"default",
-              "accordionItem": {
-                  "picker-pages": {
-                      "label": "Blog posts",
-                      "rootPath": "/sites/{site}/contents/realtors",
-                      "treeConfig": {
-                          "hideRoot": true
-                      }
-                  }
-              },
-              "pickerConfig": {
-                  "pickerDialog": {
-                      "displaySiteSwitcher": false,
-                      "displayTree": false
-                  }
-              }
-          }
-      }
-  ]
+	"name": "luxe:agency",
+	"fields": [
+		{
+			"name": "image",
+			"selectorType": "Picker",
+			"selectorOptionsMap": {
+				"type": "image",
+				"accordionItem": {
+					"picker-media": {
+						"rootPath": "/sites/{site}/files",
+						"treeConfig": {
+							"hideRoot": false
+						}
+					}
+				}
+			}
+		},
+		{
+			"name": "realtors",
+			"selectorType": "Picker",
+			"selectorOptionsMap": {
+				"type": "default",
+				"accordionItem": {
+					"picker-pages": {
+						"label": "Blog posts",
+						"rootPath": "/sites/{site}/contents/realtors",
+						"treeConfig": {
+							"hideRoot": true
+						}
+					}
+				},
+				"pickerConfig": {
+					"pickerDialog": {
+						"displaySiteSwitcher": false,
+						"displayTree": false
+					}
+				}
+			}
+		}
+	]
 }

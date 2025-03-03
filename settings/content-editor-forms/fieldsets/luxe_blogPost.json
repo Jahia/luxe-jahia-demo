@@ -1,27 +1,27 @@
 {
-    "name": "luxe:blogPost",
-    "fields": [
-        {
-            "name": "relatedBlogPosts",
-            "selectorType": "Picker",
-            "selectorOptionsMap": {
-                "type": "default",
-                "accordionItem": {
-                    "picker-pages": {
-                        "label": "Blog posts",
-                        "rootPath": "/sites/{site}/home/blog",
-                        "treeConfig": {
-                            "hideRoot": true
-                        }
-                    }
-                },
-                "pickerConfig": {
-                    "pickerDialog": {
-                        "displaySiteSwitcher": false,
-                        "displayTree": false
-                    }
-                }
-            }
-        }
-    ]
+	"name": "luxe:blogPost",
+	"fields": [
+		{
+			"name": "relatedBlogPosts",
+			"selectorType": "Picker",
+			"selectorOptionsMap": {
+				"type": "default",
+				"accordionItem": {
+					"picker-pages": {
+						"label": "Blog posts",
+						"rootPath": "/sites/{site}/home/blog",
+						"treeConfig": {
+							"hideRoot": true
+						}
+					}
+				},
+				"pickerConfig": {
+					"pickerDialog": {
+						"displaySiteSwitcher": false,
+						"displayTree": false
+					}
+				}
+			}
+		}
+	]
 }

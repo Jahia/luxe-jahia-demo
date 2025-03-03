@@ -1,9 +1,9 @@
 .lux-agentCard {
-    @extend %card;
+  @extend %card;
 }
 
 .lux-agentCard_informations {
-    font-size: 16px;
-    // TODO: use a bootstrap class instead of specific CSS
-    color: rgba($color-dark, .4);
+  font-size: 16px;
+  // TODO: use a bootstrap class instead of specific CSS
+  color: rgba($color-dark, 0.4);
 }

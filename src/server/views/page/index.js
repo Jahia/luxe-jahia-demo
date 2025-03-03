@@ -1,2 +1,2 @@
-export * from './PageRelatedContent';
-export * from './PageDefault';
+export * from "./PageRelatedContent";
+export * from "./PageDefault";

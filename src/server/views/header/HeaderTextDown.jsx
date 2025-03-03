@@ -1,36 +1,32 @@
-import React from 'react';
-import {useServerContext, getNodeProps, server, defineJahiaComponent} from '@jahia/javascript-modules-library';
-import {Figure, Row} from '../../components';
+import React from "react";
+import { server } from "@jahia/javascript-modules-library";
+import { Figure, Row } from "../../components";
 
-export const HeaderTextDown = () => {
-    const {currentNode, renderContext} = useServerContext();
-    const header = getNodeProps(currentNode, ['title', 'subtitle', 'image']);
-
-    if (header.image) {
-        server.render.addCacheDependency({node: header.image}, renderContext);
+jahiaComponent(
+  {
+    nodeType: "luxe:header",
+    name: "textDown",
+    displayName: "Image & Text Down",
+    componentType: "view",
+  },
+  ({ title, subtitle, image }, { renderContext }) => {
+    if (image) {
+      server.render.addCacheDependency({ node: image }, renderContext);
     }
 
     return (
-        <header className="container py-4 py-md-5 mb-5">
-            {header.image &&
-                <Row>
-                    <Figure src={header.image.getUrl()}
-                            alt={header.image.getDisplayableName()}
-                            layout="imgFull"/>
-                </Row>}
+      <header className="container py-4 py-md-5 mb-5">
+        {image && (
+          <Row>
+            <Figure src={image.getUrl()} alt={image.getDisplayableName()} layout="imgFull" />
+          </Row>
+        )}
 
-            <hgroup className="row text-center">
-                <h1 className="display-1 mb-0">{header.title}</h1>
-                <p className="h2 mt-0">
-                    {header.subtitle}
-                </p>
-            </hgroup>
-        </header>
+        <hgroup className="row text-center">
+          <h1 className="display-1 mb-0">{title}</h1>
+          <p className="h2 mt-0">{subtitle}</p>
+        </hgroup>
+      </header>
     );
-};
-
-HeaderTextDown.jahiaComponent = defineJahiaComponent({
-    nodeType: 'luxe:header',
-    name: 'textDown',
-    componentType: 'view'
-});
+  },
+);

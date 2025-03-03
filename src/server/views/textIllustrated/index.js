@@ -1,1 +1,1 @@
-export * from './TextIllustratedDefault';
+export * from "./TextIllustratedDefault";

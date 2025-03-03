@@ -1,10 +1,10 @@
 {
-  "nodeType": "luxe:form",
-  "priority": 1.0,
-  "sections": [
-    {
-      "name": "metadata",
-      "expanded": true
-    }
-  ]
+	"nodeType": "luxe:form",
+	"priority": 1.0,
+	"sections": [
+		{
+			"name": "metadata",
+			"expanded": true
+		}
+	]
 }

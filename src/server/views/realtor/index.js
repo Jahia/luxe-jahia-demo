@@ -1,3 +1,3 @@
-export * from './RealtorDefault';
-export * from './RealtorFullPage';
-export * from './RealtorCm';
+export * from "./RealtorDefault";
+export * from "./RealtorFullPage";
+export * from "./RealtorCm";

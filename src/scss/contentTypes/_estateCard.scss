@@ -1,15 +1,15 @@
 .lux-estateCard {
-    @extend %card;
-    height: 100%;
+  @extend %card;
+  height: 100%;
 }
 
 .lux-estateCard_informations {
-    font-size: 16px;
-    // TODO: use a bootstrap class instead of specific CSS
-    color: rgba($color-dark, .4);
+  font-size: 16px;
+  // TODO: use a bootstrap class instead of specific CSS
+  color: rgba($color-dark, 0.4);
 }
 
 .lux-estateCard_price {
-    font-size: 18px;
-    color: $color-gold;
+  font-size: 18px;
+  color: $color-gold;
 }

@@ -1,155 +1,155 @@
 {
-    "section": {
-        "heading": {
-            "contact": "contact",
-            "experts": "nos experts",
-            "exclusiveAgencyEstates": "biens exclusifs de l'agence",
-            "exclusiveEstates": "biens exclusifs",
-            "relatedBlogPosts": "articles de blog recommandés"
-        },
-        "contact": {
-            "address": "adresse",
-            "phone": "téléphone",
-            "email": "email",
-            "btn": "prendre rendez-vous"
-        }
-    },
-    "table": {
-        "data": {
-            "agency": "agence",
-            "yOfExperience": "années d'expérience",
-            "nbRealtor": "nombre d'experts",
-            "creationDate": "date de création",
-            "spokenLanguage": {
-                "label": "langues parlées",
-                "fr": "français",
-                "en": "anglais",
-                "es": "espagnol",
-                "de": "allemand",
-                "it": "italien",
-                "us": "anglais"
-            }
-        }
-    },
-    "footer": {
-        "resources": "ressources",
-        "academy": "Jahia Academy",
-        "tutorial": "tutoriel",
-        "sourceCode": "code source",
-        "backOffice": "gérer le site",
-        "connection": "connexion",
-        "copyright": "droits d'auteur © 2002-{{currentDate}} Tous droits réservés par Jahia Solutions Group SA"
-    },
-    "form": {
-        "login": {
-            "login": "se connecter",
-            "logout": "se déconnecter",
-            "badCreds": "nom d'utilisateur ou mot de passe incorrect",
-            "username": "nom d'utilisateur",
-            "password": "mot de passe",
-            "rememberMe": "se souvenir de moi",
-            "liveWorkspace": "live",
-            "previewWorkspace": "aperçu",
-            "editWorkspace": "édition",
-            "editModeWarning": "la connexion est désactivée dans Page Builder",
-            "sections": {
-                "persona": {
-                    "title": "En tant que persona",
-                    "teaser": "Utiliser un utilisateur pré-configuré pour simuler différents cas d'utilisation."
-                },
-                "login": {
-                    "title": "En tant qu'utilisateur enregistré",
-                    "teaser": "Utiliser votre nom d'utilisateur et votre mot de passe pour vous connecter."
-                }
-            },
-            "userMocks": {
-                "pam": {
-                    "function": "Rédactrice au Département Communication",
-                    "description": "Je crée, optimise et gère activement des pages attrayantes pour le site Luxe.",
-                    "alt": "Avatar de l'utilisateur : {{username}}"
-                },
-                "penny": {
-                    "function": "Agent immobilier à l'US Luxe Agency",
-                    "description": "Je crée des contenus immobilier captivant pour mon agence sur le site Luxe.",
-                    "alt": "Avatar de l'utilisateur : {{username}}"
-                },
-                "robin": {
-                    "function": "Administrateur Jahia au Département IT",
-                    "description": "J'administre la plateforme Jahia, et veille à ce que le système soit correctement configuré et optimisé.",
-                    "alt": "Avatar de l'utilisateur : {{username}}"
-                }
-            }
-        },
-        "contact": {
-            "firstName": "prénom",
-            "lastName": "nom",
-            "email": "email",
-            "msg": "votre message",
-            "submit": "envoyer",
-            "editModeWarning": "le formulaire de contact est désactivé dans Page Builder",
-            "sendMessageError": "Oups ! Désolé, {{name}}.<br/> Quelque chose s'est mal passé avec votre message. Le code d'état est {{status}}.",
-            "sendMessageAgain": "renvoyer le message"
-        },
-        "unknownError": "une erreur s'est produite"
-    },
-    "realtor": {
-        "jobPosition": {
-            "junior": "agent junior",
-            "senior": "agent senior",
-            "director": "directeur d'agence"
-        }
-    },
-    "estate": {
-        "type": {
-            "label": "type",
-            "house": "maison",
-            "apartment": "appartement",
-            "building": "bâtiment"
-        },
-        "surface": {
-            "label": "superficie"
-        },
-        "rooms": {
-            "label": "pièces",
-            "numberOf": "nombre de pièces"
-        },
-        "bedrooms": {
-            "label": "chambres",
-            "numberOf": "nombre de chambres"
-        },
-        "bathrooms": {
-            "label": "salles de bain",
-            "numberOf": "nombre de salles de bain"
-        },
-        "options": {
-            "label": "options",
-            "garage": "garage",
-            "swimmingPool": "piscine",
-            "garden": "jardin",
-            "balcony": "balcon"
-        }
-    },
-    "link": {
-        "labels": {
-            "knowMore": "en savoir plus",
-            "readMore": "lire la suite"
-        }
-    },
-    "query": {
-        "noResult": "aucun résultat retourné pour cette requête",
-        "catIsMissing": "une catégorie a été supprimée ou est manquante, veuillez vérifier la requête : '{{queryName}}'",
-        "excludeIsMissing": "un nœud exclu a été supprimé ou est manquant, veuillez vérifier la requête : '{{queryName}}'"
-    },
-    "page": {
-        "relatedContent": {
-            "estateSelection": "notre sélection de biens immobiliers",
-            "agencies": "agences locales"
-        }
-    },
-    "alt": {
-        "estate": "vue du bien immobilier : {{estate}}",
-        "realtor": "portrait de l'agent : {{realtor}}",
-        "agency": "vue de l'agence : {{agency}}",
-        "blog": "illustration du blog : {{blog}}"
-    }
+	"section": {
+		"heading": {
+			"contact": "contact",
+			"experts": "nos experts",
+			"exclusiveAgencyEstates": "biens exclusifs de l'agence",
+			"exclusiveEstates": "biens exclusifs",
+			"relatedBlogPosts": "articles de blog recommandés"
+		},
+		"contact": {
+			"address": "adresse",
+			"phone": "téléphone",
+			"email": "email",
+			"btn": "prendre rendez-vous"
+		}
+	},
+	"table": {
+		"data": {
+			"agency": "agence",
+			"yOfExperience": "années d'expérience",
+			"nbRealtor": "nombre d'experts",
+			"creationDate": "date de création",
+			"spokenLanguage": {
+				"label": "langues parlées",
+				"fr": "français",
+				"en": "anglais",
+				"es": "espagnol",
+				"de": "allemand",
+				"it": "italien",
+				"us": "anglais"
+			}
+		}
+	},
+	"footer": {
+		"resources": "ressources",
+		"academy": "Jahia Academy",
+		"tutorial": "tutoriel",
+		"sourceCode": "code source",
+		"backOffice": "gérer le site",
+		"connection": "connexion",
+		"copyright": "droits d'auteur © 2002-{{currentDate}} Tous droits réservés par Jahia Solutions Group SA"
+	},
+	"form": {
+		"login": {
+			"login": "se connecter",
+			"logout": "se déconnecter",
+			"badCreds": "nom d'utilisateur ou mot de passe incorrect",
+			"username": "nom d'utilisateur",
+			"password": "mot de passe",
+			"rememberMe": "se souvenir de moi",
+			"liveWorkspace": "live",
+			"previewWorkspace": "aperçu",
+			"editWorkspace": "édition",
+			"editModeWarning": "la connexion est désactivée dans Page Builder",
+			"sections": {
+				"persona": {
+					"title": "En tant que persona",
+					"teaser": "Utiliser un utilisateur pré-configuré pour simuler différents cas d'utilisation."
+				},
+				"login": {
+					"title": "En tant qu'utilisateur enregistré",
+					"teaser": "Utiliser votre nom d'utilisateur et votre mot de passe pour vous connecter."
+				}
+			},
+			"userMocks": {
+				"pam": {
+					"function": "Rédactrice au Département Communication",
+					"description": "Je crée, optimise et gère activement des pages attrayantes pour le site Luxe.",
+					"alt": "Avatar de l'utilisateur : {{username}}"
+				},
+				"penny": {
+					"function": "Agent immobilier à l'US Luxe Agency",
+					"description": "Je crée des contenus immobilier captivant pour mon agence sur le site Luxe.",
+					"alt": "Avatar de l'utilisateur : {{username}}"
+				},
+				"robin": {
+					"function": "Administrateur Jahia au Département IT",
+					"description": "J'administre la plateforme Jahia, et veille à ce que le système soit correctement configuré et optimisé.",
+					"alt": "Avatar de l'utilisateur : {{username}}"
+				}
+			}
+		},
+		"contact": {
+			"firstName": "prénom",
+			"lastName": "nom",
+			"email": "email",
+			"msg": "votre message",
+			"submit": "envoyer",
+			"editModeWarning": "le formulaire de contact est désactivé dans Page Builder",
+			"sendMessageError": "Oups ! Désolé, {{name}}.<br/> Quelque chose s'est mal passé avec votre message. Le code d'état est {{status}}.",
+			"sendMessageAgain": "renvoyer le message"
+		},
+		"unknownError": "une erreur s'est produite"
+	},
+	"realtor": {
+		"jobPosition": {
+			"junior": "agent junior",
+			"senior": "agent senior",
+			"director": "directeur d'agence"
+		}
+	},
+	"estate": {
+		"type": {
+			"label": "type",
+			"house": "maison",
+			"apartment": "appartement",
+			"building": "bâtiment"
+		},
+		"surface": {
+			"label": "superficie"
+		},
+		"rooms": {
+			"label": "pièces",
+			"numberOf": "nombre de pièces"
+		},
+		"bedrooms": {
+			"label": "chambres",
+			"numberOf": "nombre de chambres"
+		},
+		"bathrooms": {
+			"label": "salles de bain",
+			"numberOf": "nombre de salles de bain"
+		},
+		"options": {
+			"label": "options",
+			"garage": "garage",
+			"swimmingPool": "piscine",
+			"garden": "jardin",
+			"balcony": "balcon"
+		}
+	},
+	"link": {
+		"labels": {
+			"knowMore": "en savoir plus",
+			"readMore": "lire la suite"
+		}
+	},
+	"query": {
+		"noResult": "aucun résultat retourné pour cette requête",
+		"catIsMissing": "une catégorie a été supprimée ou est manquante, veuillez vérifier la requête : '{{queryName}}'",
+		"excludeIsMissing": "un nœud exclu a été supprimé ou est manquant, veuillez vérifier la requête : '{{queryName}}'"
+	},
+	"page": {
+		"relatedContent": {
+			"estateSelection": "notre sélection de biens immobiliers",
+			"agencies": "agences locales"
+		}
+	},
+	"alt": {
+		"estate": "vue du bien immobilier : {{estate}}",
+		"realtor": "portrait de l'agent : {{realtor}}",
+		"agency": "vue de l'agence : {{agency}}",
+		"blog": "illustration du blog : {{blog}}"
+	}
 }

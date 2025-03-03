@@ -1,25 +1,23 @@
-
 // COLORS
 // TODO: Use css custom properties instead, for demo purpose.
-$color-darkBlue: #1B1A4E;
-$color-darkBlue60:#767695;
-$color-darkBlue40: #A4A3B8;
-$color-gold: #C29B40;
-$color-gold-rgb: '194, 155, 64';
-$color-gray: #F6F6F6;
+$color-darkBlue: #1b1a4e;
+$color-darkBlue60: #767695;
+$color-darkBlue40: #a4a3b8;
+$color-gold: #c29b40;
+$color-gold-rgb: "194, 155, 64";
+$color-gray: #f6f6f6;
 $color-dark: #393847;
-$color-dark-rgb: '57, 56, 71';
+$color-dark-rgb: "57, 56, 71";
 
-$font-family-display: 'Playfair Display', serif;
-$font-family-base:'Inter', 'Helvetica', sans-serif;
+$font-family-display: "Playfair Display", serif;
+$font-family-base: "Inter", "Helvetica", sans-serif;
 
 $green: #62b569;
 $red: #cc1818;
 $yellow: #fdf05e;
 $cyan: #16cacf;
 
-
-$shadow-box: 4px 6px 17px 15px rgba(35, 33, 110, 0.10);
+$shadow-box: 4px 6px 17px 15px rgba(35, 33, 110, 0.1);
 
 // Configure bootstrap theme
 $primary: $color-gold;
@@ -28,29 +26,23 @@ $color-hovered: $color-darkBlue40;
 
 $paragraph-margin-bottom: 2rem;
 
-
 // FONTS
 $link-color: $color-gold;
 
-
 $hr-border-color: $color-gold;
-
-
 
 $navbar-light-color: $color-darkBlue;
 $navbar-light-hover-color: $color-hovered;
 $nav-link-font-size: 18px;
 
-
 // Dropdown
 $dropdown-link-hover-color: $color-hovered;
 $dropdown-padding-y: 0;
 
-
 // Modal
 // $modal-inner-padding: 24px;
 $modal-backdrop-bg: $color-darkBlue;
-$modal-backdrop-opacity: .6;
+$modal-backdrop-opacity: 0.6;
 
 $modal-header-border-width: 0;
 $modal-footer-border-width: 0;

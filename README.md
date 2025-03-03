@@ -14,7 +14,8 @@ You can find the documentation on how to use this module on the [Jahia Academy](
 
 # Build and deploy
 
-1) if not created, create a `.env` file with the following variables (adjust the values to your env) :
+1. if not created, create a `.env` file with the following variables (adjust the values to your env) :
+
 ```shell
 JAHIA_USER=username:password
 JAHIA_HOST=http://localhost:8080
@@ -24,24 +25,24 @@ JAHIA_DEPLOY_METHOD=docker
 
 `JAHIA_DEPLOY_METHOD` could be **curl** or **docker**
 
-2) Enable Corepack if needed : 
+2. Enable Corepack if needed :
 
 `enable corepack`
 
-3) Install the dependencies :
+3. Install the dependencies :
 
-``yarn install``
+`yarn install`
 
-4) Build and deploy the project :
+4. Build and deploy the project :
 
-``yarn build && yarn deploy``
+`yarn build && yarn deploy`
 
-4) Automatically build and deploy the project on file changes :
+4. Automatically build and deploy the project on file changes :
 
-``yarn watch``
+`yarn watch`
 
 ## How to upgrade yarn version to latest stable
 
-This command will upgrade yarn  to the latest stable release and update the yarn installer in .yarn/releases
+This command will upgrade yarn to the latest stable release and update the yarn installer in .yarn/releases
 
-``yarn set version stable``
+`yarn set version stable`
