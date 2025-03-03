@@ -1,4 +1,3 @@
-import React from "react";
 import { Area, jahiaComponent } from "@jahia/javascript-modules-library";
 import { MainLayout } from "../../layouts";
 

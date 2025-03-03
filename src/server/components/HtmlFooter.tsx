@@ -12,7 +12,7 @@ const loginForm = {
   },
 };
 
-export const HtmlFooter = ({ className } : {className?: string}) => {
+export const HtmlFooter = ({ className }: { className?: string }) => {
   const { t } = useTranslation();
 
   return (
@@ -44,10 +44,10 @@ export const HtmlFooter = ({ className } : {className?: string}) => {
           </ul>
         </Col>
         <Col className="col-5">
-          {/* <h5>{t('footer.backOffice')}</h5> */}
           <Render content={loginForm} />
         </Col>
         <Col className="col-3">
+          <></>
           {/* <h5>Join us</h5> */}
           {/* <ul className="list-inline"> */}
           {/*    <li className="list-inline-item"> */}
@@ -64,7 +64,7 @@ export const HtmlFooter = ({ className } : {className?: string}) => {
       </Row>
       <Row className="lux-site-footer_disclaimer pb-3">
         <Col>
-          {/* numberOfItems="4" */}
+          {/* numberOfItems={4} */}
           <AbsoluteArea
             name="footerNavLinkArea"
             areaType="jnt:linkList"

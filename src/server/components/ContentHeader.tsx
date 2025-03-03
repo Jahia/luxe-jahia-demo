@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-type ContentHeaderType = {
+type ContentHeaderTypes = {
   title: string;
   description?: string;
   image: {
@@ -12,7 +12,7 @@ type ContentHeaderType = {
 };
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
-export const ContentHeader = ({ title, description, image, className }: ContentHeaderType) => {
+export const ContentHeader = ({ title, description, image, className }: ContentHeaderTypes) => {
   return (
     <header
       className={clsx(

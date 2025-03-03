@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
 import { AddResources, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { defaultComponentType } from "./types";
 
-export const CMPreview = ({ className, children }: { className?: string; children: ReactNode }) => {
+export const CMPreview = ({ className, children }: defaultComponentType) => {
   const { buildStaticUrl } = useUrlBuilder();
 
   return (

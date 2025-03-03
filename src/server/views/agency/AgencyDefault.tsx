@@ -1,6 +1,6 @@
-import React from "react";
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { useTranslation } from "react-i18next";
+import { agencyTypes } from "./types";
 
 jahiaComponent(
   {
@@ -8,7 +8,7 @@ jahiaComponent(
     name: "default",
     componentType: "view",
   },
-  ({ name, address, phone, image: imageNode }, { currentNode, renderContext }) => {
+  ({ name, address, phone, image: imageNode }: agencyTypes, { currentNode, renderContext }) => {
     const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
 

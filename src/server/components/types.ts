@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export type defaultComponentType = {
+export type defaultComponentTypes = {
   className?: string;
   children: ReactNode;
 };

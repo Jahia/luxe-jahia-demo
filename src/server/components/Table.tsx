@@ -1,7 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
-export const Table = ({ rows = [], className }) => {
+
+type rowTypes = {
+  title: string;
+  value: string;
+};
+
+type tableTypes = {
+  rows: rowTypes[];
+  className?: string;
+};
+
+const defaultRows = [];
+
+export const Table = ({ rows = defaultRows, className }: tableTypes) => {
   return (
     <dl className={clsx("lux-table", className)}>
       {rows.map((row) => (
@@ -12,14 +23,4 @@ export const Table = ({ rows = [], className }) => {
       ))}
     </dl>
   );
-};
-
-Table.propTypes = {
-  rows: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  className: PropTypes.string,
 };

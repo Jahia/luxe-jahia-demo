@@ -1,5 +1,4 @@
-import {JSX, ReactNode} from "react";
-// Import PropTypes from 'prop-types';
+import { JSX, ReactNode } from "react";
 import { HtmlFooter, HtmlHead } from "../components";
 import { AbsoluteArea } from "@jahia/javascript-modules-library";
 
@@ -16,7 +15,15 @@ import { AbsoluteArea } from "@jahia/javascript-modules-library";
  * @returns {JSX.Element}
  * @constructor
  */
-export const MainLayout = ({ head, className, children } : {head?:Element, className?: string, children: ReactNode}): JSX.Element => {
+export const MainLayout = ({
+  head,
+  className,
+  children,
+}: {
+  head?: ReactNode;
+  className?: string;
+  children: ReactNode;
+}): JSX.Element => {
   return (
     <>
       <HtmlHead>{head}</HtmlHead>

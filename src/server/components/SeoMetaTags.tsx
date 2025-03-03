@@ -1,4 +1,3 @@
-import React from "react";
 import { buildUrl, getNodeProps, useServerContext } from "@jahia/javascript-modules-library";
 
 export const SeoMetaTags = () => {
@@ -57,7 +56,7 @@ export const SeoMetaTags = () => {
         </>
       )}
       <meta property="og:url" content={getAbsoluteUrl(currentNode)} />
-      <meta property="og:site_name" content={renderContext.getSite().getSiteKey()} />
+      <meta property="og:site_name" content={renderContext.getSite().getTitle()} />
       {seoKeywords?.length && (
         <meta
           name="keywords"

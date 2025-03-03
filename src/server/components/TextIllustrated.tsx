@@ -1,9 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Col, Row } from "./grid";
 
-export const TextIllustrated = ({ title, text, arrangement, image, link }) => {
+type textIllustratedTypes = {
+  title: string;
+  text: string;
+  arrangement: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  link?: {
+    href: string;
+    label: string;
+  };
+};
+
+/* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
+export const TextIllustrated = ({
+  title,
+  text,
+  arrangement,
+  image,
+  link,
+}: textIllustratedTypes) => {
   return (
     <Row className="lux-textIllustrated gap-5">
       <Col className="lux-textIllustrated_image">
@@ -20,7 +39,7 @@ export const TextIllustrated = ({ title, text, arrangement, image, link }) => {
         )}
       >
         <h2 className="mb-4 lux-hasDiamond">{title}</h2>
-        {/* eslint-disable-next-line react/no-danger */}
+        {/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
         <unwanteddiv
           dangerouslySetInnerHTML={{
             __html: text,
@@ -34,18 +53,4 @@ export const TextIllustrated = ({ title, text, arrangement, image, link }) => {
       </Col>
     </Row>
   );
-};
-
-TextIllustrated.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  arrangement: PropTypes.string.isRequired,
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-  }).isRequired,
-  link: PropTypes.shape({
-    href: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-  }),
 };

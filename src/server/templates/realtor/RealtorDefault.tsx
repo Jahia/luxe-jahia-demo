@@ -1,10 +1,9 @@
-import React from "react";
-import { Render, jahiaComponent } from "@jahia/javascript-modules-library";
 import { MainLayout } from "../../layouts";
+import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
 
 jahiaComponent(
   {
-    nodeType: "luxe:estate",
+    nodeType: "luxe:realtor",
     name: "default",
     componentType: "template",
   },

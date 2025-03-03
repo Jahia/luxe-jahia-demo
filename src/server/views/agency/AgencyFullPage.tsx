@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AddContentButtons,
   getNodeProps,
@@ -8,13 +7,15 @@ import {
   server,
   useUrlBuilder,
 } from "@jahia/javascript-modules-library";
+import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 import { useTranslation } from "react-i18next";
 import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "../../components";
+import { agencyLanguageType, agencyTypes } from "./types";
 
 const MAX_ESTATE = 6;
 
-const getAgencyLanguage = ({ realtors, country, renderContext }) => {
+const getAgencyLanguage = ({ realtors, country, renderContext }: agencyLanguageType) => {
   if (Array.isArray(realtors)) {
     return new Set(
       realtors.flatMap((realtor) => {
@@ -25,7 +26,7 @@ const getAgencyLanguage = ({ realtors, country, renderContext }) => {
     );
   }
 
-  return [country.toLowerCase()];
+  return [country?.toLowerCase()];
 };
 
 jahiaComponent(
@@ -36,7 +37,17 @@ jahiaComponent(
     componentType: "view",
   },
   (
-    { name, description, image: imageNode, creationDate, country, address, email, phone, realtors },
+    {
+      name,
+      description,
+      image: imageNode,
+      creationDate,
+      country,
+      address,
+      email,
+      phone,
+      realtors,
+    }: agencyTypes,
     { currentNode, renderContext },
   ) => {
     const { t } = useTranslation();
@@ -119,6 +130,7 @@ jahiaComponent(
               </button>
             </Col>
             <Col>
+              <></>
               {/* <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
                             map here
                         </div> */}
@@ -146,7 +158,7 @@ jahiaComponent(
 
             {estates.map((estate) => (
               <Col key={estate.getIdentifier()} className="g-0">
-                <Render node={estate} editable={false} />
+                <Render node={estate as JCRNodeWrapper} editable={false} />
               </Col>
             ))}
           </Row>

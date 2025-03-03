@@ -1,8 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 
 const defaultWidth = 458;
+
+type figureTypes = {
+  src: string;
+  alt: string;
+  caption?: string;
+  layout?: "imgCentered" | "imgLeft" | "imgRight" | "imgFull";
+  className?: string;
+};
 
 const CSSfigcaption = {
   imgFull: ["text-center"],
@@ -11,7 +17,7 @@ const CSSfigcaption = {
   imgCentered: [],
 };
 
-export const Figure = ({ src, alt, layout = "imgCentered", caption, className }) => {
+export const Figure = ({ src, alt, layout = "imgCentered", caption, className }: figureTypes) => {
   if (!src) {
     return null;
   }
@@ -38,12 +44,4 @@ export const Figure = ({ src, alt, layout = "imgCentered", caption, className })
       {caption && <figcaption className={clsx(CSSfigcaption[layout])}>{caption}</figcaption>}
     </figure>
   );
-};
-
-Figure.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string,
-  caption: PropTypes.string,
-  layout: PropTypes.oneOf(["imgLeft", "imgRight", "imgFull"]),
-  className: PropTypes.string,
 };

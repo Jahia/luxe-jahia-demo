@@ -1,9 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { AddResources, useServerContext, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { SeoMetaTags } from "./SeoMetaTags";
+import { ReactNode } from "react";
 
-export const HtmlHead = ({ children }) => {
+export const HtmlHead = ({ children }: { children: ReactNode }) => {
   const { renderContext } = useServerContext();
   const { buildStaticUrl } = useUrlBuilder();
 
@@ -22,8 +21,4 @@ export const HtmlHead = ({ children }) => {
       {children}
     </head>
   );
-};
-
-HtmlHead.propTypes = {
-  children: PropTypes.node,
 };

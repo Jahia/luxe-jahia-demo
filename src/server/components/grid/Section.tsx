@@ -1,22 +1,18 @@
-import React from "react";
-import { defaultComponentType } from "../types";
+import { ElementType } from "react";
+import { defaultComponentTypes } from "../types";
 
-type sectionType = defaultComponentType & {
-  component: Element;
+type sectionTypes = defaultComponentTypes & {
+  component?: ElementType;
 };
 
-export const Section = ({ className, component, children }: sectionType) => {
-  const Component = component || "section";
-
+export const Section = ({
+  className,
+  component: Component = "section",
+  children,
+}: sectionTypes) => {
   return (
     <Component className={className}>
       <div className="container">{children}</div>
     </Component>
   );
-};
-
-Section.propTypes = {
-  className: PropTypes.string,
-  component: PropTypes.elementType,
-  children: PropTypes.node,
 };

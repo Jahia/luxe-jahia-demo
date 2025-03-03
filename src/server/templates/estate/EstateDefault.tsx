@@ -1,10 +1,9 @@
-import React from "react";
-import { MainLayout } from "../../layouts";
 import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
+import { MainLayout } from "../../layouts";
 
 jahiaComponent(
   {
-    nodeType: "luxe:blogPost",
+    nodeType: "luxe:estate",
     name: "default",
     componentType: "template",
   },

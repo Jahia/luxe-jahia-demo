@@ -1,4 +1,3 @@
-import React from "react";
 import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
 import { CMPreview } from "../../components";
 
