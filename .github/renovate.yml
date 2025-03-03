@@ -1,0 +1,12 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [ "config:base" ],
+    "labels": ["dependencies"],
+    "branchPrefix": "renovate_",
+    "packageRules": [
+        {
+            "packageNames": [ "@jahia/javascript-modules-library" ],
+            "schedule": [ "at any time" ]
+        }
+    ]
+}
