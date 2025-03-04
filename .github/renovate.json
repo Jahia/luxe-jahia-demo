@@ -4,12 +4,12 @@
     "labels": ["dependencies"],
     "packageRules": [
         {
-            "matchPackagePatterns": [ "@jahia/javascript-modules-library" ],
-            "enabled": true
-        },
-        {
             "matchPackagePatterns": [ ".*" ],
             "enabled": false
+        },
+        {
+            "matchPackagePatterns": [ "@jahia/.*" ],
+            "enabled": true
         }
     ]
 }
