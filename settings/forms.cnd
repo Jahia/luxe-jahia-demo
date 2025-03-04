@@ -15,4 +15,4 @@
  - feedbackMsg (string,richtext) i18n
 
 [luxe:form] > jnt:content, luxemix:luxeContent, mix:title
- - formType (string, choicelist) indexed=no
+ - formType (string, choicelist) mandatory indexed=no

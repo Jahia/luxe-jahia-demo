@@ -1,0 +1,17 @@
+import React from "react";
+import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
+import { CMPreview } from "../../components";
+
+jahiaComponent(
+  {
+    nodeType: "luxe:realtor",
+    name: "cm",
+    displayName: "jContent internal view",
+    componentType: "view",
+  },
+  (_, { currentNode }) => (
+    <CMPreview>
+      <Render node={currentNode} view="fullPage" />
+    </CMPreview>
+  ),
+);

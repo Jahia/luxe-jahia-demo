@@ -4,7 +4,7 @@ import { Col, Row } from "./grid";
 type textIllustratedTypes = {
   title: string;
   text: string;
-  arrangement: string;
+  arrangement: "left" | "right";
   image: {
     src: string;
     alt: string;

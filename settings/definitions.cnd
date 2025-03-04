@@ -30,7 +30,7 @@
 
 [luxe:highlightNumber] > jnt:content, luxemix:luxeLayout
  - text (string) primary i18n
- - number (long)
+ - number (long) mandatory
 
 [luxe:section] > jnt:contentList, luxemix:luxeLayout, mix:title
  - arrangement (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
@@ -56,7 +56,7 @@
  - title (string) primary i18n mandatory
  - text (string,richtext[ckeditor.toolbar='Basic']) i18n mandatory
  - image (weakreference, picker[type='image']) mandatory < jmix:image
- - arrangement (string,choicelist[resourceBundle]) = 'left' < 'right', 'left'
+ - arrangement (string,choicelist[resourceBundle]) = 'left' autocreated < 'right', 'left'
 
 [luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
  - name (string) primary i18n mandatory

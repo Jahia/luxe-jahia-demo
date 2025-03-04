@@ -1,5 +1,5 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import type { JCRNodeWrapper } from "org.jahia.services.content";
+import { headerTypes } from "./types";
 
 jahiaComponent(
   {
@@ -7,7 +7,7 @@ jahiaComponent(
     name: "default",
     componentType: "view",
   },
-  ({ title, image }: {title : string, image : JCRNodeWrapper}, { renderContext}) => {
+  ({ title, image }: headerTypes, { renderContext }) => {
     if (image) {
       server.render.addCacheDependency({ node: image }, renderContext);
     }
