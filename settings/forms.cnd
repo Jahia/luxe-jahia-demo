@@ -12,7 +12,7 @@
 [luxemix:contactForm] > jmix:dynamicFieldset mixin
  extends = luxe:form
  - target (string)
- - feedbackMsg (string,richtext) i18n
+ - feedbackMsg (string,richtext) = resourceBundle('label.contactForm_feedbackMsg') autocreated mandatory i18n
 
 [luxe:form] > jnt:content, luxemix:luxeContent, mix:title
  - formType (string, choicelist) mandatory indexed=no

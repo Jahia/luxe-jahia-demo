@@ -2,7 +2,7 @@
 // @ts-nocheck
 import { buildUrl, HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
 import LoginComponent from "../../../../client/LoginComponent";
-import { loginFormTypes } from "../types";
+import { LoginFormTypes } from "../types";
 
 jahiaComponent(
   {
@@ -14,7 +14,7 @@ jahiaComponent(
       "cache.perUser": "true",
     },
   },
-  ({ "j:displayRememberMeButton": isShowRememberMe }: loginFormTypes, { renderContext }) => {
+  ({ "j:displayRememberMeButton": isShowRememberMe }: LoginFormTypes, { renderContext }) => {
     const isLoggedIn = renderContext.isLoggedIn();
 
     const userHydrated = renderContext.getUser().getName();

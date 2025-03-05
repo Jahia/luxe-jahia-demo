@@ -1,26 +1,30 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import ContactForm from "./ContactForm";
 import { getCookie, prefillWithUserContext } from "./ContactUtils";
+import { ContactComponentTypes, EmptyObject, FeedbackTypes, MsgPropsTypes } from "./types";
 
-const ContactComponent = ({ target, feedbackMsg, mode }) => {
+/* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
+const ContactComponent = ({ target, feedbackMsg, mode }: ContactComponentTypes) => {
   const { t } = useTranslation();
-  const [feedback, setFeedback] = useState({ show: false, msgProps: {} });
-  const [unknownError, setUnknownError] = useState(false);
-  const [prefill, setPrefill] = useState({});
+  const [feedback, setFeedback] = useState<FeedbackTypes>({ show: false, msgProps: {} });
+  const [unknownError, setUnknownError] = useState<boolean>(false);
+  // const [prefill, setPrefill] = useState<MsgPropsTypes | EmptyObject>({});
 
-  useEffect(() => {
-    if (Object.keys(feedback.msgProps).length) {
-      setPrefill(feedback.msgProps);
-    }
-  }, [feedback]);
+  const prefill = useMemo<MsgPropsTypes | EmptyObject>(
+    () => (Object.keys(feedback.msgProps).length ? feedback.msgProps : {}),
+    [feedback],
+  );
+  // useEffect(() => {
+  // if (Object.keys(feedback.msgProps).length) {
+  //   setPrefill(feedback.msgProps);
+  // }
+  // }, [feedback]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.digitalData) {
       const sessionId = window.cxs?.sessionId || getCookie("wem-session-id");
-      prefillWithUserContext(sessionId, setPrefill);
+      prefillWithUserContext(sessionId, setFeedback);
     }
   }, []);
 
@@ -39,7 +43,6 @@ const ContactComponent = ({ target, feedbackMsg, mode }) => {
         .replace("$email", email)
         .replace("$message", message);
       return (
-        // eslint-disable-next-line react/no-danger
         <div
           dangerouslySetInnerHTML={{
             __html: personalizedFeedbackMsg,
@@ -52,7 +55,6 @@ const ContactComponent = ({ target, feedbackMsg, mode }) => {
 
     return (
       <>
-        {/* eslint-disable-next-line react/no-danger */}
         <p
           dangerouslySetInnerHTML={{
             __html: t("form.contact.sendMessageError", { name, status: feedback.status }),
@@ -89,12 +91,6 @@ const ContactComponent = ({ target, feedbackMsg, mode }) => {
       }}
     />
   );
-};
-
-ContactComponent.propTypes = {
-  target: PropTypes.string,
-  feedbackMsg: PropTypes.string,
-  mode: PropTypes.string.isRequired,
 };
 
 export default ContactComponent;

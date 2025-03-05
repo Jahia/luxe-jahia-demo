@@ -1,33 +1,43 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { submitContact } from "./ContactUtils";
+import { submitContact } from "./ContactUtils.js";
+import { ContactFormTypes } from "./types";
 
-const ContactForm = ({ target, prefill = {}, setFeedback, setUnknownError, mode }) => {
+const defaultPrefill = {};
+
+const ContactForm = ({
+  target,
+  prefill = defaultPrefill,
+  setFeedback,
+  setUnknownError,
+  mode,
+}: ContactFormTypes) => {
   const { t } = useTranslation();
-  const [firstName, setFirstname] = useState(prefill.firstName);
-  const [lastName, setLastname] = useState(prefill.lastName);
+  const [firstName, setFirstName] = useState(prefill.firstName);
+  const [lastName, setLastName] = useState(prefill.lastName);
   const [email, setEmail] = useState(prefill.email);
   const [message, setMessage] = useState(prefill.message);
   // Const formRef = useRef(null);
 
   const isFormValid = firstName && lastName && email && message && mode !== "edit";
 
-  useEffect(() => {
-    const { firstName, lastName, email } = prefill;
-
-    if (firstName) {
-      setFirstname(firstName);
-    }
-
-    if (lastName) {
-      setLastname(lastName);
-    }
-
-    if (email) {
-      setEmail(email);
-    }
-  }, [prefill]);
+  // useEffect(() => {
+  //   const { firstName, lastName, email } = prefill;
+  //
+  //   if (firstName) {
+  //     setFirstName(firstName);
+  //   }
+  //
+  //   if (lastName) {
+  //     setLastName(lastName);
+  //   }
+  //
+  //   if (email) {
+  //     setEmail(email);
+  //   }
+  // }, [prefill]);
 
   return (
     <form id="contactForm" className="modal-body d-flex flex-column gap-3">
@@ -44,7 +54,7 @@ const ContactForm = ({ target, prefill = {}, setFeedback, setUnknownError, mode 
           name="contact-firstName"
           placeholder={t("form.contact.firstName")}
           className="form-control"
-          onChange={(e) => setFirstname(e.target.value)}
+          onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
       <div>
@@ -59,7 +69,7 @@ const ContactForm = ({ target, prefill = {}, setFeedback, setUnknownError, mode 
           name="contact-lastName"
           placeholder={t("form.contact.lastName")}
           className="form-control"
-          onChange={(e) => setLastname(e.target.value)}
+          onChange={(e) => setLastName(e.target.value)}
         />
       </div>
       <div>
@@ -115,19 +125,6 @@ const ContactForm = ({ target, prefill = {}, setFeedback, setUnknownError, mode 
       </button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  target: PropTypes.string,
-  prefill: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    message: PropTypes.string,
-  }),
-  setFeedback: PropTypes.func.isRequired,
-  setUnknownError: PropTypes.func.isRequired,
-  mode: PropTypes.string.isRequired,
 };
 
 export default ContactForm;

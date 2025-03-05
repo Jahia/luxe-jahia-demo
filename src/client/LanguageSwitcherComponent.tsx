@@ -1,8 +1,21 @@
 import React from "react";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 
-export const LanguageSwitcherComponent = ({ currentLocaleName, localesAndUrls }) => {
+type LocalesAndUrlsTypes = {
+  localeName: string;
+  isCurrent: boolean;
+  url: string;
+};
+
+type LanguageSwitcherComponentTypes = {
+  currentLocaleName: string;
+  localesAndUrls: LocalesAndUrlsTypes[];
+};
+
+export const LanguageSwitcherComponent = ({
+  currentLocaleName,
+  localesAndUrls,
+}: LanguageSwitcherComponentTypes) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownHandler = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -38,17 +51,6 @@ export const LanguageSwitcherComponent = ({ currentLocaleName, localesAndUrls })
       </ul>
     </div>
   );
-};
-
-LanguageSwitcherComponent.propTypes = {
-  currentLocaleName: PropTypes.string.isRequired,
-  localesAndUrls: PropTypes.arrayOf(
-    PropTypes.shape({
-      localeName: PropTypes.string.isRequired,
-      isCurrent: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
 };
 
 export default LanguageSwitcherComponent;

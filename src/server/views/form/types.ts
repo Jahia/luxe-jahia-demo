@@ -1,11 +1,11 @@
-export type loginFormTypes = {
+export type LoginFormTypes = {
   "j:displayRememberMeButton"?: boolean;
 };
 
-export type contactFormTypes = {
+export type ContactFormTypes = {
   target?: string;
   feedbackMsg?: string;
 };
-export type formTypes = {
+export type FormTypes = {
   formType: string;
 };

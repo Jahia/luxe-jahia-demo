@@ -44,7 +44,7 @@ jahiaComponent(
 
     const agencies: realtorAgencyTypes[] = refByNode.map((agencyNode) => {
       return {
-        ...getNodeProps(agencyNode, ["name", "address"]),
+        ...(getNodeProps(agencyNode, ["name", "address"]) as { name: string; address: string }),
         id: agencyNode.getIdentifier(),
       };
     });
