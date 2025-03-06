@@ -1,5 +1,5 @@
 import { HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
-import ContactComponent from "../../../../client/forms/contact/ContactComponent";
+import ContactComponent from "$client/forms/contact/ContactComponent";
 import { ContactFormTypes } from "../types";
 
 jahiaComponent(

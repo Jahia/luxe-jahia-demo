@@ -4,7 +4,7 @@ export type LoginFormTypes = {
 
 export type ContactFormTypes = {
   target?: string;
-  feedbackMsg?: string;
+  feedbackMsg: string;
 };
 export type FormTypes = {
   formType: string;

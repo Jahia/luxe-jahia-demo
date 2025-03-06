@@ -44,7 +44,8 @@ export const HtmlFooter = ({ className }: { className?: string }) => {
           </ul>
         </Col>
         <Col className="col-5">
-          <Render content={loginForm} />
+          <></>
+          {/*<Render content={loginForm} />*/}
         </Col>
         <Col className="col-3">
           <></>

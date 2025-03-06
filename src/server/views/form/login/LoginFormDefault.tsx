@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { buildUrl, HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
-import LoginComponent from "../../../../client/LoginComponent";
+import LoginComponent from "$client/forms/login/LoginComponent";
 import { LoginFormTypes } from "../types";
 
 jahiaComponent(

@@ -499,9 +499,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@jahia/vite-plugin@npm:0.5.1"
+"@jahia/vite-plugin@npm:^0.5.4":
+  version: 0.5.4
+  resolution: "@jahia/vite-plugin@npm:0.5.4"
   dependencies:
     "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/pluginutils": "npm:^5.1.4"
@@ -510,7 +510,7 @@ __metadata:
     zimmerframe: "npm:^1.1.2"
   peerDependencies:
     vite: ">=6.0.0"
-  checksum: 10c0/b6bec6a815eebf66f102ec4e220daaa02e4a5877857b2220c052bbd3bf647df3b6439d74e41ff3c6c07ffc8d6c6bd1a51a7b8a0b4d900690cec8bc55cb8da6fd
+  checksum: 10c0/2f9a72a8b1f26f04264129bf75076e6b53530710b1812f1ade00dd0d14f898538c54c4084a4c18a78a7c23d200628c280105e32811abcd50be32388b52bfc390
   languageName: node
   linkType: hard
 
@@ -767,12 +767,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:19.0.0":
-  version: 19.0.0
-  resolution: "@types/react@npm:19.0.0"
+"@types/react-dom@npm:^19.0.4":
+  version: 19.0.4
+  resolution: "@types/react-dom@npm:19.0.4"
+  peerDependencies:
+    "@types/react": ^19.0.0
+  checksum: 10c0/4e71853919b94df9e746a4bd73f8180e9ae13016333ce9c543dcba9f4f4c8fe6e28b038ca6ee61c24e291af8e03ca3bc5ded17c46dee938fcb32d71186fda7a3
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:19.0.10":
+  version: 19.0.10
+  resolution: "@types/react@npm:19.0.10"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10c0/d7753ec27c5fa48f3aab97d7d4e9e33ad62bbff761a421bfc56c7b403fab9e3ed266d47793e44311ca2f0034e8ae428cea4aecbe1c542b418cfe72a520eab931
+  checksum: 10c0/41884cca21850c8b2d6578b172ca0ca4fff6021251a68532b19f2031ac23dc5a9222470208065f8d9985d367376047df2f49ece8d927f7d04cdc94922b1eb34b
   languageName: node
   linkType: hard
 
@@ -2142,8 +2151,9 @@ __metadata:
     "@eslint/js": "npm:^9.21.0"
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/javascript-modules-library": "npm:^0.5.3"
-    "@jahia/vite-plugin": "npm:^0.5.1"
-    "@types/react": "npm:19.0.0"
+    "@jahia/vite-plugin": "npm:^0.5.4"
+    "@types/react": "npm:19.0.10"
+    "@types/react-dom": "npm:^19.0.4"
     bootstrap: "npm:^5.3.3"
     clsx: "npm:^2.1.0"
     eslint: "npm:^9.20.1"

@@ -19,7 +19,7 @@
     "declarationDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": ["target/types/*"]
+      "$client/*": ["src/client/*"]
     }
   },
   "include": ["src/**/*.js", "src/**/*.mjs", "src/**/*.ts", "src/**/*.tsx", "src/**/*.jsx"],

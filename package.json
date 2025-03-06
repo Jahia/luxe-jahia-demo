@@ -4,15 +4,15 @@
 	"type": "module",
 	"license": "MIT",
 	"scripts": {
-		"build:development": "vite build --mode=development && run pack",
-		"build:production": "yarn clean && vite build && run pack",
-		"build": "run build:production",
-		"pack": "mkdir -p dist/build && cd dist/build && yarn pack --out package.tgz && mv package.tgz ..",
+		"build": "tsc --noEmit && vite build && run package",
 		"clean": "rm -rf dist/",
 		"deploy": "jahia-deploy",
-		"watch": "yarn clean && vite build --mode=development --watch",
+		"format": "prettier --write --list-different .",
 		"lint": "eslint .",
-		"test": "yarn lint"
+		"package": "yarn pack --out dist/package.tgz",
+		"dev": "vite build --watch",
+		"watch": "run dev",
+		"watch:callback": "run package && run deploy"
 	},
 	"jahia": {
 		"snapshot": true,
@@ -20,7 +20,7 @@
 		"module-type": "templatesSet",
 		"module-dependencies": "default,javascript-modules-engine",
 		"static-resources": "/javascript,/client,/icons,/images",
-		"server": "main.js",
+		"server": "javascript/server/index.js",
 		"maven": {
 			"groupId": "org.jahia.modules.javascript",
 			"distributionManagement": {
@@ -44,8 +44,9 @@
 		"@eslint/compat": "^1.2.7",
 		"@eslint/js": "^9.21.0",
 		"@heroicons/react": "^2.1.1",
-		"@jahia/vite-plugin": "^0.5.1",
-		"@types/react": "19.0.0",
+		"@jahia/vite-plugin": "^0.5.4",
+		"@types/react": "19.0.10",
+		"@types/react-dom": "^19.0.4",
 		"clsx": "^2.1.0",
 		"eslint": "^9.20.1",
 		"globals": "^16.0.0",
@@ -61,5 +62,5 @@
 		"node": ">=18.0.0",
 		"yarn": ">=4.0.0"
 	},
-	"packageManager": "yarn@4.6.0"
+	"packageManager": "yarn@4.7.0"
 }

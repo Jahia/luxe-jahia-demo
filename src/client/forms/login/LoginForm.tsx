@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useState } from "react";
+import React, { useState } from "react";
 import LoginCard from "./LoginCard";
 import { useTranslation } from "react-i18next";
-import { login } from "./LoginUtils";
+import { login } from "./LoginUtils.js";
+import { LoginCommonPropsTypes } from "./types.js";
+import { LoginFormTypes } from "./types";
 
 const userMocks = [
   {
@@ -47,7 +47,13 @@ const userMocks = [
   },
 ];
 
-const LoginForm = ({ loginUrl, close, setUser, setLoggedIn, siteKey, isShowRememberMe = true }) => {
+const LoginForm = ({
+  loginUrl,
+  setUser,
+  setLoggedIn,
+  siteKey,
+  isShowRememberMe = true,
+}: LoginFormTypes) => {
   const { t } = useTranslation();
 
   const [incorrectLogin, setIncorrectLogin] = useState(false);
@@ -56,7 +62,7 @@ const LoginForm = ({ loginUrl, close, setUser, setLoggedIn, siteKey, isShowRemem
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const loginCommonProps = {
+  const loginCommonProps: LoginCommonPropsTypes = {
     siteKey,
     loginUrl,
     setUser,
@@ -175,15 +181,6 @@ const LoginForm = ({ loginUrl, close, setUser, setLoggedIn, siteKey, isShowRemem
             </footer> */}
     </div>
   );
-};
-
-LoginForm.propTypes = {
-  loginUrl: PropTypes.string.isRequired,
-  close: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
-  setLoggedIn: PropTypes.func.isRequired,
-  isShowRememberMe: PropTypes.bool.isRequired,
-  siteKey: PropTypes.string,
 };
 
 export default LoginForm;

@@ -1,9 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { WorkspaceNavigationTypes } from "./types";
 
-const hasPermission = async (gqlUrl, permission, path) => {
+const hasPermission = async (gqlUrl: string, permission: string, path: string) => {
   const response = await fetch(gqlUrl, {
     method: "POST",
     headers: {
@@ -30,7 +29,7 @@ const hasPermission = async (gqlUrl, permission, path) => {
   return data.data.jcr.nodeByPath.site.hasPermission;
 };
 
-const WorkspaceNavigation = ({ urls, mode, nodePath }) => {
+const WorkspaceNavigation = ({ urls, mode, nodePath }: WorkspaceNavigationTypes) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [hasJContentPermission, setHasJContentPermission] = useState(false);
@@ -71,14 +70,4 @@ const WorkspaceNavigation = ({ urls, mode, nodePath }) => {
   );
 };
 
-WorkspaceNavigation.propTypes = {
-  urls: PropTypes.shape({
-    liveUrl: PropTypes.string.isRequired,
-    previewUrl: PropTypes.string.isRequired,
-    editUrl: PropTypes.string.isRequired,
-    gqlUrl: PropTypes.string.isRequired,
-  }).isRequired,
-  mode: PropTypes.string.isRequired,
-  nodePath: PropTypes.string.isRequired,
-};
 export default WorkspaceNavigation;

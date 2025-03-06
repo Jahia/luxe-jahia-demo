@@ -1,9 +1,8 @@
-import React from "react";
-import { useRef, useState } from "react";
-import LoginForm from "./LoginForm";
-import WorkspaceNavigation from "./WorkspaceNavigation";
+import { MouseEvent, useRef, useState } from "react";
+import LoginForm from "./LoginForm.jsx";
+import WorkspaceNavigation from "./WorkspaceNavigation.jsx";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
+import { LoginComponentTypes } from "./types";
 
 const LoginComponent = ({
   isLoggedIn,
@@ -13,24 +12,24 @@ const LoginComponent = ({
   nodePath,
   isShowRememberMe,
   siteKey,
-}) => {
+}: LoginComponentTypes) => {
   const { t } = useTranslation();
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
   const [user, setUser] = useState(userHydrated);
   const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
-  const showModal = (event) => {
+  const showModal = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    modalRef.current.showModal();
+    modalRef.current?.showModal();
   };
 
-  const closeModal = () => {
-    modalRef.current.close();
-  };
+  // const closeModal = () => {
+  //   modalRef.current?.close();
+  // };
 
-  const handleOverlayClick = (event) => {
+  const handleOverlayClick = (event: MouseEvent<HTMLDialogElement>) => {
     if (event.target === modalRef.current) {
-      modalRef.current.close();
+      modalRef.current?.close();
     }
   };
 
@@ -81,7 +80,7 @@ const LoginComponent = ({
         <div className="modal-dialog" aria-labelledby="loginModalTitle">
           <LoginForm
             loginUrl={urls.loginUrl}
-            close={closeModal}
+            // close={closeModal}
             isShowRememberMe={isShowRememberMe}
             setUser={setUser}
             setLoggedIn={setLoggedIn}
@@ -96,19 +95,6 @@ const LoginComponent = ({
       </p>
     </>
   );
-};
-
-LoginComponent.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  userHydrated: PropTypes.string,
-  urls: PropTypes.shape({
-    logoutUrl: PropTypes.string.isRequired,
-    loginUrl: PropTypes.string.isRequired,
-  }).isRequired,
-  mode: PropTypes.string.isRequired,
-  nodePath: PropTypes.string.isRequired,
-  isShowRememberMe: PropTypes.bool.isRequired,
-  siteKey: PropTypes.string,
 };
 
 export default LoginComponent;
