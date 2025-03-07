@@ -5,7 +5,7 @@ import { getCookie, prefillWithUserContext } from "./ContactUtils";
 import { ContactComponentTypes, EmptyObject, FeedbackTypes, MsgPropsTypes } from "./types";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
-const ContactComponent = ({ target, feedbackMsg, mode }: ContactComponentTypes) => {
+export default function ContactComponent({ target, feedbackMsg, mode }: ContactComponentTypes) {
   const { t } = useTranslation();
   const [feedback, setFeedback] = useState<FeedbackTypes>({ show: false, msgProps: {} });
   const [unknownError, setUnknownError] = useState<boolean>(false);
@@ -91,6 +91,4 @@ const ContactComponent = ({ target, feedbackMsg, mode }: ContactComponentTypes) 
       }}
     />
   );
-};
-
-export default ContactComponent;
+}

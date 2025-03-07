@@ -12,10 +12,10 @@ type LanguageSwitcherComponentTypes = {
   localesAndUrls: LocalesAndUrlsTypes[];
 };
 
-export const LanguageSwitcherComponent = ({
+export default function LanguageSwitcherComponent({
   currentLocaleName,
   localesAndUrls,
-}: LanguageSwitcherComponentTypes) => {
+}: LanguageSwitcherComponentTypes) {
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownHandler = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -51,6 +51,4 @@ export const LanguageSwitcherComponent = ({
       </ul>
     </div>
   );
-};
-
-export default LanguageSwitcherComponent;
+}

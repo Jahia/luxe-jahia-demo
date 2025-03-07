@@ -1,9 +1,9 @@
-import { AddResources, useServerContext, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { AddResources, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { SeoMetaTags } from "./SeoMetaTags";
 import { ReactNode } from "react";
+import "../../scss/styles.scss";
 
 export const HtmlHead = ({ children }: { children: ReactNode }) => {
-  const { renderContext } = useServerContext();
   const { buildStaticUrl } = useUrlBuilder();
 
   return (
@@ -13,11 +13,10 @@ export const HtmlHead = ({ children }: { children: ReactNode }) => {
       <SeoMetaTags />
 
       <link rel="icon" type="image/png" href={buildStaticUrl({ assetPath: "favicon-32x32.png" })} />
-      <AddResources type="css" resources={buildStaticUrl({ assetPath: "css/styles.css" })} />
-      {/* Styles specific for Edit Mode (Page Composer) */}
-      {renderContext.isEditMode() && (
-        <AddResources type="css" resources={buildStaticUrl({ assetPath: "css/editMode.css" })} />
-      )}
+      <AddResources
+        type="css"
+        resources={buildStaticUrl({ assetPath: "../javascript/server/style.css" })}
+      />
       {children}
     </head>
   );

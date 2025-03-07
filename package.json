@@ -53,6 +53,7 @@
 		"i18next": "23.10.1",
 		"prettier": "^3.5.3",
 		"react-i18next": "15.4.1",
+		"sass-embedded": "^1.85.1",
 		"styled-jsx": "^5.1.6",
 		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.25.0",

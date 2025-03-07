@@ -2,7 +2,7 @@ import React from "react";
 import { buildUrl, HydrateInBrowser, useServerContext } from "@jahia/javascript-modules-library";
 import type { RenderContext } from "org.jahia.services.render";
 
-import LanguageSwitcherComponent from "../../../client/LanguageSwitcherComponent";
+import LanguageSwitcherComponent from "$client/LanguageSwitcherComponent";
 
 const getSiteLanguageAsLocales = (renderContext: RenderContext) => {
   const site = renderContext.getSite();

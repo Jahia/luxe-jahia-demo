@@ -4,7 +4,7 @@ import WorkspaceNavigation from "./WorkspaceNavigation.jsx";
 import { useTranslation } from "react-i18next";
 import { LoginComponentTypes } from "./types";
 
-const LoginComponent = ({
+export default function LoginComponent({
   isLoggedIn,
   userHydrated,
   urls,
@@ -12,7 +12,7 @@ const LoginComponent = ({
   nodePath,
   isShowRememberMe,
   siteKey,
-}: LoginComponentTypes) => {
+}: LoginComponentTypes) {
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
   const [user, setUser] = useState(userHydrated);
@@ -95,6 +95,4 @@ const LoginComponent = ({
       </p>
     </>
   );
-};
-
-export default LoginComponent;
+}
