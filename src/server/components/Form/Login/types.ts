@@ -65,3 +65,7 @@ export type WorkspaceNavigationTypes = {
   mode: string;
   nodePath: string;
 };
+
+export type LoginFormServerTypes = {
+  "j:displayRememberMeButton"?: boolean;
+};

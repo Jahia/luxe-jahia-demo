@@ -1,6 +1,6 @@
 import { HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
-import ContactComponent from "$client/forms/contact/ContactComponent";
-import { ContactFormTypes } from "../types";
+import ContactClient from "./Contact.client";
+import { ContactFormServerTypes } from "./types";
 
 jahiaComponent(
   {
@@ -9,8 +9,8 @@ jahiaComponent(
     displayName: "default (hydrate)",
     componentType: "view",
   },
-  ({ target, feedbackMsg }: ContactFormTypes, { renderContext }) => {
+  ({ target, feedbackMsg }: ContactFormServerTypes, { renderContext }) => {
     const mode = renderContext.getMode();
-    return <HydrateInBrowser child={ContactComponent} props={{ target, feedbackMsg, mode }} />;
+    return <HydrateInBrowser child={ContactClient} props={{ target, feedbackMsg, mode }} />;
   },
 );

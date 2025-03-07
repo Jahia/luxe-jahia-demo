@@ -93,10 +93,4 @@
 - noResultText (string) i18n indexed=no
 - j:subNodesView (string, choicelist[templates=subnodes,resourceBundle,image,dependentProperties='type']) nofulltext
 
-[luxe:blogPost] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
- - title (string) primary i18n mandatory
- - subtitle (string) i18n
- - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
- - body (string,richtext) i18n mandatory
- - date (date, DatePicker) = now() autocreated mandatory
- - relatedBlogPosts (weakreference) multiple < luxe:blogPost
+

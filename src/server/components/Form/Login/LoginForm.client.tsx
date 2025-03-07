@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginCard from "./LoginCard";
+import LoginCardClient from "./LoginCard.client";
 import { useTranslation } from "react-i18next";
 import { login } from "./LoginUtils.js";
 import { LoginCommonPropsTypes } from "./types.js";
@@ -47,7 +47,7 @@ const userMocks = [
   },
 ];
 
-const LoginForm = ({
+const LoginFormClient = ({
   loginUrl,
   setUser,
   setLoggedIn,
@@ -92,7 +92,7 @@ const LoginForm = ({
           <p className="text-muted small">{t("form.login.sections.persona.teaser")}</p>
           <div className="d-flex flex-column gap-2">
             {userMocks?.map((user) => (
-              <LoginCard key={user.username} {...user} {...{ loginCommonProps }} />
+              <LoginCardClient key={user.username} {...user} {...{ loginCommonProps }} />
             ))}
           </div>
         </div>
@@ -183,4 +183,4 @@ const LoginForm = ({
   );
 };
 
-export default LoginForm;
+export default LoginFormClient;

@@ -50,3 +50,8 @@ export type ContactFormTypes = {
   setUnknownError: Dispatch<SetStateAction<boolean>>;
   mode: string;
 };
+
+export type ContactFormServerTypes = {
+  target?: string;
+  feedbackMsg: string;
+};

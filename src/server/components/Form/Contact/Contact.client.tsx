@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ContactForm from "./ContactForm";
-import { getCookie, prefillWithUserContext } from "./ContactUtils";
+import ContactFormClient from "./ContactForm.client";
+import { getCookie, prefillWithUserContext } from "./utils.client";
 import { ContactComponentTypes, EmptyObject, FeedbackTypes, MsgPropsTypes } from "./types";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
-export default function ContactComponent({ target, feedbackMsg, mode }: ContactComponentTypes) {
+export default function ContactClient({ target, feedbackMsg, mode }: ContactComponentTypes) {
   const { t } = useTranslation();
   const [feedback, setFeedback] = useState<FeedbackTypes>({ show: false, msgProps: {} });
   const [unknownError, setUnknownError] = useState<boolean>(false);
@@ -81,7 +81,7 @@ export default function ContactComponent({ target, feedbackMsg, mode }: ContactC
   }
 
   return (
-    <ContactForm
+    <ContactFormClient
       {...{
         target,
         prefill,

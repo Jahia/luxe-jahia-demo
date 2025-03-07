@@ -1,10 +1,10 @@
 import { MouseEvent, useRef, useState } from "react";
-import LoginForm from "./LoginForm.jsx";
-import WorkspaceNavigation from "./WorkspaceNavigation.jsx";
+import LoginFormClient from "./LoginForm.client.js";
+import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
 import { useTranslation } from "react-i18next";
 import { LoginComponentTypes } from "./types";
 
-export default function LoginComponent({
+export default function LoginClient({
   isLoggedIn,
   userHydrated,
   urls,
@@ -50,7 +50,7 @@ export default function LoginComponent({
     <>
       <h5>{user}</h5>
       <ul className="list-unstyled">
-        <WorkspaceNavigation
+        <WorkspaceNavigationClient
           {...{
             urls,
             mode,
@@ -78,7 +78,7 @@ export default function LoginComponent({
         onClick={(event) => handleOverlayClick(event)}
       >
         <div className="modal-dialog" aria-labelledby="loginModalTitle">
-          <LoginForm
+          <LoginFormClient
             loginUrl={urls.loginUrl}
             // close={closeModal}
             isShowRememberMe={isShowRememberMe}

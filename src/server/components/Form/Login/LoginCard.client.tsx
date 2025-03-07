@@ -6,7 +6,7 @@ import { login } from "./LoginUtils";
 import { useTranslation } from "react-i18next";
 import { LoginCardTypes } from "./types";
 
-export const LoginCard = ({
+export const LoginCardClient = ({
   username,
   password,
   userinfo,
@@ -54,4 +54,4 @@ export const LoginCard = ({
   );
 };
 
-export default LoginCard;
+export default LoginCardClient;

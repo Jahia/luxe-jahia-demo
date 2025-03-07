@@ -1,6 +1,6 @@
 import { buildUrl, HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
-import LoginComponent from "$client/forms/login/LoginComponent";
-import { LoginFormTypes } from "../types";
+import LoginClient from "./Login.client";
+import { LoginFormServerTypes } from "./types";
 
 jahiaComponent(
   {
@@ -13,7 +13,7 @@ jahiaComponent(
     },
   },
   (
-    { "j:displayRememberMeButton": isShowRememberMe }: LoginFormTypes,
+    { "j:displayRememberMeButton": isShowRememberMe }: LoginFormServerTypes,
     { renderContext, currentResource },
   ) => {
     const isLoggedIn = renderContext.isLoggedIn();
@@ -56,7 +56,7 @@ jahiaComponent(
     // TODO see if we can get users profile public info here...
     return (
       <HydrateInBrowser
-        child={LoginComponent}
+        child={LoginClient}
         props={{
           isLoggedIn,
           userHydrated,

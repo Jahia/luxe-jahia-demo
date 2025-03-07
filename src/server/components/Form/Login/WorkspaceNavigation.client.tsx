@@ -29,7 +29,7 @@ const hasPermission = async (gqlUrl: string, permission: string, path: string) =
   return data.data.jcr.nodeByPath.site.hasPermission;
 };
 
-const WorkspaceNavigation = ({ urls, mode, nodePath }: WorkspaceNavigationTypes) => {
+const WorkspaceNavigationClient = ({ urls, mode, nodePath }: WorkspaceNavigationTypes) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [hasJContentPermission, setHasJContentPermission] = useState(false);
@@ -70,4 +70,4 @@ const WorkspaceNavigation = ({ urls, mode, nodePath }: WorkspaceNavigationTypes)
   );
 };
 
-export default WorkspaceNavigation;
+export default WorkspaceNavigationClient;

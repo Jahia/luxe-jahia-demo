@@ -1,5 +1,5 @@
 import { jahiaComponent, Render, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { Col, Figure, HeadingSection, Row, Section } from "../../components";
+import { Col, Figure, HeadingSection, Row, Section } from "../index";
 import { useTranslation } from "react-i18next";
 import { blogPostTypes } from "./types.js";
 

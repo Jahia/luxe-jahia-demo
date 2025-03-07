@@ -5,7 +5,7 @@ import { ContactFormTypes } from "./types";
 
 const defaultPrefill = {};
 
-const ContactForm = ({
+const ContactFormClient = ({
   target,
   prefill = defaultPrefill,
   setFeedback,
@@ -126,4 +126,4 @@ const ContactForm = ({
   );
 };
 
-export default ContactForm;
+export default ContactFormClient;
