@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-nocheck
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { submitContact } from "./ContactUtils.js";
@@ -108,6 +106,7 @@ const ContactForm = ({
         disabled={!isFormValid}
         onClick={(e) =>
           submitContact({
+            // @ts-expect-error form is not available in e.target
             form: e.target.form,
             target,
             body: {
