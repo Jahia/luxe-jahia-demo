@@ -32,3 +32,5 @@ javascript/client/*
 /.project
 
 .DS_Store
+/javascript/client/
+/javascript/server/
