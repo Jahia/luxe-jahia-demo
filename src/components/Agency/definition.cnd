@@ -1,0 +1,11 @@
+[luxe:Agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
+ - name (string) primary i18n mandatory
+ - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+ - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
+ - creationDate (date, DatePicker) mandatory
+ - country (string,choicelist[country]) = 'FR' autocreated
+ - address (string)
+ - phone (string)
+ - email (string)
+ - realtors (weakreference) multiple < 'luxe:Realtor'
+ + * (luxe:Estate) = luxe:Estate

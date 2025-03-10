@@ -1,0 +1,5 @@
+[luxe:TextIllustrated] > jnt:content, luxemix:luxeLayout
+ - title (string) primary i18n mandatory
+ - text (string,richtext[ckeditor.toolbar='Basic']) i18n mandatory
+ - image (weakreference, picker[type='image']) mandatory < jmix:image
+ - arrangement (string,choicelist[resourceBundle]) = 'left' autocreated < 'right', 'left'

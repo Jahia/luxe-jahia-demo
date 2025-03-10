@@ -1,0 +1,4 @@
+[luxe:Header] > jnt:content, luxemix:luxeLayout
+ - title (string) primary i18n mandatory
+ - subtitle (string) i18n
+ - image (weakreference, picker[type='image']) < 'jmix:image'

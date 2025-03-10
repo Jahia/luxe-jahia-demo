@@ -1,0 +1,3 @@
+[luxe:Cols] > jnt:content, luxemix:luxeLayout, mix:title
+ - colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
+ + * (jmix:droppableContent) = jmix:droppableContent
