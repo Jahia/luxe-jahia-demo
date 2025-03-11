@@ -6,14 +6,14 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
-import { Col, HeadingSection, Row } from "../_commons";
+import { Col, HeadingSection, Row } from "~/commons";
 import { useTranslation } from "react-i18next";
 import { buildQuery } from "./utils";
 import { JcrQueryProps } from "./types";
 
 jahiaComponent(
   {
-    nodeType: "luxe:JcrQuery",
+    nodeType: "luxe:jcrQuery",
     name: "default",
     componentType: "view",
   },

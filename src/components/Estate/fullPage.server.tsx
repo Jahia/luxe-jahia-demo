@@ -1,5 +1,5 @@
 import { jahiaComponent, server, Render, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { Col, Figure, PageTitle, Row, Section } from "../_commons";
+import { Col, Figure, PageTitle, Row, Section } from "~/commons";
 import { useTranslation } from "react-i18next";
 import { EstateProps } from "./types.js";
 import { Layout } from "~/pages/Layout";
@@ -7,7 +7,7 @@ import { Layout } from "~/pages/Layout";
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
   {
-    nodeType: "luxe:Estate",
+    nodeType: "luxe:estate",
     name: "fullPage",
     displayName: "Full Page",
     componentType: "view",

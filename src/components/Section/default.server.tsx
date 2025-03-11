@@ -21,7 +21,7 @@ const getArrangement = (arrangement: string | null): string => {
 
 jahiaComponent(
   {
-    nodeType: "luxe:Section",
+    nodeType: "luxe:section",
     name: "default",
     componentType: "view",
   },

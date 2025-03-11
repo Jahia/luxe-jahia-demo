@@ -1,9 +1,9 @@
 import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
-import { CMPreview } from "../_commons";
+import { CMPreview } from "../../commons";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Agency",
+    nodeType: "luxe:agency",
     name: "cm",
     displayName: "jContent internal view",
     componentType: "view",

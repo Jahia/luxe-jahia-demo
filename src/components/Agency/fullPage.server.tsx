@@ -11,9 +11,8 @@ import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 import { useTranslation } from "react-i18next";
-import { ContentHeader, HeadingSection, Table, Col, Row, Section } from "src/components/_commons";
+import { ContentHeader, HeadingSection, Table, Col, Row, Section } from "src/commons";
 import { AgencyProps } from "./types";
-import { Layout } from "~/pages/Layout";
 
 const MAX_ESTATE = 6;
 
@@ -41,7 +40,7 @@ const getAgencyLanguage = ({
 
 jahiaComponent(
   {
-    nodeType: "luxe:Agency",
+    nodeType: "luxe:agency",
     name: "fullPage",
     displayName: "Full Page",
     componentType: "view",
@@ -174,22 +173,6 @@ jahiaComponent(
           </Row>
         </Section>
       </>
-    );
-  },
-);
-
-// Content template to render an Agency in full page
-jahiaComponent(
-  {
-    nodeType: "luxe:Agency",
-    name: "default",
-    componentType: "template",
-  },
-  (_, { currentNode }) => {
-    return (
-      <Layout>
-        <Render node={currentNode} view="fullPage" />
-      </Layout>
     );
   },
 );

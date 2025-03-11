@@ -1,11 +1,11 @@
-[luxemix:LoginForm] > jmix:dynamicFieldset mixin
- extends = luxe:Form
+[luxemix:loginForm] > jmix:dynamicFieldset mixin
+ extends = luxe:form
  - j:displayRememberMeButton (boolean) = true autocreated
 
-[luxemix:ContactForm] > jmix:dynamicFieldset mixin
- extends = luxe:Form
+[luxemix:contactForm] > jmix:dynamicFieldset mixin
+ extends = luxe:form
  - target (string)
  - feedbackMsg (string,richtext) = resourceBundle('label.contactForm_feedbackMsg') autocreated mandatory i18n
 
-[luxe:Form] > jnt:content, luxemix:luxeContent, mix:title
+[luxe:form] > jnt:content, luxemix:luxeContent, mix:title
  - formType (string, choicelist) mandatory indexed=no

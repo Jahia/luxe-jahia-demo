@@ -3,7 +3,7 @@ import { HeaderProps } from "./types";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Header",
+    nodeType: "luxe:header",
     name: "default",
     componentType: "view",
   },

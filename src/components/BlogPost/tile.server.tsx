@@ -4,7 +4,7 @@ import { BlogPostProps } from "./types";
 
 jahiaComponent(
   {
-    nodeType: "luxe:BlogPost",
+    nodeType: "luxe:blogPost",
     name: "tile",
     displayName: "Tile",
     componentType: "view",

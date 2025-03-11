@@ -1,4 +1,4 @@
-[luxe:BlogPost] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
+[luxe:blogPost] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - title (string) primary i18n mandatory
  - subtitle (string) i18n
  - image (weakreference, picker[type='image']) mandatory < 'jmix:image'

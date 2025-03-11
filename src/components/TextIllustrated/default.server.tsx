@@ -4,7 +4,7 @@ import { TextIllustrated } from "./TextIllustrated";
 
 jahiaComponent(
   {
-    nodeType: "luxe:TextIllustrated",
+    nodeType: "luxe:textIllustrated",
     name: "default",
     componentType: "view",
   },

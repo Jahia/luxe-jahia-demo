@@ -4,7 +4,7 @@ import { RealtorProps } from "./types.js";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Realtor",
+    nodeType: "luxe:realtor",
     name: "default",
     componentType: "view",
   },

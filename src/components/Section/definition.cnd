@@ -1,2 +1,2 @@
-[luxe:Section] > jnt:contentList, luxemix:luxeLayout, mix:title
+[luxe:section] > jnt:contentList, luxemix:luxeLayout, mix:title
  - arrangement (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'

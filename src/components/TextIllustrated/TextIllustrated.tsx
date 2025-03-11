@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Col, Row } from "~/components/_commons/grid";
+import { Col, Row } from "~/commons/grid";
 
 type textIllustratedTypes = {
   title: string;

@@ -1,4 +1,4 @@
-[luxe:JcrQuery] > jnt:content, luxemix:luxeLayout, jmix:list, jmix:renderableList, mix:title, jmix:cache
+[luxe:jcrQuery] > jnt:content, luxemix:luxeLayout, jmix:list, jmix:renderableList, mix:title, jmix:cache
 - type (string, choicelist[subnodetypes = 'jnt:page,luxemix:queryContent',resourceBundle]) indexed=no mandatory
 - criteria (string,choicelist[resourceBundle]) = 'jcr:created' autocreated indexed=no < 'jcr:created','jcr:lastModified','j:lastPublished'
 - sortDirection (string, choicelist[resourceBundle]) = 'asc' autocreated indexed=no < 'asc','desc'

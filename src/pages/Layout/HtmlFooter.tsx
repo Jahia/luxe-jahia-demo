@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Col, Row, Section } from "~/components/_commons/grid";
+import { Col, Row, Section } from "~/commons/grid";
 import { useTranslation } from "react-i18next";
 import { AbsoluteArea, Render } from "@jahia/javascript-modules-library";
 

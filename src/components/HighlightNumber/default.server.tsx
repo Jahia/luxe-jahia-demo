@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 jahiaComponent(
   {
-    nodeType: "luxe:HighlightNumber",
+    nodeType: "luxe:highlightNumber",
     displayName: "Default",
     componentType: "view",
   },

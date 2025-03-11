@@ -1,4 +1,4 @@
-[luxe:Estate] > jnt:content, jmix:mainResource, luxemix:queryContent
+[luxe:estate] > jnt:content, jmix:mainResource, luxemix:queryContent
  - title (string) primary i18n mandatory
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - price (long) mandatory

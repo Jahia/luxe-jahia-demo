@@ -15,7 +15,7 @@ interface navMenuTypes {
 
 jahiaComponent(
   {
-    nodeType: "luxe:NavMenu",
+    nodeType: "luxe:navMenu",
     displayName: "Navbar Nav Menu",
     name: "default",
     componentType: "view",

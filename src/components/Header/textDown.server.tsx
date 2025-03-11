@@ -1,10 +1,10 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { Figure, Row } from "../_commons";
+import { Figure, Row } from "~/commons";
 import { HeaderProps } from "./types";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Heading",
+    nodeType: "luxe:header",
     name: "textDown",
     displayName: "Image & Text Down",
     componentType: "view",

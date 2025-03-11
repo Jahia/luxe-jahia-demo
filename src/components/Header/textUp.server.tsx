@@ -1,10 +1,10 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { Figure, PageTitle, Row } from "../_commons";
+import { Figure, PageTitle, Row } from "~/commons";
 import { HeaderProps } from "./types.js";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Header",
+    nodeType: "luxe:header",
     name: "textUp",
     displayName: "Image & Text Up",
     componentType: "view",

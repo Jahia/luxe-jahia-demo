@@ -1,3 +1,3 @@
-[luxe:HighlightNumber] > jnt:content, luxemix:luxeLayout
+[luxe:highlightNumber] > jnt:content, luxemix:luxeLayout
  - text (string) primary i18n
  - number (long) mandatory

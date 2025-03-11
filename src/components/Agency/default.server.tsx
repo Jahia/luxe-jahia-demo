@@ -4,7 +4,7 @@ import { AgencyProps } from "./types";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Agency",
+    nodeType: "luxe:agency",
     name: "default",
     componentType: "view",
   },

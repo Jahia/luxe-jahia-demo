@@ -1,4 +1,4 @@
-[luxe:Realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
+[luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
  - fullName (string) hidden
  - firstName (string) mandatory
  - lastName (string) primary mandatory

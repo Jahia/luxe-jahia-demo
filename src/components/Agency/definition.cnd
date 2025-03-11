@@ -1,4 +1,4 @@
-[luxe:Agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
+[luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
  - name (string) primary i18n mandatory
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
@@ -7,5 +7,5 @@
  - address (string)
  - phone (string)
  - email (string)
- - realtors (weakreference) multiple < 'luxe:Realtor'
- + * (luxe:Estate) = luxe:Estate
+ - realtors (weakreference) multiple < 'luxe:realtor'
+ + * (luxe:estate) = luxe:estate

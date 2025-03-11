@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Cols",
+    nodeType: "luxe:cols",
     name: "default",
     componentType: "view",
   },

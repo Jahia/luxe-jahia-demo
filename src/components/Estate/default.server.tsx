@@ -4,7 +4,7 @@ import { EstateProps } from "./types";
 
 jahiaComponent(
   {
-    nodeType: "luxe:Estate",
+    nodeType: "luxe:estate",
     name: "default",
     componentType: "view",
   },

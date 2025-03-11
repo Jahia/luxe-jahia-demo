@@ -1,12 +1,12 @@
 import { jahiaComponent, Render, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { Col, Figure, HeadingSection, Row, Section } from "../_commons";
-import { useTranslation } from "react-i18next";
+import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
+import { t } from "i18next";
 import { BlogPostProps } from "./types.js";
-import { Layout } from "~/pages/Layout";
+
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
   {
-    nodeType: "luxe:BlogPost",
+    nodeType: "luxe:blogPost",
     name: "fullPage",
     displayName: "Full Page",
     componentType: "view",
@@ -23,7 +23,6 @@ jahiaComponent(
     }: BlogPostProps,
     { currentNode, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
 
     const image = {
@@ -94,22 +93,6 @@ jahiaComponent(
           </Section>
         )}
       </>
-    );
-  },
-);
-
-// Content template to render a BlogPost in full page
-jahiaComponent(
-  {
-    nodeType: "luxe:blogPost",
-    name: "default",
-    componentType: "template",
-  },
-  (_, { currentNode }) => {
-    return (
-      <Layout>
-        <Render node={currentNode} view="fullPage" />
-      </Layout>
     );
   },
 );

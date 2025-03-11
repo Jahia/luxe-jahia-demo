@@ -8,7 +8,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { useTranslation } from "react-i18next";
-import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "../_commons";
+import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "~/commons";
 import { RealtorProps } from "./types.js";
 import { Layout } from "~/pages/Layout/Layout";
 
@@ -16,7 +16,7 @@ const MAX_ESTATE = 6;
 
 jahiaComponent(
   {
-    nodeType: "luxe:Realtor",
+    nodeType: "luxe:realtor",
     name: "fullPage",
     displayName: "Full Page",
     componentType: "view",
@@ -169,22 +169,6 @@ jahiaComponent(
           </Row>
         </Section>
       </>
-    );
-  },
-);
-
-// Content template to render a Realtor in full page
-jahiaComponent(
-  {
-    nodeType: "luxe:Realtor",
-    name: "default",
-    componentType: "template",
-  },
-  (_, { currentNode }) => {
-    return (
-      <Layout>
-        <Render node={currentNode} view="fullPage" />
-      </Layout>
     );
   },
 );
