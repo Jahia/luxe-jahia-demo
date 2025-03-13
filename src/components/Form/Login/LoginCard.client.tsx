@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { login } from "./utils.client";
-import { useTranslation } from "react-i18next";
-import { LoginCommonProps } from "./types";
+import { t } from "i18next";
+import type { LoginCommonProps } from "./types";
 
 interface LoginCardClientProps {
   username: string;
@@ -27,7 +27,6 @@ export const LoginCardClient = ({
   className,
   ...props
 }: LoginCardClientProps) => {
-  const { t } = useTranslation();
   const styles = clsx(
     "lux-loginCard",
     // {'lux-loginCard_selected': isSelected},

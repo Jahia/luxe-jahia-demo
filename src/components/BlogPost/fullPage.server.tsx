@@ -1,7 +1,7 @@
 import { jahiaComponent, Render, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
-import { BlogPostProps } from "./types.js";
+import type { BlogPostProps } from "./types.js";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(

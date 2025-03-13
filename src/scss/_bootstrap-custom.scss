@@ -109,6 +109,7 @@ main {
   h4,
   .h4 {
     margin-bottom: 2rem;
+
     &:not(:first-child) {
       margin-top: 1.5rem;
     }
@@ -175,6 +176,7 @@ section {
 .dropdown .btn::after {
   color: $color-darkBlue40;
 }
+
 .dropdown-menu {
   --bs-dropdown-link-hover-color: #{$color-gold};
 }
@@ -210,6 +212,7 @@ section {
 .nav {
   --bs-nav-link-color: var(--bs-body-color);
 }
+
 .nav-link {
   font-weight: 500;
 

@@ -1,6 +1,6 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { useTranslation } from "react-i18next";
-import { BlogPostProps } from "./types";
+import { t } from "i18next";
+import type { BlogPostProps } from "./types";
 
 jahiaComponent(
   {
@@ -10,7 +10,6 @@ jahiaComponent(
     componentType: "view",
   },
   ({ title, subtitle, image: imageNode }: BlogPostProps, { currentNode, renderContext }) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
 
     const image = {

@@ -7,9 +7,9 @@ import {
   useUrlBuilder,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "~/commons";
-import { RealtorProps } from "./types.js";
+import type { RealtorProps } from "./types.js";
 
 const MAX_ESTATE = 6;
 
@@ -33,7 +33,6 @@ jahiaComponent(
     }: RealtorProps,
     { currentNode, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
     const refBy = currentNode.getWeakReferences();
     const refByNode: JCRNodeWrapper[] = [];

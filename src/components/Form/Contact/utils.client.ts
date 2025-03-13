@@ -1,4 +1,4 @@
-import { MsgPropsProps } from "./types.js";
+import type { MsgPropsProps } from "./types.js";
 
 export const getCookie = (name) => {
   const value = `; ${document.cookie}`;

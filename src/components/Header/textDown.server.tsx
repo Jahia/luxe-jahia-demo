@@ -1,6 +1,6 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { Figure, Row } from "~/commons";
-import { HeaderProps } from "./types";
+import type { HeaderProps } from "./types";
 
 jahiaComponent(
   {

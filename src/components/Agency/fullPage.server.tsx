@@ -10,10 +10,10 @@ import {
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
-import { useTranslation } from "react-i18next";
-import { ContentHeader, HeadingSection, Table, Col, Row, Section } from "src/commons";
-import { AgencyProps } from "./types";
-import { RealtorProps } from "~/components/Realtor/types";
+import { t } from "i18next";
+import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "~/commons";
+import type { AgencyProps } from "./types";
+import type { RealtorProps } from "~/components/Realtor/types";
 
 const MAX_ESTATE = 6;
 
@@ -60,7 +60,6 @@ jahiaComponent(
     }: AgencyProps,
     { currentNode, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
     const currentNodePath = currentNode.getPath();
 

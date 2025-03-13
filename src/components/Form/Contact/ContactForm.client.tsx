@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { type Dispatch, type SetStateAction, useState } from "react";
+import { t } from "i18next";
 import { submitContact } from "./utils.client";
-import { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
+import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 
 interface ContactFormProps {
   target?: string;
@@ -20,7 +20,6 @@ const ContactFormClient = ({
   setUnknownError,
   mode,
 }: ContactFormProps) => {
-  const { t } = useTranslation();
   const [firstName, setFirstName] = useState(prefill.firstName);
   const [lastName, setLastName] = useState(prefill.lastName);
   const [email, setEmail] = useState(prefill.email);

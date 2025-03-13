@@ -12,12 +12,17 @@ export default defineConfig({
     jahia({
       client: {
         input: {
-          dir: "src/client",
-          glob: "**/*.tsx",
+          dir: "./src/",
+          glob: "**/*.client.{jsx,tsx}",
         },
+        output: "./dist/",
       },
       server: {
-        input: "./src/server/**/*.{jsx,tsx}",
+        input: "./src/**/*.server.{jsx,tsx}",
+        output: {
+          dir: "./dist/server/",
+          fileName: "index", // Will produce index.js and style.css (because of a bug)
+        },
       },
       // This function is called every time a build succeeds in watch mode
       watchCallback() {

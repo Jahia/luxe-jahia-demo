@@ -5,6 +5,7 @@ import {
   Render,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
+import { Section } from "~/commons";
 
 const getArrangement = (arrangement: string | null): string => {
   switch (arrangement) {
@@ -28,18 +29,16 @@ jahiaComponent(
   ({ arrangement }: { arrangement: "left" | "center" | "right" | null }, { currentNode }) => {
     const sectionContents = getChildNodes(currentNode, 100);
     return (
-      <section>
-        <div className="container">
-          {sectionContents.map((content) => (
-            <Render
-              key={content.getIdentifier()}
-              node={content as JCRNodeWrapper}
-              parameters={{ arrangement: getArrangement(arrangement) }}
-            />
-          ))}
-          <AddContentButtons />
-        </div>
-      </section>
+      <Section>
+        {sectionContents.map((content) => (
+          <Render
+            key={content.getIdentifier()}
+            node={content as JCRNodeWrapper}
+            parameters={{ arrangement: getArrangement(arrangement) }}
+          />
+        ))}
+        <AddContentButtons />
+      </Section>
     );
   },
 );

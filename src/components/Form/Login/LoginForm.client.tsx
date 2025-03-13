@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import LoginCardClient from "./LoginCard.client";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { login } from "./utils.client";
-import { LoginCommonProps } from "./types";
+import type { LoginCommonProps } from "./types";
 
 const userMocks = [
   {
@@ -61,8 +61,6 @@ const LoginFormClient = ({
   siteKey,
   isShowRememberMe = true,
 }: LoginFormClientProps) => {
-  const { t } = useTranslation();
-
   const [incorrectLogin, setIncorrectLogin] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
   const [username, setUsername] = useState("");

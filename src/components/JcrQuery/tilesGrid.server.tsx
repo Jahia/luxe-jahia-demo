@@ -6,10 +6,10 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { Col, HeadingSection, Row } from "~/commons";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { buildQuery } from "./utils";
 import clsx from "clsx";
-import { JcrQueryProps } from "./types";
+import type { JcrQueryProps } from "./types";
 
 jahiaComponent(
   {
@@ -33,7 +33,6 @@ jahiaComponent(
     }: JcrQueryProps,
     { currentNode, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { jcrQuery, warn } = buildQuery({
       luxeQuery: {
         "jcr:title": title,

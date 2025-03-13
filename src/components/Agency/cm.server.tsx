@@ -1,5 +1,5 @@
 import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
-import { CMPreview } from "../../commons";
+import { CMPreview } from "~/commons";
 
 jahiaComponent(
   {

@@ -1,6 +1,6 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
-import { BlogPostProps } from "./types";
+import type { BlogPostProps } from "./types";
 
 jahiaComponent(
   {

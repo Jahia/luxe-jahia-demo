@@ -1,0 +1,57 @@
+@value variables: "./variables.css";
+
+@value colorDarkBlue, colorDarkBlue60, colorDarkBlue40, colorGold, colorGoldRgb, colorGray, colorDark, colorDarkRgb, boxShadow from variables;
+
+:root {
+    --luxe-color-darkBlue: colorDarkBlue;
+    --luxe-color-darkBlue60: colorDarkBlue60;
+    --luxe-color-darkBlue40: #a4a3b8;
+    --luxe-color-gold: #c29b40;
+    --luxe-color-gold-rgb: "194, 155, 64";
+    --luxe-color-gray: #f6f6f6;
+    --luxe-color-dark: #393847;
+    --luxe-color-dark-rgb: "57, 56, 71";
+    --luxe-color-primary: var(--luxe-color-gold);
+    --luxe-color-primary-rgb: var(--luxe-color-gold-rgb);
+}
+
+.capitalize {
+    display: inline-block;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+/*.capitalize::first-letter {*/
+/*    text-transform: uppercase;*/
+/*}*/
+
+.card {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    transform: scale(1);
+    transition: all 0.2s ease-in;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: boxShadow;
+    }
+
+    & > * {
+        margin-bottom: 0;
+    }
+}
+
+.hasDiamond {
+    &:after {
+        content: "✦";
+        color: colorGold;
+        font-size: 0.4em;
+        margin-left: 4px;
+    }
+}
+

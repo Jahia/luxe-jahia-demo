@@ -1,5 +1,5 @@
 import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
-import { Layout } from "~/templates";
+import { Layout } from "~/templates/Layout";
 
 // Content template for full-page rendering of all node types with the jmix:mainResource mixin.
 // For example : luxe:realtor, luxe:agency ...

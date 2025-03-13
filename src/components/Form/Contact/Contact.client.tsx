@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import ContactFormClient from "./ContactForm.client";
 import { getCookie, prefillWithUserContext } from "./utils.client";
-import { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
+import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function ContactClient({
@@ -14,7 +14,6 @@ export default function ContactClient({
   feedbackMsg: string;
   mode: string;
 }) {
-  const { t } = useTranslation();
   const [feedback, setFeedback] = useState<FeedbackProps>({ show: false, msgProps: {} });
   const [unknownError, setUnknownError] = useState<boolean>(false);
   // const [prefill, setPrefill] = useState<MsgPropsProps | EmptyObject>({});

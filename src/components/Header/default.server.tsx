@@ -1,5 +1,5 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { HeaderProps } from "./types";
+import type { HeaderProps } from "./types";
 
 jahiaComponent(
   {

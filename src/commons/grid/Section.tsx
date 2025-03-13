@@ -1,5 +1,5 @@
-import { ElementType } from "react";
-import { CommonsProps } from "../types";
+import type { ElementType } from "react";
+import type { CommonsProps } from "../types";
 
 type sectionTypes = CommonsProps & {
   component?: ElementType;

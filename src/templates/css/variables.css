@@ -1,0 +1,15 @@
+@value colorDarkBlue: #1b1a4e;
+@value colorDarkBlue60: #767695;
+@value colorDarkBlue40: #a4a3b8;
+@value colorGold: #c29b40;
+@value colorGoldRgb: "194, 155, 64";
+@value colorGray: #f6f6f6;
+@value colorDark: #393847;
+@value colorDarkRgb: "57, 56, 71";
+
+@value colorGreen: #62b569;
+@value colorRed: #cc1818;
+@value colorYellow: #fdf05e;
+@value colorCyan: #16cacf;
+
+@value boxShadow: 4px 6px 17px 15px rgba(35, 33, 110, 0.1);

@@ -1,4 +1,4 @@
-import { JcrQueryProps } from "./types";
+import type { JcrQueryProps } from "./types";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { TFunction } from "i18next";

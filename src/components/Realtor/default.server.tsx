@@ -1,6 +1,6 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { useTranslation } from "react-i18next";
-import { RealtorProps } from "./types.js";
+import { t } from "i18next";
+import type { RealtorProps } from "./types.js";
 
 jahiaComponent(
   {
@@ -12,7 +12,6 @@ jahiaComponent(
     { firstName, lastName, jobPosition, image: imageNode }: RealtorProps,
     { currentNode, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
     const image = {
       src: buildStaticUrl({ assetPath: "img/agent-placeholder.jpg" }),

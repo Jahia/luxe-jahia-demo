@@ -1,8 +1,7 @@
-import { jahiaComponent, Render, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { Col, Figure, PageTitle, Row, Section } from "~/commons";
 import { t } from "i18next";
-import { EstateProps } from "./types.js";
-import { Layout } from "~/templates";
+import type { EstateProps } from "./types.js";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -133,22 +132,6 @@ jahiaComponent(
         </Section>
         {/* <Section>TODO: Biens similaire</Section> */}
       </>
-    );
-  },
-);
-
-// Content template to render a Real Estate in full page
-jahiaComponent(
-  {
-    nodeType: "luxe:estate",
-    name: "default",
-    componentType: "template",
-  },
-  (_, { currentNode }) => {
-    return (
-      <Layout>
-        <Render node={currentNode} view="fullPage" />
-      </Layout>
     );
   },
 );

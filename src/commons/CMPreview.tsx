@@ -1,5 +1,5 @@
 import { AddResources, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { CommonsProps } from "./types";
+import type { CommonsProps } from "./types";
 
 export const CMPreview = ({ className, children }: CommonsProps) => {
   const { buildStaticUrl } = useUrlBuilder();

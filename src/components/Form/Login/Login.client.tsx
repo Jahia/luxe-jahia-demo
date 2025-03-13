@@ -1,8 +1,8 @@
-import { MouseEvent, useRef, useState } from "react";
+import { type MouseEvent, useRef, useState } from "react";
 import LoginFormClient from "./LoginForm.client.js";
 import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
-import { useTranslation } from "react-i18next";
-import { JahiaUrlsProps } from "./types";
+import { t } from "i18next";
+import type { JahiaUrlsProps } from "./types";
 
 interface LoginClientProps {
   isLoggedIn: boolean;
@@ -23,7 +23,6 @@ export default function LoginClient({
   isShowRememberMe,
   siteKey,
 }: LoginClientProps) {
-  const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
   const [user, setUser] = useState(userHydrated);
   const [loggedIn, setLoggedIn] = useState(isLoggedIn);

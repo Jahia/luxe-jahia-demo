@@ -1,0 +1,22 @@
+.table{
+    font-size: 18px;
+}
+
+.tableRow{
+    border-bottom: 1px solid var(--luxe-color-primary);
+    padding: 4px 0;
+}
+/*capitalize*/
+.tableKey{
+    composes: capitalize from '~/templates/css/styles.css';
+    margin-bottom: 0;
+    font-weight: 200;
+    flex: 1;
+}
+
+/*capitalize*/
+.tableValue{
+    composes: capitalize from '~/templates/css/styles.css';
+    font-weight: bold;
+    flex: 1;
+}

@@ -1,6 +1,6 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { useTranslation } from "react-i18next";
-import { EstateProps } from "./types";
+import { t } from "i18next";
+import type { EstateProps } from "./types";
 
 jahiaComponent(
   {
@@ -12,7 +12,6 @@ jahiaComponent(
     { title, price, images, surface, bedrooms }: EstateProps,
     { currentNode, currentResource, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
     const locale = currentResource.getLocale().getLanguage();
     const image = {

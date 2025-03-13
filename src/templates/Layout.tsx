@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 import {
   AbsoluteArea,
   AddResources,
@@ -11,7 +11,7 @@ import { Col, Row, Section } from "~/commons";
 import clsx from "clsx";
 import { t } from "i18next";
 import "../scss/styles.scss";
-import "./styles.css";
+import "./css/styles.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 /**

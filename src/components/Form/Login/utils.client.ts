@@ -1,4 +1,4 @@
-import { LoginCommonProps } from "./types";
+import type { LoginCommonProps } from "./types";
 
 interface LoginProps extends LoginCommonProps {
   username: string;
