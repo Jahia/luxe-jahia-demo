@@ -1649,20 +1649,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@jahia/javascript-modules-library@npm:0.4.0"
+"@jahia/javascript-modules-library@npm:^0.5.0":
+  version: 0.5.6
+  resolution: "@jahia/javascript-modules-library@npm:0.5.6"
   dependencies:
     dotenv: "npm:^16.4.7"
-    graphql: "npm:^16.0.1"
-    graphql-tag: "npm:^2.12.6"
-    prop-types: "npm:^15.8.1"
   peerDependencies:
-    i18next: ">=23.0.0 <23.11.0"
-    react: ">=18.0.0 <18.3.0"
-    react-dom: ">=18.0.0 <18.3.0"
-    react-i18next: ">=14.0.0 <14.2.0"
-    styled-jsx: ">=5.0.0 <5.2.0"
+    i18next: ^23.0.0
+    react: ^19.0.0
+    react-dom: ^19.0.0
+    react-i18next: ^15.4.0
+    styled-jsx: ^5.0.0
   peerDependenciesMeta:
     i18next:
       optional: true
@@ -1676,7 +1673,7 @@ __metadata:
       optional: true
   bin:
     jahia-deploy: bin/jahia-deploy.mjs
-  checksum: 10c0/bf70c8c9cefc1d54dc05734669431cc77b322cd7e4e323ced04cefb86942d56ad03733662bcf83f55b5e141247eeae8cc9b70d9607b2c6de8357a21841d5057d
+  checksum: 10c0/d6406cd0b3f17c3a5157462d5aa21967a574f69dceb5c9d5558b6edd8985004b800db5f459ca6302f9854cb5074c2352482ddaab1b2f9fcf42c1bcf4019ddf6b
   languageName: node
   linkType: hard
 
@@ -4147,24 +4144,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-tag@npm:^2.12.6":
-  version: 2.12.6
-  resolution: "graphql-tag@npm:2.12.6"
-  dependencies:
-    tslib: "npm:^2.1.0"
-  peerDependencies:
-    graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 10c0/7763a72011bda454ed8ff1a0d82325f43ca6478e4ce4ab8b7910c4c651dd00db553132171c04d80af5d5aebf1ef6a8a9fd53ccfa33b90ddc00aa3d4be6114419
-  languageName: node
-  linkType: hard
-
-"graphql@npm:^16.0.1":
-  version: 16.10.0
-  resolution: "graphql@npm:16.10.0"
-  checksum: 10c0/303730675538c8bd6c76b447dc6f03e61242e2d2596b408c34759666ec4877409e5593a7a0467d590ac5407b8c663b093b599556a77f24f281abea69ddc53de6
-  languageName: node
-  linkType: hard
-
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
   resolution: "has-bigints@npm:1.0.2"
@@ -5009,7 +4988,7 @@ __metadata:
     "@cyclonedx/webpack-plugin": "npm:^3.12.0"
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/eslint-config": "npm:^2.1.2"
-    "@jahia/javascript-modules-library": "npm:^0.4.0"
+    "@jahia/javascript-modules-library": "npm:^0.5.0"
     babel-loader: "npm:^8.2.3"
     babel-plugin-transform-react-remove-prop-types: "npm:^0.4.24"
     bootstrap: "npm:^5.3.3"
@@ -6802,13 +6781,6 @@ __metadata:
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: 10c0/69ae09c49eea644bc5ebe1bca4fa4cc2c82b7b3e02f43b84bd891504edf66dbc6b2ec0eef31a957042de2269139e4acff911e6d186a258fb14069cd7f6febce2
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.1.0":
-  version: 2.8.1
-  resolution: "tslib@npm:2.8.1"
-  checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
   languageName: node
   linkType: hard
 
