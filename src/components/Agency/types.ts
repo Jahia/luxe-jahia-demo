@@ -5,7 +5,7 @@ export interface AgencyProps {
   description: string;
   image: JCRNodeWrapper;
   creationDate: Date;
-  country?: string;
+  country: string;
   address?: string;
   phone?: string;
   email?: string;

@@ -13,6 +13,7 @@ import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { useTranslation } from "react-i18next";
 import { ContentHeader, HeadingSection, Table, Col, Row, Section } from "src/commons";
 import { AgencyProps } from "./types";
+import { RealtorProps } from "~/components/Realtor/types";
 
 const MAX_ESTATE = 6;
 
@@ -22,20 +23,20 @@ const getAgencyLanguage = ({
   renderContext,
 }: {
   realtors: JCRNodeWrapper[] | undefined;
-  country: string | undefined;
+  country: string;
   renderContext: RenderContext;
 }) => {
   if (Array.isArray(realtors)) {
     return new Set(
       realtors.flatMap((realtor) => {
         server.render.addCacheDependency({ node: realtor }, renderContext);
-        const props = getNodeProps(realtor, ["languages"]);
+        const props = getNodeProps(realtor, ["languages"]) as RealtorProps;
         return props.languages || [];
       }),
     );
   }
 
-  return [country?.toLowerCase()];
+  return [country.toLowerCase()];
 };
 
 jahiaComponent(
@@ -87,7 +88,19 @@ jahiaComponent(
       },
       {
         title: t("table.data.spokenLanguage.label"),
-        value: languages.map((language) => t(`table.data.spokenLanguage.${language}`)).join(", "),
+        value: languages
+          .map(
+            (language) =>
+              ({
+                fr: t("table.data.spokenLanguage.fr"),
+                en: t("table.data.spokenLanguage.en"),
+                de: t("table.data.spokenLanguage.de"),
+                es: t("table.data.spokenLanguage.es"),
+                it: t("table.data.spokenLanguage.it"),
+                us: t("table.data.spokenLanguage.us"),
+              })[language],
+          )
+          .join(", "),
       },
     ];
 

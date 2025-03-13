@@ -39,7 +39,15 @@ jahiaComponent(
           <h4 className="my-0">
             {firstName} {lastName}
           </h4>
-          <p className="m-0 lux-capitalize">{t(`realtor.jobPosition.${jobPosition}`)}</p>
+          <p className="m-0 lux-capitalize">
+            {
+              {
+                junior: t("realtor.jobPosition.junior"),
+                senior: t("realtor.jobPosition.senior"),
+                director: t("realtor.jobPosition.director"),
+              }[jobPosition]
+            }
+          </p>
         </div>
       </a>
     );

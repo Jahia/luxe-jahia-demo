@@ -1,0 +1,3 @@
+[luxe:contactForm] > jnt:content, luxemix:luxeForm, mix:title
+ - target (string)
+ - feedbackMsg (string,richtext) = resourceBundle('label.contactForm_feedbackMsg') autocreated mandatory i18n

@@ -3,7 +3,7 @@
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
  - creationDate (date, DatePicker) mandatory
- - country (string,choicelist[country]) = 'FR' autocreated
+ - country (string,choicelist[country]) = 'FR' autocreated mandatory
  - address (string)
  - phone (string)
  - email (string)

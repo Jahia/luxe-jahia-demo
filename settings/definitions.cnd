@@ -10,11 +10,15 @@
 // http://localhost:8080/cms/login?redirect=/modules/tools/definitionsBrowser.jsp however that will remove content created with this type.
 // Learn more about content types definitions here: https://academy.jahia.com/developer/content-types"
 
-// These mixins create 2 categories to regroup types in the content type selector UI. Apply it to any definition you want
+// These mixins create 3 categories to regroup types in the content type selector UI. Apply it to any definition you want
 // to see in these categories.
 [luxemix:luxeContent] > jmix:droppableContent, jmix:editorialContent mixin
-[luxemix:luxeLayout] > jmix:droppableContent, jmix:editorialContent mixin
+[luxemix:luxeLayout] > jmix:droppableContent mixin
+[luxemix:luxeForm] > jmix:droppableContent mixin
+
 
 // This mixin is used to define which content is allowed to be returned by the JcrQuery content type. Add this mixin
 // to your content type to be able to select it from the "type" props of a JcrQuery content
 [luxemix:queryContent] mixin
+
+

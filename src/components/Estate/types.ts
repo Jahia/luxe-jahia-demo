@@ -6,10 +6,10 @@ export interface EstateProps {
   price: bigint;
   images: JCRNodeWrapper[];
   country?: string;
-  type?: string;
+  type: "house" | "apartment" | "building";
   surface: bigint;
   rooms: bigint;
   bedrooms: bigint;
   bathrooms: bigint;
-  options: string[];
+  options: ["garage", "swimmingPool", "garden", "balcony"];
 }

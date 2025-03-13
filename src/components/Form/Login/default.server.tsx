@@ -3,7 +3,7 @@ import LoginClient from "./Login.client";
 
 jahiaComponent(
   {
-    nodeType: "luxemix:loginForm",
+    nodeType: "luxe:loginForm",
     name: "default",
     displayName: "default (hydrate)",
     componentType: "view",

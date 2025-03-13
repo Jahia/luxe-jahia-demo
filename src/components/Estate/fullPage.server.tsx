@@ -1,8 +1,8 @@
-import { jahiaComponent, server, Render, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { jahiaComponent, Render, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { Col, Figure, PageTitle, Row, Section } from "~/commons";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { EstateProps } from "./types.js";
-import { Layout } from "~/pages/Layout";
+import { Layout } from "~/templates";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -27,7 +27,6 @@ jahiaComponent(
     }: EstateProps,
     { currentResource, renderContext },
   ) => {
-    const { t } = useTranslation();
     const { buildStaticUrl } = useUrlBuilder();
     const locale = currentResource.getLocale().getLanguage();
     const image = {
@@ -67,7 +66,15 @@ jahiaComponent(
               <dl className="lux-house_informations">
                 <div className="lux-house_information_row d-flex">
                   <dt className="lux-house_information_key">{t("estate.type.label")}</dt>
-                  <dd className="lux-house_information_value">{t(`estate.type.${type}`)}</dd>
+                  <dd className="lux-house_information_value">
+                    {
+                      {
+                        house: t("estate.type.house"),
+                        apartment: t("estate.type.apartment"),
+                        building: t("estate.type.building"),
+                      }[type]
+                    }
+                  </dd>
                 </div>
                 <div className="lux-house_information_row d-flex">
                   <dt className="lux-house_information_key">{t("estate.surface.label")}</dt>
@@ -90,7 +97,16 @@ jahiaComponent(
                 {options &&
                   options.map((option) => (
                     <div key={option} className="lux-house_information_row d-flex">
-                      <dt className="lux-house_information_key">{t(`estate.options.${option}`)}</dt>
+                      <dt className="lux-house_information_key">
+                        {
+                          {
+                            garage: t("estate.options.garage"),
+                            swimmingPool: t("estate.options.swimmingPool"),
+                            garden: t("estate.options.garden"),
+                            balcony: t("estate.options.balcony"),
+                          }[option]
+                        }
+                      </dt>
                       <dd className="lux-house_information_value  d-flex align-items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

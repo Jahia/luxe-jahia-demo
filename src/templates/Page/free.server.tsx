@@ -1,17 +1,16 @@
 import { Area, jahiaComponent } from "@jahia/javascript-modules-library";
-import { Layout } from "./Layout/Layout";
+import { Layout } from "../Layout";
 
 jahiaComponent(
   {
     nodeType: "jnt:page",
-    name: "centered",
-    displayName: "Centered Header & Main ",
+    name: "free",
+    displayName: "Free Design",
     componentType: "template",
   },
   () => {
     return (
-      <Layout className="lux-centeredLayout">
-        <Area name="header" allowedTypes={["luxe:header"]} numberOfItems={1} />
+      <Layout>
         <Area name="main" />
       </Layout>
     );

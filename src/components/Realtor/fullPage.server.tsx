@@ -10,7 +10,6 @@ import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { useTranslation } from "react-i18next";
 import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "~/commons";
 import { RealtorProps } from "./types.js";
-import { Layout } from "~/pages/Layout/Layout";
 
 const MAX_ESTATE = 6;
 
@@ -89,7 +88,17 @@ jahiaComponent(
       },
       {
         title: t("table.data.spokenLanguage.label"),
-        value: languages?.map((language) => t(`table.data.spokenLanguage.${language}`)).join(", "),
+        value: languages
+          ?.map(
+            (language) =>
+              ({
+                fr: t("table.data.spokenLanguage.fr"),
+                en: t("table.data.spokenLanguage.en"),
+                de: t("table.data.spokenLanguage.de"),
+                es: t("table.data.spokenLanguage.es"),
+              })[language],
+          )
+          .join(", "),
         valueClassName: "text-capitalize",
       },
       {

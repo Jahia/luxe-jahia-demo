@@ -3,7 +3,7 @@ import ContactClient from "./Contact.client";
 
 jahiaComponent(
   {
-    nodeType: "luxemix:contactForm",
+    nodeType: "luxe:contactForm",
     name: "default",
     displayName: "default (hydrate)",
     componentType: "view",
