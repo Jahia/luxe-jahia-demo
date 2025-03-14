@@ -1,4 +1,4 @@
-@value variables: "./variables.css";
+@value variables: "variables.css";
 
 @value colorDarkBlue, colorDarkBlue60, colorDarkBlue40, colorGold, colorGoldRgb, colorGray, colorDark, colorDarkRgb, boxShadow from variables;
 

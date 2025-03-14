@@ -67,7 +67,7 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
       <link rel="icon" type="image/png" href={buildStaticUrl({ assetPath: "favicon-32x32.png" })} />
       <AddResources
         type="css"
-        resources={buildStaticUrl({ assetPath: "../javascript/server/style.css" })}
+        resources={buildStaticUrl({ assetPath: "../dist/server/style.css" })}
       />
       {children}
     </head>

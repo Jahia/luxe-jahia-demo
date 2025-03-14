@@ -2,6 +2,12 @@
 	"name": "luxe-jahia-demo",
 	"version": "0.6.0",
 	"type": "module",
+	"files": [
+		"dist",
+		"src/**/*.cnd",
+		"settings",
+		"static"
+	],
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc --noEmit && vite build && run package",
@@ -19,8 +25,8 @@
 		"required-version": "8.2.0.0-SNAPSHOT",
 		"module-type": "templatesSet",
 		"module-dependencies": "default,javascript-modules-engine",
-		"static-resources": "/javascript,/client,/icons,/images",
-		"server": "javascript/server/index.js",
+		"static-resources": "/dist,/client,/icons,/images",
+		"server": "dist/server/index.js",
 		"maven": {
 			"groupId": "org.jahia.modules.javascript",
 			"distributionManagement": {
