@@ -2,10 +2,9 @@ import clsx from "clsx";
 import { table, tableKey, tableRow, tableValue } from "./Table.module.css";
 import type { JSX } from "react";
 
-const defaultRows = [];
-
+/* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export const Table = ({
-  rows = defaultRows,
+  rows,
   className,
 }: {
   rows?: {
@@ -15,6 +14,7 @@ export const Table = ({
   }[];
   className?: string;
 }) => {
+  if (!rows?.length) return null;
   return (
     <dl className={clsx(table, className)}>
       {rows?.map(({ title, value, className }) => (
