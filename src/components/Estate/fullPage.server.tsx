@@ -1,7 +1,8 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { Col, Figure, PageTitle, Row, Section } from "~/commons";
+import { Col, Figure, PageTitle, Row, Section, Table } from "~/commons";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
+import CheckIcon from "~/commons/icons/CheckIcon";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -41,6 +42,49 @@ jahiaComponent(
       server.render.addCacheDependency({ node: _image }, renderContext);
     }
 
+    // Define translation mappings
+    const estateTypeTranslation = {
+      house: t("estate.type.house"),
+      apartment: t("estate.type.apartment"),
+      building: t("estate.type.building"),
+    };
+
+    const estateOptionsTranslation = {
+      garage: t("estate.options.garage"),
+      swimmingPool: t("estate.options.swimmingPool"),
+      garden: t("estate.options.garden"),
+      balcony: t("estate.options.balcony"),
+    };
+
+    const tableRows = [
+      {
+        title: t("estate.type.label"),
+        value: estateTypeTranslation[type],
+      },
+      {
+        title: t("estate.surface.label"),
+        value: `${surface.toLocaleString(locale)} m<sup>2</sup>`,
+      },
+      {
+        title: t("estate.rooms.label"),
+        value: rooms.toString(),
+      },
+      {
+        title: t("estate.bedrooms.label"),
+        value: bedrooms.toString(),
+      },
+      {
+        title: t("estate.bathrooms.label"),
+        value: bathrooms.toString(),
+      },
+      // Spread additional rows based on options, if any
+      ...(options?.map((option) => ({
+        title: estateOptionsTranslation[option],
+        value: <CheckIcon />,
+        className: "icon",
+      })) || []),
+    ];
+
     return (
       <>
         <Section>
@@ -62,70 +106,7 @@ jahiaComponent(
             </Col>
             <Col>
               <p className="display-5 text-primary fw-medium">{price.toLocaleString(locale)} €</p>
-              <dl className="lux-house_informations">
-                <div className="lux-house_information_row d-flex">
-                  <dt className="lux-house_information_key">{t("estate.type.label")}</dt>
-                  <dd className="lux-house_information_value">
-                    {
-                      {
-                        house: t("estate.type.house"),
-                        apartment: t("estate.type.apartment"),
-                        building: t("estate.type.building"),
-                      }[type]
-                    }
-                  </dd>
-                </div>
-                <div className="lux-house_information_row d-flex">
-                  <dt className="lux-house_information_key">{t("estate.surface.label")}</dt>
-                  <dd className="lux-house_information_value">
-                    {surface.toLocaleString(locale)} m<sup>2</sup>
-                  </dd>
-                </div>
-                <div className="lux-house_information_row d-flex">
-                  <dt className="lux-house_information_key">{t("estate.rooms.label")}</dt>
-                  <dd className="lux-house_information_value">{rooms}</dd>
-                </div>
-                <div className="lux-house_information_row d-flex">
-                  <dt className="lux-house_information_key">{t("estate.bedrooms.label")}</dt>
-                  <dd className="lux-house_information_value">{bedrooms}</dd>
-                </div>
-                <div className="lux-house_information_row d-flex">
-                  <dt className="lux-house_information_key">{t("estate.bathrooms.label")}</dt>
-                  <dd className="lux-house_information_value">{bathrooms}</dd>
-                </div>
-                {options &&
-                  options.map((option) => (
-                    <div key={option} className="lux-house_information_row d-flex">
-                      <dt className="lux-house_information_key">
-                        {
-                          {
-                            garage: t("estate.options.garage"),
-                            swimmingPool: t("estate.options.swimmingPool"),
-                            garden: t("estate.options.garden"),
-                            balcony: t("estate.options.balcony"),
-                          }[option]
-                        }
-                      </dt>
-                      <dd className="lux-house_information_value  d-flex align-items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                          width="24px"
-                          height="24px"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m4.5 12.75 6 6 9-13.5"
-                          />
-                        </svg>
-                      </dd>
-                    </div>
-                  ))}
-              </dl>
+              <Table rows={tableRows} />
               {/* <AgentItem imgURL={profile1} name="Robert Fox"/> */}
             </Col>
           </Row>

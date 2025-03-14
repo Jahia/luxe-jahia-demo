@@ -76,7 +76,16 @@ jahiaComponent(
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
-    const data = [
+    const agencyLanguagesTranslation = {
+      fr: t("table.data.spokenLanguage.fr"),
+      en: t("table.data.spokenLanguage.en"),
+      de: t("table.data.spokenLanguage.de"),
+      es: t("table.data.spokenLanguage.es"),
+      it: t("table.data.spokenLanguage.it"),
+      us: t("table.data.spokenLanguage.us"),
+    };
+
+    const tableRows = [
       {
         title: t("table.data.nbRealtor"),
         value: `${realtors?.length || 0}`,
@@ -87,19 +96,7 @@ jahiaComponent(
       },
       {
         title: t("table.data.spokenLanguage.label"),
-        value: languages
-          .map(
-            (language) =>
-              ({
-                fr: t("table.data.spokenLanguage.fr"),
-                en: t("table.data.spokenLanguage.en"),
-                de: t("table.data.spokenLanguage.de"),
-                es: t("table.data.spokenLanguage.es"),
-                it: t("table.data.spokenLanguage.it"),
-                us: t("table.data.spokenLanguage.us"),
-              })[language],
-          )
-          .join(", "),
+        value: languages.map((language) => agencyLanguagesTranslation[language]).join(", "),
       },
     ];
 
@@ -121,7 +118,7 @@ jahiaComponent(
           <ContentHeader title={name} image={image} description={description} />
         </Section>
         <Section>
-          <Table rows={data} />
+          <Table rows={tableRows} />
         </Section>
         <Section>
           <HeadingSection title={t("section.heading.contact")} />
