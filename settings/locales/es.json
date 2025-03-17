@@ -14,7 +14,7 @@
 			"btn": "concertar una cita"
 		}
 	},
-	"table": {
+	"list": {
 		"data": {
 			"agency": "agencia",
 			"yOfExperience": "años de experiencia",

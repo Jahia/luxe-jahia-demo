@@ -1,6 +1,7 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { AgencyProps } from "./types";
+import classes from "./component.module.css";
 
 jahiaComponent(
   {
@@ -24,19 +25,13 @@ jahiaComponent(
     }
 
     return (
-      <a className="lux-agencyCard d-flex" href={currentNode.getUrl()}>
-        <img
-          className="lux-agencyCard_image me-4"
-          src={image.src}
-          alt={image.alt}
-          width="200"
-          height="200"
-        />
+      <a className={classes.card} href={currentNode.getUrl()}>
+        <img className={classes.image} src={image.src} alt={image.alt} width="200" height="200" />
 
-        <div className="d-flex flex-column justify-content-center flex-fill">
-          <h2 className="my-0 lux-capitalize">{name}</h2>
-          {address && <p className="m-0">{address}</p>}
-          {phone && <p className="m-0">{phone}</p>}
+        <div className={classes.main}>
+          <h2 className={classes.title}>{name}</h2>
+          {address && <p>{address}</p>}
+          {phone && <p>{phone}</p>}
         </div>
       </a>
     );

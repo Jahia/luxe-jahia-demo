@@ -1,5 +1,5 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
-import { Col, Figure, PageTitle, Row, Section, Table } from "~/commons";
+import { Col, Figure, PageTitle, Row, Section, List } from "~/commons";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
@@ -101,12 +101,11 @@ jahiaComponent(
                 dangerouslySetInnerHTML={{
                   __html: description,
                 }}
-                className="lux-richText"
               />
             </Col>
             <Col>
               <p className="display-5 text-primary fw-medium">{price.toLocaleString(locale)} €</p>
-              <Table rows={tableRows} />
+              <List rows={tableRows} />
               {/* <AgentItem imgURL={profile1} name="Robert Fox"/> */}
             </Col>
           </Row>

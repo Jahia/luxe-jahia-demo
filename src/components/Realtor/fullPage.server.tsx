@@ -8,7 +8,16 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { t } from "i18next";
-import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "~/commons";
+import {
+  Col,
+  ContentHeader,
+  HeadingSection,
+  Row,
+  Section,
+  List,
+  type ListRowProps,
+  Contact,
+} from "~/commons";
 import type { RealtorProps } from "./types.js";
 
 const MAX_ESTATE = 6;
@@ -74,9 +83,16 @@ jahiaComponent(
 
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
-    const data = [
+    const spokenLanguagesTranslation = {
+      fr: t("list.data.spokenLanguage.fr"),
+      en: t("list.data.spokenLanguage.en"),
+      de: t("list.data.spokenLanguage.de"),
+      es: t("list.data.spokenLanguage.es"),
+    };
+
+    const listRows: ListRowProps[] = [
       {
-        title: t("table.data.agency"),
+        title: t("list.data.agency"),
         value: agencies.reduce((value, { name }, index) => {
           if (index === 0) {
             return name;
@@ -86,22 +102,12 @@ jahiaComponent(
         }, ""),
       },
       {
-        title: t("table.data.spokenLanguage.label"),
-        value: languages
-          ?.map(
-            (language) =>
-              ({
-                fr: t("table.data.spokenLanguage.fr"),
-                en: t("table.data.spokenLanguage.en"),
-                de: t("table.data.spokenLanguage.de"),
-                es: t("table.data.spokenLanguage.es"),
-              })[language],
-          )
-          .join(", "),
-        valueClassName: "text-capitalize",
+        title: t("list.data.spokenLanguage.label"),
+        value: languages?.map((language) => spokenLanguagesTranslation[language]).join(", "),
+        className: "textCapitalize",
       },
       {
-        title: t("table.data.yOfExperience"),
+        title: t("list.data.yOfExperience"),
         value: `${yOfExperience}`,
       },
     ];
@@ -127,45 +133,9 @@ jahiaComponent(
           />
         </Section>
         <Section>
-          <Table rows={data} />
+          <List rows={listRows} />
         </Section>
-        <Section>
-          <HeadingSection title={t("section.heading.contact")} />
-          <Row>
-            <Col>
-              <address>
-                <div className="d-flex flex-column mb-4">
-                  <strong className="lux-capitalize">{t("section.contact.address")}</strong>
-                  {agencies.map(({ address, id }) => (
-                    <span key={id}>{address}</span>
-                  ))}
-                </div>
-                <div className="d-flex flex-column mb-4">
-                  <strong className="lux-capitalize">{t("section.contact.phone")}</strong>
-                  <a href={`tel:${phone}`}>{phone}</a>
-                </div>
-                <div className="d-flex flex-column mb-4">
-                  <strong className="lux-capitalize">{t("section.contact.email")}</strong>
-                  <a href={`mailto:${email}`}>{email}</a>
-                </div>
-              </address>
-              <button
-                type="button"
-                className="btn btn-primary btn-lg w-100 lux-capitalize"
-                data-bs-toggle="modal"
-                data-bs-target="#modalContact"
-              >
-                {t("section.contact.btn")}
-              </button>
-            </Col>
-            <Col>
-              <></>
-              {/* <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
-                            map here
-                        </div> */}
-            </Col>
-          </Row>
-        </Section>
+        <Contact addresses={agencies} email={email} phone={phone} />
         <Section>
           <HeadingSection title={t("section.heading.exclusiveEstates")} />
           <Row className="row-cols-3 g-0">

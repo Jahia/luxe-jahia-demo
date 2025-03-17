@@ -14,7 +14,7 @@
 			"btn": "make an appointment"
 		}
 	},
-	"table": {
+	"list": {
 		"data": {
 			"agency": "agency",
 			"yOfExperience": "years of experience",

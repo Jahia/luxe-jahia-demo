@@ -1,28 +1,33 @@
-.table{
+.main {
     font-size: 18px;
 }
 
-.tableRow{
+.row {
     display: flex;
     border-bottom: 1px solid var(--luxe-color-primary);
     padding: 4px 0;
 }
 
-.tableKey{
+.label {
     composes: capitalize from '~/templates/css/styles.css';
     margin-bottom: 0;
     font-weight: 200;
     flex: 1;
 }
 
-.tableValue{
+.value {
     composes: capitalize from '~/templates/css/styles.css';
-    text-transform: capitalize;
+
     font-weight: bold;
     flex: 1;
+
     :global(.icon) & {
         text-transform: none;
         align-items: center;
         display: flex;
+    }
+
+    :global(.textCapitalize) & {
+        text-transform: capitalize;
     }
 }

@@ -14,7 +14,7 @@
 			"btn": "prendre rendez-vous"
 		}
 	},
-	"table": {
+	"list": {
 		"data": {
 			"agency": "agence",
 			"yOfExperience": "années d'expérience",

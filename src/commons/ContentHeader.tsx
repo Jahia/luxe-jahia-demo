@@ -18,7 +18,6 @@ export const ContentHeader = ({
   return (
     <header
       className={clsx(
-        "lux-contentHeader",
         "container",
         "d-flex",
         "flex-column",

@@ -11,7 +11,16 @@ import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 import { t } from "i18next";
-import { Col, ContentHeader, HeadingSection, Row, Section, Table } from "~/commons";
+import {
+  Col,
+  ContentHeader,
+  HeadingSection,
+  Row,
+  Section,
+  List,
+  type ListRowProps,
+  Contact,
+} from "~/commons";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
 
@@ -77,26 +86,27 @@ jahiaComponent(
     const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
 
     const agencyLanguagesTranslation = {
-      fr: t("table.data.spokenLanguage.fr"),
-      en: t("table.data.spokenLanguage.en"),
-      de: t("table.data.spokenLanguage.de"),
-      es: t("table.data.spokenLanguage.es"),
-      it: t("table.data.spokenLanguage.it"),
-      us: t("table.data.spokenLanguage.us"),
+      fr: t("list.data.spokenLanguage.fr"),
+      en: t("list.data.spokenLanguage.en"),
+      de: t("list.data.spokenLanguage.de"),
+      es: t("list.data.spokenLanguage.es"),
+      it: t("list.data.spokenLanguage.it"),
+      us: t("list.data.spokenLanguage.us"),
     };
 
-    const tableRows = [
+    const listRows: ListRowProps[] = [
       {
-        title: t("table.data.nbRealtor"),
+        title: t("list.data.nbRealtor"),
         value: `${realtors?.length || 0}`,
       },
       {
-        title: t("table.data.creationDate"),
+        title: t("list.data.creationDate"),
         value: new Date(creationDate).getFullYear().toString(10) || "-",
       },
       {
-        title: t("table.data.spokenLanguage.label"),
+        title: t("list.data.spokenLanguage.label"),
         value: languages.map((language) => agencyLanguagesTranslation[language]).join(", "),
+        className: "textCapitalize",
       },
     ];
 
@@ -118,8 +128,13 @@ jahiaComponent(
           <ContentHeader title={name} image={image} description={description} />
         </Section>
         <Section>
-          <Table rows={tableRows} />
+          <List rows={listRows} />
         </Section>
+        <Contact
+          addresses={[{ address, id: currentNode.getIdentifier() }]}
+          phone={phone}
+          email={email}
+        />
         <Section>
           <HeadingSection title={t("section.heading.contact")} />
           <Row>
