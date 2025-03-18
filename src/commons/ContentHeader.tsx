@@ -1,5 +1,5 @@
 import clsx from "clsx";
-
+import classes from "./ContentHeader.module.css";
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export const ContentHeader = ({
   title,
@@ -16,30 +16,12 @@ export const ContentHeader = ({
   className?: string;
 }) => {
   return (
-    <header
-      className={clsx(
-        "container",
-        "d-flex",
-        "flex-column",
-        "flex-lg-row",
-        "mb-0",
-        "pb-0",
-        className,
-      )}
-    >
-      <img
-        className="lux-contentHeader_image"
-        src={image.src}
-        alt={image.alt}
-        width="500"
-        height="500"
-      />
-      <div className="d-flex flex-column flex-fill gap-5">
-        <h1 className="lux-contentHeader_title display-2 d-flex align-items-center mb-0 ms-5">
-          {title}
-        </h1>
+    <header className={clsx(classes.main, className)}>
+      <img className={classes.image} src={image.src} alt={image.alt} width="500" height="500" />
+      <div className={classes.content}>
+        <h1 className={classes.title}>{title}</h1>
         {description && (
-          <article className="lux-contentHeader_description bg-secondary">
+          <article className={classes.description}>
             {/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
             <unwanteddiv
               dangerouslySetInnerHTML={{

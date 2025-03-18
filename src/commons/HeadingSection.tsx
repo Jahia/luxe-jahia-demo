@@ -1,9 +1,11 @@
 import clsx from "clsx";
+import { Row } from "~/commons/grid";
+import classes from "./HeadingSection.module.css";
 
 export const HeadingSection = ({ title, className }: { title: string; className?: string }) => {
   return (
-    <header className={clsx("row", "pb-4", className)}>
-      <h2 className="lux-heading_title mb-0">{title}</h2>
-    </header>
+    <Row component="header" className={clsx(classes.main, className)}>
+      <h2 className={classes.title}>{title}</h2>
+    </Row>
   );
 };

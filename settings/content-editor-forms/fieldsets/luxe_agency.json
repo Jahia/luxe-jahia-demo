@@ -22,11 +22,14 @@
 			"selectorOptionsMap": {
 				"type": "default",
 				"accordionItem": {
-					"picker-pages": {
-						"label": "Blog posts",
+					"picker-content-folders": {
+						"label": "Realtors",
 						"rootPath": "/sites/{site}/contents/realtors",
 						"treeConfig": {
 							"hideRoot": true
+						},
+						"tableConfig": {
+							"columns": ["publicationStatus", "name", "type", "lastModified"]
 						}
 					}
 				},
