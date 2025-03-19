@@ -1,82 +1,74 @@
 {
-  "name": "luxe-jahia-demo",
-  "version": "0.6.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "build:development": "webpack --mode=development && run pack",
-    "build:production": "webpack && run pack",
-    "build": "run build:production",
-    "pack": "mkdir -p dist/build && cd dist/build && yarn pack --out package.tgz && mv package.tgz ..",
-    "clean": "rm -rf dist/",
-    "deploy": "jahia-deploy",
-    "watch": "webpack --mode=development --watch",
-    "lint": "eslint .",
-    "test": "yarn lint"
-  },
-  "jahia": {
-    "snapshot": true,
-    "required-version": "8.2.0.0-SNAPSHOT",
-    "module-type": "templatesSet",
-    "module-dependencies": "default,javascript-modules-engine",
-    "static-resources": "/javascript,/client,/icons,/images",
-    "server": "main.js",
-    "maven": {
-      "groupId": "org.jahia.modules.npm",
-      "distributionManagement": {
-        "repository": {
-          "id": "jahia-releases",
-          "url": "https://devtools.jahia.com/nexus/content/repositories/jahia-releases"
-        },
-        "snapshotRepository": {
-          "id": "jahia-snapshots",
-          "url": "https://devtools.jahia.com/nexus/content/repositories/jahia-snapshots"
-        }
-      }
-    }
-  },
-  "dependencies": {
-    "@jahia/javascript-modules-library": "^0.4.0",
-    "bootstrap": "^5.3.3"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
-    "@cyclonedx/webpack-plugin": "^3.12.0",
-    "@heroicons/react": "^2.1.1",
-    "@jahia/eslint-config": "^2.1.2",
-    "babel-loader": "^8.2.3",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "clean-webpack-plugin": "^4.0.0",
-    "clsx": "^2.1.0",
-    "copy-webpack-plugin": "^10.0.0",
-    "css-loader": "^6.9.1",
-    "dotenv-cli": "^4.0.0",
-    "eslint": "^8.43.0",
-    "eslint-plugin-jest": "latest",
-    "eslint-plugin-react": "latest",
-    "eslint-plugin-react-hooks": "latest",
-    "extra-watch-webpack-plugin": "^1.0.3",
-    "i18next": "23.10.1",
-    "mini-css-extract-plugin": "^2.7.7",
-    "prop-types": "^15.8.1",
-    "react": "18.2.0",
-    "react-i18next": "14.1.0",
-    "sass": "^1.70.0",
-    "sass-loader": "^14.0.0",
-    "style-loader": "^3.3.4",
-    "styled-jsx": "5.1.2",
-    "terser-webpack-plugin": "^5.3.10",
-    "typescript": "^5.4.4",
-    "webpack": "5.94.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-shell-plugin-next": "^2.3.1"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "yarn": ">=4.0.0"
-  },
-  "packageManager": "yarn@4.6.0"
+	"name": "luxe-jahia-demo",
+	"version": "0.6.0",
+	"type": "module",
+	"files": [
+		"dist",
+		"src/**/*.cnd",
+		"settings",
+		"static"
+	],
+	"license": "MIT",
+	"scripts": {
+		"build": "tsc --noEmit && vite build && run package",
+		"clean": "rm -rf dist/",
+		"deploy": "jahia-deploy",
+		"format": "prettier --write --list-different .",
+		"lint": "eslint .",
+		"package": "yarn pack --out dist/package.tgz",
+		"dev": "vite build --watch",
+		"watch": "run dev",
+		"watch:callback": "run package && run deploy"
+	},
+	"jahia": {
+		"snapshot": true,
+		"required-version": "8.2.0.0-SNAPSHOT",
+		"module-type": "templatesSet",
+		"module-dependencies": "default,javascript-modules-engine",
+		"static-resources": "/dist,/client,/icons,/images",
+		"server": "dist/server/index.js",
+		"maven": {
+			"groupId": "org.jahia.modules.javascript",
+			"distributionManagement": {
+				"repository": {
+					"id": "jahia-releases",
+					"url": "https://devtools.jahia.com/nexus/content/repositories/jahia-releases"
+				},
+				"snapshotRepository": {
+					"id": "jahia-snapshots",
+					"url": "https://devtools.jahia.com/nexus/content/repositories/jahia-snapshots"
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"bootstrap": "^5.3.3",
+		"clsx": "^2.1.0"
+	},
+	"devDependencies": {
+		"@eslint-react/eslint-plugin": "^1.30.0",
+		"@eslint/compat": "^1.2.7",
+		"@eslint/js": "^9.21.0",
+		"@heroicons/react": "^2.1.1",
+		"@jahia/javascript-modules-library": "^0.5.3",
+		"@jahia/vite-plugin": "^0.5.4",
+		"@types/react": "19.0.10",
+		"@types/react-dom": "^19.0.4",
+		"eslint": "^9.20.1",
+		"globals": "^16.0.0",
+		"i18next": "23.10.1",
+		"prettier": "^3.5.3",
+		"react-i18next": "15.4.1",
+		"sass-embedded": "^1.85.1",
+		"styled-jsx": "^5.1.6",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.25.0",
+		"typescript-plugin-css-modules": "^5.1.0",
+		"vite": "^6.2.0"
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"yarn": ">=4.0.0"
+	},
+	"packageManager": "yarn@4.7.0"
 }

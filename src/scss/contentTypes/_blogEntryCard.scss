@@ -1,16 +1,15 @@
 .lux-blogEntryCard {
-    @extend %card;
+  @extend %card;
 }
 
 .lux-blogEntryCard_image {
-    width: 380px;
-    height: 260px;
-    aspect-ratio: 380/260;
+  width: 380px;
+  height: 260px;
+  aspect-ratio: 380/260;
 }
 
-
 .lux-blogEntryCard_title {
-    font-family: $font-family-base;
-    line-height: 2.2rem;
-    text-wrap: balance;
+  font-family: $font-family-base;
+  line-height: 2.2rem;
+  text-wrap: balance;
 }

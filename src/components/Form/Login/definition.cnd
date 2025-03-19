@@ -1,0 +1,2 @@
+[luxe:loginForm] > jnt:content, luxemix:luxeForm, mix:title
+ - j:displayRememberMeButton (boolean) = true autocreated

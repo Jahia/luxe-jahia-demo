@@ -1,0 +1,11 @@
+[luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
+ - fullName (string) hidden
+ - firstName (string) mandatory
+ - lastName (string) primary mandatory
+ - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'senior', 'director'
+ - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+ - image (weakreference, picker[type='image']) < 'jmix:image'
+ - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
+ - yOfExperience (long) = 1 autocreated mandatory
+ - phone (string) = '+33 6 123 456' autocreated mandatory indexed=no
+ - email (string) = 'agent@luxe.com' autocreated mandatory

@@ -1,28 +1,30 @@
 .lux-textIllustrated {
-    & + & {
-        margin-top: 80px;
-    }
+  & + & {
+    margin-top: 80px;
+  }
 }
 
 @include media-breakpoint-down(sm) {
-    .lux-textIllustrated {
-        position: relative;
-        overflow: hidden;
-        padding: 24px;
-    }
-    
-    .lux-textIllustrated_image {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        opacity: .15;
-        padding: 0;
+  .lux-textIllustrated {
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+  }
 
-        img {border-radius: 0;}
-    }
+  .lux-textIllustrated_image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.15;
+    padding: 0;
 
-    .lux-textIllustrated_text {
-        padding: 0 !important;
-            margin: 16px;
+    img {
+      border-radius: 0;
     }
+  }
+
+  .lux-textIllustrated_text {
+    padding: 0 !important;
+    margin: 16px;
+  }
 }

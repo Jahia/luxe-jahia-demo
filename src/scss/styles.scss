@@ -2,7 +2,7 @@
 @import "bootstrap-config";
 
 // Import all of Bootstrap's CSS
-@import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 // Custom Bootstrap CSS
 @import "bootstrap-custom";
@@ -14,71 +14,71 @@
 
 // @import "cheatsheet";
 .lux-centeredLayout {
-    max-width: 900px;
-    margin: 0 auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .lux-icon {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .lux-404page {
-    height: 95vh;
-    // the path is relative to the final folder where the styles.css file be generated to (dist/build/static/css/)
-    background: url(../img/bg-404.jpg) no-repeat;
-    background-size: cover;
+  height: 95vh;
+  // the path is relative to the final folder where the styles.css file be generated to (dist/build/static/css/)
+  background: url(../img/bg-404.jpg) no-repeat;
+  background-size: cover;
 }
 
 .lux-cover {
-    position: relative;
-    min-height: 695px;
-    overflow: hidden; // Prevent the text from spilling over other sections
+  position: relative;
+  min-height: 695px;
+  overflow: hidden; // Prevent the text from spilling over other sections
 }
 
 .lux-cover_img {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 .lux-cover_caption {
-    position: absolute;
-    bottom: 33%;
-    left: 120px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, .8);
-    padding: 32px;
-    max-width: 450px;
-    font-size: 40px;
-    line-height: 1.2;
-    font-family: $font-family-display;
+  position: absolute;
+  bottom: 33%;
+  left: 120px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 32px;
+  max-width: 450px;
+  font-size: 40px;
+  line-height: 1.2;
+  font-family: $font-family-display;
 }
 
 .lux-richtext {
-    max-width: 800px;
-    margin-right: auto;
-    margin-left: auto;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .lux-article > *:not(.lux-figure) {
-    max-width: 800px;
-    margin-right: auto;
-    margin-left: auto;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .lux-diamond {
-    font-size: 11px;
+  font-size: 11px;
 }
 
 .lux-aside {
-    min-width: 280px;
+  min-width: 280px;
 }
 
 .lux-capitalize {
-    @extend %capitalize;
+  @extend %capitalize;
 }
 
 .lux-hasDiamond {
-    @extend %hasDiamond;
+  @extend %hasDiamond;
 }
 
 // Uncomment to play with breakpoint to manage responsive
@@ -101,39 +101,39 @@
 //     }
 // }
 
-
 .lux-loginCard {
-    font-family: $font-family-base;
-    border: 1px solid $color-darkBlue40;
-    color: $color-darkBlue60;
-    font-size: 14px;
+  font-family: $font-family-base;
+  border: 1px solid $color-darkBlue40;
+  color: $color-darkBlue60;
+  font-size: 14px;
 
-    &:hover {
-        border-color: $color-darkBlue60;
-    }
+  &:hover {
+    border-color: $color-darkBlue60;
+  }
 }
 
 .lux-loginCard_selected {
-    border-color: $color-gold;
+  border-color: $color-gold;
 }
 
-.lux-loginCard_img {}
+.lux-loginCard_img {
+}
 
 .lux-loginCard_title {
-    color: $color-darkBlue;
-    font-size: 22px;
-    font-weight: semi-bold;
+  color: $color-darkBlue;
+  font-size: 22px;
+  font-weight: semi-bold;
 }
 
 .lux-loginCard_subtitle {
-    font-size: 16px;
-    color: $color-darkBlue60;
+  font-size: 16px;
+  color: $color-darkBlue60;
 }
 
 .gap-6 {
-    gap: 5rem;
+  gap: 5rem;
 }
 
 .p-6 {
-    padding: 5rem;
+  padding: 5rem;
 }

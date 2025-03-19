@@ -1,0 +1,9 @@
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom:1.5rem;
+}
+
+.label {
+    composes: capitalize from '~/templates/css/styles.css';
+}

@@ -1,0 +1,13 @@
+[luxe:estate] > jnt:content, jmix:mainResource, luxemix:queryContent
+ - title (string) primary i18n mandatory
+// - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+ - description (string,richtext) i18n mandatory
+ - price (long) mandatory
+ - images (weakreference, picker[type='image']) multiple mandatory < 'jmix:image'
+ - country (string,choicelist[country]) = 'FR' autocreated
+ - type (string,choicelist[resourceBundle]) = 'house' autocreated mandatory < 'house', 'apartment', 'building'
+ - surface (long) = 45 autocreated mandatory
+ - rooms (long) = 2 autocreated mandatory
+ - bedrooms (long) = 1 autocreated mandatory
+ - bathrooms (long) = 1 autocreated mandatory
+ - options (string,choicelist[resourceBundle]) multiple < 'garage', 'swimmingPool', 'garden', 'balcony'

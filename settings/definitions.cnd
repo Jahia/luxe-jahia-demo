@@ -5,98 +5,20 @@
 <luxe = 'http://www.jahia.org/jahia/demo/luxe/nt/1.0'>
 <luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
 
-[luxemix:luxeContent] > jmix:droppableContent, jmix:editorialContent mixin
-[luxemix:luxeLayout] > jmix:droppableContent, jmix:editorialContent mixin
+// Defining the content types is similar to defining a data model: once deployed, you cannot change the type of a property.
+// If you need to do changes during the development phase, it is possible to remove the definitions from the tools:
+// http://localhost:8080/cms/login?redirect=/modules/tools/definitionsBrowser.jsp however that will remove content created with this type.
+// Learn more about content types definitions here: https://academy.jahia.com/developer/content-types"
 
+// These mixins create 3 categories to regroup types in the content type selector UI. Apply it to any definition you want
+// to see in these categories.
+[luxemix:luxeContent] > jmix:droppableContent, jmix:editorialContent mixin
+[luxemix:luxeLayout] > jmix:droppableContent mixin
+[luxemix:luxeForm] > jmix:droppableContent mixin
+
+
+// This mixin is used to define which content is allowed to be returned by the JcrQuery content type. Add this mixin
+// to your content type to be able to select it from the "type" props of a JcrQuery content
 [luxemix:queryContent] mixin
 
-[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeLayout, jmix:navMenuComponent
- orderable
- - base (string,choicelist) nofulltext < 'home', 'currentPage'
- - maxDepth (long) = 2 mandatory
- - startLevel (long) = 0 mandatory
- - menuItemView (string,choicelist[templates='jmix:navMenuItem,menuItem',resourceBundle,image]) = menuElement nofulltext
 
-[luxemix:brand] mixin
- extends = luxe:navMenu
- - brandText (string) i18n
- - brandImage (weakreference, picker[type='image']) < 'jmix:image'
- - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
-
-[luxe:header] > jnt:content, luxemix:luxeLayout
- - title (string) primary i18n mandatory
- - subtitle (string) i18n
- - image (weakreference, picker[type='image']) < 'jmix:image'
-
-[luxe:highlightNumber] > jnt:content, luxemix:luxeLayout
- - text (string) primary i18n
- - number (long)
-
-[luxe:section] > jnt:contentList, luxemix:luxeLayout, mix:title
- - arrangement (string,choicelist[resourceBundle]) = 'center' autocreated < 'left', 'center', 'right'
-
-[luxe:cols] > jnt:content, luxemix:luxeLayout, mix:title
- - colsNumber (string,choicelist[resourceBundle]) = '2' autocreated < '2', '3', '4'
- + * (jmix:droppableContent) = jmix:droppableContent
-
-[luxe:estate] > jnt:content, jmix:mainResource, luxemix:queryContent
- - title (string) primary i18n mandatory
- - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - price (long) mandatory
- - images (weakreference, picker[type='image']) multiple mandatory < 'jmix:image'
- - country (string,choicelist[country]) = 'FR' autocreated
- - type (string,choicelist[resourceBundle]) = 'house' autocreated mandatory < 'house', 'apartment', 'building'
- - surface (long) = 45 autocreated mandatory
- - rooms (long) = 2 autocreated mandatory
- - bedrooms (long) = 1 autocreated mandatory
- - bathrooms (long) = 1 autocreated mandatory
- - options (string,choicelist[resourceBundle]) multiple < 'garage', 'swimmingPool', 'garden', 'balcony'
-
-[luxe:textIllustrated] > jnt:content, luxemix:luxeLayout
- - title (string) primary i18n mandatory
- - text (string,richtext[ckeditor.toolbar='Basic']) i18n mandatory
- - image (weakreference, picker[type='image']) mandatory < jmix:image
- - arrangement (string,choicelist[resourceBundle]) = 'left' < 'right', 'left'
-
-[luxe:agency] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent, jmix:visibleInContentTree
- - name (string) primary i18n mandatory
- - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
- - creationDate (date, DatePicker)
- - country (string,choicelist[country]) = 'FR' autocreated
- - address (string)
- - phone (string)
- - email (string)
- - realtors (weakreference) multiple < 'luxe:realtor'
- + * (luxe:estate) = luxe:estate
-
-[luxe:realtor] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
- - fullName (string) hidden
- - firstName (string) mandatory
- - lastName (string) primary mandatory
- - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'senior', 'director'
- - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
- - image (weakreference, picker[type='image']) < 'jmix:image'
- - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
- - yOfExperience (long) = 1 autocreated mandatory
- - phone (string) = '+33 6 123 456' autocreated mandatory indexed=no
- - email (string) = 'agent@luxe.com' autocreated mandatory
-
-[luxe:jcrQuery] > jnt:content, luxemix:luxeLayout, jmix:list, jmix:renderableList, mix:title, jmix:cache
-- type (string, choicelist[subnodetypes = 'jnt:page,luxemix:queryContent',resourceBundle]) indexed=no mandatory
-- criteria (string,choicelist[resourceBundle]) = 'jcr:created' autocreated indexed=no < 'jcr:created','jcr:lastModified','j:lastPublished'
-- sortDirection (string, choicelist[resourceBundle]) = 'asc' autocreated indexed=no < 'asc','desc'
-- maxItems (long) indexed=no
-- startNode (weakreference)
-- excludeNodes (weakreference) multiple < jnt:page, luxemix:queryContent
-- filter (weakreference, category[autoSelectParent=false]) multiple
-- noResultText (string) i18n indexed=no
-- j:subNodesView (string, choicelist[templates=subnodes,resourceBundle,image,dependentProperties='type']) nofulltext
-
-[luxe:blogPost] > jnt:content, jmix:mainResource, luxemix:luxeContent, luxemix:queryContent
- - title (string) primary i18n mandatory
- - subtitle (string) i18n
- - image (weakreference, picker[type='image']) mandatory < 'jmix:image'
- - body (string,richtext) i18n mandatory
- - date (date, DatePicker) = now() autocreated mandatory
- - relatedBlogPosts (weakreference) multiple < luxe:blogPost

@@ -1,37 +1,36 @@
 {
-  "name": "luxe:form",
-  "fields": [
-    {
-      "name": "formType",
-      "valueConstraints": [
-        {
-          "value": {
-            "type": "String",
-            "value": "loginForm"
-          },
-          "displayValue": "Login Form",
-          "propertyList": [
-            {
-              "name": "addMixin",
-              "value": "luxemix:loginForm"
-            }
-          ]
-        },
-        {
-          "value": {
-            "type": "String",
-            "value": "contactUs"
-          },
-          "displayValue": "Contact",
-          "propertyList": [
-            {
-              "name": "addMixin",
-              "value": "luxemix:contactForm"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+	"name": "luxe:form",
+	"fields": [
+		{
+			"name": "formType",
+			"valueConstraints": [
+				{
+					"value": {
+						"type": "String",
+						"value": "loginForm"
+					},
+					"displayValue": "Login Form",
+					"propertyList": [
+						{
+							"name": "addMixin",
+							"value": "luxemix:loginForm"
+						}
+					]
+				},
+				{
+					"value": {
+						"type": "String",
+						"value": "contactUs"
+					},
+					"displayValue": "Contact",
+					"propertyList": [
+						{
+							"name": "addMixin",
+							"value": "luxemix:contactForm"
+						}
+					]
+				}
+			]
+		}
+	]
 }
-

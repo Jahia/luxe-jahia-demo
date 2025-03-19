@@ -1,0 +1,104 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_xl from variables;
+
+:root {
+    --luxe-color-darkBlue: #1b1a4e;
+    --luxe-color-darkBlue60: #767695;
+    --luxe-color-darkBlue40: #a4a3b8;
+    --luxe-color-gold: #c29b40;
+    --luxe-color-gold-rgb: "194, 155, 64";
+    --luxe-color-gray: #f6f6f6;
+    --luxe-color-dark: #393847;
+    --luxe-color-dark-rgb: "57, 56, 71";
+    --luxe-color-primary: var(--luxe-color-gold);
+    --luxe-color-primary-rgb: var(--luxe-color-gold-rgb);
+    --luxe-secondary-rgb: 246, 246, 246;
+
+    --luxe-box-shadow: 4px 6px 17px 15px rgba(35, 33, 110, 0.1);
+
+    --luxe-body-color: var(--luxe-color-dark);
+    --luxe-body-font-size: 1.25rem;
+    --luxe-body-line-height: 1.75;
+    --luxe-secondary-color: var(--luxe-color-darkBlue60);
+    --luxe-emphasis-color: var(--luxe-color-dark);
+    --luxe-dark-bg-subtle: var(--luxe-color-gray);
+    --luxe-border-color: var(--luxe-color-darkBlue40);
+    --luxe-border-radius: 8px;
+    --luxe-heading-color: var(--luxe-color-darkBlue);
+    --luxe-secondary-bg: var(--luxe-color-gray);
+    --luxe-tertiary-bg: var(--luxe-color-gray);
+
+    --luxe-font-family-display: "Playfair Display", serif;
+    --luxe-font-family-base: "Inter", "Helvetica", sans-serif;
+}
+
+.display_1, .display_2 {
+    font-family: var(--luxe-font-family-display);
+}
+
+.display_1 {
+    font-size: calc(1.625rem + 4.5vw);
+    font-weight: 300;
+    line-height: 1.2;
+
+    @media (min-width: gridBreakpoints_xl) {
+        & {
+            font-size: 5rem
+        }
+    }
+}
+
+.display_2 {
+    font-size: calc(1.575rem + 3.9vw);
+    font-weight: 300;
+    line-height: 1.2;
+
+    @media (min-width: gridBreakpoints_xl) {
+        & {
+            font-size: 4.5rem
+        }
+    }
+}
+
+.luxeBgSecondary {
+    --luxe-bg-opacity: 1;
+    background-color: rgba(var(--luxe-secondary-rgb), var(--luxe-bg-opacity))
+}
+
+.capitalize {
+    display: inline-block;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+.card {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    transform: scale(1);
+    transition: all 0.2s ease-in;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: var(--luxe-box-shadow);
+    }
+
+    & > * {
+        margin-bottom: 0;
+    }
+}
+
+.hasDiamond {
+    &:after {
+        content: "✦";
+        color: var(--luxe-color-primary);
+        font-size: 0.4em;
+        margin-left: 4px;
+    }
+}
+

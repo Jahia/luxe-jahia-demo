@@ -1,0 +1,12 @@
+[luxe:navMenu] > jnt:content, mix:title, luxemix:luxeLayout, jmix:navMenuComponent
+ orderable
+ - base (string,choicelist) nofulltext < 'home', 'currentPage'
+ - maxDepth (long) = 2 mandatory
+ - startLevel (long) = 0 mandatory
+ - menuItemView (string,choicelist[templates='jmix:navMenuItem,menuItem',resourceBundle,image]) = menuElement nofulltext
+
+[luxemix:brand] mixin
+ extends = luxe:navMenu
+ - brandText (string) i18n
+ - brandImage (weakreference, picker[type='image']) < 'jmix:image'
+ - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'

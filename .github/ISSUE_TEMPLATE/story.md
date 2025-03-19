@@ -1,26 +1,23 @@
 ---
 name: User Story
 about: Create a user story
-title: ''
+title: ""
 type: Story
-
 ---
 
-**As a** 
+**As a**
 
-**I want to** 
+**I want to**
 
-**In order to** 
-
+**In order to**
 
 ### Acceptance criteria
 
-**Given** 
+**Given**
 
-**When** 
+**When**
 
-**Then** 
-
+**Then**
 
 ### Notes
 

@@ -1,155 +1,155 @@
 {
-    "section": {
-        "heading": {
-            "contact": "contact",
-            "experts": "our experts",
-            "exclusiveAgencyEstates": "agency's exclusive properties",
-            "exclusiveEstates": "exclusive properties",
-            "relatedBlogPosts": "recommended Blog Posts"
-        },
-        "contact": {
-            "address": "address",
-            "phone": "phone",
-            "email": "email",
-            "btn": "make an appointment"
-        }
-    },
-    "table": {
-        "data": {
-            "agency": "agency",
-            "yOfExperience": "years of experience",
-            "nbRealtor": "number of experts",
-            "creationDate": "creation date",
-            "spokenLanguage": {
-                "label": "spoken languages",
-                "fr": "french",
-                "en": "english",
-                "es": "spanish",
-                "de": "german",
-                "it": "italian",
-                "us": "english"
-            }
-        }
-    },
-    "footer": {
-        "resources": "resources",
-        "academy": "jahia academy",
-        "tutorial": "tutorial",
-        "sourceCode": "source code",
-        "backOffice": "manage website",
-        "connection": "connection",
-        "copyright": "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
-    },
-    "form": {
-        "login": {
-            "login": "login",
-            "logout": "logout",
-            "badCreds": "username or password incorrect",
-            "username": "username",
-            "password": "password",
-            "rememberMe": "remember me",
-            "liveWorkspace": "live",
-            "previewWorkspace": "preview",
-            "editWorkspace": "edit",
-            "editModeWarning": "login is disabled in Page Builder",
-            "sections": {
-                "persona": {
-                    "title": "As a persona",
-                    "teaser": "Use a pre-configured user to simulate different use cases."
-                },
-                "login": {
-                    "title": "As a registered user",
-                    "teaser": "Use your username and password to log in."
-                }
-            },
-            "userMocks": {
-                "pam": {
-                    "function": "Editor in the Communications Department",
-                    "description": "I actively create, optimize, and manage engaging pages for the Luxe website.",
-                    "alt": "User avatar: {{username}}"
-                },
-                "penny": {
-                    "function": "Realtor at the US Luxe Agency",
-                    "description": "I create compelling real estate contents for my agency on the Luxe website.",
-                    "alt": "User avatar: {{username}}"
-                },
-                "robin": {
-                    "function": "Jahia Administrator in the IT Department",
-                    "description": "I administer the Jahia platform, ensuring that the system is properly configured and optimized.",
-                    "alt": "User avatar: {{username}}"
-                }
-            }
-        },
-        "contact": {
-            "firstName": "firstname",
-            "lastName": "lastname",
-            "email": "email",
-            "msg": "your message",
-            "submit": "submit",
-            "editModeWarning": "contact form disabled in Page Builder",
-            "sendMessageError": "oops! Sorry, {{name}}.<br/> Something went wrong with your message. The status code is {{status}}.",
-            "sendMessageAgain": "send the message again"
-        },
-        "unknownError": "an error occured"
-    },
-    "realtor": {
-        "jobPosition": {
-            "junior": "junior agent",
-            "senior": "senior agent",
-            "director": "agency director"
-        }
-    },
-    "estate": {
-        "type": {
-            "label": "type",
-            "house": "house",
-            "apartment": "apartment",
-            "building": "building"
-        },
-        "surface": {
-            "label": "area"
-        },
-        "rooms": {
-            "label": "rooms",
-            "numberOf": "number of rooms"
-        },
-        "bedrooms": {
-            "label": "bedrooms",
-            "numberOf": "number of bedrooms"
-        },
-        "bathrooms": {
-            "label": "bathrooms",
-            "numberOf": "number of bathrooms"
-        },
-        "options": {
-            "label": "options",
-            "garage": "garage",
-            "swimmingPool": "swimming pool",
-            "garden": "garden",
-            "balcony": "balcony"
-        }
-    },
-    "link": {
-        "labels": {
-            "knowMore": "know more",
-            "readMore": "read more"
-        }
-    },
-    "query": {
-        "noResult": "no result returned for this query",
-        "catIsMissing": "one category was removed or is missing, please review the query  : '{{queryName}}'",
-        "excludeIsMissing": "one excluded node was removed or is missing, please review the query  : '{{queryName}}'"
-    },
-    "page": {
-        "relatedContent": {
-            "estateSelection": "our selection of real estate properties",
-            "agencies": "local agencies"
-        }
-    },
-    "alt": {
-        "estate": "view of the real estate : {{estate}}",
-        "realtor": "portrait of the agent : {{realtor}}",
-        "agency": "view of the agency : {{agency}}",
-        "blog": "illustration of the blog : {{blog}}"
-    }
+	"section": {
+		"heading": {
+			"contact": "contact",
+			"experts": "our experts",
+			"exclusiveAgencyEstates": "agency's exclusive properties",
+			"exclusiveEstates": "exclusive properties",
+			"relatedBlogPosts": "recommended Blog Posts"
+		},
+		"contact": {
+			"address": "address",
+			"phone": "phone",
+			"email": "email",
+			"btn": "make an appointment"
+		}
+	},
+	"list": {
+		"data": {
+			"agency": "agency",
+			"yOfExperience": "years of experience",
+			"nbRealtor": "number of experts",
+			"creationDate": "creation date",
+			"spokenLanguage": {
+				"label": "spoken languages",
+				"fr": "french",
+				"en": "english",
+				"es": "spanish",
+				"de": "german",
+				"it": "italian",
+				"us": "english"
+			}
+		}
+	},
+	"footer": {
+		"resources": "resources",
+		"academy": "jahia academy",
+		"tutorial": "tutorial",
+		"sourceCode": "source code",
+		"backOffice": "manage website",
+		"connection": "connection",
+		"copyright": "copyrights © 2002-{{currentDate}} All Rights Reserved by Jahia Solutions Group SA"
+	},
+	"form": {
+		"login": {
+			"login": "login",
+			"logout": "logout",
+			"badCreds": "username or password incorrect",
+			"username": "username",
+			"password": "password",
+			"rememberMe": "remember me",
+			"liveWorkspace": "live",
+			"previewWorkspace": "preview",
+			"editWorkspace": "edit",
+			"editModeWarning": "login is disabled in Page Builder",
+			"sections": {
+				"persona": {
+					"title": "As a persona",
+					"teaser": "Use a pre-configured user to simulate different use cases."
+				},
+				"login": {
+					"title": "As a registered user",
+					"teaser": "Use your username and password to log in."
+				}
+			},
+			"userMocks": {
+				"pam": {
+					"function": "Editor in the Communications Department",
+					"description": "I actively create, optimize, and manage engaging pages for the Luxe website.",
+					"alt": "User avatar: {{username}}"
+				},
+				"penny": {
+					"function": "Realtor at the US Luxe Agency",
+					"description": "I create compelling real estate contents for my agency on the Luxe website.",
+					"alt": "User avatar: {{username}}"
+				},
+				"robin": {
+					"function": "Jahia Administrator in the IT Department",
+					"description": "I administer the Jahia platform, ensuring that the system is properly configured and optimized.",
+					"alt": "User avatar: {{username}}"
+				}
+			}
+		},
+		"contact": {
+			"firstName": "firstname",
+			"lastName": "lastname",
+			"email": "email",
+			"msg": "your message",
+			"submit": "submit",
+			"editModeWarning": "contact form disabled in Page Builder",
+			"sendMessageError": "oops! Sorry, {{name}}.<br/> Something went wrong with your message. The status code is {{status}}.",
+			"sendMessageAgain": "send the message again"
+		},
+		"unknownError": "an error occured"
+	},
+	"realtor": {
+		"jobPosition": {
+			"junior": "junior agent",
+			"senior": "senior agent",
+			"director": "agency director"
+		}
+	},
+	"estate": {
+		"type": {
+			"label": "type",
+			"house": "house",
+			"apartment": "apartment",
+			"building": "building"
+		},
+		"surface": {
+			"label": "area"
+		},
+		"rooms": {
+			"label": "rooms",
+			"numberOf": "number of rooms"
+		},
+		"bedrooms": {
+			"label": "bedrooms",
+			"numberOf": "number of bedrooms"
+		},
+		"bathrooms": {
+			"label": "bathrooms",
+			"numberOf": "number of bathrooms"
+		},
+		"options": {
+			"label": "options",
+			"garage": "garage",
+			"swimmingPool": "swimming pool",
+			"garden": "garden",
+			"balcony": "balcony"
+		}
+	},
+	"link": {
+		"labels": {
+			"knowMore": "know more",
+			"readMore": "read more"
+		}
+	},
+	"query": {
+		"noResult": "no result returned for this query",
+		"catIsMissing": "one category was removed or is missing, please review the query  : '{{queryName}}'",
+		"excludeIsMissing": "one excluded node was removed or is missing, please review the query  : '{{queryName}}'"
+	},
+	"page": {
+		"relatedContent": {
+			"estateSelection": "our selection of real estate properties",
+			"agencies": "local agencies"
+		}
+	},
+	"alt": {
+		"estate": "view of the real estate : {{estate}}",
+		"realtor": "portrait of the agent : {{realtor}}",
+		"agency": "view of the agency : {{agency}}",
+		"blog": "illustration of the blog : {{blog}}"
+	}
 }

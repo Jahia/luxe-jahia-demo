@@ -1,20 +1,20 @@
 @use "sass:map";
 
 .lux-figure {
-    &:not(:first-child) {
-        margin-top: map.get($spacers, "3");
-    }
+  &:not(:first-child) {
+    margin-top: map.get($spacers, "3");
+  }
 }
 .lux-image {
-    max-width: 100%;
-    width: 640px;
-    // width: auto;
-    max-height: 400px;
-    object-fit: cover;
+  max-width: 100%;
+  width: 640px;
+  // width: auto;
+  max-height: 400px;
+  object-fit: cover;
 }
 
 .lux-image_full {
-    width: 100%;
-    max-height: 700px;
-    object-fit: cover;
+  width: 100%;
+  max-height: 700px;
+  object-fit: cover;
 }
