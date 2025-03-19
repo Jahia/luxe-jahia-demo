@@ -1,6 +1,7 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
+import classes from "./component.module.css";
 
 jahiaComponent(
   {
@@ -25,10 +26,10 @@ jahiaComponent(
     }
 
     return (
-      <a href={currentNode.getUrl()} className="lux-estateCard">
+      <a href={currentNode.getUrl()} className={classes.card}>
         <img src={image.src} alt={image.alt} height="265" />
-        <h4 className="my-2">{title}</h4>
-        {subtitle && <p className="lux-estateCard_informations">{subtitle}</p>}
+        <h4>{title}</h4>
+        {subtitle && <p>{subtitle}</p>}
       </a>
     );
   },

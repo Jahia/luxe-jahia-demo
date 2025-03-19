@@ -1,3 +1,7 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, gridBreakpoints_md, gridBreakpoints_sm from variables;
+
 .row {
     --luxe-gutter-x: 1.5rem;
     --luxe-gutter-y: 0;
@@ -17,78 +21,119 @@
     }
 }
 
-.row-cols-auto > * {
+.rowCols_auto > * {
     flex: 0 0 auto;
     width: auto
 }
 
-.row-cols-1 > * {
+.rowCols_1 > * {
     flex: 0 0 auto;
     width: 100%
 }
 
-.row-cols-2 > * {
+.rowCols_2 > * {
     flex: 0 0 auto;
     width: 50%
 }
 
-.row-cols-3 > * {
+.rowCols_3 > * {
     flex: 0 0 auto;
     width: 33.33333333%
 }
 
-.row-cols-4 > * {
+.rowCols_4 > * {
     flex: 0 0 auto;
     width: 25%
 }
 
-.row-cols-5 > * {
+.rowCols_5 > * {
     flex: 0 0 auto;
     width: 20%
 }
 
-.row-cols-6 > * {
+.rowCols_6 > * {
     flex: 0 0 auto;
     width: 16.66666667%
 }
 
-
-@media (min-width: 768px) {
-    .col-md {
-        flex: 1 0 0%
+@media (min-width: gridBreakpoints_sm) {
+    .col_sm {
+        flex: 1 0 0
     }
 
-    .row-cols-md-auto > * {
+    .rowCols_sm_auto > * {
         flex: 0 0 auto;
         width: auto
     }
 
-    .row-cols-md-1 > * {
+    .rowCols_sm_1 > * {
         flex: 0 0 auto;
         width: 100%
     }
 
-    .row-cols-md-2 > * {
+    .rowCols_sm_2 > * {
         flex: 0 0 auto;
         width: 50%
     }
 
-    .row-cols-md-3 > * {
+    .rowCols_sm_3 > * {
         flex: 0 0 auto;
         width: 33.33333333%
     }
 
-    .row-cols-md-4 > * {
+    .rowCols_sm_4 > * {
         flex: 0 0 auto;
         width: 25%
     }
 
-    .row-cols-md-5 > * {
+    .rowCols_sm_5 > * {
         flex: 0 0 auto;
         width: 20%
     }
 
-    .row-cols-md-6 > * {
+    .rowCols_sm_6 > * {
+        flex: 0 0 auto;
+        width: 16.66666667%
+    }
+}
+
+
+@media (min-width: gridBreakpoints_md) {
+    .col_md {
+        flex: 1 0 0
+    }
+
+    .rowCols_md_auto > * {
+        flex: 0 0 auto;
+        width: auto
+    }
+
+    .rowCols_md_1 > * {
+        flex: 0 0 auto;
+        width: 100%
+    }
+
+    .rowCols_md_2 > * {
+        flex: 0 0 auto;
+        width: 50%
+    }
+
+    .rowCols_md_3 > * {
+        flex: 0 0 auto;
+        width: 33.33333333%
+    }
+
+    .rowCols_md_4 > * {
+        flex: 0 0 auto;
+        width: 25%
+    }
+
+    .rowCols_md_5 > * {
+        flex: 0 0 auto;
+        width: 20%
+    }
+
+    .rowCols_md_6 > * {
         flex: 0 0 auto;
         width: 16.66666667%
     }
@@ -96,43 +141,43 @@
 
 }
 
-    @media (min-width: 992px) {
-        .col-lg {
-            flex: 1 0 0%
-        }
-
-        .row-cols-lg-auto > * {
-            flex: 0 0 auto;
-            width: auto
-        }
-
-        .row-cols-lg-1 > * {
-            flex: 0 0 auto;
-            width: 100%
-        }
-
-        .row-cols-lg-2 > * {
-            flex: 0 0 auto;
-            width: 50%
-        }
-
-        .row-cols-lg-3 > * {
-            flex: 0 0 auto;
-            width: 33.33333333%
-        }
-
-        .row-cols-lg-4 > * {
-            flex: 0 0 auto;
-            width: 25%
-        }
-
-        .row-cols-lg-5 > * {
-            flex: 0 0 auto;
-            width: 20%
-        }
-
-        .row-cols-lg-6 > * {
-            flex: 0 0 auto;
-            width: 16.66666667%
-        }
+@media (min-width: gridBreakpoints_lg) {
+    .col_lg {
+        flex: 1 0 0
     }
+
+    .rowCols_lg_auto > * {
+        flex: 0 0 auto;
+        width: auto
+    }
+
+    .rowCols_lg_1 > * {
+        flex: 0 0 auto;
+        width: 100%
+    }
+
+    .rowCols_lg_2 > * {
+        flex: 0 0 auto;
+        width: 50%
+    }
+
+    .rowCols_lg_3 > * {
+        flex: 0 0 auto;
+        width: 33.33333333%
+    }
+
+    .rowCols_lg_4 > * {
+        flex: 0 0 auto;
+        width: 25%
+    }
+
+    .rowCols_lg_5 > * {
+        flex: 0 0 auto;
+        width: 20%
+    }
+
+    .rowCols_lg_6 > * {
+        flex: 0 0 auto;
+        width: 16.66666667%
+    }
+}

@@ -23,6 +23,7 @@ import {
 } from "~/commons";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
+import classes from "./component.module.css";
 
 const MAX_ESTATE = 6;
 
@@ -137,9 +138,9 @@ jahiaComponent(
         />
         <Section>
           <HeadingSection title={t("section.heading.experts")} />
-          <Row className="row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-3">
+          <Row className={classes.rowRealtors}>
             {realtors?.map((realtor) => (
-              <Col key={realtor.getIdentifier()} className="g-0">
+              <Col key={realtor.getIdentifier()}>
                 <Render node={realtor} editable={false} />
               </Col>
             ))}
@@ -147,15 +148,15 @@ jahiaComponent(
         </Section>
         <Section>
           <HeadingSection title={t("section.heading.exclusiveAgencyEstates")} />
-          <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+          <Row className={classes.rowEstates}>
             {renderContext.isEditMode() && (
-              <Col key="addNewRealEstate" className="g-0">
+              <Col key="addNewRealEstate">
                 <AddContentButtons nodeTypes={["luxe:estate"]} />
               </Col>
             )}
 
             {estates.map((estate) => (
-              <Col key={estate.getIdentifier()} className="g-0">
+              <Col key={estate.getIdentifier()}>
                 <Render node={estate as JCRNodeWrapper} editable={false} />
               </Col>
             ))}

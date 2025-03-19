@@ -1,3 +1,7 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, gridBreakpoints_md, gridBreakpoints_sm from variables;
+
 .col {
     flex: 1 0 0;
 }
@@ -62,7 +66,7 @@
     width: 100%
 }
 
-@media (min-width: 768px) {
+@media (min-width: gridBreakpoints_md) {
 .col-md-auto {
     flex: 0 0 auto;
     width: auto
