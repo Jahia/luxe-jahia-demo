@@ -44,10 +44,10 @@ jobs:
       image: cyclonedx/cyclonedx-cli:0.24.2
     steps:
       - uses: jahia/jahia-modules-action/sbom-processing@v2
-      with:
-        dependencytrack_hostname: ${{ vars.DEPENDENCYTRACK_HOSTNAME }}
-        dependencytrack_apikey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
-        sbom_artifacts: "build-artifacts"
+        with:
+          dependencytrack_hostname: ${{ vars.DEPENDENCYTRACK_HOSTNAME }}
+          dependencytrack_apikey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
+          sbom_artifacts: "build-artifacts"
 
   integration-tests:
     uses:  Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
