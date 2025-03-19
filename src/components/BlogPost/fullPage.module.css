@@ -1,0 +1,58 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_md, space_5, space_4, space_0, fs_6 from variables;
+
+.header {
+    composes: container from '~/commons/grid/Section.module.css';
+    padding-top:space_4;
+    padding-bottom:space_4;
+    margin-bottom: space_5;
+    @media (min-width: gridBreakpoints_md) {
+        & {
+            padding-top:space_5;
+            padding-bottom:space_5;
+        }
+    }
+
+    hgroup {
+        text-align:center;
+    }
+    time {
+        font-size: fs_6;
+    }
+}
+
+.title {
+    composes: display_1 from '~/templates/css/styles.css';
+    margin-bottom: space_0;
+}
+.hp {
+    composes: h2 from '~/templates/css/styles.css';
+    margin-top: space_0;
+}
+
+.richtext{
+    composes: richtext from '~/templates/css/styles.css';
+}
+
+.category{
+    composes: richtext from '~/templates/css/styles.css';
+    display: flex;
+    border-top: 1px solid var(--luxe-primary);
+    gap: 16px;
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.rowrelatedBlogPosts {
+    --luxe-gutter-x: 0;
+    --luxe-gutter-y: 0;
+    composes: rowCols_lg_3 from '~/commons/grid/Row.module.css';
+    composes: rowCols_md_2 from '~/commons/grid/Row.module.css';
+    composes: rowCols_sm_1 from '~/commons/grid/Row.module.css';
+
+    > div {
+        --luxe-gutter-x: 0;
+        --luxe-gutter-y: 0;
+    }
+}

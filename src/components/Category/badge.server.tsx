@@ -1,5 +1,5 @@
 import { jahiaComponent } from "@jahia/javascript-modules-library";
-
+import classes from "./component.module.css";
 jahiaComponent(
   {
     nodeType: "jnt:category",
@@ -7,5 +7,7 @@ jahiaComponent(
     displayName: "Badge",
     componentType: "view",
   },
-  ({ "jcr:title": title }: { "jcr:title": string }) => <span>{title}</span>,
+  ({ "jcr:title": title }: { "jcr:title": string }) => (
+    <span className={classes.badge}>{title}</span>
+  ),
 );

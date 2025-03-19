@@ -1,0 +1,27 @@
+.card {
+    composes: card from '~/templates/css/styles.css';
+    display: flex;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    margin-right: 1.5rem;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 auto;
+
+    p {
+        margin: 0;
+    }
+}
+
+.title {
+    composes: capitalize from '~/templates/css/styles.css';
+    margin-top: 0;
+    margin-bottom: 0;
+}

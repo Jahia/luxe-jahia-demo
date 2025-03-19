@@ -62,7 +62,7 @@
 }
 
 .description {
-    composes: luxeBgSecondary from '~/templates/css/styles.css';
+    composes: bgSecondary from '~/templates/css/styles.css';
     --description-offset: 50px;
     padding: 80px;
     font-size: 1.5rem;
