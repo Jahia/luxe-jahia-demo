@@ -1,6 +1,6 @@
 .card {
-    composes: card from '~/templates/css/styles.css';
-    display: flex;
+    display: flex !important;
+    composes: card from '~/templates/css/global.module.css';
 }
 
 .image {
@@ -21,7 +21,7 @@
 }
 
 .title {
-    composes: capitalize from '~/templates/css/styles.css';
+    composes: capitalize from '~/templates/css/global.module.css';
     margin-top: 0;
     margin-bottom: 0;
 }

@@ -1,25 +1,29 @@
+@value variables: "~/templates/css/variables.css";
+
+@value space_3, space_0 from variables;
+
 .rowRealtors {
-    --luxe-gutter-x: 1rem;
-    --luxe-gutter-y: 1rem;
+    --luxe-gutter-x: space_0;
+    --luxe-gutter-y: space_0;
     composes: rowCols_lg_4 from '~/commons/grid/Row.module.css';
     composes: rowCols_md_3 from '~/commons/grid/Row.module.css';
     composes: rowCols_sm_2 from '~/commons/grid/Row.module.css';
 
     > div {
-        --luxe-gutter-x: 0;
-        --luxe-gutter-y: 0;
+        --luxe-gutter-x: space_0;
+        --luxe-gutter-y: space_0;
     }
 }
 
 .rowEstates {
-    --luxe-gutter-x: 0;
-    --luxe-gutter-y: 0;
+    --luxe-gutter-x: space_0;
+    --luxe-gutter-y: space_0;
     composes: rowCols_lg_3 from '~/commons/grid/Row.module.css';
     composes: rowCols_md_2 from '~/commons/grid/Row.module.css';
     composes: rowCols_sm_1 from '~/commons/grid/Row.module.css';
 
     > div {
-        --luxe-gutter-x: 0;
-        --luxe-gutter-y: 0;
+        --luxe-gutter-x: space_0;
+        --luxe-gutter-y: space_0;
     }
 }

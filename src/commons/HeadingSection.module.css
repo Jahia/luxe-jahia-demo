@@ -3,7 +3,7 @@
 }
 
 .title {
-    composes: capitalize from '~/templates/css/styles.css';
-    composes: hasDiamond from '~/templates/css/styles.css';
+    composes: capitalize from '~/templates/css/global.module.css';
+    composes: hasDiamond from '~/templates/css/global.module.css';
     margin-bottom: 0;
 }

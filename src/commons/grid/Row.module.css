@@ -11,6 +11,10 @@
     margin-right: calc(-.5 * var(--luxe-gutter-x));
     margin-left: calc(-.5 * var(--luxe-gutter-x));
 
+    &:not(:only-child, :last-child) {
+        padding-bottom: 2rem;
+    }
+
     > * {
         flex-shrink: 0;
         width: 100%;
@@ -18,6 +22,26 @@
         padding-right: calc(var(--luxe-gutter-x) * .5);
         padding-left: calc(var(--luxe-gutter-x) * .5);
         margin-top: var(--luxe-gutter-y)
+    }
+
+    /*Page Builder fix*/
+    > :global(.jahia-template-gxt) {
+        --luxe-gutter-y: 0;
+        --luxe-gutter-x: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--luxe-gutter-y));
+        margin-right: calc(-0.5 * var(--luxe-gutter-x));
+        margin-left: calc(-0.5 * var(--luxe-gutter-x));
+
+        > * {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 100%;
+            padding-right: calc(var(--luxe-gutter-x) * 0.5);
+            padding-left: calc(var(--luxe-gutter-x) * 0.5);
+            margin-top: var(--luxe-gutter-y);
+        }
     }
 }
 

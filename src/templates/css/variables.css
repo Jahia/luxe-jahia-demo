@@ -1,21 +1,8 @@
-@value colorGreen: #62b569;
-
-@value colorRed: #cc1818;
-
-@value colorYellow: #fdf05e;
-
-@value colorCyan: #16cacf;
-
 @value gridBreakpoints_xs: 0;
-
 @value gridBreakpoints_sm: 576px;
-
 @value gridBreakpoints_md: 768px;
-
 @value gridBreakpoints_lg: 992px;
-
 @value gridBreakpoints_xl: 1200px;
-
 @value gridBreakpoints_xxl: 1400px;
 
 @value space_0: 0;
@@ -31,3 +18,11 @@
 @value fs_4: calc(1.275rem + .3vw);
 @value fs_5: 1.25rem;
 @value fs_6: 1rem;
+
+@value spacer: 1rem;
+@value spacer_0: 0;
+@value spacer_1: spacer * .25;
+@value spacer_2 spacer * .5;
+@value spacer_3: spacer;
+@value spacer_4: spacer * 1.5;
+@value spacer_5: spacer * 3;

@@ -3,6 +3,7 @@ import { Col, Figure, PageTitle, Row, Section, List } from "~/commons";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
+import classes from "./fullPage.module.css";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -88,13 +89,13 @@ jahiaComponent(
     return (
       <>
         <Section>
-          <header className="d-flex mb-5">
-            <PageTitle title={title} className="pb-0" />
+          <header className={classes.header}>
+            <PageTitle title={title} className={classes.title} />
           </header>
           <Row>
             <Figure src={image.src} alt={image.alt} layout="imgFull" />
           </Row>
-          <Row className="row-cols-1 row-cols-lg-2 g-5">
+          <Row className={classes.rowDescription}>
             <Col>
               {/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
               <unwanteddiv
@@ -104,7 +105,7 @@ jahiaComponent(
               />
             </Col>
             <Col>
-              <p className="display-5 text-primary fw-medium">{price.toLocaleString(locale)} €</p>
+              <p className={classes.price}>{price.toLocaleString(locale)} €</p>
               <List rows={tableRows} />
               {/* <AgentItem imgURL={profile1} name="Robert Fox"/> */}
             </Col>

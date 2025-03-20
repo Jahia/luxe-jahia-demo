@@ -9,14 +9,14 @@
 }
 
 .label {
-    composes: capitalize from '~/templates/css/styles.css';
+    composes: capitalize from '~/templates/css/global.module.css';
     margin-bottom: 0;
     font-weight: 200;
     flex: 1;
 }
 
 .value {
-    composes: capitalize from '~/templates/css/styles.css';
+    composes: capitalize from '~/templates/css/global.module.css';
 
     font-weight: bold;
     flex: 1;

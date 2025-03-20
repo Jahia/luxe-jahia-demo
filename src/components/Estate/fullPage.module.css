@@ -1,0 +1,26 @@
+@value variables: "~/templates/css/variables.css";
+
+@value space_5, space_0 from variables;
+
+.header {
+    display: flex;
+    margin-bottom: space_5;
+}
+
+.title{
+    padding-bottom: space_0;
+}
+
+.rowDescription {
+    --luxe-gutter-x: space_5;
+    --luxe-gutter-y: space_5;
+    composes: rowCols_1 from '~/commons/grid/Row.module.css';
+    composes: rowCols_lg_2 from '~/commons/grid/Row.module.css';
+}
+
+.price {
+    --luxe-text-opacity: 1;
+    composes: display_5 from '~/templates/css/global.module.css';
+    color:rgba(var(--luxe-primary-rgb),var(--luxe-text-opacity));
+    font-weight:500;
+}

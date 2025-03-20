@@ -11,7 +11,7 @@ import { Col, Row, Section } from "~/commons";
 import clsx from "clsx";
 import { t } from "i18next";
 import "../scss/styles.scss";
-import "./css/styles.css";
+import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 /**

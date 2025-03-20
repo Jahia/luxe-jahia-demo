@@ -23,20 +23,20 @@
 }
 
 .title {
-    composes: display_1 from '~/templates/css/styles.css';
+    composes: display_1 from '~/templates/css/global.module.css';
     margin-bottom: space_0;
 }
 .hp {
-    composes: h2 from '~/templates/css/styles.css';
+    composes: h2 from '~/templates/css/global.module.css';
     margin-top: space_0;
 }
 
 .richtext{
-    composes: richtext from '~/templates/css/styles.css';
+    composes: richtext from '~/templates/css/global.module.css';
 }
 
 .category{
-    composes: richtext from '~/templates/css/styles.css';
+    composes: richtext from '~/templates/css/global.module.css';
     display: flex;
     border-top: 1px solid var(--luxe-primary);
     gap: 16px;

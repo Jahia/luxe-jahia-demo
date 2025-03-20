@@ -5,5 +5,5 @@
 }
 
 .label {
-    composes: capitalize from '~/templates/css/styles.css';
+    composes: capitalize from '~/templates/css/global.module.css';
 }
