@@ -1,6 +1,7 @@
 import { Area, jahiaComponent } from "@jahia/javascript-modules-library";
-import clsx from "clsx";
-
+import { Col, Row } from "~/commons";
+import classes from "./default.module.css";
+import type { SectionProps } from "~/components/Section/default.server";
 jahiaComponent(
   {
     nodeType: "luxe:cols",
@@ -14,15 +15,16 @@ jahiaComponent(
     const cols = Array.from(Array(limit).keys());
 
     // @ts-expect-error getModuleParams() is not available in currentResource
-    const arrangement = currentResource.getModuleParams().get("arrangement");
+    const arrangement: SectionProps = currentResource.getModuleParams().get("arrangement");
     return (
-      <div className={clsx("row", arrangement)}>
+      // @ts-expect-error arrangement is the appropriate type but maybe need a better cast...
+      <Row className={classes[arrangement]}>
         {cols.map((col) => (
-          <div key={col} className={clsx("col")}>
+          <Col key={col}>
             <Area areaAsSubNode name={`${currentNode.getName()}-col-${col}`} />
-          </div>
+          </Col>
         ))}
-      </div>
+      </Row>
     );
   },
 );

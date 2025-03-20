@@ -23,7 +23,7 @@ import {
 } from "~/commons";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
-import classes from "./component.module.css";
+import classes from "./fullPage.module.css";
 
 const MAX_ESTATE = 6;
 

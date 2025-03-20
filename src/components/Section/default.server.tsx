@@ -7,18 +7,9 @@ import {
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { Section } from "~/commons";
 
-const getArrangement = (arrangement: string | null): string => {
-  switch (arrangement) {
-    case "left":
-      return "align-items-start";
-    case "center":
-      return "align-items-center";
-    case "right":
-      return "align-items-end";
-    default:
-      return "";
-  }
-};
+export interface SectionProps {
+  arrangement: "left" | "center" | "right";
+}
 
 jahiaComponent(
   {
@@ -26,7 +17,7 @@ jahiaComponent(
     name: "default",
     componentType: "view",
   },
-  ({ arrangement }: { arrangement: "left" | "center" | "right" | null }, { currentNode }) => {
+  ({ arrangement = "center" }: SectionProps, { currentNode }) => {
     const sectionContents = getChildNodes(currentNode, 100);
     return (
       <Section>
@@ -34,7 +25,7 @@ jahiaComponent(
           <Render
             key={content.getIdentifier()}
             node={content as JCRNodeWrapper}
-            parameters={{ arrangement: getArrangement(arrangement) }}
+            parameters={{ arrangement }}
           />
         ))}
         <AddContentButtons />

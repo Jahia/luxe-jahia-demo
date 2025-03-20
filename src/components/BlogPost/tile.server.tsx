@@ -1,6 +1,7 @@
 import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
+import classes from "./tile.module.css";
 
 jahiaComponent(
   {
@@ -25,11 +26,9 @@ jahiaComponent(
 
     return (
       <a href={currentNode.getUrl()}>
-        <figure className="lux-card">
-          <img className="lux-card_img" src={image.src} alt={image.alt} />
-          <figcaption className="lux-card_figcaption d-flex justify-content-center align-items-center">
-            {title}
-          </figcaption>
+        <figure className={classes.card}>
+          <img src={image.src} alt={image.alt} />
+          <figcaption>{title}</figcaption>
         </figure>
       </a>
     );
