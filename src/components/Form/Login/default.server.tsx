@@ -1,4 +1,8 @@
-import { buildUrl, HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
+import {
+  buildEndpointUrl,
+  HydrateInBrowser,
+  jahiaComponent,
+} from "@jahia/javascript-modules-library";
 import LoginClient from "./Login.client";
 
 jahiaComponent(
@@ -13,41 +17,21 @@ jahiaComponent(
   },
   (
     { "j:displayRememberMeButton": isShowRememberMe }: { "j:displayRememberMeButton"?: boolean },
-    { renderContext, currentResource },
+    { renderContext },
   ) => {
     const isLoggedIn = renderContext.isLoggedIn();
 
     // @ts-expect-error getName() is not available in getUser
     const userHydrated = renderContext.getUser().getName();
 
-    // URL management, usage of buildUrl ensure urls are correct (vanity, url rewriting, webapp context, etc.)
+    // URL management, usage of buildEndpointUrl ensure urls are correct (vanity, url rewriting, webapp context, etc.)
     const urls = {
-      liveUrl: buildUrl(
-        { value: renderContext.getURLGenerator().getLive() },
-        renderContext,
-        currentResource,
-      ),
-      previewUrl: buildUrl(
-        { value: renderContext.getURLGenerator().getPreview() },
-        renderContext,
-        currentResource,
-      ),
-      editUrl: buildUrl(
-        { value: renderContext.getURLGenerator().getEdit() },
-        renderContext,
-        currentResource,
-      ),
-      gqlUrl: buildUrl({ value: "/modules/graphql" }, renderContext, currentResource),
-      loginUrl: buildUrl(
-        { value: renderContext.getURLGenerator().getLogin() },
-        renderContext,
-        currentResource,
-      ),
-      logoutUrl: buildUrl(
-        { value: renderContext.getURLGenerator().getLogout() },
-        renderContext,
-        currentResource,
-      ),
+      liveUrl: buildEndpointUrl(renderContext.getURLGenerator().getLive()),
+      previewUrl: buildEndpointUrl(renderContext.getURLGenerator().getPreview()),
+      editUrl: buildEndpointUrl(renderContext.getURLGenerator().getEdit()),
+      gqlUrl: buildEndpointUrl("/modules/graphql"),
+      loginUrl: buildEndpointUrl(renderContext.getURLGenerator().getLogin()),
+      logoutUrl: buildEndpointUrl(renderContext.getURLGenerator().getLogout()),
     };
 
     const mode = renderContext.getMode();
@@ -63,7 +47,6 @@ jahiaComponent(
           mode,
           nodePath: mainPath,
           isShowRememberMe: Boolean(isShowRememberMe),
-          // @ts-expect-error getSiteKey() is not available in getSite
           siteKey: renderContext.getSite().getSiteKey(),
         }}
       />

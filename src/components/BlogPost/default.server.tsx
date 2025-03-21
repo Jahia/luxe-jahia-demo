@@ -1,4 +1,4 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
 
@@ -9,10 +9,8 @@ jahiaComponent(
     componentType: "view",
   },
   ({ title, subtitle, image: imageNode }: BlogPostProps, { currentNode, renderContext }) => {
-    const { buildStaticUrl } = useUrlBuilder();
-
     const image = {
-      src: buildStaticUrl({ assetPath: "img/img-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "Placeholder",
     };
 

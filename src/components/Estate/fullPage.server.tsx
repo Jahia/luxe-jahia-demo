@@ -1,4 +1,4 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { Col, Figure, PageTitle, Row, Section, List } from "~/commons";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
@@ -27,10 +27,9 @@ jahiaComponent(
     }: EstateProps,
     { currentResource, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const locale = currentResource.getLocale().getLanguage();
     const image = {
-      src: buildStaticUrl({ assetPath: "img/img-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "Placeholder",
     };
 

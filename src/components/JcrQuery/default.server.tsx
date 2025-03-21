@@ -63,11 +63,7 @@ jahiaComponent(
             {queryContent.map((node) => {
               return (
                 <Col key={node.getIdentifier()} className="g-0">
-                  <Render
-                    node={node as JCRNodeWrapper}
-                    view={subNodeView || "default"}
-                    editable={false}
-                  />
+                  <Render node={node as JCRNodeWrapper} view={subNodeView || "default"} readOnly />
                 </Col>
               );
             })}

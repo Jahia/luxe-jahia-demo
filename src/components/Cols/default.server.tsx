@@ -13,7 +13,6 @@ jahiaComponent(
     // Create an array of integers from 0 to 'limit - 1'
     const cols = Array.from(Array(limit).keys());
 
-    // @ts-expect-error getModuleParams() is not available in currentResource
     const arrangement = currentResource.getModuleParams().get("arrangement");
     return (
       <div className={clsx("row", arrangement)}>

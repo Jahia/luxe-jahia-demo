@@ -1,11 +1,11 @@
 import {
   AddContentButtons,
+  buildModuleFileUrl,
   getNodeProps,
   getNodesByJCRQuery,
   jahiaComponent,
   Render,
   server,
-  useUrlBuilder,
 } from "@jahia/javascript-modules-library";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
@@ -70,7 +70,6 @@ jahiaComponent(
     }: AgencyProps,
     { currentNode, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const currentNodePath = currentNode.getPath();
 
     const languages = [...getAgencyLanguage({ realtors, country, renderContext })];
@@ -112,7 +111,7 @@ jahiaComponent(
     ];
 
     const image = {
-      src: buildStaticUrl({ assetPath: "img/agency-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/agency-placeholder.jpg"),
       alt: "Placeholder",
     };
 
@@ -141,7 +140,7 @@ jahiaComponent(
           <Row className={classes.rowRealtors}>
             {realtors?.map((realtor) => (
               <Col key={realtor.getIdentifier()}>
-                <Render node={realtor} editable={false} />
+                <Render node={realtor} readOnly />
               </Col>
             ))}
           </Row>
@@ -157,7 +156,7 @@ jahiaComponent(
 
             {estates.map((estate) => (
               <Col key={estate.getIdentifier()}>
-                <Render node={estate as JCRNodeWrapper} editable={false} />
+                <Render node={estate as JCRNodeWrapper} readOnly />
               </Col>
             ))}
           </Row>

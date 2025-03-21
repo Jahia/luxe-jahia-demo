@@ -3,7 +3,9 @@
 		"**/.yarn": true,
 		"**/.pnp.*": true
 	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"eslint.nodePath": ".yarn/sdks",
-	"typescript.tsdk": ".yarn/sdks/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true
+	"i18n-ally.localesPaths": ["settings/locales"],
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.tsdk": ".yarn/sdks/typescript/lib"
 }

@@ -2,10 +2,10 @@ import type { JSX, ReactNode } from "react";
 import {
   AbsoluteArea,
   AddResources,
+  buildModuleFileUrl,
   getNodeProps,
   Render,
   useServerContext,
-  useUrlBuilder,
 } from "@jahia/javascript-modules-library";
 import { Col, Row, Section } from "~/commons";
 import clsx from "clsx";
@@ -57,18 +57,14 @@ export const Layout = ({
  * @constructor
  */
 const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
-  const { buildStaticUrl } = useUrlBuilder();
   return (
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <SeoMetaTags />
 
-      <link rel="icon" type="image/png" href={buildStaticUrl({ assetPath: "favicon-32x32.png" })} />
-      <AddResources
-        type="css"
-        resources={buildStaticUrl({ assetPath: "../dist/server/style.css" })}
-      />
+      <link rel="icon" type="image/png" href={buildModuleFileUrl("static/favicon-32x32.png")} />
+      <AddResources type="css" resources={buildModuleFileUrl("dist/server/style.css")} />
       {children}
     </head>
   );
