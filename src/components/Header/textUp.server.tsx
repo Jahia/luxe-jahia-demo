@@ -1,6 +1,7 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { Figure, PageTitle, Row } from "~/commons";
 import type { HeaderProps } from "./types.js";
+import classes from "./textUp.module.css";
 
 jahiaComponent(
   {
@@ -9,19 +10,23 @@ jahiaComponent(
     displayName: "Image & Text Up",
     componentType: "view",
   },
-  ({ title, subtitle, image }: HeaderProps, { renderContext }) => {
-    if (image) {
-      server.render.addCacheDependency({ node: image }, renderContext);
+  ({ title, subtitle, image: imageNode }: HeaderProps, { renderContext }) => {
+    if (imageNode) {
+      server.render.addCacheDependency({ node: imageNode }, renderContext);
     }
 
     return (
-      <header className="container d-flex flex-column py-2 py-md-4 gap-3">
+      <header className={classes.header}>
         <Row>
           <PageTitle title={title} description={subtitle} />
         </Row>
-        {image && (
+        {imageNode && (
           <Row>
-            <Figure src={image.getUrl()} alt={image.getDisplayableName()} layout="imgFull" />
+            <Figure
+              src={imageNode.getUrl()}
+              alt={imageNode.getDisplayableName()}
+              layout="imgFull"
+            />
           </Row>
         )}
       </header>

@@ -1,6 +1,6 @@
 .card {
-    display: flex !important;
     composes: card from '~/templates/css/global.module.css';
+    display: flex;
 }
 
 .image {

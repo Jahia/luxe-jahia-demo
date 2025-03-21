@@ -19,6 +19,7 @@ import {
   Contact,
 } from "~/commons";
 import type { RealtorProps } from "./types.js";
+import classes from "./fullPage.module.css";
 
 const MAX_ESTATE = 6;
 
@@ -138,9 +139,9 @@ jahiaComponent(
         <Contact addresses={agencies} email={email} phone={phone} />
         <Section>
           <HeadingSection title={t("section.heading.exclusiveEstates")} />
-          <Row className="row-cols-3 g-0">
+          <Row className={classes.rowEstates}>
             {estates.map((estate) => (
-              <Col key={estate.getIdentifier()} className="g-0">
+              <Col key={estate.getIdentifier()}>
                 <Render node={estate as JCRNodeWrapper} />
               </Col>
             ))}

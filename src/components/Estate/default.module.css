@@ -2,6 +2,7 @@
 @value space_0, space_2 from variables;
 .card {
     composes: card from '~/templates/css/global.module.css';
+    display: block;
     height: 100%;
     h4 {
         margin-top: space_2;
