@@ -1,3 +1,5 @@
+# Note: disabled until sonar analysis is available for JS Modules
+
 # This workflow trigger a full Sonar analysis at regular interval
 # Github actions command reference: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
 name: Sonar Analysis - Scheduled
