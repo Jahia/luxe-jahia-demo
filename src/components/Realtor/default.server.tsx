@@ -1,4 +1,4 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 
@@ -12,9 +12,8 @@ jahiaComponent(
     { firstName, lastName, jobPosition, image: imageNode }: RealtorProps,
     { currentNode, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const image = {
-      src: buildStaticUrl({ assetPath: "img/agent-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/agent-placeholder.jpg"),
       alt: "Placeholder",
     };
 

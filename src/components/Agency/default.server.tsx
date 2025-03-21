@@ -1,4 +1,4 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { AgencyProps } from "./types";
 import classes from "./component.module.css";
@@ -10,10 +10,8 @@ jahiaComponent(
     componentType: "view",
   },
   ({ name, address, phone, image: imageNode }: AgencyProps, { currentNode, renderContext }) => {
-    const { buildStaticUrl } = useUrlBuilder();
-
     const image = {
-      src: buildStaticUrl({ assetPath: "img/agency-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/agency-placeholder.jpg"),
       alt: "Placeholder",
     };
 

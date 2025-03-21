@@ -1,10 +1,10 @@
 import {
+  buildModuleFileUrl,
   getNodeProps,
   getNodesByJCRQuery,
   jahiaComponent,
   Render,
   server,
-  useUrlBuilder,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { t } from "i18next";
@@ -42,7 +42,6 @@ jahiaComponent(
     }: RealtorProps,
     { currentNode, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const refBy = currentNode.getWeakReferences();
     const refByNode: JCRNodeWrapper[] = [];
     while (refBy.hasNext()) {
@@ -113,7 +112,7 @@ jahiaComponent(
     ];
 
     const image = {
-      src: buildStaticUrl({ assetPath: "img/agent-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/agent-placeholder.jpg"),
       alt: "Placeholder",
     };
 
