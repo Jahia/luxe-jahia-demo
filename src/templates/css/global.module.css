@@ -18,6 +18,8 @@
     --luxe-color-primary-rgb: var(--luxe-color-gold-rgb);
     --luxe-color-secondary: var(--luxe-color-darkBlue60);
     --luxe-color-secondary-rgb: var(--luxe-color-darkBlue60-rgb);
+    --luxe-tertiary-color: rgba(222, 226, 230, .5);
+    --luxe-tertiary-color-rgb: 222, 226, 230;
 
     --luxe-primary: var(--luxe-color-primary);
     --luxe-primary-rgb: var(--luxe-color-primary-rgb);
@@ -31,6 +33,7 @@
     --luxe-body-line-height: 1.75;
     --luxe-secondary-color: var(--luxe-color-darkBlue60);
     --luxe-emphasis-color: var(--luxe-color-dark);
+    --luxe-emphasis-color-rgb: var(--luxe-color-dark-rgb);
     --luxe-border-color: var(--luxe-color-darkBlue40);
     --luxe-border-radius: 8px;
     --luxe-heading-color: var(--luxe-color-darkBlue);
@@ -49,6 +52,11 @@
     --luxe-warning-bg-subtle: rgb(50.6, 48, 18.8);
 
     --luxe-border-width: 1px;
+
+    --luxe-body-bg: #fff;
+    --luxe-body-bg-rgb: 255, 255, 255;
+
+    --luxe-border-color-translucent: rgba(0, 0, 0, .175);
 }
 
 .alert {

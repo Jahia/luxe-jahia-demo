@@ -1,7 +1,7 @@
 @value variables: "~/templates/css/variables.css";
 @value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_lg, gridBreakpoints_xl, gridBreakpoints_xxl from variables;
 
-.container {
+.default {
     --luxe-gutter-x: 1.5rem;
     --luxe-gutter-y: 0;
     width:100%;
@@ -9,7 +9,13 @@
     padding-left:calc(var(--luxe-gutter-x) * .5);
     margin-right:auto;
     margin-left:auto;
+}
 
+.containerFluid {
+    composes: default;
+}
+.container {
+    composes: default;
     @media (min-width: gridBreakpoints_sm){
         & {max-width:540px}
     }
