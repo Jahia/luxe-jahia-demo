@@ -82,11 +82,26 @@
         color: var(--luxe-nav-link-hover-color);
     }
 
-    @media (min-width: 992px) {
-        &:not(:global(.active)) {
-            cursor: pointer;
-        }
+    &:global(.active) {
+        color: var(--luxe-navbar-active-color);
+        position: relative;
+    }
 
+    &:global(.active):after {
+        position: absolute;
+        content: "✦";
+        text-align: center;
+        font-size: 16px;
+        bottom: -15px;
+        right: 0;
+        left: 0;
+    }
+
+    &:not(:global(.active)) {
+        cursor: pointer;
+    }
+
+    @media (min-width: 992px) {
         & {
             padding-right: var(--luxe-navbar-nav-link-padding-x);
             padding-left: var(--luxe-navbar-nav-link-padding-x);

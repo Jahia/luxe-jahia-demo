@@ -29,7 +29,7 @@ export default function NavigationTogglerClient({
       <div id="navbarSupportedContent" className={clsx(classes.collapse, { show: isOpen })}>
         <ul className={classes.nav}>
           {menu.map(({ node, selected }) => (
-            <li key={node.uuid} /*className="nav-item"*/>
+            <li key={node.uuid}>
               <a
                 href={node.url}
                 className={clsx(classes.link, {

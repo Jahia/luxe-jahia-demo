@@ -9,7 +9,7 @@
     --luxe-navbar-color: var(--luxe-color-darkBlue);
     --luxe-navbar-hover-color: var(--luxe-color-darkBlue40);
     --luxe-navbar-disabled-color: rgba(var(--luxe-emphasis-color-rgb), .3);
-    --luxe-navbar-active-color: rgba(var(--luxe-emphasis-color-rgb), 1);
+    --luxe-navbar-active-color: rgba(var(--luxe-color-gold-rgb), 1);
     --luxe-navbar-brand-padding-y: .3125rem;
     --luxe-navbar-brand-margin-end: 1rem;
     --luxe-navbar-brand-font-size: 1.25rem;

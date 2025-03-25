@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import classes from "./LanguageSwitcher.client.module.css";
 
 export default function LanguageSwitcherClient({
   currentLocaleName,
@@ -18,25 +19,24 @@ export default function LanguageSwitcherClient({
   };
 
   return (
-    <div className="dropdown">
+    <div className={classes.dropdown}>
       <button
-        className={clsx("btn dropdown-toggle lux-capitalize", { show: isOpen })}
+        className={clsx(classes.btn, { show: isOpen })}
         type="button"
         aria-expanded={isOpen}
         onClick={dropdownHandler}
       >
         {currentLocaleName}
       </button>
-      <ul
-        className={clsx("dropdown-menu dropdown-menu-end", { show: isOpen })}
-        {...(isOpen ? { "data-bs-popper": "none" } : {})}
-      >
+      <ul className={clsx(classes.menu, { show: isOpen })}>
         {localesAndUrls?.map(({ localeName, isCurrent, url }) => {
           return (
             <li key={localeName}>
               <a
                 href={url}
-                className={clsx("dropdown-item", "lux-capitalize", { active: isCurrent })}
+                className={clsx(classes.item, {
+                  active: isCurrent,
+                })}
                 aria-current={isCurrent}
               >
                 {localeName}

@@ -7,13 +7,27 @@
 }
 
 .btn {
+    composes: btn from '~/templates/css/global.module.css';
     composes: capitalize from '~/templates/css/global.module.css';
     --luxe-btn-disabled-color: inherit;
     white-space: nowrap;
-
-    &:not(:disabled) {
-        cursor: pointer;
+    &:after {
+        color: var(--luxe-color-darkBlue40);
+        display: inline-block;
+        margin-left: .255em;
+        vertical-align: .255em;
+        content: "";
+        border-top: .3em solid;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
     }
+
+    /*&:global(.show) {*/
+    /*    color: var(--luxe-btn-active-color);*/
+    /*    background-color: var(--luxe-btn-active-bg);*/
+    /*    border-color: var(--luxe-btn-active-border-color);*/
+    /*}*/
 }
 
 .menu {
@@ -64,6 +78,14 @@
         border-top-left-radius: var(--luxe-dropdown-inner-border-radius);
         border-top-right-radius: var(--luxe-dropdown-inner-border-radius);
     }
+
+    &:global(.show){
+        display: block;
+        top: 100%;
+        right: 0;
+        left: auto;
+        margin-top: var(--luxe-dropdown-spacer);
+    }
 }
 
 .item {
@@ -87,7 +109,7 @@
         background-color: var(--luxe-dropdown-link-hover-bg);
     }
 
-    &.active, &:active {
+    &:global(.active), &:active {
         text-decoration: none;
         color: var(--luxe-dropdown-link-active-color);
         background-color: var(--luxe-dropdown-link-active-bg);
