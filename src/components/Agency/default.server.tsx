@@ -1,4 +1,9 @@
-import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { AgencyProps } from "./types";
 import classes from "./component.module.css";
@@ -16,14 +21,14 @@ jahiaComponent(
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.agency", { agency: name });
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);
     }
 
     return (
-      <a className={classes.card} href={currentNode.getUrl()}>
+      <a className={classes.card} href={buildNodeUrl(currentNode)}>
         <img className={classes.image} src={image.src} alt={image.alt} width="200" height="200" />
 
         <div className={classes.main}>

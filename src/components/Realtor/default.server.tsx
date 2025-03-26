@@ -1,4 +1,9 @@
-import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 
@@ -19,12 +24,12 @@ jahiaComponent(
 
     if (imageNode) {
       server.render.addCacheDependency({ node: imageNode }, renderContext);
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
     }
 
     return (
-      <a href={currentNode.getUrl()} className="lux-agentCard d-flex flex-column">
+      <a href={buildNodeUrl(currentNode)} className="lux-agentCard d-flex flex-column">
         <img
           className="lux-agentCard_image"
           src={image.src}

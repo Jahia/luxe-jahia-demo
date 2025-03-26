@@ -1,5 +1,6 @@
 import {
   buildModuleFileUrl,
+  buildNodeUrl,
   jahiaComponent,
   Render,
   server,
@@ -34,7 +35,7 @@ jahiaComponent(
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.blog", { blog: title });
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);

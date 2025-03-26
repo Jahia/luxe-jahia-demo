@@ -1,5 +1,6 @@
 import {
   buildModuleFileUrl,
+  buildNodeUrl,
   getNodeProps,
   getNodesByJCRQuery,
   jahiaComponent,
@@ -118,7 +119,7 @@ jahiaComponent(
 
     if (imageNode) {
       server.render.addCacheDependency({ node: imageNode }, renderContext);
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
     }
 

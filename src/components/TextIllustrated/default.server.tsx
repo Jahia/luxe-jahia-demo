@@ -1,4 +1,9 @@
-import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { TextIllustrated } from "./TextIllustrated";
 
@@ -23,7 +28,7 @@ jahiaComponent(
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = imageNode.getDisplayableName();
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);

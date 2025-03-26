@@ -1,6 +1,7 @@
 import {
   AddContentButtons,
   buildModuleFileUrl,
+  buildNodeUrl,
   getNodeProps,
   getNodesByJCRQuery,
   jahiaComponent,
@@ -116,7 +117,7 @@ jahiaComponent(
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.agency", { agency: name });
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);
