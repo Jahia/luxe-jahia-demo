@@ -1,13 +1,14 @@
-import { getChildNodes, jahiaComponent, server } from "@jahia/javascript-modules-library";
+import {
+  buildNodeUrl,
+  getChildNodes,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import clsx from "clsx";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
-interface navMenuTypes {
-  base?: "home" | "currentPage" | "";
-  maxDepth: number;
-  startLevel: number;
-  menuItemView: string;
+interface Props {
   brandText?: string;
   brandImage?: JCRNodeWrapper;
   brandImageMobile?: JCRNodeWrapper;
@@ -15,7 +16,7 @@ interface navMenuTypes {
 
 jahiaComponent(
   {
-    nodeType: "luxe:navMenu",
+    nodeType: "luxe:navMenu2",
     displayName: "Navbar Nav Menu",
     name: "default",
     componentType: "view",
@@ -23,7 +24,7 @@ jahiaComponent(
       "cache.mainResource": "true",
     },
   },
-  ({ brandText, brandImage }: navMenuTypes, { renderContext, mainNode }) => {
+  ({ brandText, brandImage }: Props, { renderContext, mainNode }) => {
     const mainPath = renderContext.getMainResource().getPath();
     const siteName = renderContext.getSite().getTitle();
     const home = renderContext.getSite().getHome();
@@ -37,8 +38,10 @@ jahiaComponent(
     return (
       <nav className={clsx("navbar", "navbar-expand-lg", "bg-body", "px-5", "py-4")}>
         <div className="container-fluid gap-5">
-          <a href={home.getUrl()} className="navbar-brand">
-            {brandImage && <img src={brandImage.getUrl()} alt={`Logo-${siteName}`} width="100px" />}
+          <a href={buildNodeUrl(home)} className="navbar-brand">
+            {brandImage && (
+              <img src={buildNodeUrl(brandImage)} alt={`Logo-${siteName}`} width="100" />
+            )}
             {brandText}
           </a>
           <button
@@ -57,7 +60,7 @@ jahiaComponent(
               {menu.map((node) => (
                 <li key={node.getIdentifier()} className="nav-item">
                   <a
-                    href={node.getUrl()}
+                    href={buildNodeUrl(node)}
                     className={clsx("nav-link", {
                       active: node === mainNode || mainPath.includes(node.getPath()),
                     })}

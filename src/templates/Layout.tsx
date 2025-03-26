@@ -44,9 +44,9 @@ export const Layout = ({
       <HtmlHead>{head}</HtmlHead>
       <body>
         <AbsoluteArea
-          name="navArea"
-          parent={renderContext.getSite() as unknown as JCRNodeWrapper}
-          nodeType="luxe:navMenu"
+          name="nav"
+          parent={renderContext.getSite().getHome()}
+          nodeType="luxe:navMenu2"
         />
         <main className={className}>{children}</main>
         <HtmlFooter />
@@ -142,7 +142,7 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
           {/* numberOfItems={4} */}
           <AbsoluteArea
             name="footerNavLinkArea"
-            parent={renderContext.getSite() as unknown as JCRNodeWrapper}
+            parent={renderContext.getSite().getHome()}
             nodeType="jnt:linkList"
             allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
           />
