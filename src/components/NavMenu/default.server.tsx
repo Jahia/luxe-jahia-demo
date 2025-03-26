@@ -1,4 +1,4 @@
-import { buildNavMenu, jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { getChildNodes, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import clsx from "clsx";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
@@ -23,22 +23,12 @@ jahiaComponent(
       "cache.mainResource": "true",
     },
   },
-  (
-    { base = "", maxDepth, startLevel, menuItemView, brandText, brandImage }: navMenuTypes,
-    { renderContext, currentResource },
-  ) => {
-    const menu = buildNavMenu(
-      maxDepth,
-      base,
-      menuItemView,
-      startLevel,
-      renderContext,
-      currentResource,
-    );
-
+  ({ brandText, brandImage }: navMenuTypes, { renderContext, mainNode }) => {
     const mainPath = renderContext.getMainResource().getPath();
     const siteName = renderContext.getSite().getTitle();
     const home = renderContext.getSite().getHome();
+
+    const menu = getChildNodes(home, 10, 0, (node) => node.isNodeType("jnt:page"));
 
     if (brandImage) {
       server.render.addCacheDependency({ node: brandImage }, renderContext);
@@ -64,12 +54,12 @@ jahiaComponent(
           </button>
           <div id="navbarSupportedContent" className="collapse navbar-collapse">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
-              {menu.map(({ node, selected }) => (
+              {menu.map((node) => (
                 <li key={node.getIdentifier()} className="nav-item">
                   <a
                     href={node.getUrl()}
                     className={clsx("nav-link", {
-                      active: selected || mainPath.includes(node.getPath()),
+                      active: node === mainNode || mainPath.includes(node.getPath()),
                     })}
                   >
                     {node.getDisplayableName()}

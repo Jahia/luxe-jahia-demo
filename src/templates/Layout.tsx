@@ -38,11 +38,16 @@ export const Layout = ({
   className?: string;
   children: ReactNode;
 }): JSX.Element => {
+  const { renderContext } = useServerContext();
   return (
     <>
       <HtmlHead>{head}</HtmlHead>
       <body>
-        <AbsoluteArea name="navArea" allowedTypes={["luxe:navMenu"]} numberOfItems={1} />
+        <AbsoluteArea
+          name="navArea"
+          parent={renderContext.getSite() as unknown as JCRNodeWrapper}
+          nodeType="luxe:navMenu"
+        />
         <main className={className}>{children}</main>
         <HtmlFooter />
       </body>
@@ -87,6 +92,7 @@ const loginForm = {
  * @constructor
  */
 const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
+  const { renderContext } = useServerContext();
   return (
     <Section component="footer" className={clsx("lux-site-footer", className)}>
       <Row>
@@ -136,8 +142,9 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
           {/* numberOfItems={4} */}
           <AbsoluteArea
             name="footerNavLinkArea"
-            areaType="jnt:linkList"
-            allowedTypes={["jnt:nodeLink", "jnt:externalLink"]}
+            parent={renderContext.getSite() as unknown as JCRNodeWrapper}
+            nodeType="jnt:linkList"
+            allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
           />
         </Col>
         <Col className="text-end">

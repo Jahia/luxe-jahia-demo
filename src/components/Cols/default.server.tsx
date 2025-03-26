@@ -1,4 +1,4 @@
-import { Area, jahiaComponent } from "@jahia/javascript-modules-library";
+import { AbsoluteArea, jahiaComponent } from "@jahia/javascript-modules-library";
 import clsx from "clsx";
 
 jahiaComponent(
@@ -18,7 +18,7 @@ jahiaComponent(
       <div className={clsx("row", arrangement)}>
         {cols.map((col) => (
           <div key={col} className={clsx("col")}>
-            <Area areaAsSubNode name={`${currentNode.getName()}-col-${col}`} />
+            <AbsoluteArea parent={currentNode} name={`${currentNode.getName()}-col-${col}`} />
           </div>
         ))}
       </div>
