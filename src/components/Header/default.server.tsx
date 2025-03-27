@@ -1,4 +1,4 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import type { HeaderProps } from "./types";
 
 jahiaComponent(
@@ -20,14 +20,14 @@ jahiaComponent(
           <picture>
             <source
               media="(min-width: 960px)"
-              srcSet={`${image.getUrl(["width:1920"])}?w=1920&h=695`}
+              srcSet={`${buildNodeUrl(image, { parameters: { width: "1920" } })}?w=1920&h=695`}
             />
             <source
               media="(min-width: 480px)"
-              srcSet={`${image.getUrl(["width:960"])}?w=960&h=695`}
+              srcSet={`${buildNodeUrl(image, { parameters: { width: "960" } })}?w=960&h=695`}
             />
             <img
-              src={`${image.getUrl(["width:480"])}?w=480&h=695`}
+              src={`${buildNodeUrl(image, { parameters: { width: "480" } })}?w=480&h=695`}
               alt={image.getDisplayableName()}
               className="lux-cover_img"
               height="695px"
