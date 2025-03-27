@@ -491,9 +491,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:^0.5.3":
-  version: 0.5.6
-  resolution: "@jahia/javascript-modules-library@npm:0.5.6"
+"@jahia/javascript-modules-library@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@jahia/javascript-modules-library@npm:0.6.0"
   dependencies:
     dotenv: "npm:^16.4.7"
   peerDependencies:
@@ -515,7 +515,7 @@ __metadata:
       optional: true
   bin:
     jahia-deploy: bin/jahia-deploy.mjs
-  checksum: 10c0/d6406cd0b3f17c3a5157462d5aa21967a574f69dceb5c9d5558b6edd8985004b800db5f459ca6302f9854cb5074c2352482ddaab1b2f9fcf42c1bcf4019ddf6b
+  checksum: 10c0/f81a9b1967f6ad0f6d5e7a0254f28a89877bbf5ebcf6299667daec069ed54ac2752f6a83cd98ae335da2621ac786c0c1ca77e3afffa3b7ddaed28503a1cab001
   languageName: node
   linkType: hard
 
@@ -2733,7 +2733,7 @@ __metadata:
     "@eslint/compat": "npm:^1.2.7"
     "@eslint/js": "npm:^9.21.0"
     "@heroicons/react": "npm:^2.1.1"
-    "@jahia/javascript-modules-library": "npm:^0.5.3"
+    "@jahia/javascript-modules-library": "npm:^0.6.0"
     "@jahia/vite-plugin": "npm:^0.5.4"
     "@types/react": "npm:19.0.10"
     "@types/react-dom": "npm:^19.0.4"
