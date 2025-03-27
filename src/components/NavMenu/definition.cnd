@@ -1,4 +1,4 @@
-[luxe:navMenu2] > jnt:content
+[luxe:navigationMenu] > jnt:content
  - brandText (string) i18n
  - brandImage (weakreference, picker[type='image']) < 'jmix:image'
  - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'

@@ -46,7 +46,7 @@ export const Layout = ({
         <AbsoluteArea
           name="nav"
           parent={renderContext.getSite().getHome()}
-          nodeType="luxe:navMenu2"
+          nodeType="luxe:navigationMenu"
         />
         <main className={className}>{children}</main>
         <HtmlFooter />

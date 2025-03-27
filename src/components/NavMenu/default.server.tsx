@@ -16,8 +16,8 @@ interface Props {
 
 jahiaComponent(
   {
-    nodeType: "luxe:navMenu2",
-    displayName: "Navbar Nav Menu",
+    nodeType: "luxe:navigationMenu",
+    displayName: "Navigation Menu",
     name: "default",
     componentType: "view",
     properties: {
