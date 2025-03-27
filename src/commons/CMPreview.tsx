@@ -3,7 +3,7 @@ import type { CommonsProps } from "./types";
 
 export const CMPreview = ({ className, children }: CommonsProps) => (
   <>
-    <AddResources type="css" resources={buildModuleFileUrl("javascript/server/style.css")} />
+    <AddResources type="css" resources={buildModuleFileUrl("dist/server/style.css")} />
     <main className={className}>{children}</main>
   </>
 );
