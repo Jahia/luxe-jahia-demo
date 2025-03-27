@@ -81,7 +81,7 @@ jahiaComponent(
                   >
                     {row.map((node) => (
                       <Col key={node.getIdentifier()}>
-                        <Render node={node} view={subNodeView || "default"} editable={false} />
+                        <Render node={node} view={subNodeView || "default"} readOnly />
                       </Col>
                     ))}
                   </Row>
@@ -100,7 +100,7 @@ jahiaComponent(
                         "col-8": nodeIndex === 1,
                       })}
                     >
-                      <Render node={node} view={subNodeView || "default"} editable={false} />
+                      <Render node={node} view={subNodeView || "default"} readOnly />
                     </Col>
                   ))}
                 </Row>

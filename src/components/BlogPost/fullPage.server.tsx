@@ -1,4 +1,10 @@
-import { jahiaComponent, Render, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  Render,
+  server,
+} from "@jahia/javascript-modules-library";
 import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types.js";
@@ -23,15 +29,13 @@ jahiaComponent(
     }: BlogPostProps,
     { currentNode, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
-
     const image = {
-      src: buildStaticUrl({ assetPath: "img/img-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "Placeholder",
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.blog", { blog: title });
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);
@@ -72,7 +76,7 @@ jahiaComponent(
             {categories && (
               <div className="lux-richtext lux-category">
                 {categories.map((node) => (
-                  <Render key={node.getIdentifier()} node={node} view="badge" editable={false} />
+                  <Render key={node.getIdentifier()} node={node} view="badge" readOnly />
                 ))}
               </div>
             )}
@@ -85,7 +89,7 @@ jahiaComponent(
               {relatedBlogPosts.slice(0, 3).map((node) => {
                 return (
                   <Col key={node.getIdentifier()} className="g-0">
-                    <Render node={node} view="card" editable={false} />
+                    <Render node={node} view="card" readOnly />
                   </Col>
                 );
               })}

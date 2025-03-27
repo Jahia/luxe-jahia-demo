@@ -1,4 +1,4 @@
-import { Area, jahiaComponent } from "@jahia/javascript-modules-library";
+import { AbsoluteArea, jahiaComponent } from "@jahia/javascript-modules-library";
 import clsx from "clsx";
 
 jahiaComponent(
@@ -13,13 +13,12 @@ jahiaComponent(
     // Create an array of integers from 0 to 'limit - 1'
     const cols = Array.from(Array(limit).keys());
 
-    // @ts-expect-error getModuleParams() is not available in currentResource
     const arrangement = currentResource.getModuleParams().get("arrangement");
     return (
       <div className={clsx("row", arrangement)}>
         {cols.map((col) => (
           <div key={col} className={clsx("col")}>
-            <Area areaAsSubNode name={`${currentNode.getName()}-col-${col}`} />
+            <AbsoluteArea parent={currentNode} name={`${currentNode.getName()}-col-${col}`} />
           </div>
         ))}
       </div>

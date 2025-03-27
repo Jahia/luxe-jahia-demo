@@ -24,7 +24,6 @@ export const buildQuery = ({
   // Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
 
   const descendantPath =
-    // @ts-expect-error getPath() is not available in getResolveSite
     luxeQuery.startNode?.getPath() || `${currentNode.getResolveSite().getPath()}`;
 
   /**

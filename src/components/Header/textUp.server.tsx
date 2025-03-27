@@ -1,4 +1,4 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { Figure, PageTitle, Row } from "~/commons";
 import type { HeaderProps } from "./types.js";
 
@@ -21,7 +21,7 @@ jahiaComponent(
         </Row>
         {image && (
           <Row>
-            <Figure src={image.getUrl()} alt={image.getDisplayableName()} layout="imgFull" />
+            <Figure src={buildNodeUrl(image)} alt={image.getDisplayableName()} layout="imgFull" />
           </Row>
         )}
       </header>

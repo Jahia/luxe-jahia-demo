@@ -1,4 +1,9 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { EstateProps } from "./types";
 
@@ -12,23 +17,22 @@ jahiaComponent(
     { title, price, images, surface, bedrooms }: EstateProps,
     { currentNode, currentResource, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const locale = currentResource.getLocale().getLanguage();
     const image = {
-      src: buildStaticUrl({ assetPath: "img/img-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "Placeholder",
     };
 
     if (images[0]) {
       const _image = images[0];
-      image.src = _image.getUrl();
+      image.src = buildNodeUrl(_image);
       image.alt = t("alt.estate", { estate: title });
 
       server.render.addCacheDependency({ node: _image }, renderContext);
     }
 
     return (
-      <a href={currentNode.getUrl()} className="lux-estateCard">
+      <a href={buildNodeUrl(currentNode)} className="lux-estateCard">
         <img src={image.src} alt={image.alt} height="265" />
         <h4 className="my-2">{title}</h4>
         <p className="lux-estateCard_informations">
