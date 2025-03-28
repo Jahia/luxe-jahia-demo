@@ -1,6 +1,6 @@
 {
   "name": "luxe-jahia-demo",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
   "files": [
     "dist",
@@ -21,7 +21,7 @@
     "watch:callback": "run package && run deploy"
   },
   "jahia": {
-    "snapshot": false,
+    "snapshot": true,
     "required-version": "8.2.0.0-SNAPSHOT",
     "module-type": "templatesSet",
     "module-dependencies": "default,javascript-modules-engine",
