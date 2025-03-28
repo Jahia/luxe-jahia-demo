@@ -23,7 +23,7 @@ jahiaComponent(
       subtitle,
       "image": imageNode,
       body,
-      date,
+      "date": stringDate,
       "j:defaultCategory": categories,
       relatedBlogPosts,
     }: BlogPostProps,
@@ -41,8 +41,9 @@ jahiaComponent(
       server.render.addCacheDependency({ node: imageNode }, renderContext);
     }
 
+    const date: Date = new Date(stringDate);
     const formatedDate =
-      new Date(date).toLocaleDateString(currentNode.getLanguage(), {
+      date.toLocaleDateString(currentNode.getLanguage(), {
         // Weekday: 'long',
         year: "numeric",
         month: "long",
