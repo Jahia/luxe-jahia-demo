@@ -12,6 +12,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.18.9":
+  version: 7.27.0
+  resolution: "@babel/runtime@npm:7.27.0"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/35091ea9de48bd7fd26fb177693d64f4d195eb58ab2b142b893b7f3fa0f1d7c677604d36499ae0621a3703f35ba0c6a8f6c572cc8f7dc0317213841e493cf663
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.25.0":
   version: 7.26.9
   resolution: "@babel/runtime@npm:7.26.9"
@@ -1242,6 +1251,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"apache-unomi-tracker@portal:../../apache/unomi-tracker::locator=luxe-jahia-demo%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "apache-unomi-tracker@portal:../../apache/unomi-tracker::locator=luxe-jahia-demo%40workspace%3A."
+  dependencies:
+    "@babel/runtime": "npm:^7.18.9"
+    es6-crawler-detect: "npm:^3.3.0"
+  languageName: node
+  linkType: soft
+
 "argparse@npm:^1.0.7":
   version: 1.0.10
   resolution: "argparse@npm:1.0.10"
@@ -1640,6 +1658,13 @@ __metadata:
   bin:
     errno: cli.js
   checksum: 10c0/83758951967ec57bf00b5f5b7dc797e6d65a6171e57ea57adcf1bd1a0b477fd9b5b35fae5be1ff18f4090ed156bce1db749fe7e317aac19d485a5d150f6a4936
+  languageName: node
+  linkType: hard
+
+"es6-crawler-detect@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "es6-crawler-detect@npm:3.3.0"
+  checksum: 10c0/4fd0051aaa308e16c56696f516b9a899954d103af0237737ae55db37720840cd72f36132722d1de9b68c68803f63ddf10f6ec01a5b0a183531a7d109dcc24df1
   languageName: node
   linkType: hard
 
@@ -2737,6 +2762,7 @@ __metadata:
     "@jahia/vite-plugin": "npm:^0.6.0"
     "@types/react": "npm:19.0.10"
     "@types/react-dom": "npm:^19.0.4"
+    apache-unomi-tracker: "portal:../../apache/unomi-tracker"
     bootstrap: "npm:^5.3.3"
     clsx: "npm:^2.1.0"
     eslint: "npm:^9.20.1"
