@@ -21,7 +21,7 @@
     "watch:callback": "run package && run deploy"
   },
   "jahia": {
-    "snapshot": true,
+    "snapshot": false,
     "required-version": "8.2.1.0",
     "module-type": "templatesSet",
     "module-dependencies": "default,javascript-modules-engine",
