@@ -2,6 +2,8 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import { t } from "i18next";
 import { submitContact } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
+import classes from "~/components/Form/Contact/ContactForm.client.module.css";
+import clsx from "clsx";
 
 interface ContactFormProps {
   target?: string;
@@ -45,9 +47,9 @@ const ContactFormClient = ({
   // }, [prefill]);
 
   return (
-    <form id="contactForm" className="modal-body d-flex flex-column gap-3">
+    <form id="contactForm" className={classes.form}>
       <div>
-        <label htmlFor="inputContactFirstName" className="form-label fs-6 lux-capitalize">
+        <label htmlFor="inputContactFirstName" className={classes.label}>
           {t("form.contact.firstName")}
         </label>
         <input
@@ -58,12 +60,12 @@ const ContactFormClient = ({
           type="text"
           name="contact-firstName"
           placeholder={t("form.contact.firstName")}
-          className="form-control"
+          className={classes.control}
           onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
       <div>
-        <label htmlFor="inputContactLastName" className="form-label fs-6 lux-capitalize">
+        <label htmlFor="inputContactLastName" className={classes.label}>
           {t("form.contact.lastName")}
         </label>
         <input
@@ -73,12 +75,12 @@ const ContactFormClient = ({
           type="text"
           name="contact-lastName"
           placeholder={t("form.contact.lastName")}
-          className="form-control"
+          className={classes.control}
           onChange={(e) => setLastName(e.target.value)}
         />
       </div>
       <div>
-        <label htmlFor="inputContactEmail" className="form-label fs-6 lux-capitalize">
+        <label htmlFor="inputContactEmail" className={classes.label}>
           {t("form.contact.email")}
         </label>
         <input
@@ -88,12 +90,12 @@ const ContactFormClient = ({
           type="email"
           name="contact-email"
           placeholder={t("form.contact.email")}
-          className="form-control"
+          className={classes.control}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
-        <label htmlFor="inputContactMsg" className="form-label fs-6 lux-capitalize">
+        <label htmlFor="inputContactMsg" className={classes.label}>
           {t("form.contact.msg")}
         </label>
         <textarea
@@ -102,14 +104,14 @@ const ContactFormClient = ({
           defaultValue={message}
           name="contact-message"
           placeholder={t("form.contact.msg")}
-          className="form-control"
+          className={classes.control}
           onChange={(e) => setMessage(e.target.value)}
         />
       </div>
       <button
         type="button"
         form="contactForm"
-        className="btn btn-primary lux-capitalize"
+        className={clsx(classes.btn)}
         disabled={!isFormValid}
         onClick={(e) =>
           submitContact({

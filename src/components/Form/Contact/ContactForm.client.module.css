@@ -1,0 +1,23 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, fs_6, space_2, space_3 from variables;
+
+.form {
+    composes: form from '~/templates/css/global.module.css';
+}
+
+.label {
+    composes: capitalize from '~/templates/css/global.module.css';
+    font-size: fs_6;
+    margin-bottom: space_2;
+}
+
+.control {
+    composes: formControl from '~/templates/css/global.module.css';
+}
+
+.btn {
+    composes: btnPrimary from '~/templates/css/global.module.css';
+    composes: btn from '~/templates/css/global.module.css';
+    composes: capitalize from '~/templates/css/global.module.css';
+}
