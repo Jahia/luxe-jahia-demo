@@ -492,8 +492,8 @@ __metadata:
   linkType: hard
 
 "@jahia/javascript-modules-library@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@jahia/javascript-modules-library@npm:0.6.0"
+  version: 0.6.1
+  resolution: "@jahia/javascript-modules-library@npm:0.6.1"
   dependencies:
     dotenv: "npm:^16.4.7"
   peerDependencies:
@@ -515,7 +515,7 @@ __metadata:
       optional: true
   bin:
     jahia-deploy: bin/jahia-deploy.mjs
-  checksum: 10c0/f81a9b1967f6ad0f6d5e7a0254f28a89877bbf5ebcf6299667daec069ed54ac2752f6a83cd98ae335da2621ac786c0c1ca77e3afffa3b7ddaed28503a1cab001
+  checksum: 10c0/7cbc7ac960f8853a55d690d7631af6fc7c61636d7a7cd88e3e3481e4bceb14be21f0e18d150d7f441f9989700a65b1cbcfc64d45574f397bff984a185b8458e0
   languageName: node
   linkType: hard
 
