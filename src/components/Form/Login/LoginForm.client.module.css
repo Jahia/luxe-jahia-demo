@@ -1,0 +1,125 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, space_0, space_2, space_5, space_6, fs_6, fs_small from variables;
+
+.main {
+    --luxe-modal-bg: var(--luxe-body-bg);
+    --luxe-modal-border-color: var(--luxe-border-color-translucent);
+    --luxe-modal-border-width: var(--luxe-border-width);
+    --luxe-modal-border-radius: var(--luxe-border-radius-lg);
+    max-height: 80vh;
+    overflow: hidden;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*color: var(--luxe-modal-color);*/
+    pointer-events: auto;
+    background-color: var(--luxe-modal-bg);
+    background-clip: padding-box;
+    border: var(--luxe-modal-border-width) solid var(--luxe-modal-border-color);
+    border-radius: var(--luxe-modal-border-radius);
+    outline: 0;
+
+    header {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        padding: space_5;
+        border-bottom: var(--luxe-modal-header-border-width) solid var(--luxe-modal-header-border-color);
+        border-top-left-radius: var(--luxe-modal-inner-border-radius);
+        border-top-right-radius: var(--luxe-modal-inner-border-radius)
+    }
+}
+
+.title {
+    composes: capitalize from '~/templates/css/global.module.css';
+    composes: display_4 from '~/templates/css/global.module.css';
+    text-align: center;
+    margin: space_0;
+    width: 100%;
+}
+
+.body{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: space_6;
+    gap: space_6;
+}
+.loginCardSection{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    > h3 {
+        margin: space_0;
+    }
+    > p {
+        --luxe-text-opacity: 1;
+        color: var(--luxe-secondary-color);
+        font-size: fs_small;
+    }
+    > div {
+        display: flex;
+        flex-direction: column;
+        gap: space_2;
+    }
+}
+.loginFormSection {
+    width: 50%;
+    > h3 {
+        margin: space_0;
+    }
+    > p {
+        --luxe-text-opacity: 1;
+        color: var(--luxe-secondary-color);
+        font-size: fs_small;
+    }
+}
+.form{
+    composes: form from '~/templates/css/global.module.css';
+}
+.label {
+    font-size: fs_6;
+    margin-bottom: space_2;
+}
+
+.control {
+    composes: formControl from '~/templates/css/global.module.css';
+}
+.btn {
+    composes: btnPrimary from '~/templates/css/global.module.css';
+    composes: btn from '~/templates/css/global.module.css';
+    composes: capitalize from '~/templates/css/global.module.css';
+}
+
+.checkBox {
+    display: flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: .125rem;
+}
+
+.formCheckInput{
+    composes: formCheckInput from '~/templates/css/global.module.css';
+    border-radius: .25em;
+    float: left;
+    margin-left: -1.5em;
+    margin-right: space_2;
+    margin-top: space_0;
+}
+
+.formCheckLabel {
+    composes: capitalize from '~/templates/css/global.module.css';
+    font-size: fs_6;
+}
+
+.alert {
+    composes: alert from '~/templates/css/global.module.css';
+    composes: alertDanger from '~/templates/css/global.module.css';
+    font-size: fs_6;
+}

@@ -1,9 +1,11 @@
 @value variables: "~/templates/css/variables.css";
 
-@value gridBreakpoints_lg, fs_6, space_2, space_3 from variables;
+@value fs_6, space_2 from variables;
 
 .form {
     composes: form from '~/templates/css/global.module.css';
+    overflow: auto;
+    position: relative;
 }
 
 .label {

@@ -6,7 +6,6 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./default.module.css";
-import gClasses from "~/templates/css/global.module.css";
 
 import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
@@ -56,7 +55,7 @@ jahiaComponent(
       <>
         {title && queryContent && queryContent.length > 0 && <HeadingSection title={title} />}
         {renderContext.isEditMode() && warn && (
-          <div className={clsx(gClasses.alert, gClasses.warning)} role="alert">
+          <div className={classes.alertWarning} role="alert">
             {warn}
           </div>
         )}
@@ -77,7 +76,7 @@ jahiaComponent(
           </Row>
         )}
         {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
-          <div className={clsx(gClasses.alert, gClasses.dark)} role="alert">
+          <div className={classes.alertDark} role="alert">
             {t(noResultText || "query.noResult")}
           </div>
         )}

@@ -3,6 +3,7 @@ import { t } from "i18next";
 import ContactFormClient from "./ContactForm.client";
 import { getCookie, prefillWithUserContext } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
+import classes from "~/components/Form/Contact/Contact.client.module.css";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function ContactClient({
@@ -54,7 +55,7 @@ export default function ContactClient({
           dangerouslySetInnerHTML={{
             __html: personalizedFeedbackMsg,
           }}
-          className="info fs-6"
+          className={classes.fs6}
           role="info"
         />
       );
@@ -66,12 +67,12 @@ export default function ContactClient({
           dangerouslySetInnerHTML={{
             __html: t("form.contact.sendMessageError", { name, status: feedback.status }),
           }}
-          className="alert alert-danger fs-6"
+          className={classes.alert}
           role="alert"
         />
 
         <p>
-          <a href="" className="lux-capitalize" onClick={handleRedo}>
+          <a href="" className={classes.capitalize} onClick={handleRedo}>
             {t("form.contact.sendMessageAgain")}
           </a>
         </p>
@@ -81,8 +82,8 @@ export default function ContactClient({
 
   if (unknownError) {
     return (
-      <p className="alert alert-danger fs-6" role="alert">
-        {t("form.unknownError")} et voilà
+      <p className={classes.alert} role="alert">
+        {t("form.unknownError")}
       </p>
     );
   }

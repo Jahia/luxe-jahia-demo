@@ -3,6 +3,7 @@ import LoginFormClient from "./LoginForm.client.js";
 import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
 import { t } from "i18next";
 import type { JahiaUrlsProps } from "./types";
+import classes from "~/components/Form/Login/Login.client.module.css";
 
 interface LoginClientProps {
   isLoggedIn: boolean;
@@ -45,7 +46,7 @@ export default function LoginClient({
 
   if (mode === "edit") {
     return (
-      <div className="alert alert-dark fs-6" role="alert">
+      <div className={classes.alertDark} role="alert">
         {t("form.login.editModeWarning")}
       </div>
     );
@@ -54,7 +55,7 @@ export default function LoginClient({
   return loggedIn ? (
     <>
       <h5>{user}</h5>
-      <ul className="list-unstyled">
+      <ul className={classes.list}>
         <WorkspaceNavigationClient
           {...{
             urls,
@@ -63,11 +64,7 @@ export default function LoginClient({
           }}
         />
         <li>
-          <button
-            type="button"
-            className="d-block btn btn-link p-0 lux-capitalize border-0"
-            onClick={logout}
-          >
+          <button type="button" className={classes.btn} onClick={logout}>
             {t("form.login.logout")}
           </button>
         </li>
@@ -79,10 +76,10 @@ export default function LoginClient({
       <dialog
         ref={modalRef}
         id="loginModal"
-        className="lux-dialog modal modal-xl"
+        className={classes.dialog}
         onClick={(event) => handleOverlayClick(event)}
       >
-        <div className="modal-dialog" aria-labelledby="loginModalTitle">
+        <div className={classes.content} aria-labelledby="loginModalTitle">
           <LoginFormClient
             loginUrl={urls.loginUrl}
             isShowRememberMe={isShowRememberMe}
@@ -93,7 +90,7 @@ export default function LoginClient({
         </div>
       </dialog>
       <p>
-        <a href={urls.loginUrl} className="lux-capitalize" onClick={showModal}>
+        <a href={urls.loginUrl} className={classes.capitalize} onClick={showModal}>
           {t("form.login.login")}
         </a>
       </p>

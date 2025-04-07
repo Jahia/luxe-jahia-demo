@@ -10,3 +10,13 @@
         --luxe-gutter-y: 0;
     }
 }
+
+.alertWarning {
+    composes: alert from '~/templates/css/global.module.css';
+    composes: alertWarning from '~/templates/css/global.module.css';
+}
+
+.alertDark {
+    composes: alert from '~/templates/css/global.module.css';
+    composes: alertDark from '~/templates/css/global.module.css';
+}

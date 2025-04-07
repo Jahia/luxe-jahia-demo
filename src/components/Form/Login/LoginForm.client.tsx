@@ -3,6 +3,7 @@ import LoginCardClient from "./LoginCard.client";
 import { t } from "i18next";
 import { login } from "./utils.client";
 import type { LoginCommonProps } from "./types";
+import classes from "~/components/Form/Login/LoginForm.client.module.css";
 
 const userMocks = [
   {
@@ -85,40 +86,40 @@ const LoginFormClient = ({
     });
 
   return (
-    <div className="modal-content">
-      <header className="modal-header p-5">
-        <h2 id="loginModalTitle" className="lux-capitalize text-center w-100 display-4 m-0">
+    <div className={classes.main}>
+      <header>
+        <h2 id="loginModalTitle" className={classes.title}>
           {t("form.login.login")}
         </h2>
       </header>
-      <div className="modal-body d-flex flex-row p-6 gap-6">
-        <div className="d-flex flex-column w-50">
-          <h3 className="m0">{t("form.login.sections.persona.title")}</h3>
-          <p className="text-muted small">{t("form.login.sections.persona.teaser")}</p>
-          <div className="d-flex flex-column gap-2">
+      <div className={classes.body}>
+        <div className={classes.loginCardSection}>
+          <h3>{t("form.login.sections.persona.title")}</h3>
+          <p>{t("form.login.sections.persona.teaser")}</p>
+          <div>
             {userMocks?.map((user) => (
               <LoginCardClient key={user.username} {...user} {...{ loginCommonProps }} />
             ))}
           </div>
         </div>
-        <div className="w-50">
-          <h3 className="m0">{t("form.login.sections.login.title")}</h3>
-          <p className="text-muted small">{t("form.login.sections.login.teaser")}</p>
-          <form id="loginForm" className="d-flex flex-column gap-3">
+        <div className={classes.loginFormSection}>
+          <h3>{t("form.login.sections.login.title")}</h3>
+          <p>{t("form.login.sections.login.teaser")}</p>
+          <form id="loginForm" className={classes.form}>
             {incorrectLogin && (
-              <p className="alert alert-danger fs-6" role="alert">
+              <p className={classes.alert} role="alert">
                 {t("form.login.badCreds")}
               </p>
             )}
 
             {unknownError && (
-              <p className="alert alert-danger fs-6" role="alert">
+              <p className={classes.alert} role="alert">
                 {t("form.login.unknownError")}
               </p>
             )}
 
             <div>
-              <label htmlFor="inputUser" className="form-label fs-6">
+              <label htmlFor="inputUser" className={classes.label}>
                 {t("form.login.username")}
               </label>
               <input
@@ -127,19 +128,19 @@ const LoginFormClient = ({
                 type="text"
                 name="username"
                 placeholder="robin"
-                className="form-control"
+                className={classes.control}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="inputPassword" className="form-label fs-6">
+              <label htmlFor="inputPassword" className={classes.label}>
                 {t("form.login.password")}
               </label>
               <input
                 id="inputPassword"
                 type="password"
                 name="password"
-                className="form-control"
+                className={classes.control}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyUp={(event) => {
                   if (event.key === "Enter") {
@@ -149,26 +150,21 @@ const LoginFormClient = ({
               />
             </div>
             {isShowRememberMe && (
-              <div className="form-check d-flex align-items-center">
+              <div className={classes.checkBox}>
                 <input
                   id="remember"
                   type="checkbox"
                   name="remember"
-                  className="form-check-input me-2 mt-0"
+                  className={classes.formCheckInput}
                   defaultChecked={rememberMe}
                   onChange={() => setRememberMe(!rememberMe)}
                 />
-                <label htmlFor="remember" className="form-check-label lux-capitalize fs-6">
+                <label htmlFor="remember" className={classes.formCheckLabel}>
                   {t("form.login.rememberMe")}
                 </label>
               </div>
             )}
-            <button
-              type="button"
-              form="loginForm"
-              className="btn btn-primary lux-capitalize"
-              onClick={handleLogin}
-            >
+            <button type="button" form="loginForm" className={classes.btn} onClick={handleLogin}>
               {t("form.login.login")}
             </button>
           </form>
