@@ -74,6 +74,14 @@
     /*--luxe-btn-disabled-opacity:*/
 }
 
+[role=button] {
+    cursor: pointer;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
 *, *:before, *:after {
     box-sizing: border-box;
 }
