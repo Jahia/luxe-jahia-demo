@@ -11,6 +11,7 @@ export const LanguageSwitcher = () => {
   const currentLocale = currentResource.getLocale();
   const currentLocaleCode = currentLocale.toString();
   const currentLocaleName = currentLocale.getDisplayLanguage(currentLocale);
+  const mode = renderContext.getMode();
 
   const localesAndUrls = Object.entries(getSiteLocales()).map(([language, locale]) => {
     return {
@@ -23,7 +24,7 @@ export const LanguageSwitcher = () => {
   return (
     <HydrateInBrowser
       child={LanguageSwitcherClient}
-      props={{ currentLocaleName, localesAndUrls }}
+      props={{ currentLocaleName, localesAndUrls, mode }}
     />
   );
 };

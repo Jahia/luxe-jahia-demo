@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function LanguageSwitcherClient({
   currentLocaleName,
   localesAndUrls,
+  mode,
 }: {
   currentLocaleName: string;
   localesAndUrls: {
@@ -11,11 +12,14 @@ export default function LanguageSwitcherClient({
     isCurrent: boolean;
     url: string;
   }[];
+  mode: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownHandler = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+  // suppress the hydration warnings in edit mode, as JContent performs some DOM manipulations, messing up with React hydration process
+  const suppressHydrationWarning = mode === "edit";
 
   return (
     <div className="dropdown">
@@ -24,6 +28,7 @@ export default function LanguageSwitcherClient({
         type="button"
         aria-expanded={isOpen}
         onClick={dropdownHandler}
+        suppressHydrationWarning={suppressHydrationWarning}
       >
         {currentLocaleName}
       </button>
@@ -38,6 +43,7 @@ export default function LanguageSwitcherClient({
                 href={url}
                 className={clsx("dropdown-item", "lux-capitalize", { active: isCurrent })}
                 aria-current={isCurrent}
+                suppressHydrationWarning={suppressHydrationWarning}
               >
                 {localeName}
               </a>
