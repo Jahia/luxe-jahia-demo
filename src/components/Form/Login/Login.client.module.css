@@ -88,15 +88,12 @@
     composes: capitalize from '~/templates/css/global.module.css';
 }
 
-.alertDark {
-    composes: alert from '~/templates/css/global.module.css';
-    composes: alertDark from '~/templates/css/global.module.css';
+.fs6{
     font-size: fs_6;
 }
 
 .btn {
-    composes: btn from '~/templates/css/global.module.css';
-    composes: btnLink from '~/templates/css/global.module.css';
+    composes: link from '~/templates/css/button.module.css';
     composes: capitalize from '~/templates/css/global.module.css';
     padding: space_0;
     border: 0;
@@ -104,6 +101,5 @@
 }
 
 .list {
-    padding-left: 0;
-    list-style: none;
+    composes: listUnstyled from '~/templates/css/global.module.css';
 }

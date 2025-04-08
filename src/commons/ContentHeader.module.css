@@ -9,7 +9,7 @@
 */
 
 .main {
-    composes: container from '~/commons/grid/Section.module.css';
+    composes: container from '~/commons/grid/grid.module.css';
     display: flex;
     flex-direction: column;
     margin-bottom: 0;

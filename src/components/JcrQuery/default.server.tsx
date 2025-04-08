@@ -6,12 +6,13 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./default.module.css";
+import alert from "~/templates/css/alert.module.css";
 
 import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
-import clsx from "clsx";
+import { Fragment } from "react";
 
 jahiaComponent(
   {
@@ -52,10 +53,10 @@ jahiaComponent(
     const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
 
     return (
-      <>
+      <div className={classes.root}>
         {title && queryContent && queryContent.length > 0 && <HeadingSection title={title} />}
         {renderContext.isEditMode() && warn && (
-          <div className={classes.alertWarning} role="alert">
+          <div className={alert.warning} role="alert">
             {warn}
           </div>
         )}
@@ -76,11 +77,11 @@ jahiaComponent(
           </Row>
         )}
         {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
-          <div className={classes.alertDark} role="alert">
+          <div className={alert.dark} role="alert">
             {t(noResultText || "query.noResult")}
           </div>
         )}
-      </>
+      </div>
     );
   },
 );

@@ -59,7 +59,7 @@
 }
 
 .containerFluid {
-    composes: containerFluid from '~/commons/grid/Section.module.css';
+    composes: containerFluid from '~/commons/grid/grid.module.css';
     display: flex;
     flex-wrap: inherit;
     align-items: center;

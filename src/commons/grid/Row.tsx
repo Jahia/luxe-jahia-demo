@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type { CommonsProps } from "../types";
-import classes from "./Row.module.css";
+import classes from "./grid.module.css";
 import type { ElementType } from "react";
 
 interface rowProps extends CommonsProps {

@@ -12,10 +12,13 @@
 }
 
 .rowDescription {
+    composes: rowCols_1 from '~/commons/grid/grid.module.css';
+    composes: rowCols_lg_2 from '~/commons/grid/grid.module.css';
+}
+
+section .rowDescription {
     --luxe-gutter-x: space_5;
     --luxe-gutter-y: space_5;
-    composes: rowCols_1 from '~/commons/grid/Row.module.css';
-    composes: rowCols_lg_2 from '~/commons/grid/Row.module.css';
 }
 
 .price {

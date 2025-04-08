@@ -8,11 +8,11 @@ import {
   useUrlBuilder,
 } from "@jahia/javascript-modules-library";
 import { Col, Row, Section } from "~/commons";
-import clsx from "clsx";
 import { t } from "i18next";
-import "../scss/styles.scss";
 import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
+import classes from "./Layout.module.css";
+import grid from "~/commons/grid/grid.module.css";
 
 /**
  * Layout : Places 'children' in an html page.
@@ -92,14 +92,14 @@ const loginForm = {
  */
 const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
   return (
-    <Section component="footer" className={clsx("lux-site-footer", className)}>
+    <Section component="footer" className={className}>
       <Row>
-        <Col className="col-4">
-          <h5>{t("footer.resources")}</h5>
-          <ul className="list-unstyled">
+        <Col className={grid.col_4}>
+          <h5 className={classes.capitalize}>{t("footer.resources")}</h5>
+          <ul className={classes.list}>
             <li>
               <a
-                className="text-capitalize"
+                className={classes.fullTextCapitalize}
                 href="https://academy.jahia.com/home"
                 target="_blank"
                 rel="noreferrer"
@@ -108,21 +108,31 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
               </a>
             </li>
             <li>
-              <a href="https://academy.jahia.com/get-started" target="_blank" rel="noreferrer">
+              <a
+                className={classes.capitalize}
+                href="https://academy.jahia.com/get-started"
+                target="_blank"
+                rel="noreferrer"
+              >
                 {t("footer.tutorial")}
               </a>
             </li>
             <li>
-              <a href="https://github.com/Jahia/luxe-jahia-demo/" target="_blank" rel="noreferrer">
+              <a
+                className={classes.capitalize}
+                href="https://github.com/Jahia/luxe-jahia-demo/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 {t("footer.sourceCode")}
               </a>
             </li>
           </ul>
         </Col>
-        <Col className="col-5">
+        <Col className={grid.col_5}>
           <Render content={loginForm} />
         </Col>
-        <Col className="col-3">
+        <Col className={grid.col_3}>
           <></>
           {/* <h5>Join us</h5> */}
           {/* <ul className="list-inline"> */}
@@ -135,7 +145,7 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
           {/* </ul> */}
         </Col>
       </Row>
-      <Row className="lux-site-footer_disclaimer pb-3">
+      <Row className={classes.disclaimer}>
         <Col>
           {/* numberOfItems={4} */}
           <AbsoluteArea
@@ -144,7 +154,7 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
             allowedTypes={["jnt:nodeLink", "jnt:externalLink"]}
           />
         </Col>
-        <Col className="text-end">
+        <Col className={classes.copyright}>
           <span>{t("footer.copyright", { currentDate: new Date().getFullYear() })}</span>
         </Col>
       </Row>

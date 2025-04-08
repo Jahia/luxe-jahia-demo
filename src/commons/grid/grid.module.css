@@ -1,6 +1,39 @@
 @value variables: "~/templates/css/variables.css";
+@value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_lg, gridBreakpoints_xl, gridBreakpoints_xxl from variables;
 
-@value gridBreakpoints_lg, gridBreakpoints_md, gridBreakpoints_sm from variables;
+.default {
+    --luxe-gutter-x: 1.5rem;
+    --luxe-gutter-y: 0;
+    width:100%;
+    padding-right:calc(var(--luxe-gutter-x) * .5);
+    padding-left:calc(var(--luxe-gutter-x) * .5);
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.containerFluid {
+    composes: default;
+}
+.container {
+    composes: default;
+    @media (min-width: gridBreakpoints_sm){
+        & {max-width:540px}
+    }
+    @media (min-width: gridBreakpoints_md){
+        & {max-width:720px}
+    }
+    @media (min-width: gridBreakpoints_lg){
+        & {max-width:960px}
+    }
+    @media (min-width: gridBreakpoints_xl){
+        & {max-width:1140px}
+    }
+    @media (min-width: gridBreakpoints_xxl) {
+        & {max-width:1320px}
+    }
+}
+
+
 
 .row {
     --luxe-gutter-x: 1.5rem;
@@ -204,4 +237,81 @@
         flex: 0 0 auto;
         width: 16.66666667%
     }
+}
+
+
+.col {
+    flex: 1 0 0 ;
+}
+
+.col_1 {
+    flex: 0 0 auto ;
+    width: 8.33333333% ;
+}
+
+.col_2 {
+    flex: 0 0 auto ;
+    width: 16.66666667% ;
+}
+
+.col_3 {
+    flex: 0 0 auto ;
+    width: 25% ;
+}
+
+.col_4 {
+    flex: 0 0 auto ;
+    width: 33.33333333% ;
+}
+
+.col_5 {
+    flex: 0 0 auto ;
+    width: 41.66666667% ;
+}
+
+.col_6 {
+    flex: 0 0 auto;
+    width: 50% ;
+}
+
+.col_7 {
+    flex: 0 0 auto ;
+    width: 58.33333333% ;
+}
+
+.col_8 {
+    flex: 0 0 auto;
+    width: 66.66666667% ;
+}
+
+.col_9 {
+    flex: 0 0 auto ;
+    width: 75% ;
+}
+
+.col_10 {
+    flex: 0 0 auto ;
+    width: 83.33333333% ;
+}
+
+.col_11 {
+    flex: 0 0 auto ;
+    width: 91.66666667% ;
+}
+
+.col_12 {
+    flex: 0 0 auto ;
+    width: 100% ;
+}
+
+@media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
+    [class*=col_], .col {
+        flex: 0 0 auto ;
+        width: 100% ;
+    }
+
+    [class*=col_]+[class*=col_], [class*=col_]+.col, .col+[class*=col_], .col+.col {
+        margin-top: 24px;
+    }
+
 }

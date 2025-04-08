@@ -81,7 +81,7 @@ jahiaComponent(
         {relatedBlogPosts && relatedBlogPosts.length > 0 && (
           <Section>
             <HeadingSection title={t("section.heading.relatedBlogPosts")} />
-            <Row className={classes.rowrelatedBlogPosts}>
+            <Row className={classes.rowRelatedBlogPosts}>
               {relatedBlogPosts.slice(0, 3).map((node) => {
                 return (
                   <Col key={node.getIdentifier()}>

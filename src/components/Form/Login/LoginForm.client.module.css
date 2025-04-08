@@ -50,6 +50,7 @@
     padding: space_6;
     gap: space_6;
 }
+
 .loginCardSection{
     display: flex;
     flex-direction: column;
@@ -79,20 +80,18 @@
         font-size: fs_small;
     }
 }
-.form{
-    composes: form from '~/templates/css/global.module.css';
-}
-.label {
+
+.fs6{
     font-size: fs_6;
+}
+
+.label {
+    composes: fs6;
     margin-bottom: space_2;
 }
 
-.control {
-    composes: formControl from '~/templates/css/global.module.css';
-}
 .btn {
-    composes: btnPrimary from '~/templates/css/global.module.css';
-    composes: btn from '~/templates/css/global.module.css';
+    composes: primary from '~/templates/css/button.module.css';
     composes: capitalize from '~/templates/css/global.module.css';
 }
 
@@ -105,21 +104,16 @@
 }
 
 .formCheckInput{
-    composes: formCheckInput from '~/templates/css/global.module.css';
+    composes: checkInput from '~/templates/css/form.module.css';
     border-radius: .25em;
     float: left;
     margin-left: -1.5em;
     margin-right: space_2;
-    margin-top: space_0;
+    margin-top: space_0 !important;
 }
 
 .formCheckLabel {
     composes: capitalize from '~/templates/css/global.module.css';
-    font-size: fs_6;
+    composes: fs6;
 }
 
-.alert {
-    composes: alert from '~/templates/css/global.module.css';
-    composes: alertDanger from '~/templates/css/global.module.css';
-    font-size: fs_6;
-}

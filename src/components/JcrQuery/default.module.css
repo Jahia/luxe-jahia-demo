@@ -1,22 +1,16 @@
 .main {
-    --luxe-gutter-x: 0 !important;
-    --luxe-gutter-y: 0 !important;
-    composes: rowCols_lg_3 from '~/commons/grid/Row.module.css';
-    composes: rowCols_md_2 from '~/commons/grid/Row.module.css';
-    composes: rowCols_sm_1 from '~/commons/grid/Row.module.css';
+    composes: rowCols_lg_3 from '~/commons/grid/grid.module.css';
+    composes: rowCols_md_2 from '~/commons/grid/grid.module.css';
+    composes: rowCols_sm_1 from '~/commons/grid/grid.module.css';
+
+}
+
+.root .main {
+    --luxe-gutter-x: 0;
+    --luxe-gutter-y: 0;
 
     > div {
         --luxe-gutter-x: 0;
         --luxe-gutter-y: 0;
     }
-}
-
-.alertWarning {
-    composes: alert from '~/templates/css/global.module.css';
-    composes: alertWarning from '~/templates/css/global.module.css';
-}
-
-.alertDark {
-    composes: alert from '~/templates/css/global.module.css';
-    composes: alertDark from '~/templates/css/global.module.css';
 }

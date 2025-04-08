@@ -4,6 +4,9 @@ import { t } from "i18next";
 import { login } from "./utils.client";
 import type { LoginCommonProps } from "./types";
 import classes from "~/components/Form/Login/LoginForm.client.module.css";
+import alert from "~/templates/css/alert.module.css";
+import form from "~/templates/css/form.module.css";
+import clsx from "clsx";
 
 const userMocks = [
   {
@@ -105,15 +108,15 @@ const LoginFormClient = ({
         <div className={classes.loginFormSection}>
           <h3>{t("form.login.sections.login.title")}</h3>
           <p>{t("form.login.sections.login.teaser")}</p>
-          <form id="loginForm" className={classes.form}>
+          <form id="loginForm" className={form.root}>
             {incorrectLogin && (
-              <p className={classes.alert} role="alert">
+              <p className={clsx(alert.danger, classes.fs6)} role="alert">
                 {t("form.login.badCreds")}
               </p>
             )}
 
             {unknownError && (
-              <p className={classes.alert} role="alert">
+              <p className={clsx(alert.danger, classes.fs6)} role="alert">
                 {t("form.login.unknownError")}
               </p>
             )}
@@ -128,7 +131,7 @@ const LoginFormClient = ({
                 type="text"
                 name="username"
                 placeholder="robin"
-                className={classes.control}
+                className={form.control}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
@@ -140,7 +143,7 @@ const LoginFormClient = ({
                 id="inputPassword"
                 type="password"
                 name="password"
-                className={classes.control}
+                className={form.control}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyUp={(event) => {
                   if (event.key === "Enter") {

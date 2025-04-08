@@ -10,8 +10,8 @@ import { t } from "i18next";
 import { buildQuery } from "./utils";
 import clsx from "clsx";
 import type { JcrQueryProps } from "./types";
-import gClasses from "~/templates/css/global.module.css";
-import colClasses from "~/commons/grid/Col.module.css";
+import alert from "~/templates/css/alert.module.css";
+import grid from "~/commons/grid/grid.module.css";
 
 jahiaComponent(
   {
@@ -68,7 +68,7 @@ jahiaComponent(
       <>
         {title && <HeadingSection title={title} />}
         {renderContext.isEditMode() && warn && (
-          <div className={clsx(gClasses.alert, gClasses.warning)} role="alert">
+          <div className={alert.warning} role="alert">
             {warn}
           </div>
         )}
@@ -98,8 +98,8 @@ jahiaComponent(
                     <Col
                       key={node.getIdentifier()}
                       className={clsx({
-                        [colClasses.col_4]: nodeIndex === 0,
-                        [colClasses.col_8]: nodeIndex === 1,
+                        [grid.col_4]: nodeIndex === 0,
+                        [grid.col_8]: nodeIndex === 1,
                       })}
                     >
                       <Render node={node} view={subNodeView || "default"} editable={false} />
@@ -111,7 +111,7 @@ jahiaComponent(
           </>
         )}
         {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
-          <div className={clsx(gClasses.alert, gClasses.dark)} role="alert">
+          <div className={alert.dark} role="alert">
             {t(noResultText || "query.noResult")}
           </div>
         )}

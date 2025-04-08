@@ -4,6 +4,8 @@ import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
 import { t } from "i18next";
 import type { JahiaUrlsProps } from "./types";
 import classes from "~/components/Form/Login/Login.client.module.css";
+import alert from "~/templates/css/alert.module.css";
+import clsx from "clsx";
 
 interface LoginClientProps {
   isLoggedIn: boolean;
@@ -46,7 +48,7 @@ export default function LoginClient({
 
   if (mode === "edit") {
     return (
-      <div className={classes.alertDark} role="alert">
+      <div className={clsx(alert.dark, classes.fs6)} role="alert">
         {t("form.login.editModeWarning")}
       </div>
     );
@@ -54,7 +56,7 @@ export default function LoginClient({
 
   return loggedIn ? (
     <>
-      <h5>{user}</h5>
+      <h5 className={classes.capitalize}>{user}</h5>
       <ul className={classes.list}>
         <WorkspaceNavigationClient
           {...{
@@ -72,7 +74,7 @@ export default function LoginClient({
     </>
   ) : (
     <>
-      <h5>{t("footer.backOffice")}</h5>
+      <h5 className={classes.capitalize}>{t("footer.backOffice")}</h5>
       <dialog
         ref={modalRef}
         id="loginModal"

@@ -3,7 +3,7 @@
 @value gridBreakpoints_md, space_2, space_3, space_4, space_0 from variables;
 
 .header {
-    composes: container from '~/commons/grid/Section.module.css';
+    composes: container from '~/commons/grid/grid.module.css';
     display: flex;
     flex-direction:column;
     gap:space_3;

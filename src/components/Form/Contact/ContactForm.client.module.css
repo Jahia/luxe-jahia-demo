@@ -19,7 +19,6 @@
 }
 
 .btn {
-    composes: btnPrimary from '~/templates/css/global.module.css';
-    composes: btn from '~/templates/css/global.module.css';
+    composes: primary from '~/templates/css/button.module.css';
     composes: capitalize from '~/templates/css/global.module.css';
 }

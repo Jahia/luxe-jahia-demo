@@ -3,7 +3,7 @@
 @value gridBreakpoints_md, space_5, space_4, space_0, fs_6 from variables;
 
 .header {
-    composes: container from '~/commons/grid/Section.module.css';
+    composes: container from '~/commons/grid/grid.module.css';
     padding-top:space_4;
     padding-bottom:space_4;
     margin-bottom: space_5;
@@ -44,12 +44,15 @@
     margin-top: 40px;
 }
 
-.rowrelatedBlogPosts {
+.rowRelatedBlogPosts {
+    composes: rowCols_lg_3 from '~/commons/grid/grid.module.css';
+    composes: rowCols_md_2 from '~/commons/grid/grid.module.css';
+    composes: rowCols_sm_1 from '~/commons/grid/grid.module.css';
+}
+
+section .rowRelatedBlogPosts {
     --luxe-gutter-x: 0;
     --luxe-gutter-y: 0;
-    composes: rowCols_lg_3 from '~/commons/grid/Row.module.css';
-    composes: rowCols_md_2 from '~/commons/grid/Row.module.css';
-    composes: rowCols_sm_1 from '~/commons/grid/Row.module.css';
 
     > div {
         --luxe-gutter-x: 0;
