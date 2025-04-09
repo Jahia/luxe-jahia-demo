@@ -3,7 +3,6 @@
 @value gridBreakpoints_lg, space_0, space_2, space_4, space_5 from variables;
 
 .navbar {
-    --luxe-navbar-active-color: #c29b40;
     --luxe-navbar-padding-x: 0;
     --luxe-navbar-padding-y: .5rem;
     --luxe-navbar-color: var(--luxe-color-darkBlue);

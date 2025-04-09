@@ -7,3 +7,17 @@
 .label {
     composes: capitalize from '~/templates/css/global.module.css';
 }
+
+
+.btn {
+    composes: primary from '~/templates/css/button.module.css';
+    composes: capitalize from '~/templates/css/global.module.css';
+}
+
+section .btn {
+    --luxe-btn-padding-y: .5rem;
+    --luxe-btn-padding-x: 1rem;
+    --luxe-btn-font-size: 1.25rem;
+    --luxe-btn-border-radius: var(--luxe-border-radius-lg);
+    width: 100%;
+}

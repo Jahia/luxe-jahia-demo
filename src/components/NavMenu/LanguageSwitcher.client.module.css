@@ -7,10 +7,15 @@
 }
 
 .btn {
-    composes: btn from '~/templates/css/global.module.css';
+    composes: root from '~/templates/css/button.module.css';
     composes: capitalize from '~/templates/css/global.module.css';
+}
+
+.dropdown .btn{
     --luxe-btn-disabled-color: inherit;
+
     white-space: nowrap;
+
     &:after {
         color: var(--luxe-color-darkBlue40);
         display: inline-block;
@@ -23,11 +28,11 @@
         border-left: .3em solid transparent;
     }
 
-    /*&:global(.show) {*/
-    /*    color: var(--luxe-btn-active-color);*/
-    /*    background-color: var(--luxe-btn-active-bg);*/
-    /*    border-color: var(--luxe-btn-active-border-color);*/
-    /*}*/
+    &:global(.show) {
+        color: var(--luxe-btn-active-color);
+        background-color: var(--luxe-btn-active-bg);
+        border-color: var(--luxe-btn-active-border-color);
+    }
 }
 
 .menu {

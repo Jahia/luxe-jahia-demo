@@ -115,7 +115,7 @@ ol, ul, dl {
     margin-bottom: 1rem;
 }
 
-.display_1, .display_2, h4, h3, h2, h1 {
+.display_1, .display_2, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     font-family: var(--luxe-font-family-display);
 }
 
@@ -166,7 +166,7 @@ ol, ul, dl {
 }
 
 
-h6, h5, h4, h3, h2, h1 {
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     margin-top: 0;
     margin-bottom: .5rem;
     font-weight: 500;
@@ -174,7 +174,7 @@ h6, h5, h4, h3, h2, h1 {
     color: var(--luxe-heading-color)
 }
 
-h1 {
+h1, .h1 {
     font-size: calc(1.375rem + 1.5vw);
     @media (min-width: gridBreakpoints_xl) {
         & {
@@ -183,7 +183,7 @@ h1 {
     }
 }
 
-h2 {
+h2, .h2 {
     font-size: calc(1.325rem + .9vw);
     @media (min-width: gridBreakpoints_xl) {
         & {
@@ -192,7 +192,7 @@ h2 {
     }
 }
 
-h3 {
+h3, .h3 {
     font-size: calc(1.3rem + .6vw);
     @media (min-width: gridBreakpoints_xl) {
         & {
@@ -201,7 +201,7 @@ h3 {
     }
 }
 
-h4 {
+h4, .h4 {
     /*font-size: calc(1.275rem + .3vw);*/
     font-size: 22px;
     /*@media (min-width: gridBreakpoints_xl) {*/
@@ -211,14 +211,25 @@ h4 {
     /*}*/
 }
 
-h5 {
+h5, .h5 {
     /*font-size: 1.25rem;*/
     font-size: 24px;
     font-weight: 600;
 }
 
-h6 {
+h6, .h6 {
     font-size: 1rem;
+}
+
+main h1:not(:first-child),
+main .h1:not(:first-child),
+main h2:not(:first-child),
+main .h2:not(:first-child),
+main h3:not(:first-child),
+main .h3:not(:first-child),
+main h4:not(:first-child),
+main .h4:not(:first-child) {
+    margin-top: 1.5rem;
 }
 
 p {
@@ -258,9 +269,41 @@ main a, footer a {
     transition: all .2s ease-in-out;
 }
 
+address {
+    margin-bottom: 1rem;
+    font-style: normal;
+    line-height: inherit;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
 a {
     color: rgba(var(--luxe-link-color-rgb), var(--luxe-link-opacity, 1));
     text-decoration: underline;
+}
+
+button, [type=button], [type=reset], [type=submit] {
+    -webkit-appearance: button;
+}
+button, select {
+    text-transform: none;
+}
+input, button, select, optgroup, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button {
+    border-radius: 0;
+}
+
+button:focus:not(:focus-visible) {
+    outline: 0;
 }
 
 .richtext {

@@ -19,6 +19,7 @@
     }
     time {
         font-size: fs_6;
+        color: var(--luxe-secondary);
     }
 }
 
