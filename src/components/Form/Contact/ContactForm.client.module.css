@@ -3,7 +3,7 @@
 @value fs_6, space_2 from variables;
 
 .form {
-    composes: form from '~/templates/css/global.module.css';
+    composes: root from '~/templates/css/form.module.css';
     overflow: auto;
     position: relative;
 }
@@ -12,10 +12,6 @@
     composes: capitalize from '~/templates/css/global.module.css';
     font-size: fs_6;
     margin-bottom: space_2;
-}
-
-.control {
-    composes: formControl from '~/templates/css/global.module.css';
 }
 
 .btn {

@@ -3,6 +3,7 @@ import { t } from "i18next";
 import { submitContact } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 import classes from "~/components/Form/Contact/ContactForm.client.module.css";
+import form from "~/templates/css/form.module.css";
 import clsx from "clsx";
 
 interface ContactFormProps {
@@ -60,7 +61,7 @@ const ContactFormClient = ({
           type="text"
           name="contact-firstName"
           placeholder={t("form.contact.firstName")}
-          className={classes.control}
+          className={form.control}
           onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
@@ -75,7 +76,7 @@ const ContactFormClient = ({
           type="text"
           name="contact-lastName"
           placeholder={t("form.contact.lastName")}
-          className={classes.control}
+          className={form.control}
           onChange={(e) => setLastName(e.target.value)}
         />
       </div>
@@ -90,7 +91,7 @@ const ContactFormClient = ({
           type="email"
           name="contact-email"
           placeholder={t("form.contact.email")}
-          className={classes.control}
+          className={form.control}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
@@ -104,7 +105,7 @@ const ContactFormClient = ({
           defaultValue={message}
           name="contact-message"
           placeholder={t("form.contact.msg")}
-          className={classes.control}
+          className={form.control}
           onChange={(e) => setMessage(e.target.value)}
         />
       </div>

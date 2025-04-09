@@ -2,12 +2,6 @@
 
 @value fs_6 from variables;
 
-.alert {
-    composes: alert from '~/templates/css/global.module.css';
-    composes: alertDanger from '~/templates/css/global.module.css';
-    font-size: fs_6;
-}
-
 .fs6{
     font-size: fs_6;
 }

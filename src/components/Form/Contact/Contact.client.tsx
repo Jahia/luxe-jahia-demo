@@ -4,6 +4,8 @@ import ContactFormClient from "./ContactForm.client";
 import { getCookie, prefillWithUserContext } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 import classes from "~/components/Form/Contact/Contact.client.module.css";
+import alert from "~/templates/css/alert.module.css";
+import clsx from "clsx";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function ContactClient({
@@ -67,7 +69,7 @@ export default function ContactClient({
           dangerouslySetInnerHTML={{
             __html: t("form.contact.sendMessageError", { name, status: feedback.status }),
           }}
-          className={classes.alert}
+          className={clsx(alert.danger, classes.fs6)}
           role="alert"
         />
 
@@ -82,7 +84,7 @@ export default function ContactClient({
 
   if (unknownError) {
     return (
-      <p className={classes.alert} role="alert">
+      <p className={clsx(alert.danger, classes.fs6)} role="alert">
         {t("form.unknownError")}
       </p>
     );
