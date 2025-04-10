@@ -9,6 +9,7 @@ import { HeadingSection } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
+import alert from "~/templates/css/alert.module.css";
 
 jahiaComponent(
   {
@@ -54,7 +55,7 @@ jahiaComponent(
         {title && <HeadingSection title={title} />}
 
         {renderContext.isEditMode() && warn && (
-          <div className="alert alert-warning" role="alert">
+          <div className={alert.warning} role="alert">
             {warn}
           </div>
         )}
@@ -68,7 +69,7 @@ jahiaComponent(
             />
           ))}
         {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
-          <div className="alert alert-dark" role="alert">
+          <div className={alert.dark} role="alert">
             {t(noResultText || "query.noResult")}
           </div>
         )}

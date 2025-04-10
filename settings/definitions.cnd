@@ -13,8 +13,8 @@
 // These mixins create 3 categories to regroup types in the content type selector UI. Apply it to any definition you want
 // to see in these categories.
 [luxemix:luxeContent] > jmix:droppableContent, jmix:editorialContent mixin
-[luxemix:luxeLayout] > jmix:droppableContent mixin
-[luxemix:luxeForm] > jmix:droppableContent mixin
+[luxemix:luxeLayout] > jmix:droppableContent, jmix:editorialContent mixin
+[luxemix:luxeForm] > jmix:droppableContent, jmix:editorialContent mixin
 
 
 // This mixin is used to define which content is allowed to be returned by the JcrQuery content type. Add this mixin

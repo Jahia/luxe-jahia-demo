@@ -6,3 +6,4 @@ export * from "./HeadingSection";
 export * from "./grid";
 export * from "./CMPreview";
 export * from "./Contact";
+export * from "./Picture";

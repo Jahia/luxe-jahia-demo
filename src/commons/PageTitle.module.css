@@ -1,0 +1,15 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_md, space_5, space_4, space_0, fs_6 from variables;
+
+.main{
+    margin-bottom: space_0;
+    p {
+        --luxe-text-opacity: 1;
+        color:var(--luxe-color-secondary)
+    }
+}
+.title {
+    composes: hasDiamond from '~/templates/css/global.module.css';
+    margin-bottom: space_0;
+}

@@ -1,0 +1,29 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, space_0 from variables;
+
+.main {
+    h4 {
+        font-family: var(--luxe-font-family-display);
+        font-size: 70px;
+        color: var(--luxe-color-darkBlue);
+        margin-bottom: space_0;
+        text-align:center;
+        @media (max-width: calc(gridBreakpoints_lg - 0.02px)) {
+            & {
+                font-size: 42px;
+            }
+        }
+    }
+    p{
+        color: var(--luxe-color-primary);
+        font-size: 24px;
+        text-align:center;
+        margin-bottom: space_0;
+        @media (max-width: calc(gridBreakpoints_lg - 0.02px)) {
+            & {
+                font-size: 18px;
+            }
+        }
+    }
+}

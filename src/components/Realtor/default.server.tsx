@@ -6,6 +6,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
+import classes from "./default.module.css";
 
 jahiaComponent(
   {
@@ -28,29 +29,20 @@ jahiaComponent(
       image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
     }
 
-    return (
-      <a href={buildNodeUrl(currentNode)} className="lux-agentCard d-flex flex-column">
-        <img
-          className="lux-agentCard_image"
-          src={image.src}
-          alt={image.alt}
-          width="250px"
-          height="250px"
-        />
+    const jobPositionLanguagesTranslation = {
+      junior: t("realtor.jobPosition.junior"),
+      senior: t("realtor.jobPosition.senior"),
+      director: t("realtor.jobPosition.director"),
+    };
 
-        <div className="lux-agentCard_informations d-flex py-3 flex-column justify-content-center">
-          <h4 className="my-0">
+    return (
+      <a href={buildNodeUrl(currentNode)} className={classes.card}>
+        <img src={image.src} alt={image.alt} width="250px" height="250px" />
+        <div className={classes.main}>
+          <h4>
             {firstName} {lastName}
           </h4>
-          <p className="m-0 lux-capitalize">
-            {
-              {
-                junior: t("realtor.jobPosition.junior"),
-                senior: t("realtor.jobPosition.senior"),
-                director: t("realtor.jobPosition.director"),
-              }[jobPosition]
-            }
-          </p>
+          <p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
         </div>
       </a>
     );

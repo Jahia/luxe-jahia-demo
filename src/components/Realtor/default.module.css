@@ -1,0 +1,28 @@
+@value variables: "~/templates/css/variables.css";
+@value space_3, space_0 from variables;
+
+.card {
+    composes: card from '~/templates/css/global.module.css';
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: space_3;
+    padding-bottom: space_3;
+    font-size: 16px;
+    color: rgba(var(--luxe-color-dark-rgb), 0.4);
+    h4 {
+        margin-top: space_0;
+        margin-bottom: space_0;
+    }
+
+}
+
+.jobPosition {
+    composes: capitalize from '~/templates/css/global.module.css';
+    margin: space_0;
+}

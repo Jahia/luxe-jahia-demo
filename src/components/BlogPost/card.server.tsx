@@ -6,7 +6,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
-import classes from "./component.module.css";
+import classes from "./card.module.css";
 
 jahiaComponent(
   {

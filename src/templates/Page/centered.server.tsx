@@ -1,5 +1,6 @@
 import { Area, jahiaComponent } from "@jahia/javascript-modules-library";
 import { Layout } from "../Layout";
+import classes from "./centered.module.css";
 
 jahiaComponent(
   {
@@ -10,8 +11,8 @@ jahiaComponent(
   },
   () => {
     return (
-      <Layout className="lux-centeredLayout">
-        <Area name="header" allowedTypes={["luxe:header"]} numberOfItems={1} />
+      <Layout className={classes.main}>
+        <Area name="header" allowedNodeTypes={["luxe:header"]} numberOfItems={1} />
         <Area name="main" />
       </Layout>
     );

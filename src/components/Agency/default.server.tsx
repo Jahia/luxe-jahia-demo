@@ -6,7 +6,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { AgencyProps } from "./types";
-import classes from "./component.module.css";
+import classes from "./default.module.css";
 
 jahiaComponent(
   {

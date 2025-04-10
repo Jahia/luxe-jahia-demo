@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Col, Row } from "~/commons/grid";
-
+import classes from "./TextIllustrated.module.css";
 type textIllustratedTypes = {
   title: string;
   text: string;
@@ -24,21 +24,12 @@ export const TextIllustrated = ({
   link,
 }: textIllustratedTypes) => {
   return (
-    <Row className="lux-textIllustrated gap-5">
-      <Col className="lux-textIllustrated_image">
+    <Row className={classes.main}>
+      <Col className={classes.image}>
         <img src={image.src} alt={image.alt} height="480px" />
       </Col>
-      <Col
-        className={clsx(
-          "d-flex",
-          "flex-column",
-          "align-center",
-          "justify-content-center",
-          "lux-textIllustrated_text",
-          { "order-first": arrangement === "right" },
-        )}
-      >
-        <h2 className="mb-4 lux-hasDiamond">{title}</h2>
+      <Col className={clsx(classes.text, classes[arrangement])}>
+        <h2 className={classes.title}>{title}</h2>
         {/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
         <unwanteddiv
           dangerouslySetInnerHTML={{
@@ -46,7 +37,7 @@ export const TextIllustrated = ({
           }}
         />
         {link && (
-          <a className="lux-capitalize" href={link.href}>
+          <a className={classes.link} href={link.href}>
             {link.label}
           </a>
         )}

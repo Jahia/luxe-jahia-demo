@@ -9,7 +9,7 @@
 */
 
 .main {
-    /*composes: container from '~/commons/grid/Section.module.css';*/
+    composes: container from '~/commons/grid/grid.module.css';
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
@@ -30,7 +30,7 @@
 }
 
 .title {
-    composes: display_2 from '~/templates/css/styles.css';
+    composes: display_2 from '~/templates/css/global.module.css';
     display: flex;
     align-items: center;
     height: 350px;
@@ -62,7 +62,7 @@
 }
 
 .description {
-    composes: luxeBgSecondary from '~/templates/css/styles.css';
+    composes: bgSecondary from '~/templates/css/global.module.css';
     --description-offset: 50px;
     padding: 80px;
     font-size: 1.5rem;
