@@ -12,7 +12,7 @@ jahiaComponent(
   () => {
     return (
       <Layout className={classes.main}>
-        <Area name="header" allowedTypes={["luxe:header"]} numberOfItems={1} />
+        <Area name="header" allowedNodeTypes={["luxe:header"]} numberOfItems={1} />
         <Area name="main" />
       </Layout>
     );
