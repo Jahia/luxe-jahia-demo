@@ -1,4 +1,4 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { Figure, PageTitle, Row } from "~/commons";
 import type { HeaderProps } from "./types.js";
 import classes from "./textUp.module.css";
@@ -23,7 +23,7 @@ jahiaComponent(
         {imageNode && (
           <Row>
             <Figure
-              src={imageNode.getUrl()}
+              src={buildNodeUrl(imageNode)}
               alt={imageNode.getDisplayableName()}
               layout="imgFull"
             />

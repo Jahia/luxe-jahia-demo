@@ -1,4 +1,9 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
 import classes from "./card.module.css";
@@ -11,22 +16,20 @@ jahiaComponent(
     componentType: "view",
   },
   ({ title, subtitle, image: imageNode }: BlogPostProps, { currentNode, renderContext }) => {
-    const { buildStaticUrl } = useUrlBuilder();
-
     const image = {
-      src: buildStaticUrl({ assetPath: "img/img-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "Placeholder",
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.blog", { blog: title });
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);
     }
 
     return (
-      <a href={currentNode.getUrl()} className={classes.card}>
+      <a href={buildNodeUrl(currentNode)} className={classes.card}>
         <img src={image.src} alt={image.alt} height="265" />
         <h4>{title}</h4>
         {subtitle && <p>{subtitle}</p>}

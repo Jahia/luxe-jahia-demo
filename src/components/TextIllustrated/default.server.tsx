@@ -1,4 +1,9 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { TextIllustrated } from "./TextIllustrated";
 
@@ -17,14 +22,13 @@ jahiaComponent(
     }: { title: string; text: string; image: JCRNodeWrapper; arrangement: "left" | "right" },
     { renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const image = {
-      src: buildStaticUrl({ assetPath: "img/img-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "placeholder",
     };
 
     if (imageNode) {
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = imageNode.getDisplayableName();
 
       server.render.addCacheDependency({ node: imageNode }, renderContext);

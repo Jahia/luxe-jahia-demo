@@ -34,18 +34,13 @@ jahiaComponent(
             return (
               <Fragment key={node2Render.getIdentifier()}>
                 <span> / </span>
-                <Render node={node2Render} view="link" editable={false} />
+                <Render node={node2Render} view="link" readOnly />
               </Fragment>
             );
           }
 
           return (
-            <Render
-              key={node2Render.getIdentifier()}
-              node={node2Render}
-              view="link"
-              editable={false}
-            />
+            <Render key={node2Render.getIdentifier()} node={node2Render} view="link" readOnly />
           );
         })}
         <AddContentButtons />

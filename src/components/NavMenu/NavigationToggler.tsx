@@ -1,17 +1,10 @@
 import {
-  buildNavMenu,
-  getNodeProps,
+  buildNodeUrl,
+  getChildNodes,
   HydrateInBrowser,
   useServerContext,
 } from "@jahia/javascript-modules-library";
 import NavigationTogglerClient from "~/components/NavMenu/NavigationToggler.client";
-
-interface NavMenuProps {
-  base?: "home" | "currentPage" | "";
-  maxDepth: number;
-  startLevel: number;
-  menuItemView: string;
-}
 
 export interface RefinedNavMenuProps {
   node: {
@@ -20,47 +13,24 @@ export interface RefinedNavMenuProps {
     name: string;
     url: string;
   };
-  selected: boolean;
+  active: boolean;
 }
 
 export const NavigationToggler = () => {
-  const { renderContext, currentNode, currentResource } = useServerContext();
-  const {
-    base = "",
-    maxDepth,
-    startLevel,
-    menuItemView,
-  }: NavMenuProps = getNodeProps(currentNode, [
-    "base",
-    "maxDepth",
-    "startLevel",
-    "menuItemView",
-  ]) as NavMenuProps;
+  const { renderContext, mainNode } = useServerContext();
+  const mainPath = renderContext.getMainResource().getPath();
+  const home = renderContext.getSite().getHome();
+  const menu = getChildNodes(home, 10, 0, (node) => node.isNodeType("jnt:page"));
 
-  const menu = buildNavMenu(
-    maxDepth,
-    base,
-    menuItemView,
-    startLevel,
-    renderContext,
-    currentResource,
-  );
-
-  const refinedMenu: RefinedNavMenuProps[] = menu.map(({ node, selected }) => ({
+  const refinedMenu: RefinedNavMenuProps[] = menu.map((node) => ({
     node: {
       uuid: node.getIdentifier(),
       path: node.getPath(),
       name: node.getDisplayableName(),
-      url: node.getUrl(),
+      url: buildNodeUrl(node),
     },
-    selected,
+    active: node === mainNode || mainPath.includes(node.getPath()),
   }));
 
-  const mainPath = renderContext.getMainResource().getPath();
-  return (
-    <HydrateInBrowser
-      child={NavigationTogglerClient}
-      props={{ menu: refinedMenu, mainPath: mainPath }}
-    />
-  );
+  return <HydrateInBrowser child={NavigationTogglerClient} props={{ menu: refinedMenu }} />;
 };

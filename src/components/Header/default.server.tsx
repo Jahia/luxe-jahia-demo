@@ -1,4 +1,4 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import type { HeaderProps } from "./types";
 import { Picture } from "~/commons/Picture";
 import classes from "./default.module.css";
@@ -20,17 +20,17 @@ jahiaComponent(
         {imageNode && (
           <Picture
             image={{
-              src: `${imageNode.getUrl(["width:480"])}?w=480&h=695`,
+              src: `${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`,
               alt: imageNode.getDisplayableName(),
             }}
             sources={[
               {
                 media: "(min-width: 960px)",
-                srcSet: `${imageNode.getUrl(["width:1920"])}?w=1920&h=695`,
+                srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "1920" } })}?w=1920&h=695`,
               },
               {
                 media: "(min-width: 480px)",
-                srcSet: `${imageNode.getUrl(["width:960"])}?w=960&h=695`,
+                srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "960" } })}?w=960&h=695`,
               },
             ]}
             height="695px"

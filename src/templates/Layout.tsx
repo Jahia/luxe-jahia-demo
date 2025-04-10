@@ -2,10 +2,10 @@ import type { JSX, ReactNode } from "react";
 import {
   AbsoluteArea,
   AddResources,
+  buildModuleFileUrl,
   getNodeProps,
   Render,
   useServerContext,
-  useUrlBuilder,
 } from "@jahia/javascript-modules-library";
 import { Col, Row, Section } from "~/commons";
 import { t } from "i18next";
@@ -38,11 +38,16 @@ export const Layout = ({
   className?: string;
   children: ReactNode;
 }): JSX.Element => {
+  const { renderContext } = useServerContext();
   return (
     <>
       <HtmlHead>{head}</HtmlHead>
       <body>
-        <AbsoluteArea name="navArea" allowedTypes={["luxe:navMenu"]} numberOfItems={1} />
+        <AbsoluteArea
+          name="nav"
+          parent={renderContext.getSite().getHome()}
+          nodeType="luxe:navigationMenu"
+        />
         <main className={className}>{children}</main>
         <HtmlFooter />
       </body>
@@ -57,18 +62,14 @@ export const Layout = ({
  * @constructor
  */
 const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
-  const { buildStaticUrl } = useUrlBuilder();
   return (
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <SeoMetaTags />
 
-      <link rel="icon" type="image/png" href={buildStaticUrl({ assetPath: "favicon-32x32.png" })} />
-      <AddResources
-        type="css"
-        resources={buildStaticUrl({ assetPath: "../dist/server/style.css" })}
-      />
+      <link rel="icon" type="image/png" href={buildModuleFileUrl("static/favicon-32x32.png")} />
+      <AddResources type="css" resources={buildModuleFileUrl("dist/server/style.css")} />
       {children}
     </head>
   );
@@ -91,6 +92,7 @@ const loginForm = {
  * @constructor
  */
 const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
+  const { renderContext } = useServerContext();
   return (
     <Section component="footer" className={className}>
       <Row>
@@ -150,8 +152,9 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
           {/* numberOfItems={4} */}
           <AbsoluteArea
             name="footerNavLinkArea"
-            areaType="jnt:linkList"
-            allowedTypes={["jnt:nodeLink", "jnt:externalLink"]}
+            parent={renderContext.getSite().getHome()}
+            nodeType="jnt:linkList"
+            allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
           />
         </Col>
         <Col className={classes.copyright}>

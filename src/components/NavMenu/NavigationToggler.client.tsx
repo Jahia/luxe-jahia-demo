@@ -3,13 +3,7 @@ import classes from "~/components/NavMenu/NavigationToggler.client.module.css";
 import clsx from "clsx";
 import type { RefinedNavMenuProps } from "~/components/NavMenu/NavigationToggler";
 
-export default function NavigationTogglerClient({
-  menu,
-  mainPath,
-}: {
-  menu: RefinedNavMenuProps[];
-  mainPath: string;
-}) {
+export default function NavigationTogglerClient({ menu }: { menu: RefinedNavMenuProps[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const togglerHandler = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -28,12 +22,12 @@ export default function NavigationTogglerClient({
       </button>
       <div id="navbarSupportedContent" className={clsx(classes.collapse, { show: isOpen })}>
         <ul className={classes.nav}>
-          {menu.map(({ node, selected }) => (
+          {menu.map(({ node, active }) => (
             <li key={node.uuid}>
               <a
                 href={node.url}
                 className={clsx(classes.link, {
-                  active: selected || mainPath.includes(node.path),
+                  active: active,
                 })}
               >
                 {node.name}

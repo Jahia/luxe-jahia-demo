@@ -1,4 +1,4 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import { Figure, Row } from "~/commons";
 import type { HeaderProps } from "./types";
 import classes from "./textDown.module.css";
@@ -20,7 +20,7 @@ jahiaComponent(
         {imageNode && (
           <Row>
             <Figure
-              src={imageNode.getUrl()}
+              src={buildNodeUrl(imageNode)}
               alt={imageNode.getDisplayableName()}
               layout="imgFull"
             />

@@ -1,4 +1,9 @@
-import { jahiaComponent, server, useUrlBuilder } from "@jahia/javascript-modules-library";
+import {
+  buildModuleFileUrl,
+  buildNodeUrl,
+  jahiaComponent,
+  server,
+} from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import classes from "./default.module.css";
@@ -13,15 +18,14 @@ jahiaComponent(
     { firstName, lastName, jobPosition, image: imageNode }: RealtorProps,
     { currentNode, renderContext },
   ) => {
-    const { buildStaticUrl } = useUrlBuilder();
     const image = {
-      src: buildStaticUrl({ assetPath: "img/agent-placeholder.jpg" }),
+      src: buildModuleFileUrl("static/img/agent-placeholder.jpg"),
       alt: "Placeholder",
     };
 
     if (imageNode) {
       server.render.addCacheDependency({ node: imageNode }, renderContext);
-      image.src = imageNode.getUrl();
+      image.src = buildNodeUrl(imageNode);
       image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
     }
 
@@ -32,7 +36,7 @@ jahiaComponent(
     };
 
     return (
-      <a href={currentNode.getUrl()} className={classes.card}>
+      <a href={buildNodeUrl(currentNode)} className={classes.card}>
         <img src={image.src} alt={image.alt} width="250px" height="250px" />
         <div className={classes.main}>
           <h4>

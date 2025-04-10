@@ -12,7 +12,6 @@ import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
-import { Fragment } from "react";
 
 jahiaComponent(
   {
@@ -67,9 +66,9 @@ jahiaComponent(
               return (
                 <Col key={node.getIdentifier()}>
                   <Render
-                    node={node as JCRNodeWrapper}
-                    view={subNodeView || "default"}
-                    editable={false}
+                      node={node as JCRNodeWrapper}
+                      view={subNodeView || "default"}
+                      readOnly
                   />
                 </Col>
               );
