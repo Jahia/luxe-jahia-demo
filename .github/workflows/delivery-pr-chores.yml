@@ -3,15 +3,15 @@
 name: Delivery - PR Chores
 
 on:
-    pull_request:
-        types:
-            - opened
-            - reopened
-            - edited
-            - synchronize
-    pull_request_review:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize  
+  pull_request_review:
 
 jobs:
-    WF:
-        uses: Jahia/jahia-modules-action/.github/workflows/reusable-delivery-pr-chores.yml@v2
-        secrets: inherit
+  WF:
+    uses: Jahia/jahia-modules-action/.github/workflows/reusable-delivery-pr-chores.yml@v2
+    secrets: inherit
