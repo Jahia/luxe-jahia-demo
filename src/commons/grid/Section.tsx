@@ -1,8 +1,8 @@
 import type { ElementType } from "react";
 import type { CommonsProps } from "../types";
-import classes from "./Section.module.css";
+import classes from "./grid.module.css";
 
-interface sectionProps extends CommonsProps {
+interface SectionProps extends CommonsProps {
   component?: ElementType;
 }
 
@@ -10,7 +10,7 @@ export const Section = ({
   className,
   component: Component = "section",
   children,
-}: sectionProps) => {
+}: SectionProps) => {
   return (
     <Component className={className}>
       <div className={classes.container}>{children}</div>

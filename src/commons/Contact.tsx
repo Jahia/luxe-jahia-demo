@@ -31,20 +31,9 @@ export const Contact = ({ addresses, phone, email }: ContactProps) => {
               <a href={`mailto:${email}`}>{email}</a>
             </div>
           </address>
-          <button
-            type="button"
-            className="btn btn-primary btn-lg w-100 lux-capitalize"
-            data-bs-toggle="modal"
-            data-bs-target="#modalContact"
-          >
+          <button type="button" className={classes.btn}>
             {t("section.contact.btn")}
           </button>
-        </Col>
-        <Col>
-          <></>
-          {/* <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
-                            map here
-                        </div> */}
         </Col>
       </Row>
     </Section>

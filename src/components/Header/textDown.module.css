@@ -1,0 +1,29 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_md, space_5, space_4, space_0 from variables;
+
+.header {
+  composes: container from "~/commons/grid/grid.module.css";
+  padding-top: space_4;
+  padding-bottom: space_4;
+  margin-bottom: space_5;
+  @media (min-width: gridBreakpoints_md) {
+    & {
+      padding-top: space_5;
+      padding-bottom: space_5;
+    }
+  }
+
+  hgroup {
+    text-align: center;
+  }
+}
+.title {
+  composes: display_1 from "~/templates/css/global.module.css";
+  margin-bottom: space_0;
+}
+
+.hp {
+  composes: h2 from "~/templates/css/global.module.css";
+  margin-top: space_0;
+}

@@ -492,8 +492,8 @@ __metadata:
   linkType: hard
 
 "@jahia/javascript-modules-library@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@jahia/javascript-modules-library@npm:0.6.0"
+  version: 0.6.1
+  resolution: "@jahia/javascript-modules-library@npm:0.6.1"
   dependencies:
     dotenv: "npm:^16.4.7"
   peerDependencies:
@@ -515,13 +515,13 @@ __metadata:
       optional: true
   bin:
     jahia-deploy: bin/jahia-deploy.mjs
-  checksum: 10c0/f81a9b1967f6ad0f6d5e7a0254f28a89877bbf5ebcf6299667daec069ed54ac2752f6a83cd98ae335da2621ac786c0c1ca77e3afffa3b7ddaed28503a1cab001
+  checksum: 10c0/7cbc7ac960f8853a55d690d7631af6fc7c61636d7a7cd88e3e3481e4bceb14be21f0e18d150d7f441f9989700a65b1cbcfc64d45574f397bff984a185b8458e0
   languageName: node
   linkType: hard
 
 "@jahia/vite-plugin@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@jahia/vite-plugin@npm:0.6.0"
+  version: 0.6.1
+  resolution: "@jahia/vite-plugin@npm:0.6.1"
   dependencies:
     "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/pluginutils": "npm:^5.1.4"
@@ -530,7 +530,7 @@ __metadata:
     zimmerframe: "npm:^1.1.2"
   peerDependencies:
     vite: ">=6.0.0"
-  checksum: 10c0/fb02dd2c94f5c68cadb4d9975961f8fe0f44e31c8b173c6b4df0e3589dc57ee5f29bc665475af46e529e4f94dbe054c73874280f5a1413bc2490bc58bc36f955
+  checksum: 10c0/c94040f5871bf5dbb01b2b7f436988cd50c829d8e8fe0552ceac220ebf1586c1b15409b7b03e006863d5d18c6c0aaedb7b6730c56629d38439c0ffe58f41b1e1
   languageName: node
   linkType: hard
 

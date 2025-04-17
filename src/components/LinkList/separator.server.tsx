@@ -33,7 +33,7 @@ jahiaComponent(
           if (index > 0) {
             return (
               <Fragment key={node2Render.getIdentifier()}>
-                <span className="lux-site-footer_disclaimer_seprator"> / </span>
+                <span> / </span>
                 <Render node={node2Render} view="link" readOnly />
               </Fragment>
             );

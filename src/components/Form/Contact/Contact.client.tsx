@@ -3,6 +3,9 @@ import { t } from "i18next";
 import ContactFormClient from "./ContactForm.client";
 import { getCookie, prefillWithUserContext } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
+import classes from "~/components/Form/Contact/Contact.client.module.css";
+import alert from "~/templates/css/alert.module.css";
+import clsx from "clsx";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function ContactClient({
@@ -16,17 +19,11 @@ export default function ContactClient({
 }) {
   const [feedback, setFeedback] = useState<FeedbackProps>({ show: false, msgProps: {} });
   const [unknownError, setUnknownError] = useState<boolean>(false);
-  // const [prefill, setPrefill] = useState<MsgPropsProps | EmptyObject>({});
 
   const prefill = useMemo<MsgPropsProps | EmptyObject>(
     () => (Object.keys(feedback.msgProps).length ? feedback.msgProps : {}),
     [feedback],
   );
-  // useEffect(() => {
-  // if (Object.keys(feedback.msgProps).length) {
-  //   setPrefill(feedback.msgProps);
-  // }
-  // }, [feedback]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.digitalData) {
@@ -54,7 +51,7 @@ export default function ContactClient({
           dangerouslySetInnerHTML={{
             __html: personalizedFeedbackMsg,
           }}
-          className="info fs-6"
+          className={classes.fs6}
           role="info"
         />
       );
@@ -66,12 +63,12 @@ export default function ContactClient({
           dangerouslySetInnerHTML={{
             __html: t("form.contact.sendMessageError", { name, status: feedback.status }),
           }}
-          className="alert alert-danger fs-6"
+          className={clsx(alert.danger, classes.fs6)}
           role="alert"
         />
 
         <p>
-          <a href="" className="lux-capitalize" onClick={handleRedo}>
+          <a href="" className={classes.capitalize} onClick={handleRedo}>
             {t("form.contact.sendMessageAgain")}
           </a>
         </p>
@@ -81,8 +78,8 @@ export default function ContactClient({
 
   if (unknownError) {
     return (
-      <p className="alert alert-danger fs-6" role="alert">
-        {t("form.unknownError")} et voilà
+      <p className={clsx(alert.danger, classes.fs6)} role="alert">
+        {t("form.unknownError")}
       </p>
     );
   }

@@ -6,6 +6,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { EstateProps } from "./types";
+import classes from "./default.module.css";
 
 jahiaComponent(
   {
@@ -32,14 +33,14 @@ jahiaComponent(
     }
 
     return (
-      <a href={buildNodeUrl(currentNode)} className="lux-estateCard">
+      <a href={buildNodeUrl(currentNode)} className={classes.card}>
         <img src={image.src} alt={image.alt} height="265" />
-        <h4 className="my-2">{title}</h4>
-        <p className="lux-estateCard_informations">
-          {bedrooms} {t("estate.bedrooms.label")} <span className="lux-diamond">✦</span>{" "}
-          {surface.toLocaleString(locale)} m<sup>2</sup>
+        <h4>{title}</h4>
+        <p>
+          {bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface.toLocaleString(locale)} m
+          <sup>2</sup>
         </p>
-        <strong className="lux-estateCard_price">{price.toLocaleString(locale)}€</strong>
+        <strong>{price.toLocaleString(locale)}€</strong>
       </a>
     );
   },

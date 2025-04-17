@@ -5,7 +5,7 @@ export interface BlogPostProps {
   "subtitle"?: string;
   "image": JCRNodeWrapper;
   "body": string;
-  "date": Date;
+  "date": string;
   "relatedBlogPosts"?: JCRNodeWrapper[];
   "j:defaultCategory": JCRNodeWrapper[];
 }

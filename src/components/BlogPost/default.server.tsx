@@ -6,6 +6,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
+import classes from "./default.module.css";
 
 jahiaComponent(
   {
@@ -27,14 +28,8 @@ jahiaComponent(
     }
 
     return (
-      <a className="lux-agencyCard d-flex" href={buildNodeUrl(currentNode)}>
-        <img
-          className="lux-agencyCard_image me-4"
-          src={image.src}
-          alt={image.alt}
-          width="200"
-          height="200"
-        />
+      <a className={classes.card} href={buildNodeUrl(currentNode)}>
+        <img className={classes.image} src={image.src} alt={image.alt} width="200" height="200" />
 
         <div className="d-flex flex-column justify-content-center flex-fill">
           <h2 className="my-0 lux-capitalize">{title}</h2>

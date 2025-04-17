@@ -1,0 +1,18 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_md, space_2, space_3, space_4 from variables;
+
+.header {
+  composes: container from "~/commons/grid/grid.module.css";
+  display: flex;
+  flex-direction: column;
+  gap: space_3;
+  padding-top: space_2;
+  padding-bottom: space_2;
+  @media (min-width: gridBreakpoints_md) {
+    & {
+      padding-top: space_4;
+      padding-bottom: space_4;
+    }
+  }
+}

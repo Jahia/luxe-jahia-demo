@@ -1,7 +1,7 @@
-import { clsx } from "clsx";
 import { login } from "./utils.client";
 import { t } from "i18next";
 import type { LoginCommonProps } from "./types";
+import classes from "~/components/Form/Login/LoginCard.client.module.css";
 
 interface LoginCardClientProps {
   username: string;
@@ -24,20 +24,8 @@ export const LoginCardClient = ({
   password,
   userinfo,
   loginCommonProps,
-  className,
   ...props
 }: LoginCardClientProps) => {
-  const styles = clsx(
-    "lux-loginCard",
-    // {'lux-loginCard_selected': isSelected},
-    "rounded-2",
-    " align-items-center",
-    "p-3",
-    "d-flex",
-    "flex-row",
-    className,
-  );
-
   const handleClick = () =>
     login({
       username,
@@ -47,19 +35,18 @@ export const LoginCardClient = ({
     });
 
   return (
-    <div role="button" className={styles} {...props} onClick={handleClick}>
+    <div role="button" className={classes.card} {...props} onClick={handleClick}>
       {userinfo.avatar && (
         <img
           src={userinfo.avatar.url}
-          className="img-fluid rounded-circle me-3"
           alt={t(userinfo.avatar.alt, { username })}
           width="90"
           height="90"
         />
       )}
-      <div className="flex-fill">
-        <h2 className="lux-loginCard_title my-0">{userinfo.fullname}</h2>
-        {userinfo.function && <h4 className="lux-loginCard_subtitle">{t(userinfo.function)}</h4>}
+      <div>
+        <h2>{userinfo.fullname}</h2>
+        {userinfo.function && <h4>{t(userinfo.function)}</h4>}
         {userinfo.description && t(userinfo.description)}
       </div>
     </div>

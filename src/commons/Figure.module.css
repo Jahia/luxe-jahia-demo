@@ -1,0 +1,47 @@
+@value variables: "~/templates/css/variables.css";
+
+@value space_3, space_5 from variables;
+
+.figure {
+  margin-bottom: space_3;
+  &:not(:first-child) {
+    margin-top: space_3;
+  }
+  img {
+    max-width: 100%;
+    width: 640px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  &.imgFull {
+    img {
+      width: 100%;
+      max-height: 700px;
+    }
+
+    figcaption {
+      text-align: center;
+    }
+  }
+  &.imgLeft {
+    display: flex;
+    figcaption {
+      flex: 1 1 auto;
+      align-self: center;
+      margin-left: space_5;
+    }
+  }
+  &.imgRight {
+    display: flex;
+    figcaption {
+      flex: 1 1 auto;
+      align-self: center;
+      text-align: right;
+      margin-right: space_5;
+    }
+  }
+  &.imgCentered {
+    display: flex;
+  }
+}

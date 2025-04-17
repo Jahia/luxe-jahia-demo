@@ -1,5 +1,7 @@
 import { AbsoluteArea, jahiaComponent } from "@jahia/javascript-modules-library";
-import clsx from "clsx";
+import { Col, Row } from "~/commons";
+import classes from "./default.module.css";
+import type { SectionProps } from "~/components/Section/default.server";
 
 jahiaComponent(
   {
@@ -11,17 +13,20 @@ jahiaComponent(
     const iColsNumber = Number(colsNumber);
     const limit = isNaN(iColsNumber) ? 1 : iColsNumber;
     // Create an array of integers from 0 to 'limit - 1'
-    const cols = Array.from(Array(limit).keys());
+    const cols = Array.from({ length: limit }, (_, i) => i);
 
-    const arrangement = currentResource.getModuleParams().get("arrangement");
+    const arrangement = currentResource
+      .getModuleParams()
+      .get("arrangement") as SectionProps["arrangement"];
+
     return (
-      <div className={clsx("row", arrangement)}>
+      <Row className={classes[arrangement]}>
         {cols.map((col) => (
-          <div key={col} className={clsx("col")}>
+          <Col key={col}>
             <AbsoluteArea parent={currentNode} name={`${currentNode.getName()}-col-${col}`} />
-          </div>
+          </Col>
         ))}
-      </div>
+      </Row>
     );
   },
 );

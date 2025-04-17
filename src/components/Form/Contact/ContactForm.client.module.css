@@ -1,0 +1,20 @@
+@value variables: "~/templates/css/variables.css";
+
+@value fs_6, space_2 from variables;
+
+.form {
+  composes: root from "~/templates/css/form.module.css";
+  overflow: auto;
+  position: relative;
+}
+
+.label {
+  composes: capitalize from "~/templates/css/global.module.css";
+  font-size: fs_6;
+  margin-bottom: space_2;
+}
+
+.btn {
+  composes: primary from "~/templates/css/button.module.css";
+  composes: capitalize from "~/templates/css/global.module.css";
+}
