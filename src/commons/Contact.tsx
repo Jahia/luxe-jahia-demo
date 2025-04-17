@@ -35,12 +35,6 @@ export const Contact = ({ addresses, phone, email }: ContactProps) => {
             {t("section.contact.btn")}
           </button>
         </Col>
-        <Col>
-          <></>
-          {/* <div className="d-flex justify-content-center align-items-center bg-secondary flex-fill h-100">
-                            map here
-                        </div> */}
-        </Col>
       </Row>
     </Section>
   );
