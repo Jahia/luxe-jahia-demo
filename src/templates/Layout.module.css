@@ -1,47 +1,47 @@
 footer {
-    background-color: var(--luxe-color-darkBlue);
-    padding-top: 40px;
+  background-color: var(--luxe-color-darkBlue);
+  padding-top: 40px;
+  color: var(--luxe-color-gray);
+
+  h5 {
     color: var(--luxe-color-gray);
+  }
 
-    h5 {
-        color: var(--luxe-color-gray);
+  a {
+    color: rgba(var(--luxe-color-gray-rgb), 0.8);
+    text-decoration: none;
+    font-size: 16px;
+    border: 0;
+
+    &:hover {
+      color: var(--luxe-color-gray);
+      border-bottom: 2px solid var(--luxe-primary);
     }
-
-    a {
-        color: rgba(var(--luxe-color-gray-rgb), 0.8);
-        text-decoration: none;
-        font-size: 16px;
-        border: 0;
-
-        &:hover {
-            color: var(--luxe-color-gray);
-            border-bottom: 2px solid var(--luxe-primary);
-        }
-    }
+  }
 }
 
 .list {
-    composes: listUnstyled from '~/templates/css/global.module.css';
+  composes: listUnstyled from "~/templates/css/global.module.css";
 }
 
 .capitalize {
-    composes: capitalize from '~/templates/css/global.module.css';
+  composes: capitalize from "~/templates/css/global.module.css";
 }
 
 .fullTextCapitalize {
-    display: inline-block;
-    text-transform: capitalize;
+  display: inline-block;
+  text-transform: capitalize;
 }
 
 .disclaimer {
-    font-size: 12px;
-    opacity: .6;
-    padding-bottom: 1rem;
-    a {
-        font-size: inherit;
-    }
+  font-size: 12px;
+  opacity: 0.6;
+  padding-bottom: 1rem;
+  a {
+    font-size: inherit;
+  }
 }
 
 .copyright {
-    text-align: right;
+  text-align: right;
 }

@@ -134,18 +134,6 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
         <Col className={grid.col_5}>
           <Render content={loginForm} />
         </Col>
-        <Col className={grid.col_3}>
-          <></>
-          {/* <h5>Join us</h5> */}
-          {/* <ul className="list-inline"> */}
-          {/*    <li className="list-inline-item"> */}
-          {/*        <a href="#">youtube</a> */}
-          {/*    </li> */}
-          {/*    <li className="list-inline-item"> */}
-          {/*        <a href="#">Github</a> */}
-          {/*    </li> */}
-          {/* </ul> */}
-        </Col>
       </Row>
       <Row className={classes.disclaimer}>
         <Col>

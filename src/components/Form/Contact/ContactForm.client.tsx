@@ -27,25 +27,8 @@ const ContactFormClient = ({
   const [lastName, setLastName] = useState(prefill.lastName);
   const [email, setEmail] = useState(prefill.email);
   const [message, setMessage] = useState(prefill.message);
-  // Const formRef = useRef(null);
 
   const isFormValid = firstName && lastName && email && message && mode !== "edit";
-
-  // useEffect(() => {
-  //   const { firstName, lastName, email } = prefill;
-  //
-  //   if (firstName) {
-  //     setFirstName(firstName);
-  //   }
-  //
-  //   if (lastName) {
-  //     setLastName(lastName);
-  //   }
-  //
-  //   if (email) {
-  //     setEmail(email);
-  //   }
-  // }, [prefill]);
 
   return (
     <form id="contactForm" className={classes.form}>

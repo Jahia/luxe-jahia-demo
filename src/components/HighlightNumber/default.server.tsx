@@ -1,5 +1,4 @@
 import { jahiaComponent } from "@jahia/javascript-modules-library";
-import clsx from "clsx";
 import classes from "./default.module.css";
 jahiaComponent(
   {

@@ -1,4 +1,3 @@
-import { clsx } from "clsx";
 import { login } from "./utils.client";
 import { t } from "i18next";
 import type { LoginCommonProps } from "./types";
@@ -25,20 +24,8 @@ export const LoginCardClient = ({
   password,
   userinfo,
   loginCommonProps,
-  className,
   ...props
 }: LoginCardClientProps) => {
-  const styles = clsx(
-    "lux-loginCard",
-    // {'lux-loginCard_selected': isSelected},
-    "rounded-2",
-    " align-items-center",
-    "p-3",
-    "d-flex",
-    "flex-row",
-    className,
-  );
-
   const handleClick = () =>
     login({
       username,

@@ -30,11 +30,11 @@ jahiaComponent(
     }
 
     return (
-      <nav className={clsx(classes.navbar /*"navbar-expand-lg"*/)}>
+      <nav className={clsx(classes.navbar)}>
         <div className={classes.containerFluid}>
           <a href={buildNodeUrl(home)} className={classes.brand}>
             {brandImage && (
-              <img src={buildNodeUrl(brandImage)} alt={`Logo-${siteName}`} width="100px" />
+              <img src={buildNodeUrl(brandImage)} alt={`Logo-${siteName}`} width="100" />
             )}
             {brandText}
           </a>

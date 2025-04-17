@@ -173,16 +173,6 @@ const LoginFormClient = ({
           </form>
         </div>
       </div>
-      {/* <footer className="modal-footer p-6">
-                <button type="button" className="btn btn-secondary" onClick={close}>Cancel</button>
-                <button type="button"
-                        form="loginForm"
-                        className="btn btn-primary lux-capitalize"
-                        onClick={login}
-                >
-                    {t('form.login.login')}
-                </button>
-            </footer> */}
     </div>
   );
 };

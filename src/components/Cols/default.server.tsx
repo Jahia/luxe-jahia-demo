@@ -13,9 +13,9 @@ jahiaComponent(
     const iColsNumber = Number(colsNumber);
     const limit = isNaN(iColsNumber) ? 1 : iColsNumber;
     // Create an array of integers from 0 to 'limit - 1'
-    const cols = Array.from(Array(limit).keys());
+    const cols = Array.from({ length: limit }, (_, i) => i);
 
-    const arrangement: SectionProps["arrangement"] = currentResource
+    const arrangement = currentResource
       .getModuleParams()
       .get("arrangement") as SectionProps["arrangement"];
 

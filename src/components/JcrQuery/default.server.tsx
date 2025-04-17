@@ -7,7 +7,6 @@ import {
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./default.module.css";
 import alert from "~/templates/css/alert.module.css";
-
 import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
@@ -65,11 +64,7 @@ jahiaComponent(
             {queryContent.map((node) => {
               return (
                 <Col key={node.getIdentifier()}>
-                  <Render
-                      node={node as JCRNodeWrapper}
-                      view={subNodeView || "default"}
-                      readOnly
-                  />
+                  <Render node={node as JCRNodeWrapper} view={subNodeView || "default"} readOnly />
                 </Col>
               );
             })}

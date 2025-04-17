@@ -19,17 +19,11 @@ export default function ContactClient({
 }) {
   const [feedback, setFeedback] = useState<FeedbackProps>({ show: false, msgProps: {} });
   const [unknownError, setUnknownError] = useState<boolean>(false);
-  // const [prefill, setPrefill] = useState<MsgPropsProps | EmptyObject>({});
 
   const prefill = useMemo<MsgPropsProps | EmptyObject>(
     () => (Object.keys(feedback.msgProps).length ? feedback.msgProps : {}),
     [feedback],
   );
-  // useEffect(() => {
-  // if (Object.keys(feedback.msgProps).length) {
-  //   setPrefill(feedback.msgProps);
-  // }
-  // }, [feedback]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.digitalData) {
