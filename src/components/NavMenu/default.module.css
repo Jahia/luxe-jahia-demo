@@ -1,0 +1,71 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, space_4, space_5 from variables;
+
+.navbar {
+  --luxe-navbar-padding-x: 0;
+  --luxe-navbar-padding-y: 0.5rem;
+  --luxe-navbar-color: var(--luxe-color-darkBlue);
+  --luxe-navbar-hover-color: var(--luxe-color-darkBlue40);
+  --luxe-navbar-disabled-color: rgba(var(--luxe-emphasis-color-rgb), 0.3);
+  --luxe-navbar-active-color: rgba(var(--luxe-color-gold-rgb), 1);
+  --luxe-navbar-brand-padding-y: 0.3125rem;
+  --luxe-navbar-brand-margin-end: 1rem;
+  --luxe-navbar-brand-font-size: 1.25rem;
+  --luxe-navbar-brand-color: rgba(var(--luxe-emphasis-color-rgb), 1);
+  --luxe-navbar-brand-hover-color: rgba(var(--luxe-emphasis-color-rgb), 1);
+  --luxe-navbar-nav-link-padding-x: 0.5rem;
+  --luxe-navbar-toggler-padding-y: 0.25rem;
+  --luxe-navbar-toggler-padding-x: 0.75rem;
+  --luxe-navbar-toggler-font-size: 1.25rem;
+  --luxe-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  --luxe-navbar-toggler-border-color: rgba(var(--luxe-emphasis-color-rgb), 0.15);
+  --luxe-navbar-toggler-border-radius: var(--luxe-border-radius);
+  --luxe-navbar-toggler-focus-width: 0.25rem;
+  --luxe-navbar-toggler-transition: box-shadow 0.15s ease-in-out;
+  --luxe-bg-opacity: 1;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  /*padding: var(--luxe-navbar-padding-y) var(--luxe-navbar-padding-x);*/
+  background-color: rgba(var(--luxe-body-bg-rgb), var(--luxe-bg-opacity));
+  padding: space_4 space_5;
+
+  /* expand_lg */
+  @media (min-width: gridBreakpoints_lg) {
+    & {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+
+  .brand {
+    padding-top: var(--luxe-navbar-brand-padding-y);
+    padding-bottom: var(--luxe-navbar-brand-padding-y);
+    margin-right: var(--luxe-navbar-brand-margin-end);
+    font-size: var(--luxe-navbar-brand-font-size);
+    color: var(--luxe-navbar-brand-color);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      color: var(--luxe-navbar-brand-hover-color);
+    }
+  }
+}
+
+.containerFluid {
+  composes: containerFluid from "~/commons/grid/grid.module.css";
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+  gap: space_5;
+
+  > div {
+    display: contents;
+  }
+}

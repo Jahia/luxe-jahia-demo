@@ -1,0 +1,48 @@
+@value variables: "~/templates/css/variables.css";
+@value gridBreakpoints_sm, space_5, space_4, space_0 from variables;
+
+.main {
+  gap: space_5;
+  & + & {
+    margin-top: 80px;
+  }
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &.right {
+    order: -1;
+  }
+}
+
+.title {
+  composes: hasDiamond from "~/templates/css/global.module.css";
+  margin-bottom: space_4;
+}
+.link {
+  composes: capitalize from "~/templates/css/global.module.css";
+}
+@media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
+  .main {
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+  }
+
+  .image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.15;
+    padding: space_0;
+
+    img {
+      border-radius: 0;
+    }
+  }
+  .text {
+    padding: space_0 !important;
+    margin: 16px;
+  }
+}

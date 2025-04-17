@@ -1,0 +1,11 @@
+@value variables: "~/templates/css/variables.css";
+
+@value fs_6 from variables;
+
+.fs6 {
+  font-size: fs_6;
+}
+
+.capitalize {
+  composes: capitalize from "~/templates/css/global.module.css";
+}

@@ -1,0 +1,39 @@
+.root {
+  --luxe-alert-bg: transparent;
+  --luxe-alert-padding-x: 1rem;
+  --luxe-alert-padding-y: 1rem;
+  --luxe-alert-margin-bottom: 1rem;
+  --luxe-alert-color: inherit;
+  --luxe-alert-border-color: transparent;
+  --luxe-alert-border: var(--luxe-border-width) solid var(--luxe-alert-border-color);
+  --luxe-alert-border-radius: var(--luxe-border-radius);
+  --luxe-alert-link-color: inherit;
+  position: relative;
+  padding: var(--luxe-alert-padding-y) var(--luxe-alert-padding-x);
+  margin-bottom: var(--luxe-alert-margin-bottom);
+  color: var(--luxe-alert-color);
+  background-color: var(--luxe-alert-bg);
+  border: var(--luxe-alert-border);
+  border-radius: var(--luxe-alert-border-radius);
+}
+.dark {
+  composes: root;
+  --luxe-alert-color: var(--luxe-dark-text-emphasis);
+  --luxe-alert-bg: var(--luxe-dark-bg-subtle);
+  --luxe-alert-border-color: var(--luxe-dark-border-subtle);
+  --luxe-alert-link-color: var(--luxe-dark-text-emphasis);
+}
+.warning {
+  composes: root;
+  --luxe-alert-color: var(--luxe-warning-text-emphasis);
+  --luxe-alert-bg: var(--luxe-warning-bg-subtle);
+  --luxe-alert-border-color: var(--luxe-warning-border-subtle);
+  --luxe-alert-link-color: var(--luxe-warning-text-emphasis);
+}
+.danger {
+  composes: root;
+  --luxe-alert-color: var(--luxe-danger-text-emphasis);
+  --luxe-alert-bg: var(--luxe-danger-bg-subtle);
+  --luxe-alert-border-color: var(--luxe-danger-border-subtle);
+  --luxe-alert-link-color: var(--luxe-danger-text-emphasis);
+}

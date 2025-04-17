@@ -8,6 +8,7 @@ import {
 import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types.js";
+import classes from "./fullPage.module.css";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -53,20 +54,18 @@ jahiaComponent(
     return (
       <>
         <article>
-          <header className="container py-4 py-md-5 mb-5">
+          <header className={classes.header}>
             <Row>
               <Figure src={image.src} alt={image.alt} layout="imgFull" />
             </Row>
-            <hgroup className="row text-center">
-              <time className="fs-6" dateTime={date.toISOString()}>
-                {formatedDate}
-              </time>
-              <h1 className="display-1 mb-0">{title}</h1>
-              {subtitle && <p className="h2 mt-0">{subtitle}</p>}
-            </hgroup>
+            <Row component="hgroup">
+              <time dateTime={date.toISOString()}>{formatedDate}</time>
+              <h1 className={classes.title}>{title}</h1>
+              {subtitle && <p className={classes.hp}>{subtitle}</p>}
+            </Row>
           </header>
           <Section>
-            <Row className="lux-richtext">
+            <Row className={classes.richtext}>
               {/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
               <unwanteddiv
                 dangerouslySetInnerHTML={{
@@ -75,7 +74,7 @@ jahiaComponent(
               />
             </Row>
             {categories && (
-              <div className="lux-richtext lux-category">
+              <div className={classes.category}>
                 {categories.map((node) => (
                   <Render key={node.getIdentifier()} node={node} view="badge" readOnly />
                 ))}
@@ -86,10 +85,10 @@ jahiaComponent(
         {relatedBlogPosts && relatedBlogPosts.length > 0 && (
           <Section>
             <HeadingSection title={t("section.heading.relatedBlogPosts")} />
-            <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+            <Row className={classes.rowRelatedBlogPosts}>
               {relatedBlogPosts.slice(0, 3).map((node) => {
                 return (
-                  <Col key={node.getIdentifier()} className="g-0">
+                  <Col key={node.getIdentifier()}>
                     <Render node={node} view="card" readOnly />
                   </Col>
                 );

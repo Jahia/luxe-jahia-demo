@@ -1,0 +1,54 @@
+.card {
+  position: relative;
+  height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+  margin-bottom: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(var(--luxe-color-darkBlue-rgb), 0.4);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+
+    figcaption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  img {
+    height: 100%;
+  }
+
+  figcaption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 10;
+    transform: translateY(20px);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: #fff;
+    text-align: center;
+    font-family: var(--luxe-font-family-display);
+    font-size: 80px;
+    opacity: 0;
+    transition: all 0.3s ease-in;
+  }
+}

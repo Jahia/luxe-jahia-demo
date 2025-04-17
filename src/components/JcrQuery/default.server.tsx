@@ -5,7 +5,8 @@ import {
   server,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-
+import classes from "./default.module.css";
+import alert from "~/templates/css/alert.module.css";
 import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
@@ -50,19 +51,19 @@ jahiaComponent(
     const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
 
     return (
-      <>
+      <div className={classes.root}>
         {title && queryContent && queryContent.length > 0 && <HeadingSection title={title} />}
         {renderContext.isEditMode() && warn && (
-          <div className="alert alert-warning" role="alert">
+          <div className={alert.warning} role="alert">
             {warn}
           </div>
         )}
 
         {queryContent && queryContent.length > 0 && (
-          <Row className="row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-0">
+          <Row className={classes.main}>
             {queryContent.map((node) => {
               return (
-                <Col key={node.getIdentifier()} className="g-0">
+                <Col key={node.getIdentifier()}>
                   <Render node={node as JCRNodeWrapper} view={subNodeView || "default"} readOnly />
                 </Col>
               );
@@ -70,11 +71,11 @@ jahiaComponent(
           </Row>
         )}
         {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
-          <div className="alert alert-dark" role="alert">
+          <div className={alert.dark} role="alert">
             {t(noResultText || "query.noResult")}
           </div>
         )}
-      </>
+      </div>
     );
   },
 );
