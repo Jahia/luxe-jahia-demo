@@ -1,21 +1,12 @@
+import { useTracker } from "apache-unomi-tracker";
+
 declare global {
   interface Window {
-    digitalData: {
-      contextServerPublicUrl?: string;
-      scope?: string;
-      page: {
-        pageInfo: {
-          pageID: string;
-        };
-      };
-    };
+    digitalData: ReturnType<typeof useTracker>["digitalData"];
     cxs?: {
       sessionId: string;
     };
-    wem?: {
-      buildFormEvent: (name: string) => object;
-      _extractFormData: string[];
-    };
+    wem: ReturnType<typeof useTracker>;
   }
 }
 
