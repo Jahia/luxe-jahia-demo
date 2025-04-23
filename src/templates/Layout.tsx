@@ -37,23 +37,16 @@ export const Layout = ({
   head?: ReactNode;
   className?: string;
   children: ReactNode;
-}): JSX.Element => {
-  const { renderContext } = useServerContext();
-  return (
-    <>
-      <HtmlHead>{head}</HtmlHead>
-      <body>
-        <AbsoluteArea
-          name="nav"
-          parent={renderContext.getSite().getHome()}
-          nodeType="luxe:navigationMenu"
-        />
-        <main className={className}>{children}</main>
-        <HtmlFooter />
-      </body>
-    </>
-  );
-};
+}): JSX.Element => (
+  <>
+    <HtmlHead>{head}</HtmlHead>
+    <body>
+      <VirtualNavMenu />
+      <main className={className}>{children}</main>
+      <HtmlFooter />
+    </body>
+  </>
+);
 
 /**
  * HtmlHead
@@ -73,6 +66,44 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
       {children}
     </head>
   );
+};
+
+/**
+ * Virtual navigation menu used as a workaround for a known limitation: empty areas (`<AbsoluteArea>` or `<Area>`) are not rendered in "preview" mode. See https://github.com/Jahia/luxe-jahia-demo/issues/226 for details.
+ * The temporary solution is to use a virtual node: a `"jnt:contentList"` containing a single child, the `"luxe:navigationMenu"`.
+ *
+ * TODO once Jahia 8.2.2.0, that contains the fix, is released, replace with:
+ * <code>
+ *     <AbsoluteArea
+ *        name="nav"
+ *         parent={renderContext.getSite().getHome()}
+ *         nodeType="luxe:navigationMenu"
+ *       />
+ * </code>
+ */
+const VirtualNavMenu = (): JSX.Element => {
+  const { renderContext } = useServerContext();
+  const homeNode = renderContext.getSite().getHome();
+  const navProps = homeNode.hasNode("nav")
+    ? homeNode.getNode("nav").getPropertiesAsString()
+    : new Map();
+  // copy the known properties of "luxe:navigationMenu" to discard the read-only/protected ones (jcr:created, etc.)
+  const props = new Map();
+  props.set("brandText", navProps.get("brandText"));
+  props.set("brandImage", navProps.get("brandImage"));
+  props.set("brandImageMobile", navProps.get("brandImageMobile"));
+  const virtualArea = {
+    name: "virtualArea",
+    nodeType: "jnt:contentList",
+    children: [
+      {
+        name: "menu",
+        nodeType: "luxe:navigationMenu",
+        properties: props,
+      },
+    ],
+  };
+  return <Render content={virtualArea} />;
 };
 
 // The login form is implemented as static content.
