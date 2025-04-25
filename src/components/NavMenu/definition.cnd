@@ -1,4 +1,4 @@
-[luxe:navigationMenu] > jnt:content, mix:title
+[luxe:navigationMenu] > jnt:content, mix:title, jmix:droppableContent
  - brandText (string) i18n
  - brandImage (weakreference, picker[type='image']) < 'jmix:image'
  - brandImageMobile (weakreference, picker[type='image']) < 'jmix:image'
