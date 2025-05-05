@@ -83,12 +83,9 @@ export const submitContact = ({ form, target, body, setFeedback, setUnknownError
   // By default, form info are sync with jExp if exist
   if (window.wem) {
     const contactFormEvent = window.wem.buildFormEvent("contactForm");
-    // @ts-expect-error need to have types exported from jExp wem
     contactFormEvent.flattenedProperties = {
-      // @ts-expect-error need to have types exported from jExp wem
       fields: window.wem._extractFormData(form),
     };
-    // @ts-expect-error need to have types exported from jExp wem
     window.wem.collectEvent(
       contactFormEvent,
       function ({ status }) {
