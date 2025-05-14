@@ -491,13 +491,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:^0.6.0":
-  version: 0.6.1
-  resolution: "@jahia/javascript-modules-library@npm:0.6.1"
+"@jahia/javascript-modules-library@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@jahia/javascript-modules-library@npm:0.7.0"
   dependencies:
-    dotenv: "npm:^16.4.7"
+    dotenv: "npm:^16.5.0"
   peerDependencies:
-    i18next: ^23.0.0
+    i18next: ^25.0.0
     react: ^19.0.0
     react-dom: ^19.0.0
     react-i18next: ^15.4.0
@@ -515,7 +515,7 @@ __metadata:
       optional: true
   bin:
     jahia-deploy: bin/jahia-deploy.mjs
-  checksum: 10c0/7cbc7ac960f8853a55d690d7631af6fc7c61636d7a7cd88e3e3481e4bceb14be21f0e18d150d7f441f9989700a65b1cbcfc64d45574f397bff984a185b8458e0
+  checksum: 10c0/b7c0ab110bab1942cc54fc7c569282b1c4e32cb4757b2426aa2222b8d3ae64fa9f5033b9b58a14a13973429fa0e0d3f373cbfba2277b94b1c97f2917c254a49a
   languageName: node
   linkType: hard
 
@@ -1572,10 +1572,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.4.2, dotenv@npm:^16.4.7":
+"dotenv@npm:^16.4.2":
   version: 16.4.7
   resolution: "dotenv@npm:16.4.7"
   checksum: 10c0/be9f597e36a8daf834452daa1f4cc30e5375a5968f98f46d89b16b983c567398a330580c88395069a77473943c06b877d1ca25b4afafcdd6d4adb549e8293462
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.5.0":
+  version: 16.5.0
+  resolution: "dotenv@npm:16.5.0"
+  checksum: 10c0/5bc94c919fbd955bf0ba44d33922a1e93d1078e64a1db5c30faeded1d996e7a83c55332cb8ea4fae5a9ca4d0be44cbceb95c5811e70f9f095298df09d1997dd9
   languageName: node
   linkType: hard
 
@@ -2733,7 +2740,7 @@ __metadata:
     "@eslint/compat": "npm:^1.2.7"
     "@eslint/js": "npm:^9.21.0"
     "@heroicons/react": "npm:^2.1.1"
-    "@jahia/javascript-modules-library": "npm:^0.6.0"
+    "@jahia/javascript-modules-library": "npm:^0.7.0"
     "@jahia/vite-plugin": "npm:^0.6.0"
     "@types/react": "npm:19.0.10"
     "@types/react-dom": "npm:^19.0.4"
