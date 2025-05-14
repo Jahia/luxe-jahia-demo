@@ -10,7 +10,7 @@ export default defineConfig({
     alias: { "~": path.resolve("./src") },
   },
   plugins: [
-    sbom({specVersion: "1.4"}),
+    sbom({ specVersion: "1.4" }),
     jahia({
       client: {
         input: {

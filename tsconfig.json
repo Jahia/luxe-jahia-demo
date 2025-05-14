@@ -4,7 +4,7 @@
 		"checkJs": true,
 		"esModuleInterop": true,
 		"jsx": "preserve",
-		"lib": ["esnext","dom"],
+		"lib": ["esnext", "dom"],
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"noEmit": true,
@@ -21,8 +21,7 @@
 		"declaration": true,
 		"declarationDir": "dist",
 		"baseUrl": ".",
-		"paths": { "~/*": ["src/*"]
-		}
+		"paths": { "~/*": ["src/*"] }
 	},
 	"include": ["src"],
 	"exclude": ["node_modules"]

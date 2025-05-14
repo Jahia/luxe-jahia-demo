@@ -6,5 +6,4 @@
 export default {
 	quoteProps: "consistent",
 	printWidth: 100,
-
 };
