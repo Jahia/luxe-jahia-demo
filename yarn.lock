@@ -519,22 +519,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:^0.6.0":
-  version: 0.6.1
-  resolution: "@jahia/vite-plugin@npm:0.6.1"
+"@jahia/vite-plugin@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@jahia/vite-plugin@npm:0.7.0"
   dependencies:
     "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/pluginutils": "npm:^5.1.4"
-    esrap: "npm:^1.4.5"
-    tinyglobby: "npm:^0.2.12"
-    zimmerframe: "npm:^1.1.2"
+    magic-string: "npm:^0.30.17"
+    tinyglobby: "npm:^0.2.13"
   peerDependencies:
     vite: ">=6.0.0"
-  checksum: 10c0/c94040f5871bf5dbb01b2b7f436988cd50c829d8e8fe0552ceac220ebf1586c1b15409b7b03e006863d5d18c6c0aaedb7b6730c56629d38439c0ffe58f41b1e1
+  checksum: 10c0/6b1f912a658481e4fec61eaf922e18e7cb10a6135f4d8b439b90c3e37f8eaf98c3be5a3ab72389544550dcb028003b786f851a5d7f7e7a61d1d63a01f8c292e9
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:^1.4.15":
+"@jridgewell/sourcemap-codec@npm:^1.5.0":
   version: 1.5.0
   resolution: "@jridgewell/sourcemap-codec@npm:1.5.0"
   checksum: 10c0/2eb864f276eb1096c3c11da3e9bb518f6d9fc0023c78344cdc037abadc725172c70314bdb360f2d4b7bffec7f5d657ce006816bc5d4ecb35e61b66132db00c18
@@ -2010,15 +2009,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esrap@npm:^1.4.5":
-  version: 1.4.5
-  resolution: "esrap@npm:1.4.5"
-  dependencies:
-    "@jridgewell/sourcemap-codec": "npm:^1.4.15"
-  checksum: 10c0/7dd93c2481bcee8e53f1a9b15094ebba2724a0fa17c864aa728d5cfc3db9aca1640293cdb873243eb981c2cad5eb0bfed6e7f3cf427e5467e698042b3cc0ec3b
-  languageName: node
-  linkType: hard
-
 "esrecurse@npm:^4.3.0":
   version: 4.3.0
   resolution: "esrecurse@npm:4.3.0"
@@ -2120,15 +2110,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.4.3":
-  version: 6.4.3
-  resolution: "fdir@npm:6.4.3"
+"fdir@npm:^6.4.4":
+  version: 6.4.4
+  resolution: "fdir@npm:6.4.4"
   peerDependencies:
     picomatch: ^3 || ^4
   peerDependenciesMeta:
     picomatch:
       optional: true
-  checksum: 10c0/d13c10120e9625adf21d8d80481586200759928c19405a816b77dd28eaeb80e7c59c5def3e2941508045eb06d34eb47fad865ccc8bf98e6ab988bb0ed160fb6f
+  checksum: 10c0/6ccc33be16945ee7bc841e1b4178c0b4cf18d3804894cb482aa514651c962a162f96da7ffc6ebfaf0df311689fb70091b04dd6caffe28d56b9ebdc0e7ccadfdd
   languageName: node
   linkType: hard
 
@@ -2734,7 +2724,7 @@ __metadata:
     "@eslint/js": "npm:^9.21.0"
     "@heroicons/react": "npm:^2.1.1"
     "@jahia/javascript-modules-library": "npm:^0.6.0"
-    "@jahia/vite-plugin": "npm:^0.6.0"
+    "@jahia/vite-plugin": "npm:^0.7.0"
     "@types/react": "npm:19.0.10"
     "@types/react-dom": "npm:^19.0.4"
     bootstrap: "npm:^5.3.3"
@@ -2753,6 +2743,15 @@ __metadata:
     vite: "npm:^6.2.0"
   languageName: unknown
   linkType: soft
+
+"magic-string@npm:^0.30.17":
+  version: 0.30.17
+  resolution: "magic-string@npm:0.30.17"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.5.0"
+  checksum: 10c0/16826e415d04b88378f200fe022b53e638e3838b9e496edda6c0e086d7753a44a6ed187adc72d19f3623810589bf139af1a315541cd6a26ae0771a0193eaf7b8
+  languageName: node
+  linkType: hard
 
 "make-dir@npm:^2.1.0":
   version: 2.1.0
@@ -4266,13 +4265,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.12":
-  version: 0.2.12
-  resolution: "tinyglobby@npm:0.2.12"
+"tinyglobby@npm:^0.2.13":
+  version: 0.2.13
+  resolution: "tinyglobby@npm:0.2.13"
   dependencies:
-    fdir: "npm:^6.4.3"
+    fdir: "npm:^6.4.4"
     picomatch: "npm:^4.0.2"
-  checksum: 10c0/7c9be4fd3625630e262dcb19015302aad3b4ba7fc620f269313e688f2161ea8724d6cb4444baab5ef2826eb6bed72647b169a33ec8eea37501832a2526ff540f
+  checksum: 10c0/ef07dfaa7b26936601d3f6d999f7928a4d1c6234c5eb36896bb88681947c0d459b7ebe797022400e555fe4b894db06e922b95d0ce60cb05fd827a0a66326b18c
   languageName: node
   linkType: hard
 
@@ -4595,12 +4594,5 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
-  languageName: node
-  linkType: hard
-
-"zimmerframe@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "zimmerframe@npm:1.1.2"
-  checksum: 10c0/8f693609c31cbb4449db223acd61661bc93b73e615f9db6fb8c86d4ceea84ca54cbbeebcf53cf74c22a1f923b92abd18e97988a5e175c76b6ab17238e5593a9d
   languageName: node
   linkType: hard
