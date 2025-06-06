@@ -515,8 +515,8 @@ __metadata:
   linkType: hard
 
 "@jahia/vite-plugin@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@jahia/vite-plugin@npm:0.7.0"
+  version: 0.7.2
+  resolution: "@jahia/vite-plugin@npm:0.7.2"
   dependencies:
     "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/pluginutils": "npm:^5.1.4"
@@ -524,7 +524,7 @@ __metadata:
     tinyglobby: "npm:^0.2.13"
   peerDependencies:
     vite: ">=6.0.0"
-  checksum: 10c0/6b1f912a658481e4fec61eaf922e18e7cb10a6135f4d8b439b90c3e37f8eaf98c3be5a3ab72389544550dcb028003b786f851a5d7f7e7a61d1d63a01f8c292e9
+  checksum: 10c0/402d7228be0994bb637bf2fc3941f11dba5b9a525a966ae0c8f553c409ce2f16f5a32490bf5f86cb91bc0348887f55687c68ebc7d887b38542d6c54f05b69bbf
   languageName: node
   linkType: hard
 
