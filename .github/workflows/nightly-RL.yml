@@ -13,7 +13,7 @@ jobs:
       jahia_image: jahia/jahia-ee:8
       module_id: luxe-jahia-demo
       testrail_project: Demo Site Javascript Module
-      pagerduty_incident_service: keepicker-JahiaRL
+      pagerduty_incident_service: luxe-jahia-demo-JahiaRL
       provisioning_manifest: provisioning-manifest-snapshot.yml
       artifact_prefix: luxe
       module_branch: ${{ github.ref }}
