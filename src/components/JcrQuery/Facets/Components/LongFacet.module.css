@@ -1,0 +1,121 @@
+
+.container {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.sliderContainer {
+  padding: 0 0.75rem;
+}
+
+.sliderWrapper {
+  position: relative;
+  height: 40px;
+  margin-bottom: 1.5rem;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 2px solid #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 2px solid #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  -moz-appearance: none;
+  transition: all 0.15s ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-moz-range-thumb:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+.sliderTrack {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.sliderRange {
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}

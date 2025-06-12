@@ -40,7 +40,7 @@ jahiaComponent(
           {bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface.toLocaleString(locale)} m
           <sup>2</sup>
         </p>
-        <strong>{price.toLocaleString(locale)}€</strong>
+        <strong>{price.toLocaleString(locale)}&euro;</strong>
       </a>
     );
   },

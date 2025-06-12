@@ -10,5 +10,5 @@ README.md
 settings/README.txt
 src
 tests
-webpack.config.js
+webpack.config.cjs
 jsconfig.json*

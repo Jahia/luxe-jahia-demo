@@ -7,7 +7,7 @@ import {
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
-import { buildQuery } from "./utils";
+import { buildJCRQuery } from "./utils";
 import clsx from "clsx";
 import type { JcrQueryProps } from "./types";
 import alert from "~/templates/css/alert.module.css";
@@ -35,7 +35,7 @@ jahiaComponent(
     }: JcrQueryProps,
     { currentNode, renderContext },
   ) => {
-    const { jcrQuery, warn } = buildQuery({
+    const { jcrQuery, warn } = buildJCRQuery({
       luxeQuery: {
         "jcr:title": title,
         type,

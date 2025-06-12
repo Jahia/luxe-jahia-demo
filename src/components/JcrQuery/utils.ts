@@ -4,7 +4,7 @@ import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { TFunction } from "i18next";
 import { server } from "@jahia/javascript-modules-library";
 
-interface BuildQueryProps {
+interface BuildJCRQueryProps {
   luxeQuery: JcrQueryProps;
   t: TFunction;
   server: typeof server;
@@ -12,13 +12,41 @@ interface BuildQueryProps {
   renderContext: RenderContext;
 }
 
-export const buildQuery = ({
+export const gqlFacetsQueryString = `
+query GetContentPropertiesQuery($query: String!, $view: String!, $name: String!, $language: String!) {
+ jcr {
+  nodesByQuery(
+    query: $query
+  ) {
+    nodes {
+      workspace
+      uuid
+      path
+      name
+      renderedContent(view: $view, language: $language){
+        output
+      }
+    }
+  }
+  nodeTypeByName(name: $name) {
+    properties(fieldFilter: {filters: [{fieldName: "hidden", value: "false"}]}) {
+      name
+      hidden
+      displayName(language: $language)
+      mandatory
+      requiredType
+    }
+  }
+ }
+}`;
+
+export const buildJCRQuery = ({
   luxeQuery,
   t,
   server,
   currentNode,
   renderContext,
-}: BuildQueryProps) => {
+}: BuildJCRQueryProps) => {
   let warn: string | null = null;
   const asContent = "content";
   // Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;

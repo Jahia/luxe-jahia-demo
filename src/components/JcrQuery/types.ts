@@ -11,4 +11,19 @@ export interface JcrQueryProps {
   "filter"?: JCRNodeWrapper[];
   "noResultText"?: string;
   "j:subNodesView"?: string;
+  "facetFields"?: string[];
+}
+
+export interface FacetProps {
+  name: string;
+  hidden: boolean;
+  displayName: string;
+  mandatory: boolean;
+  requiredType: string;
+  isActive: boolean;
+}
+
+export interface RenderNodeProps {
+  uuid: string;
+  html: string;
 }

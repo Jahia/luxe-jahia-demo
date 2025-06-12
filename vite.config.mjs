@@ -3,6 +3,7 @@ import { spawnSync } from "node:child_process";
 import path from "node:path";
 import sbom from "rollup-plugin-sbom";
 import { defineConfig } from "vite";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
   resolve: {
@@ -30,6 +31,14 @@ export default defineConfig({
       watchCallback() {
         spawnSync("yarn", ["watch:callback"], { stdio: "inherit" });
       },
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "./javascript/apps/*", // source file or folder
+          dest: "./javascript/apps", // destination inside dist, '' means root of dist
+        },
+      ],
     }),
   ],
   build: {

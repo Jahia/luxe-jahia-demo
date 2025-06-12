@@ -8,3 +8,4 @@
 - filter (weakreference, category[autoSelectParent=false]) multiple
 - noResultText (string) i18n indexed=no
 - j:subNodesView (string, choicelist[templates=subnodes,resourceBundle,image,dependentProperties='type']) nofulltext
+- facetFields (string) multiple hidden
