@@ -2,7 +2,7 @@ import { useState } from "react";
 import MultiSelectDropdown, { type Option } from "~/commons/MultiSelectDropdown";
 import StringFacet from "~/components/JcrQuery/Facets/Components/StringFacet";
 import LongFacet from "~/components/JcrQuery/Facets/Components/LongFacet";
-import DateFacet from "~/components/JcrQuery/Facets/Components/DateFacet";
+// import DateFacet from "~/components/JcrQuery/Facets/Components/DateFacet";
 
 import type { FacetProps } from "~/components/JcrQuery/types";
 
@@ -11,7 +11,7 @@ interface FacetItem {
   label: string;
   isActive: boolean;
   type: string;
-  values?: string[];
+  values?: unknown[];
   // component?: React.ReactNode;
 }
 
@@ -19,7 +19,7 @@ const FacetsFilter = ({ facets, isEditMode }: { facets: FacetProps[]; isEditMode
   const Cmp = {
     STRING: StringFacet,
     LONG: LongFacet,
-    DATE: DateFacet,
+    // DATE: DateFacet,
   };
 
   const [facetOrder, setFacetOrder] = useState<FacetItem[]>(

@@ -1,5 +1,4 @@
 import {
-  getNodesByJCRQuery,
   jahiaComponent,
   useGQLQuery,
   server,
@@ -7,7 +6,12 @@ import {
 } from "@jahia/javascript-modules-library";
 
 import { t } from "i18next";
-import { buildJCRQuery, gqlFacetsQueryString } from "./utils";
+import {
+  buildJCRQuery,
+  getNodePropertyValues,
+  gqlContentPropertiesQueryString,
+  gqlNodesQueryString,
+} from "./utils";
 import type { FacetProps, JcrQueryProps, RenderNodeProps } from "./types";
 import FacetsClient from "~/components/JcrQuery/Facets/Facets.client";
 
@@ -55,28 +59,52 @@ jahiaComponent(
     const currentLocale = currentResource.getLocale();
     const currentLocaleCode = currentLocale.toString();
 
-    const gqlQuery = useGQLQuery({
-      query: gqlFacetsQueryString,
+    const gqlProperties = useGQLQuery({
+      query: gqlContentPropertiesQueryString,
       variables: {
-        query: jcrQuery,
-        view: subNodeView || "default",
         name: type,
         language: currentLocaleCode,
       },
     });
 
-    const nodes: RenderNodeProps = gqlQuery?.data?.jcr?.nodesByQuery?.nodes?.map((node) => ({
-      html: node.renderedContent.output,
-      uuid: node.uuid,
-    }));
-
-    const facets: FacetProps[] = gqlQuery?.data?.jcr?.nodeTypeByName?.properties
+    let facets: FacetProps[] = gqlProperties?.data?.jcr?.nodeTypeByName?.properties
       ?.filter((facet: FacetProps) => facet.requiredType != "WEAKREFERENCE")
       .map((facet: FacetProps) =>
         facetFields?.includes(facet.name)
           ? { ...facet, isActive: true }
           : { ...facet, isActive: false },
       );
+
+    const selectedFacets = facets?.filter((facet) => facet.isActive);
+
+    const gqlContents = useGQLQuery({
+      query: gqlNodesQueryString(selectedFacets || []),
+      variables: {
+        query: jcrQuery,
+        view: subNodeView || "default",
+        language: currentLocaleCode,
+      },
+    });
+
+    // server.render.addCacheDependency(
+    //   { nodes: gqlContents?.data?.jcr?.nodesByQuery?.nodes || [] },
+    //   renderContext,
+    // );
+    const gqlNodes = gqlContents?.data?.jcr?.nodesByQuery?.nodes;
+
+    facets = facets.map((facet) => {
+      if (facet.isActive)
+        return {
+          ...facet,
+          values: Array.from(getNodePropertyValues(gqlNodes, facet)),
+        };
+      return facet;
+    });
+
+    const nodes: RenderNodeProps = gqlNodes?.map((node) => ({
+      html: node.renderedContent.output,
+      uuid: node.uuid,
+    }));
 
     return (
       <HydrateInBrowser

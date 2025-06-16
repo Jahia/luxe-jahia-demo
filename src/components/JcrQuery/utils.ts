@@ -1,4 +1,4 @@
-import type { JcrQueryProps } from "./types";
+import type { ExtractedProps, FacetProps, JcrQueryProps, NodeResult } from "./types";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { TFunction } from "i18next";
@@ -12,33 +12,144 @@ interface BuildJCRQueryProps {
   renderContext: RenderContext;
 }
 
-export const gqlFacetsQueryString = `
-query GetContentPropertiesQuery($query: String!, $view: String!, $name: String!, $language: String!) {
- jcr {
-  nodesByQuery(
-    query: $query
-  ) {
-    nodes {
-      workspace
-      uuid
-      path
-      name
-      renderedContent(view: $view, language: $language){
-        output
+export const gqlNodesQueryString = (properties: FacetProps[]): string => {
+  const fragment = generateGraphQLFragProperties(properties, "FacetPropertiesValues");
+  return `
+    query GetContentPropertiesQuery($query: String!, $view: String!, $language: String!) {
+     jcr {
+      nodesByQuery(
+        query: $query
+      ) {
+        nodes {
+          workspace
+          uuid
+          path
+          name
+          ${fragment ? "...FacetPropertiesValues" : ""}
+          renderedContent(view: $view, language: $language){
+            output
+          }
+        }
       }
+     }
     }
-  }
-  nodeTypeByName(name: $name) {
-    properties(fieldFilter: {filters: [{fieldName: "hidden", value: "false"}]}) {
-      name
-      hidden
-      displayName(language: $language)
-      mandatory
-      requiredType
+    ${fragment ? fragment : ""}
+  `;
+};
+
+export const gqlContentPropertiesQueryString = `
+  query GetContentPropertiesQuery($name: String!, $language: String!) {
+    jcr {
+      nodeTypeByName(name: $name) {
+        properties(fieldFilter: {filters: [{fieldName: "hidden", value: "false"}]}) {
+          name
+          hidden
+          displayName(language: $language)
+          mandatory
+          requiredType
+          multiple
+          internationalized
+        }
+      }
+     }
     }
+  `;
+
+const typeMap = {
+  LONG: "longValue",
+  BOOLEAN: "booleanValue",
+  DECIMAL: "decimalValue",
+  DATE: "dateValue",
+  DOUBLE: "doubleValue",
+} as const;
+
+const stripPrefix = (name: string): string => {
+  return name.replace(/:/g, "_");
+};
+
+const unstripPrefix = (key: string): string => {
+  return key.replace(/_/g, ":");
+};
+
+const generateGraphQLFragProperties = (
+  properties: FacetProps[],
+  fragmentName: string = "FacetPropertiesValues",
+): string | undefined => {
+  if (properties.length === 0) return;
+
+  const fragmentBody = properties
+    .map((prop) => {
+      let field = "";
+      if (prop.requiredType === "STRING") {
+        field = prop.multiple ? "values" : "value";
+      } else {
+        const baseField = typeMap[prop.requiredType];
+        if (!baseField) return ""; // Unknown type, skip and filtered later
+        field = prop.multiple ? baseField.replace("Value", "Values") : baseField;
+      }
+
+      const langParam = prop.internationalized ? ",language: $language" : "";
+      const key = stripPrefix(prop.name);
+      return `${key}:property(name:"${prop.name}"${langParam}){${field}}`;
+    })
+    .filter(Boolean)
+    .join("\n");
+
+  return `fragment ${fragmentName} on JCRNode {\n${fragmentBody}\n}`;
+};
+
+export const getNodePropertyValues = (nodes: NodeResult[], facet: FacetProps): Set<unknown> => {
+  const key = stripPrefix(facet.name);
+  const valuesSet = new Set<unknown>();
+
+  for (const node of nodes) {
+    const propObj = node[key];
+    if (!propObj) continue;
+
+    let values: unknown[] = [];
+    if (facet.requiredType === "STRING") {
+      values = facet.multiple
+        ? (propObj.values ?? [])
+        : propObj.value !== undefined
+          ? [propObj.value]
+          : [];
+    } else {
+      const baseField = typeMap[facet.requiredType as keyof typeof typeMap];
+      if (!baseField) continue;
+      const field = facet.multiple ? baseField.replace("Value", "Values") : baseField;
+      const v = propObj[field as keyof typeof propObj];
+      values = facet.multiple ? (Array.isArray(v) ? v : []) : v !== undefined ? [v] : [];
+    }
+    values.forEach((val) => valuesSet.add(val));
   }
- }
-}`;
+  return valuesSet;
+};
+
+//
+// export const extractGraphQLPropertyValue = (node: NodeResult, properties: FacetProps): unknown =>
+//   extractGraphQLProperties(node, [properties])[stripPrefix(properties.name)];
+//
+// const extractGraphQLProperties = (node: NodeResult, properties: FacetProps[]): ExtractedProps => {
+//   const result: ExtractedProps = {};
+//   for (const prop of properties) {
+//     const key = stripPrefix(prop.name);
+//     const propObj = node[key];
+//
+//     if (!propObj) continue; // Propriété absente du résultat
+//
+//     let value;
+//     if (prop.requiredType === "STRING") {
+//       value = prop.multiple ? propObj.values : propObj.value;
+//     } else {
+//       const baseField = typeMap[prop.requiredType];
+//       if (!baseField) continue; // Type inconnu
+//       const field = prop.multiple ? baseField.replace("Value", "Values") : baseField;
+//       value = propObj[field];
+//     }
+//     result[key] = value;
+//   }
+//   return result;
+// };
 
 export const buildJCRQuery = ({
   luxeQuery,

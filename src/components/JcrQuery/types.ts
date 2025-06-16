@@ -21,9 +21,32 @@ export interface FacetProps {
   mandatory: boolean;
   requiredType: string;
   isActive: boolean;
+  multiple: boolean;
+  internationalized: boolean;
+  values?: unknown[];
 }
 
 export interface RenderNodeProps {
   uuid: string;
   html: string;
 }
+
+export type NodeResult = Record<
+  string,
+  {
+    value?: unknown;
+    values?: unknown[];
+    longValue?: number;
+    longValues?: number[];
+    booleanValue?: boolean;
+    booleanValues?: boolean[];
+    dateValue?: string;
+    dateValues?: string[];
+    decimalValue?: number;
+    decimalValues?: number[];
+    doubleValue?: number;
+    doubleValues?: number[];
+  }
+>;
+
+export type ExtractedProps = Record<string, unknown>;
