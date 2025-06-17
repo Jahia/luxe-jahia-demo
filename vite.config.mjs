@@ -7,7 +7,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   resolve: {
-    // alias: { $client: path.resolve("./src/client") },
     alias: { "~": path.resolve("./src") },
   },
   plugins: [
