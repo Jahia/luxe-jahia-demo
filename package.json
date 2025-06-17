@@ -25,7 +25,7 @@
 		"required-version": "8.2.1.0",
 		"module-type": "templatesSet",
 		"module-dependencies": "default,javascript-modules-engine",
-		"static-resources": "/dist,/client,/icons,/images",
+		"static-resources": "/dist/assets,/dist/client",
 		"server": "dist/server/index.js",
 		"maven": {
 			"groupId": "org.jahia.modules.javascript",

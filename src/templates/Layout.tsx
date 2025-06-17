@@ -62,7 +62,7 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
       <SeoMetaTags />
 
       <link rel="icon" type="image/png" href={buildModuleFileUrl("static/favicon-32x32.png")} />
-      <AddResources type="css" resources={buildModuleFileUrl("dist/server/style.css")} />
+      <AddResources type="css" resources={buildModuleFileUrl("dist/assets/style.css")} />
       {children}
     </head>
   );
