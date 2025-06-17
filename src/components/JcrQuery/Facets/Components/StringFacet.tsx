@@ -1,19 +1,20 @@
 import React from "react";
 import styles from "./StringFacet.module.css";
+import type { FacetItem } from "~/components/JcrQuery/Facets/FacetsFilter.client";
 
-const propertyTypes = ["House", "Apartment", "Building", "Condo", "Townhouse", "Villa"];
+// const propertyTypes = ["House", "Apartment", "Building", "Condo", "Townhouse", "Villa"];
 
-interface TypeFacetProps {
-  selectedTypes: string[];
-  onChange: (types: string[]) => void;
+interface StringFacetProps {
+  facet: FacetItem;
+  onChange: (id: string, values: string[]) => void;
 }
 
-const StringFacet: React.FC<TypeFacetProps> = ({ selectedTypes, onChange }) => {
-  const handleTypeChange = (type: string) => {
-    if (selectedTypes.includes(type)) {
-      onChange(selectedTypes.filter((t) => t !== type));
+const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFacetProps) => {
+  const handleTypeChange = (value: string) => {
+    if (facet.values.includes(value)) {
+      onChange(facet.id, facet.values.filter((t) => t !== value) as string[]);
     } else {
-      onChange([...selectedTypes, type]);
+      onChange(facet.id, [...facet.values, value] as string[]);
     }
   };
 
@@ -21,12 +22,16 @@ const StringFacet: React.FC<TypeFacetProps> = ({ selectedTypes, onChange }) => {
     <div className={styles.container}>
       <h3 className={styles.title}>Property Type</h3>
       <div className={styles.options}>
-        {propertyTypes.map((type) => (
-          <div key={type} className={styles.option} onClick={() => handleTypeChange(type)}>
+        {facet.values.map((value) => (
+          <div
+            key={value as string}
+            className={styles.option}
+            onClick={() => handleTypeChange(value as string)}
+          >
             <div
-              className={`${styles.checkbox} ${selectedTypes.includes(type) ? styles.checked : ""}`}
+              className={`${styles.checkbox} ${facet.selectedTypes.includes(type) ? styles.checked : ""}`}
             />
-            <label className={styles.label}>{type}</label>
+            <label className={styles.label}>{value as string}</label>
           </div>
         ))}
       </div>
