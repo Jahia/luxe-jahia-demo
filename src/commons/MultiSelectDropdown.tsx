@@ -10,7 +10,7 @@ export type Option = {
 type MultiSelectDropdownProps = {
   options: Option[];
   placeholder?: string;
-  onChange?: (selected: Option[]) => void;
+  onChange: (selected: string[]) => void;
 };
 
 const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
@@ -43,7 +43,7 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
       newSelected = [...selectedOptions, option];
     }
     setSelectedOptions(newSelected);
-    onChange?.(newSelected);
+    onChange(newSelected.map((o) => o.value));
   };
 
   const isSelected = (option: Option) => selectedOptions.some((o) => o.value === option.value);
@@ -54,7 +54,7 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
         className={styles.dropdownHeader}
         onClick={() => setIsOpen((open) => !open)}
         tabIndex={0}
-        onBlur={() => setIsOpen(false)}
+        // onBlur={() => setIsOpen(false)}
       >
         {selectedOptions.length > 0 ? (
           selectedOptions.map((o) => o.label).join(", ")

@@ -110,6 +110,7 @@ jahiaComponent(
       <HydrateInBrowser
         child={FacetsClient}
         props={{
+          jcrQueryUuid: currentNode.getIdentifier(),
           nodes,
           facets,
           warn,

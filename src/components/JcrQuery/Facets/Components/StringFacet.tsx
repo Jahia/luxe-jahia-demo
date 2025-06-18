@@ -11,10 +11,12 @@ interface StringFacetProps {
 
 const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFacetProps) => {
   const handleTypeChange = (value: string) => {
-    if (facet.values.includes(value)) {
-      onChange(facet.id, facet.values.filter((t) => t !== value) as string[]);
+    if (facet.selectedValues.includes(value)) {
+      // console.log("Removing value:", value);
+      onChange(facet.id, facet.selectedValues.filter((t) => t !== value) as string[]);
     } else {
-      onChange(facet.id, [...facet.values, value] as string[]);
+      // console.log("Adding value:", value);
+      onChange(facet.id, [...facet.selectedValues, value] as string[]);
     }
   };
 
@@ -29,7 +31,7 @@ const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFace
             onClick={() => handleTypeChange(value as string)}
           >
             <div
-              className={`${styles.checkbox} ${facet.selectedTypes.includes(type) ? styles.checked : ""}`}
+              className={`${styles.checkbox} ${facet.selectedValues.includes(value) ? styles.checked : ""}`}
             />
             <label className={styles.label}>{value as string}</label>
           </div>

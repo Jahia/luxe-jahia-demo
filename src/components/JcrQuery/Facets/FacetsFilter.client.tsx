@@ -6,6 +6,7 @@ import StringFacet from "~/components/JcrQuery/Facets/Components/StringFacet";
 // import LongFacet from "~/components/JcrQuery/Facets/Components/LongFacet";
 import classes from "./FacetsFilter.client.module.css";
 import type { FacetProps } from "~/components/JcrQuery/types";
+import { useFacet } from "~/components/JcrQuery/Facets/Hooks/Facet.client";
 
 export interface FacetItem {
   id: string;
@@ -62,62 +63,32 @@ export interface FacetItem {
 //   );
 // };
 
-const FacetsFilter = ({ facets }: { facets: FacetProps[] }) => {
+const FacetsFilter = ({
+  facets,
+  isEditMode,
+  jcrQueryUuid,
+}: {
+  facets: FacetProps[];
+  isEditMode: boolean;
+  jcrQueryUuid: string;
+}) => {
+  const { enabledFacets, handleFacetVisibilityChange, handleFacetValuesChange } = useFacet(
+    facets,
+    jcrQueryUuid,
+  );
+
   const Cmp = {
     STRING: StringFacet,
     // LONG: LongFacet,
   };
 
-  const [facetOrder, setFacetOrder] = useState<FacetItem[]>(
-    facets.map((facet) => ({
-      id: facet.name,
-      label: facet.displayName,
-      isActive: facet.isActive,
-      type: facet.requiredType,
-      values: facet.values || [],
-      selectedValues: [],
-    })),
-  );
-
-  const handleFacetChange = (_selectedFacets: Option[]) => {
-    //todo: update filters and set facets isActive-> true and do the mutation to hidden fields facets
-  };
-
-  const moveFacet = (from: number, to: number) => {
-    const updated = [...facetOrder];
-    const [removed] = updated.splice(from, 1);
-    updated.splice(to, 0, removed);
-    setFacetOrder(updated);
-  };
-
-  const onChange = (facetId: string, values: unknown[]) => {
-    setFacetOrder((prev) =>
-      prev.map((facet) => (facet.id === facetId ? { ...facet, selectedValues: values } : facet)),
-    );
-  };
-
-  // const onChange = (facetId: string, value: unknown) => {
-  //   setFacetOrder((prev) =>
-  //     prev.map((facet) =>
-  //       facet.id === facetId
-  //         ? {
-  //             ...facet,
-  //             selectedValues: facet.selectedValues.includes(value)
-  //               ? facet.selectedValues.filter((v) => v !== value)
-  //               : [...facet.selectedValues, value],
-  //           }
-  //         : facet,
-  //     ),
-  //   );
-  // };
-
   const getFacetComponent = (facet: FacetItem) => {
     const FacetComponent = Cmp[facet.type];
     if (!FacetComponent) return null;
-    return <FacetComponent {...{ facet, onChange }} />;
+    return <FacetComponent {...{ facet, onChange: handleFacetValuesChange }} />;
   };
 
-  const enabledFacets = facetOrder.filter((facet) => facet.isActive);
+  // const enabledFacets = facetOrder.filter((facet) => facet.isActive);
 
   return (
     // <DndProvider backend={HTML5Backend}>
@@ -129,8 +100,8 @@ const FacetsFilter = ({ facets }: { facets: FacetProps[] }) => {
           label: displayName,
           isActive,
         }))}
-        placeholder="Choisis tes fruits"
-        onChange={handleFacetChange}
+        placeholder="select your facets"
+        onChange={handleFacetVisibilityChange}
       />
       <div>
         {enabledFacets.map((facet, index) => (
