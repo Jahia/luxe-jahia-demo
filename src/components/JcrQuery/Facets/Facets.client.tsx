@@ -8,9 +8,11 @@ import type { FacetProps, RenderNodeProps } from "~/components/JcrQuery/types";
 import alert from "~/templates/css/alert.module.css";
 import { t } from "i18next";
 import FacetsFilter from "~/components/JcrQuery/Facets/FacetsFilter.client";
+import { JCRQueryBuilder, type JCRQueryConfig } from "~/components/JcrQuery/JCRQueryBuilder";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function FacetsClient({
+  jcrQueryBuilderProps,
   jcrQueryUuid,
   nodes,
   facets,
@@ -19,6 +21,7 @@ export default function FacetsClient({
   subNodeView,
   isEditMode,
 }: {
+  jcrQueryBuilderProps: JCRQueryConfig;
   jcrQueryUuid: string;
   nodes: RenderNodeProps[];
   facets: FacetProps[];
@@ -27,10 +30,13 @@ export default function FacetsClient({
   subNodeView?: string;
   isEditMode: boolean;
 }) {
+  const builder = useMemo(() => new JCRQueryBuilder(jcrQueryBuilderProps), [jcrQueryBuilderProps]);
+  const { jcrQuery } = useMemo(() => builder.build(), [builder]);
+  console.log("JCR Query:", jcrQuery);
   return (
     <div className={styles.container}>
       <div className={styles.facetsColumn}>
-        <FacetsFilter {...{ facets, isEditMode, jcrQueryUuid }} />
+        <FacetsFilter {...{ facets, isEditMode, jcrQueryUuid, builder }} />
 
         {/*<SearchFacets filters={filters} onFiltersChange={setFilters} />*/}
       </div>

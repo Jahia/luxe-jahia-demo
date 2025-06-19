@@ -1,29 +1,12 @@
 import { useState, useCallback, useMemo } from "react";
 import type { FacetProps } from "~/components/JcrQuery/types";
-import { useUpdateJcrQueryFacetFields } from "~/components/JcrQuery/Facets/Hooks/Gql.client";
+import { useGraphQL } from "~/components/JcrQuery/Facets/Hooks/Gql.client";
+import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
 
-export interface FacetItem {
-  id: string;
-  label: string;
-  isActive: boolean;
-  type: string;
-  values: unknown[];
-  selectedValues: unknown[];
-}
+export function useFacet(builder: JCRQueryBuilderType, facets: FacetProps[], jcrQueryUuid: string) {
+  const [facetOrder, setFacetOrder] = useState<FacetProps[]>(facets);
 
-export function useFacet(facets: FacetProps[], jcrQueryUuid: string) {
-  const [facetOrder, setFacetOrder] = useState<FacetItem[]>(
-    facets.map((facet) => ({
-      id: facet.name,
-      label: facet.displayName,
-      isActive: facet.isActive,
-      type: facet.requiredType,
-      values: facet.values || [],
-      selectedValues: [],
-    })),
-  );
-
-  const { mutate } = useUpdateJcrQueryFacetFields();
+  const { execute } = useGraphQL();
 
   const moveFacet = useCallback((from: number, to: number) => {
     setFacetOrder((prev) => {
@@ -35,25 +18,81 @@ export function useFacet(facets: FacetProps[], jcrQueryUuid: string) {
   }, []);
 
   const handleFacetValuesChange = useCallback((facetId: string, values: unknown[]) => {
+    const facet = facetOrder.find((f) => f.id === facetId);
+    if (!facet) return;
+
+    values?.forEach((value) => builder.addConstraint(facet.id, "=", value as string));
+    const { jcrQuery } = builder.build();
+    console.log("Updated JCR Query:", jcrQuery);
+    //todo
+
     setFacetOrder((prev) =>
       prev.map((facet) => (facet.id === facetId ? { ...facet, selectedValues: values } : facet)),
     );
   }, []);
 
   const handleFacetVisibilityChange = useCallback(
-    (newSetOfSelectedFacets: string[]) => {
-      mutate({
-        pathsOrIds: [jcrQueryUuid],
-        facetFields: newSetOfSelectedFacets,
-      });
-      setFacetOrder((prev) =>
-        prev.map((facet) => ({
-          ...facet,
-          isActive: newSetOfSelectedFacets.includes(facet.id),
-        })),
-      );
+    async (newSetOfSelectedFacets: string[]) => {
+      const mutation = {
+        query: `
+          mutation UpdateFacetFields($pathsOrIds: [String!]!, $facetFields: [String!]!) {
+            jcr {
+              mutateNodes(pathsOrIds: $pathsOrIds) {
+                mutateProperty(name: "facetFields") {
+                  setValues(values: $facetFields)
+                  property {
+                    values
+                  }
+                }
+              }
+            }
+          }`,
+        variables: {
+          pathsOrIds: [jcrQueryUuid],
+          facetFields: newSetOfSelectedFacets,
+        },
+      };
+
+      try {
+        await execute([mutation]);
+        setFacetOrder((prev) =>
+          prev.map((facet) => ({
+            ...facet,
+            isActive: newSetOfSelectedFacets.includes(facet.id),
+          })),
+        );
+      } catch (e) {
+        // Gérer l’erreur si besoin
+      }
+
+      // const graphQLFragProperties = generateGraphQLFragProperties(
+      //   facetOrder.filter(),
+      //   "FacetPropertiesValues",
+      // );
+      // const gqlContents = useGQLQuery({
+      //   query: gqlNodesQueryString(
+      //     { name: "FacetPropertiesValues", value: graphQLFragProperties },
+      //     true,
+      //   ),
+      //   variables: {
+      //     query: jcrQuery,
+      //     language: currentLocaleCode,
+      //   },
+      // });
+
+      // mutate({
+      //   pathsOrIds: [jcrQueryUuid],
+      //   facetFields: newSetOfSelectedFacets,
+      // });
+      //
+      // setFacetOrder((prev) =>
+      //   prev.map((facet) => ({
+      //     ...facet,
+      //     isActive: newSetOfSelectedFacets.includes(facet.id),
+      //   })),
+      // );
     },
-    [mutate, jcrQueryUuid],
+    [execute, jcrQueryUuid],
   );
 
   const enabledFacets = useMemo(() => facetOrder.filter((facet) => facet.isActive), [facetOrder]);

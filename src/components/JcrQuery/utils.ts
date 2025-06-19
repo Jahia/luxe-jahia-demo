@@ -3,19 +3,22 @@ import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { TFunction } from "i18next";
 import { server } from "@jahia/javascript-modules-library";
+import type { JCRQueryConfig } from "~/components/JcrQuery/JCRQueryBuilder";
 
 interface BuildJCRQueryProps {
   luxeQuery: JcrQueryProps;
   t: TFunction;
-  server: typeof server;
+  server?: typeof server;
   currentNode: JCRNodeWrapper;
   renderContext: RenderContext;
 }
 
-export const gqlNodesQueryString = (properties: FacetProps[]): string => {
-  const fragment = generateGraphQLFragProperties(properties, "FacetPropertiesValues");
+export const gqlNodesQueryString = (
+  fragment: { name: string; value: string | undefined },
+  isRenderEnabled: boolean,
+): string => {
   return `
-    query GetContentPropertiesQuery($query: String!, $view: String!, $language: String!) {
+    query GetContentPropertiesQuery($query: String!, ${isRenderEnabled ? "$view: String!," : ""} $language: String!) {
      jcr {
       nodesByQuery(
         query: $query
@@ -25,15 +28,13 @@ export const gqlNodesQueryString = (properties: FacetProps[]): string => {
           uuid
           path
           name
-          ${fragment ? "...FacetPropertiesValues" : ""}
-          renderedContent(view: $view, language: $language){
-            output
-          }
+          ${fragment.value ? `...${fragment.name}` : ""}
+          ${isRenderEnabled ? "renderedContent(view: $view, language: $language){ output }" : ""}
         }
       }
      }
     }
-    ${fragment ? fragment : ""}
+    ${fragment.value ? fragment.value : ""}
   `;
 };
 
@@ -42,13 +43,13 @@ export const gqlContentPropertiesQueryString = `
     jcr {
       nodeTypeByName(name: $name) {
         properties(fieldFilter: {filters: [{fieldName: "hidden", value: "false"}]}) {
-          name
-          hidden
-          displayName(language: $language)
-          mandatory
-          requiredType
-          multiple
-          internationalized
+          id: name
+          label : displayName(language: $language)
+          type : requiredType
+          isHidden : hidden
+          isMandatory : mandatory
+          isMultiple : multiple
+          isI18n : internationalized
         }
       }
      }
@@ -71,7 +72,7 @@ const unstripPrefix = (key: string): string => {
   return key.replace(/_/g, ":");
 };
 
-const generateGraphQLFragProperties = (
+export const generateGraphQLFragProperties = (
   properties: FacetProps[],
   fragmentName: string = "FacetPropertiesValues",
 ): string | undefined => {
@@ -80,17 +81,17 @@ const generateGraphQLFragProperties = (
   const fragmentBody = properties
     .map((prop) => {
       let field = "";
-      if (prop.requiredType === "STRING") {
-        field = prop.multiple ? "values" : "value";
+      if (prop.type === "STRING") {
+        field = prop.isMultiple ? "values" : "value";
       } else {
-        const baseField = typeMap[prop.requiredType];
+        const baseField = typeMap[prop.type];
         if (!baseField) return ""; // Unknown type, skip and filtered later
-        field = prop.multiple ? baseField.replace("Value", "Values") : baseField;
+        field = prop.isMultiple ? baseField.replace("Value", "Values") : baseField;
       }
 
-      const langParam = prop.internationalized ? ",language: $language" : "";
-      const key = stripPrefix(prop.name);
-      return `${key}:property(name:"${prop.name}"${langParam}){${field}}`;
+      const langParam = prop.isI18n ? ",language: $language" : "";
+      const key = stripPrefix(prop.id);
+      return `${key}:property(name:"${prop.id}"${langParam}){${field}}`;
     })
     .filter(Boolean)
     .join("\n");
@@ -99,7 +100,7 @@ const generateGraphQLFragProperties = (
 };
 
 export const getNodePropertyValues = (nodes: NodeResult[], facet: FacetProps): Set<unknown> => {
-  const key = stripPrefix(facet.name);
+  const key = stripPrefix(facet.id);
   const valuesSet = new Set<unknown>();
 
   for (const node of nodes) {
@@ -107,18 +108,18 @@ export const getNodePropertyValues = (nodes: NodeResult[], facet: FacetProps): S
     if (!propObj) continue;
 
     let values: unknown[] = [];
-    if (facet.requiredType === "STRING") {
-      values = facet.multiple
+    if (facet.type === "STRING") {
+      values = facet.isMultiple
         ? (propObj.values ?? [])
         : propObj.value !== undefined
           ? [propObj.value]
           : [];
     } else {
-      const baseField = typeMap[facet.requiredType as keyof typeof typeMap];
+      const baseField = typeMap[facet.type as keyof typeof typeMap];
       if (!baseField) continue;
-      const field = facet.multiple ? baseField.replace("Value", "Values") : baseField;
+      const field = facet.isMultiple ? baseField.replace("Value", "Values") : baseField;
       const v = propObj[field as keyof typeof propObj];
-      values = facet.multiple ? (Array.isArray(v) ? v : []) : v !== undefined ? [v] : [];
+      values = facet.isMultiple ? (Array.isArray(v) ? v : []) : v !== undefined ? [v] : [];
     }
     values.forEach((val) => valuesSet.add(val));
   }
@@ -138,12 +139,12 @@ export const getNodePropertyValues = (nodes: NodeResult[], facet: FacetProps): S
 //     if (!propObj) continue; // Propriété absente du résultat
 //
 //     let value;
-//     if (prop.requiredType === "STRING") {
-//       value = prop.multiple ? propObj.values : propObj.value;
+//     if (prop.type === "STRING") {
+//       value = prop.isMultiple ? propObj.values : propObj.value;
 //     } else {
-//       const baseField = typeMap[prop.requiredType];
+//       const baseField = typeMap[prop.type];
 //       if (!baseField) continue; // Type inconnu
-//       const field = prop.multiple ? baseField.replace("Value", "Values") : baseField;
+//       const field = prop.isMultiple ? baseField.replace("Value", "Values") : baseField;
 //       value = propObj[field];
 //     }
 //     result[key] = value;
@@ -206,9 +207,56 @@ export const buildJCRQuery = ({
                       WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
                       ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
 
-  server.render.addCacheDependency(
+  server?.render.addCacheDependency(
     { flushOnPathMatchingRegexp: `${descendantPath}/.*` },
     renderContext,
   );
   return { jcrQuery, warn };
 };
+
+export function mapToJCRQueryBuilderProps({
+  luxeQuery,
+  currentNode,
+  renderContext,
+  t,
+}: BuildJCRQueryProps): JCRQueryConfig {
+  const warn: string[] = [];
+
+  const categories =
+    luxeQuery.filter
+      ?.map((cat) => {
+        if (!cat) {
+          warn.push(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
+          return null;
+        }
+        return { id: cat.getIdentifier() };
+      })
+      .filter((c): c is { id: string } => !!c) || [];
+
+  const excludeNodes =
+    luxeQuery.excludeNodes
+      ?.map((node) => {
+        if (!node) {
+          warn.push(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
+          return null;
+        }
+        const translationNode = node.getNode(
+          `j:translation_${renderContext.getMainResourceLocale().getLanguage()}`,
+        );
+        const translationId = translationNode?.getIdentifier();
+        return translationId
+          ? { id: node.getIdentifier(), translationId }
+          : { id: node.getIdentifier() };
+      })
+      .filter((n): n is { id: string; translationId?: string } => !!n && !!n?.id) || [];
+
+  return {
+    type: luxeQuery.type,
+    startNodePath: luxeQuery.startNode?.getPath() || currentNode.getResolveSite().getPath(),
+    criteria: luxeQuery.criteria,
+    sortDirection: luxeQuery.sortDirection,
+    categories,
+    excludeNodes,
+    warn,
+  };
+}

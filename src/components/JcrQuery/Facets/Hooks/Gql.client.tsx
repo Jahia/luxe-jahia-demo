@@ -1,75 +1,64 @@
 import { useState, useCallback } from "react";
 
-type UpdateFacetFieldsVars = {
-  pathsOrIds: string[];
-  facetFields: string[];
+type GraphQLRequest = {
+  query: string;
+  variables?: object;
 };
 
-type UpdateFacetFieldsResult = {
-  data: object | null;
+type GraphQLResult = {
+  data: any;
   error: Error | null;
   loading: boolean;
-  mutate: (variables: UpdateFacetFieldsVars) => Promise<void>;
+  execute: (requests: GraphQLRequest | GraphQLRequest[], token?: string) => Promise<any>;
 };
-
-const UPDATE_FACET_FIELDS_MUTATION = `
-mutation UpdateFacetFields($pathsOrIds: [String!]!, $facetFields: [String!]!) {
-  jcr {
-    mutateNodes(pathsOrIds: $pathsOrIds) {
-      mutateProperty(name: "facetFields") {
-        setValues(values: $facetFields)
-        property {
-          values
-        }
-      }
-    }
-  }
-}
-`;
 
 const GRAPHQL_ENDPOINT = "/modules/graphql";
 
-export function useUpdateJcrQueryFacetFields(token?: string): UpdateFacetFieldsResult {
-  const [data, setData] = useState<object | null>(null);
+export function useGraphQL(): GraphQLResult {
+  const [data, setData] = useState<any>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const mutate = useCallback(
-    async (variables: UpdateFacetFieldsVars) => {
+  const execute = useCallback(
+    async (requests: GraphQLRequest | GraphQLRequest[], token?: string) => {
       setLoading(true);
       setError(null);
       setData(null);
 
+      const reqs = Array.isArray(requests) ? requests : [requests];
+
       try {
-        const res = await fetch(GRAPHQL_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: JSON.stringify({
-            query: UPDATE_FACET_FIELDS_MUTATION,
-            variables,
+        const results = await Promise.all(
+          reqs.map(async ({ query, variables }) => {
+            const res = await fetch(GRAPHQL_ENDPOINT, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+              },
+              body: JSON.stringify({ query, variables }),
+            });
+            if (!res.ok) {
+              throw new Error(`GraphQL error: ${res.status} ${res.statusText}`);
+            }
+            const result = await res.json();
+            if (result.errors) {
+              throw new Error(`GraphQL error: ${JSON.stringify(result.errors)}`);
+            }
+            return result.data;
           }),
-        });
-
-        if (!res.ok) {
-          throw new Error(`GraphQL error: ${res.status} ${res.statusText}`);
-        }
-
-        const result = await res.json();
-        if (result.errors) {
-          throw new Error(`GraphQL error: ${JSON.stringify(result.errors)}`);
-        }
-        setData(result.data);
+        );
+        setData(reqs.length === 1 ? results[0] : results);
+        return reqs.length === 1 ? results[0] : results;
       } catch (err) {
         setError(err as Error);
+        throw err;
       } finally {
         setLoading(false);
       }
     },
-    [token],
+    [],
   );
 
-  return { data, error, loading, mutate };
+  return { data, error, loading, execute };
 }

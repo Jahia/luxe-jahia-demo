@@ -15,15 +15,16 @@ export interface JcrQueryProps {
 }
 
 export interface FacetProps {
-  name: string;
-  hidden: boolean;
-  displayName: string;
-  mandatory: boolean;
-  requiredType: string;
+  id: string;
+  label: string;
+  type: string;
+  isHidden: boolean;
+  isMandatory: boolean;
+  isMultiple: boolean;
+  isI18n: boolean;
   isActive: boolean;
-  multiple: boolean;
-  internationalized: boolean;
-  values?: unknown[];
+  values: unknown[];
+  selectedValues: unknown[];
 }
 
 export interface RenderNodeProps {

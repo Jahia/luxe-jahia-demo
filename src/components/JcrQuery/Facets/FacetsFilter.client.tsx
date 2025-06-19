@@ -7,15 +7,7 @@ import StringFacet from "~/components/JcrQuery/Facets/Components/StringFacet";
 import classes from "./FacetsFilter.client.module.css";
 import type { FacetProps } from "~/components/JcrQuery/types";
 import { useFacet } from "~/components/JcrQuery/Facets/Hooks/Facet.client";
-
-export interface FacetItem {
-  id: string;
-  label: string;
-  isActive: boolean;
-  type: string;
-  values: unknown[];
-  selectedValues: unknown[];
-}
+import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
 
 // const ItemType = { FACET: "facet" };
 //
@@ -25,7 +17,7 @@ export interface FacetItem {
 //   moveFacet,
 //   children,
 // }: {
-//   facet: FacetItem;
+//   facet: FacetProps;
 //   index: number;
 //   moveFacet: (from: number, to: number) => void;
 //   children: React.ReactNode;
@@ -64,15 +56,18 @@ export interface FacetItem {
 // };
 
 const FacetsFilter = ({
+  builder,
   facets,
   isEditMode,
   jcrQueryUuid,
 }: {
+  builder: JCRQueryBuilderType;
   facets: FacetProps[];
   isEditMode: boolean;
   jcrQueryUuid: string;
 }) => {
   const { enabledFacets, handleFacetVisibilityChange, handleFacetValuesChange } = useFacet(
+    builder,
     facets,
     jcrQueryUuid,
   );
@@ -82,7 +77,7 @@ const FacetsFilter = ({
     // LONG: LongFacet,
   };
 
-  const getFacetComponent = (facet: FacetItem) => {
+  const getFacetComponent = (facet: FacetProps) => {
     const FacetComponent = Cmp[facet.type];
     if (!FacetComponent) return null;
     return <FacetComponent {...{ facet, onChange: handleFacetValuesChange }} />;
@@ -95,9 +90,9 @@ const FacetsFilter = ({
     <div>
       <h2>Facets</h2>
       <MultiSelectDropdown
-        options={facets.map(({ name, displayName, isActive }) => ({
-          value: name,
-          label: displayName,
+        options={facets.map(({ id, label, isActive }) => ({
+          value: id,
+          label,
           isActive,
         }))}
         placeholder="select your facets"

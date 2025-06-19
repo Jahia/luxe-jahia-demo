@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./StringFacet.module.css";
-import type { FacetItem } from "~/components/JcrQuery/Facets/FacetsFilter.client";
+import type { FacetProps } from "~/components/JcrQuery/types";
 
 // const propertyTypes = ["House", "Apartment", "Building", "Condo", "Townhouse", "Villa"];
 
 interface StringFacetProps {
-  facet: FacetItem;
+  facet: FacetProps;
   onChange: (id: string, values: string[]) => void;
 }
 
