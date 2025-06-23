@@ -14,6 +14,12 @@ export interface JcrQueryProps {
   "facetFields"?: string[];
 }
 
+export type Constraint = {
+  prop: string;
+  operator: string;
+  value: string | number | boolean | Date;
+};
+
 export interface FacetProps {
   id: string;
   label: string;
@@ -23,8 +29,8 @@ export interface FacetProps {
   isMultiple: boolean;
   isI18n: boolean;
   isActive: boolean;
-  values: unknown[];
-  selectedValues: unknown[];
+  values: (string | number | boolean | Date)[];
+  constraints: Constraint[];
 }
 
 export interface RenderNodeProps {

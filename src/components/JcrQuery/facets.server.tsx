@@ -7,10 +7,10 @@ import {
 
 import { t } from "i18next";
 import {
-  buildJCRQuery,
   generateGraphQLFragProperties,
   getNodePropertyValues,
   gqlContentPropertiesQueryString,
+  gqlNodes2DiplayNodes,
   gqlNodesQueryString,
   mapToJCRQueryBuilderProps,
 } from "./utils";
@@ -41,22 +41,6 @@ jahiaComponent(
     }: JcrQueryProps,
     { currentNode, renderContext, currentResource },
   ) => {
-    // const { jcrQuery, warn } = buildJCRQuery({
-    //   luxeQuery: {
-    //     "jcr:title": title,
-    //     type,
-    //     criteria,
-    //     sortDirection,
-    //     startNode,
-    //     filter,
-    //     excludeNodes,
-    //   },
-    //   t,
-    //   server,
-    //   currentNode,
-    //   renderContext,
-    // });
-
     const jcrQueryBuilderProps = mapToJCRQueryBuilderProps({
       luxeQuery: {
         "jcr:title": title,
@@ -66,6 +50,7 @@ jahiaComponent(
         startNode,
         filter,
         excludeNodes,
+        "j:subNodesView": subNodeView,
       },
       t,
       currentNode,
@@ -97,8 +82,8 @@ jahiaComponent(
       ?.filter((facet: FacetProps) => facet.type != "WEAKREFERENCE")
       .map((facet: FacetProps) =>
         facetFields?.includes(facet.id)
-          ? { ...facet, isActive: true, values: [], selectedValues: [] }
-          : { ...facet, isActive: false, values: [], selectedValues: [] },
+          ? { ...facet, isActive: true, values: [], constraints: [] }
+          : { ...facet, isActive: false, values: [], constraints: [] },
       );
 
     const selectedFacets = facets?.filter((facet) => facet.isActive) || [];
@@ -108,10 +93,12 @@ jahiaComponent(
       "FacetPropertiesValues",
     );
     const gqlContents = useGQLQuery({
-      query: gqlNodesQueryString(
-        { name: "FacetPropertiesValues", value: graphQLFragProperties },
-        true,
-      ),
+      query: gqlNodesQueryString({
+        fragment: graphQLFragProperties
+          ? { name: "FacetPropertiesValues", value: graphQLFragProperties }
+          : undefined,
+        isRenderEnabled: true,
+      }),
       variables: {
         query: jcrQuery,
         view: subNodeView || "default",
@@ -134,22 +121,17 @@ jahiaComponent(
       return facet;
     });
 
-    const nodes: RenderNodeProps = gqlNodes?.map((node) => ({
-      html: node.renderedContent.output,
-      uuid: node.uuid,
-    }));
+    const nodes: RenderNodeProps[] = gqlNodes2DiplayNodes(gqlNodes);
 
     return (
       <HydrateInBrowser
         child={FacetsClient}
         props={{
           jcrQueryBuilderProps,
-          jcrQueryUuid: currentNode.getIdentifier(),
           nodes,
           facets,
           warn,
           noResultText,
-          subNodeView,
           isEditMode: renderContext.isEditMode(),
         }}
       />

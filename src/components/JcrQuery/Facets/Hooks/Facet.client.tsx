@@ -1,9 +1,20 @@
 import { useState, useCallback, useMemo } from "react";
-import type { FacetProps } from "~/components/JcrQuery/types";
+import type { Constraint, FacetProps, RenderNodeProps } from "~/components/JcrQuery/types";
 import { useGraphQL } from "~/components/JcrQuery/Facets/Hooks/Gql.client";
 import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
+import { gqlNodesQueryString } from "~/components/JcrQuery/utils";
 
-export function useFacet(builder: JCRQueryBuilderType, facets: FacetProps[], jcrQueryUuid: string) {
+export function useFacet({
+  builder,
+  facets,
+  jcrQueryUuid,
+  setNodes,
+}: {
+  builder: JCRQueryBuilderType;
+  facets: FacetProps[];
+  jcrQueryUuid: string;
+  setNodes: (nodes: RenderNodeProps[]) => void;
+}) {
   const [facetOrder, setFacetOrder] = useState<FacetProps[]>(facets);
 
   const { execute } = useGraphQL();
@@ -17,17 +28,16 @@ export function useFacet(builder: JCRQueryBuilderType, facets: FacetProps[], jcr
     });
   }, []);
 
-  const handleFacetValuesChange = useCallback((facetId: string, values: unknown[]) => {
+  const handleFacetValuesChange = useCallback((facetId: string, values: Constraint[]) => {
     const facet = facetOrder.find((f) => f.id === facetId);
     if (!facet) return;
 
-    values?.forEach((value) => builder.addConstraint(facet.id, "=", value as string));
-    const { jcrQuery } = builder.build();
-    console.log("Updated JCR Query:", jcrQuery);
-    //todo
+    // Update the builder with the new constraints
+    builder.setConstraint(...values);
+    builder.execute();
 
     setFacetOrder((prev) =>
-      prev.map((facet) => (facet.id === facetId ? { ...facet, selectedValues: values } : facet)),
+      prev.map((facet) => (facet.id === facetId ? { ...facet, constraints: values } : facet)),
     );
   }, []);
 
@@ -64,33 +74,6 @@ export function useFacet(builder: JCRQueryBuilderType, facets: FacetProps[], jcr
       } catch (e) {
         // Gérer l’erreur si besoin
       }
-
-      // const graphQLFragProperties = generateGraphQLFragProperties(
-      //   facetOrder.filter(),
-      //   "FacetPropertiesValues",
-      // );
-      // const gqlContents = useGQLQuery({
-      //   query: gqlNodesQueryString(
-      //     { name: "FacetPropertiesValues", value: graphQLFragProperties },
-      //     true,
-      //   ),
-      //   variables: {
-      //     query: jcrQuery,
-      //     language: currentLocaleCode,
-      //   },
-      // });
-
-      // mutate({
-      //   pathsOrIds: [jcrQueryUuid],
-      //   facetFields: newSetOfSelectedFacets,
-      // });
-      //
-      // setFacetOrder((prev) =>
-      //   prev.map((facet) => ({
-      //     ...facet,
-      //     isActive: newSetOfSelectedFacets.includes(facet.id),
-      //   })),
-      // );
     },
     [execute, jcrQueryUuid],
   );

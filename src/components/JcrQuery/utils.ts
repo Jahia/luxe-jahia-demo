@@ -1,22 +1,31 @@
-import type { ExtractedProps, FacetProps, JcrQueryProps, NodeResult } from "./types";
+import type {
+  ExtractedProps,
+  FacetProps,
+  JcrQueryProps,
+  NodeResult,
+  RenderNodeProps,
+} from "./types";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { TFunction } from "i18next";
-import { server } from "@jahia/javascript-modules-library";
+// import { server } from "@jahia/javascript-modules-library";
 import type { JCRQueryConfig } from "~/components/JcrQuery/JCRQueryBuilder";
 
 interface BuildJCRQueryProps {
   luxeQuery: JcrQueryProps;
   t: TFunction;
-  server?: typeof server;
+  // server?: typeof server;
   currentNode: JCRNodeWrapper;
   renderContext: RenderContext;
 }
 
-export const gqlNodesQueryString = (
-  fragment: { name: string; value: string | undefined },
-  isRenderEnabled: boolean,
-): string => {
+export const gqlNodesQueryString = ({
+  fragment,
+  isRenderEnabled,
+}: {
+  fragment?: { name: string; value: string };
+  isRenderEnabled: boolean;
+}): string => {
   return `
     query GetContentPropertiesQuery($query: String!, ${isRenderEnabled ? "$view: String!," : ""} $language: String!) {
      jcr {
@@ -28,13 +37,13 @@ export const gqlNodesQueryString = (
           uuid
           path
           name
-          ${fragment.value ? `...${fragment.name}` : ""}
+          ${fragment?.value ? `...${fragment.name}` : ""}
           ${isRenderEnabled ? "renderedContent(view: $view, language: $language){ output }" : ""}
         }
       }
      }
     }
-    ${fragment.value ? fragment.value : ""}
+    ${fragment?.value ? fragment.value : ""}
   `;
 };
 
@@ -64,6 +73,11 @@ const typeMap = {
   DOUBLE: "doubleValue",
 } as const;
 
+export type GqlNode = {
+  uuid: string;
+  renderedContent: { output: string };
+};
+
 const stripPrefix = (name: string): string => {
   return name.replace(/:/g, "_");
 };
@@ -71,6 +85,12 @@ const stripPrefix = (name: string): string => {
 const unstripPrefix = (key: string): string => {
   return key.replace(/_/g, ":");
 };
+
+export const gqlNodes2DiplayNodes = (gqlNodes: GqlNode[]): RenderNodeProps[] =>
+  gqlNodes?.map((node) => ({
+    html: node.renderedContent.output,
+    uuid: node.uuid,
+  }));
 
 export const generateGraphQLFragProperties = (
   properties: FacetProps[],
@@ -99,27 +119,44 @@ export const generateGraphQLFragProperties = (
   return `fragment ${fragmentName} on JCRNode {\n${fragmentBody}\n}`;
 };
 
-export const getNodePropertyValues = (nodes: NodeResult[], facet: FacetProps): Set<unknown> => {
+export const getNodePropertyValues = (
+  nodes: NodeResult[],
+  facet: FacetProps,
+): Set<string | number | boolean | Date> => {
   const key = stripPrefix(facet.id);
-  const valuesSet = new Set<unknown>();
+  const valuesSet = new Set<string | number | boolean | Date>();
 
   for (const node of nodes) {
     const propObj = node[key];
     if (!propObj) continue;
 
-    let values: unknown[] = [];
+    let values: (string | number | boolean | Date)[] = [];
     if (facet.type === "STRING") {
       values = facet.isMultiple
-        ? (propObj.values ?? [])
-        : propObj.value !== undefined
-          ? [propObj.value]
+        ? ((propObj as { values?: string[] }).values ?? [])
+        : (propObj as { value?: string }).value !== undefined
+          ? [(propObj as { value?: string }).value as string]
           : [];
+    } else if (facet.type === "DATE") {
+      // Optionnel : parser la date string en Date, sinon laisse en string
+      if (facet.isMultiple) {
+        values = ((propObj as { dateValues?: string[] }).dateValues ?? []).map((d) => new Date(d));
+      } else {
+        const val = (propObj as { dateValue?: string }).dateValue;
+        values = val !== undefined ? [new Date(val)] : [];
+      }
     } else {
       const baseField = typeMap[facet.type as keyof typeof typeMap];
       if (!baseField) continue;
-      const field = facet.isMultiple ? baseField.replace("Value", "Values") : baseField;
+      const field = facet.isMultiple ? baseField + "s" : baseField;
       const v = propObj[field as keyof typeof propObj];
-      values = facet.isMultiple ? (Array.isArray(v) ? v : []) : v !== undefined ? [v] : [];
+      values = facet.isMultiple
+        ? Array.isArray(v)
+          ? (v as (number | boolean)[])
+          : []
+        : v !== undefined
+          ? [v as number | boolean]
+          : [];
     }
     values.forEach((val) => valuesSet.add(val));
   }
@@ -152,67 +189,69 @@ export const getNodePropertyValues = (nodes: NodeResult[], facet: FacetProps): S
 //   return result;
 // };
 
-export const buildJCRQuery = ({
-  luxeQuery,
-  t,
-  server,
-  currentNode,
-  renderContext,
-}: BuildJCRQueryProps) => {
-  let warn: string | null = null;
-  const asContent = "content";
-  // Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
-
-  const descendantPath =
-    luxeQuery.startNode?.getPath() || `${currentNode.getResolveSite().getPath()}`;
-
-  /**
-   * build Filter based on category
-   */
-  const filter =
-    luxeQuery.filter?.reduce((condition, categoryNode, index) => {
-      // If category is deleted, the filter contains "undefined" for the deleted category
-      if (!categoryNode) {
-        warn = t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] });
-        return condition;
-      }
-
-      return `${condition} ${index === 0 ? "" : "OR"} ${asContent}.[j:defaultCategory] = '${categoryNode.getIdentifier()}'`;
-    }, "") || "";
-  const queryFilter = filter.trim().length > 0 ? `AND (${filter})` : "";
-
-  /**
-   * build Filter based on excludeNodes
-   */
-  const excludeNodes =
-    luxeQuery.excludeNodes?.reduce((condition, excludeNode, index) => {
-      // If excludeNode is deleted, the filter contains "undefined" for the deleted category
-      if (!excludeNode) {
-        warn = t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] });
-        return condition;
-      }
-
-      const translationNode = excludeNode.getNode(
-        `j:translation_${renderContext.getMainResourceLocale().getLanguage()}`,
-      );
-      const extraLanguageNode = translationNode
-        ? `AND ${asContent}.[jcr:uuid] <> '${translationNode.getIdentifier()}'`
-        : "";
-      return `${condition} ${index === 0 ? "" : "OR"} (${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}' ${extraLanguageNode})`;
-    }, "") || "";
-  const queryExcludeNodes = excludeNodes.trim().length > 0 ? `AND (${excludeNodes})` : "";
-
-  const jcrQuery = `SELECT *
-                      FROM [${luxeQuery.type}] AS ${asContent}
-                      WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
-                      ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
-
-  server?.render.addCacheDependency(
-    { flushOnPathMatchingRegexp: `${descendantPath}/.*` },
-    renderContext,
-  );
-  return { jcrQuery, warn };
-};
+// //todo update all code using this to use JCRQueryBuilder
+// export const buildJCRQuery = ({
+//   luxeQuery,
+//   t,
+//   server,
+//   currentNode,
+//   renderContext,
+// }: BuildJCRQueryProps) => {
+//   let warn: string | null = null;
+//   const asContent = "content";
+//
+//   // Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
+//
+//   const descendantPath =
+//     luxeQuery.startNode?.getPath() || `${currentNode.getResolveSite().getPath()}`;
+//
+//   /**
+//    * build Filter based on category
+//    */
+//   const filter =
+//     luxeQuery.filter?.reduce((condition, categoryNode, index) => {
+//       // If category is deleted, the filter contains "undefined" for the deleted category
+//       if (!categoryNode) {
+//         warn = t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] });
+//         return condition;
+//       }
+//
+//       return `${condition} ${index === 0 ? "" : "OR"} ${asContent}.[j:defaultCategory] = '${categoryNode.getIdentifier()}'`;
+//     }, "") || "";
+//   const queryFilter = filter.trim().length > 0 ? `AND (${filter})` : "";
+//
+//   /**
+//    * build Filter based on excludeNodes
+//    */
+//   const excludeNodes =
+//     luxeQuery.excludeNodes?.reduce((condition, excludeNode, index) => {
+//       // If excludeNode is deleted, the filter contains "undefined" for the deleted category
+//       if (!excludeNode) {
+//         warn = t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] });
+//         return condition;
+//       }
+//
+//       const translationNode = excludeNode.getNode(
+//         `j:translation_${renderContext.getMainResourceLocale().getLanguage()}`,
+//       );
+//       const extraLanguageNode = translationNode
+//         ? `AND ${asContent}.[jcr:uuid] <> '${translationNode.getIdentifier()}'`
+//         : "";
+//       return `${condition} ${index === 0 ? "" : "OR"} (${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}' ${extraLanguageNode})`;
+//     }, "") || "";
+//   const queryExcludeNodes = excludeNodes.trim().length > 0 ? `AND (${excludeNodes})` : "";
+//
+//   const jcrQuery = `SELECT *
+//                       FROM [${luxeQuery.type}] AS ${asContent}
+//                       WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
+//                       ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
+//
+//   server?.render.addCacheDependency(
+//     { flushOnPathMatchingRegexp: `${descendantPath}/.*` },
+//     renderContext,
+//   );
+//   return { jcrQuery, warn };
+// };
 
 export function mapToJCRQueryBuilderProps({
   luxeQuery,
@@ -221,6 +260,8 @@ export function mapToJCRQueryBuilderProps({
   t,
 }: BuildJCRQueryProps): JCRQueryConfig {
   const warn: string[] = [];
+  const currentLocale = renderContext.getMainResourceLocale();
+  const currentLocaleCode = currentLocale.toString();
 
   const categories =
     luxeQuery.filter
@@ -258,5 +299,8 @@ export function mapToJCRQueryBuilderProps({
     categories,
     excludeNodes,
     warn,
+    uuid: currentNode.getIdentifier(),
+    subNodeView: luxeQuery["j:subNodesView"] || "default",
+    language: currentLocaleCode,
   };
 }

@@ -9,39 +9,46 @@ import alert from "~/templates/css/alert.module.css";
 import { t } from "i18next";
 import FacetsFilter from "~/components/JcrQuery/Facets/FacetsFilter.client";
 import { JCRQueryBuilder, type JCRQueryConfig } from "~/components/JcrQuery/JCRQueryBuilder";
+import { gqlNodesQueryString } from "~/components/JcrQuery/utils";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function FacetsClient({
   jcrQueryBuilderProps,
-  jcrQueryUuid,
-  nodes,
+  nodes: initialNodes,
   facets,
   warn,
   noResultText,
-  subNodeView,
   isEditMode,
 }: {
   jcrQueryBuilderProps: JCRQueryConfig;
-  jcrQueryUuid: string;
   nodes: RenderNodeProps[];
   facets: FacetProps[];
   warn: string;
   noResultText: string;
-  subNodeView?: string;
   isEditMode: boolean;
 }) {
   const builder = useMemo(() => new JCRQueryBuilder(jcrQueryBuilderProps), [jcrQueryBuilderProps]);
   const { jcrQuery } = useMemo(() => builder.build(), [builder]);
+  const [nodes, setNodes] = useState<RenderNodeProps[]>(initialNodes);
+
   console.log("JCR Query:", jcrQuery);
+
   return (
     <div className={styles.container}>
       <div className={styles.facetsColumn}>
-        <FacetsFilter {...{ facets, isEditMode, jcrQueryUuid, builder }} />
+        <FacetsFilter
+          {...{ facets, isEditMode, jcrQueryUuid: jcrQueryBuilderProps.uuid, builder, setNodes }}
+        />
 
         {/*<SearchFacets filters={filters} onFiltersChange={setFilters} />*/}
       </div>
       <div className={styles.resultsColumn}>
         {/*<SearchResults properties={filteredProperties} />*/}
+        {warn && (
+          <div className={alert.warning} role="alert">
+            {warn}
+          </div>
+        )}
         {nodes.map(({ html, uuid }) => (
           <div
             key={uuid}

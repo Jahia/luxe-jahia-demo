@@ -1,3 +1,6 @@
+import type { Constraint } from "~/components/JcrQuery/types";
+import { gqlNodesQueryString } from "~/components/JcrQuery/utils";
+
 export type JCRQueryConfig = {
   type: string;
   startNodePath: string;
@@ -6,31 +9,25 @@ export type JCRQueryConfig = {
   categories: { id: string }[];
   excludeNodes: { id: string; translationId?: string }[];
   warn: string[];
-};
-
-type Constraint = {
-  prop: string;
-  operator: string;
-  value: string | number | boolean;
+  uuid: string;
+  subNodeView: string;
+  language: string;
 };
 
 export type JCRQueryBuilderType = {
-  addConstraint(
-    prop: string,
-    operator: string,
-    value: string | number | boolean,
-  ): JCRQueryBuilderType;
-  build(): {
+  setConstraint: (...constraints: Constraint[]) => JCRQueryBuilderType;
+  build: () => {
     jcrQuery: string;
     warn: string[];
     cacheDependency: string;
   };
+  execute: (token?: string) => Promise<any>;
 };
 
 //todo review constraints -> Set<Constraint> and create a constraint group based on type
 export class JCRQueryBuilder {
   private config: JCRQueryConfig;
-  private constraints: Constraint[] = [];
+  private constraints: Map<string, Set<Constraint>> = new Map();
   private cacheDependency: string;
   private warnings: string[] = [];
 
@@ -40,8 +37,19 @@ export class JCRQueryBuilder {
     this.warnings = config.warn;
   }
 
-  addConstraint(prop: string, operator: string, value: string | number | boolean): this {
-    this.constraints.push({ prop, operator, value });
+  setConstraint(...constraints: Constraint[]): this {
+    // group by props
+    const byProp: Map<string, Set<Constraint>> = new Map();
+    for (const constraint of constraints) {
+      if (!byProp.has(constraint.prop)) {
+        byProp.set(constraint.prop, new Set());
+      }
+      byProp.get(constraint.prop)!.add(constraint);
+    }
+    // replace the set
+    for (const [prop, set] of byProp) {
+      this.constraints.set(prop, set);
+    }
     return this;
   }
 
@@ -49,17 +57,29 @@ export class JCRQueryBuilder {
     const asContent = "content";
     const { type, startNodePath, criteria, sortDirection, categories, excludeNodes } = this.config;
 
-    // Contraintes génériques
-    const constraintsClause = this.constraints.length
-      ? "AND (" +
-        this.constraints
-          .map(
-            ({ prop, operator, value }) =>
-              `${asContent}.[${prop}] ${operator} ${typeof value === "string" ? `'${value}'` : value}`,
-          )
-          .join(" OR ") +
-        ")"
-      : "";
+    let constraintsClause = "";
+    if (this.constraints.size > 0) {
+      const andClauses = Array.from(this.constraints.entries())
+        .map(([prop, constraintsSet]) => {
+          if (constraintsSet.size === 0) return "";
+
+          // OR entre chaque contrainte d'un même groupe
+          const orGroup = Array.from(constraintsSet)
+            .map(
+              ({ operator, value }) =>
+                `${asContent}.[${prop}] ${operator} ${typeof value === "string" ? `'${value}'` : value}`,
+            )
+            .join(" OR ");
+
+          // Ajoute les parenthèses pour chaque groupe de OR
+          return `(${orGroup})`;
+        })
+        .filter(Boolean); // enlève les groupes vides, au cas où
+
+      if (andClauses.length > 0) {
+        constraintsClause = "AND " + andClauses.join(" AND ");
+      }
+    }
 
     // Catégories
     const categoryFilter = categories?.length
@@ -88,5 +108,39 @@ export class JCRQueryBuilder {
       `SELECT * FROM [${type}] AS ${asContent} WHERE ISDESCENDANTNODE('${startNodePath}') ${categoryFilter} ${excludeFilter} ${constraintsClause} ${orderClause}`.trim();
 
     return { jcrQuery, warn: this.warnings, cacheDependency: this.cacheDependency };
+  }
+
+  async execute(token?: string): Promise<any> {
+    const { jcrQuery } = this.build();
+    const query = gqlNodesQueryString({
+      isRenderEnabled: true,
+    });
+
+    // Exécute le call
+    const res = await fetch("/modules/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify({
+        query,
+        variables: {
+          query: jcrQuery,
+          view: this.config.subNodeView,
+          language: this.config.language,
+        },
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`GraphQL error: ${res.status} ${res.statusText}`);
+    }
+
+    const result = await res.json();
+    if (result.errors) {
+      throw new Error(`GraphQL error: ${JSON.stringify(result.errors)}`);
+    }
+    return result.data;
   }
 }

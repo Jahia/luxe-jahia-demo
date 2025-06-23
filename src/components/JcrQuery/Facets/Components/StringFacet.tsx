@@ -1,28 +1,40 @@
 import React from "react";
 import styles from "./StringFacet.module.css";
-import type { FacetProps } from "~/components/JcrQuery/types";
+import type { Constraint, FacetProps } from "~/components/JcrQuery/types";
+import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
 
 // const propertyTypes = ["House", "Apartment", "Building", "Condo", "Townhouse", "Villa"];
 
 interface StringFacetProps {
   facet: FacetProps;
-  onChange: (id: string, values: string[]) => void;
+  onChange: (id: string, values: Constraint[]) => void;
+  builder: JCRQueryBuilderType;
 }
 
 const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFacetProps) => {
   const handleTypeChange = (value: string) => {
-    if (facet.selectedValues.includes(value)) {
+    if (facet.constraints.filter(({ value: v }) => v === value).length > 0) {
       // console.log("Removing value:", value);
-      onChange(facet.id, facet.selectedValues.filter((t) => t !== value) as string[]);
+      onChange(
+        facet.id,
+        facet.constraints.filter(({ value: v }) => v !== value),
+      );
     } else {
       // console.log("Adding value:", value);
-      onChange(facet.id, [...facet.selectedValues, value] as string[]);
+      onChange(facet.id, [
+        ...facet.constraints,
+        {
+          prop: facet.id,
+          operator: "=",
+          value: value,
+        },
+      ]);
     }
   };
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Property Type</h3>
+      <h3 className={styles.title}>{facet.label}</h3>
       <div className={styles.options}>
         {facet.values.map((value) => (
           <div
@@ -31,7 +43,7 @@ const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFace
             onClick={() => handleTypeChange(value as string)}
           >
             <div
-              className={`${styles.checkbox} ${facet.selectedValues.includes(value) ? styles.checked : ""}`}
+              className={`${styles.checkbox} ${facet.constraints.map(({ value }) => value).includes(value) ? styles.checked : ""}`}
             />
             <label className={styles.label}>{value as string}</label>
           </div>

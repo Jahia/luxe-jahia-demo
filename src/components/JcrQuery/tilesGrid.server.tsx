@@ -7,11 +7,12 @@ import {
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
-import { buildJCRQuery } from "./utils";
+import { mapToJCRQueryBuilderProps } from "./utils";
 import clsx from "clsx";
 import type { JcrQueryProps } from "./types";
 import alert from "~/templates/css/alert.module.css";
 import grid from "~/commons/grid/grid.module.css";
+import { JCRQueryBuilder } from "~/components/JcrQuery/JCRQueryBuilder";
 
 jahiaComponent(
   {
@@ -35,7 +36,23 @@ jahiaComponent(
     }: JcrQueryProps,
     { currentNode, renderContext },
   ) => {
-    const { jcrQuery, warn } = buildJCRQuery({
+    // const { jcrQuery, warn } = buildJCRQuery({
+    //   luxeQuery: {
+    //     "jcr:title": title,
+    //     type,
+    //     criteria,
+    //     sortDirection,
+    //     startNode,
+    //     filter,
+    //     excludeNodes,
+    //   },
+    //   t,
+    //   server,
+    //   currentNode,
+    //   renderContext,
+    // });
+    // const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
+    const jcrQueryBuilderProps = mapToJCRQueryBuilderProps({
       luxeQuery: {
         "jcr:title": title,
         type,
@@ -44,12 +61,20 @@ jahiaComponent(
         startNode,
         filter,
         excludeNodes,
+        "j:subNodesView": subNodeView,
       },
       t,
-      server,
       currentNode,
       renderContext,
     });
+
+    const builder = new JCRQueryBuilder(jcrQueryBuilderProps);
+
+    const { jcrQuery, warn, cacheDependency } = builder.build();
+    server?.render.addCacheDependency(
+      { flushOnPathMatchingRegexp: cacheDependency },
+      renderContext,
+    );
     const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
     const rowQueryContent = queryContent.reduce((row: JCRNodeWrapper[][], node, index) => {
       if (index % 2 === 0) {
