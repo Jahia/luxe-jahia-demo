@@ -32,9 +32,15 @@ export function useFacet({
     const facet = facetOrder.find((f) => f.id === facetId);
     if (!facet) return;
 
+    if (values.length === 0) {
+      builder.deleteConstraints(facetId);
+    }
     // Update the builder with the new constraints
-    builder.setConstraint(...values);
-    builder.execute();
+    builder.setConstraints(...values);
+    builder.execute().then((renderNodes: RenderNodeProps[]) => {
+      console.log("Query executed successfully:", renderNodes);
+      setNodes(renderNodes || []);
+    });
 
     setFacetOrder((prev) =>
       prev.map((facet) => (facet.id === facetId ? { ...facet, constraints: values } : facet)),

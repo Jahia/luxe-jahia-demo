@@ -1,4 +1,4 @@
-import type { Constraint } from "~/components/JcrQuery/types";
+import type { Constraint, RenderNodeProps } from "~/components/JcrQuery/types";
 import { gqlNodesQueryString } from "~/components/JcrQuery/utils";
 
 export type JCRQueryConfig = {
@@ -14,14 +14,22 @@ export type JCRQueryConfig = {
   language: string;
 };
 
+export type JCRQueryResponse = {
+  uuid: string;
+  renderedContent: {
+    output: string;
+  };
+};
+
 export type JCRQueryBuilderType = {
-  setConstraint: (...constraints: Constraint[]) => JCRQueryBuilderType;
+  setConstraints: (...constraints: Constraint[]) => JCRQueryBuilderType;
+  deleteConstraints: (key: string) => JCRQueryBuilderType;
   build: () => {
     jcrQuery: string;
     warn: string[];
     cacheDependency: string;
   };
-  execute: (token?: string) => Promise<any>;
+  execute: (token?: string) => Promise<RenderNodeProps[]>;
 };
 
 //todo review constraints -> Set<Constraint> and create a constraint group based on type
@@ -37,7 +45,7 @@ export class JCRQueryBuilder {
     this.warnings = config.warn;
   }
 
-  setConstraint(...constraints: Constraint[]): this {
+  setConstraints(...constraints: Constraint[]): this {
     // group by props
     const byProp: Map<string, Set<Constraint>> = new Map();
     for (const constraint of constraints) {
@@ -50,6 +58,11 @@ export class JCRQueryBuilder {
     for (const [prop, set] of byProp) {
       this.constraints.set(prop, set);
     }
+    return this;
+  }
+
+  deleteConstraints(key: string): this {
+    this.constraints.delete(key);
     return this;
   }
 
@@ -110,7 +123,7 @@ export class JCRQueryBuilder {
     return { jcrQuery, warn: this.warnings, cacheDependency: this.cacheDependency };
   }
 
-  async execute(token?: string): Promise<any> {
+  async execute(token?: string): Promise<RenderNodeProps[]> {
     const { jcrQuery } = this.build();
     const query = gqlNodesQueryString({
       isRenderEnabled: true,
@@ -141,6 +154,11 @@ export class JCRQueryBuilder {
     if (result.errors) {
       throw new Error(`GraphQL error: ${JSON.stringify(result.errors)}`);
     }
-    return result.data;
+    return result.data?.jcr?.nodesByQuery?.nodes?.map(
+      ({ uuid, renderedContent }: JCRQueryResponse) => ({
+        uuid,
+        html: renderedContent.output,
+      }),
+    );
   }
 }
