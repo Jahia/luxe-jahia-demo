@@ -1,12 +1,13 @@
-import React from "react";
 import styles from "./LongFacet.module.css";
+import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
+import type { FacetProps } from "~/components/JcrQuery/types";
 
 interface PriceFacetProps {
-  priceRange: [number, number];
+  facet: FacetProps;
   onChange: (range: [number, number]) => void;
 }
 
-const LongFacet: React.FC<PriceFacetProps> = ({ priceRange, onChange }) => {
+const LongFacet: React.FC<PriceFacetProps> = ({ facet, onChange }) => {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -15,6 +16,10 @@ const LongFacet: React.FC<PriceFacetProps> = ({ priceRange, onChange }) => {
       maximumFractionDigits: 0,
     }).format(price);
   };
+
+  const priceRange = facet.constraints.length
+    ? [facet.constraints[0].value as number, facet.constraints[1].value as number]
+    : [0, 1000000];
 
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMin = parseInt(e.target.value);

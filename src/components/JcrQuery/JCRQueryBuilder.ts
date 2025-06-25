@@ -12,6 +12,7 @@ export type JCRQueryConfig = {
   uuid: string;
   subNodeView: string;
   language: string;
+  limit?: number;
 };
 
 export type JCRQueryResponse = {
@@ -127,6 +128,7 @@ export class JCRQueryBuilder {
     const { jcrQuery } = this.build();
     const query = gqlNodesQueryString({
       isRenderEnabled: true,
+      limit: this.config.limit,
     });
 
     // Exécute le call

@@ -22,15 +22,21 @@ interface BuildJCRQueryProps {
 export const gqlNodesQueryString = ({
   fragment,
   isRenderEnabled,
+  limit,
+  offset,
 }: {
   fragment?: { name: string; value: string };
   isRenderEnabled: boolean;
+  limit?: number;
+  offset?: number;
 }): string => {
   return `
     query GetContentPropertiesQuery($query: String!, ${isRenderEnabled ? "$view: String!," : ""} $language: String!) {
      jcr {
       nodesByQuery(
         query: $query
+        ${limit && limit >= 0 ? `limit: ${limit}` : ""}
+        ${offset && offset >= 0 ? `offset: ${offset}` : ""}
       ) {
         nodes {
           workspace
@@ -122,7 +128,7 @@ export const generateGraphQLFragProperties = (
 export const getNodePropertyValues = (
   nodes: NodeResult[],
   facet: FacetProps,
-): Set<string | number | boolean | Date> => {
+): Array<string | number | boolean | Date> => {
   const key = stripPrefix(facet.id);
   const valuesSet = new Set<string | number | boolean | Date>();
 
@@ -160,98 +166,27 @@ export const getNodePropertyValues = (
     }
     values.forEach((val) => valuesSet.add(val));
   }
-  return valuesSet;
+
+  let result = Array.from(valuesSet);
+  if (facet.type === "STRING") {
+    result = result
+      .filter((x): x is string => typeof x === "string")
+      .sort((a, b) => a.localeCompare(b));
+  } else if (facet.type === "DATE") {
+    result = result
+      .filter((x): x is Date => x instanceof Date)
+      .sort((a, b) => a.getTime() - b.getTime());
+  } else if (facet.type === "LONG" || facet.type === "DECIMAL" || facet.type === "DOUBLE") {
+    result = result.filter((x): x is number => typeof x === "number").sort((a, b) => a - b);
+  }
+
+  // Si tu veux vraiment tout rendre (y compris booleans), tu peux les concaténer à la fin
+  if (facet.type === "BOOLEAN") {
+    result = result.filter((x): x is boolean => typeof x === "boolean");
+  }
+
+  return result;
 };
-
-//
-// export const extractGraphQLPropertyValue = (node: NodeResult, properties: FacetProps): unknown =>
-//   extractGraphQLProperties(node, [properties])[stripPrefix(properties.name)];
-//
-// const extractGraphQLProperties = (node: NodeResult, properties: FacetProps[]): ExtractedProps => {
-//   const result: ExtractedProps = {};
-//   for (const prop of properties) {
-//     const key = stripPrefix(prop.name);
-//     const propObj = node[key];
-//
-//     if (!propObj) continue; // Propriété absente du résultat
-//
-//     let value;
-//     if (prop.type === "STRING") {
-//       value = prop.isMultiple ? propObj.values : propObj.value;
-//     } else {
-//       const baseField = typeMap[prop.type];
-//       if (!baseField) continue; // Type inconnu
-//       const field = prop.isMultiple ? baseField.replace("Value", "Values") : baseField;
-//       value = propObj[field];
-//     }
-//     result[key] = value;
-//   }
-//   return result;
-// };
-
-// //todo update all code using this to use JCRQueryBuilder
-// export const buildJCRQuery = ({
-//   luxeQuery,
-//   t,
-//   server,
-//   currentNode,
-//   renderContext,
-// }: BuildJCRQueryProps) => {
-//   let warn: string | null = null;
-//   const asContent = "content";
-//
-//   // Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
-//
-//   const descendantPath =
-//     luxeQuery.startNode?.getPath() || `${currentNode.getResolveSite().getPath()}`;
-//
-//   /**
-//    * build Filter based on category
-//    */
-//   const filter =
-//     luxeQuery.filter?.reduce((condition, categoryNode, index) => {
-//       // If category is deleted, the filter contains "undefined" for the deleted category
-//       if (!categoryNode) {
-//         warn = t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] });
-//         return condition;
-//       }
-//
-//       return `${condition} ${index === 0 ? "" : "OR"} ${asContent}.[j:defaultCategory] = '${categoryNode.getIdentifier()}'`;
-//     }, "") || "";
-//   const queryFilter = filter.trim().length > 0 ? `AND (${filter})` : "";
-//
-//   /**
-//    * build Filter based on excludeNodes
-//    */
-//   const excludeNodes =
-//     luxeQuery.excludeNodes?.reduce((condition, excludeNode, index) => {
-//       // If excludeNode is deleted, the filter contains "undefined" for the deleted category
-//       if (!excludeNode) {
-//         warn = t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] });
-//         return condition;
-//       }
-//
-//       const translationNode = excludeNode.getNode(
-//         `j:translation_${renderContext.getMainResourceLocale().getLanguage()}`,
-//       );
-//       const extraLanguageNode = translationNode
-//         ? `AND ${asContent}.[jcr:uuid] <> '${translationNode.getIdentifier()}'`
-//         : "";
-//       return `${condition} ${index === 0 ? "" : "OR"} (${asContent}.[jcr:uuid] <> '${excludeNode.getIdentifier()}' ${extraLanguageNode})`;
-//     }, "") || "";
-//   const queryExcludeNodes = excludeNodes.trim().length > 0 ? `AND (${excludeNodes})` : "";
-//
-//   const jcrQuery = `SELECT *
-//                       FROM [${luxeQuery.type}] AS ${asContent}
-//                       WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
-//                       ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
-//
-//   server?.render.addCacheDependency(
-//     { flushOnPathMatchingRegexp: `${descendantPath}/.*` },
-//     renderContext,
-//   );
-//   return { jcrQuery, warn };
-// };
 
 export function mapToJCRQueryBuilderProps({
   luxeQuery,
@@ -297,6 +232,7 @@ export function mapToJCRQueryBuilderProps({
     criteria: luxeQuery.criteria,
     sortDirection: luxeQuery.sortDirection,
     categories,
+    limit: luxeQuery.maxItems,
     excludeNodes,
     warn,
     uuid: currentNode.getIdentifier(),

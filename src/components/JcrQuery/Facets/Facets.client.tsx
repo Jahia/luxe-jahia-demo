@@ -44,11 +44,11 @@ export default function FacetsClient({
       </div>
       <div className={styles.resultsColumn}>
         {/*<SearchResults properties={filteredProperties} />*/}
-        {warn && (
-          <div className={alert.warning} role="alert">
-            {warn}
-          </div>
-        )}
+        {/*{warn && (*/}
+        {/*  <div className={alert.warning} role="alert">*/}
+        {/*    {warn}*/}
+        {/*  </div>*/}
+        {/*)}*/}
         {nodes.map(({ html, uuid }) => (
           <div
             key={uuid}

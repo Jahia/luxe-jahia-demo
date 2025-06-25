@@ -1,8 +1,7 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import type { Constraint, FacetProps, RenderNodeProps } from "~/components/JcrQuery/types";
 import { useGraphQL } from "~/components/JcrQuery/Facets/Hooks/Gql.client";
 import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
-import { gqlNodesQueryString } from "~/components/JcrQuery/utils";
 
 export function useFacet({
   builder,
@@ -16,6 +15,8 @@ export function useFacet({
   setNodes: (nodes: RenderNodeProps[]) => void;
 }) {
   const [facetOrder, setFacetOrder] = useState<FacetProps[]>(facets);
+  const [isLoading, setIsLoading] = useState(false);
+  const lastRequestIdRef = useRef(0);
 
   const { execute } = useGraphQL();
 
@@ -28,57 +29,80 @@ export function useFacet({
     });
   }, []);
 
-  const handleFacetValuesChange = useCallback((facetId: string, values: Constraint[]) => {
-    const facet = facetOrder.find((f) => f.id === facetId);
-    if (!facet) return;
+  const handleFacetValuesChange = useCallback(
+    async (facetId: string, values: Constraint[]) => {
+      const facet = facetOrder.find((f) => f.id === facetId);
+      if (!facet) return;
 
-    if (values.length === 0) {
-      builder.deleteConstraints(facetId);
-    }
-    // Update the builder with the new constraints
-    builder.setConstraints(...values);
-    builder.execute().then((renderNodes: RenderNodeProps[]) => {
-      console.log("Query executed successfully:", renderNodes);
-      setNodes(renderNodes || []);
-    });
+      // Identifiant unique pour gérer les requêtes concurrentes
+      const requestId = ++lastRequestIdRef.current;
+      setIsLoading(true);
 
-    setFacetOrder((prev) =>
-      prev.map((facet) => (facet.id === facetId ? { ...facet, constraints: values } : facet)),
-    );
-  }, []);
+      try {
+        if (values.length === 0) {
+          builder.deleteConstraints(facetId);
+        } else {
+          builder.setConstraints(...values);
+        }
+
+        const renderNodes = await builder.execute();
+
+        // Ignorer les résultats si une requête plus récente a été lancée
+        if (requestId !== lastRequestIdRef.current) return;
+
+        setNodes(renderNodes || []);
+
+        setFacetOrder((prev) =>
+          prev.map((facet) => (facet.id === facetId ? { ...facet, constraints: values } : facet)),
+        );
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour des contraintes:", error);
+      } finally {
+        if (requestId === lastRequestIdRef.current) {
+          setIsLoading(false);
+        }
+      }
+    },
+    [builder, facetOrder, setNodes],
+  );
 
   const handleFacetVisibilityChange = useCallback(
     async (newSetOfSelectedFacets: string[]) => {
-      const mutation = {
-        query: `
-          mutation UpdateFacetFields($pathsOrIds: [String!]!, $facetFields: [String!]!) {
-            jcr {
-              mutateNodes(pathsOrIds: $pathsOrIds) {
-                mutateProperty(name: "facetFields") {
-                  setValues(values: $facetFields)
-                  property {
-                    values
+      setIsLoading(true);
+
+      try {
+        const mutation = {
+          query: `
+            mutation UpdateFacetFields($pathsOrIds: [String!]!, $facetFields: [String!]!) {
+              jcr {
+                mutateNodes(pathsOrIds: $pathsOrIds) {
+                  mutateProperty(name: "facetFields") {
+                    setValues(values: $facetFields)
+                    property {
+                      values
+                    }
                   }
                 }
               }
-            }
-          }`,
-        variables: {
-          pathsOrIds: [jcrQueryUuid],
-          facetFields: newSetOfSelectedFacets,
-        },
-      };
+            }`,
+          variables: {
+            pathsOrIds: [jcrQueryUuid],
+            facetFields: newSetOfSelectedFacets,
+          },
+        };
 
-      try {
         await execute([mutation]);
+
         setFacetOrder((prev) =>
           prev.map((facet) => ({
             ...facet,
             isActive: newSetOfSelectedFacets.includes(facet.id),
           })),
         );
-      } catch (e) {
-        // Gérer l’erreur si besoin
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour des facets:", error);
+      } finally {
+        setIsLoading(false);
       }
     },
     [execute, jcrQueryUuid],
@@ -92,5 +116,6 @@ export function useFacet({
     moveFacet,
     handleFacetValuesChange,
     handleFacetVisibilityChange,
+    isLoading,
   };
 }

@@ -47,6 +47,7 @@ jahiaComponent(
         type,
         criteria,
         sortDirection,
+        maxItems,
         startNode,
         filter,
         excludeNodes,
@@ -98,6 +99,7 @@ jahiaComponent(
           ? { name: "FacetPropertiesValues", value: graphQLFragProperties }
           : undefined,
         isRenderEnabled: true,
+        limit: maxItems,
       }),
       variables: {
         query: jcrQuery,
@@ -116,7 +118,7 @@ jahiaComponent(
       if (facet.isActive)
         return {
           ...facet,
-          values: Array.from(getNodePropertyValues(gqlNodes, facet)),
+          values: getNodePropertyValues(gqlNodes, facet),
         };
       return facet;
     });

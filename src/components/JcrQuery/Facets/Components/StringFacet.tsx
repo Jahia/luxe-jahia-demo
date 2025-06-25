@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./StringFacet.module.css";
 import type { Constraint, FacetProps } from "~/components/JcrQuery/types";
 import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
@@ -8,7 +7,6 @@ import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder"
 interface StringFacetProps {
   facet: FacetProps;
   onChange: (id: string, values: Constraint[]) => void;
-  builder: JCRQueryBuilderType;
 }
 
 const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFacetProps) => {
