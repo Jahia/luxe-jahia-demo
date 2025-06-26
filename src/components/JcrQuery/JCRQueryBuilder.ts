@@ -77,18 +77,22 @@ export class JCRQueryBuilder {
         .map(([prop, constraintsSet]) => {
           if (constraintsSet.size === 0) return "";
 
-          // OR entre chaque contrainte d'un même groupe
-          const orGroup = Array.from(constraintsSet)
+          // On regarde le type de la première contrainte du set pour choisir le séparateur
+          const first = constraintsSet.values().next().value;
+          const isNumber = typeof first?.value === "number";
+
+          const groupSeparator = isNumber ? " AND " : " OR ";
+
+          const groupClause = Array.from(constraintsSet)
             .map(
               ({ operator, value }) =>
                 `${asContent}.[${prop}] ${operator} ${typeof value === "string" ? `'${value}'` : value}`,
             )
-            .join(" OR ");
+            .join(groupSeparator);
 
-          // Ajoute les parenthèses pour chaque groupe de OR
-          return `(${orGroup})`;
+          return `(${groupClause})`;
         })
-        .filter(Boolean); // enlève les groupes vides, au cas où
+        .filter(Boolean); // enlève les groupes vides
 
       if (andClauses.length > 0) {
         constraintsClause = "AND " + andClauses.join(" AND ");

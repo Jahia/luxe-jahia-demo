@@ -3,7 +3,7 @@ import { useState } from "react";
 // import { HTML5Backend } from "react-dnd-html5-backend";
 import MultiSelectDropdown, { type Option } from "~/commons/MultiSelectDropdown";
 import StringFacet from "~/components/JcrQuery/Facets/Components/StringFacet";
-// import LongFacet from "~/components/JcrQuery/Facets/Components/LongFacet";
+import LongFacet from "~/components/JcrQuery/Facets/Components/LongFacet";
 import classes from "./FacetsFilter.client.module.css";
 import type { FacetProps, RenderNodeProps } from "~/components/JcrQuery/types";
 import { useFacet } from "~/components/JcrQuery/Facets/Hooks/Facet.client";
@@ -77,7 +77,7 @@ const FacetsFilter = ({
 
   const Cmp = {
     STRING: StringFacet,
-    // LONG: LongFacet,
+    LONG: LongFacet,
   };
 
   const getFacetComponent = (facet: FacetProps) => {

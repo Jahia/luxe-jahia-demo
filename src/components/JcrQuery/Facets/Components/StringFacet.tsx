@@ -1,8 +1,5 @@
 import styles from "./StringFacet.module.css";
 import type { Constraint, FacetProps } from "~/components/JcrQuery/types";
-import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder";
-
-// const propertyTypes = ["House", "Apartment", "Building", "Condo", "Townhouse", "Villa"];
 
 interface StringFacetProps {
   facet: FacetProps;
@@ -10,7 +7,7 @@ interface StringFacetProps {
 }
 
 const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFacetProps) => {
-  const handleTypeChange = (value: string) => {
+  const handleValueChange = (value: string) => {
     if (facet.constraints.filter(({ value: v }) => v === value).length > 0) {
       // console.log("Removing value:", value);
       onChange(
@@ -38,7 +35,7 @@ const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFace
           <div
             key={value as string}
             className={styles.option}
-            onClick={() => handleTypeChange(value as string)}
+            onClick={() => handleValueChange(value as string)}
           >
             <div
               className={`${styles.checkbox} ${facet.constraints.map(({ value }) => value).includes(value) ? styles.checked : ""}`}
