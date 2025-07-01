@@ -1,7 +1,6 @@
-import { useState } from "react";
 // import { DndProvider, useDrag, useDrop } from "react-dnd";
 // import { HTML5Backend } from "react-dnd-html5-backend";
-import MultiSelectDropdown, { type Option } from "~/commons/MultiSelectDropdown";
+
 import StringFacet from "~/components/JcrQuery/Facets/Components/StringFacet";
 import LongFacet from "~/components/JcrQuery/Facets/Components/LongFacet";
 import classes from "./FacetsFilter.client.module.css";
@@ -58,8 +57,6 @@ import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder"
 const FacetsFilter = ({
   builder,
   facets,
-  isEditMode,
-  jcrQueryUuid,
   setNodes,
 }: {
   builder: JCRQueryBuilderType;
@@ -68,10 +65,9 @@ const FacetsFilter = ({
   jcrQueryUuid: string;
   setNodes: (nodes: RenderNodeProps[]) => void;
 }) => {
-  const { enabledFacets, handleFacetVisibilityChange, handleFacetValuesChange } = useFacet({
+  const { enabledFacets, handleFacetValuesChange } = useFacet({
     builder,
     facets,
-    jcrQueryUuid,
     setNodes,
   });
 
@@ -92,17 +88,8 @@ const FacetsFilter = ({
     // <DndProvider backend={HTML5Backend}>
     <div>
       <h2>Facets</h2>
-      <MultiSelectDropdown
-        options={facets.map(({ id, label, isActive }) => ({
-          value: id,
-          label,
-          isActive,
-        }))}
-        placeholder="select your facets"
-        onChange={handleFacetVisibilityChange}
-      />
       <div>
-        {enabledFacets.map((facet, index) => (
+        {enabledFacets.map((facet) => (
           <div key={facet.id} className={classes.facetContent}>
             {getFacetComponent(facet)}
           </div>

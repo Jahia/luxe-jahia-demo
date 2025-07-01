@@ -180,7 +180,6 @@ export const getNodePropertyValues = (
     result = result.filter((x): x is number => typeof x === "number").sort((a, b) => a - b);
   }
 
-  // Si tu veux vraiment tout rendre (y compris booleans), tu peux les concaténer à la fin
   if (facet.type === "BOOLEAN") {
     result = result.filter((x): x is boolean => typeof x === "boolean");
   }

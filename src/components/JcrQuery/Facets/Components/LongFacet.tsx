@@ -84,15 +84,11 @@ const LongFacet: React.FC<PriceFacetProps> = ({ facet, onChange }) => {
 
     const newConstraints = [
       ...facet.constraints.filter(({ prop: p, operator: o }) => !(p === prop && o === operator)),
-      ...(value !== undefined && value !== null
-        ? [
-            {
-              prop,
-              operator,
-              value,
-            },
-          ]
-        : []),
+      {
+        prop,
+        operator,
+        value,
+      },
     ];
     onChange(facet.id, newConstraints);
   };

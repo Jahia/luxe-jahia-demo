@@ -18,6 +18,10 @@ import type { FacetProps, JcrQueryProps, RenderNodeProps } from "./types";
 import FacetsClient from "~/components/JcrQuery/Facets/Facets.client";
 import { JCRQueryBuilder } from "~/components/JcrQuery/JCRQueryBuilder";
 
+// const facetTypeMap: Record<string, string[]> = {
+//   ["luxe:estate"]:["price",""]
+// }
+
 jahiaComponent(
   {
     nodeType: "luxe:jcrQuery",
@@ -59,14 +63,12 @@ jahiaComponent(
     });
 
     const builder = new JCRQueryBuilder(jcrQueryBuilderProps);
-
     const { jcrQuery, warn, cacheDependency } = builder.build();
+
     server?.render.addCacheDependency(
       { flushOnPathMatchingRegexp: cacheDependency },
       renderContext,
     );
-    // const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
-    // const nodesPath = queryContent.map((node) => node.getPath());
 
     const currentLocale = currentResource.getLocale();
     const currentLocaleCode = currentLocale.toString();
@@ -79,20 +81,16 @@ jahiaComponent(
       },
     });
 
+    /*TODO remove isActive*/
     let facets: FacetProps[] = gqlProperties?.data?.jcr?.nodeTypeByName?.properties
-      ?.filter((facet: FacetProps) => facet.type != "WEAKREFERENCE")
-      .map((facet: FacetProps) =>
-        facetFields?.includes(facet.id)
-          ? { ...facet, isActive: true, values: [], constraints: [] }
-          : { ...facet, isActive: false, values: [], constraints: [] },
-      );
+      ?.filter(
+        (facet: FacetProps) => facet.type != "WEAKREFERENCE" && facetFields?.includes(facet.id),
+      )
+      .map((facet: FacetProps) => ({ ...facet, isActive: true, values: [], constraints: [] }));
 
-    const selectedFacets = facets?.filter((facet) => facet.isActive) || [];
+    const graphQLFragProperties = generateGraphQLFragProperties(facets, "FacetPropertiesValues");
 
-    const graphQLFragProperties = generateGraphQLFragProperties(
-      selectedFacets,
-      "FacetPropertiesValues",
-    );
+    // get facet values && html view for each content of the query
     const gqlContents = useGQLQuery({
       query: gqlNodesQueryString({
         fragment: graphQLFragProperties
@@ -112,6 +110,7 @@ jahiaComponent(
     //   { nodes: gqlContents?.data?.jcr?.nodesByQuery?.nodes || [] },
     //   renderContext,
     // );
+
     const gqlNodes = gqlContents?.data?.jcr?.nodesByQuery?.nodes;
 
     facets = facets.map((facet) => {
