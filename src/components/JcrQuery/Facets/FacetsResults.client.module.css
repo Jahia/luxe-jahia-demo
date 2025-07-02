@@ -1,0 +1,68 @@
+.wrapper {
+    background: #fff;
+    padding: 32px 32px 24px 32px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px #23294210;
+    margin-bottom: 32px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.count {
+    color: #3c4c74;
+    font-size: 1.06rem;
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+.pageInfo {
+    font-size: 0.98em;
+    color: #777;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.resultsRow {
+    composes: rowCols_lg_3 from "~/commons/grid/grid.module.css";
+    composes: rowCols_md_2 from "~/commons/grid/grid.module.css";
+    composes: rowCols_sm_1 from "~/commons/grid/grid.module.css";
+}
+
+.pageBtn,
+.pageBtnActive {
+    background: #f5faff;
+    border: 1.5px solid #e6e9f4;
+    color: #3066be;
+    border-radius: 8px;
+    padding: 5px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border 0.15s, background 0.15s;
+}
+
+.wrapper .resultsRow {
+    --luxe-gutter-x: 0;
+    --luxe-gutter-y: 0;
+
+    > div {
+        --luxe-gutter-x: 0;
+        --luxe-gutter-y: 0;
+    }
+}

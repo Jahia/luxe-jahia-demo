@@ -8,11 +8,11 @@ export type JCRQueryConfig = {
   sortDirection: "asc" | "desc";
   categories: { id: string }[];
   excludeNodes: { id: string; translationId?: string }[];
-  warn: string[];
   uuid: string;
   subNodeView: string;
   language: string;
   limit?: number;
+  offset?: number;
 };
 
 export type JCRQueryResponse = {
@@ -23,14 +23,13 @@ export type JCRQueryResponse = {
 };
 
 export type JCRQueryBuilderType = {
-  setConstraints: (...constraints: Constraint[]) => JCRQueryBuilderType;
+  setConstraints: (constraints: Constraint[]) => JCRQueryBuilderType;
   deleteConstraints: (key: string) => JCRQueryBuilderType;
   build: () => {
     jcrQuery: string;
-    warn: string[];
     cacheDependency: string;
   };
-  execute: (token?: string) => Promise<RenderNodeProps[]>;
+  execute: (options?: { limit?: number; offset?: number }) => Promise<RenderNodeProps[]>;
 };
 
 //todo review constraints -> Set<Constraint> and create a constraint group based on type
@@ -38,15 +37,18 @@ export class JCRQueryBuilder {
   private config: JCRQueryConfig;
   private constraints: Map<string, Set<Constraint>> = new Map();
   private cacheDependency: string;
-  private warnings: string[] = [];
 
   constructor(config: JCRQueryConfig) {
     this.config = { ...config };
     this.cacheDependency = `${config.startNodePath}/.*`;
-    this.warnings = config.warn;
+    this.setConstraints(
+      config.categories.map(
+        ({ id }) => ({ prop: "j:defaultCategory", operator: "=", value: id }) as Constraint,
+      ),
+    );
   }
 
-  setConstraints(...constraints: Constraint[]): this {
+  setConstraints(constraints: Constraint[]): this {
     // group by props
     const byProp: Map<string, Set<Constraint>> = new Map();
     for (const constraint of constraints) {
@@ -67,9 +69,9 @@ export class JCRQueryBuilder {
     return this;
   }
 
-  build(): { jcrQuery: string; warn: string[]; cacheDependency: string } {
+  build(): { jcrQuery: string; cacheDependency: string } {
     const asContent = "content";
-    const { type, startNodePath, criteria, sortDirection, categories, excludeNodes } = this.config;
+    const { type, startNodePath, criteria, sortDirection, excludeNodes } = this.config;
 
     let constraintsClause = "";
     if (this.constraints.size > 0) {
@@ -99,12 +101,12 @@ export class JCRQueryBuilder {
       }
     }
 
-    // Catégories
-    const categoryFilter = categories?.length
-      ? "AND (" +
-        categories.map((cat) => `${asContent}.[j:defaultCategory] = '${cat.id}'`).join(" OR ") +
-        ")"
-      : "";
+    // Catégories it is a constraint like others
+    // const categoryFilter = categories?.length
+    //   ? "AND (" +
+    //     categories.map((cat) => `${asContent}.[j:defaultCategory] = '${cat.id}'`).join(" OR ") +
+    //     ")"
+    //   : "";
 
     // Exclusions
     const excludeFilter = excludeNodes?.length
@@ -123,16 +125,23 @@ export class JCRQueryBuilder {
     const orderClause = `ORDER BY ${asContent}.[${criteria}] ${sortDirection}`;
 
     const jcrQuery =
-      `SELECT * FROM [${type}] AS ${asContent} WHERE ISDESCENDANTNODE('${startNodePath}') ${categoryFilter} ${excludeFilter} ${constraintsClause} ${orderClause}`.trim();
+      `SELECT * FROM [${type}] AS ${asContent} WHERE ISDESCENDANTNODE('${startNodePath}') ${excludeFilter} ${constraintsClause} ${orderClause}`.trim();
 
-    return { jcrQuery, warn: this.warnings, cacheDependency: this.cacheDependency };
+    return { jcrQuery, cacheDependency: this.cacheDependency };
   }
 
-  async execute(token?: string): Promise<RenderNodeProps[]> {
+  async execute({
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {}): Promise<RenderNodeProps[]> {
     const { jcrQuery } = this.build();
     const query = gqlNodesQueryString({
       isRenderEnabled: true,
-      limit: this.config.limit,
+      limit: limit || this.config.limit || -1,
+      offset: offset || this.config.offset || 0,
     });
 
     // Exécute le call
@@ -140,7 +149,7 @@ export class JCRQueryBuilder {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        // ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify({
         query,

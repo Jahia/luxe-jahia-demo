@@ -1,5 +1,5 @@
 
-.container {
+.main {
     display: flex;
     min-height: 100vh;
     gap: 2rem;
@@ -7,7 +7,7 @@
     background-color: #f8f9fa;
 }
 
-.facetsColumn {
+.facetsContainer {
     flex: 0 0 25%;
     background: white;
     border-radius: 8px;
@@ -18,16 +18,16 @@
     top: 2rem;
 }
 
-.resultsColumn {
+.resultsContainer {
     flex: 1;
 }
 
 @media (max-width: 1024px) {
-    .container {
+    .main {
         flex-direction: column;
     }
 
-    .facetsColumn {
+    .facetsContainer {
         flex: none;
         position: static;
     }

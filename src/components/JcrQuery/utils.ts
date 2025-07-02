@@ -1,22 +1,15 @@
-import type {
-  ExtractedProps,
-  FacetProps,
-  JcrQueryProps,
-  NodeResult,
-  RenderNodeProps,
-} from "./types";
+import type { FacetProps, JcrQueryProps, NodeResult, RenderNodeProps } from "./types";
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { TFunction } from "i18next";
-// import { server } from "@jahia/javascript-modules-library";
 import type { JCRQueryConfig } from "~/components/JcrQuery/JCRQueryBuilder";
 
 interface BuildJCRQueryProps {
   luxeQuery: JcrQueryProps;
   t: TFunction;
-  // server?: typeof server;
   currentNode: JCRNodeWrapper;
   renderContext: RenderContext;
+  offset?: number;
 }
 
 export const gqlNodesQueryString = ({
@@ -192,8 +185,9 @@ export function mapToJCRQueryBuilderProps({
   currentNode,
   renderContext,
   t,
+  offset = 0,
 }: BuildJCRQueryProps): JCRQueryConfig {
-  const warn: string[] = [];
+  // const warn: string[] = [];
   const currentLocale = renderContext.getMainResourceLocale();
   const currentLocaleCode = currentLocale.toString();
 
@@ -201,7 +195,8 @@ export function mapToJCRQueryBuilderProps({
     luxeQuery.filter
       ?.map((cat) => {
         if (!cat) {
-          warn.push(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
+          // warn.push(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
+          console.warn(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
           return null;
         }
         return { id: cat.getIdentifier() };
@@ -212,7 +207,8 @@ export function mapToJCRQueryBuilderProps({
     luxeQuery.excludeNodes
       ?.map((node) => {
         if (!node) {
-          warn.push(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
+          // warn.push(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
+          console.warn(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
           return null;
         }
         const translationNode = node.getNode(
@@ -233,9 +229,9 @@ export function mapToJCRQueryBuilderProps({
     categories,
     limit: luxeQuery.maxItems,
     excludeNodes,
-    warn,
     uuid: currentNode.getIdentifier(),
     subNodeView: luxeQuery["j:subNodesView"] || "default",
     language: currentLocaleCode,
+    offset,
   };
 }

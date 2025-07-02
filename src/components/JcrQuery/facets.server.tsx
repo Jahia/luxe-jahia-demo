@@ -63,7 +63,7 @@ jahiaComponent(
     });
 
     const builder = new JCRQueryBuilder(jcrQueryBuilderProps);
-    const { jcrQuery, warn, cacheDependency } = builder.build();
+    const { jcrQuery, cacheDependency } = builder.build();
 
     server?.render.addCacheDependency(
       { flushOnPathMatchingRegexp: cacheDependency },
@@ -81,12 +81,16 @@ jahiaComponent(
       },
     });
 
-    /*TODO remove isActive*/
-    let facets: FacetProps[] = gqlProperties?.data?.jcr?.nodeTypeByName?.properties
-      ?.filter(
-        (facet: FacetProps) => facet.type != "WEAKREFERENCE" && facetFields?.includes(facet.id),
-      )
-      .map((facet: FacetProps) => ({ ...facet, isActive: true, values: [], constraints: [] }));
+    let facets: FacetProps[] = [];
+    if (Array.isArray(facetFields) && facetFields.length > 0) {
+      /*TODO remove isActive*/
+      facets = gqlProperties?.data?.jcr?.nodeTypeByName?.properties
+        ?.filter(
+          (facet: FacetProps) => facet.type != "WEAKREFERENCE" && facetFields.includes(facet.id),
+        )
+        .map((facet: FacetProps) => ({ ...facet, isActive: true, values: [], constraints: [] }))
+        .sort((a, b) => facetFields.indexOf(a.id) - facetFields.indexOf(b.id));
+    }
 
     const graphQLFragProperties = generateGraphQLFragProperties(facets, "FacetPropertiesValues");
 
@@ -131,7 +135,6 @@ jahiaComponent(
           jcrQueryBuilderProps,
           nodes,
           facets,
-          warn,
           noResultText,
           isEditMode: renderContext.isEditMode(),
         }}

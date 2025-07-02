@@ -4,29 +4,29 @@ import type { JCRQueryBuilderType } from "~/components/JcrQuery/JCRQueryBuilder"
 
 export function useFacet({
   builder,
-  facets,
+  facets: initialFacets,
   setNodes,
 }: {
   builder: JCRQueryBuilderType;
   facets: FacetProps[];
   setNodes: (nodes: RenderNodeProps[]) => void;
 }) {
-  const [facetOrder, setFacetOrder] = useState<FacetProps[]>(facets);
+  const [facets, setFacets] = useState<FacetProps[]>(initialFacets);
   const [isLoading, setIsLoading] = useState(false);
   const lastRequestIdRef = useRef(0);
 
-  const moveFacet = useCallback((from: number, to: number) => {
-    setFacetOrder((prev) => {
-      const updated = [...prev];
-      const [removed] = updated.splice(from, 1);
-      updated.splice(to, 0, removed);
-      return updated;
-    });
-  }, []);
+  // const moveFacet = useCallback((from: number, to: number) => {
+  //   setFacets((prev) => {
+  //     const updated = [...prev];
+  //     const [removed] = updated.splice(from, 1);
+  //     updated.splice(to, 0, removed);
+  //     return updated;
+  //   });
+  // }, []);
 
   const handleFacetValuesChange = useCallback(
     async (facetId: string, values: Constraint[]) => {
-      const facet = facetOrder.find((f) => f.id === facetId);
+      const facet = facets.find((f) => f.id === facetId);
       if (!facet) return;
 
       // Identifiant unique pour gérer les requêtes concurrentes
@@ -37,7 +37,7 @@ export function useFacet({
         if (values.length === 0) {
           builder.deleteConstraints(facetId);
         } else {
-          builder.setConstraints(...values);
+          builder.setConstraints(values);
         }
 
         const renderNodes = await builder.execute();
@@ -47,7 +47,7 @@ export function useFacet({
 
         setNodes(renderNodes || []);
 
-        setFacetOrder((prev) =>
+        setFacets((prev) =>
           prev.map((facet) => (facet.id === facetId ? { ...facet, constraints: values } : facet)),
         );
       } catch (error) {
@@ -58,15 +58,11 @@ export function useFacet({
         }
       }
     },
-    [builder, facetOrder, setNodes],
+    [builder, facets, setNodes],
   );
 
-  const enabledFacets = useMemo(() => facetOrder.filter((facet) => facet.isActive), [facetOrder]);
-
   return {
-    facetOrder,
-    enabledFacets,
-    moveFacet,
+    facets,
     handleFacetValuesChange,
     isLoading,
   };

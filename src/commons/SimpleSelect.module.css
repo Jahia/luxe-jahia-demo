@@ -1,0 +1,29 @@
+.selectContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Tu peux ajouter une marge si besoin */
+    /* margin-left: auto; */
+}
+
+.customSelect {
+    width: auto;/*90px; /* ou auto si tu préfères */
+    min-width: 0;
+    max-width: 120px;
+    padding: 8px 28px 8px 12px;
+    border: 1px solid #4090ff;
+    border-radius: 6px;
+    background: #fff url("data:image/svg+xml;utf8,<svg fill='gray' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 8px center/16px 16px;
+    font-size: 15px;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.customSelect:focus {
+    border: 1.5px solid #2762c4;
+    box-shadow: 0 0 0 2px #e4eeff;
+}

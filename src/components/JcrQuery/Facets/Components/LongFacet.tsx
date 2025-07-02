@@ -1,11 +1,7 @@
 import styles from "./LongFacet.module.css";
-import type { Constraint, FacetProps } from "~/components/JcrQuery/types";
+import type { FacetProps } from "~/components/JcrQuery/types";
 import React from "react";
-
-interface PriceFacetProps {
-  facet: FacetProps;
-  onChange: (id: string, values: Constraint[]) => void;
-}
+import type { FacetCmpProps } from "~/components/JcrQuery/Facets/Components/types";
 
 type Operator = ">=" | "<=";
 
@@ -43,7 +39,7 @@ const getPriceRange = (facet: FacetProps) => {
   return [min, max];
 };
 
-const LongFacet: React.FC<PriceFacetProps> = ({ facet, onChange }) => {
+const LongFacet: React.FC<FacetCmpProps> = ({ facet, onChange }: FacetCmpProps) => {
   // const formatPrice = (price: number) => {
   //   return new Intl.NumberFormat("en-US", {
   //     style: "currency",

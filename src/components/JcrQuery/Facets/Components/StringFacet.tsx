@@ -1,21 +1,14 @@
-import styles from "./StringFacet.module.css";
-import type { Constraint, FacetProps } from "~/components/JcrQuery/types";
+import classes from "./StringFacet.module.css";
+import type { FacetCmpProps } from "~/components/JcrQuery/Facets/Components/types";
 
-interface StringFacetProps {
-  facet: FacetProps;
-  onChange: (id: string, values: Constraint[]) => void;
-}
-
-const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFacetProps) => {
+const StringFacet: React.FC<FacetCmpProps> = ({ facet, onChange }: FacetCmpProps) => {
   const handleValueChange = (value: string) => {
     if (facet.constraints.filter(({ value: v }) => v === value).length > 0) {
-      // console.log("Removing value:", value);
       onChange(
         facet.id,
         facet.constraints.filter(({ value: v }) => v !== value),
       );
     } else {
-      // console.log("Adding value:", value);
       onChange(facet.id, [
         ...facet.constraints,
         {
@@ -28,19 +21,19 @@ const StringFacet: React.FC<StringFacetProps> = ({ facet, onChange }: StringFace
   };
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>{facet.label}</h3>
-      <div className={styles.options}>
+    <div className={classes.container}>
+      <h3 className={classes.title}>{facet.label}</h3>
+      <div className={classes.options}>
         {facet.values.map((value) => (
           <div
             key={value as string}
-            className={styles.option}
+            className={classes.option}
             onClick={() => handleValueChange(value as string)}
           >
             <div
-              className={`${styles.checkbox} ${facet.constraints.map(({ value }) => value).includes(value) ? styles.checked : ""}`}
+              className={`${classes.checkbox} ${facet.constraints.map(({ value }) => value).includes(value) ? classes.checked : ""}`}
             />
-            <label className={styles.label}>{value as string}</label>
+            <label className={classes.label}>{value as string}</label>
           </div>
         ))}
       </div>
