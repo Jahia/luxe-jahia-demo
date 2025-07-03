@@ -68,7 +68,7 @@ jahiaComponent(
 
     const builder = new JCRQueryBuilder(jcrQueryBuilderProps);
 
-    const { jcrQuery, warn, cacheDependency } = builder.build();
+    const { jcrQuery, cacheDependency } = builder.build();
     server?.render.addCacheDependency(
       { flushOnPathMatchingRegexp: cacheDependency },
       renderContext,
@@ -79,11 +79,11 @@ jahiaComponent(
       <>
         {title && <HeadingSection title={title} />}
 
-        {renderContext.isEditMode() && warn && (
-          <div className={alert.warning} role="alert">
-            {warn}
-          </div>
-        )}
+        {/*{renderContext.isEditMode() && warn && (*/}
+        {/*  <div className={alert.warning} role="alert">*/}
+        {/*    {warn}*/}
+        {/*  </div>*/}
+        {/*)}*/}
 
         {queryContent &&
           queryContent.map((node) => (

@@ -24,7 +24,7 @@ export default function FacetsClient({
         <FacetsFilter builder={builder} facets={facets} setNodes={setNodes} />
       </div>
       <div className={classes.resultsContainer}>
-        <FacetsResults builder={builder} nodes={nodes} setNodes={setNodes} />
+        <FacetsResults nodes={nodes} />
       </div>
     </div>
   );

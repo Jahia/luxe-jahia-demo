@@ -135,8 +135,6 @@ jahiaComponent(
           jcrQueryBuilderProps,
           nodes,
           facets,
-          noResultText,
-          isEditMode: renderContext.isEditMode(),
         }}
       />
     );
