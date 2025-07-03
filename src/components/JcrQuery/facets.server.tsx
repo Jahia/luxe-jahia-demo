@@ -72,10 +72,13 @@ jahiaComponent(
 
     const currentLocale = currentResource.getLocale();
     const currentLocaleCode = currentLocale.toString();
+    const workspace =
+      currentNode.getSession().getWorkspace().getName() === "default" ? "EDIT" : "LIVE";
 
     const gqlProperties = useGQLQuery({
       query: gqlContentPropertiesQueryString,
       variables: {
+        workspace,
         name: type,
         language: currentLocaleCode,
       },
@@ -104,6 +107,7 @@ jahiaComponent(
         limit: maxItems,
       }),
       variables: {
+        workspace,
         query: jcrQuery,
         view: subNodeView || "default",
         language: currentLocaleCode,

@@ -24,8 +24,8 @@ export const gqlNodesQueryString = ({
   offset?: number;
 }): string => {
   return `
-    query GetContentPropertiesQuery($query: String!, ${isRenderEnabled ? "$view: String!," : ""} $language: String!) {
-     jcr {
+    query GetContentPropertiesQuery($workspace: Workspace! ,$query: String!, ${isRenderEnabled ? "$view: String!," : ""} $language: String!) {
+     jcr(workspace: $workspace) {
       nodesByQuery(
         query: $query
         ${limit && limit >= 0 ? `limit: ${limit}` : ""}
@@ -47,8 +47,8 @@ export const gqlNodesQueryString = ({
 };
 
 export const gqlContentPropertiesQueryString = `
-  query GetContentPropertiesQuery($name: String!, $language: String!) {
-    jcr {
+  query GetContentPropertiesQuery($workspace: Workspace! ,$name: String!, $language: String!) {
+    jcr(workspace: $workspace) {
       nodeTypeByName(name: $name) {
         properties(fieldFilter: {filters: [{fieldName: "hidden", value: "false"}]}) {
           id: name
@@ -188,6 +188,8 @@ export function mapToJCRQueryBuilderProps({
   offset = 0,
 }: BuildJCRQueryProps): JCRQueryConfig {
   // const warn: string[] = [];
+  const workspace =
+    currentNode.getSession().getWorkspace().getName() === "default" ? "EDIT" : "LIVE";
   const currentLocale = renderContext.getMainResourceLocale();
   const currentLocaleCode = currentLocale.toString();
 
@@ -222,6 +224,7 @@ export function mapToJCRQueryBuilderProps({
       .filter((n): n is { id: string; translationId?: string } => !!n && !!n?.id) || [];
 
   return {
+    workspace,
     type: luxeQuery.type,
     startNodePath: luxeQuery.startNode?.getPath() || currentNode.getResolveSite().getPath(),
     criteria: luxeQuery.criteria,

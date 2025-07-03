@@ -70,6 +70,7 @@ export default function FacetsResults({ nodes }: { nodes: RenderNodeProps[] }) {
       {totalPages >= 1 && !noResults && (
         <div className={classes.pagination}>
           <button
+            type="button"
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 1}
             className={classes.pageBtn}
@@ -79,6 +80,7 @@ export default function FacetsResults({ nodes }: { nodes: RenderNodeProps[] }) {
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i + 1}
+              type="button"
               className={currentPage === i + 1 ? classes.pageBtnActive : classes.pageBtn}
               onClick={() => goToPage(i + 1)}
             >
@@ -86,6 +88,7 @@ export default function FacetsResults({ nodes }: { nodes: RenderNodeProps[] }) {
             </button>
           ))}
           <button
+            type="button"
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
             className={classes.pageBtn}

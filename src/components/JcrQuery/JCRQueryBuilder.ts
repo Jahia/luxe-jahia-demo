@@ -2,6 +2,7 @@ import type { Constraint, RenderNodeProps } from "~/components/JcrQuery/types";
 import { gqlNodesQueryString } from "~/components/JcrQuery/utils";
 
 export type JCRQueryConfig = {
+  workspace: string;
   type: string;
   startNodePath: string;
   criteria: "jcr:created" | "jcr:lastModified" | "j:lastPublished";
@@ -138,6 +139,7 @@ export class JCRQueryBuilder {
     offset?: number;
   } = {}): Promise<RenderNodeProps[]> {
     const { jcrQuery } = this.build();
+
     const query = gqlNodesQueryString({
       isRenderEnabled: true,
       limit: limit || this.config.limit || -1,
@@ -154,6 +156,7 @@ export class JCRQueryBuilder {
       body: JSON.stringify({
         query,
         variables: {
+          workspace: this.config.workspace,
           query: jcrQuery,
           view: this.config.subNodeView,
           language: this.config.language,
