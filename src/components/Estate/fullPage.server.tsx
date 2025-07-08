@@ -9,6 +9,7 @@ import { t } from "i18next";
 import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
 import classes from "./fullPage.module.css";
+import placeholder from "/static/img/img-placeholder.jpg";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -35,7 +36,7 @@ jahiaComponent(
   ) => {
     const locale = currentResource.getLocale().getLanguage();
     const image = {
-      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 

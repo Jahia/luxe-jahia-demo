@@ -7,6 +7,9 @@ import classes from "~/components/Form/Login/LoginForm.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import form from "~/templates/css/form.module.css";
 import clsx from "clsx";
+// import pam from "/static/img/users/pam.webp";
+// import penny from "/static/img/users/penny.webp";
+// import robin from "/static/img/users/robin.webp";
 
 const userMocks = [
   {
@@ -16,7 +19,7 @@ const userMocks = [
       fullname: "Pam Pasteur",
       function: "form.login.userMocks.pam.function",
       avatar: {
-        url: "https://placehold.co/90x90",
+        url: "/modules/luxe-jahia-demo/static/img/users/pam.webp",
         alt: "form.login.userMocks.pam.alt",
       },
       description: "form.login.userMocks.pam.description",
@@ -29,7 +32,7 @@ const userMocks = [
       fullname: "Penny Galileo",
       function: "form.login.userMocks.penny.function",
       avatar: {
-        url: "https://placehold.co/90x90",
+        url: "/modules/luxe-jahia-demo/static/img/users/penny.webp",
         alt: "form.login.userMocks.penny.alt",
       },
       description: "form.login.userMocks.penny.description",
@@ -42,7 +45,7 @@ const userMocks = [
       fullname: "Robin Lovelace ",
       function: "form.login.userMocks.robin.function",
       avatar: {
-        url: "https://placehold.co/90x90",
+        url: "/modules/luxe-jahia-demo/static/img/users/robin.webp",
         alt: "form.login.userMocks.robin.alt",
       },
       description: "form.login.userMocks.robin.description",

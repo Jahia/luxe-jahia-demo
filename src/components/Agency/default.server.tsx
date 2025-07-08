@@ -7,6 +7,7 @@ import {
 import { t } from "i18next";
 import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
+import placeholder from "/static/img/agency-placeholder.jpg";
 
 jahiaComponent(
   {
@@ -16,7 +17,7 @@ jahiaComponent(
   },
   ({ name, address, phone, image: imageNode }: AgencyProps, { currentNode, renderContext }) => {
     const image = {
-      src: buildModuleFileUrl("static/img/agency-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 
