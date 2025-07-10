@@ -7,6 +7,7 @@ import {
 import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import classes from "./default.module.css";
+import placeholder from "/static/img/agent-placeholder.jpg";
 
 jahiaComponent(
   {
@@ -19,7 +20,7 @@ jahiaComponent(
     { currentNode, renderContext },
   ) => {
     const image = {
-      src: buildModuleFileUrl("static/img/agent-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 

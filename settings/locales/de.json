@@ -62,7 +62,7 @@
 					"teaser": "Verwenden Sie Ihren Benutzernamen und Ihr Passwort, um sich anzumelden."
 				}
 			},
-			"userMocks": {
+			"persona": {
 				"pam": {
 					"function": "Redakteurin in der Kommunikationsabteilung",
 					"description": "Ich erstelle, optimiere und verwalte aktiv ansprechende Seiten für die Luxe-Website.",

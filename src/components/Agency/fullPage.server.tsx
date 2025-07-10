@@ -25,6 +25,7 @@ import {
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
 import classes from "./fullPage.module.css";
+import placeholder from "/static/img/agency-placeholder.jpg";
 
 const MAX_ESTATE = 6;
 
@@ -112,7 +113,7 @@ jahiaComponent(
     ];
 
     const image = {
-      src: buildModuleFileUrl("static/img/agency-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 

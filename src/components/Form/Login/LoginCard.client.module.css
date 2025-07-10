@@ -15,6 +15,9 @@
 
   &:hover {
     border-color: var(--luxe-color-darkBlue60);
+    img {
+        filter: grayscale(0%);
+    }
   }
 
   > div {
@@ -22,11 +25,16 @@
   }
 
   img {
-    max-width: 100%;
-    height: auto;
-    margin-right: space_3;
-    border-radius: 50%;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out;
   }
+    img, video {
+        max-width: 100%;
+        width: 90px;
+        height: 90px;
+        margin-right: space_3;
+        border-radius: 50%;
+    }
 
   h2 {
     color: var(--luxe-color-darkBlue);

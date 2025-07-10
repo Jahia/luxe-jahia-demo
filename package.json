@@ -42,7 +42,6 @@
 		}
 	},
 	"dependencies": {
-		"bootstrap": "^5.3.6",
 		"clsx": "^2.1.1"
 	},
 	"devDependencies": {

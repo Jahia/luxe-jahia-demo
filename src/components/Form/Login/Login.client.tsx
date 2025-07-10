@@ -2,7 +2,7 @@ import { type MouseEvent, useRef, useState } from "react";
 import LoginFormClient from "./LoginForm.client.js";
 import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
 import { t } from "i18next";
-import type { JahiaUrlsProps } from "./types";
+import type { JahiaUrlsProps, LoginPersonaProps } from "./types";
 import classes from "~/components/Form/Login/Login.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import clsx from "clsx";
@@ -15,6 +15,7 @@ interface LoginClientProps {
   nodePath: string;
   isShowRememberMe: boolean;
   siteKey?: string;
+  persona: LoginPersonaProps[];
 }
 
 export default function LoginClient({
@@ -25,6 +26,7 @@ export default function LoginClient({
   nodePath,
   isShowRememberMe,
   siteKey,
+  persona,
 }: LoginClientProps) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const [user, setUser] = useState(userHydrated);
@@ -88,6 +90,7 @@ export default function LoginClient({
             setUser={setUser}
             setLoggedIn={setLoggedIn}
             siteKey={siteKey}
+            persona={persona}
           />
         </div>
       </dialog>

@@ -17,3 +17,22 @@ export interface LoginCommonProps {
   setIncorrectLogin: Dispatch<SetStateAction<boolean>>;
   setUnknownError: Dispatch<SetStateAction<boolean>>;
 }
+
+export type LoginPersonaProps = {
+  username: string;
+  password: string;
+  userinfo: {
+    fullname: string;
+    function: string;
+    avatar: {
+      image: {
+        url: string;
+        alt: string;
+      };
+      video: {
+        url: string;
+      };
+    };
+    description: string;
+  };
+};

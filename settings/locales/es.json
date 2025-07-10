@@ -62,7 +62,7 @@
 					"teaser": "Usa tu nombre de usuario y contraseña para iniciar sesión."
 				}
 			},
-			"userMocks": {
+			"persona": {
 				"pam": {
 					"function": "Editora en el Departamento de Comunicación",
 					"description": "Creo, optimizo y gestiono activamente páginas atractivas para el sitio web de Luxe.",

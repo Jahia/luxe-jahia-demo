@@ -6,6 +6,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { TextIllustrated } from "./TextIllustrated";
+import placeholder from "/static/img/img-placeholder.jpg";
 
 jahiaComponent(
   {
@@ -23,7 +24,7 @@ jahiaComponent(
     { renderContext },
   ) => {
     const image = {
-      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "placeholder",
     };
 
