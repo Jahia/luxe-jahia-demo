@@ -1,0 +1,86 @@
+@value variables: "~/templates/css/variables.css";
+
+@value space_3, space_5 from variables;
+
+.galleryItemMain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space_3;
+  margin-bottom: 16px;
+
+  & > figure {
+    flex: 1 1 calc(33.333% - space_3);
+    margin: 0;
+    position: relative;
+
+    @media (max-width: 768px) {
+      flex: 1 1 calc(50% - space_3);
+    }
+
+    @media (max-width: 480px) {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.galleryItems {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  list-style: none;
+}
+
+.galleryMore,
+.galleryItem {
+  /* height: 158px; */
+  flex: 1;
+}
+
+.galleryMore,
+.galleryItem {
+  /* TODO: Same style than card  */
+  border-radius: 16px;
+  transition: all .2s ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--luxe-box-shadow);
+  }
+}
+
+.galleryThumbnail {
+  margin-bottom: 0;
+  border-radius: 16px;;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* img {
+    transition: .4s ease-in-out;
+  }
+
+
+  &:hover {
+
+    img {
+      transform: scale(1.1);
+      opacity: .7;
+    }
+  } */
+}
+
+.galleryMore {
+  cursor: pointer;
+  display: flex;
+  background-color: var(--luxe-color-gray);
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: bold;
+  border-radius: 16px;
+
+  /* &:hover {
+    background-color: var(--luxe-tertiary-color);
+  } */
+}
