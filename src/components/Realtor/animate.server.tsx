@@ -1,18 +1,19 @@
 import {
   buildModuleFileUrl,
   buildNodeUrl,
+  HydrateInBrowser,
   jahiaComponent,
   server,
 } from "@jahia/javascript-modules-library";
 import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
-import classes from "./default.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
-
+import AnimateClient from "~/components/Realtor/Animate.client";
 jahiaComponent(
   {
     nodeType: "luxe:realtor",
-    name: "default",
+    name: "animate",
+    displayName: "Animated Picture",
     componentType: "view",
   },
   (
@@ -37,15 +38,17 @@ jahiaComponent(
     };
 
     return (
-      <a href={buildNodeUrl(currentNode)} className={classes.card}>
-        <img src={image.src} alt={image.alt} width="250px" height="250px" />
-        <div className={classes.main}>
-          <h4>
-            {firstName} {lastName}
-          </h4>
-          <p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
-        </div>
-      </a>
+      <HydrateInBrowser
+        child={AnimateClient}
+        props={{
+          firstName,
+          lastName,
+          jobPosition: jobPositionLanguagesTranslation[jobPosition],
+          image,
+          videoUrl: videoNode ? buildNodeUrl(videoNode) : undefined,
+          currentNodeUrl: buildNodeUrl(currentNode),
+        }}
+      />
     );
   },
 );
