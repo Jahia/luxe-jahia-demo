@@ -18,17 +18,15 @@ export const Gallery = ({ data, className }: GalleryProps) => {
 
   return (
     <>
-      <figure className={clsx(classes.galleryItemMain, classes.galleryThumbnail, className)}>
-        <img src={data[0].src} alt={data[0].alt} />
+      <figure className={clsx(classes.galleryItemMain, className)}>
+        <img src={data[0].src} alt={data[0].alt}/>
       </figure>
       <ul className={classes.galleryItems}>
         {data.slice(1).map((image, index) => {
           if (index < 4) {
             return (
               <li key={image.src} className={classes.galleryItem}>
-                <figure className={classes.galleryThumbnail}>
-                  <img src={image.src} alt={image.alt} />
-                </figure>
+                <img src={image.src} alt={image.alt} />
               </li>
             )
           } else {
