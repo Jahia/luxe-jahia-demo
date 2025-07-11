@@ -2,9 +2,11 @@ import {
   buildModuleFileUrl,
   buildNodeUrl,
   jahiaComponent,
+  HydrateInBrowser,
   server,
 } from "@jahia/javascript-modules-library";
-import { Col, Figure, PageTitle, Row, Section, List } from "~/commons";
+import { Col, PageTitle, Row, Section, List } from "~/commons";
+import GalleryClient from "~/commons/Gallery.client";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
@@ -38,6 +40,11 @@ jahiaComponent(
       src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
       alt: "Placeholder",
     };
+
+    const galleryImages = images.map((img) => ({
+      src: buildNodeUrl(img),
+      alt: t("alt.estate", { estate: title }),
+    }));
 
     if (images[0]) {
       const _image = images[0];
@@ -94,10 +101,11 @@ jahiaComponent(
       <>
         <Section>
           <header className={classes.header}>
-            <PageTitle title={title} className={classes.title} />
+            <PageTitle title="test" className={classes.title} />
           </header>
           <Row>
-            <Figure src={image.src} alt={image.alt} layout="imgFull" />
+            {/* <Figure src={image.src} alt={image.alt} layout="imgFull" /> */}
+            <HydrateInBrowser child={GalleryClient} props={{data: galleryImages}} />
           </Row>
           <Row className={classes.rowDescription}>
             <Col>

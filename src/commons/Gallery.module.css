@@ -1,10 +1,6 @@
-@value variables: "~/templates/css/variables.css";
-
-@value space_3, space_5 from variables;
-
 .galleryItemMain {
   margin-bottom: 0;
-
+  width: 100%;
   cursor: pointer;
   
   img {
@@ -31,7 +27,6 @@
 
 .galleryMore,
 .galleryItem {
-  /* height: 158px; */
   flex: 1;
   min-width: 0;
   min-height: 0;
@@ -60,8 +55,69 @@
   font-size: 23px;
   font-weight: bold;
   border-radius: 16px;
+}
 
-  /* &:hover {
-    background-color: var(--luxe-tertiary-color);
-  } */
+
+/* Gallery */
+.dialogContentImage {
+  display: flex;
+  gap: 16px;
+  margin: 20px;
+}
+
+.dialogButton {
+  border: 0;
+  background: transparent;
+  color: var(--luxe-color-gray);
+  opacity: 0.6;
+  transition: color 0.2s ease-in-out;
+  cursor: pointer;
+  font-size: 40px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--luxe-color-gold);
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    opacity: 1;
+    color: var(--luxe-color-gold);
+  }
+
+  &[disabled] {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}
+
+.dialogButtonNav {
+  width: 80px;
+  font-size: 120px;
+}
+
+.dialogButtonClose {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  line-height: 1;
+}
+
+.dialogInfo {
+  color: var(--luxe-color-gray);
+  font-size: 13px;
+  text-align: right;
+  margin-right: 108px;
+}
+
+
+.dialogImage {
+  height: 80vh;
 }
