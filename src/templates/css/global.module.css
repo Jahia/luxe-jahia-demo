@@ -252,7 +252,8 @@ p {
 [role="button"] {
   cursor: pointer;
 }
-main img {
+main img,
+main video{
   width: 100%;
   object-fit: cover;
   border-radius: 16px;

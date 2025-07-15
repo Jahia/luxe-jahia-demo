@@ -142,7 +142,7 @@ jahiaComponent(
           <Row className={classes.rowRealtors}>
             {realtors?.map((realtor) => (
               <Col key={realtor.getIdentifier()}>
-                <Render node={realtor} readOnly />
+                <Render node={realtor} view="animate" readOnly />
               </Col>
             ))}
           </Row>
