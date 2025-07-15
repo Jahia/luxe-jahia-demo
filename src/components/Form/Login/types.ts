@@ -13,7 +13,7 @@ export interface LoginCommonProps {
   siteKey?: string;
   loginUrl: string;
   setUser: Dispatch<SetStateAction<string | undefined>>;
-  setLoggedIn: Dispatch<SetStateAction<boolean>>;
+  handleLoggedIn: () => void;
   setIncorrectLogin: Dispatch<SetStateAction<boolean>>;
   setUnknownError: Dispatch<SetStateAction<boolean>>;
 }

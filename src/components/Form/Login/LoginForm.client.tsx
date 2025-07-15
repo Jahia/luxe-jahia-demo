@@ -11,7 +11,7 @@ import clsx from "clsx";
 interface LoginFormClientProps {
   loginUrl: string;
   setUser: Dispatch<SetStateAction<string | undefined>>;
-  setLoggedIn: Dispatch<SetStateAction<boolean>>;
+  handleLoggedIn: () => void;
   isShowRememberMe: boolean;
   siteKey?: string;
   persona: LoginPersonaProps[];
@@ -20,7 +20,7 @@ interface LoginFormClientProps {
 const LoginFormClient = ({
   loginUrl,
   setUser,
-  setLoggedIn,
+  handleLoggedIn,
   siteKey,
   isShowRememberMe = true,
   persona,
@@ -35,7 +35,7 @@ const LoginFormClient = ({
     siteKey,
     loginUrl,
     setUser,
-    setLoggedIn,
+    handleLoggedIn,
     setIncorrectLogin,
     setUnknownError,
   };

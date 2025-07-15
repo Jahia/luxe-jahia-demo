@@ -2,24 +2,28 @@ import React, { useEffect } from "react";
 import clsx from "clsx";
 import classes from "./Dialog.module.css";
 
-interface DialogProps extends Omit<React.ComponentPropsWithoutRef<'dialog'>, 'className' | 'id' | 'onClick' | 'onClose'> {
-  id: string;
+interface DialogProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<"dialog">,
+    "className" | "id" | "onClick" | "onClose"
+  > {
+  id?: string;
   children: React.ReactNode;
   className?: string;
-  isOpen: boolean;
-  onClose?: (event: React.MouseEvent) => void;
+  isOpen?: boolean;
+  onClose?: (event: React.SyntheticEvent<HTMLDialogElement>) => void;
 }
 
-export const Dialog = ({
+export const DialogClient = ({
   id,
   children,
   className,
-  isOpen,
+  isOpen = false,
   onClose,
   ...props
 }: DialogProps & { ref?: React.RefObject<HTMLDialogElement> }) => {
   const dialogRef = React.useRef<HTMLDialogElement>(null);
-  
+
   useEffect(() => {
     const dialog = dialogRef?.current;
     if (!dialog) return;
@@ -32,8 +36,8 @@ export const Dialog = ({
   }, [isOpen, dialogRef]);
 
   const handleClose = (event: React.MouseEvent) => {
-    if (event.target === event.currentTarget) {
-      onClose?.(event);
+    if (event.target === dialogRef.current) {
+      dialogRef.current?.close();
     }
   };
   return (
@@ -42,7 +46,7 @@ export const Dialog = ({
       id={id}
       className={clsx(classes.dialog, className)}
       onClick={handleClose}
-      // onClose={e => handleClose(e: React.MouseEvent)}
+      onClose={(e) => onClose?.(e)}
       {...props}
     >
       {children}
@@ -50,4 +54,4 @@ export const Dialog = ({
   );
 };
 
-Dialog.displayName = 'Dialog';
+DialogClient.displayName = "Dialog";
