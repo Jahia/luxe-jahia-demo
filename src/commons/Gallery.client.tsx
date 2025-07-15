@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import clsx from "clsx";
 import classes from "./Gallery.module.css";
 // import {Dialog} from "./Dialog";
-import {Dialog} from "~/commons/Dialog";
+import { DialogClient } from "~/commons/Dialog.client";
 
 interface ImageDataProps {
   src: string;
@@ -35,7 +35,7 @@ const GalleryClient = ({ data, className }: GalleryProps) => {
   return (
     <>
       <figure className={clsx(classes.galleryItemMain, className)} onClick={() => openDialog(0)}>
-        <img src={data[0].src} alt={data[0].alt}/>
+        <img src={data[0].src} alt={data[0].alt} />
       </figure>
       {data.length > 1 && (
         <ul className={classes.galleryItems}>
@@ -43,10 +43,14 @@ const GalleryClient = ({ data, className }: GalleryProps) => {
             const actualIndex = index + 1; // Fix index offset
             if (index < 4) {
               return (
-                <li key={image.src} className={classes.galleryItem} onClick={() => openDialog(actualIndex)}>
+                <li
+                  key={image.src}
+                  className={classes.galleryItem}
+                  onClick={() => openDialog(actualIndex)}
+                >
                   <img src={image.src} alt={image.alt} />
                 </li>
-              )
+              );
             } else {
               return null;
             }
@@ -85,47 +89,51 @@ const DialogGallery = ({
   setSelectedImageIndex,
   isOpen,
   onClose,
-  className
+  className,
 }: DialogGalleryProps) => {
-
-  if (!data?.length || selectedImageIndex === null || selectedImageIndex < 0 || selectedImageIndex >= data.length) {
+  if (
+    !data?.length ||
+    selectedImageIndex === null ||
+    selectedImageIndex < 0 ||
+    selectedImageIndex >= data.length
+  ) {
     return null;
   }
 
-  const navigateTo = (direction: 'prev' | 'next') => {
+  const navigateTo = (direction: "prev" | "next") => {
     if (selectedImageIndex === null) return;
-    
-    if (direction === 'prev' && selectedImageIndex > 0) {
+
+    if (direction === "prev" && selectedImageIndex > 0) {
       setSelectedImageIndex(selectedImageIndex - 1);
-    } else if (direction === 'next' && selectedImageIndex < data.length - 1) {
+    } else if (direction === "next" && selectedImageIndex < data.length - 1) {
       setSelectedImageIndex(selectedImageIndex + 1);
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     switch (event.key) {
-      case 'ArrowLeft':
-        navigateTo('prev');
+      case "ArrowLeft":
+        navigateTo("prev");
         break;
-      case 'ArrowRight':
-        navigateTo('next');
+      case "ArrowRight":
+        navigateTo("next");
         break;
-      case 'Escape':
+      case "Escape":
         onClose();
         break;
     }
   };
 
   return (
-    <Dialog 
+    <DialogClient
       id="gallery-dialog"
       className={className}
       isOpen={isOpen}
       onClose={onClose}
       onKeyDown={handleKeyDown}
     >
-      <div className={classes.dialogContent}>
-        <button 
+      <div /*className={classes.dialogContent}*/>
+        <button
           type="button"
           className={clsx(classes.dialogButton, classes.dialogButtonClose)}
           onClick={onClose}
@@ -133,41 +141,43 @@ const DialogGallery = ({
         >
           ×
         </button>
-        
+
         <div className={classes.dialogContentImage}>
-          <button 
+          <button
             type="button"
             className={clsx(classes.dialogButton, classes.dialogButtonNav)}
-            onClick={() => navigateTo('prev')}
+            onClick={() => navigateTo("prev")}
             aria-label="Previous image"
             disabled={selectedImageIndex === 0}
           >
             ‹
           </button>
 
-          <img 
-            src={data[selectedImageIndex].src} 
+          <img
+            src={data[selectedImageIndex].src}
             alt={data[selectedImageIndex].alt}
             className={classes.dialogImage}
           />
 
-          <button 
+          <button
             type="button"
             className={clsx(classes.dialogButton, classes.dialogButtonNav)}
-            onClick={() => navigateTo('next')}
+            onClick={() => navigateTo("next")}
             aria-label="Next image"
             disabled={selectedImageIndex === data.length - 1}
           >
             ›
           </button>
         </div>
-        
+
         <div className={classes.dialogInfo}>
-          <span>{selectedImageIndex + 1} / {data.length}</span>
+          <span>
+            {selectedImageIndex + 1} / {data.length}
+          </span>
           <p>{data[selectedImageIndex].alt}</p>
         </div>
       </div>
-    </Dialog>
+    </DialogClient>
   );
 };
 
