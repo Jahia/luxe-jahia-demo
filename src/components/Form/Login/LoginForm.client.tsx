@@ -2,53 +2,11 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import LoginCardClient from "./LoginCard.client";
 import { t } from "i18next";
 import { login } from "./utils.client";
-import type { LoginCommonProps } from "./types";
+import type { LoginCommonProps, LoginPersonaProps } from "./types";
 import classes from "~/components/Form/Login/LoginForm.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import form from "~/templates/css/form.module.css";
 import clsx from "clsx";
-
-const userMocks = [
-  {
-    username: "pam",
-    password: "password",
-    userinfo: {
-      fullname: "Pam Pasteur",
-      function: "form.login.userMocks.pam.function",
-      avatar: {
-        url: "https://placehold.co/90x90",
-        alt: "form.login.userMocks.pam.alt",
-      },
-      description: "form.login.userMocks.pam.description",
-    },
-  },
-  {
-    username: "penny",
-    password: "password",
-    userinfo: {
-      fullname: "Penny Galileo",
-      function: "form.login.userMocks.penny.function",
-      avatar: {
-        url: "https://placehold.co/90x90",
-        alt: "form.login.userMocks.penny.alt",
-      },
-      description: "form.login.userMocks.penny.description",
-    },
-  },
-  {
-    username: "robin",
-    password: "password",
-    userinfo: {
-      fullname: "Robin Lovelace ",
-      function: "form.login.userMocks.robin.function",
-      avatar: {
-        url: "https://placehold.co/90x90",
-        alt: "form.login.userMocks.robin.alt",
-      },
-      description: "form.login.userMocks.robin.description",
-    },
-  },
-];
 
 interface LoginFormClientProps {
   loginUrl: string;
@@ -56,6 +14,7 @@ interface LoginFormClientProps {
   setLoggedIn: Dispatch<SetStateAction<boolean>>;
   isShowRememberMe: boolean;
   siteKey?: string;
+  persona: LoginPersonaProps[];
 }
 
 const LoginFormClient = ({
@@ -64,6 +23,7 @@ const LoginFormClient = ({
   setLoggedIn,
   siteKey,
   isShowRememberMe = true,
+  persona,
 }: LoginFormClientProps) => {
   const [incorrectLogin, setIncorrectLogin] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
@@ -100,7 +60,7 @@ const LoginFormClient = ({
           <h3>{t("form.login.sections.persona.title")}</h3>
           <p>{t("form.login.sections.persona.teaser")}</p>
           <div>
-            {userMocks?.map((user) => (
+            {persona?.map((user) => (
               <LoginCardClient key={user.username} {...user} {...{ loginCommonProps }} />
             ))}
           </div>

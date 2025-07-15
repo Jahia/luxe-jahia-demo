@@ -13,7 +13,7 @@ import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
 import grid from "~/commons/grid/grid.module.css";
-
+import favicon from "/static/favicon-32x32.png";
 /**
  * Layout : Places 'children' in an html page.
  *
@@ -61,7 +61,7 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <SeoMetaTags />
 
-      <link rel="icon" type="image/png" href={buildModuleFileUrl("static/favicon-32x32.png")} />
+      <link rel="icon" type="image/png" href={buildModuleFileUrl(favicon)} />
       <AddResources type="css" resources={buildModuleFileUrl("dist/assets/style.css")} />
       {children}
     </head>

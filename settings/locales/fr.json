@@ -62,7 +62,7 @@
 					"teaser": "Utiliser votre nom d'utilisateur et votre mot de passe pour vous connecter."
 				}
 			},
-			"userMocks": {
+			"persona": {
 				"pam": {
 					"function": "Rédactrice au Département Communication",
 					"description": "Je crée, optimise et gère activement des pages attrayantes pour le site Luxe.",

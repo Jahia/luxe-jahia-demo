@@ -9,6 +9,7 @@ import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
+import placeholder from "/static/img/img-placeholder.jpg";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -31,7 +32,7 @@ jahiaComponent(
     { currentNode, renderContext },
   ) => {
     const image = {
-      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 
