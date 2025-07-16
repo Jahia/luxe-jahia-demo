@@ -1,6 +1,6 @@
 @value variables: "~/templates/css/variables.css";
 
-@value space_0, space_3, fs_6 from variables;
+@value gridBreakpoints_xxl, space_0, space_3, fs_6 from variables;
 
 .card {
   display: flex;
@@ -48,4 +48,12 @@
     font-size: 16px;
     color: var(--luxe-color-darkBlue60);
   }
+    p{
+        display: none;
+        @media (min-width: gridBreakpoints_xxl) {
+            & {
+                display: block;
+            }
+        }
+    }
 }

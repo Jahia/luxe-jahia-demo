@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import clsx from "clsx";
-import classes from "./Dialog.module.css";
+import classes from "./Dialog.client.module.css";
 
 interface DialogProps
   extends Omit<
@@ -30,8 +30,10 @@ export const DialogClient = ({
 
     if (isOpen) {
       dialog.showModal();
+      document.body.classList.add(classes.noScroll);
     } else {
       dialog.close();
+      document.body.classList.remove(classes.noScroll);
     }
   }, [isOpen, dialogRef]);
 

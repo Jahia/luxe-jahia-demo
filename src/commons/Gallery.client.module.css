@@ -1,8 +1,12 @@
+.galleryDialog {
+	--luxe-dialog-opacity: 0.9;
+}
+
 .galleryItemMain {
   margin-bottom: 0;
   width: 100%;
   cursor: pointer;
-  
+
   img {
     transition: all .2s ease-in;
     &:hover {

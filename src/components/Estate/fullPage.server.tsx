@@ -37,22 +37,33 @@ jahiaComponent(
     { currentResource, renderContext },
   ) => {
     const locale = currentResource.getLocale().getLanguage();
-    const image = {
-      src: buildModuleFileUrl(placeholder),
-      alt: "Placeholder",
-    };
 
-    const galleryImages = images.map((img) => ({
-      src: buildNodeUrl(img),
-      alt: t("alt.estate", { estate: title }),
-    }));
+    // const image = {
+    //   src: buildModuleFileUrl(placeholder),
+    //   alt: "Placeholder",
+    // };
 
-    if (images[0]) {
-      const _image = images[0];
-      image.src = buildNodeUrl(_image);
-      image.alt = t("alt.estate", { estate: title });
+    // if (images[0]) {
+    //   const _image = images[0];
+    //   image.src = buildNodeUrl(_image);
+    //   image.alt = t("alt.estate", { estate: title });
+    //
+    //   server.render.addCacheDependency({ node: _image }, renderContext);
+    // }
 
-      server.render.addCacheDependency({ node: _image }, renderContext);
+    const galleryImages = images.map((img) => {
+      server.render.addCacheDependency({ node: img }, renderContext);
+      return {
+        src: buildNodeUrl(img),
+        alt: t("alt.estate", { estate: title }),
+      };
+    });
+
+    if (!galleryImages.length) {
+      galleryImages.push({
+        src: buildModuleFileUrl(placeholder),
+        alt: "Placeholder",
+      });
     }
 
     // Define translation mappings
@@ -102,11 +113,11 @@ jahiaComponent(
       <>
         <Section>
           <header className={classes.header}>
-            <PageTitle title="test" className={classes.title} />
+            <PageTitle title={title} className={classes.title} />
           </header>
           <Row>
             {/* <Figure src={image.src} alt={image.alt} layout="imgFull" /> */}
-            <HydrateInBrowser child={GalleryClient} props={{data: galleryImages}} />
+            <HydrateInBrowser child={GalleryClient} props={{ data: galleryImages }} />
           </Row>
           <Row className={classes.rowDescription}>
             <Col>

@@ -86,7 +86,7 @@ export const LoginCardClient = ({
       <div>
         <h2>{userinfo.fullname}</h2>
         {userinfo.function && <h4>{t(userinfo.function)}</h4>}
-        {userinfo.description && t(userinfo.description)}
+        {userinfo.description && <p>{t(userinfo.description)}</p>}
       </div>
     </div>
   );
