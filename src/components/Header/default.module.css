@@ -14,4 +14,7 @@
     line-height: 1.2;
     font-family: var(--luxe-font-family-display);
   }
+	img {
+		border-radius: 0;
+	}
 }
