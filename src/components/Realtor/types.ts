@@ -7,6 +7,7 @@ export interface RealtorProps {
   jobPosition: "junior" | "senior" | "director";
   description: string;
   image?: JCRNodeWrapper;
+  animate?: JCRNodeWrapper;
   languages: ["fr" | "en" | "de" | "es"];
   yOfExperience: bigint;
   phone: string;

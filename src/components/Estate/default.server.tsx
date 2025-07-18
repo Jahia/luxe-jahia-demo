@@ -7,6 +7,7 @@ import {
 import { t } from "i18next";
 import type { EstateProps } from "./types";
 import classes from "./default.module.css";
+import placeholder from "/static/img/img-placeholder.jpg";
 
 jahiaComponent(
   {
@@ -20,7 +21,7 @@ jahiaComponent(
   ) => {
     const locale = currentResource.getLocale().getLanguage();
     const image = {
-      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 

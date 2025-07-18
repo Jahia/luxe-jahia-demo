@@ -1333,15 +1333,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^5.3.6":
-  version: 5.3.6
-  resolution: "bootstrap@npm:5.3.6"
-  peerDependencies:
-    "@popperjs/core": ^2.11.8
-  checksum: 10c0/1b3f8f4f265463b3cd6aece84135b521ff55f3225a5c16c6981fdd8fb2bfb53b35b0815bff63382e5c83f6d537c017ae8392afe34366d5d547e4fd507d086e1c
-  languageName: node
-  linkType: hard
-
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
   resolution: "brace-expansion@npm:1.1.11"
@@ -2782,7 +2773,6 @@ __metadata:
     "@jahia/vite-plugin": "npm:0.8.0-alpha-20250616135731995"
     "@types/react": "npm:19.1.8"
     "@types/react-dom": "npm:^19.1.6"
-    bootstrap: "npm:^5.3.6"
     clsx: "npm:^2.1.1"
     eslint: "npm:^9.29.0"
     globals: "npm:^16.2.0"

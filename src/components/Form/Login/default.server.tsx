@@ -1,9 +1,11 @@
 import {
   buildEndpointUrl,
+  buildModuleFileUrl,
   HydrateInBrowser,
   jahiaComponent,
 } from "@jahia/javascript-modules-library";
 import LoginClient from "./Login.client";
+import { rawPersona } from "./persona";
 
 jahiaComponent(
   {
@@ -36,7 +38,24 @@ jahiaComponent(
 
     const mode = renderContext.getMode();
     const mainPath = renderContext.getMainResource().getNode().getPath();
-    // TODO see if we can get users profile public info here...
+
+    const persona = rawPersona.map((p) => ({
+      ...p,
+      userinfo: {
+        ...p.userinfo,
+        avatar: {
+          image: {
+            ...p.userinfo.avatar.image,
+            url: buildModuleFileUrl(p.userinfo.avatar.image.url),
+          },
+          video: {
+            ...p.userinfo.avatar.video,
+            url: buildModuleFileUrl(p.userinfo.avatar.video.url),
+          },
+        },
+      },
+    }));
+
     return (
       <HydrateInBrowser
         child={LoginClient}
@@ -48,6 +67,7 @@ jahiaComponent(
           nodePath: mainPath,
           isShowRememberMe: Boolean(isShowRememberMe),
           siteKey: renderContext.getSite().getSiteKey(),
+          persona: persona,
         }}
       />
     );

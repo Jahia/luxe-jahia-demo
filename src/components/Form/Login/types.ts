@@ -13,7 +13,26 @@ export interface LoginCommonProps {
   siteKey?: string;
   loginUrl: string;
   setUser: Dispatch<SetStateAction<string | undefined>>;
-  setLoggedIn: Dispatch<SetStateAction<boolean>>;
+  handleLoggedIn: () => void;
   setIncorrectLogin: Dispatch<SetStateAction<boolean>>;
   setUnknownError: Dispatch<SetStateAction<boolean>>;
 }
+
+export type LoginPersonaProps = {
+  username: string;
+  password: string;
+  userinfo: {
+    fullname: string;
+    function: string;
+    avatar: {
+      image: {
+        url: string;
+        alt: string;
+      };
+      video: {
+        url: string;
+      };
+    };
+    description: string;
+  };
+};

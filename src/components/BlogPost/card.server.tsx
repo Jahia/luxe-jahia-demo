@@ -7,6 +7,7 @@ import {
 import { t } from "i18next";
 import type { BlogPostProps } from "./types";
 import classes from "./card.module.css";
+import placeholder from "/static/img/img-placeholder.jpg";
 
 jahiaComponent(
   {
@@ -17,7 +18,7 @@ jahiaComponent(
   },
   ({ title, subtitle, image: imageNode }: BlogPostProps, { currentNode, renderContext }) => {
     const image = {
-      src: buildModuleFileUrl("static/img/img-placeholder.jpg"),
+      src: buildModuleFileUrl(placeholder),
       alt: "Placeholder",
     };
 

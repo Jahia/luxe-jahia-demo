@@ -62,7 +62,7 @@
 					"teaser": "Use your username and password to log in."
 				}
 			},
-			"userMocks": {
+			"persona": {
 				"pam": {
 					"function": "Editor in the Communications Department",
 					"description": "I actively create, optimize, and manage engaging pages for the Luxe website.",

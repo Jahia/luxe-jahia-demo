@@ -5,6 +5,7 @@
  - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'senior', 'director'
  - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
  - image (weakreference, picker[type='image']) < 'jmix:image'
+ - animate (weakreference, picker[type='video']) < 'jnt:file'
  - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
  - yOfExperience (long) = 1 autocreated mandatory
  - phone (string) = '+33 6 123 456' autocreated mandatory indexed=no

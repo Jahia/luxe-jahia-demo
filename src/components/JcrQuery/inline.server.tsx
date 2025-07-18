@@ -66,6 +66,7 @@ jahiaComponent(
               key={node.getIdentifier()}
               node={node as JCRNodeWrapper}
               view={subNodeView || "default"}
+              readOnly
             />
           ))}
         {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (

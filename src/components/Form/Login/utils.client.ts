@@ -13,7 +13,7 @@ export const login = async ({
   rememberMe,
   loginUrl,
   setUser,
-  setLoggedIn,
+  handleLoggedIn,
   setIncorrectLogin,
   setUnknownError,
 }: LoginProps) => {
@@ -40,9 +40,8 @@ export const login = async ({
     });
     const value = await response.text();
     if (value === "OK") {
-      close();
       setUser(username);
-      setLoggedIn(true);
+      handleLoggedIn();
     } else if (value === "unauthorized") {
       setIncorrectLogin(true);
     } else {
