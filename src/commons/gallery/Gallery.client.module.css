@@ -2,24 +2,12 @@
 
 @value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_xl, space_3, space_4 from variables;
 
-/*@keyframes fadeInListItem {*/
-/*	from { opacity: 0; transform: translateY(20px);}*/
-/*	to   { opacity: 1; transform: translateY(0);}*/
-/*}*/
-/*@keyframes fadeOutListItem {*/
-/*	from { opacity: 1; transform: translateY(0);}*/
-/*	to   { opacity: 0; transform: translateY(-20px);}*/
-/*}*/
-
-/*!* Par défaut, animé à l’entrée *!*/
-/*.item {*/
-/*	animation: fadeInListItem 0.3s;*/
-/*}*/
-
-/*!* Classe à ajouter lors de la suppression *!*/
-/*.itemLeaving {*/
-/*	animation: fadeOutListItem 0.3s forwards;*/
-/*}*/
+.main {
+	@media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
+		padding-right: calc(var(--luxe-gutter-x) * .5);
+		padding-left: calc(var(--luxe-gutter-x) * .5);
+	}
+}
 
 .dialog {
 	--luxe-dialog-opacity: 1;
@@ -29,6 +17,7 @@
   margin-bottom: 0;
   width: 100%;
   cursor: pointer;
+	/*min-height: 60vh;*/
 
   img {
     transition: all .2s ease-in;
@@ -63,12 +52,6 @@
 				max-width: 33.3333%;
 			}
 		}
-		/*@media (min-width: gridBreakpoints_lg) {*/
-		/*	& {*/
-		/*		flex: 0 1 50%;*/
-		/*		max-width: 50%;*/
-		/*	}*/
-		/*}*/
 		@media (min-width: gridBreakpoints_xl) {
 			& {
 				flex: 0 1 20%;
@@ -80,16 +63,21 @@
 
 .more,
 .item {
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-}
-
-.more,
-.item {
 	composes: card from "~/templates/css/global.module.css";
 	padding: 0 !important;
-  /*!* TODO: Same style than card  *!*/
+	flex: 1;
+	min-width: 0;
+	min-height: 0;
+	visibility: hidden;
+	opacity: 0;
+
+	&.visible {
+		visibility: visible;
+		opacity: 1;
+	}
+
+
+	/*!* TODO: Same style than card  *!*/
   /*border-radius: 16px;*/
   /*transition: all .2s ease-in;*/
   /*margin-bottom: 0;*/
