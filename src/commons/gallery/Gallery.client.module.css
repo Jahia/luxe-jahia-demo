@@ -3,6 +3,7 @@
 @value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_xl, space_3, space_4 from variables;
 
 .main {
+	width: 100%;
 	@media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
 		padding-right: calc(var(--luxe-gutter-x) * .5);
 		padding-left: calc(var(--luxe-gutter-x) * .5);
@@ -65,37 +66,22 @@
 .item {
 	composes: card from "~/templates/css/global.module.css";
 	padding: 0 !important;
-	flex: 1;
 	min-width: 0;
 	min-height: 0;
 	visibility: hidden;
 	opacity: 0;
+	cursor: pointer;
 
 	&.visible {
 		visibility: visible;
 		opacity: 1;
 	}
-
-
-	/*!* TODO: Same style than card  *!*/
-  /*border-radius: 16px;*/
-  /*transition: all .2s ease-in;*/
-  /*margin-bottom: 0;*/
-  /*cursor: pointer;*/
-
-  /*&:hover {*/
-  /*  transform: scale(1.05);*/
-  /*  box-shadow: var(--luxe-box-shadow);*/
-  /*}*/
 }
 
 .more {
-  cursor: pointer;
-  display: flex;
   background-color: var(--luxe-color-gray);
   align-items: center;
   justify-content: center;
   font-size: 23px;
   font-weight: bold;
-  border-radius: 16px;
 }
