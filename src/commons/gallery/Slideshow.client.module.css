@@ -2,7 +2,6 @@
 
 @value gridBreakpoints_sm, space_3, space_4 from variables;
 
-
 .contentImage {
 	display: flex;
 	flex-direction: column;
@@ -11,7 +10,7 @@
 	gap: space_3;
 	margin: space_3;
 
-	picture{
+	picture {
 		flex: 1;
 		text-align: center;
 	}
@@ -62,7 +61,6 @@
 		pointer-events: none;
 	}
 }
-
 
 .buttonNav {
 	width: 44px;
@@ -115,4 +113,3 @@
 		}
 	}
 }
-

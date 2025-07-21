@@ -1,8 +1,8 @@
 import {
-  getNodesByJCRQuery,
-  jahiaComponent,
-  Render,
-  server,
+	getNodesByJCRQuery,
+	jahiaComponent,
+	Render,
+	server,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./default.module.css";
@@ -13,69 +13,69 @@ import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
 
 jahiaComponent(
-  {
-    nodeType: "luxe:jcrQuery",
-    name: "default",
-    componentType: "view",
-  },
-  (
-    {
-      "jcr:title": title,
-      type,
-      criteria,
-      sortDirection,
-      maxItems,
-      startNode,
-      excludeNodes,
-      filter,
-      noResultText,
-      "j:subNodesView": subNodeView,
-    }: JcrQueryProps,
-    { currentNode, renderContext },
-  ) => {
-    const { jcrQuery, warn } = buildQuery({
-      luxeQuery: {
-        "jcr:title": title,
-        type,
-        criteria,
-        sortDirection,
-        startNode,
-        filter,
-        excludeNodes,
-      },
-      t,
-      server,
-      currentNode,
-      renderContext,
-    });
-    const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
+	{
+		nodeType: "luxe:jcrQuery",
+		name: "default",
+		componentType: "view",
+	},
+	(
+		{
+			"jcr:title": title,
+			type,
+			criteria,
+			sortDirection,
+			maxItems,
+			startNode,
+			excludeNodes,
+			filter,
+			noResultText,
+			"j:subNodesView": subNodeView,
+		}: JcrQueryProps,
+		{ currentNode, renderContext },
+	) => {
+		const { jcrQuery, warn } = buildQuery({
+			luxeQuery: {
+				"jcr:title": title,
+				type,
+				criteria,
+				sortDirection,
+				startNode,
+				filter,
+				excludeNodes,
+			},
+			t,
+			server,
+			currentNode,
+			renderContext,
+		});
+		const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
 
-    return (
-      <div className={classes.root}>
-        {title && queryContent && queryContent.length > 0 && <HeadingSection title={title} />}
-        {renderContext.isEditMode() && warn && (
-          <div className={alert.warning} role="alert">
-            {warn}
-          </div>
-        )}
+		return (
+			<div className={classes.root}>
+				{title && queryContent && queryContent.length > 0 && <HeadingSection title={title} />}
+				{renderContext.isEditMode() && warn && (
+					<div className={alert.warning} role="alert">
+						{warn}
+					</div>
+				)}
 
-        {queryContent && queryContent.length > 0 && (
-          <Row className={classes.main}>
-            {queryContent.map((node) => {
-              return (
-                <Col key={node.getIdentifier()}>
-                  <Render node={node as JCRNodeWrapper} view={subNodeView || "default"} readOnly />
-                </Col>
-              );
-            })}
-          </Row>
-        )}
-        {(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
-          <div className={alert.dark} role="alert">
-            {t(noResultText || "query.noResult")}
-          </div>
-        )}
-      </div>
-    );
-  },
+				{queryContent && queryContent.length > 0 && (
+					<Row className={classes.main}>
+						{queryContent.map((node) => {
+							return (
+								<Col key={node.getIdentifier()}>
+									<Render node={node as JCRNodeWrapper} view={subNodeView || "default"} readOnly />
+								</Col>
+							);
+						})}
+					</Row>
+				)}
+				{(!queryContent || queryContent.length === 0) && renderContext.isEditMode() && (
+					<div className={alert.dark} role="alert">
+						{t(noResultText || "query.noResult")}
+					</div>
+				)}
+			</div>
+		);
+	},
 );

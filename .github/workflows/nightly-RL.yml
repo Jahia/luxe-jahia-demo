@@ -3,11 +3,11 @@ name: Nightly Test run (Jahia RL)
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 1 * * *'
+    - cron: "0 1 * * *"
 
 jobs:
   integration-tests:
-    uses:  Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
+    uses: Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
     secrets: inherit
     with:
       jahia_image: jahia/jahia-ee:8
