@@ -3,32 +3,32 @@
 @value space_0 from variables;
 
 .rowRealtors {
-  composes: rowCols_lg_4 from "~/commons/grid/grid.module.css";
-  composes: rowCols_md_3 from "~/commons/grid/grid.module.css";
-  composes: rowCols_sm_2 from "~/commons/grid/grid.module.css";
+	composes: rowCols_lg_4 from "~/commons/grid/grid.module.css";
+	composes: rowCols_md_3 from "~/commons/grid/grid.module.css";
+	composes: rowCols_sm_2 from "~/commons/grid/grid.module.css";
 }
 
 section .rowRealtors {
-  --luxe-gutter-x: space_0;
-  --luxe-gutter-y: space_0;
+	--luxe-gutter-x: space_0;
+	--luxe-gutter-y: space_0;
 
-  > div {
-    --luxe-gutter-x: space_0;
-    --luxe-gutter-y: space_0;
-  }
+	> div {
+		--luxe-gutter-x: space_0;
+		--luxe-gutter-y: space_0;
+	}
 }
 
 .rowEstates {
-  composes: rowCols_lg_3 from "~/commons/grid/grid.module.css";
-  composes: rowCols_md_2 from "~/commons/grid/grid.module.css";
-  composes: rowCols_sm_1 from "~/commons/grid/grid.module.css";
+	composes: rowCols_lg_3 from "~/commons/grid/grid.module.css";
+	composes: rowCols_md_2 from "~/commons/grid/grid.module.css";
+	composes: rowCols_sm_1 from "~/commons/grid/grid.module.css";
 }
 
 section .rowEstates {
-  --luxe-gutter-x: space_0;
-  --luxe-gutter-y: space_0;
-  > div {
-    --luxe-gutter-x: space_0;
-    --luxe-gutter-y: space_0;
-  }
+	--luxe-gutter-x: space_0;
+	--luxe-gutter-y: space_0;
+	> div {
+		--luxe-gutter-x: space_0;
+		--luxe-gutter-y: space_0;
+	}
 }

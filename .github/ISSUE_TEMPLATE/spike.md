@@ -1,18 +1,15 @@
 ---
 name: Spike
 about: Create a spike
-title: ''
+title: ""
 type: Spike
-
 ---
 
-**The goal of the spike is to** 
-
+**The goal of the spike is to**
 
 ### Outcomes
 
 Story ? POC ? Documentation ?
-
 
 ### Notes
 

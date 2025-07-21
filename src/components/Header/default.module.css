@@ -1,17 +1,20 @@
 .cover {
-  position: relative;
-  min-height: 695px;
-  overflow: hidden; /* Prevent the text from spilling over other sections */
-  h1 {
-    position: absolute;
-    bottom: 33%;
-    left: 120px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 32px;
-    max-width: 450px;
-    font-size: 40px;
-    line-height: 1.2;
-    font-family: var(--luxe-font-family-display);
-  }
+	position: relative;
+	min-height: 695px;
+	overflow: hidden; /* Prevent the text from spilling over other sections */
+	h1 {
+		position: absolute;
+		bottom: 33%;
+		left: 120px;
+		border-radius: 8px;
+		background-color: rgba(255, 255, 255, 0.8);
+		padding: 32px;
+		max-width: 450px;
+		font-size: 40px;
+		line-height: 1.2;
+		font-family: var(--luxe-font-family-display);
+	}
+	img {
+		border-radius: 0;
+	}
 }

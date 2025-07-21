@@ -3,12 +3,12 @@
 @value space_0 from variables;
 
 .rowEstates {
-  --luxe-gutter-x: space_0;
-  --luxe-gutter-y: space_0;
-  composes: rowCols_3 from "~/commons/grid/grid.module.css";
+	--luxe-gutter-x: space_0;
+	--luxe-gutter-y: space_0;
+	composes: rowCols_3 from "~/commons/grid/grid.module.css";
 
-  > div {
-    --luxe-gutter-x: space_0;
-    --luxe-gutter-y: space_0;
-  }
+	> div {
+		--luxe-gutter-x: space_0;
+		--luxe-gutter-y: space_0;
+	}
 }

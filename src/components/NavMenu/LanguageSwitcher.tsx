@@ -1,30 +1,30 @@
 import {
-  HydrateInBrowser,
-  useServerContext,
-  getSiteLocales,
-  buildNodeUrl,
+	HydrateInBrowser,
+	useServerContext,
+	getSiteLocales,
+	buildNodeUrl,
 } from "@jahia/javascript-modules-library";
 import LanguageSwitcherClient from "./LanguageSwitcher.client";
 
 export const LanguageSwitcher = () => {
-  const { renderContext, currentResource } = useServerContext();
-  const currentLocale = currentResource.getLocale();
-  const currentLocaleCode = currentLocale.toString();
-  const currentLocaleName = currentLocale.getDisplayLanguage(currentLocale);
-  const mode = renderContext.getMode();
+	const { renderContext, currentResource } = useServerContext();
+	const currentLocale = currentResource.getLocale();
+	const currentLocaleCode = currentLocale.toString();
+	const currentLocaleName = currentLocale.getDisplayLanguage(currentLocale);
+	const mode = renderContext.getMode();
 
-  const localesAndUrls = Object.entries(getSiteLocales()).map(([language, locale]) => {
-    return {
-      localeName: locale.getDisplayLanguage(locale),
-      isCurrent: language === currentLocaleCode,
-      url: buildNodeUrl(renderContext.getMainResource().getNode(), { language }),
-    };
-  });
+	const localesAndUrls = Object.entries(getSiteLocales()).map(([language, locale]) => {
+		return {
+			localeName: locale.getDisplayLanguage(locale),
+			isCurrent: language === currentLocaleCode,
+			url: buildNodeUrl(renderContext.getMainResource().getNode(), { language }),
+		};
+	});
 
-  return (
-    <HydrateInBrowser
-      child={LanguageSwitcherClient}
-      props={{ currentLocaleName, localesAndUrls, mode }}
-    />
-  );
+	return (
+		<HydrateInBrowser
+			child={LanguageSwitcherClient}
+			props={{ currentLocaleName, localesAndUrls, mode }}
+		/>
+	);
 };
