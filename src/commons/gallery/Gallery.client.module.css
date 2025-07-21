@@ -42,22 +42,16 @@
 		flex: 0 1 100%;
 		max-width: 100%;
 		@media (min-width: gridBreakpoints_sm) {
-			& {
-				flex: 0 1 50%;
-				max-width: 50%;
-			}
+			flex: 0 1 50%;
+			max-width: 50%;
 		}
 		@media (min-width: gridBreakpoints_md) {
-			& {
-				flex: 0 1 33.3333%;
-				max-width: 33.3333%;
-			}
+			flex: 0 1 33.3333%;
+			max-width: 33.3333%;
 		}
 		@media (min-width: gridBreakpoints_xl) {
-			& {
-				flex: 0 1 20%;
-				max-width: 20%;
-			}
+			flex: 0 1 20%;
+			max-width: 20%;
 		}
 	}
 }
