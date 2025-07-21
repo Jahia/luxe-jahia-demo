@@ -521,9 +521,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:0.8.0-alpha-20250616135731995":
-  version: 0.8.0-alpha-20250616135731995
-  resolution: "@jahia/vite-plugin@npm:0.8.0-alpha-20250616135731995"
+"@jahia/vite-plugin@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@jahia/vite-plugin@npm:0.8.0"
   dependencies:
     "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/pluginutils": "npm:^5.1.4"
@@ -531,7 +531,9 @@ __metadata:
     tinyglobby: "npm:^0.2.13"
   peerDependencies:
     vite: ">=6.0.0"
-  checksum: 10c0/facdadcc41f5418039cebbf5ce1507ffb0c1c2f5f03ea8ca9d829e30c0fde9d9fc6794d314bb2fc835f9df7978e9294dba2afb3928f813f8ce1d989a438b62bb
+  bin:
+    jahia-deploy: bin/jahia-deploy.js
+  checksum: 10c0/80fd367594958110c273b1a96b3f47d51ee013df3d2d5ca4780814170599a7668c2a0774a9f004cf28ed7a56bf1418429b7954604b5e8477c4aa31bc056d532b
   languageName: node
   linkType: hard
 
@@ -2768,7 +2770,7 @@ __metadata:
     "@eslint/compat": "npm:^1.3.0"
     "@eslint/js": "npm:^9.29.0"
     "@jahia/javascript-modules-library": "npm:0.8.0"
-    "@jahia/vite-plugin": "npm:0.8.0-alpha-20250616135731995"
+    "@jahia/vite-plugin": "npm:0.8.0"
     "@types/react": "npm:19.1.8"
     "@types/react-dom": "npm:^19.1.6"
     clsx: "npm:^2.1.1"
