@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import LeafletMapClient from "~/commons/map/LeafletMap.client";
+// import LeafletMapClient from "~/commons/map/LeafletMap.client";
 import { geocodeAddress } from "~/commons/map/geocodeAddress";
 
+// const LeafletMapClient = React.lazy(() => import("~/commons/map/LeafletMap.client"));
 export type AddressItem = {
 	label: string; // For popup (e.g. agency name or address)
 	address: string;
@@ -20,14 +21,28 @@ type MapWithPinClientProps = {
 const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 	// State for coordinates (latitude and longitude)
 	const [coords, setCoords] = useState<Coordinates[]>([]);
+	const [LeafletMapClient, setLeafletMapClient] = useState<React.ComponentType<{
+		pins: Coordinates[];
+	}> | null>(null);
+
 	// State to check if we are on client-side (for SSR compatibility)
-	const [isClient, setIsClient] = useState(false);
+	// const [isClient, setIsClient] = useState(false);
 	// State for error message
 	const [error, setError] = useState<string | null>(null);
 
+	// useEffect(() => {
+	// 	// Ensure map is only rendered on client side
+	// 	setIsClient(true);
+	// }, []);
+
 	useEffect(() => {
-		// Ensure map is only rendered on client side
-		setIsClient(true);
+		// Import dynamically ONLY on client
+		if (typeof window !== "undefined") {
+			// @ts-ignore
+			import("~/commons/map/LeafletMap.client.tsx")
+				.then((mod) => setLeafletMapClient(() => mod.default))
+				.catch(() => setError("Erreur lors du chargement de la carte."));
+		}
 	}, []);
 
 	useEffect(() => {
@@ -53,16 +68,19 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 			.catch(() => setError("Erreur lors du géocodage."));
 	}, [addresses]);
 
-	if (!isClient) return <div>Chargement…</div>; // Do not render on server
-
+	// if (!isClient) return <div>Chargement…</div>; // Do not render on server
+	if (!LeafletMapClient) return <div>Chargement de la carte…</div>;
 	return (
 		<>
 			{error && <div style={{ color: "red" }}>{error}</div>}
-			{coords.length > 0 ? (
-				<LeafletMapClient pins={coords} />
-			) : !error ? (
-				<div>Chargement de la carte…</div>
-			) : null}
+			{/*<Suspense fallback={<div>Chargement de la carte…</div>}>*/}
+			<LeafletMapClient pins={coords} />
+			{/*</Suspense>*/}
+			{/*{coords.length > 0 ? (*/}
+			{/*	<LeafletMapClient pins={coords} />*/}
+			{/*) : !error ? (*/}
+			{/*	<div>Chargement de la carte…</div>*/}
+			{/*) : null}*/}
 		</>
 	);
 };

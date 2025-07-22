@@ -21,7 +21,7 @@ import {
 	Section,
 	List,
 	type ListRowProps,
-	Contact,
+	// Contact,
 } from "~/commons";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
