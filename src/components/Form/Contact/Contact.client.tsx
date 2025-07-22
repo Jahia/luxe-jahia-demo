@@ -9,90 +9,90 @@ import clsx from "clsx";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function ContactClient({
-  target,
-  feedbackMsg,
-  mode,
+	target,
+	feedbackMsg,
+	mode,
 }: {
-  target?: string;
-  feedbackMsg: string;
-  mode: string;
+	target?: string;
+	feedbackMsg: string;
+	mode: string;
 }) {
-  const [feedback, setFeedback] = useState<FeedbackProps>({ show: false, msgProps: {} });
-  const [unknownError, setUnknownError] = useState<boolean>(false);
+	const [feedback, setFeedback] = useState<FeedbackProps>({ show: false, msgProps: {} });
+	const [unknownError, setUnknownError] = useState<boolean>(false);
 
-  const prefill = useMemo<MsgPropsProps | EmptyObject>(
-    () => (Object.keys(feedback.msgProps).length ? feedback.msgProps : {}),
-    [feedback],
-  );
+	const prefill = useMemo<MsgPropsProps | EmptyObject>(
+		() => (Object.keys(feedback.msgProps).length ? feedback.msgProps : {}),
+		[feedback],
+	);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.digitalData) {
-      const sessionId = window.cxs?.sessionId || getCookie("wem-session-id");
-      prefillWithUserContext(sessionId, setFeedback);
-    }
-  }, []);
+	useEffect(() => {
+		if (typeof window !== "undefined" && window.digitalData) {
+			const sessionId = window.cxs?.sessionId || getCookie("wem-session-id");
+			prefillWithUserContext(sessionId, setFeedback);
+		}
+	}, []);
 
-  const handleRedo = (e) => {
-    e.preventDefault();
-    setFeedback({ show: false, msgProps: {} });
-    return false;
-  };
+	const handleRedo = (e) => {
+		e.preventDefault();
+		setFeedback({ show: false, msgProps: {} });
+		return false;
+	};
 
-  if (feedback.show) {
-    const { firstName, lastName, email, message } = feedback.msgProps;
-    const name = `${firstName} ${lastName}`;
-    if (feedback.ok || feedback.status === 200) {
-      const personalizedFeedbackMsg = feedbackMsg
-        .replace("$name", name)
-        .replace("$email", email)
-        .replace("$message", message);
-      return (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: personalizedFeedbackMsg,
-          }}
-          className={classes.fs6}
-          role="info"
-        />
-      );
-    }
+	if (feedback.show) {
+		const { firstName, lastName, email, message } = feedback.msgProps;
+		const name = `${firstName} ${lastName}`;
+		if (feedback.ok || feedback.status === 200) {
+			const personalizedFeedbackMsg = feedbackMsg
+				.replace("$name", name)
+				.replace("$email", email)
+				.replace("$message", message);
+			return (
+				<div
+					dangerouslySetInnerHTML={{
+						__html: personalizedFeedbackMsg,
+					}}
+					className={classes.fs6}
+					role="info"
+				/>
+			);
+		}
 
-    return (
-      <>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: t("form.contact.sendMessageError", { name, status: feedback.status }),
-          }}
-          className={clsx(alert.danger, classes.fs6)}
-          role="alert"
-        />
+		return (
+			<>
+				<p
+					dangerouslySetInnerHTML={{
+						__html: t("form.contact.sendMessageError", { name, status: feedback.status }),
+					}}
+					className={clsx(alert.danger, classes.fs6)}
+					role="alert"
+				/>
 
-        <p>
-          <a href="" className={classes.capitalize} onClick={handleRedo}>
-            {t("form.contact.sendMessageAgain")}
-          </a>
-        </p>
-      </>
-    );
-  }
+				<p>
+					<a href="" className={classes.capitalize} onClick={handleRedo}>
+						{t("form.contact.sendMessageAgain")}
+					</a>
+				</p>
+			</>
+		);
+	}
 
-  if (unknownError) {
-    return (
-      <p className={clsx(alert.danger, classes.fs6)} role="alert">
-        {t("form.unknownError")}
-      </p>
-    );
-  }
+	if (unknownError) {
+		return (
+			<p className={clsx(alert.danger, classes.fs6)} role="alert">
+				{t("form.unknownError")}
+			</p>
+		);
+	}
 
-  return (
-    <ContactFormClient
-      {...{
-        target,
-        prefill,
-        setFeedback,
-        setUnknownError,
-        mode,
-      }}
-    />
-  );
+	return (
+		<ContactFormClient
+			{...{
+				target,
+				prefill,
+				setFeedback,
+				setUnknownError,
+				mode,
+			}}
+		/>
+	);
 }

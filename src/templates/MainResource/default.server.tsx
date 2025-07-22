@@ -5,16 +5,16 @@ import { Layout } from "~/templates/Layout";
 // For example : luxe:realtor, luxe:agency ...
 // Note : if needed, you can also create a dedicated template for these content types.
 jahiaComponent(
-  {
-    nodeType: "jmix:mainResource",
-    name: "default",
-    componentType: "template",
-  },
-  (_, { currentNode }) => {
-    return (
-      <Layout>
-        <Render node={currentNode} view="fullPage" />
-      </Layout>
-    );
-  },
+	{
+		nodeType: "jmix:mainResource",
+		name: "default",
+		componentType: "template",
+	},
+	(_, { currentNode }) => {
+		return (
+			<Layout>
+				<Render node={currentNode} view="fullPage" />
+			</Layout>
+		);
+	},
 );

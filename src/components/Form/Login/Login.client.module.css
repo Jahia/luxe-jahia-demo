@@ -3,36 +3,36 @@
 @value gridBreakpoints_sm, gridBreakpoints_lg, gridBreakpoints_xl, space_0, space_2, space_3, fs_6 from variables;
 
 .content {
-  position: relative;
-  width: auto;
-  margin: var(--luxe-modal-margin);
-  pointer-events: none;
+	position: relative;
+	width: auto;
+	margin: var(--luxe-modal-margin);
+	pointer-events: none;
 
-  @media (min-width: gridBreakpoints_sm) {
-    & {
-      max-width: var(--luxe-modal-width);
-      margin-right: auto;
-      margin-left: auto;
-    }
-  }
+	@media (min-width: gridBreakpoints_sm) {
+		& {
+			max-width: var(--luxe-modal-width);
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
 }
 
 .capitalize {
-  composes: capitalize from "~/templates/css/global.module.css";
+	composes: capitalize from "~/templates/css/global.module.css";
 }
 
 .fs6 {
-  font-size: fs_6;
+	font-size: fs_6;
 }
 
 .btn {
-  composes: link from "~/templates/css/button.module.css";
-  composes: capitalize from "~/templates/css/global.module.css";
-  padding: space_0;
-  border: 0;
-  display: block;
+	composes: link from "~/templates/css/button.module.css";
+	composes: capitalize from "~/templates/css/global.module.css";
+	padding: space_0;
+	border: 0;
+	display: block;
 }
 
 .list {
-  composes: listUnstyled from "~/templates/css/global.module.css";
+	composes: listUnstyled from "~/templates/css/global.module.css";
 }

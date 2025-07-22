@@ -4,9 +4,9 @@ import classes from "./grid.module.css";
 import type { ElementType } from "react";
 
 interface RowProps extends CommonsProps {
-  component?: ElementType;
+	component?: ElementType;
 }
 
 export const Row = ({ className, component: Component = "div", children }: RowProps) => {
-  return <Component className={clsx(classes.row, className)}>{children}</Component>;
+	return <Component className={clsx(classes.row, className)}>{children}</Component>;
 };
