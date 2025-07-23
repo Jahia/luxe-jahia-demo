@@ -28,8 +28,7 @@ export const TextIllustrated = ({
 			</Col>
 			<Col className={clsx(classes.text, classes[arrangement])}>
 				<h2 className={classes.title}>{title}</h2>
-				{/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
-				<unwanteddiv
+				<div
 					dangerouslySetInnerHTML={{
 						__html: text,
 					}}
