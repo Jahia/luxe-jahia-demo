@@ -60,27 +60,38 @@ export default function LoginClient({
 		);
 	}
 
-	return loggedIn ? (
+	return (
 		<>
-			<h5 className={classes.capitalize}>{user}</h5>
-			<ul className={classes.list}>
-				<WorkspaceNavigationClient
-					{...{
-						urls,
-						mode,
-						nodePath,
-					}}
-				/>
-				<li>
-					<button type="button" className={classes.btn} onClick={logout}>
-						{t("form.login.logout")}
-					</button>
-				</li>
-			</ul>
-		</>
-	) : (
-		<>
-			<h5 className={classes.capitalize}>{t("footer.backOffice")}</h5>
+			{loggedIn && (
+				<>
+					<h5 className={classes.capitalize}>{user}</h5>
+					<ul className={classes.list}>
+						<WorkspaceNavigationClient
+							{...{
+								urls,
+								mode,
+								nodePath,
+							}}
+						/>
+						<li>
+							<button type="button" className={classes.btn} onClick={logout}>
+								{t("form.login.logout")}
+							</button>
+						</li>
+					</ul>
+				</>
+			)}
+			{!loggedIn && (
+				<>
+					<h5 className={classes.capitalize}>{t("footer.backOffice")}</h5>
+					<p>
+						<a href={urls.loginUrl} className={classes.capitalize} onClick={showModal}>
+							{t("form.login.login")}
+						</a>
+					</p>
+				</>
+			)}
+			{/*Dialog must be displayed all time to update the dialog open state and remove css class blocking scroll */}
 			<DialogClient isOpen={isOpen} onClose={() => setIsOpen(false)} onKeyDown={handleKeyDown}>
 				<div className={classes.content} aria-labelledby="loginModalTitle">
 					<LoginFormClient
@@ -93,11 +104,6 @@ export default function LoginClient({
 					/>
 				</div>
 			</DialogClient>
-			<p>
-				<a href={urls.loginUrl} className={classes.capitalize} onClick={showModal}>
-					{t("form.login.login")}
-				</a>
-			</p>
 		</>
 	);
 }
