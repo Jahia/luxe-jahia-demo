@@ -66,14 +66,12 @@ jahiaComponent(
 						</Row>
 					</header>
 					<Section>
-						<Row className={classes.richtext}>
-							{/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
-							<unwanteddiv
-								dangerouslySetInnerHTML={{
-									__html: body,
-								}}
-							/>
-						</Row>
+						<Row
+							className={classes.richtext}
+							dangerouslySetInnerHTML={{
+								__html: body,
+							}}
+						/>
 						{categories && (
 							<div className={classes.category}>
 								{categories.map((node) => (

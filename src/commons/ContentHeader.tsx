@@ -19,14 +19,12 @@ export const ContentHeader = ({
 			<div className={classes.content}>
 				<h1 className={classes.title}>{title}</h1>
 				{description && (
-					<article className={classes.description}>
-						{/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
-						<unwanteddiv
-							dangerouslySetInnerHTML={{
-								__html: description,
-							}}
-						/>
-					</article>
+					<article
+						className={classes.description}
+						dangerouslySetInnerHTML={{
+							__html: description,
+						}}
+					/>
 				)}
 			</div>
 		</header>
