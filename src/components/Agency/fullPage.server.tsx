@@ -21,7 +21,7 @@ import {
 	Section,
 	List,
 	type ListRowProps,
-	// Contact,
+	Contact,
 } from "~/commons";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
@@ -127,9 +127,9 @@ jahiaComponent(
 		}
 
 		const addresses = [{ address, id: currentNode.getIdentifier() }];
-		const mapAddresses: AddressItem[] = addresses
+		const addressItems: AddressItem[] = addresses
 			.filter((item): item is { address: string; id: string } => Boolean(item.address))
-			.map(({ address }) => ({ label: address, address }));
+			.map((item) => ({ label: item.address, ...item }));
 
 		return (
 			<>
@@ -140,41 +140,23 @@ jahiaComponent(
 					<List rows={listRows} />
 				</Section>
 				<Section>
-					<HeadingSection title={t("section.heading.contact")} />
 					<Row>
 						<Col>
-							<address>
-								<div className={classes.row}>
-									<strong className={classes.label}>{t("section.contact.address")}</strong>
-									{addresses.map(({ address, id }) => {
-										if (address) return <span key={id}>{address}</span>;
-									})}
-								</div>
-								<div className={classes.row}>
-									<strong className={classes.label}>{t("section.contact.phone")}</strong>
-									<a href={`tel:${phone}`}>{phone}</a>
-								</div>
-								<div className={classes.row}>
-									<strong className={classes.label}>{t("section.contact.email")}</strong>
-									<a href={`mailto:${email}`}>{email}</a>
-								</div>
-							</address>
-							<button type="button" className={classes.btn}>
-								{t("section.contact.btn")}
-							</button>
+							<Contact
+								addresses={addressItems} //{[{ address, id: currentNode.getIdentifier() }]}
+								phone={phone}
+								email={email}
+							/>
 						</Col>
 						<Col>
-							<div>
-								<RenderInBrowser child={MapWithPinClient} props={{ addresses: mapAddresses }} />
-							</div>
+							<RenderInBrowser
+								child={MapWithPinClient}
+								props={{ addresses: addressItems, className: "" }}
+							/>
 						</Col>
 					</Row>
 				</Section>
-				{/*<Contact*/}
-				{/*  addresses={[{ address, id: currentNode.getIdentifier() }]}*/}
-				{/*  phone={phone}*/}
-				{/*  email={email}*/}
-				{/*/>*/}
+
 				<Section>
 					<HeadingSection title={t("section.heading.experts")} />
 					<Row className={classes.rowRealtors}>

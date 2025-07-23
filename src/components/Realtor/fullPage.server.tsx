@@ -22,6 +22,7 @@ import {
 import type { RealtorProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
+import type { AddressItem } from "~/commons/map/MapWithPin.client";
 
 const MAX_ESTATE = 6;
 
@@ -125,6 +126,12 @@ jahiaComponent(
 			image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
 		}
 
+		const addressItems: AddressItem[] = agencies
+			.filter((item): item is { address: string; id: string; name: string } =>
+				Boolean(item.address),
+			)
+			.map(({ address, id }) => ({ label: address, address, id }));
+
 		return (
 			<>
 				<Section>
@@ -137,7 +144,13 @@ jahiaComponent(
 				<Section>
 					<List rows={listRows} />
 				</Section>
-				<Contact addresses={agencies} email={email} phone={phone} />
+				<Section>
+					<Row>
+						<Col>
+							<Contact addresses={addressItems} email={email} phone={phone} />
+						</Col>
+					</Row>
+				</Section>
 				<Section>
 					<HeadingSection title={t("section.heading.exclusiveEstates")} />
 					<Row className={classes.rowEstates}>

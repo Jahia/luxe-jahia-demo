@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-// import LeafletMapClient from "~/commons/map/LeafletMap.client";
 import { geocodeAddress } from "~/commons/map/geocodeAddress";
 import "leaflet/dist/leaflet.css";
+import classes from "~/commons/map/MapWithPin.client.module.css";
+import type { LeafletMapClientProps } from "~/commons/map/LeafletMap.client";
+import clsx from "clsx";
 
 // const LeafletMapClient = React.lazy(() => import("~/commons/map/LeafletMap.client"));
 export type AddressItem = {
+	id: string;
 	label: string; // For popup (e.g. agency name or address)
 	address: string;
 };
@@ -17,14 +20,14 @@ type Coordinates = {
 
 type MapWithPinClientProps = {
 	addresses: AddressItem[];
+	className?: string; // Optional className for custom styling
 };
 
-const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
+const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, className }) => {
 	// State for coordinates (latitude and longitude)
 	const [coords, setCoords] = useState<Coordinates[]>([]);
-	const [LeafletMapClient, setLeafletMapClient] = useState<React.ComponentType<{
-		pins: Coordinates[];
-	}> | null>(null);
+	const [LeafletMapClient, setLeafletMapClient] =
+		useState<React.ComponentType<LeafletMapClientProps> | null>(null);
 
 	// State to check if we are on client-side (for SSR compatibility)
 	// const [isClient, setIsClient] = useState(false);
@@ -46,6 +49,10 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 			});
 	}, []);
 
+	// This code is not scalable and is provided as an example only.
+	// The recommended approach would be to implement a Drools rule or use a "SelectorType" in Jahia
+	// to calculate and persist the latitude and longitude directly in the content,
+	// instead of computing it on the fly in the frontend.
 	useEffect(() => {
 		// Geocode all addresses, and store the found coordinates with their labels
 		Promise.all(
@@ -72,10 +79,10 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 	// if (!isClient) return <div>Chargement…</div>; // Do not render on server
 	if (!LeafletMapClient) return <div>Chargement de la carte…</div>;
 	return (
-		<>
-			{error && <div style={{ color: "red" }}>{error}</div>}
-			<LeafletMapClient pins={coords} />
-		</>
+		<div className={clsx(classes.mapWrapper, className)}>
+			<LeafletMapClient pins={coords} className={clsx(classes.mapContainer, className)} />
+			{error && <div className={classes.errorOverlay}>{error}</div>}
+		</div>
 	);
 };
 

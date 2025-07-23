@@ -5,7 +5,8 @@
  - price (long) mandatory
  - images (weakreference, picker[type='image']) multiple mandatory < 'jmix:image'
  - address (string)
- - city (string)
+ - state (string)
+ - city (string) hidden
  - country (string,choicelist[country]) = 'FR' autocreated
  - type (string,choicelist[resourceBundle]) = 'house' autocreated mandatory < 'house', 'apartment', 'building'
  - surface (long) = 45 autocreated mandatory

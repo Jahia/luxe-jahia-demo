@@ -1,7 +1,6 @@
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
-
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -19,21 +18,35 @@ type Pin = {
 	label: string;
 };
 
-type LeafletMapClientProps = {
+export type LeafletMapClientProps = {
 	pins: Pin[];
+	className?: string; // Optional className for custom styling
 };
 
-const LeafletMapClient: React.FC<LeafletMapClientProps> = ({ pins }) => {
+// FitBounds helper component
+const FitBounds: React.FC<{ pins: Pin[] }> = ({ pins }) => {
+	const map = useMap();
+
+	useEffect(() => {
+		if (!pins.length) return;
+		// Build bounds from all pins
+		const bounds = L.latLngBounds(pins.map((pin) => [pin.lat, pin.lng] as [number, number]));
+		// Fit the map view to these bounds with padding
+		map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+	}, [pins, map]);
+
+	return null;
+};
+
+const LeafletMapClient: React.FC<LeafletMapClientProps> = ({ pins, className }) => {
 	// If at least one pin, use the first as map center
 	const center: [number, number] = pins.length > 0 ? [pins[0].lat, pins[0].lng] : [48.8566, 2.3522]; // Paris fallback
 
 	return (
-		<MapContainer
-			center={center}
-			zoom={12}
-			scrollWheelZoom={false}
-			style={{ height: "400px", width: "100%" }}
-		>
+		<MapContainer center={center} zoom={12} scrollWheelZoom={true} className={className}>
+			{/* Fit bounds to all pins */}
+			<FitBounds pins={pins} />
+
 			{/* Add OpenStreetMap tiles */}
 			<TileLayer
 				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
