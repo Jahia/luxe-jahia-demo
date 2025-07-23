@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import LeafletMapClient from "~/commons/map/LeafletMap.client";
 import { geocodeAddress } from "~/commons/map/geocodeAddress";
+import "leaflet/dist/leaflet.css";
 
 // const LeafletMapClient = React.lazy(() => import("~/commons/map/LeafletMap.client"));
 export type AddressItem = {
@@ -37,12 +38,12 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 
 	useEffect(() => {
 		// Import dynamically ONLY on client
-		if (typeof window !== "undefined") {
-			// @ts-ignore
-			import("~/commons/map/LeafletMap.client.tsx")
-				.then((mod) => setLeafletMapClient(() => mod.default))
-				.catch(() => setError("Erreur lors du chargement de la carte."));
-		}
+		import("~/commons/map/LeafletMap.client")
+			.then((mod) => setLeafletMapClient(() => mod.default))
+			.catch((e) => {
+				console.error(e);
+				setError("Erreur lors du chargement de la carte.");
+			});
 	}, []);
 
 	useEffect(() => {
@@ -73,14 +74,7 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 	return (
 		<>
 			{error && <div style={{ color: "red" }}>{error}</div>}
-			{/*<Suspense fallback={<div>Chargement de la carte…</div>}>*/}
 			<LeafletMapClient pins={coords} />
-			{/*</Suspense>*/}
-			{/*{coords.length > 0 ? (*/}
-			{/*	<LeafletMapClient pins={coords} />*/}
-			{/*) : !error ? (*/}
-			{/*	<div>Chargement de la carte…</div>*/}
-			{/*) : null}*/}
 		</>
 	);
 };
