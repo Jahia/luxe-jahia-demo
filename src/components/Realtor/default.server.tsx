@@ -16,7 +16,7 @@ jahiaComponent(
 		componentType: "view",
 	},
 	(
-		{ firstName, lastName, jobPosition, image: imageNode, animate: videoNode }: RealtorProps,
+		{ firstName, lastName, jobPosition, image: imageNode }: RealtorProps,
 		{ currentNode, renderContext },
 	) => {
 		const image = {

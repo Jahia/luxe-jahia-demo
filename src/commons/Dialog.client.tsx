@@ -35,7 +35,7 @@ export const DialogClient = ({
 			dialog.close();
 			document.body.classList.remove(classes.noScroll);
 		}
-	}, [isOpen, dialogRef]);
+	}, [isOpen]);
 
 	const handleClose = (event: React.MouseEvent) => {
 		if (event.target === dialogRef.current) {
@@ -48,6 +48,10 @@ export const DialogClient = ({
 			id={id}
 			className={clsx(classes.dialog, className)}
 			onClick={handleClose}
+			onDoubleClick={(e) => {
+				e.preventDefault();
+				e.stopPropagation();
+			}}
 			onClose={(e) => onClose?.(e)}
 			{...props}
 		>

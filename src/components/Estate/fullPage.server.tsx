@@ -38,25 +38,27 @@ jahiaComponent(
 	) => {
 		const locale = currentResource.getLocale().getLanguage();
 
-		const galleryImages: PictureProps[] = images.map((imageNode) => {
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			return {
-				image: {
-					src: `${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`,
-					alt: t("alt.estate", { estate: title }), //imageNode.getDisplayableName(),
-				},
-				sources: [
-					{
-						media: "(min-width: 960px)",
-						srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "1920" } })}?w=1920&h=695`,
+		const galleryImages: PictureProps[] = images
+			.filter((imageNode) => Boolean(imageNode))
+			.map((imageNode) => {
+				server.render.addCacheDependency({ node: imageNode }, renderContext);
+				return {
+					image: {
+						src: `${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`,
+						alt: t("alt.estate", { estate: title }), //imageNode.getDisplayableName(),
 					},
-					{
-						media: "(min-width: 480px)",
-						srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "960" } })}?w=960&h=695`,
-					},
-				],
-			};
-		}) as PictureProps[];
+					sources: [
+						{
+							media: "(min-width: 960px)",
+							srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "1920" } })}?w=1920&h=695`,
+						},
+						{
+							media: "(min-width: 480px)",
+							srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "960" } })}?w=960&h=695`,
+						},
+					],
+				};
+			}) as PictureProps[];
 
 		if (!galleryImages.length) {
 			galleryImages.push({
