@@ -120,14 +120,11 @@ jahiaComponent(
 						<HydrateInBrowser child={GalleryClient} props={{ data: galleryImages }} />
 					</Row>
 					<Row className={classes.rowDescription}>
-						<Col>
-							{/* @ts-expect-error <unwanteddiv> is not a valid HTML element */}
-							<unwanteddiv
-								dangerouslySetInnerHTML={{
-									__html: description,
-								}}
-							/>
-						</Col>
+						<Col
+							dangerouslySetInnerHTML={{
+								__html: description,
+							}}
+						/>
 						<Col>
 							<p className={classes.price}>{price.toLocaleString(locale)} €</p>
 							<List rows={tableRows} />
