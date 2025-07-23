@@ -16,15 +16,16 @@ jahiaComponent(
 		componentType: "view",
 	},
 	(
-		{ title, price, images, surface, bedrooms }: EstateProps,
+		{ title, price, images: imageNodes, surface, bedrooms }: EstateProps,
 		{ currentNode, currentResource, renderContext },
 	) => {
 		const locale = currentResource.getLocale().getLanguage();
+
 		const image = {
 			src: buildModuleFileUrl(placeholder),
 			alt: "Placeholder",
 		};
-
+		const images = imageNodes.filter((imageNode) => Boolean(imageNode));
 		if (images[0]) {
 			const _image = images[0];
 			image.src = buildNodeUrl(_image);
