@@ -1,18 +1,18 @@
 ---
 name: Epic
 about: Create an epic
-title: ""
+title: ''
 type: Epic
+
 ---
 
-**As a**
+**As a** 
 
-**I want to**
+**I want to** 
 
-**In order to**
+**In order to** 
 
 ### Non-functional requirements
-
 - Security
   - Identity management
   - Authentication
