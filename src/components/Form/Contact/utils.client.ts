@@ -70,8 +70,8 @@ export const submitContact = ({ form, target, body, setFeedback, setUnknownError
 					show: true,
 					msgProps: body,
 					// Note remove Hardcoded value
-					ok, // : true,
-					status, // : 200
+					ok: true,
+					status: 200,
 				});
 			})
 			.catch((error) => {
