@@ -21,9 +21,9 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 	// State for coordinates (latitude and longitude)
 	const [coords, setCoords] = useState<Coordinates[]>([]);
 	const [LeafletMapClient, setLeafletMapClient] =
-		useState<React.ComponentType<LeafletMapClientProps> | null>(null);
+		useState<React.ComponentType<LeafletMapClientProps>>();
 	// State for error message
-	const [error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<string>();
 
 	useEffect(() => {
 		// Import dynamically ONLY on client
