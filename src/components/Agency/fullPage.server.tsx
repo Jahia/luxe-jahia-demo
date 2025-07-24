@@ -144,7 +144,7 @@ jahiaComponent(
 					<Row>
 						<Col>
 							<Contact
-								addresses={addressItems} //{[{ address, id: currentNode.getIdentifier() }]}
+								addresses={addressItems}
 								phone={phone}
 								email={email}
 							/>
