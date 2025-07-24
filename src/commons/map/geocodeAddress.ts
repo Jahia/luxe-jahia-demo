@@ -20,8 +20,8 @@ export const geocodeAddress = async (address: string): Promise<{ lat: number; ln
 			lng: parseFloat(data[0].lon),
 		};
 
-		// Store the result in the cache with an expiry time
-		cache.set(address, { ...result, expiry: now + CACHE_TTL });
+		// Store the result in the cache
+		cache.set(address, result);
 
 		return result;
 	}
