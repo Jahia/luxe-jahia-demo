@@ -1,20 +1,12 @@
 import { t } from "i18next";
 
-const cache: Map<string, { lat: number; lng: number; expiry: number }> = new Map();
-const CACHE_TTL = 5 * 60 * 1000; // Cache entries expire after 5 minutes
+const cache = new Map<string, { lat: number; lng: number }>();
 
 // Utility function to get coordinates from an address using Nominatim API
 export const geocodeAddress = async (address: string): Promise<{ lat: number; lng: number }> => {
-	const now = Date.now();
-
 	// Check if the address is in the cache and still valid
 	if (cache.has(address)) {
-		const cachedEntry = cache.get(address);
-		if (cachedEntry && cachedEntry.expiry > now) {
-			return { lat: cachedEntry.lat, lng: cachedEntry.lng };
-		} else {
-			cache.delete(address); // Remove expired entry
-		}
+		return cache.get(address);
 	}
 
 	// Make the API call if not cached
