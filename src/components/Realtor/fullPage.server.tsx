@@ -22,7 +22,7 @@ import {
 import type { RealtorProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
-import type { AddressItem } from "~/commons/map/MapWithPin.client";
+import type { AddressItem } from "~/commons/map/types";
 
 const MAX_ESTATE = 6;
 

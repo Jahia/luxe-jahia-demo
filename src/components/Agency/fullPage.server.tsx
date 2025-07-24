@@ -27,7 +27,8 @@ import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
-import MapWithPinClient, { type AddressItem } from "~/commons/map/MapWithPin.client";
+import MapWithPinClient from "~/commons/map/MapWithPin.client";
+import type { AddressItem } from "~/commons/map/types";
 
 const MAX_ESTATE = 6;
 
