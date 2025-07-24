@@ -61,8 +61,7 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 			.catch(() => setError(t("maps.error.addressGeo")));
 	}, [addresses]);
 
-	// if (!isClient) return <div>Chargement…</div>; // Do not render on server
-	if (!LeafletMapClient) return <div>Chargement de la carte…</div>;
+	if (!LeafletMapClient) return <div>{t("maps.loading.map")}</div>;
 	return (
 		<div className={clsx(classes.mapWrapper, className)}>
 			<LeafletMapClient pins={coords} className={clsx(classes.mapContainer, className)} />

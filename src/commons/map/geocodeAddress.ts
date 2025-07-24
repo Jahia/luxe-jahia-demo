@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 const cache: Map<string, { lat: number; lng: number; expiry: number }> = new Map();
 const CACHE_TTL = 5 * 60 * 1000; // Cache entries expire after 5 minutes
 
@@ -31,5 +33,5 @@ export const geocodeAddress = async (address: string): Promise<{ lat: number; ln
 
 		return result;
 	}
-	throw new Error("Address not found");
+	throw new Error(t("maps.error.addressNotFound"));
 };

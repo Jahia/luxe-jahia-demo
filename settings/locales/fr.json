@@ -157,6 +157,9 @@
 			"mapLoading": "Erreur lors du chargement de la carte : {{error}}",
 			"addressNotFound": "Certaines adresses n'ont pas pu être localisées.",
 			"addressGeo": "Erreur lors du géocodage."
+		},
+		"loading":{
+			"map": "Chargement de la carte en cours..."
 		}
 	}
 }
