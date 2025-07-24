@@ -151,5 +151,12 @@
 		"realtor": "portrait de l'agent : {{realtor}}",
 		"agency": "vue de l'agence : {{agency}}",
 		"blog": "illustration du blog : {{blog}}"
+	},
+	"maps": {
+		"error": {
+			"mapLoading": "Erreur lors du chargement de la carte : {{error}}",
+			"addressNotFound": "Certaines adresses n'ont pas pu être localisées.",
+			"addressGeo": "Erreur lors du géocodage."
+		}
 	}
 }

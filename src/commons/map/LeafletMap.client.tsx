@@ -4,6 +4,7 @@ import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import type { LeafletMapClientProps, Pin } from "~/commons/map/types";
 
 // Set default marker icon paths
 L.Icon.Default.mergeOptions({
@@ -11,17 +12,6 @@ L.Icon.Default.mergeOptions({
 	iconUrl: markerIcon,
 	shadowUrl: markerShadow,
 });
-
-type Pin = {
-	lat: number;
-	lng: number;
-	label: string;
-};
-
-export type LeafletMapClientProps = {
-	pins: Pin[];
-	className?: string; // Optional className for custom styling
-};
 
 // FitBounds helper component
 const FitBounds: React.FC<{ pins: Pin[] }> = ({ pins }) => {

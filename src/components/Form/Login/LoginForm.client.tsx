@@ -92,6 +92,7 @@ const LoginFormClient = ({
 								name="username"
 								placeholder="robin"
 								className={form.control}
+								autoComplete="username"
 								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</div>
@@ -104,6 +105,7 @@ const LoginFormClient = ({
 								type="password"
 								name="password"
 								className={form.control}
+								autoComplete="current-password"
 								onChange={(e) => setPassword(e.target.value)}
 								onKeyUp={(event) => {
 									if (event.key === "Enter") {
