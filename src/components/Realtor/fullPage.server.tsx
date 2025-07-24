@@ -3,6 +3,7 @@ import {
 	buildNodeUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
+	HydrateInBrowser,
 	jahiaComponent,
 	Render,
 	server,
@@ -17,12 +18,12 @@ import {
 	Section,
 	List,
 	type ListRowProps,
-	Contact,
 } from "~/commons";
 import type { RealtorProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import type { AddressItem } from "~/commons/map/types";
+import ContactClient from "~/commons/Contact.client";
 
 const MAX_ESTATE = 6;
 
@@ -147,7 +148,10 @@ jahiaComponent(
 				<Section>
 					<Row>
 						<Col>
-							<Contact addresses={addressItems} email={email} phone={phone} />
+							<HydrateInBrowser
+								child={ContactClient}
+								props={{ addresses: addressItems, email: email, phone: phone }}
+							/>
 						</Col>
 					</Row>
 				</Section>
