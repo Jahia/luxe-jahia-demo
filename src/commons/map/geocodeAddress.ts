@@ -6,7 +6,7 @@ const cache = new Map<string, { lat: number; lng: number }>();
 export const geocodeAddress = async (address: string): Promise<{ lat: number; lng: number }> => {
 	// Check if the address is in the cache and still valid
 	if (cache.has(address)) {
-		return cache.get(address);
+		return cache.get(address)!;
 	}
 
 	// Make the API call if not cached
