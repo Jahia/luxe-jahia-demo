@@ -73,6 +73,7 @@
 	--luxe-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 
 	--luxe-dialog-opacity: 0.4;
+	--map-border-radius: var(--luxe-border-radius);
 }
 body {
 	margin: 0;

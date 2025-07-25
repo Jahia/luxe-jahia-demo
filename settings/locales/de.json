@@ -151,5 +151,15 @@
 		"realtor": "Porträt des Maklers: {{realtor}}",
 		"agency": "Ansicht der Agentur: {{agency}}",
 		"blog": "Illustration des Blogs: {{blog}}"
+	},
+	"maps": {
+		"error": {
+			"mapLoading": "Fehler beim Laden der Karte: {{error}}",
+			"addressNotFound": "Einige Adressen konnten nicht gefunden werden.",
+			"addressGeo": "Fehler bei der Geokodierung."
+		},
+		"loading": {
+			"map": "Karte wird geladen..."
+		}
 	}
 }

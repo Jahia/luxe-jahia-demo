@@ -1,4 +1,4 @@
-import { type MouseEvent, useRef, useState } from "react";
+import { type MouseEvent, useState } from "react";
 import LoginFormClient from "./LoginForm.client.js";
 import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
 import { t } from "i18next";
