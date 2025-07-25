@@ -23,7 +23,8 @@ section .btn {
 .dialog {
 	--luxe-dialog-opacity: 1;
 }
-.title{}
+.title {
+}
 .formWrapper {
 	width: 80vw;
 	background-color: #fff;

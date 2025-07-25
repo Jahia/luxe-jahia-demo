@@ -19,7 +19,7 @@
 	background: rgba(255, 255, 255, 0.8); /* Bootstrap danger */
 	color: rgba(220, 53, 69, 0.95); /* Bootstrap danger */
 	padding: 0 5px;
-	font-size: .75rem;
+	font-size: 0.75rem;
 	z-index: 400;
 	max-width: 70%;
 	pointer-events: none; /* Allow map to receive mouse events */

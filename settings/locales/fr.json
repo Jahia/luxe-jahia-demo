@@ -159,7 +159,7 @@
 			"addressNotFound": "Certaines adresses n'ont pas pu être localisées.",
 			"addressGeo": "Erreur lors du géocodage."
 		},
-		"loading":{
+		"loading": {
 			"map": "Chargement de la carte en cours..."
 		}
 	}
