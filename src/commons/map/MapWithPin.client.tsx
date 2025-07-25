@@ -21,9 +21,9 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 	// State for coordinates (latitude and longitude)
 	const [coords, setCoords] = useState<Coordinates[]>([]);
 	const [LeafletMapClient, setLeafletMapClient] =
-		useState<React.ComponentType<LeafletMapClientProps> | null>(null);
+		useState<React.ComponentType<LeafletMapClientProps>>();
 	// State for error message
-	const [error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<string>();
 
 	useEffect(() => {
 		// Import dynamically ONLY on client
@@ -46,8 +46,7 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 				try {
 					const { lat, lng } = await geocodeAddress(item.address);
 					return { lat, lng, label: item.label };
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				} catch (e) {
+				} catch (_e) {
 					return null;
 				}
 			}),
@@ -62,8 +61,7 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 			.catch(() => setError(t("maps.error.addressGeo")));
 	}, [addresses]);
 
-	// if (!isClient) return <div>Chargement…</div>; // Do not render on server
-	if (!LeafletMapClient) return <div>Chargement de la carte…</div>;
+	if (!LeafletMapClient) return <div>{t("maps.loading.map")}</div>;
 	return (
 		<div className={clsx(classes.mapWrapper, className)}>
 			<LeafletMapClient pins={coords} className={clsx(classes.mapContainer, className)} />

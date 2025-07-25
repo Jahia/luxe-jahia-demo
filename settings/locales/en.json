@@ -157,6 +157,9 @@
 			"mapLoading": "Error while loading the map: {{error}}",
 			"addressNotFound": "Some addresses could not be located.",
 			"addressGeo": "Error during geocoding."
+		},
+		"loading": {
+			"map": "Loading map..."
 		}
 	}
 }
