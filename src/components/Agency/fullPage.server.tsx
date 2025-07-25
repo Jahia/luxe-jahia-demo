@@ -152,7 +152,7 @@ jahiaComponent(
 									email: email,
 									phone: phone,
 									contextMode,
-									feedbackMsg: "$name : Your message was sent successfully!",
+									feedbackMsg: t("form.contact.demoMessage"),
 								}}
 							/>
 						</Col>
