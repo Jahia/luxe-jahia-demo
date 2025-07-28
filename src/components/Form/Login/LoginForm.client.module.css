@@ -36,7 +36,6 @@
 		display: flex;
 		flex-shrink: 0;
 		align-items: center;
-		/*padding-bottom: space_5;*/
 		border-bottom: var(--luxe-modal-header-border-width) solid var(--luxe-modal-header-border-color);
 		border-top-left-radius: var(--luxe-modal-inner-border-radius);
 		border-top-right-radius: var(--luxe-modal-inner-border-radius);
