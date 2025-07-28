@@ -25,15 +25,13 @@
 	padding: space_5 space_4;
 
 	@media (min-width: gridBreakpoints_lg) {
-			padding: space_5;
+		padding: space_5;
 	}
 	@media (min-width: gridBreakpoints_xxl) {
 		gap: space_6;
 		max-height: 80vh;
 		padding: space_6 space_5;
 	}
-
-
 
 	header {
 		display: flex;
@@ -64,8 +62,8 @@
 	gap: space_6;
 
 	@media (min-width: gridBreakpoints_lg) {
-			flex-direction: row;
-			/*padding-top: space_5;*/
+		flex-direction: row;
+		/*padding-top: space_5;*/
 	}
 	/*@media (min-width: gridBreakpoints_xl) {*/
 	/*	& {*/
