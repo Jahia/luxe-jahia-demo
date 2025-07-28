@@ -22,6 +22,7 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	padding: space_0;
 	z-index: var(--luxe-modal-zindex);
 	display: none;
 	width: 100%;
