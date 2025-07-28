@@ -62,11 +62,6 @@
 		flex-direction: row;
 		/*padding-top: space_5;*/
 	}
-	/*@media (min-width: gridBreakpoints_xl) {*/
-	/*	& {*/
-	/*		padding-top: space_6;*/
-	/*	}*/
-	/*}*/
 }
 
 .loginCardSection {
