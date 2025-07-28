@@ -89,7 +89,7 @@
 			"editModeWarning": "le formulaire de contact est désactivé dans Page Builder",
 			"sendMessageError": "Oups ! Désolé, {{name}}.<br/> Quelque chose s'est mal passé avec votre message. Le code d'état est {{status}}.",
 			"sendMessageAgain": "renvoyer le message",
-			"demoMessage": "<p><b>$name</b> : Votre demande a été prise en compte avec succès !</p><p><b>Note</b> : Cette page est fournie à titre d'exemple ; aucune donnée n'a été envoyée et aucune action réelle n'a été effectuée.</p>"
+			"demoMessage": "<h5>$name :</h5> <p>Votre demande a été prise en compte avec succès !</p><p><b>Note</b> : Cette page est fournie à titre d'exemple ; aucune donnée n'a été envoyée et aucune action réelle n'a été effectuée.</p>"
 		},
 		"unknownError": "une erreur s'est produite"
 	},

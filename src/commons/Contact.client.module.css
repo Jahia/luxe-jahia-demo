@@ -26,6 +26,9 @@ section .btn {
 .title {
 }
 .formWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
 	width: 80vw;
 	background-color: #fff;
 	margin: auto;
