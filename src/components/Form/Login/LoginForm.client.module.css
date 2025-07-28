@@ -15,7 +15,6 @@
 	flex-direction: column;
 	gap: space_5;
 	width: 100%;
-	/*color: var(--luxe-modal-color);*/
 	pointer-events: auto;
 	background-color: var(--luxe-modal-bg);
 	background-clip: padding-box;
