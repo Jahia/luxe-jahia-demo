@@ -56,7 +56,6 @@
 	flex-direction: column-reverse;
 	flex: 1 1 auto;
 	overflow: auto;
-	/*padding-top: space_4;*/
 	gap: space_6;
 
 	@media (min-width: gridBreakpoints_lg) {
