@@ -88,7 +88,8 @@
 			"submit": "submit",
 			"editModeWarning": "contact form disabled in Page Builder",
 			"sendMessageError": "oops! Sorry, {{name}}.<br/> Something went wrong with your message. The status code is {{status}}.",
-			"sendMessageAgain": "send the message again"
+			"sendMessageAgain": "send the message again",
+			"demoMessage": "<h5>$name:</h5> <p>Your request has been successfully received!</p><p><b>Disclaimer</b>: This page is provided as an example; no data has been sent and no real action has been performed.</p>"
 		},
 		"unknownError": "an error occured"
 	},

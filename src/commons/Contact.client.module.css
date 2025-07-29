@@ -20,3 +20,18 @@ section .btn {
 	--luxe-btn-border-radius: var(--luxe-border-radius-lg);
 	width: 100%;
 }
+.dialog {
+	--luxe-dialog-opacity: 1;
+}
+.title {
+}
+.formWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	width: 80vw;
+	background-color: #fff;
+	margin: auto;
+	padding: 3rem;
+	border-radius: 8px;
+}

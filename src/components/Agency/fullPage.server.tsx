@@ -4,6 +4,7 @@ import {
 	buildNodeUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
+	HydrateInBrowser,
 	jahiaComponent,
 	Render,
 	RenderInBrowser,
@@ -21,8 +22,8 @@ import {
 	Section,
 	List,
 	type ListRowProps,
-	Contact,
 } from "~/commons";
+import ContactClient from "~/commons/Contact.client";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
 import classes from "./fullPage.module.css";
@@ -76,6 +77,7 @@ jahiaComponent(
 		{ currentNode, renderContext },
 	) => {
 		const currentNodePath = currentNode.getPath();
+		const contextMode = renderContext.getMode();
 
 		const languages = [...getAgencyLanguage({ realtors, country, renderContext })];
 
@@ -143,7 +145,16 @@ jahiaComponent(
 				<Section>
 					<Row>
 						<Col>
-							<Contact addresses={addressItems} phone={phone} email={email} />
+							<HydrateInBrowser
+								child={ContactClient}
+								props={{
+									addresses: addressItems,
+									email: email,
+									phone: phone,
+									contextMode,
+									feedbackMsg: t("form.contact.demoMessage"),
+								}}
+							/>
 						</Col>
 						<Col>
 							<RenderInBrowser

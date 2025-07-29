@@ -1,11 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { t } from "i18next";
 import ContactFormClient from "./ContactForm.client";
-import { getCookie, prefillWithUserContext } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 import classes from "~/components/Form/Contact/Contact.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import clsx from "clsx";
+
+// This code runs when Jahia DxP is configured.
+// If available, it will prefill the form with the user's context.
+// import { getCookie, prefillWithUserContext } from "~/components/Form/Contact/utils.dxp.client";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export default function ContactClient({
@@ -25,12 +28,14 @@ export default function ContactClient({
 		[feedback],
 	);
 
-	useEffect(() => {
-		if (typeof window !== "undefined" && window.digitalData) {
-			const sessionId = window.cxs?.sessionId || getCookie("wem-session-id");
-			prefillWithUserContext(sessionId, setFeedback);
-		}
-	}, []);
+	// This code runs when Jahia DxP is configured.
+	// If available, it will prefill the form with the user's context.
+	// useEffect(() => {
+	// 	if (typeof window !== "undefined" && window.digitalData) {
+	// 		const sessionId = window.cxs?.sessionId || getCookie("wem-session-id");
+	// 		prefillWithUserContext(sessionId, setFeedback);
+	// 	}
+	// }, []);
 
 	const handleRedo = (e) => {
 		e.preventDefault();
