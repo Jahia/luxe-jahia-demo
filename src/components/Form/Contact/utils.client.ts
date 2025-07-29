@@ -1,4 +1,18 @@
-export const submitContact = ({ form, target, body, setFeedback, setUnknownError }) => {
+import type { FeedbackProps, MsgPropsProps } from "~/components/Form/Contact/types";
+
+export const submitContact = ({
+	form,
+	target,
+	body,
+	setFeedback,
+	setUnknownError,
+}: {
+	form: HTMLFormElement;
+	target?: string;
+	body: MsgPropsProps;
+	setFeedback: (feedback: FeedbackProps) => void;
+	setUnknownError: (error: boolean) => void;
+}) => {
 	// The following code is used in the demo site to display a validation message
 	// even though no user action has been performed.
 	if (!target) {
@@ -59,9 +73,8 @@ export const submitContact = ({ form, target, body, setFeedback, setUnknownError
 					setFeedback({
 						show: true,
 						msgProps: body,
-						// Note remove Hardcoded value
 						ok: true,
-						status, // : 200
+						status,
 					});
 				}
 			},
