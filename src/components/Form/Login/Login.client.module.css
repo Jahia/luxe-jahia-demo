@@ -5,7 +5,6 @@
 .content {
 	position: relative;
 	width: auto;
-	margin: var(--luxe-modal-margin);
 	pointer-events: none;
 
 	@media (min-width: gridBreakpoints_sm) {

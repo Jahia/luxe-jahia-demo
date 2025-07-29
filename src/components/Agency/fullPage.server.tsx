@@ -143,11 +143,7 @@ jahiaComponent(
 				<Section>
 					<Row>
 						<Col>
-							<Contact
-								addresses={addressItems}
-								phone={phone}
-								email={email}
-							/>
+							<Contact addresses={addressItems} phone={phone} email={email} />
 						</Col>
 						<Col>
 							<RenderInBrowser
