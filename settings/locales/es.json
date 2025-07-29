@@ -89,7 +89,10 @@
 			"editModeWarning": "el formulario de contacto está deshabilitado en Page Builder",
 			"sendMessageError": "¡Vaya! Lo sentimos, {{name}}.<br/> Algo salió mal con tu mensaje. El código de estado es {{status}}.",
 			"sendMessageAgain": "reenviar el mensaje",
-			"demoMessage": "<h5>$name :</h5><p>¡Su solicitud ha sido recibida con éxito!</p><p><b>Aviso</b>: Esta página se proporciona solo como ejemplo; no se ha enviado ningún dato ni se ha realizado ninguna acción real.</p>"
+			"demoMessage": "<h5>$name :</h5><p>¡Su solicitud ha sido recibida con éxito!</p><p><b>Aviso</b>: Esta página se proporciona solo como ejemplo; no se ha enviado ningún dato ni se ha realizado ninguna acción real.</p>",
+			"dialog": {
+				"title": "contáctanos"
+			}
 		},
 		"unknownError": "ocurrió un error"
 	},

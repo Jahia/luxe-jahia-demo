@@ -24,6 +24,7 @@ section .btn {
 	--luxe-dialog-opacity: 1;
 }
 .title {
+	text-transform: capitalize;
 }
 .formWrapper {
 	display: flex;

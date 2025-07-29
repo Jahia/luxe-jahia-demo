@@ -89,7 +89,10 @@
 			"editModeWarning": "Das Kontaktformular ist im Page Builder deaktiviert",
 			"sendMessageError": "Hoppla! Entschuldigung, {{name}}.<br/> Etwas ist mit Ihrer Nachricht schiefgelaufen. Der Statuscode ist {{status}}.",
 			"sendMessageAgain": "Nachricht erneut senden",
-			"demoMessage": "<h5>$name :</h5><p>Ihre Anfrage wurde erfolgreich entgegengenommen!</p><p><b>Hinweis</b>: Diese Seite wird nur als Beispiel bereitgestellt; es wurden keine Daten gesendet und keine tatsächliche Aktion durchgeführt.</p>"
+			"demoMessage": "<h5>$name :</h5><p>Ihre Anfrage wurde erfolgreich entgegengenommen!</p><p><b>Hinweis</b>: Diese Seite wird nur als Beispiel bereitgestellt; es wurden keine Daten gesendet und keine tatsächliche Aktion durchgeführt.</p>",
+			"dialog": {
+				"title": "kontaktieren sie uns"
+			}
 		},
 		"unknownError": "ein Fehler ist aufgetreten"
 	},
