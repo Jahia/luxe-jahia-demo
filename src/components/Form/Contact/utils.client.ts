@@ -1,56 +1,29 @@
-import type { MsgPropsProps } from "./types.js";
+import type { FeedbackProps, MsgPropsProps } from "~/components/Form/Contact/types";
 
-export const getCookie = (name) => {
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) {
-		return parts.pop()?.split(";").shift();
-	}
-};
-
-export const prefillWithUserContext = (sessionId, setFeedback) => {
-	if (!sessionId) {
-		return;
-	}
-
-	const contextServerPublicUrl = window.digitalData.contextServerPublicUrl;
-	const body = {
-		requiredProfileProperties: ["firstName", "lastName", "email"],
-		sessionId,
-		source: {
-			itemId: window.digitalData.page?.pageInfo.pageID,
-			itemType: "page",
-			scope: window.digitalData.scope,
-		},
-	};
-	fetch(`${contextServerPublicUrl}/context.json`, {
-		method: "post",
-		headers: {
-			"Content-Type": "application/json",
-			"allow-redirects": "false",
-		},
-		body: JSON.stringify(body),
-	})
-		.then((response) => {
-			if (response.status !== 200) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-
-			return response.json();
-		})
-		.then((data) => {
-			setFeedback((feedback) => ({
-				...feedback,
-				msgProps: data.profileProperties as MsgPropsProps,
-			}));
-		})
-		.catch((error) => {
-			console.log("Error in the call to retrieve user profiles data: ");
-			console.error(error);
+export const submitContact = ({
+	form,
+	target,
+	body,
+	setFeedback,
+	setUnknownError,
+}: {
+	form: HTMLFormElement;
+	target?: string;
+	body: MsgPropsProps;
+	setFeedback: (feedback: FeedbackProps) => void;
+	setUnknownError: (error: boolean) => void;
+}) => {
+	// The following code is used in the demo site to display a validation message
+	// even though no user action has been performed.
+	if (!target) {
+		setFeedback({
+			show: true,
+			msgProps: body,
+			ok: true,
+			status: 200,
 		});
-};
+	}
 
-export const submitContact = ({ form, target, body, setFeedback, setUnknownError }) => {
 	// If user wants to use its own process to manage the data
 	if (target) {
 		fetch(target, {
@@ -69,9 +42,8 @@ export const submitContact = ({ form, target, body, setFeedback, setUnknownError
 				setFeedback({
 					show: true,
 					msgProps: body,
-					// Note remove Hardcoded value
-					ok, // : true,
-					status, // : 200
+					ok, //: true,
+					status, //: 200,
 				});
 			})
 			.catch((error) => {
@@ -80,7 +52,8 @@ export const submitContact = ({ form, target, body, setFeedback, setUnknownError
 			});
 	}
 
-	// By default, form info are sync with jExp if exist
+	// This code runs when Jahia DxP is configured.
+	// Form info are sync with jExp if exist
 	if (window.wem) {
 		const contactFormEvent = window.wem.buildFormEvent("contactForm");
 		// @ts-expect-error need to have types exported from jExp wem
@@ -100,9 +73,8 @@ export const submitContact = ({ form, target, body, setFeedback, setUnknownError
 					setFeedback({
 						show: true,
 						msgProps: body,
-						// Note remove Hardcoded value
 						ok: true,
-						status, // : 200
+						status,
 					});
 				}
 			},
