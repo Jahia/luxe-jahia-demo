@@ -1,16 +1,17 @@
 ---
 name: User Story
 about: Create a user story
-title: ""
+title: ''
 type: Story
+
 ---
 
 ### Context / Problem to solve / Design
 
-### Story
 
-As a
-I want to
+### Story
+As a 
+I want to 
 
 ## Testable scenarios
 
@@ -18,21 +19,21 @@ I want to
 Given
 
 **Case 1**
-When
-Then
+When 
+Then 
 
 **Case N**
-When
-Then
+When 
+Then 
 
 ### Test Strategy
-
 Cypress tests?
 
 ### Tech Notes
 
-### Labels
+### Labels 
+En: 
+Fr: 
+De: 
 
-En:
-Fr:
-De:
+
