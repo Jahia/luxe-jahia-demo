@@ -19,7 +19,6 @@ jobs:
         with:
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          nexus_enterprise_internal_url: ${{ secrets.NEXUS_ENTERPRISE_RELEASES_URL }}
 
   build:
     name: Build Module
@@ -30,9 +29,7 @@ jobs:
       - run: corepack enable
       - uses: jahia/jahia-modules-action/build-javascript@v2
         with:
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          module_id: luxe-jahia-demo
+          module_path: packages/template-set
 
   integration-tests:
     uses: Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
