@@ -1,0 +1,67 @@
+{
+	"name": "luxe-jahia-demo",
+	"version": "0.9.0",
+	"license": "MIT",
+	"type": "module",
+	"files": [
+		"dist",
+		"src/**/*.cnd",
+		"settings",
+		"static"
+	],
+	"scripts": {
+		"build": "tsc --noEmit && vite build && run package",
+		"clean": "rm -rf dist/",
+		"deploy": "jahia-deploy",
+		"dev": "vite build --watch",
+		"package": "yarn pack --out dist/package.tgz",
+		"watch": "run dev",
+		"watch:callback": "run package && run deploy"
+	},
+	"dependencies": {
+		"clsx": "^2.1.1",
+		"leaflet": "^1.9.4",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"react-leaflet": "^5.0.0"
+	},
+	"devDependencies": {
+		"@jahia/javascript-modules-library": "0.8.0",
+		"@jahia/vite-plugin": "0.8.0",
+		"@types/leaflet": "^1.9.20",
+		"@types/react": "19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"i18next": "^25.2.1",
+		"react-i18next": "^15.5.3",
+		"rollup-plugin-sbom": "^2.0.3",
+		"sass-embedded": "^1.89.2",
+		"typescript": "^5.8.3",
+		"typescript-plugin-css-modules": "^5.1.0",
+		"vite": "^6.3.5"
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"yarn": ">=4.0.0"
+	},
+	"jahia": {
+		"snapshot": true,
+		"required-version": "8.2.1.0",
+		"module-type": "templatesSet",
+		"module-dependencies": "default,javascript-modules-engine",
+		"static-resources": "/dist/assets,/dist/client,/icons",
+		"server": "dist/server/index.js",
+		"maven": {
+			"groupId": "org.jahia.modules.javascript",
+			"distributionManagement": {
+				"repository": {
+					"id": "jahia-releases",
+					"url": "https://devtools.jahia.com/nexus/content/repositories/jahia-releases"
+				},
+				"snapshotRepository": {
+					"id": "jahia-snapshots",
+					"url": "https://devtools.jahia.com/nexus/content/repositories/jahia-snapshots"
+				}
+			}
+		}
+	}
+}

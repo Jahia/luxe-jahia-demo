@@ -43,6 +43,7 @@ jobs:
           github_api_token: ${{ secrets.GH_API_TOKEN }}
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          module_path: packages/template-set
 
       - uses: jahia/jahia-modules-action/release-publication@v2
         name: Publish Module
