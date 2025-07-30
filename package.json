@@ -6,6 +6,7 @@
 		"packages/*"
 	],
 	"scripts": {
+		"build": "yarn workspaces foreach -Atvv run build",
 		"dev": "yarn workspace luxe-jahia-demo dev",
 		"format": "prettier --write --list-different .",
 		"lint": "eslint ."
