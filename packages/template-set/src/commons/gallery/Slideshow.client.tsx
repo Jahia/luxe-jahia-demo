@@ -45,23 +45,11 @@ export const Slideshow = ({
 			case "ArrowRight":
 				navigateTo("next");
 				break;
-			case "Escape":
-				onClose();
-				break;
 		}
 	};
 
 	return (
 		<div onKeyDown={handleKeyDown}>
-			<button
-				type="button"
-				className={clsx(classes.button, classes.buttonClose)}
-				onClick={onClose}
-				aria-label="Close gallery"
-			>
-				×
-			</button>
-
 			<div className={classes.contentImage}>
 				<button
 					type="button"

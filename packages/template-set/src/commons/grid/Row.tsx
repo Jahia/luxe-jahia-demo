@@ -8,5 +8,7 @@ export const Row = <T,>({
 	children,
 	...props
 }: HTMLAttributes<T> & { component?: ElementType }) => (
-	<Component className={clsx(classes.row, className)} {...props}>{children}</Component>
+	<Component className={clsx(classes.row, className)} {...props}>
+		{children}
+	</Component>
 );

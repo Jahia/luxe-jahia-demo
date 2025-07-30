@@ -37,9 +37,21 @@ export const DialogClient = ({
 		}
 	}, [isOpen]);
 
-	const handleClose = (event: React.MouseEvent) => {
+	const handleKeyDown = (event: React.KeyboardEvent) => {
+		const dialog = dialogRef?.current;
+		if (!dialog) return;
+
+		switch (event.key) {
+			case "Escape":
+				dialog.close();
+				break;
+		}
+	};
+	const handleClose = () => dialogRef.current?.close();
+
+	const handleBackdropClose = (event: React.MouseEvent) => {
 		if (event.target === dialogRef.current) {
-			dialogRef.current?.close();
+			handleClose();
 		}
 	};
 	return (
@@ -47,14 +59,18 @@ export const DialogClient = ({
 			ref={dialogRef}
 			id={id}
 			className={clsx(classes.dialog, className)}
-			onClick={handleClose}
+			onClick={handleBackdropClose}
 			onDoubleClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
 			}}
 			onClose={(e) => onClose?.(e)}
+			onKeyDown={handleKeyDown}
 			{...props}
 		>
+			<button type="button" onClick={handleClose} aria-label="Close gallery">
+				×
+			</button>
 			{children}
 		</dialog>
 	);
