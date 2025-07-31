@@ -38,14 +38,7 @@ export const DialogClient = ({
 	}, [isOpen]);
 
 	const handleKeyDown = (event: React.KeyboardEvent) => {
-		const dialog = dialogRef?.current;
-		if (!dialog) return;
-
-		switch (event.key) {
-			case "Escape":
-				dialog.close();
-				break;
-		}
+		if (event.key === 'Escape') handleClose();
 	};
 	const handleClose = () => dialogRef.current?.close();
 
