@@ -1,7 +1,7 @@
 :root {
 	/* Value tokens */
-	--luxe-font-family-display: "Playfair Display", serif;
-	--luxe-font-family-base: "Inter", system-ui;
+	--luxe-font-family-display: "Playfair Display Variable", serif;
+	--luxe-font-family-base: "Inter Variable", system-ui;
 	--luxe-color-gray: #f6f6f6;
 
 	/* Semantic tokens */
