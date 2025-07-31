@@ -58,7 +58,7 @@ jahiaComponent(
 						},
 					],
 				};
-			}) as PictureProps[];
+			});
 
 		if (!galleryImages.length) {
 			galleryImages.push({

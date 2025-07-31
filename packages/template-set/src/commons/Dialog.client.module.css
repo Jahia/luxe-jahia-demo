@@ -40,19 +40,61 @@
 	}
 
 	@media (min-width: gridBreakpoints_sm) {
-		& {
-			--luxe-modal-margin: 1.75rem;
-			--luxe-modal-box-shadow: var(--luxe-box-shadow);
-		}
+		--luxe-modal-margin: 1.75rem;
+		--luxe-modal-box-shadow: var(--luxe-box-shadow);
 	}
 	@media (min-width: gridBreakpoints_lg) {
-		& {
-			--luxe-modal-width: 800px;
-		}
+		--luxe-modal-width: 800px;
 	}
 	@media (min-width: gridBreakpoints_xl) {
-		& {
-			--luxe-modal-width: 80vw;
+		--luxe-modal-width: 80vw;
+	}
+
+	> button {
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 36px;
+		height: 36px;
+		font-size: 28px;
+		border-radius: 0 8px 0;
+		background-color: var(--luxe-color-darkBlue);
+
+		padding: 0;
+		text-align: center;
+		line-height: 1;
+		border: 0;
+
+		color: var(--luxe-color-gray);
+		opacity: 0.6;
+		transition: color 0.2s ease-in-out;
+		cursor: pointer;
+
+		z-index: 1001;
+
+		&:focus {
+			outline: none;
+		}
+		&:focus-visible {
+			outline: 2px solid var(--luxe-color-gold);
+			outline-offset: 2px;
+		}
+		&:hover {
+			opacity: 1;
+			color: var(--luxe-color-gold);
+		}
+		&[disabled] {
+			opacity: 0.2;
+			pointer-events: none;
+		}
+
+		@media (min-width: gridBreakpoints_sm) {
+			top: 24px;
+			right: 24px;
+			width: 40px;
+			height: 40px;
+			font-size: 40px;
+			background: transparent;
 		}
 	}
 }

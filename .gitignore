@@ -18,7 +18,7 @@ node_modules
 yarn-error.log
 .pnp.*
 
-.env
+packages/template-set/.env
 .env.local
 luxe-jahia-demo-v*
 
