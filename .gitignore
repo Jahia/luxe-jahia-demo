@@ -34,3 +34,6 @@ javascript/client/*
 .DS_Store
 /javascript/client/
 /javascript/server/
+
+*storybook.log
+storybook-static
