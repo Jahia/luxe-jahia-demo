@@ -46,9 +46,7 @@ export default function AnimateClient({
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
-			{(!isVideoAvailable || !isHovered) && (
-				<img src={image.src} alt={image.alt} width="250px" height="250px" />
-			)}
+			{(!isVideoAvailable || !isHovered) && <img src={image.src} alt={image.alt} height="250px" />}
 			{isVideoAvailable && (
 				<video
 					ref={videoRef}

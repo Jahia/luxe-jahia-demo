@@ -38,7 +38,7 @@ jahiaComponent(
 
 		return (
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
-				<img src={image.src} alt={image.alt} width="250px" height="250px" />
+				<img src={image.src} alt={image.alt} height="250px" />
 				<div className={classes.main}>
 					<h4>
 						{firstName} {lastName}
