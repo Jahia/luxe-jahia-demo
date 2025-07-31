@@ -1,5 +1,6 @@
 import { jahiaComponent } from "@jahia/javascript-modules-library";
-import classes from "./default.module.css";
+import { HighlightNumber } from "design-system";
+
 jahiaComponent(
 	{
 		nodeType: "luxe:highlightNumber",
@@ -8,11 +9,6 @@ jahiaComponent(
 	},
 	({ text, number }: { text: string; number: bigint }, { currentResource }) => {
 		const locale = currentResource.getLocale().getLanguage();
-		return (
-			<div className={classes.main}>
-				<h4>{number.toLocaleString(locale)}</h4>
-				<p>{text}</p>
-			</div>
-		);
+		return <HighlightNumber big={number.toLocaleString(locale)} small={text} />;
 	},
 );

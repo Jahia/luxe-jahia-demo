@@ -3,8 +3,12 @@
 	--luxe-font-family-display: "Playfair Display Variable", serif;
 	--luxe-font-family-base: "Inter Variable", system-ui;
 	--luxe-color-gray: #f6f6f6;
+	--luxe-color-gold: #c29b40;
+	--luxe-color-darkBlue: #1b1a4e;
 
 	/* Semantic tokens */
-	--luxe-body-font: 400 1.25rem/1.75 var(--luxe-font-family-base);
-	--luxe-secondary-bg: var(--luxe-color-gray);
+	--luxe-font-body: 400 1.25rem/1.75 var(--luxe-font-family-base);
+	--luxe-color-heading: var(--luxe-color-darkBlue);
+	--luxe-color-primary: var(--luxe-color-gold);
+	--luxe-bg-secondary: var(--luxe-color-gray);
 }

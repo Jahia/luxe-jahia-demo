@@ -1,3 +1,13 @@
 body {
-	font: var(--luxe-body-font);
+	font: var(--luxe-font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--luxe-font-family-display);
+	color: var(--luxe-color-heading);
 }
