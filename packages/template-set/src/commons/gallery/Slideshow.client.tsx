@@ -12,12 +12,7 @@ interface SlideshowProps {
 	className?: string;
 }
 
-export const Slideshow = ({
-	data,
-	selectedImageIndex,
-	setSelectedImageIndex,
-	onClose,
-}: SlideshowProps) => {
+export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: SlideshowProps) => {
 	if (
 		!data?.length ||
 		selectedImageIndex === null ||

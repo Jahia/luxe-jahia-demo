@@ -46,7 +46,7 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 				try {
 					const { lat, lng } = await geocodeAddress(item.address);
 					return { lat, lng, label: item.label };
-				} catch (_e) {
+				} catch {
 					return null;
 				}
 			}),

@@ -1,4 +1,3 @@
-// @ts-check
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
@@ -22,5 +21,5 @@ export default tseslint.config(
 
 	// Ignore the same files as .gitignore
 	includeIgnoreFile(path.resolve(import.meta.dirname, ".gitignore")),
-	{ ignores: ["*", "!src"] },
+	{ ignores: ["tests"] },
 );

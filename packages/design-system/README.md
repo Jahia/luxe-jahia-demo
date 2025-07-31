@@ -21,9 +21,9 @@ The package is structured as follows:
         \-- 📁 (name of component)/      Components live in their own directories
               +-- 📃 index.tsx           Contains the React component(s)
               +-- 📃 styles.module.css   Contains the CSS styles for the component, as a CSS Module
-              \-- 📃 story.tsx           Contains the Storybook story for the component
+              \-- 📃 stories.tsx         Contains the Storybook stories for the component
 ```
 
-All components are made of three files: a React component, a CSS module, and a Storybook story.
+All components directories are made of three files: [a React component](https://react.dev/learn), [a CSS module](https://github.com/css-modules/css-modules), and [a Storybook story](https://storybook.js.org/docs/writing-stories).
 
 The package has no build step, and this is intentional. As JavaScript Modules are built with Vite, the components of the design system can be imported directly and built by Vite when packaging the module.
