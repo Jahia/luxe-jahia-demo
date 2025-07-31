@@ -20,6 +20,7 @@
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",
+		"design-system": "workspace:*",
 		"leaflet": "^1.9.4",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
@@ -29,7 +30,7 @@
 		"@jahia/javascript-modules-library": "0.8.0",
 		"@jahia/vite-plugin": "0.8.0",
 		"@types/leaflet": "^1.9.20",
-		"@types/react": "19.1.8",
+		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"i18next": "^25.2.1",
 		"react-i18next": "^15.5.3",

@@ -1,0 +1,7 @@
+:root {
+	/* Values */
+	--luxe-color-gray: #f6f6f6;
+
+	/* Semantic colors */
+	--luxe-secondary-bg: var(--luxe-color-gray);
+}

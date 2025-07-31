@@ -10,7 +10,6 @@
 	--luxe-color-darkBlue40: #a4a3b8;
 	--luxe-color-gold: #c29b40;
 	--luxe-color-gold-rgb: 194, 155, 64;
-	--luxe-color-gray: #f6f6f6;
 	--luxe-color-gray-rgb: 246, 246, 246;
 	--luxe-color-dark: #393847;
 	--luxe-color-dark-rgb: 57, 56, 71;
@@ -34,7 +33,6 @@
 	--luxe-border-color: var(--luxe-color-darkBlue40);
 	--luxe-border-radius: 8px;
 	--luxe-heading-color: var(--luxe-color-darkBlue);
-	--luxe-secondary-bg: var(--luxe-color-gray);
 	--luxe-secondary-bg-rgb: var(--luxe-color-gray-rgb);
 	--luxe-tertiary-bg: var(--luxe-color-gray);
 
