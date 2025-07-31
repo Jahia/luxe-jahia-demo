@@ -633,6 +633,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/inter@npm:^5.2.6":
+  version: 5.2.6
+  resolution: "@fontsource-variable/inter@npm:5.2.6"
+  checksum: 10c0/946efe63cb0328433e8cf00af95cd2fb6f2e9e8b9c0bbf2170376f3d941c5c4b332f0279b5e73cbe05ac04ad01751c1d108d0a625e00e4f8c2ffca35b33d402f
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/playfair-display@npm:^5.2.6":
+  version: 5.2.6
+  resolution: "@fontsource-variable/playfair-display@npm:5.2.6"
+  checksum: 10c0/f0d366ecbf97ad77a56c9e028b271f5085581da906fbe22059cf0547178cdfcd53752c9cc5cdeae895ec0dc6fad1e9c650f24bbaec56b5415b71e62f5e1dd1ca
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -2178,6 +2192,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "design-system@workspace:packages/design-system"
   dependencies:
+    "@fontsource-variable/inter": "npm:^5.2.6"
+    "@fontsource-variable/playfair-display": "npm:^5.2.6"
     "@storybook/react-vite": "npm:^9.0.18"
     "@types/react": "npm:^19.1.9"
     clsx: "npm:^2.1.1"

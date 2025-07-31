@@ -41,14 +41,7 @@
 	--luxe-link-hover-color: rgb(155.2, 124, 51.2);
 	--luxe-link-hover-color-rgb: 155, 124, 51;
 
-	--luxe-font-family-display: "Playfair Display", serif;
-	--luxe-font-family-base: "Inter", "Helvetica", sans-serif;
-
-	--luxe-body-font-family: var(--luxe-font-family-base);
-	--luxe-body-font-weight: 400;
 	--luxe-body-color: var(--luxe-color-dark);
-	--luxe-body-font-size: 1.25rem;
-	--luxe-body-line-height: 1.75;
 
 	--luxe-dark-text-emphasis: #495057;
 	--luxe-dark-border-subtle: #adb5bd;
@@ -75,10 +68,6 @@
 }
 body {
 	margin: 0;
-	font-family: var(--luxe-body-font-family);
-	font-size: var(--luxe-body-font-size);
-	font-weight: var(--luxe-body-font-weight);
-	line-height: var(--luxe-body-line-height);
 	color: var(--luxe-body-color);
 	text-align: var(--luxe-body-text-align);
 	background-color: var(--luxe-body-bg);
