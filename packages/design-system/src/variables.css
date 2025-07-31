@@ -1,7 +1,10 @@
 :root {
-	/* Values */
+	/* Value tokens */
+	--luxe-font-family-display: "Playfair Display", serif;
+	--luxe-font-family-base: "Inter", system-ui;
 	--luxe-color-gray: #f6f6f6;
 
-	/* Semantic colors */
+	/* Semantic tokens */
+	--luxe-body-font: 400 1.25rem/1.75 var(--luxe-font-family-base);
 	--luxe-secondary-bg: var(--luxe-color-gray);
 }
