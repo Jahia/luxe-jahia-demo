@@ -62,6 +62,7 @@
 	--luxe-dialog-opacity: 0.4;
 	--map-border-radius: var(--luxe-border-radius);
 }
+
 body {
 	margin: 0;
 	color: var(--luxe-body-color);
@@ -233,9 +234,10 @@ p {
 [role="button"] {
 	cursor: pointer;
 }
+
 main img,
 main video {
-	max-width:  100%;
+	max-width: 100%;
 	object-fit: cover;
 	border-radius: 16px;
 }
@@ -285,10 +287,12 @@ button,
 [type="submit"] {
 	-webkit-appearance: button;
 }
+
 button,
 select {
 	text-transform: none;
 }
+
 input,
 button,
 select,

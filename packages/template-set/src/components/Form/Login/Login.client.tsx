@@ -92,17 +92,22 @@ export default function LoginClient({
 				</>
 			)}
 			{/*Dialog must be displayed all time to update the dialog open state and remove css class blocking scroll */}
-			<Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} onKeyDown={handleKeyDown}>
-				<div className={classes.content} aria-labelledby="loginModalTitle">
-					<LoginFormClient
-						loginUrl={urls.loginUrl}
-						isShowRememberMe={isShowRememberMe}
-						setUser={setUser}
-						handleLoggedIn={handleLoggedIn}
-						siteKey={siteKey}
-						persona={persona}
-					/>
-				</div>
+			<Dialog
+				title={t("form.login.login")}
+				isOpen={isOpen}
+				onClose={() => setIsOpen(false)}
+				onKeyDown={handleKeyDown}
+			>
+				{/*<div className={classes.content} aria-labelledby="loginModalTitle">*/}
+				<LoginFormClient
+					loginUrl={urls.loginUrl}
+					isShowRememberMe={isShowRememberMe}
+					setUser={setUser}
+					handleLoggedIn={handleLoggedIn}
+					siteKey={siteKey}
+					persona={persona}
+				/>
+				{/*</div>*/}
 			</Dialog>
 		</>
 	);

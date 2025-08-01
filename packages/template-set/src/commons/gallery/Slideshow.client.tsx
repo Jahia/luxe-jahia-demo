@@ -44,7 +44,7 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 	};
 
 	return (
-		<div onKeyDown={handleKeyDown}>
+		<div className={classes.container} onKeyDown={handleKeyDown}>
 			<div className={classes.contentImage}>
 				<button
 					type="button"
@@ -78,7 +78,7 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 				<span>
 					{selectedImageIndex + 1} / {data.length}
 				</span>
-				<p>{data[selectedImageIndex].image.alt}</p>
+				{/*<p>{data[selectedImageIndex].image.alt}</p>*/}
 			</div>
 		</div>
 	);

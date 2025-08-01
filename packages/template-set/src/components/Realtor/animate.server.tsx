@@ -9,6 +9,7 @@ import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
+
 jahiaComponent(
 	{
 		nodeType: "luxe:realtor",

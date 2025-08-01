@@ -14,6 +14,7 @@ import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
 import grid from "~/commons/grid/grid.module.css";
 import favicon from "/static/favicon-32x32.png";
+
 /**
  * Layout : Places 'children' in an html page.
  *

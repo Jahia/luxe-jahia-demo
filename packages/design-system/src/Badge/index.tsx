@@ -1,5 +1,5 @@
 import classes from "./styles.module.css";
-import type { FC, ComponentProps } from "react";
+import type { ComponentProps, FC } from "react";
 import clsx from "clsx";
 
 export const Badge: FC<ComponentProps<"span">> = (props) => (

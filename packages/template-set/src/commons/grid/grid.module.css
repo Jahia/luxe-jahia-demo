@@ -1,4 +1,5 @@
 @value variables: "~/templates/css/variables.css";
+
 @value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_lg, gridBreakpoints_xl, gridBreakpoints_xxl from variables;
 
 .default {
@@ -14,6 +15,7 @@
 .containerFluid {
 	composes: default;
 }
+
 .container {
 	composes: default;
 	@media (min-width: gridBreakpoints_sm) {
@@ -66,6 +68,7 @@
 	}
 
 	/*Page Builder fix*/
+
 	> :global(.jahia-template-gxt) {
 		--luxe-gutter-y: 0;
 		--luxe-gutter-x: 1.5rem;

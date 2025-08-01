@@ -2,6 +2,7 @@
 	position: relative;
 	min-height: 695px;
 	overflow: hidden; /* Prevent the text from spilling over other sections */
+
 	h1 {
 		position: absolute;
 		bottom: 33%;
@@ -14,6 +15,7 @@
 		line-height: 1.2;
 		font-family: var(--luxe-font-family-display);
 	}
+
 	img {
 		border-radius: 0;
 	}

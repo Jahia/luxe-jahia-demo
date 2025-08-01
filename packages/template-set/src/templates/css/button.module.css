@@ -46,6 +46,7 @@
 		opacity: var(--luxe-btn-disabled-opacity);
 	}
 }
+
 .primary {
 	composes: root;
 	--luxe-btn-color: var(--luxe-color-gray);

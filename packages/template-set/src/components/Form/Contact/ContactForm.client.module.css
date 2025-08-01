@@ -1,11 +1,18 @@
 @value variables: "~/templates/css/variables.css";
 
-@value fs_6, space_2 from variables;
+@value gridBreakpoints_lg, fs_6, space_2,space_3, space_4, space_5 from variables;
 
 .form {
 	composes: root from "~/templates/css/form.module.css";
 	overflow: auto;
 	position: relative;
+	padding: space_4 space_3;
+	@container (min-width: gridBreakpoints_lg) {
+		padding: space_5;
+	}
+	textarea {
+		resize: vertical;
+	}
 }
 
 .label {

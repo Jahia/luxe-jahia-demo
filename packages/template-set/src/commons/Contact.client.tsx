@@ -46,10 +46,15 @@ const ContactClient = ({
 				{t("section.contact.btn")}
 			</button>
 
-			<Dialog isOpen={isOpen} onClose={() => setIsOpen(false)} className={classes.dialog}>
+			<Dialog
+				title={t("form.contact.dialog.title")}
+				isOpen={isOpen}
+				onClose={() => setIsOpen(false)}
+				className={classes.dialog}
+			>
 				{/* Contact form inside the dialog */}
 				<div className={classes.formWrapper}>
-					<h2 className={classes.title}>{t("form.contact.dialog.title")}</h2>
+					{/*<h2 className={classes.title}>{}</h2>*/}
 					<ContactFormClient target={contactTarget} feedbackMsg={feedbackMsg} mode={contextMode} />
 				</div>
 			</Dialog>

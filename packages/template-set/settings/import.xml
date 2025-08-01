@@ -8,11 +8,11 @@
                 <j:translation_fr jcr:language="fr"
                                   jcr:primaryType="jnt:translation"
                                   jcr:mixinTypes="mix:title"
-                                  jcr:title="Accueil" />
+                                  jcr:title="Accueil"/>
                 <j:translation_en jcr:language="en"
                                   jcr:primaryType="jnt:translation"
                                   jcr:mixinTypes="mix:title"
-                                  jcr:title="Home" />
+                                  jcr:title="Home"/>
             </home>
         </luxe-jahia-demo>
     </modules>

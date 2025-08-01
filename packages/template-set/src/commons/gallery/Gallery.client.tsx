@@ -9,13 +9,14 @@ import { useMediaQuery } from "~/commons/hooks/useMediaQuery.client";
 import { useProgressiveVisibleList } from "~/commons/hooks/useProgressiveVisibleList.client";
 
 interface GalleryProps {
+	title: string;
 	data: PictureProps[];
 	className?: string;
 }
 
 const visibilityDelayMs = 100;
 
-const GalleryClient = ({ data, className }: GalleryProps) => {
+const GalleryClient = ({ title, data, className }: GalleryProps) => {
 	const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [hydrated, setHydrated] = useState(false);
@@ -90,7 +91,12 @@ const GalleryClient = ({ data, className }: GalleryProps) => {
 				</ul>
 			)}
 
-			<Dialog className={clsx(classes.dialog, className)} isOpen={isOpen} onClose={closeDialog}>
+			<Dialog
+				title={title}
+				className={clsx(classes.dialog, className)}
+				isOpen={isOpen}
+				onClose={closeDialog}
+			>
 				<Slideshow
 					data={data}
 					selectedImageIndex={selectedImageIndex}

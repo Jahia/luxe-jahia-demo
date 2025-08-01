@@ -2,6 +2,7 @@ import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-
 import type { HeaderProps } from "./types";
 import { Picture } from "~/commons/Picture";
 import classes from "./default.module.css";
+
 jahiaComponent(
 	{
 		nodeType: "luxe:header",
