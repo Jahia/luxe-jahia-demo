@@ -14,10 +14,10 @@ import {
 	Col,
 	ContentHeader,
 	HeadingSection,
-	Row,
-	Section,
 	List,
 	type ListRowProps,
+	Row,
+	Section,
 } from "~/commons";
 import type { RealtorProps } from "./types.js";
 import classes from "./fullPage.module.css";

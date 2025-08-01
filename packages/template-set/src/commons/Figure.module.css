@@ -4,9 +4,11 @@
 
 .figure {
 	margin-bottom: space_3;
+
 	&:not(:first-child) {
 		margin-top: space_3;
 	}
+
 	img {
 		max-width: 100%;
 		width: 640px;
@@ -24,16 +26,20 @@
 			text-align: center;
 		}
 	}
+
 	&.imgLeft {
 		display: flex;
+
 		figcaption {
 			flex: 1 1 auto;
 			align-self: center;
 			margin-left: space_5;
 		}
 	}
+
 	&.imgRight {
 		display: flex;
+
 		figcaption {
 			flex: 1 1 auto;
 			align-self: center;
@@ -41,6 +47,7 @@
 			margin-right: space_5;
 		}
 	}
+
 	&.imgCentered {
 		display: flex;
 	}

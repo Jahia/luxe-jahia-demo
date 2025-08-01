@@ -16,8 +16,14 @@
 		"moduleResolution": "bundler",
 		"noEmit": true,
 		"noImplicitAny": false,
-		"paths": { "~/*": ["src/*"] },
-		"plugins": [{ "name": "typescript-plugin-css-modules" }],
+		"paths": {
+			"~/*": ["src/*"]
+		},
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		],
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"strict": true,

@@ -1,5 +1,6 @@
 import { jahiaComponent } from "@jahia/javascript-modules-library";
 import classes from "./default.module.css";
+
 jahiaComponent(
 	{
 		nodeType: "luxe:highlightNumber",

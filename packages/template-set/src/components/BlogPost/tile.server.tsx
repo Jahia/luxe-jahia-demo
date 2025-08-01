@@ -8,6 +8,7 @@ import { t } from "i18next";
 import type { BlogPostProps } from "./types";
 import classes from "./tile.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+
 jahiaComponent(
 	{
 		nodeType: "luxe:blogPost",

@@ -2,9 +2,11 @@
 
 This package contains a minimal design system for Luxe, factoring common design elements and concepts.
 
-The goal of this package is to provide a functional sample on how to use a React design system in Jahia through the use of JavaScript Modules.
+The goal of this package is to provide a functional sample on how to use a React design system in Jahia through the use
+of JavaScript Modules.
 
-It is in no way a complete design system. While we try to follow industry best practices, this package is not meant to be a sample of a good design system.
+It is in no way a complete design system. While we try to follow industry best practices, this package is not meant to
+be a sample of a good design system.
 
 ## Architecture
 
@@ -24,6 +26,9 @@ The package is structured as follows:
               \-- 📃 stories.tsx         Contains the Storybook stories for the component
 ```
 
-All components directories are made of three files: [a React component](https://react.dev/learn), [a CSS module](https://github.com/css-modules/css-modules), and [a Storybook story](https://storybook.js.org/docs/writing-stories).
+All components directories are made of three
+files: [a React component](https://react.dev/learn), [a CSS module](https://github.com/css-modules/css-modules),
+and [a Storybook story](https://storybook.js.org/docs/writing-stories).
 
-The package has no build step, and this is intentional. As JavaScript Modules are built with Vite, the components of the design system can be imported directly and built by Vite when packaging the module.
+The package has no build step, and this is intentional. As JavaScript Modules are built with Vite, the components of the
+design system can be imported directly and built by Vite when packaging the module.

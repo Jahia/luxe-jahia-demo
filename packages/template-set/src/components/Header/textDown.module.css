@@ -18,6 +18,7 @@
 		text-align: center;
 	}
 }
+
 .title {
 	composes: display_1 from "~/templates/css/global.module.css";
 	margin-bottom: space_0;

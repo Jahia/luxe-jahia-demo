@@ -17,6 +17,7 @@
 	hgroup {
 		text-align: center;
 	}
+
 	time {
 		font-size: fs_6;
 		color: var(--luxe-secondary);
@@ -27,6 +28,7 @@
 	composes: display_1 from "~/templates/css/global.module.css";
 	margin-bottom: space_0;
 }
+
 .hp {
 	composes: h2 from "~/templates/css/global.module.css";
 	margin-top: space_0;

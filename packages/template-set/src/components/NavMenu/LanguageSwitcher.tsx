@@ -1,8 +1,8 @@
 import {
+	buildNodeUrl,
+	getSiteLocales,
 	HydrateInBrowser,
 	useServerContext,
-	getSiteLocales,
-	buildNodeUrl,
 } from "@jahia/javascript-modules-library";
 import LanguageSwitcherClient from "./LanguageSwitcher.client";
 

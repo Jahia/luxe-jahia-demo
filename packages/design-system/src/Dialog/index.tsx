@@ -8,6 +8,7 @@ interface DialogProps
 		"className" | "id" | "onClick" | "onClose"
 	> {
 	id?: string;
+	title: string;
 	children: React.ReactNode;
 	className?: string;
 	isOpen?: boolean;
@@ -16,6 +17,7 @@ interface DialogProps
 
 export const Dialog = ({
 	id,
+	title,
 	children,
 	className,
 	isOpen = false,
@@ -62,9 +64,13 @@ export const Dialog = ({
 			{...props}
 		>
 			<div className={classes.container}>
-				<button type="button" onClick={handleClose} aria-label="Close gallery">
-					×
-				</button>
+				<div className={classes.heading}>
+					<button type="button" onClick={handleClose} aria-label="Close dialog-modal">
+						x
+					</button>
+					<h2 className={classes.title}>{title}</h2>
+				</div>
+
 				{children}
 			</div>
 		</dialog>

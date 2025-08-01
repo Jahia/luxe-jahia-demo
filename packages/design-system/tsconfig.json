@@ -5,7 +5,11 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"noEmit": true,
-		"plugins": [{ "name": "typescript-plugin-css-modules" }],
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		],
 		"strict": true,
 		"verbatimModuleSyntax": true
 	}

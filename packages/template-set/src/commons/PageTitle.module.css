@@ -4,11 +4,13 @@
 
 .main {
 	margin-bottom: space_0;
+
 	p {
 		--luxe-text-opacity: 1;
 		color: var(--luxe-color-secondary);
 	}
 }
+
 .title {
 	composes: hasDiamond from "~/templates/css/global.module.css";
 	margin-bottom: space_0;
