@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    >
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>jahia-modules</artifactId>
+        <groupId>org.jahia.modules</groupId>
+        <version>8.2.1.0</version>
+    </parent>
+    <artifactId>luxe-prepackaged-website</artifactId>
+    <name>Luxe pre-packaged website</name>
+    <version>0.9.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <description>This is the custom module (Luxe pre-packaged website) for running on a Jahia server.</description>
+
+    <scm>
+        <connection>scm:git:git@github.com:Jahia/luxe-prepackaged-website.git</connection>
+        <developerConnection>scm:git:git@github.com:Jahia/luxe-prepackaged-website.git</developerConnection>
+        <url>https://github.com/Jahia/luxe-prepackaged-website</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <jahia-module-type>system</jahia-module-type>
+        <jahia-depends>default,luxe-jahia-demo</jahia-depends>
+        <jahia-module-signature>MCwCFHfEV46Ug1PbOMbpWvxxYnaZQ/nyAhRXX9TgXMLHTp+v4mwCNB1eK0Qj5A==</jahia-module-signature>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jahia-public</id>
+            <name>Jahia Public Repository</name>
+            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}/classes/META-INF/prepackagedSites</directory>
+                <includes>
+                    <include>luxe.zip</include>
+                </includes>
+                <targetPath>META-INF/prepackagedSites</targetPath>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-luxe-website</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <zip
+                                    destfile="${project.build.directory}/dist/luxe.zip"
+                                    basedir="${basedir}/src/main/luxe-prepackaged-website"
+                                    />
+                                <zip destfile="${project.build.directory}/classes/META-INF/prepackagedSites/luxe.zip">
+                                    <fileset dir="${project.build.directory}/dist" />
+                                    <fileset
+                                        dir="${basedir}/src/main/prepackagedSites"
+                                        includes="export.properties"
+                                        />
+                                </zip>
+                                <delete dir="${project.build.directory}/dist" />
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>target/classes/META-INF/prepackagedSites/luxe.zip</file>
+                                    <type>zip</type>
+                                    <classifier>import</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
