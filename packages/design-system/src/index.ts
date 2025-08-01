@@ -4,3 +4,4 @@ import "./variables.css";
 import "./global.css";
 
 export { Badge } from "./Badge/index.tsx";
+export { Dialog } from "./Dialog/index.tsx";

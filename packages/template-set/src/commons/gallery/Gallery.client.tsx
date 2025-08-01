@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import classes from "./Gallery.client.module.css";
-import { DialogClient } from "~/commons/Dialog.client";
+import { Dialog } from "design-system";
 import { Slideshow } from "~/commons/gallery/Slideshow.client";
 import type { PictureProps } from "~/commons/types";
 import { Picture } from "~/commons/Picture";
@@ -90,18 +90,14 @@ const GalleryClient = ({ data, className }: GalleryProps) => {
 				</ul>
 			)}
 
-			<DialogClient
-				className={clsx(classes.dialog, className)}
-				isOpen={isOpen}
-				onClose={closeDialog}
-			>
+			<Dialog className={clsx(classes.dialog, className)} isOpen={isOpen} onClose={closeDialog}>
 				<Slideshow
 					data={data}
 					selectedImageIndex={selectedImageIndex}
 					setSelectedImageIndex={setSelectedImageIndex}
 					onClose={closeDialog}
 				/>
-			</DialogClient>
+			</Dialog>
 		</div>
 	);
 };

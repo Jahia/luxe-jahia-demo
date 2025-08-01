@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import clsx from "clsx";
-import classes from "./Dialog.client.module.css";
+import classes from "./styles.module.css";
 
 interface DialogProps
 	extends Omit<
@@ -14,14 +14,14 @@ interface DialogProps
 	onClose?: (event: React.SyntheticEvent<HTMLDialogElement>) => void;
 }
 
-export const DialogClient = ({
+export const Dialog = ({
 	id,
 	children,
 	className,
 	isOpen = false,
 	onClose,
 	...props
-}: DialogProps & { ref?: React.RefObject<HTMLDialogElement> }) => {
+}: DialogProps) => {
 	const dialogRef = React.useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
@@ -61,12 +61,12 @@ export const DialogClient = ({
 			onKeyDown={handleKeyDown}
 			{...props}
 		>
-			<button type="button" onClick={handleClose} aria-label="Close gallery">
-				×
-			</button>
-			{children}
+			<div className={classes.container}>
+				<button type="button" onClick={handleClose} aria-label="Close gallery">
+					×
+				</button>
+				{children}
+			</div>
 		</dialog>
 	);
 };
-
-DialogClient.displayName = "Dialog";
