@@ -5,12 +5,26 @@ Luxe is the demo website for Jahia 8.2, built using the [JavaScript Modules](htt
 This repository is a [monorepo](https://monorepo.tools/#understanding-monorepos) that contains different packages, each with its own purpose:
 
 - [`template-set`](./packages/template-set/): the Jahia module that, when pushed on a Jahia instance, allows creating all Luxe components and content types.
-
-The repository is under active development, the upcoming packages will be added soon:
-
 - [`design-system`](./packages/design-system/): a collection of reusable React components used by the template-set.
 - [`prepackaged-site`](./packages/prepackaged-site/): a prepackaged site that can be used to quickly get a populated Luxe site.
 
 # Build and deploy
 
-To be documented
+To work in this monorepo, you'll need a functional [Node.js+Yarn](https://nodejs.org/en/download) installation. Once cloned, the following commands are available:
+
+```bash
+# Install the dependencies of all packages
+yarn install
+
+# Start a local Jahia instance
+docker compose up --wait
+
+# Build all modules
+yarn build
+
+# Start the development mode for the template-set
+yarn dev
+
+# Start the Storybook for the design system
+yarn storybook
+```
