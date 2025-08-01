@@ -3,17 +3,14 @@
 @value gridBreakpoints_xl from variables;
 
 :root {
-	--luxe-color-darkBlue: #1b1a4e;
 	--luxe-color-darkBlue-rgb: 27, 26, 78;
 	--luxe-color-darkBlue60: #767695;
 	--luxe-color-darkBlue60-rgb: 118, 118, 149;
 	--luxe-color-darkBlue40: #a4a3b8;
-	--luxe-color-gold: #c29b40;
 	--luxe-color-gold-rgb: 194, 155, 64;
 	--luxe-color-gray-rgb: 246, 246, 246;
 	--luxe-color-dark: #393847;
 	--luxe-color-dark-rgb: 57, 56, 71;
-	--luxe-color-primary: var(--luxe-color-gold);
 	--luxe-color-primary-rgb: var(--luxe-color-gold-rgb);
 	--luxe-color-secondary: var(--luxe-color-darkBlue60);
 	--luxe-color-secondary-rgb: var(--luxe-color-darkBlue60-rgb);
@@ -32,7 +29,6 @@
 	--luxe-emphasis-color-rgb: var(--luxe-color-dark-rgb);
 	--luxe-border-color: var(--luxe-color-darkBlue40);
 	--luxe-border-radius: 8px;
-	--luxe-heading-color: var(--luxe-color-darkBlue);
 	--luxe-secondary-bg-rgb: var(--luxe-color-gray-rgb);
 	--luxe-tertiary-bg: var(--luxe-color-gray);
 
@@ -107,13 +103,9 @@ dl {
 
 .display_1,
 .display_2,
-h4,
 .h4,
-h3,
 .h3,
-h2,
 .h2,
-h1,
 .h1 {
 	font-family: var(--luxe-font-family-display);
 }
@@ -180,7 +172,6 @@ h1,
 	margin-bottom: 0.5rem;
 	font-weight: 500;
 	line-height: 1.2;
-	color: var(--luxe-heading-color);
 }
 
 h1,

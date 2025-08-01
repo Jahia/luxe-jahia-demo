@@ -1,0 +1,17 @@
+.main {
+	container-type: inline-size;
+	text-align: center;
+	line-height: 1.2;
+
+	> * {
+		margin: 0;
+	}
+
+	h4 {
+		font-size: clamp(2em, 20cqw, 4em);
+	}
+
+	p {
+		color: var(--luxe-color-primary);
+	}
+}
