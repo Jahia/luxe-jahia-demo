@@ -1,0 +1,126 @@
+@value variables: "../../../template-set/src/templates/css/variables.css";
+@value gridBreakpoints_sm, gridBreakpoints_lg, gridBreakpoints_xl, space_0, space_2, space_3, fs_6 from variables;
+
+/* Disable background scroll */
+.noScroll {
+	overflow: hidden;
+}
+
+.dialog {
+	--luxe-modal-zindex: 1055;
+	--luxe-modal-width: 500px;
+	--luxe-modal-opacity: var(--luxe-dialog-opacity);
+
+	border: 0;
+	background-color: transparent;
+	overflow: hidden;
+	margin: 0;
+	color: var(--luxe-body-color);
+
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: space_0;
+	z-index: var(--luxe-modal-zindex);
+	display: none;
+	width: 100vw;
+	height: 100vh;
+	outline: 0;
+
+	&[open] {
+		display: block;
+	}
+
+	&::backdrop {
+		background-color: var(--luxe-color-darkBlue);
+		opacity: var(--luxe-modal-opacity);
+	}
+
+	/* Internal container for container queries */
+	.container {
+		container-type: inline-size;
+		width: 100%;
+		max-width: var(--luxe-modal-width);
+		margin: 0 auto;
+		background: var(--luxe-modal-bg, #fff);
+		border-radius: 16px;
+		position: relative;
+		min-height: 100px;
+		padding: space_2;
+
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		box-sizing: border-box;
+
+		/* Close button styling */
+		> button {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 36px;
+			height: 36px;
+			font-size: 28px;
+			border-radius: 0 8px 0 0;
+			background-color: var(--luxe-color-darkBlue);
+
+			padding: 0;
+			text-align: center;
+			line-height: 1;
+			border: 0;
+
+			color: var(--luxe-color-gray);
+			opacity: 0.6;
+			transition: color 0.2s ease-in-out;
+			cursor: pointer;
+			z-index: 1001;
+
+			/*text-shadow:*/
+			/*	0 2px 8px rgba(0,0,0,0.7),*/
+			/*	0 0 1px #fff,*/
+			/*	0 0 0.5px #000;*/
+
+			&:focus {
+				outline: none;
+			}
+			&:focus-visible {
+				outline: 2px solid var(--luxe-color-gold);
+				outline-offset: 2px;
+			}
+			&:hover {
+				opacity: 1;
+				color: var(--luxe-color-gold);
+			}
+			&[disabled] {
+				opacity: 0.2;
+				pointer-events: none;
+			}
+		}
+
+		@container (min-width: gridBreakpoints_lg) {
+			max-width: 800px;
+			padding: space_3;
+
+			> button {
+				top: 24px;
+				right: 24px;
+				width: 40px;
+				height: 40px;
+				font-size: 40px;
+				background: transparent;
+			}
+		}
+
+		@container (min-width: gridBreakpoints_xl) {
+			max-width: 80vw;
+			padding: space_3;
+		}
+
+		@container (max-width: 400px) {
+			font-size: 14px;
+			padding: space_0;
+		}
+	}
+}
