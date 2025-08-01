@@ -18,12 +18,14 @@
 
   <modules>
     <module>packages/prepackaged-site</module>
+    <module>packages/template-set</module>
   </modules>
 
   <properties>
     <node.version>v22.18.0</node.version>
     <yarn.version>v1.22.22</yarn.version>
     <frontend-maven-plugin.version>1.15.1</frontend-maven-plugin.version>
+    <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
   </properties>
 
   <repositories>
@@ -62,6 +64,7 @@
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <version>${frontend-maven-plugin.version}</version>
+        <inherited>false</inherited>
         <configuration>
           <nodeVersion>${node.version}</nodeVersion>
           <yarnVersion>${yarn.version}</yarnVersion>
