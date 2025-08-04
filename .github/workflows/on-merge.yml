@@ -54,6 +54,7 @@ jobs:
   integration-tests:
     uses: Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
     secrets: inherit
+    needs: build
     with:
       jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
       module_id: luxe-jahia-demo
@@ -65,11 +66,11 @@ jobs:
 
   publish:
     name: Publish module
-    needs: build
+    needs: integration-tests
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     container:
-      image: jahia/cimg-mvn-cache:ga_cimg_openjdk_8.0.312-node
+      image: jahia/cimg-mvn-cache:ga_cimg_openjdk_17.0.9-node
       credentials:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
