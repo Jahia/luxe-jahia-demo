@@ -34,8 +34,8 @@
 		opacity: 1;
 	}
 
-	&:global(.light)::backdrop {
-		opacity: 0.4;
+	&.light::backdrop {
+		opacity: 0.85;
 	}
 
 	.container {

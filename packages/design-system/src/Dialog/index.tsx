@@ -55,7 +55,7 @@ export const Dialog = ({
 		<dialog
 			ref={dialogRef}
 			id={id}
-			className={clsx(classes.dialog, className, backdrop)}
+			className={clsx(classes.dialog, className, backdrop === "light" && classes.light)}
 			onClick={handleBackdropClose}
 			onDoubleClick={(e) => {
 				e.preventDefault();
