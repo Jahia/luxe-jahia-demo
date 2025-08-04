@@ -33,7 +33,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY_JAHIACI }}
 
-      - uses: jahia/jahia-modules-action/release-javascript@v2
+      - uses: jahia/jahia-modules-action/release@v2
         name: Release Module
         with:
           github_slug: Jahia/luxe-jahia-demo
@@ -43,15 +43,7 @@ jobs:
           github_api_token: ${{ secrets.GH_API_TOKEN }}
           nexus_username: ${{ secrets.NEXUS_USERNAME }}
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-          module_path: packages/template-set
-
-      - uses: jahia/jahia-modules-action/release-publication@v2
-        name: Publish Module
-        with:
-          module_id: luxe-jahia-demo
-          release_version: ${{ github.event.release.tag_name }}
-          nexus_username: ${{ secrets.NEXUS_USERNAME }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          slack-webhook-qa: ${{ secrets.SLACK_WEBHOOK_URL_RC_FOR_QA }}
 
       # Tmate only starts if any of the previous steps fails.
       # Be careful since it also means that if a step fails the workflow will
