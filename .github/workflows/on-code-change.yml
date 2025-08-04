@@ -36,6 +36,7 @@ jobs:
   integration-tests:
     uses: Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
     secrets: inherit
+    needs: build
     with:
       jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
       module_id: luxe-jahia-demo
