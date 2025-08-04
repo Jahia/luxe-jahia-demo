@@ -1,6 +1,5 @@
-@value variables: "../../../template-set/src/templates/css/variables.css";
-
-@value gridBreakpoints_sm, gridBreakpoints_lg, gridBreakpoints_xl, space_0, space_2, space_3, space_4,fs_3,fs_5, fs_6 from variables;
+@value variables: "../variables.css";
+@value breakpoints_lg,breakpoints_xl,space_3,space_4,fs_3,fs_5 from variables;
 
 /* Disable background scroll */
 .noScroll {
@@ -46,7 +45,7 @@
 		padding: space_3;
 		max-height: 100%;
 
-		@container (min-width: gridBreakpoints_lg) {
+		@container (min-width: breakpoints_lg) {
 			max-width: 800px;
 			padding: space_4 0;
 			.heading{
@@ -63,7 +62,7 @@
 
 		}
 
-		@container (min-width: gridBreakpoints_xl) {
+		@container (min-width: breakpoints_xl) {
 			max-width: 80vw;
 		}
 	}
