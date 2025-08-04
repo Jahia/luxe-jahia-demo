@@ -119,10 +119,7 @@ jahiaComponent(
 						<PageTitle title={title} className={classes.title} />
 					</header>
 					<Row>
-						<HydrateInBrowser
-							child={GalleryClient}
-							props={{ title: t("alt.estate", { estate: title }), data: galleryImages }}
-						/>
+						<HydrateInBrowser child={GalleryClient} props={{ title, data: galleryImages }} />
 					</Row>
 					<Row className={classes.rowDescription}>
 						<Col

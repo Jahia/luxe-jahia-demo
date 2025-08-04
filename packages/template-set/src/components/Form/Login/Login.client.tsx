@@ -95,6 +95,7 @@ export default function LoginClient({
 			<Dialog
 				title={t("form.login.login")}
 				isOpen={isOpen}
+				backdrop="light"
 				onClose={() => setIsOpen(false)}
 				onKeyDown={handleKeyDown}
 			>

@@ -1,6 +1,6 @@
 @value variables: "~/templates/css/variables.css";
 
-@value gridBreakpoints_sm, space_3, space_4 from variables;
+@value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_lg, space_3, space_4 from variables;
 
 .container {
 	container-type: inline-size;
@@ -26,15 +26,17 @@
 	}
 
 	@container (min-width: gridBreakpoints_sm) {
-		width: calc(100% + 208px);
-		translate: -104px;
-
 		flex-direction: row;
 		gap: space_4;
 
 		img {
 			max-height: 80vh;
 		}
+	}
+
+	@container (min-width: gridBreakpoints_lg) {
+		width: calc(100% + 208px);
+		translate: -104px;
 	}
 }
 
@@ -87,7 +89,7 @@
 	margin: space_3 0 0 0;
 	word-break: break-word;
 
-	@container (min-width: gridBreakpoints_sm) {
+	@container (min-width: gridBreakpoints_md) {
 		font-size: 15px;
 	}
 }

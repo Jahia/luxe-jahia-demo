@@ -1,6 +1,6 @@
 @value variables: "~/templates/css/variables.css";
 
-@value gridBreakpoints_lg, space_4, space_5 from variables;
+@value gridBreakpoints_sm, gridBreakpoints_lg, space_1, space_3, space_4, space_5 from variables;
 
 .navbar {
 	--luxe-navbar-padding-x: 0;
@@ -31,14 +31,15 @@
 	justify-content: space-between;
 	/*padding: var(--luxe-navbar-padding-y) var(--luxe-navbar-padding-x);*/
 	background-color: rgba(var(--luxe-body-bg-rgb), var(--luxe-bg-opacity));
-	padding: space_4 space_5;
+	padding: space_4 space_3;
 
+	@media (min-width: gridBreakpoints_sm) {
+		padding: space_4 space_5;
+	}
 	/* expand_lg */
 	@media (min-width: gridBreakpoints_lg) {
-		& {
 			flex-wrap: nowrap;
 			justify-content: flex-start;
-		}
 	}
 
 	.brand {
@@ -63,7 +64,6 @@
 	flex-wrap: inherit;
 	align-items: center;
 	justify-content: space-between;
-	gap: space_5;
 
 	> div {
 		display: contents;

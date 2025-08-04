@@ -11,6 +11,7 @@ interface DialogProps
 	title: string;
 	children: React.ReactNode;
 	className?: string;
+	backdrop?: "light" | "dark";
 	isOpen?: boolean;
 	onClose?: (event: React.SyntheticEvent<HTMLDialogElement>) => void;
 }
@@ -20,6 +21,7 @@ export const Dialog = ({
 	title,
 	children,
 	className,
+	backdrop = "dark",
 	isOpen = false,
 	onClose,
 	...props
@@ -53,7 +55,7 @@ export const Dialog = ({
 		<dialog
 			ref={dialogRef}
 			id={id}
-			className={clsx(classes.dialog, className)}
+			className={clsx(classes.dialog, className, backdrop)}
 			onClick={handleBackdropClose}
 			onDoubleClick={(e) => {
 				e.preventDefault();
