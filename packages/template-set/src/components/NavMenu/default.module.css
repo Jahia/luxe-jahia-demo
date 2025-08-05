@@ -38,8 +38,8 @@
 	}
 	/* expand_lg */
 	@media (min-width: gridBreakpoints_lg) {
-			flex-wrap: nowrap;
-			justify-content: flex-start;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
 	}
 
 	.brand {

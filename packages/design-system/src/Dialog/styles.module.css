@@ -1,5 +1,5 @@
 @value variables: "../variables.module.css";
-@value breakpoints_lg,breakpoints_xl,space_3,space_4,fs_3,fs_5 from variables;
+@value breakpoints_lg,space_3,space_4,fs_3,fs_5,fs_6 from variables;
 
 /* Disable background scroll */
 .noScroll {
@@ -44,27 +44,16 @@
 		gap: 1.5rem;
 		padding: space_3;
 		max-height: 100%;
-		max-width:max(800px,80vw);
+		max-width: max(800px, 80vw);
 
 		@container (min-width: breakpoints_lg) {
 			padding: space_4 0;
-			.heading{
-				.title {
-					font-size: fs_3;
-				}
+			.heading {
 				> button {
-					width: 2.25rem;
-					height: 2.25rem;
-					font-size: fs_5;
 					font-weight: 700;
 				}
 			}
-
 		}
-
-		/*@container (min-width: breakpoints_xl) {*/
-		/*	max-width: 80vw;*/
-		/*}*/
 	}
 
 	.heading {
@@ -77,12 +66,13 @@
 
 		> button {
 			display: flex;
+			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
 
-			width: 1.75rem;
-			height: 1.75rem;
-			font-size: 1rem;
+			width: clamp(1.75rem, 3cqw, 2.25rem);
+			height: clamp(1.75rem, 3cqw, 2.25rem);
+			font-size: clamp(fs_6, 1.5cqw, fs_5);
 
 			text-transform: uppercase;
 			border-radius: 50%;
@@ -130,7 +120,7 @@
 	color: var(--luxe-color-gray);
 	margin: 0;
 	padding: 0;
-	font-size: fs_5;
+	font-size: clamp(fs_5, 2cqw, fs_3);
 	flex-grow: 1;
 	white-space: nowrap;
 	overflow: hidden;
