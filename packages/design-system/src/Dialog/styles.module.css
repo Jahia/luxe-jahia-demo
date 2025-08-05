@@ -1,4 +1,4 @@
-@value variables: "../variables.css";
+@value variables: "../variables.module.css";
 @value breakpoints_lg,breakpoints_xl,space_3,space_4,fs_3,fs_5 from variables;
 
 /* Disable background scroll */
@@ -44,9 +44,9 @@
 		gap: 1.5rem;
 		padding: space_3;
 		max-height: 100%;
+		max-width:max(800px,80vw);
 
 		@container (min-width: breakpoints_lg) {
-			max-width: 800px;
 			padding: space_4 0;
 			.heading{
 				.title {
@@ -62,9 +62,9 @@
 
 		}
 
-		@container (min-width: breakpoints_xl) {
-			max-width: 80vw;
-		}
+		/*@container (min-width: breakpoints_xl) {*/
+		/*	max-width: 80vw;*/
+		/*}*/
 	}
 
 	.heading {
