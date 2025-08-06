@@ -116,7 +116,7 @@
 }
 
 .title {
-	composes: capitalize from "../../../template-set/src/templates/css/global.module.css";
+	composes: capitalize from "../global.css";
 	color: var(--luxe-color-gray);
 	margin: 0;
 	padding: 0;
