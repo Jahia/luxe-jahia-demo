@@ -2,30 +2,13 @@ import React, { useEffect } from "react";
 import clsx from "clsx";
 import classes from "./styles.module.css";
 
-interface DialogProps
-	extends Omit<
-		React.ComponentPropsWithoutRef<"dialog">,
-		"className" | "id" | "onClick" | "onClose"
-	> {
-	id?: string;
+interface DialogProps extends Omit<React.ComponentPropsWithoutRef<"dialog">, "onClick"> {
 	title: string;
 	children: React.ReactNode;
-	className?: string;
-	backdrop?: "light" | "dark";
 	isOpen?: boolean;
-	onClose?: (event: React.SyntheticEvent<HTMLDialogElement>) => void;
 }
 
-export const Dialog = ({
-	id,
-	title,
-	children,
-	className,
-	backdrop = "dark",
-	isOpen = false,
-	onClose,
-	...props
-}: DialogProps) => {
+export const Dialog = ({ title, children, className, isOpen = false, ...props }: DialogProps) => {
 	const dialogRef = React.useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
@@ -54,14 +37,12 @@ export const Dialog = ({
 	return (
 		<dialog
 			ref={dialogRef}
-			id={id}
-			className={clsx(classes.dialog, className, backdrop === "light" && classes.light)}
+			className={clsx(classes.dialog, className)}
 			onClick={handleBackdropClose}
 			onDoubleClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
 			}}
-			onClose={(e) => onClose?.(e)}
 			onKeyDown={handleKeyDown}
 			{...props}
 		>

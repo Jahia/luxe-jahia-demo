@@ -22,11 +22,6 @@
 
 	&::backdrop {
 		background-color: var(--luxe-color-darkBlue);
-		opacity: 1;
-	}
-
-	&.light::backdrop {
-		opacity: 0.85;
 	}
 }
 
