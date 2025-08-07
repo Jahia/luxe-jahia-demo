@@ -6,7 +6,7 @@ export const Picture = ({ image, sources, height, className, onClick }: PictureP
 			{sources?.map((source) => (
 				<source key={source.media} media={source.media} srcSet={source.srcSet} />
 			))}
-			<img src={image.src} alt={image.alt} height={height} width="100%" />
+			<img src={image.src} alt={image.alt} height={height} style={{ width: "100%" }} />
 		</picture>
 	);
 };
