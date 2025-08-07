@@ -7,8 +7,6 @@
 }
 
 .dialog {
-	--luxe-modal-zindex: 1055;
-
 	container-type: inline-size;
 
 	width: 100vw;
@@ -18,14 +16,9 @@
 	border: 0;
 	margin: 0;
 	padding: 0;
-	z-index: var(--luxe-modal-zindex);
-	display: none;
+	z-index: 1055;
 	background-color: transparent;
 	overflow: hidden;
-
-	&[open] {
-		display: block;
-	}
 
 	&::backdrop {
 		background-color: var(--luxe-color-darkBlue);
@@ -35,82 +28,80 @@
 	&.light::backdrop {
 		opacity: 0.85;
 	}
+}
 
-	.container {
+.heading {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: stretch;
+	width: 100%;
+	gap: 1.5rem;
+
+	> button {
 		display: flex;
-		flex-direction: column;
-		margin: auto;
-		gap: 1.5rem;
-		padding: space_3;
-		max-height: 100%;
-		max-width: max(800px, 80vw);
-
-		@container (min-width: breakpoints_lg) {
-			padding: space_4 0;
-			.heading {
-				> button {
-					font-weight: 700;
-				}
-			}
-		}
-	}
-
-	.heading {
-		display: flex;
-		flex-direction: row-reverse;
+		flex-shrink: 0;
 		align-items: center;
-		justify-content: stretch;
-		width: 100%;
-		gap: 1.5rem;
+		justify-content: center;
 
-		> button {
-			display: flex;
-			flex-shrink: 0;
-			align-items: center;
-			justify-content: center;
+		width: clamp(1.75rem, 3cqw, 2.25rem);
+		height: clamp(1.75rem, 3cqw, 2.25rem);
+		font-size: clamp(fs_6, 1.5cqw, fs_5);
 
-			width: clamp(1.75rem, 3cqw, 2.25rem);
-			height: clamp(1.75rem, 3cqw, 2.25rem);
-			font-size: clamp(fs_6, 1.5cqw, fs_5);
+		text-transform: uppercase;
+		border-radius: 50%;
+		background-color: var(--luxe-color-darkBlue);
 
-			text-transform: uppercase;
-			border-radius: 50%;
-			background-color: var(--luxe-color-darkBlue);
+		padding: 0;
+		text-align: center;
+		line-height: 1;
+		border: 2px solid var(--luxe-color-gray);
 
-			padding: 0;
-			text-align: center;
-			line-height: 1;
-			border: 2px solid var(--luxe-color-gray);
-
-			color: var(--luxe-color-gray);
-			opacity: 0.6;
-			transition:
+		color: var(--luxe-color-gray);
+		opacity: 0.6;
+		transition:
 				color 0.2s ease-in-out,
 				border-color 0.2s ease-in-out,
 				opacity 0.2s ease-in-out;
-			cursor: pointer;
-			z-index: 1001;
+		cursor: pointer;
+		z-index: 1001;
 
-			&:focus {
-				outline: none;
-			}
-
-			&:focus-visible {
-				outline: 2px solid var(--luxe-color-gold);
-				outline-offset: 2px;
-			}
-
-			&:hover {
-				opacity: 1;
-				color: var(--luxe-color-gold);
-				border-color: var(--luxe-color-gold);
-			}
-
-			&[disabled] {
-				opacity: 0.2;
-				pointer-events: none;
-			}
+		&:focus {
+			outline: none;
 		}
+
+		&:focus-visible {
+			outline: 2px solid var(--luxe-color-gold);
+			outline-offset: 2px;
+		}
+
+		&:hover {
+			opacity: 1;
+			color: var(--luxe-color-gold);
+			border-color: var(--luxe-color-gold);
+		}
+
+		&[disabled] {
+			opacity: 0.2;
+			pointer-events: none;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	gap: 1.5rem;
+	padding: space_3;
+	max-height: 100%;
+	max-width: max(800px, 80vw);
+
+	@container (min-width: breakpoints_lg) {
+		padding: space_4 0;
+		.heading  button {
+				font-weight: 700;
+			}
 	}
 }
 
