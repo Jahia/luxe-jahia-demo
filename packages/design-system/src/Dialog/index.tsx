@@ -67,7 +67,7 @@ export const Dialog = ({
 		>
 			<div className={classes.container}>
 				<div className={classes.heading}>
-					<button type="button" onClick={handleClose} aria-label="Close dialog-modal">
+					<button type="button" onClick={handleClose} aria-label="Close dialog">
 						x
 					</button>
 					<h2 className={classes.title} aria-labelledby="modalTitle">
