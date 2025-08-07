@@ -78,7 +78,6 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 				<span>
 					{selectedImageIndex + 1} / {data.length}
 				</span>
-				{/*<p>{data[selectedImageIndex].image.alt}</p>*/}
 			</div>
 		</div>
 	);
