@@ -66,14 +66,14 @@ export const Dialog = ({
 			{...props}
 		>
 			<div className={classes.container}>
-				<div className={classes.heading}>
+				<header className={classes.heading}>
 					<button type="button" onClick={handleClose} aria-label="Close dialog">
 						x
 					</button>
 					<h2 className={classes.title} aria-labelledby="modalTitle">
 						{title}
 					</h2>
-				</div>
+				</header>
 
 				{children}
 			</div>
