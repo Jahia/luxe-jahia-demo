@@ -29,7 +29,6 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	/*padding: var(--luxe-navbar-padding-y) var(--luxe-navbar-padding-x);*/
 	background-color: rgba(var(--luxe-body-bg-rgb), var(--luxe-bg-opacity));
 	padding: space_4 space_3;
 

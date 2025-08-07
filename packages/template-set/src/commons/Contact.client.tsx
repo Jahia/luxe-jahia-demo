@@ -54,7 +54,6 @@ const ContactClient = ({
 			>
 				{/* Contact form inside the dialog */}
 				<div className={classes.formWrapper}>
-					{/*<h2 className={classes.title}>{}</h2>*/}
 					<ContactFormClient target={contactTarget} feedbackMsg={feedbackMsg} mode={contextMode} />
 				</div>
 			</Dialog>

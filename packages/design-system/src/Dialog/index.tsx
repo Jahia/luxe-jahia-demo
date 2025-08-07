@@ -70,7 +70,9 @@ export const Dialog = ({
 					<button type="button" onClick={handleClose} aria-label="Close dialog-modal">
 						x
 					</button>
-					<h2 className={classes.title}>{title}</h2>
+					<h2 className={classes.title} aria-labelledby="modalTitle">
+						{title}
+					</h2>
 				</div>
 
 				{children}

@@ -98,7 +98,6 @@ export default function LoginClient({
 				onClose={() => setIsOpen(false)}
 				onKeyDown={handleKeyDown}
 			>
-				{/*<div className={classes.content} aria-labelledby="loginModalTitle">*/}
 				<LoginFormClient
 					loginUrl={urls.loginUrl}
 					isShowRememberMe={isShowRememberMe}
@@ -107,7 +106,6 @@ export default function LoginClient({
 					siteKey={siteKey}
 					persona={persona}
 				/>
-				{/*</div>*/}
 			</Dialog>
 		</>
 	);
