@@ -8,8 +8,6 @@ interface SlideshowProps {
 	data: PictureProps[];
 	selectedImageIndex: number | null;
 	setSelectedImageIndex: (index: number | null) => void;
-	onClose: () => void;
-	className?: string;
 }
 
 export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: SlideshowProps) => {

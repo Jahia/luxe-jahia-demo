@@ -7,7 +7,7 @@ const meta = {
 	title: "Atoms/Dialog",
 	component: Dialog,
 	tags: ["autodocs"],
-	args: { title: "The title", children, isOpen: true },
+	args: { title: "The title", children, isOpen: true, setIsOpen: () => {} },
 } satisfies Meta<typeof Dialog>;
 
 export default meta;

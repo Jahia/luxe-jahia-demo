@@ -36,6 +36,7 @@
 	}
 
 	@container (min-width: gridBreakpoints_lg) {
+		/*each nav button area is 104px, so remove 2 btns -> 208px*/
 		width: calc(100% + 208px);
 		translate: -104px;
 	}

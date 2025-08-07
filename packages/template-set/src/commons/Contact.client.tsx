@@ -49,7 +49,7 @@ const ContactClient = ({
 			<Dialog
 				title={t("form.contact.dialog.title")}
 				isOpen={isOpen}
-				onClose={() => setIsOpen(false)}
+				setIsOpen={setIsOpen}
 				className={classes.dialog}
 			>
 				{/* Contact form inside the dialog */}

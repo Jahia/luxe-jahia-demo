@@ -5,10 +5,18 @@ import classes from "./styles.module.css";
 interface DialogProps extends Omit<React.ComponentPropsWithoutRef<"dialog">, "onClick"> {
 	title: string;
 	children: React.ReactNode;
-	isOpen?: boolean;
+	isOpen: boolean;
+	setIsOpen: (isOpen: boolean) => void;
 }
 
-export const Dialog = ({ title, children, className, isOpen = false, ...props }: DialogProps) => {
+export const Dialog = ({
+	title,
+	children,
+	className,
+	isOpen = false,
+	setIsOpen,
+	...props
+}: DialogProps) => {
 	const dialogRef = React.useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
@@ -27,7 +35,10 @@ export const Dialog = ({ title, children, className, isOpen = false, ...props }:
 	const handleKeyDown = (event: React.KeyboardEvent) => {
 		if (event.key === "Escape") handleClose();
 	};
-	const handleClose = () => dialogRef.current?.close();
+	const handleClose = () => {
+		dialogRef.current?.close();
+		setIsOpen(false);
+	};
 
 	const handleBackdropClose = (event: React.MouseEvent) => {
 		if (event.target === dialogRef.current) {

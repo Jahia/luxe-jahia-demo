@@ -46,9 +46,11 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 		setIsOpen(true);
 	};
 
-	const closeDialog = () => {
-		setSelectedImageIndex(null);
-		setIsOpen(false);
+	const closeDialog = (value: boolean) => {
+		if (!value) {
+			setSelectedImageIndex(null);
+			setIsOpen(false);
+		}
 	};
 
 	return (
@@ -95,13 +97,12 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 				title={title}
 				className={clsx(classes.dialog, className)}
 				isOpen={isOpen}
-				onClose={closeDialog}
+				setIsOpen={closeDialog}
 			>
 				<Slideshow
 					data={data}
 					selectedImageIndex={selectedImageIndex}
 					setSelectedImageIndex={setSelectedImageIndex}
-					onClose={closeDialog}
 				/>
 			</Dialog>
 		</div>
