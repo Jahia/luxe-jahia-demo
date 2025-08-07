@@ -60,7 +60,6 @@
 	}
 
 	@container (min-width: gridBreakpoints_xxl) {
-		/*gap: space_6;*/
 		max-height: 80vh;
 		padding: space_6 space_5;
 	}
