@@ -35,10 +35,7 @@ export const Dialog = ({
 	const handleKeyDown = (event: React.KeyboardEvent) => {
 		if (event.key === "Escape") handleClose();
 	};
-	const handleClose = () => {
-		dialogRef.current?.close();
-		setIsOpen(false);
-	};
+	const handleClose = () => setIsOpen(false);
 
 	const handleBackdropClose = (event: React.MouseEvent) => {
 		if (event.target === dialogRef.current) {
