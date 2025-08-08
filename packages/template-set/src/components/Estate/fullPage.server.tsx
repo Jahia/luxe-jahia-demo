@@ -1,11 +1,11 @@
 import {
 	buildModuleFileUrl,
 	buildNodeUrl,
-	jahiaComponent,
 	HydrateInBrowser,
+	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
-import { Col, PageTitle, Row, Section, List, type PictureProps } from "~/commons";
+import { Col, List, PageTitle, type PictureProps, Row, Section } from "~/commons";
 import GalleryClient from "~/commons/gallery/Gallery.client";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
@@ -119,7 +119,7 @@ jahiaComponent(
 						<PageTitle title={title} className={classes.title} />
 					</header>
 					<Row>
-						<HydrateInBrowser child={GalleryClient} props={{ data: galleryImages }} />
+						<HydrateInBrowser child={GalleryClient} props={{ title, data: galleryImages }} />
 					</Row>
 					<Row className={classes.rowDescription}>
 						<Col

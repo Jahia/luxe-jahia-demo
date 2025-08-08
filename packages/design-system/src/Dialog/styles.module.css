@@ -1,0 +1,113 @@
+@value variables: "../variables.module.css";
+@value breakpoints_lg,space_3,space_4,fs_3,fs_5,fs_6 from variables;
+
+/* Disable background scroll */
+.noScroll {
+	overflow: hidden;
+}
+
+.dialog {
+	container-type: inline-size;
+
+	width: 100vw;
+	max-width: 100vw;
+	height: 100vh;
+	max-height: 100vh;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	z-index: 1055;
+	background-color: transparent;
+	overflow: hidden;
+
+	&::backdrop {
+		background-color: var(--luxe-color-darkBlue);
+	}
+}
+
+.heading {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: stretch;
+	width: 100%;
+	gap: 1.5rem;
+
+	> button {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+
+		width: clamp(1.75rem, 3cqw, 2.25rem);
+		height: clamp(1.75rem, 3cqw, 2.25rem);
+		font-size: clamp(fs_6, 1.5cqw, fs_5);
+
+		text-transform: uppercase;
+		border-radius: 50%;
+		background-color: var(--luxe-color-darkBlue);
+
+		padding: 0;
+		text-align: center;
+		line-height: 1;
+		border: 2px solid var(--luxe-color-gray);
+
+		color: var(--luxe-color-gray);
+		opacity: 0.6;
+		transition:
+				color 0.2s ease-in-out,
+				border-color 0.2s ease-in-out,
+				opacity 0.2s ease-in-out;
+		cursor: pointer;
+		z-index: 1001;
+
+		&:focus {
+			outline: none;
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--luxe-color-gold);
+			outline-offset: 2px;
+		}
+
+		&:hover {
+			opacity: 1;
+			color: var(--luxe-color-gold);
+			border-color: var(--luxe-color-gold);
+		}
+
+		&[disabled] {
+			opacity: 0.2;
+			pointer-events: none;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	gap: 1.5rem;
+	padding: space_3;
+	max-height: 100%;
+	max-width: max(800px, 80vw);
+
+	@container (min-width: breakpoints_lg) {
+		padding: space_4 0;
+		.heading  button {
+				font-weight: 700;
+			}
+	}
+}
+
+.title {
+	composes: capitalize from "../global.css";
+	color: var(--luxe-color-gray);
+	margin: 0;
+	padding: 0;
+	font-size: clamp(fs_5, 2cqw, fs_3);
+	flex-grow: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

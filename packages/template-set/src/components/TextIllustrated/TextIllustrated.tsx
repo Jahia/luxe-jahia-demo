@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { Col, Row } from "~/commons/grid";
 import classes from "./TextIllustrated.module.css";
 import type { ImageDataProps } from "~/commons/types";
+
 type textIllustratedTypes = {
 	title: string;
 	text: string;

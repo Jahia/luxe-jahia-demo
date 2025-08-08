@@ -1,19 +1,19 @@
 @value variables: "~/templates/css/variables.css";
 
-@value gridBreakpoints_lg,gridBreakpoints_xxl, space_0, space_2, space_4, space_5, space_6, fs_6, fs_small from variables;
+@value gridBreakpoints_md, gridBreakpoints_lg, gridBreakpoints_xxl, space_0, space_2, space_3, space_4, space_5, space_6, fs_6, fs_small from variables;
 
 .main {
 	--luxe-modal-bg: var(--luxe-body-bg);
 	--luxe-modal-border-color: var(--luxe-border-color-translucent);
 	--luxe-modal-border-width: var(--luxe-border-width);
 	--luxe-modal-border-radius: var(--luxe-border-radius-lg);
-	max-height: 90vh;
-	overflow: hidden;
+	container-type: inline-size;
 
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: space_5;
+
+	overflow: auto;
 	width: 100%;
 	pointer-events: auto;
 	background-color: var(--luxe-modal-bg);
@@ -21,16 +21,7 @@
 	border: var(--luxe-modal-border-width) solid var(--luxe-modal-border-color);
 	border-radius: var(--luxe-modal-border-radius);
 	outline: 0;
-	padding: space_5 space_4;
-
-	@media (min-width: gridBreakpoints_lg) {
-		padding: space_5;
-	}
-	@media (min-width: gridBreakpoints_xxl) {
-		gap: space_6;
-		max-height: 80vh;
-		padding: space_6 space_5;
-	}
+	padding: 0;
 
 	header {
 		display: flex;
@@ -57,10 +48,20 @@
 	flex: 1 1 auto;
 	overflow: auto;
 	gap: space_6;
+	padding: space_4 space_3;
 
-	@media (min-width: gridBreakpoints_lg) {
+	@container (min-width: gridBreakpoints_md) {
+		padding: space_4;
+	}
+
+	@container (min-width: gridBreakpoints_lg) {
 		flex-direction: row;
-		/*padding-top: space_5;*/
+		padding: space_5;
+	}
+
+	@container (min-width: gridBreakpoints_xxl) {
+		max-height: 80vh;
+		padding: space_6 space_5;
 	}
 }
 
@@ -68,25 +69,31 @@
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+
 	> h3 {
 		margin: space_0;
 	}
+
 	> p {
 		--luxe-text-opacity: 1;
 		color: var(--luxe-secondary-color);
 		font-size: fs_small;
 	}
+
 	> div {
 		display: flex;
 		flex-direction: column;
 		gap: space_2;
 	}
 }
+
 .loginFormSection {
 	flex: 1;
+
 	> h3 {
 		margin: space_0;
 	}
+
 	> p {
 		--luxe-text-opacity: 1;
 		color: var(--luxe-secondary-color);

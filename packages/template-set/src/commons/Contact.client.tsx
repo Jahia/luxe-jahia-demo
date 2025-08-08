@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HeadingSection } from "~/commons/HeadingSection";
 import { t } from "i18next";
 import classes from "./Contact.client.module.css";
-import { DialogClient } from "~/commons/Dialog.client";
+import { Dialog } from "design-system";
 import ContactFormClient from "~/components/Form/Contact/Contact.client";
 
 export interface ContactProps {
@@ -46,13 +46,17 @@ const ContactClient = ({
 				{t("section.contact.btn")}
 			</button>
 
-			<DialogClient isOpen={isOpen} onClose={() => setIsOpen(false)} className={classes.dialog}>
+			<Dialog
+				title={t("form.contact.dialog.title")}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				className={classes.dialog}
+			>
 				{/* Contact form inside the dialog */}
 				<div className={classes.formWrapper}>
-					<h2 className={classes.title}>{t("form.contact.dialog.title")}</h2>
 					<ContactFormClient target={contactTarget} feedbackMsg={feedbackMsg} mode={contextMode} />
 				</div>
-			</DialogClient>
+			</Dialog>
 		</>
 	);
 };

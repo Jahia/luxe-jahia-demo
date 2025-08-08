@@ -6,7 +6,7 @@ import type { JahiaUrlsProps, LoginPersonaProps } from "./types";
 import classes from "~/components/Form/Login/Login.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import clsx from "clsx";
-import { DialogClient } from "~/commons/Dialog.client";
+import { Dialog } from "design-system";
 
 interface LoginClientProps {
 	isLoggedIn: boolean;
@@ -92,18 +92,21 @@ export default function LoginClient({
 				</>
 			)}
 			{/*Dialog must be displayed all time to update the dialog open state and remove css class blocking scroll */}
-			<DialogClient isOpen={isOpen} onClose={() => setIsOpen(false)} onKeyDown={handleKeyDown}>
-				<div className={classes.content} aria-labelledby="loginModalTitle">
-					<LoginFormClient
-						loginUrl={urls.loginUrl}
-						isShowRememberMe={isShowRememberMe}
-						setUser={setUser}
-						handleLoggedIn={handleLoggedIn}
-						siteKey={siteKey}
-						persona={persona}
-					/>
-				</div>
-			</DialogClient>
+			<Dialog
+				title={t("form.login.login")}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				onKeyDown={handleKeyDown}
+			>
+				<LoginFormClient
+					loginUrl={urls.loginUrl}
+					isShowRememberMe={isShowRememberMe}
+					setUser={setUser}
+					handleLoggedIn={handleLoggedIn}
+					siteKey={siteKey}
+					persona={persona}
+				/>
+			</Dialog>
 		</>
 	);
 }

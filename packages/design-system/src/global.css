@@ -11,3 +11,10 @@ h6 {
 	font-family: var(--luxe-font-family-display);
 	color: var(--luxe-color-heading);
 }
+
+.capitalize {
+	display: inline-block;
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}

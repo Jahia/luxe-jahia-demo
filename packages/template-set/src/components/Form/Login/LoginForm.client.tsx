@@ -50,11 +50,6 @@ const LoginFormClient = ({
 
 	return (
 		<div className={classes.main}>
-			<header>
-				<h2 id="loginModalTitle" className={classes.title}>
-					{t("form.login.login")}
-				</h2>
-			</header>
 			<div className={classes.body}>
 				<div className={classes.loginCardSection}>
 					<h3>{t("form.login.sections.persona.title")}</h3>

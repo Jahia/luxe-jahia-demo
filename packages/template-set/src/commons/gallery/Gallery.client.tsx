@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import classes from "./Gallery.client.module.css";
-import { DialogClient } from "~/commons/Dialog.client";
+import { Dialog } from "design-system";
 import { Slideshow } from "~/commons/gallery/Slideshow.client";
 import type { PictureProps } from "~/commons/types";
 import { Picture } from "~/commons/Picture";
@@ -9,13 +9,14 @@ import { useMediaQuery } from "~/commons/hooks/useMediaQuery.client";
 import { useProgressiveVisibleList } from "~/commons/hooks/useProgressiveVisibleList.client";
 
 interface GalleryProps {
+	title: string;
 	data: PictureProps[];
 	className?: string;
 }
 
 const visibilityDelayMs = 100;
 
-const GalleryClient = ({ data, className }: GalleryProps) => {
+const GalleryClient = ({ title, data, className }: GalleryProps) => {
 	const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [hydrated, setHydrated] = useState(false);
@@ -45,9 +46,11 @@ const GalleryClient = ({ data, className }: GalleryProps) => {
 		setIsOpen(true);
 	};
 
-	const closeDialog = () => {
-		setSelectedImageIndex(null);
-		setIsOpen(false);
+	const closeDialog = (value: boolean) => {
+		if (!value) {
+			setSelectedImageIndex(null);
+			setIsOpen(false);
+		}
 	};
 
 	return (
@@ -90,18 +93,18 @@ const GalleryClient = ({ data, className }: GalleryProps) => {
 				</ul>
 			)}
 
-			<DialogClient
+			<Dialog
+				title={title}
 				className={clsx(classes.dialog, className)}
 				isOpen={isOpen}
-				onClose={closeDialog}
+				setIsOpen={closeDialog}
 			>
 				<Slideshow
 					data={data}
 					selectedImageIndex={selectedImageIndex}
 					setSelectedImageIndex={setSelectedImageIndex}
-					onClose={closeDialog}
 				/>
-			</DialogClient>
+			</Dialog>
 		</div>
 	);
 };
