@@ -4,12 +4,6 @@
 
 .form {
 	composes: root from "~/templates/css/form.module.css";
-	overflow: auto;
-	position: relative;
-	padding: space_4 space_3;
-	@container (min-width: gridBreakpoints_lg) {
-		padding: space_5;
-	}
 	textarea {
 		resize: vertical;
 	}
