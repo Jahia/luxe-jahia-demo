@@ -7,4 +7,5 @@
 - excludeNodes (weakreference) multiple < jnt:page, luxemix:queryContent
 - filter (weakreference, category[autoSelectParent=false]) multiple
 - noResultText (string) i18n indexed=no
+- facetFields (string, choicelist[nodetypeproperties='isFacetable=true',dependentProperties='type']) multiple
 - j:subNodesView (string, choicelist[templates=subnodes,resourceBundle,image,dependentProperties='type']) nofulltext
