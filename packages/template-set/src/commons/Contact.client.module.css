@@ -1,3 +1,7 @@
+@value variables: "~/templates/css/variables.css";
+
+@value gridBreakpoints_lg, space_3, space_4, space_5 from variables;
+
 .row {
 	display: flex;
 	flex-direction: column;
@@ -37,4 +41,8 @@ section .btn {
 	border-radius: 8px;
 	max-height: 100%;
 	overflow: auto;
+	padding: space_4 space_3;
+	@container (min-width: gridBreakpoints_lg) {
+		padding: space_5;
+	}
 }
