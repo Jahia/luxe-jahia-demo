@@ -14,19 +14,20 @@ import {
 	gqlNodesQueryString,
 	mapToJCRQueryBuilderProps,
 } from "~/components/JcrQuery/utils/index.ts";
-import type { FacetProps, JcrQueryProps, RenderNodeProps } from "./types";
-import SearchClient from "~/components/JcrQuery/Search/Search.client";
+import type {
+	FacetProps,
+	JcrQueryProps,
+	RenderNodeProps,
+	SearchEstateConstraintsProps,
+} from "./types";
+import SearchEstateClient from "~/components/JcrQuery/SearchEstate/SearchEstate.client.tsx";
 import { JCRQueryBuilder } from "~/components/JcrQuery/utils/JCRQueryBuilder";
-
-// const facetTypeMap: Record<string, string[]> = {
-//   ["luxe:estate"]:["price",""]
-// }
 
 jahiaComponent(
 	{
 		nodeType: "luxe:jcrQuery",
-		name: "facets",
-		displayName: "Facets",
+		name: "searchEstateFullPage",
+		displayName: "Search Estate Full Page",
 		componentType: "view",
 	},
 	(
@@ -75,15 +76,6 @@ jahiaComponent(
 		const workspace =
 			currentNode.getSession().getWorkspace().getName() === "default" ? "EDIT" : "LIVE";
 
-		const gqlProperties = useGQLQuery({
-			query: gqlContentPropertiesQueryString,
-			variables: {
-				workspace,
-				name: type,
-				language: currentLocaleCode,
-			},
-		});
-
 		let facets: FacetProps[] = [];
 		if (Array.isArray(facetFields) && facetFields.length > 0) {
 			/*TODO remove isActive*/
@@ -91,7 +83,7 @@ jahiaComponent(
 				?.filter(
 					(facet: FacetProps) => facet.type != "WEAKREFERENCE" && facetFields.includes(facet.id),
 				)
-				.map((facet: FacetProps) => ({ ...facet, isActive: true, values: [], constraints: [] }))
+				.map((facet: FacetProps) => ({ ...facet, isActive: true, values: [] }))
 				.sort((a, b) => facetFields.indexOf(a.id) - facetFields.indexOf(b.id));
 		}
 
@@ -134,7 +126,7 @@ jahiaComponent(
 
 		return (
 			<HydrateInBrowser
-				child={SearchClient}
+				child={SearchEstateClient}
 				props={{
 					jcrQueryBuilderProps,
 					nodes,

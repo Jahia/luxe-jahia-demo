@@ -189,54 +189,56 @@ export function mapToJCRQueryBuilderProps({
 	t,
 	offset = 0,
 }: BuildJCRQueryProps): JCRQueryConfig {
-	// const warn: string[] = [];
-	const workspace =
+	// Derive workspace once
+	const workspace: JCRQueryConfig["workspace"] =
 		currentNode.getSession().getWorkspace().getName() === "default" ? "EDIT" : "LIVE";
-	const currentLocale = renderContext.getMainResourceLocale();
-	const currentLocaleCode = currentLocale.toString();
 
-	const categories =
-		luxeQuery.filter
-			?.map((cat) => {
-				if (!cat) {
-					// warn.push(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
-					console.warn(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
-					return null;
-				}
-				return { id: cat.getIdentifier() };
-			})
-			.filter((c): c is { id: string } => !!c) || [];
+	// Cache locale and language code once
+	const locale = renderContext.getMainResourceLocale();
+	const language = locale.toString();
+	const langCode = locale.getLanguage();
 
-	const excludeNodes =
-		luxeQuery.excludeNodes
-			?.map((node) => {
-				if (!node) {
-					// warn.push(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
-					console.warn(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
-					return null;
-				}
-				const translationNode = node.getNode(
-					`j:translation_${renderContext.getMainResourceLocale().getLanguage()}`,
-				);
-				const translationId = translationNode?.getIdentifier();
-				return translationId
-					? { id: node.getIdentifier(), translationId }
-					: { id: node.getIdentifier() };
-			})
-			.filter((n): n is { id: string; translationId?: string } => !!n && !!n?.id) || [];
+	// Build categories with a single pass (skip nulls + warn)
+	const categories = (luxeQuery.filter ?? []).reduce<{ id: string }[]>((acc, node) => {
+		if (!node) {
+			console.warn(t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] }));
+			return acc;
+		}
+		acc.push({ id: node.getIdentifier() });
+		return acc;
+	}, []);
+
+	// Build exclusions in one pass (optional translationId + warn)
+	const excludeNodes = (luxeQuery.excludeNodes ?? []).reduce<
+		{ id: string; translationId?: string }[]
+	>((acc, node) => {
+		if (!node) {
+			console.warn(t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] }));
+			return acc;
+		}
+		const translationId =
+			node.getNode?.(`j:translation_${langCode}`)?.getIdentifier?.() ?? undefined;
+		acc.push(
+			translationId ? { id: node.getIdentifier(), translationId } : { id: node.getIdentifier() },
+		);
+		return acc;
+	}, []);
+
+	// Prefer explicit start node path, fallback to site root
+	const startNodePath = luxeQuery.startNode?.getPath() ?? currentNode.getResolveSite().getPath();
 
 	return {
 		workspace,
 		type: luxeQuery.type,
-		startNodePath: luxeQuery.startNode?.getPath() || currentNode.getResolveSite().getPath(),
+		startNodePath,
 		criteria: luxeQuery.criteria,
 		sortDirection: luxeQuery.sortDirection,
 		categories,
-		limit: luxeQuery.maxItems,
 		excludeNodes,
 		uuid: currentNode.getIdentifier(),
 		subNodeView: luxeQuery["j:subNodesView"] || "default",
-		language: currentLocaleCode,
+		language,
+		limit: luxeQuery.maxItems,
 		offset,
 	};
 }

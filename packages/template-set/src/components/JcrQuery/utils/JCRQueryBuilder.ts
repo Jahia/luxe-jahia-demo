@@ -2,7 +2,7 @@ import type { Constraint, RenderNodeProps } from "~/components/JcrQuery/types";
 import { gqlNodesQueryString } from "~/components/JcrQuery/utils/index.ts";
 
 export type JCRQueryConfig = {
-	workspace: string;
+	workspace: "EDIT" | "LIVE";
 	type: string;
 	startNodePath: string;
 	criteria: "jcr:created" | "jcr:lastModified" | "j:lastPublished";

@@ -20,16 +20,12 @@ export type Constraint = {
 	value: string | number | boolean | Date;
 };
 
-export interface FacetProps {
+export interface SearchEstateConstraintsProps {
 	id: string;
 	label: string;
 	type: string;
-	isHidden: boolean;
-	isMandatory: boolean;
 	isMultiple: boolean;
-	isI18n: boolean;
-	isActive: boolean;
-	values: (string | number | boolean | Date)[];
+	values: (string | number)[];
 	constraints: Constraint[];
 }
 

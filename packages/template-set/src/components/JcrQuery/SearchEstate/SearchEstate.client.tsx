@@ -1,21 +1,20 @@
 import { useState, useMemo } from "react";
 import type { FacetProps, RenderNodeProps } from "~/components/JcrQuery/types";
 import { JCRQueryBuilder, type JCRQueryConfig } from "~/components/JcrQuery/utils/JCRQueryBuilder";
-import SearchForm from "~/components/JcrQuery/Search/SearchForm.client.tsx";
-import SearchResults from "~/components/JcrQuery/Search/SearchResults.client.tsx";
-import classes from "./Search.client.module.css";
+import SearchForm from "~/components/JcrQuery/SearchEstate/SearchEstateForm.client.tsx";
+import SearchResults from "~/components/JcrQuery/SearchEstate/SearchEstateResults.client.tsx";
+import classes from "./SearchEstate.client.module.css";
 
-export default function SearchClient({
+export default function SearchEstateClient({
 	jcrQueryBuilderProps,
 	nodes: initialNodes,
-	facets,
+	constraints,
 }: {
 	jcrQueryBuilderProps: JCRQueryConfig;
 	nodes: RenderNodeProps[];
-	facets: FacetProps[];
+	constraints: FacetProps[];
 }) {
 	const builder = useMemo(() => new JCRQueryBuilder(jcrQueryBuilderProps), [jcrQueryBuilderProps]);
-	// const { jcrQuery } = useMemo(() => builder.build(), [builder]);
 	const [nodes, setNodes] = useState<RenderNodeProps[]>(initialNodes);
 
 	return (
