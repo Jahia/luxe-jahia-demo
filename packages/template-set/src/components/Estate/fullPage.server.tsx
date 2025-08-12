@@ -5,7 +5,8 @@ import {
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
-import { Col, List, PageTitle, type PictureProps, Row, Section } from "~/commons";
+import { Col, List, PageTitle, Row, Section } from "~/commons";
+import type { PictureProps } from "design-system";
 import GalleryClient from "~/commons/gallery/Gallery.client";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";

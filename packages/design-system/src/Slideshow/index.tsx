@@ -1,8 +1,7 @@
-import type { PictureProps } from "~/commons/types";
-import classes from "./Slideshow.client.module.css";
-import clsx from "clsx";
-import { Picture } from "~/commons/Picture";
 import React from "react";
+import classes from "./styles..module.css";
+import clsx from "clsx";
+import { Picture, type PictureProps } from "../index.ts";
 
 interface SlideshowProps {
 	data: PictureProps[];
@@ -59,7 +58,6 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 					sources={data[selectedImageIndex].sources}
 					height={data[selectedImageIndex].height}
 				/>
-				{/*<img src={data[selectedImageIndex].src} alt={data[selectedImageIndex].alt} />*/}
 
 				<button
 					type="button"

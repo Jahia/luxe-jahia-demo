@@ -1,6 +1,6 @@
 import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
 import type { HeaderProps } from "./types";
-import { Picture } from "~/commons/Picture";
+import { Picture } from "design-system";
 import classes from "./default.module.css";
 
 jahiaComponent(

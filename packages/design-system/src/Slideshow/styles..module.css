@@ -1,6 +1,5 @@
-@value variables: "~/templates/css/variables.css";
-
-@value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_lg, space_3, space_4 from variables;
+@value variables: "../variables.module.css";
+@value breakpoints_sm, breakpoints_md, breakpoints_lg, space_3, space_4 from variables;
 
 .container {
 	container-type: inline-size;
@@ -26,16 +25,15 @@
 		height: 100%;
 	}
 
-	@container (min-width: gridBreakpoints_sm) {
+	@container (min-width: breakpoints_sm) {
 		flex-direction: row;
 		gap: space_4;
-
 		img {
 			max-height: 80vh;
 		}
 	}
 
-	@container (min-width: gridBreakpoints_lg) {
+	@container (min-width: breakpoints_lg) {
 		/*each nav button area is 104px, so remove 2 btns -> 208px*/
 		width: calc(100% + 208px);
 		translate: -104px;
@@ -76,7 +74,7 @@
 	width: 44px;
 	font-size: 60px;
 
-	@container (min-width: gridBreakpoints_sm) {
+	@container (min-width: breakpoints_sm) {
 		& {
 			width: 80px;
 			font-size: 120px;
@@ -91,7 +89,7 @@
 	margin: space_3 0 0 0;
 	word-break: break-word;
 
-	@container (min-width: gridBreakpoints_md) {
+	@container (min-width: breakpoints_md) {
 		font-size: 15px;
 	}
 }
