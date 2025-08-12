@@ -14,6 +14,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	gap: space_4;
 
 	&.right {
 		order: -1;
@@ -22,11 +23,6 @@
 
 .title {
 	composes: hasDiamond from "~/templates/css/global.module.css";
-	margin-bottom: space_4;
-}
-
-.link {
-	composes: capitalize from "~/templates/css/global.module.css";
 }
 
 @media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
