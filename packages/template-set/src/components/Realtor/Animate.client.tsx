@@ -1,6 +1,6 @@
 import classes from "~/components/Realtor/default.module.css";
 import { useRef, useState } from "react";
-import type { ImageDataProps } from "~/commons/types";
+import type { ImageDataProps } from "design-system";
 
 interface AnimateClientProps {
 	firstName: string;
