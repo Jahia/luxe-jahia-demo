@@ -4,6 +4,7 @@
 .container {
 	container-type: inline-size;
 }
+
 .contentImage {
 	display: flex;
 	flex-direction: column;
@@ -19,6 +20,7 @@
 
 	img {
 		object-fit: contain;
+		background: rgba(0, 0, 0, .3);
 		max-width: 90vw;
 		max-height: 50vh;
 		width: 100%;

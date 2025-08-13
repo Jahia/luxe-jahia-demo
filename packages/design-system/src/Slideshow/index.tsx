@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./styles..module.css";
+import classes from "./styles.module.css";
 import clsx from "clsx";
 import { Picture, type PictureProps } from "../index.ts";
 
