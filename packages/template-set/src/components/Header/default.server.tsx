@@ -20,10 +20,8 @@ jahiaComponent(
             to enable live image resizing performed by the DAM provider. */}
 				{imageNode && (
 					<Picture
-						image={{
-							src: `${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`,
-							alt: imageNode.getDisplayableName(),
-						}}
+						src={`${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`}
+						alt={imageNode.getDisplayableName()}
 						sources={[
 							{
 								media: "(min-width: 960px)",

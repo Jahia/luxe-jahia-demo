@@ -8,5 +8,6 @@ export { HighlightNumber } from "./HighlightNumber/index.tsx";
 export { Dialog } from "./Dialog/index.tsx";
 export { Picture } from "./Picture/index.tsx";
 export { Slideshow } from "./Slideshow/index.tsx";
+export { Figure } from "./Figure/index.tsx";
 
 export type { PictureProps, ImageDataProps } from "./Picture/index.tsx";

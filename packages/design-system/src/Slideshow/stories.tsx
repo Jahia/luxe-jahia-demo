@@ -9,7 +9,8 @@ import type { PictureProps } from "../index.ts";
 // Demo data
 const data: PictureProps[] = [
 	{
-		image: { src: "https://picsum.photos/800/600?random=1", alt: "Sample image 1" },
+		src: "https://picsum.photos/800/600?random=1",
+		alt: "Sample image 1",
 		sources: [
 			{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=1" },
 			{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=1" },
@@ -17,7 +18,8 @@ const data: PictureProps[] = [
 		height: "600px",
 	},
 	{
-		image: { src: "https://picsum.photos/800/600?random=2", alt: "Sample image 2" },
+		src: "https://picsum.photos/800/600?random=2",
+		alt: "Sample image 2",
 		sources: [
 			{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=2" },
 			{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=2" },
@@ -25,7 +27,8 @@ const data: PictureProps[] = [
 		height: "600px",
 	},
 	{
-		image: { src: "https://picsum.photos/800/600?random=3", alt: "Sample image 3" },
+		src: "https://picsum.photos/800/600?random=3",
+		alt: "Sample image 3",
 		sources: [
 			{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=3" },
 			{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=3" },

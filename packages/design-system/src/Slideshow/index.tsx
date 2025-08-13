@@ -54,7 +54,8 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 				</button>
 
 				<Picture
-					image={data[selectedImageIndex].image}
+					src={data[selectedImageIndex].src}
+					alt={data[selectedImageIndex].alt}
 					sources={data[selectedImageIndex].sources}
 					height={data[selectedImageIndex].height}
 				/>

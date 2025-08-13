@@ -13,6 +13,17 @@ import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+import { imageNodeToImageProps } from "~/commons/libs/imageNodeToImgProps.tsx";
+import type { ImageProps, ImageConfig } from "~/commons/libs/imageNodeToImgProps.tsx";
+
+const GALLERY_PICTURE_CONFIG: ImageConfig = {
+	height: 695,
+	baseWidth: 480,
+	sources: [
+		{ media: "(min-width: 960px)", width: 1920 },
+		{ media: "(min-width: 480px)", width: 960 },
+	],
+};
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -41,32 +52,20 @@ jahiaComponent(
 
 		const galleryImages: PictureProps[] = images
 			.filter((imageNode) => Boolean(imageNode))
-			.map((imageNode) => {
-				server.render.addCacheDependency({ node: imageNode }, renderContext);
-				return {
-					image: {
-						src: `${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`,
-						alt: t("alt.estate", { estate: title }), //imageNode.getDisplayableName(),
-					},
-					sources: [
-						{
-							media: "(min-width: 960px)",
-							srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "1920" } })}?w=1920&h=695`,
-						},
-						{
-							media: "(min-width: 480px)",
-							srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "960" } })}?w=960&h=695`,
-						},
-					],
-				};
-			});
+			.map(
+				(imageNode) =>
+					imageNodeToImageProps({
+						imageNode,
+						alt: t("alt.estate", { estate: title }),
+						renderContext,
+						config: GALLERY_PICTURE_CONFIG,
+					}) as PictureProps,
+			);
 
 		if (!galleryImages.length) {
 			galleryImages.push({
-				image: {
-					src: buildModuleFileUrl(placeholder),
-					alt: "Placeholder",
-				},
+				src: buildModuleFileUrl(placeholder),
+				alt: "Placeholder",
 			});
 		}
 

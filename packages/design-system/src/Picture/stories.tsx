@@ -6,7 +6,8 @@ import { Picture, type PictureProps } from "./index.tsx";
 
 // Demo data
 const args: PictureProps = {
-	image: { src: "https://picsum.photos/800/600?random=1", alt: "Sample image 1" },
+	src: "https://picsum.photos/800/600?random=1",
+	alt: "Sample image 1",
 	sources: [
 		{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=1" },
 		{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=1" },

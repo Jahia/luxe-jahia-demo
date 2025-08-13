@@ -1,5 +1,6 @@
 import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { Figure, Row } from "~/commons";
+import { Row } from "~/commons";
+import { Figure } from "design-system";
 import type { HeaderProps } from "./types";
 import classes from "./textDown.module.css";
 

@@ -5,11 +5,12 @@ import {
 	Render,
 	server,
 } from "@jahia/javascript-modules-library";
-import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
+import { Col, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+import { Figure } from "design-system";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(

@@ -33,7 +33,7 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 	const thumbnailsCount = isXlAndUp ? 4 : isMdAndUp ? 2 : 1;
 	const maxThumbnails = thumbnailsCount + 1;
 
-	const thumbKeys = data.slice(1, maxThumbnails).map((d) => d.image.src);
+	const thumbKeys = data.slice(1, maxThumbnails).map((d) => d.src);
 	const hasMore = data.length > maxThumbnails;
 	const allKeys = hasMore ? [...thumbKeys, "_more"] : thumbKeys;
 
@@ -54,7 +54,8 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 	return (
 		<div className={clsx(classes.main, className)}>
 			<Picture
-				image={data[0].image}
+				src={data[0].src}
+				alt={data[0].alt}
 				sources={data[0].sources}
 				height={data[0].height}
 				className={clsx(classes.picture, className)}
@@ -62,18 +63,18 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 			/>
 			{data.length > 1 && (
 				<ul className={classes.thumbnails}>
-					{data.slice(1, maxThumbnails).map(({ image }, index) => {
+					{data.slice(1, maxThumbnails).map(({ src, alt }, index) => {
 						const actualIndex = index + 1; // Fix index offset
 						if (index < 4) {
 							return (
 								<li
-									key={image.src}
+									key={src}
 									className={clsx(classes.item, {
-										[classes.visible]: visibleThumbs.includes(image.src),
+										[classes.visible]: visibleThumbs.includes(src),
 									})}
 									onClick={() => openDialog(actualIndex)}
 								>
-									<img src={image.src} alt={image.alt} />
+									<img src={src} alt={alt} />
 								</li>
 							);
 						} else {

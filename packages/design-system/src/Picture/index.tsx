@@ -11,18 +11,19 @@ type PictureSource = {
 };
 
 export interface PictureProps extends React.ComponentPropsWithoutRef<"picture"> {
-	image: ImageDataProps;
+	src: string;
+	alt: string;
 	sources?: PictureSource[];
 	height?: string;
 }
 
-export const Picture = ({ image, sources, height, ...props }: PictureProps) => {
+export const Picture = ({ src, alt, sources, height, ...props }: PictureProps) => {
 	return (
 		<picture {...props}>
 			{sources?.map((source) => (
 				<source key={source.media} media={source.media} srcSet={source.srcSet} />
 			))}
-			<img src={image.src} alt={image.alt} height={height} style={{ width: "100%" }} />
+			<img src={src} alt={alt} height={height} style={{ width: "100%" }} />
 		</picture>
 	);
 };
