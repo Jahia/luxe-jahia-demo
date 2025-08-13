@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./styles.module.css";
 import clsx from "clsx";
-import { Picture, type PictureProps } from "../index.ts";
+import { Picture, type PictureProps } from "../Picture/index.tsx";
 
 interface SlideshowProps {
 	data: PictureProps[];
