@@ -15,8 +15,10 @@
 		line-height: 1.2;
 		font-family: var(--luxe-font-family-display);
 	}
-
+}
+.picture {
 	img {
+		height:695px;
 		border-radius: 0;
 	}
 }

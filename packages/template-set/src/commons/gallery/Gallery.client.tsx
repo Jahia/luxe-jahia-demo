@@ -8,13 +8,13 @@ import { useProgressiveVisibleList } from "~/commons/hooks/useProgressiveVisible
 
 interface GalleryProps {
 	title: string;
-	data: PictureProps[];
+	images: PictureProps[];
 	className?: string;
 }
 
 const visibilityDelayMs = 100;
 
-const GalleryClient = ({ title, data, className }: GalleryProps) => {
+const GalleryClient = ({ title, images, className }: GalleryProps) => {
 	const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [hydrated, setHydrated] = useState(false);
@@ -23,18 +23,18 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 		setHydrated(true);
 	}, []);
 
-	if (Array.isArray(data) === false || data.length === 0) {
+	if (Array.isArray(images) === false || images.length === 0) {
 		return null;
 	}
-
+	const mainImage = images[0];
 	const isMdAndUp = useMediaQuery("(min-width: 768px)");
 	const isXlAndUp = useMediaQuery("(min-width: 1200px)");
 
 	const thumbnailsCount = isXlAndUp ? 4 : isMdAndUp ? 2 : 1;
 	const maxThumbnails = thumbnailsCount + 1;
 
-	const thumbKeys = data.slice(1, maxThumbnails).map((d) => d.src);
-	const hasMore = data.length > maxThumbnails;
+	const thumbKeys = images.slice(1, maxThumbnails).map((d) => d.src);
+	const hasMore = images.length > maxThumbnails;
 	const allKeys = hasMore ? [...thumbKeys, "_more"] : thumbKeys;
 
 	const visibleThumbs = useProgressiveVisibleList(allKeys, visibilityDelayMs);
@@ -54,16 +54,17 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 	return (
 		<div className={clsx(classes.main, className)}>
 			<Picture
-				src={data[0].src}
-				alt={data[0].alt}
-				sources={data[0].sources}
-				height={data[0].height}
+				src={mainImage.src}
+				alt={mainImage.alt}
+				sources={mainImage.sources}
+				width={mainImage.width}
+				height={mainImage.height}
 				className={clsx(classes.picture, className)}
 				onClick={() => openDialog(0)}
 			/>
-			{data.length > 1 && (
+			{images.length > 1 && (
 				<ul className={classes.thumbnails}>
-					{data.slice(1, maxThumbnails).map(({ src, alt }, index) => {
+					{images.slice(1, maxThumbnails).map(({ src, alt }, index) => {
 						const actualIndex = index + 1; // Fix index offset
 						if (index < 4) {
 							return (
@@ -81,12 +82,12 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 							return null;
 						}
 					})}
-					{hydrated && data.length > maxThumbnails && (
+					{hydrated && images.length > maxThumbnails && (
 						<li
 							className={clsx(classes.more, { [classes.visible]: visibleThumbs.includes("_more") })}
 							onClick={() => openDialog(maxThumbnails)}
 						>
-							<span>+{data.length - maxThumbnails}</span>
+							<span>+{images.length - maxThumbnails}</span>
 						</li>
 					)}
 				</ul>
@@ -99,7 +100,7 @@ const GalleryClient = ({ title, data, className }: GalleryProps) => {
 				setIsOpen={closeDialog}
 			>
 				<Slideshow
-					data={data}
+					images={images}
 					selectedImageIndex={selectedImageIndex}
 					setSelectedImageIndex={setSelectedImageIndex}
 				/>

@@ -4,27 +4,33 @@ import clsx from "clsx";
 import { Picture, type PictureProps } from "../Picture";
 
 interface SlideshowProps {
-	data: PictureProps[];
+	images: PictureProps[];
 	selectedImageIndex: number | null;
 	setSelectedImageIndex: (index: number | null) => void;
 }
 
-export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: SlideshowProps) => {
+export const Slideshow = ({
+	images,
+	selectedImageIndex,
+	setSelectedImageIndex,
+}: SlideshowProps) => {
 	if (
-		!data?.length ||
+		!images?.length ||
 		selectedImageIndex === null ||
 		selectedImageIndex < 0 ||
-		selectedImageIndex >= data.length
+		selectedImageIndex >= images.length
 	) {
 		return null;
 	}
+
+	const selectedImage = images[selectedImageIndex];
 
 	const navigateTo = (direction: "prev" | "next") => {
 		if (selectedImageIndex === null) return;
 
 		if (direction === "prev" && selectedImageIndex > 0) {
 			setSelectedImageIndex(selectedImageIndex - 1);
-		} else if (direction === "next" && selectedImageIndex < data.length - 1) {
+		} else if (direction === "next" && selectedImageIndex < images.length - 1) {
 			setSelectedImageIndex(selectedImageIndex + 1);
 		}
 	};
@@ -54,10 +60,11 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 				</button>
 
 				<Picture
-					src={data[selectedImageIndex].src}
-					alt={data[selectedImageIndex].alt}
-					sources={data[selectedImageIndex].sources}
-					height={data[selectedImageIndex].height}
+					src={selectedImage.src}
+					alt={selectedImage.alt}
+					sources={selectedImage.sources}
+					width={selectedImage.width}
+					height={selectedImage.height}
 				/>
 
 				<button
@@ -65,7 +72,7 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 					className={clsx(classes.button, classes.buttonNav)}
 					onClick={() => navigateTo("next")}
 					aria-label="Next image"
-					disabled={selectedImageIndex === data.length - 1}
+					disabled={selectedImageIndex === images.length - 1}
 				>
 					›
 				</button>
@@ -73,7 +80,7 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 
 			<div className={classes.info}>
 				<span>
-					{selectedImageIndex + 1} / {data.length}
+					{selectedImageIndex + 1} / {images.length}
 				</span>
 			</div>
 		</div>

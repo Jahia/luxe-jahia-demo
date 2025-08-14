@@ -6,7 +6,19 @@
 	display: flex;
 	margin-bottom: space_5;
 }
-
+.gallery{
+	img {
+		width: 100%;
+		max-width: 100%;
+		object-fit: cover;
+		border-radius: 16px;
+	}
+	> picture {
+		img {
+			height: 695px;
+		}
+	}
+}
 .title {
 	padding-bottom: space_0;
 }

@@ -12,7 +12,8 @@ const args: PictureProps = {
 		{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=1" },
 		{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=1" },
 	],
-	height: "600px",
+	width: 800,
+	height: 600,
 };
 
 const storybookStyles: React.CSSProperties = {

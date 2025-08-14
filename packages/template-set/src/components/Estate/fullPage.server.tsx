@@ -1,6 +1,5 @@
 import {
 	buildModuleFileUrl,
-	buildNodeUrl,
 	HydrateInBrowser,
 	jahiaComponent,
 	server,
@@ -13,15 +12,15 @@ import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
-import { imageNodeToImageProps } from "~/commons/libs/imageNodeToImgProps.tsx";
-import type { ImageProps, ImageConfig } from "~/commons/libs/imageNodeToImgProps.tsx";
+import { imageNodeToImageProps } from "~/commons/libs/imageNodeToImgProps";
+import type { ImageConfig } from "~/commons/libs/imageNodeToImgProps/types.ts";
 
 const GALLERY_PICTURE_CONFIG: ImageConfig = {
-	height: 695,
-	baseWidth: 480,
+	baseWidth: 360,
 	sources: [
-		{ media: "(min-width: 960px)", width: 1920 },
-		{ media: "(min-width: 480px)", width: 960 },
+		{ media: "(min-width: 1440px)", width: 1920 },
+		{ media: "(min-width: 720px)", width: 1440 },
+		{ media: "(min-width: 360px)", width: 720 },
 	],
 };
 
@@ -52,15 +51,15 @@ jahiaComponent(
 
 		const galleryImages: PictureProps[] = images
 			.filter((imageNode) => Boolean(imageNode))
-			.map(
-				(imageNode) =>
-					imageNodeToImageProps({
-						imageNode,
-						alt: t("alt.estate", { estate: title }),
-						renderContext,
-						config: GALLERY_PICTURE_CONFIG,
-					}) as PictureProps,
-			);
+			.map((imageNode) => {
+				// Cache dependency for all nodes involved
+				server.render.addCacheDependency({ node: imageNode }, renderContext);
+				return imageNodeToImageProps({
+					imageNode,
+					alt: t("alt.estate", { estate: title }),
+					config: GALLERY_PICTURE_CONFIG,
+				}) as PictureProps;
+			});
 
 		if (!galleryImages.length) {
 			galleryImages.push({
@@ -119,7 +118,10 @@ jahiaComponent(
 						<PageTitle title={title} className={classes.title} />
 					</header>
 					<Row>
-						<HydrateInBrowser child={GalleryClient} props={{ title, data: galleryImages }} />
+						<HydrateInBrowser
+							child={GalleryClient}
+							props={{ title, images: galleryImages, className: classes.gallery }}
+						/>
 					</Row>
 					<Row className={classes.rowDescription}>
 						<Col

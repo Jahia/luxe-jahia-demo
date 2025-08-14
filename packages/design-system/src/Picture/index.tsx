@@ -14,16 +14,17 @@ export interface PictureProps extends React.ComponentPropsWithoutRef<"picture"> 
 	src: string;
 	alt: string;
 	sources?: PictureSource[];
-	height?: string;
+	width?: number;
+	height?: number;
 }
 
-export const Picture = ({ src, alt, sources, height, ...props }: PictureProps) => {
+export const Picture = ({ src, alt, sources, width, height, ...props }: PictureProps) => {
 	return (
 		<picture {...props}>
 			{sources?.map((source) => (
 				<source key={source.media} media={source.media} srcSet={source.srcSet} />
 			))}
-			<img src={src} alt={alt} height={height} style={{ width: "100%" }} />
+			<img src={src} alt={alt} width={width} height={height} />
 		</picture>
 	);
 };

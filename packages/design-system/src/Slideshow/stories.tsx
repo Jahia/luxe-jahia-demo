@@ -7,7 +7,7 @@ import type { PictureProps } from "../index.ts";
 // More on writing stories: https://storybook.js.org/docs/writing-stories
 
 // Demo data
-const data: PictureProps[] = [
+const images: PictureProps[] = [
 	{
 		src: "https://picsum.photos/800/600?random=1",
 		alt: "Sample image 1",
@@ -15,7 +15,8 @@ const data: PictureProps[] = [
 			{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=1" },
 			{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=1" },
 		],
-		height: "600px",
+		width: 800,
+		height: 600,
 	},
 	{
 		src: "https://picsum.photos/800/600?random=2",
@@ -24,7 +25,8 @@ const data: PictureProps[] = [
 			{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=2" },
 			{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=2" },
 		],
-		height: "600px",
+		width: 800,
+		height: 600,
 	},
 	{
 		src: "https://picsum.photos/800/600?random=3",
@@ -33,7 +35,8 @@ const data: PictureProps[] = [
 			{ media: "(min-width: 800px)", srcSet: "https://picsum.photos/800/600?random=3" },
 			{ media: "(min-width: 400px)", srcSet: "https://picsum.photos/400/300?random=3" },
 		],
-		height: "600px",
+		width: 800,
+		height: 600,
 	},
 ];
 
@@ -47,16 +50,16 @@ const storybookStyles: React.CSSProperties = {
 /**
  * Wrapper component used only for Storybook.
  * It owns the index state and forwards required props to Slideshow.
- * This keeps Storybook `args` minimal (only `data`), avoiding TS conflicts.
+ * This keeps Storybook `args` minimal (only `images`), avoiding TS conflicts.
  */
-function SlideshowStory({ data }: { data: PictureProps[] }) {
+function SlideshowStory({ images }: { images: PictureProps[] }) {
 	// Local state so Prev/Next buttons can change the slide
 	const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(0);
 
 	return (
 		<div style={storybookStyles}>
 			<Slideshow
-				data={data}
+				images={images}
 				selectedImageIndex={selectedImageIndex}
 				setSelectedImageIndex={setSelectedImageIndex}
 			/>
@@ -68,8 +71,8 @@ const meta = {
 	title: "Atoms/Slideshow",
 	component: SlideshowStory, // <-- Use the wrapper as the story component
 	args: {
-		// Only pass `data` through Storybook controls/args
-		data,
+		// Only pass `images` through Storybook controls/args
+		images,
 	},
 	parameters: {
 		// Optional: hide internal state props from controls if they appear
