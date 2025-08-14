@@ -4,46 +4,47 @@ import {
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
+import clsx from "clsx";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { TextIllustrated } from "./TextIllustrated";
+import { Col, Row } from "~/commons/index.ts";
+import { CTA, type CTAProps } from "~/mixins/CTA/index.tsx";
+import classes from "./component.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+
+type Props = {
+	title?: string;
+	text?: string;
+	image?: JCRNodeWrapper;
+	arrangement?: "left" | "right";
+} & CTAProps;
 
 jahiaComponent(
 	{
-		nodeType: "luxe:textIllustrated",
-		name: "default",
 		componentType: "view",
+		nodeType: "luxe:textIllustrated",
 	},
-	(
-		{
-			title,
-			text,
-			image: imageNode,
-			arrangement,
-		}: { title: string; text: string; image: JCRNodeWrapper; arrangement: "left" | "right" },
-		{ renderContext },
-	) => {
-		const image = {
-			src: buildModuleFileUrl(placeholder),
-			alt: "placeholder",
-		};
-
-		if (imageNode) {
-			image.src = buildNodeUrl(imageNode);
-			image.alt = imageNode.getDisplayableName();
-
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-		}
+	({ title, text, image, arrangement, ...props }: Props, { renderContext }) => {
+		if (image) server.render.addCacheDependency({ node: image }, renderContext);
 
 		return (
-			<TextIllustrated
-				{...{
-					title: title,
-					text: text,
-					arrangement: arrangement,
-					image,
-				}}
-			/>
+			<Row className={classes.main}>
+				<Col className={classes.image}>
+					<img
+						src={image ? buildNodeUrl(image) : buildModuleFileUrl(placeholder)}
+						alt={image?.getDisplayableName() || "Placeholder"}
+						height="480"
+					/>
+				</Col>
+				<Col className={clsx(classes.text, arrangement === "right" && classes.right)}>
+					<h2 className={classes.title}>{title}</h2>
+					{text && <div dangerouslySetInnerHTML={{ __html: text }} />}
+					{props.ctaType !== "none" && (
+						<p>
+							<CTA {...props} />
+						</p>
+					)}
+				</Col>
+			</Row>
 		);
 	},
 );
