@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Col, Row } from "~/commons/grid";
 import classes from "./TextIllustrated.module.css";
-import type { ImageDataProps } from "~/commons/types";
+import type { ImageDataProps } from "design-system";
 
 type textIllustratedTypes = {
 	title: string;

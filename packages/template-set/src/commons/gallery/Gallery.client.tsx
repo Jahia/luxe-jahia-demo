@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import classes from "./Gallery.client.module.css";
-import { Dialog } from "design-system";
-import { Slideshow } from "~/commons/gallery/Slideshow.client";
-import type { PictureProps } from "~/commons/types";
-import { Picture } from "~/commons/Picture";
+import { Picture, Dialog, Slideshow, type PictureProps } from "design-system";
+
 import { useMediaQuery } from "~/commons/hooks/useMediaQuery.client";
 import { useProgressiveVisibleList } from "~/commons/hooks/useProgressiveVisibleList.client";
 

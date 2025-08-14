@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import classes from "./Figure.module.css";
-import type { ImageDataProps } from "~/commons/types";
+import type { ImageDataProps } from "design-system";
 
 interface FigureProps extends ImageDataProps {
 	caption?: string;

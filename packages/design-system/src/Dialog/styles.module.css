@@ -55,9 +55,9 @@
 		color: var(--luxe-color-gray);
 		opacity: 0.6;
 		transition:
-				color 0.2s ease-in-out,
-				border-color 0.2s ease-in-out,
-				opacity 0.2s ease-in-out;
+			color 0.2s ease-in-out,
+			border-color 0.2s ease-in-out,
+			opacity 0.2s ease-in-out;
 		cursor: pointer;
 		z-index: 1001;
 
@@ -94,9 +94,9 @@
 
 	@container (min-width: breakpoints_lg) {
 		padding: space_4 0;
-		.heading  button {
-				font-weight: 700;
-			}
+		.heading button {
+			font-weight: 700;
+		}
 	}
 }
 

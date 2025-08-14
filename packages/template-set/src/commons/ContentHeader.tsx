@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import classes from "./ContentHeader.module.css";
-import type { ImageDataProps } from "~/commons/types";
+import type { ImageDataProps } from "design-system";
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export const ContentHeader = ({
 	title,
