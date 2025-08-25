@@ -1,15 +1,16 @@
 .card {
 	composes: card from "~/templates/css/global.module.css";
 	display: flex;
+
+	.image {
+		width: 200px;
+		aspect-ratio: 1;
+		height: auto;
+		margin-right: 1.5rem;
+	}
 }
 
-.image {
-	width: 200px;
-	height: 200px;
-	margin-right: 1.5rem;
-}
-
-.main {
+.containerText {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

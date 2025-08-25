@@ -17,6 +17,11 @@
 	hgroup {
 		text-align: center;
 	}
+
+	.image {
+		height: 695px;
+		border-radius: 0;
+	}
 }
 
 .title {

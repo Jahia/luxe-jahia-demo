@@ -8,6 +8,9 @@ import { t } from "i18next";
 import type { BlogPostProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import React from "react";
+import { Image } from "design-system";
 
 jahiaComponent(
 	{
@@ -16,25 +19,26 @@ jahiaComponent(
 		componentType: "view",
 	},
 	({ title, subtitle, image: imageNode }: BlogPostProps, { currentNode, renderContext }) => {
-		const image = {
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
-
 		if (imageNode) {
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.blog", { blog: title });
-
+			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.blog", { blog: title }),
+				config: { widths: [380, 760] }, // 760 is for double density screens
+			});
+			imageProps.sizes = "380px"; //Ensure the image is always 380px wide
 		}
 
 		return (
 			<a className={classes.card} href={buildNodeUrl(currentNode)}>
-				<img className={classes.image} src={image.src} alt={image.alt} width="200" height="200" />
-
-				<div className="d-flex flex-column justify-content-center flex-fill">
-					<h2 className="my-0 lux-capitalize">{title}</h2>
-					{subtitle && <p className="m-0">{subtitle}</p>}
+				<Image {...imageProps} className={classes.image} />
+				<div className={classes.main}>
+					<h2 className={classes.title}>{title}</h2>
+					{subtitle && <p>{subtitle}</p>}
 				</div>
 			</a>
 		);

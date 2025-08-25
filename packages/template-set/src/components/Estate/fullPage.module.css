@@ -7,6 +7,10 @@
 	margin-bottom: space_5;
 }
 
+:where(.gallery) [data-part="mainImage"] {
+	height: 695px;
+}
+
 .title {
 	padding-bottom: space_0;
 }

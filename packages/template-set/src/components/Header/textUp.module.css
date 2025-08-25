@@ -9,6 +9,12 @@
 	gap: space_3;
 	padding-top: space_2;
 	padding-bottom: space_2;
+
+	.image {
+		height: 695px;
+		border-radius: 0;
+	}
+
 	@media (min-width: gridBreakpoints_md) {
 		& {
 			padding-top: space_4;

@@ -1,15 +1,16 @@
 import {
 	buildModuleFileUrl,
-	buildNodeUrl,
 	jahiaComponent,
 	Render,
 	server,
 } from "@jahia/javascript-modules-library";
-import { Col, Figure, HeadingSection, Row, Section } from "~/commons";
+import { Col, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+import { Figure, Image } from "design-system";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -31,16 +32,24 @@ jahiaComponent(
 		}: BlogPostProps,
 		{ currentNode, renderContext },
 	) => {
-		const image = {
+		// Image: placeholder by default; override when a real node exists
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
 
 		if (imageNode) {
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.blog", { blog: title });
-
+			// SSR cache dep for this image node
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
+
+			// Map Jahia node -> <img> props (+ i18n alt)
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.blog", { blog: title }),
+			});
+
+			// Responsive slot hint: ≤1320px → 100vw, otherwise ≈1320px
+			// (keep in sync with grid breakpoints; effective with width-based srcset)
+			imageProps.sizes = "(max-width: 1320px) 100vw, 1320px";
 		}
 
 		const date: Date = new Date(stringDate);
@@ -57,7 +66,9 @@ jahiaComponent(
 				<article>
 					<header className={classes.header}>
 						<Row>
-							<Figure src={image.src} alt={image.alt} layout="imgFull" />
+							<Figure layout="imgFull">
+								<Image {...imageProps} />
+							</Figure>
 						</Row>
 						<Row component="hgroup">
 							<time dateTime={date.toISOString()}>{formatedDate}</time>

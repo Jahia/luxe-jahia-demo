@@ -1,6 +1,5 @@
 import {
 	buildModuleFileUrl,
-	buildNodeUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
 	HydrateInBrowser,
@@ -24,6 +23,7 @@ import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import type { AddressItem } from "~/commons/map/types";
 import ContactClient from "~/commons/Contact.client";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 
 const MAX_ESTATE = 6;
 
@@ -117,15 +117,24 @@ jahiaComponent(
 			},
 		];
 
-		const image = {
+		// Image: placeholder by default; override when a real node exists
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
 
 		if (imageNode) {
+			// SSR cache dep for this image node
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
+
+			// Map Jahia node -> <img> props (+ i18n alt)
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.realtor", { realtor: `${firstName} ${lastName}` }),
+			});
+
+			// Responsive slot hint: ≤992px → 90vw, otherwise ≈500px
+			// (keep in sync with grid breakpoints; effective with width-based srcset)
+			imageProps.sizes = "(max-width: 992px) 90vw, 500px";
 		}
 
 		const addressItems: AddressItem[] = agencies
@@ -139,7 +148,7 @@ jahiaComponent(
 				<Section>
 					<ContentHeader
 						title={`${firstName} ${lastName}`}
-						image={image}
+						image={imageProps}
 						description={description}
 					/>
 				</Section>

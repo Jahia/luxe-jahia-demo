@@ -1,4 +1,4 @@
-@value variables: "~/templates/css/variables.css";
+@value variables: "../variables.module.css";
 
 @value space_3, space_5 from variables;
 
@@ -10,10 +10,11 @@
 	}
 
 	img {
-		max-width: 100%;
 		width: 640px;
+		max-width: 100%;
 		max-height: 400px;
 		object-fit: cover;
+		border-radius: 16px;
 	}
 
 	&.imgFull {
@@ -21,7 +22,6 @@
 			width: 100%;
 			max-height: 700px;
 		}
-
 		figcaption {
 			text-align: center;
 		}

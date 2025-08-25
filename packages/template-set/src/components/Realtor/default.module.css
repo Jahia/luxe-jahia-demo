@@ -6,6 +6,10 @@
 	composes: card from "~/templates/css/global.module.css";
 	display: flex;
 	flex-direction: column;
+
+	.image {
+		height: 250px;
+	}
 }
 
 .main {

@@ -7,6 +7,11 @@
 	display: block;
 	height: 100%;
 
+	.image {
+		aspect-ratio: 16 / 10;
+		height: auto;
+	}
+
 	h4 {
 		margin-top: space_2;
 		margin-bottom: space_2;
