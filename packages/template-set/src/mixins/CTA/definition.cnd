@@ -1,0 +1,4 @@
+// This mixin is used to define an optional CTA (Call to Action) on any content type
+[luxemix:cta] mixin
+ - ctaType (string, choicelist[linkTypeInitializer]) = 'none' autocreated
+ - ctaLabel (string) i18n
