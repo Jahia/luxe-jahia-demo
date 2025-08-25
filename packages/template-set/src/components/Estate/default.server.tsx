@@ -8,6 +8,9 @@ import { t } from "i18next";
 import type { EstateProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+import React from "react";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { Image } from "design-system";
 
 jahiaComponent(
 	{
@@ -16,27 +19,36 @@ jahiaComponent(
 		componentType: "view",
 	},
 	(
-		{ title, price, images: imageNodes, surface, bedrooms }: EstateProps,
+		{ title, price, images, surface, bedrooms }: EstateProps,
 		{ currentNode, currentResource, renderContext },
 	) => {
 		const locale = currentResource.getLocale().getLanguage();
 
-		const image = {
+		// Image: placeholder by default; override when a real node exists
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
-		const images = imageNodes.filter((imageNode) => Boolean(imageNode));
 		if (images[0]) {
-			const _image = images[0];
-			image.src = buildNodeUrl(_image);
-			image.alt = t("alt.estate", { estate: title });
+			const imageNode = images[0];
+			// SSR cache dep for this image node
+			server.render.addCacheDependency({ node: imageNode }, renderContext);
 
-			server.render.addCacheDependency({ node: _image }, renderContext);
+			// Map Jahia node -> <img> props (+ i18n alt)
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.estate", { estate: title }),
+			});
+
+			// Responsive slot hint: ≤768px → 100vw,≤992px → 50vw, ≤1320px → 30vw, otherwise ≈400px
+			// (keep in sync with grid breakpoints; effective with width-based srcset)
+			// default is usually used in 3 cols grid, so 400px is a good default for larger screens
+			imageProps.sizes =
+				"(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px";
 		}
 
 		return (
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
-				<img src={image.src} alt={image.alt} height="265" />
+				<Image className={classes.image} {...imageProps} />
 				<h4>{title}</h4>
 				<p>
 					{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface.toLocaleString(locale)} m

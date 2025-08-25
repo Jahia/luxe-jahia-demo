@@ -1,7 +1,6 @@
 import {
 	AddContentButtons,
 	buildModuleFileUrl,
-	buildNodeUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
 	HydrateInBrowser,
@@ -30,6 +29,8 @@ import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
 import MapWithPinClient from "~/commons/map/MapWithPin.client";
 import type { AddressItem } from "~/commons/map/types";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import React from "react";
 
 const MAX_ESTATE = 6;
 
@@ -117,16 +118,24 @@ jahiaComponent(
 			},
 		];
 
-		const image = {
+		// Image: placeholder by default; override when a real node exists
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
 
 		if (imageNode) {
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.agency", { agency: name });
-
+			// SSR cache dep for this image node
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
+
+			// Map Jahia node -> <img> props (+ i18n alt)
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.agency", { agency: name }),
+			});
+
+			// Responsive slot hint: ≤992px → 90vw, otherwise ≈500px
+			// (keep in sync with grid breakpoints; effective with width-based srcset)
+			imageProps.sizes = "(max-width: 992px) 90vw, 500px";
 		}
 
 		const addresses = [{ address, id: currentNode.getIdentifier() }];
@@ -137,7 +146,7 @@ jahiaComponent(
 		return (
 			<>
 				<Section>
-					<ContentHeader title={name} image={image} description={description} />
+					<ContentHeader title={name} image={imageProps} description={description} />
 				</Section>
 				<Section>
 					<List rows={listRows} />

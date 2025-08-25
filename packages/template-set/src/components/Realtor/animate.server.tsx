@@ -9,6 +9,8 @@ import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
+import React from "react";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 
 jahiaComponent(
 	{
@@ -21,15 +23,18 @@ jahiaComponent(
 		{ firstName, lastName, jobPosition, image: imageNode, animate: videoNode }: RealtorProps,
 		{ currentNode, renderContext },
 	) => {
-		const image = {
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
-
 		if (imageNode) {
+			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.realtor", { realtor: `${firstName} ${lastName}` }),
+				config: { widths: [300, 600] }, // 600 is for double density screens
+			});
+			imageProps.sizes = "300px"; // Ensure the image is always 300px wide
 		}
 
 		const jobPositionLanguagesTranslation = {
@@ -45,7 +50,7 @@ jahiaComponent(
 					firstName,
 					lastName,
 					jobPosition: jobPositionLanguagesTranslation[jobPosition],
-					image,
+					image: imageProps,
 					videoUrl: videoNode ? buildNodeUrl(videoNode) : undefined,
 					currentNodeUrl: buildNodeUrl(currentNode),
 				}}

@@ -1,12 +1,12 @@
 import classes from "~/components/Realtor/default.module.css";
-import { useRef, useState } from "react";
-import type { ImageDataProps } from "~/commons/types";
+import React, { useRef, useState } from "react";
+import { Image } from "design-system";
 
 interface AnimateClientProps {
 	firstName: string;
 	lastName: string;
 	jobPosition: string;
-	image: ImageDataProps;
+	image: React.ImgHTMLAttributes<HTMLImageElement>;
 	videoUrl?: string;
 	currentNodeUrl: string;
 }
@@ -46,7 +46,7 @@ export default function AnimateClient({
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
-			{(!isVideoAvailable || !isHovered) && <img src={image.src} alt={image.alt} height="250px" />}
+			{(!isVideoAvailable || !isHovered) && <Image className={classes.image} {...image} />}
 			{isVideoAvailable && (
 				<video
 					ref={videoRef}
@@ -55,6 +55,9 @@ export default function AnimateClient({
 					playsInline
 					preload="auto"
 					style={{
+						maxWidth: "100%",
+						objectFit: "cover",
+						borderRadius: "16px",
 						height: "250px",
 						display: isHovered ? "block" : "none",
 					}}

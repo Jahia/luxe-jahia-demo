@@ -235,13 +235,6 @@ p {
 	cursor: pointer;
 }
 
-main img,
-main video {
-	max-width: 100%;
-	object-fit: cover;
-	border-radius: 16px;
-}
-
 img,
 svg {
 	vertical-align: middle;

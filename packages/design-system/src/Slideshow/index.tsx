@@ -1,31 +1,38 @@
-import type { PictureProps } from "~/commons/types";
-import classes from "./Slideshow.client.module.css";
+import classes from "./styles.module.css";
 import clsx from "clsx";
-import { Picture } from "~/commons/Picture";
-import React from "react";
+import { Image } from "../Image";
+import type { ImgHTMLAttributes } from "react";
 
 interface SlideshowProps {
-	data: PictureProps[];
+	images: ImgHTMLAttributes<HTMLImageElement>[];
 	selectedImageIndex: number | null;
 	setSelectedImageIndex: (index: number | null) => void;
 }
 
-export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: SlideshowProps) => {
+export const Slideshow = ({
+	images,
+	selectedImageIndex,
+	setSelectedImageIndex,
+}: SlideshowProps) => {
 	if (
-		!data?.length ||
+		!images?.length ||
 		selectedImageIndex === null ||
 		selectedImageIndex < 0 ||
-		selectedImageIndex >= data.length
+		selectedImageIndex >= images.length
 	) {
 		return null;
 	}
+
+	// Responsive slot hint: ≤576px → 90vw, otherwise 80vw
+	// (keep in sync with grid breakpoints; effective with width-based srcset)
+	const selectedImage = { ...images[selectedImageIndex], sizes: "(max-width: 576px) 90vw, 80vw" };
 
 	const navigateTo = (direction: "prev" | "next") => {
 		if (selectedImageIndex === null) return;
 
 		if (direction === "prev" && selectedImageIndex > 0) {
 			setSelectedImageIndex(selectedImageIndex - 1);
-		} else if (direction === "next" && selectedImageIndex < data.length - 1) {
+		} else if (direction === "next" && selectedImageIndex < images.length - 1) {
 			setSelectedImageIndex(selectedImageIndex + 1);
 		}
 	};
@@ -43,7 +50,7 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 
 	return (
 		<div className={classes.container} onKeyDown={handleKeyDown}>
-			<div className={classes.contentImage}>
+			<div className={classes.containerImage}>
 				<button
 					type="button"
 					className={clsx(classes.button, classes.buttonNav)}
@@ -54,19 +61,14 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 					‹
 				</button>
 
-				<Picture
-					image={data[selectedImageIndex].image}
-					sources={data[selectedImageIndex].sources}
-					height={data[selectedImageIndex].height}
-				/>
-				{/*<img src={data[selectedImageIndex].src} alt={data[selectedImageIndex].alt} />*/}
+				<Image className={classes.image} {...selectedImage} />
 
 				<button
 					type="button"
 					className={clsx(classes.button, classes.buttonNav)}
 					onClick={() => navigateTo("next")}
 					aria-label="Next image"
-					disabled={selectedImageIndex === data.length - 1}
+					disabled={selectedImageIndex === images.length - 1}
 				>
 					›
 				</button>
@@ -74,7 +76,7 @@ export const Slideshow = ({ data, selectedImageIndex, setSelectedImageIndex }: S
 
 			<div className={classes.info}>
 				<span>
-					{selectedImageIndex + 1} / {data.length}
+					{selectedImageIndex + 1} / {images.length}
 				</span>
 			</div>
 		</div>

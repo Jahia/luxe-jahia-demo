@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import classes from "./ContentHeader.module.css";
-import type { ImageDataProps } from "~/commons/types";
+import { Image } from "design-system";
+import type { ImgHTMLAttributes } from "react";
+
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export const ContentHeader = ({
 	title,
@@ -10,12 +12,12 @@ export const ContentHeader = ({
 }: {
 	title: string;
 	description?: string;
-	image: ImageDataProps;
+	image: ImgHTMLAttributes<HTMLImageElement>;
 	className?: string;
 }) => {
 	return (
 		<header className={clsx(classes.main, className)}>
-			<img className={classes.image} src={image.src} alt={image.alt} width="500" height="500" />
+			<Image className={clsx(classes.image, image.className)} {...image} />
 			<div className={classes.content}>
 				<h1 className={classes.title}>{title}</h1>
 				{description && (

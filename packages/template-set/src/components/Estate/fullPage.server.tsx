@@ -1,17 +1,17 @@
 import {
 	buildModuleFileUrl,
-	buildNodeUrl,
 	HydrateInBrowser,
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
-import { Col, List, PageTitle, type PictureProps, Row, Section } from "~/commons";
+import { Col, List, PageTitle, Row, Section } from "~/commons";
 import GalleryClient from "~/commons/gallery/Gallery.client";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
 import CheckIcon from "~/commons/icons/CheckIcon";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -38,34 +38,21 @@ jahiaComponent(
 	) => {
 		const locale = currentResource.getLocale().getLanguage();
 
-		const galleryImages: PictureProps[] = images
+		const galleryImages = images
 			.filter((imageNode) => Boolean(imageNode))
 			.map((imageNode) => {
+				// Cache dependency for all nodes involved
 				server.render.addCacheDependency({ node: imageNode }, renderContext);
-				return {
-					image: {
-						src: `${buildNodeUrl(imageNode, { parameters: { width: "480" } })}?w=480&h=695`,
-						alt: t("alt.estate", { estate: title }), //imageNode.getDisplayableName(),
-					},
-					sources: [
-						{
-							media: "(min-width: 960px)",
-							srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "1920" } })}?w=1920&h=695`,
-						},
-						{
-							media: "(min-width: 480px)",
-							srcSet: `${buildNodeUrl(imageNode, { parameters: { width: "960" } })}?w=960&h=695`,
-						},
-					],
-				};
+				return imageNodeToImgProps({
+					imageNode,
+					alt: t("alt.estate", { estate: title }),
+				});
 			});
 
 		if (!galleryImages.length) {
 			galleryImages.push({
-				image: {
-					src: buildModuleFileUrl(placeholder),
-					alt: "Placeholder",
-				},
+				src: buildModuleFileUrl(placeholder),
+				alt: "Placeholder",
 			});
 		}
 
@@ -119,7 +106,10 @@ jahiaComponent(
 						<PageTitle title={title} className={classes.title} />
 					</header>
 					<Row>
-						<HydrateInBrowser child={GalleryClient} props={{ title, data: galleryImages }} />
+						<HydrateInBrowser
+							child={GalleryClient}
+							props={{ title, images: galleryImages, className: classes.gallery }}
+						/>
 					</Row>
 					<Row className={classes.rowDescription}>
 						<Col

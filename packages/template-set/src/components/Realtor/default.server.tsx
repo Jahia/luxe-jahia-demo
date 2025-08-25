@@ -8,6 +8,9 @@ import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
+import React from "react";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { Image } from "design-system";
 
 jahiaComponent(
 	{
@@ -19,15 +22,18 @@ jahiaComponent(
 		{ firstName, lastName, jobPosition, image: imageNode }: RealtorProps,
 		{ currentNode, renderContext },
 	) => {
-		const image = {
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
-
 		if (imageNode) {
+			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.realtor", { realtor: `${firstName} ${lastName}` });
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.realtor", { realtor: `${firstName} ${lastName}` }),
+				config: { widths: [300, 600] }, // 600 is for double density screens
+			});
+			imageProps.sizes = "300px"; //Ensure the image is always 300px wide
 		}
 
 		const jobPositionLanguagesTranslation = {
@@ -38,7 +44,7 @@ jahiaComponent(
 
 		return (
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
-				<img src={image.src} alt={image.alt} height="250px" />
+				<Image className={classes.image} {...imageProps} />
 				<div className={classes.main}>
 					<h4>
 						{firstName} {lastName}

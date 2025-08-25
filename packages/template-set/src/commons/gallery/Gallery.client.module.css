@@ -14,20 +14,19 @@
 	--luxe-dialog-opacity: 1;
 }
 
-.picture {
+.image {
 	margin-bottom: 0;
-	width: 100%;
 	cursor: pointer;
-	/*min-height: 60vh;*/
+	transition: all 0.2s ease-in;
 
-	img {
-		transition: all 0.2s ease-in;
-
-		&:hover {
-			transform: scale(1.01);
-			box-shadow: var(--luxe-box-shadow);
-		}
+	&:hover {
+		transform: scale(1.01);
+		box-shadow: var(--luxe-box-shadow);
 	}
+}
+.thumbImage {
+	aspect-ratio: 16 / 10;
+	height: auto;
 }
 
 .thumbnails {

@@ -8,6 +8,9 @@ import { t } from "i18next";
 import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import React from "react";
+import { Image } from "design-system";
 
 jahiaComponent(
 	{
@@ -16,23 +19,24 @@ jahiaComponent(
 		componentType: "view",
 	},
 	({ name, address, phone, image: imageNode }: AgencyProps, { currentNode, renderContext }) => {
-		const image = {
+		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
-			alt: "Placeholder",
 		};
-
 		if (imageNode) {
-			image.src = buildNodeUrl(imageNode);
-			image.alt = t("alt.agency", { agency: name });
-
+			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
+			imageProps = imageNodeToImgProps({
+				imageNode,
+				alt: t("alt.agency", { agency: name }),
+				config: { widths: [200, 400] }, // 400 is for double density screens
+			});
+			imageProps.sizes = "200px"; // Ensure the image is always 200px wide
 		}
 
 		return (
 			<a className={classes.card} href={buildNodeUrl(currentNode)}>
-				<img className={classes.image} src={image.src} alt={image.alt} width="200" height="200" />
-
-				<div className={classes.main}>
+				<Image {...imageProps} className={classes.image} />
+				<div className={classes.containerText}>
 					<h2 className={classes.title}>{name}</h2>
 					{address && <p>{address}</p>}
 					{phone && <p>{phone}</p>}

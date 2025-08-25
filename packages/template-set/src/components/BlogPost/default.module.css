@@ -4,8 +4,9 @@
 }
 
 .image {
-	width: 200px;
-	height: 200px;
+	width: 380px;
+	aspect-ratio: 16 / 11;
+	height: auto;
 	margin-right: 1.5rem;
 }
 
