@@ -7,7 +7,7 @@ import clsx from "clsx";
 import React from "react";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import { Image } from "design-system";
-import type { CTAProps } from "~/mixins/CTA/index.tsx";
+import { CTA, type CTAProps } from "~/mixins/CTA/index.tsx";
 
 type Props = {
 	title?: string;
@@ -21,7 +21,7 @@ jahiaComponent(
 		componentType: "view",
 		nodeType: "luxe:textIllustrated",
 	},
-	({ title, text, image: imageNode, arrangement }: Props, { renderContext }) => {
+	({ title, text, image: imageNode, arrangement, ...props }: Props, { renderContext }) => {
 		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
@@ -43,6 +43,11 @@ jahiaComponent(
 					<h2 className={classes.title}>{title}</h2>
 					{/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
 					{text && <div dangerouslySetInnerHTML={{ __html: text }} />}
+					{props.ctaType !== "none" && (
+						<p>
+							<CTA {...props} />
+						</p>
+					)}
 				</Col>
 			</Row>
 		);
