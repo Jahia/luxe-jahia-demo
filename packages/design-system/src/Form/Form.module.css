@@ -1,0 +1,44 @@
+.form {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background: white;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-width: 0;
+}
+
+.label {
+	display: none; /* for a11y, optionally visible */
+}
+
+.controlWrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.controlWrapper > input,
+.controlWrapper > select {
+	width: 100%;
+	padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+	border: 1px solid #ccc;
+	border-radius: 0.375rem;
+	font-size: 0.95rem;
+}
+
+.icon {
+	position: absolute;
+	left: 0.75rem;
+	pointer-events: none;
+	color: var(--ds-color-icon, #666);
+	display: flex;
+	align-items: center;
+}

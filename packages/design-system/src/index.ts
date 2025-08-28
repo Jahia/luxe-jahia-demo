@@ -9,3 +9,4 @@ export { Dialog } from "./Dialog/index.tsx";
 export { Slideshow } from "./Slideshow/index.tsx";
 export { Figure } from "./Figure/index.tsx";
 export { Image } from "./Image/index.tsx";
+export * from "./Form";

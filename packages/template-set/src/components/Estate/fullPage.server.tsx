@@ -8,7 +8,7 @@ import { Col, List, PageTitle, Row, Section } from "~/commons";
 import GalleryClient from "~/commons/gallery/Gallery.client";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
-import CheckIcon from "~/commons/icons/CheckIcon";
+import { CheckIcon } from "design-system/Icons";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
