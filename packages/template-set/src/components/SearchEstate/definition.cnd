@@ -1,0 +1,2 @@
+[luxe:searchEstate] > jnt:content, jmix:mainResource
+- resultsPage (weakreference,picker[type='page']) < 'jnt:page'
