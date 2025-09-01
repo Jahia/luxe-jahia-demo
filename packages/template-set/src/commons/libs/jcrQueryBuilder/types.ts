@@ -21,5 +21,12 @@ export interface RenderNodeProps {
 export type Constraint = {
 	prop: string;
 	operator: string;
-	value: string | number | boolean | Date;
+	values: Array<string | number | boolean | Date>;
+};
+
+export type ConstraintJoiner = "AND" | "OR";
+
+export type GqlNode = {
+	uuid: string;
+	renderedContent: { output: string };
 };

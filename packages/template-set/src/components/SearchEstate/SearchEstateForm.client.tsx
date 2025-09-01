@@ -1,13 +1,17 @@
 import { useFormQuerySync } from "~/commons/hooks/useFormQuerySync";
 import { Form, Field } from "design-system";
 import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
+import type { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
+import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 
 type Props = {
-	target: string | null;
+	target?: string;
+	builder?: JCRQueryBuilder;
+	setNodes?: (nodes: RenderNodeProps[]) => void;
 };
 
-const SearchEstateFormClient = ({ target }: Props) => {
-	const { updateParam, getUrlString } = useFormQuerySync(target);
+const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
+	const { updateParam, getUrlString } = useFormQuerySync(target ?? null);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		updateParam(e.target.name, e.target.value);
@@ -23,7 +27,7 @@ const SearchEstateFormClient = ({ target }: Props) => {
 	return (
 		<Form onSubmit={handleSubmit}>
 			<Field label="Localisation" icon={<MapPinIcon />}>
-				<select name="location" defaultValue="" onChange={handleChange}>
+				<select name="location" defaultValue="" onChange={handleChange} multiple>
 					<option value="" disabled>
 						Localisation
 					</option>
@@ -33,7 +37,7 @@ const SearchEstateFormClient = ({ target }: Props) => {
 			</Field>
 
 			<Field label="Type" icon={<HomeIcon />}>
-				<select name="type" defaultValue="" onChange={handleChange}>
+				<select name="type" defaultValue="" onChange={handleChange} multiple>
 					<option value="" disabled>
 						Type
 					</option>

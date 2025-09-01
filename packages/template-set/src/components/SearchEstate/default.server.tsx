@@ -8,8 +8,7 @@ jahiaComponent(
 		name: "default",
 		componentType: "view",
 	},
-	({ resultsPage }: { resultsPage: JCRNodeWrapper }, { renderContext }) => {
-		// const params = renderContext.getRequest().getParameterMap();
+	({ resultsPage }: { resultsPage: JCRNodeWrapper }) => {
 		return (
 			<HydrateInBrowser
 				child={SearchEstateFormClient}

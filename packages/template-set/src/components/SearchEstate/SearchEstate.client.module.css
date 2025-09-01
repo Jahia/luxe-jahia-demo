@@ -1,0 +1,34 @@
+
+.main {
+	display: flex;
+	min-height: 100vh;
+	gap: 2rem;
+	padding: 2rem;
+	background-color: #f8f9fa;
+}
+
+.searchContainer {
+	flex: 0 0 25%;
+	background: white;
+	border-radius: 8px;
+	padding: 1.5rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	height: fit-content;
+	position: sticky;
+	top: 2rem;
+}
+
+.resultsContainer {
+	flex: 1;
+}
+
+@media (max-width: 1024px) {
+	.main {
+		flex-direction: column;
+	}
+
+	.facetsContainer {
+		flex: none;
+		position: static;
+	}
+}
