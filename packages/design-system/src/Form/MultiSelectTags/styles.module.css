@@ -4,17 +4,21 @@
 }
 
 .tags {
+	all: unset; /* reset pour bouton */
 	display: flex;
 	flex-wrap: wrap;
 	gap: 4px;
 	align-items: center;
 	cursor: pointer;
 	border: 1px solid #ccc;
-	padding: 6px;
+	padding: 6px 8px;
 	border-radius: 4px;
 	background: white;
 	min-height: 36px;
+	width: 100%;
 }
+
+.placeholder { color: #888; }
 
 .tag {
 	background: #e0e0e0;

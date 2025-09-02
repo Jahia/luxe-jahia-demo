@@ -46,7 +46,7 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 
 	return (
 		<Form onSubmit={handleSubmit}>
-			<Field label="Localisation" icon={<MapPinIcon />}>
+			<Field label="Country" icon={<MapPinIcon />}>
 				<MultiSelectTags
 					name="country"
 					options={[
@@ -55,6 +55,7 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 					]}
 					// initialSelected={[...]}
 					onChange={(vals) => handleChange("country", vals)}
+					placeholder="Pays"
 				/>
 				{/*<select name="country" defaultValue="" onChange={handleChange} multiple>*/}
 				{/*	<option value="" disabled>*/}
@@ -67,14 +68,15 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 
 			<Field label="Type" icon={<HomeIcon />}>
 				<MultiSelectTags
-					name="country"
+					name="type"
 					options={[
 						{ value: "house", label: "Maison" },
 						{ value: "apartment", label: "Appartement" },
 						{ value: "building", label: "Building" },
 					]}
 					// initialSelected={[...]}
-					onChange={(vals) => handleChange("country", vals)}
+					onChange={(vals) => handleChange("type", vals)}
+					placeholder="Type de bien"
 				/>
 				{/*<select name="type" defaultValue="" onChange={handleChange} multiple>*/}
 				{/*	<option value="" disabled>*/}
@@ -91,8 +93,11 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 					type="number"
 					name="rooms"
 					min={1}
-					onChange={(vals) => handleChange("rooms", [vals])}
-					placeholder="Chambres"
+					onChange={(e) => {
+						const n = Number(e.currentTarget.value);
+						handleChange("rooms", Number.isFinite(n) ? [n] : []);
+					}}
+					placeholder="# Chambres"
 				/>
 			</Field>
 

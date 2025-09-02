@@ -90,23 +90,32 @@ export class JCRQueryBuilder {
 				const atomicOp = op === "IN" ? "=" : "<>";
 				const joiner = op === "IN" ? "OR" : "AND";
 
-				// Always override joiner explicitly
 				this.setConstraintJoiner(c.prop, joiner);
 
 				for (const v of values) {
 					const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
-					set.add({ prop: c.prop, operator: atomicOp, values: [v] });
-					this.constraints.set(c.prop, set);
+					const candidate = { prop: c.prop, operator: atomicOp, values: [v] };
+					if (!this.isConstraintDuplicate(set, candidate)) {
+						set.add(candidate);
+						this.constraints.set(c.prop, set);
+					}
 				}
 			} else {
-				// Default path: push constraint as-is
+				// Default case: push constraint as-is, avoid duplicates
 				const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
-				set.add(c);
-				this.constraints.set(c.prop, set);
+				if (!this.isConstraintDuplicate(set, c)) {
+					set.add(c);
+					this.constraints.set(c.prop, set);
+				}
 			}
 		}
 		return this;
 	}
+
+	// /** Returns all constraints associated with a given property */
+	// getConstraint(prop: string): Constraint[] {
+	// 	return [...(this.constraints.get(prop) ?? [])];
+	// }
 
 	/** Return current constraints as a flat array (for rehydration or serialization) */
 	getConstraints(): Constraint[] {
@@ -197,6 +206,19 @@ export class JCRQueryBuilder {
 		} finally {
 			clearTimeout(id);
 		}
+	}
+
+	/** Utility to detect if a constraint already exists in a Set */
+	private isConstraintDuplicate(set: Set<Constraint>, candidate: Constraint): boolean {
+		for (const existing of set) {
+			if (
+				existing.operator === candidate.operator &&
+				JSON.stringify(existing.values) === JSON.stringify(candidate.values)
+			) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private isAllowedOperator(op: string): boolean {

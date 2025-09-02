@@ -25,6 +25,23 @@
 	align-items: center;
 }
 
+.control {
+	width: 100%;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid #ccc;
+	border-radius: 0.375rem;
+	font-size: 0.95rem;
+	background: #fff;
+	min-height: 2.25rem; /* align with inputs */
+	display: flex;
+	align-items: center;
+	gap: .375rem;
+}
+
+.hasIcon .control {
+	padding-left: 2.25rem;
+}
+
 .controlWrapper > input,
 .controlWrapper > select {
 	width: 100%;
@@ -41,4 +58,5 @@
 	color: var(--ds-color-icon, #666);
 	display: flex;
 	align-items: center;
+	z-index: 1;
 }

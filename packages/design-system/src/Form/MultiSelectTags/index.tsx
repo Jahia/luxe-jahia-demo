@@ -1,19 +1,25 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.module.css";
 
-export type Option = {
-	value: string | number;
-	label: string;
-};
+export type Option = { value: string | number; label: string };
 
 type Props = {
 	name: string;
 	options: Option[];
 	initialSelected?: (string | number)[];
 	onChange?: (values: (string | number)[]) => void;
+	className?: string; // 🔹 pour se faire styler par Field
+	placeholder?: string; // 🔹 UX quand vide
 };
 
-export function MultiSelectTags({ name, options, initialSelected = [], onChange }: Props) {
+export function MultiSelectTags({
+	name,
+	options,
+	initialSelected = [],
+	onChange,
+	className,
+	placeholder = "Sélectionner…",
+}: Props) {
 	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
@@ -35,20 +41,27 @@ export function MultiSelectTags({ name, options, initialSelected = [], onChange 
 		});
 	};
 
-	const handleClickOutside = (e: MouseEvent) => {
-		if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-			setIsOpen(false);
-		}
-	};
-
 	useEffect(() => {
+		const handleClickOutside = (e: MouseEvent) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+				setIsOpen(false);
+			}
+		};
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, []);
 
 	return (
-		<div className={styles.container} ref={dropdownRef}>
-			<div className={styles.tags} onClick={() => setIsOpen((prev) => !prev)}>
+		<div className={`${styles.container} ${className ?? ""}`} ref={dropdownRef}>
+			<button
+				type="button"
+				className={styles.tags}
+				onClick={() => setIsOpen((p) => !p)}
+				aria-haspopup="listbox"
+				aria-expanded={isOpen}
+			>
+				{selected.length === 0 && <span className={styles.placeholder}>{placeholder}</span>}
+
 				{selected.map((val) => {
 					const opt = options.find((o) => o.value === val);
 					if (!opt) return null;
@@ -62,6 +75,7 @@ export function MultiSelectTags({ name, options, initialSelected = [], onChange 
 									removeTag(val);
 								}}
 								className={styles.removeBtn}
+								aria-label={`Retirer ${opt.label}`}
 							>
 								×
 							</button>
@@ -69,11 +83,13 @@ export function MultiSelectTags({ name, options, initialSelected = [], onChange 
 						</span>
 					);
 				})}
-				<span className={styles.chevron}>{isOpen ? "▲" : "▼"}</span>
-			</div>
+				<span className={styles.chevron} aria-hidden>
+					▾
+				</span>
+			</button>
 
 			{isOpen && (
-				<div className={styles.dropdown}>
+				<div className={styles.dropdown} role="listbox" aria-multiselectable="true">
 					{options.map(({ value, label }) => (
 						<label key={value} className={styles.option}>
 							<input
