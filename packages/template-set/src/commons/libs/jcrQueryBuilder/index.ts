@@ -77,12 +77,37 @@ export class JCRQueryBuilder {
 			if (!this.isAllowedOperator(c.operator)) {
 				throw new Error(`Unsupported or suspicious operator "${c.operator}" for prop "${c.prop}"`);
 			}
-			const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
-			set.add(c);
-			this.constraints.set(c.prop, set);
+
+			const op = c.operator.toUpperCase();
+			const values = c.values;
+
+			if (!Array.isArray(values) || values.length === 0) {
+				continue;
+			}
+
+			// Auto-expand IN / NOT IN into multiple atomic constraints
+			if (op === "IN" || op === "NOT IN") {
+				const atomicOp = op === "IN" ? "=" : "<>";
+				const joiner = op === "IN" ? "OR" : "AND";
+
+				// Always override joiner explicitly
+				this.setConstraintJoiner(c.prop, joiner);
+
+				for (const v of values) {
+					const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
+					set.add({ prop: c.prop, operator: atomicOp, values: [v] });
+					this.constraints.set(c.prop, set);
+				}
+			} else {
+				// Default path: push constraint as-is
+				const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
+				set.add(c);
+				this.constraints.set(c.prop, set);
+			}
 		}
 		return this;
 	}
+
 	/** Return current constraints as a flat array (for rehydration or serialization) */
 	getConstraints(): Constraint[] {
 		const all: Constraint[] = [];
@@ -220,7 +245,7 @@ export class JCRQueryBuilder {
 	}
 
 	private formatValue(values: Array<string | number | boolean | Date>): string {
-		return values.map(this.formatScalar).join(", ");
+		return values.map((v) => this.formatScalar(v)).join(", ");
 	}
 
 	private formatScalar(value: string | number | boolean | Date): string {

@@ -8,6 +8,7 @@ import type {
 import { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 import SearchResultsClient from "~/components/SearchEstate/SearchResults.client.tsx";
+import { Row, Section } from "~/commons";
 
 export default function SearchEstateClient({
 	builderConfig,
@@ -24,13 +25,13 @@ export default function SearchEstateClient({
 	const [nodes, setNodes] = useState<RenderNodeProps[]>(initialNodes);
 
 	return (
-		<div className={classes.main}>
-			<div className={classes.searchContainer}>
+		<Section>
+			<Row>
 				<SearchEstateFormClient builder={builder} setNodes={setNodes} />
-			</div>
-			<div className={classes.resultsContainer}>
+			</Row>
+			<Row className={classes.resultsRow}>
 				<SearchResultsClient nodes={nodes} />
-			</div>
-		</div>
+			</Row>
+		</Section>
 	);
 }

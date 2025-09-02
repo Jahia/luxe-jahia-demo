@@ -1,4 +1,4 @@
-import { Col, Row } from "~/commons";
+import { Col } from "~/commons";
 import classes from "./SearchResults.client.module.css";
 import { useEffect, useState } from "react";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
@@ -15,24 +15,24 @@ export default function SearchResultsClient({ nodes }: { nodes: RenderNodeProps[
 
 	const noResults =
 		allNodes.length === 0 || (allNodes.length === 1 && allNodes[0].uuid === "no-results");
+	if (noResults)
+		return (
+			<Col>
+				<div className={classes.noResults}>
+					<p className="noResults">No results found</p>
+				</div>
+			</Col>
+		);
 	return (
-		<Row className={classes.resultsRow}>
-			{noResults ? (
-				<Col>
-					<div className={classes.noResults}>
-						<p className="noResults">No results found</p>
-					</div>
-				</Col>
-			) : (
-				allNodes.map(({ html, uuid }) => (
-					<Col
-						key={uuid}
-						dangerouslySetInnerHTML={{
-							__html: html,
-						}}
-					/>
-				))
-			)}
-		</Row>
+		<>
+			{allNodes.map(({ html, uuid }) => (
+				<Col
+					key={uuid}
+					dangerouslySetInnerHTML={{
+						__html: html,
+					}}
+				/>
+			))}
+		</>
 	);
 }
