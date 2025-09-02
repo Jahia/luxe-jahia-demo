@@ -699,17 +699,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:0.8.0":
-  version: 0.8.0
-  resolution: "@jahia/javascript-modules-library@npm:0.8.0"
+"@jahia/javascript-modules-library@npm:0.9.0-alpha-20250902084455780":
+  version: 0.9.0-alpha-20250902084455780
+  resolution: "@jahia/javascript-modules-library@npm:0.9.0-alpha-20250902084455780"
   dependencies:
-    dotenv: "npm:^16.5.0"
+    dotenv: "npm:^17.0.0"
   peerDependencies:
     i18next: ^25.0.0
     react: ^19.0.0
     react-dom: ^19.0.0
     react-i18next: ^15.4.0
-    styled-jsx: ^5.0.0
   peerDependenciesMeta:
     i18next:
       optional: true
@@ -719,17 +718,14 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-    styled-jsx:
-      optional: true
-  checksum: 10c0/f8dbac2aac764733f8ff7b07b4f9e5e84858f7aa501955014ddbb06a5a5eee614bc2f78676053c7091d3a6d7943265efe54dcd61f7eea39579dfed5b68485b9a
+  checksum: 10c0/68ac4f0f80cd79bd9df7d9bcc6387ff9f32baab93c136aadb05f2c55274e6650fa0ee3206284309c4773e512f0ad84e2abe4cc765dc001eec06dbd40ac4b38d5
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:0.8.0":
-  version: 0.8.0
-  resolution: "@jahia/vite-plugin@npm:0.8.0"
+"@jahia/vite-plugin@npm:0.9.0-alpha-20250902084455780":
+  version: 0.9.0-alpha-20250902084455780
+  resolution: "@jahia/vite-plugin@npm:0.9.0-alpha-20250902084455780"
   dependencies:
-    "@rollup/plugin-multi-entry": "npm:^6.0.1"
     "@rollup/pluginutils": "npm:^5.1.4"
     magic-string: "npm:^0.30.17"
     tinyglobby: "npm:^0.2.13"
@@ -737,7 +733,7 @@ __metadata:
     vite: ">=6.0.0"
   bin:
     jahia-deploy: bin/jahia-deploy.js
-  checksum: 10c0/80fd367594958110c273b1a96b3f47d51ee013df3d2d5ca4780814170599a7668c2a0774a9f004cf28ed7a56bf1418429b7954604b5e8477c4aa31bc056d532b
+  checksum: 10c0/e67c52f984f5c8c40362fd735457297a4899535d5d9d4e78e48a96b05a75acb7624c077faea20445f246f3a2139151e31f8bc2205bf0e254efe7a7be3f845bb0
   languageName: node
   linkType: hard
 
@@ -1053,33 +1049,6 @@ __metadata:
     react: ^19.0.0
     react-dom: ^19.0.0
   checksum: 10c0/1e20f92ea99d378121d7ba57b9571ca3a67a86247729d8cd5726ded26105fcbffbbdf727da34b2ad5976438979819a38c93b94389313abb3ff80ca81632609a6
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-multi-entry@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "@rollup/plugin-multi-entry@npm:6.0.1"
-  dependencies:
-    "@rollup/plugin-virtual": "npm:^3.0.0"
-    matched: "npm:^5.0.1"
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 10c0/546d5d707eb2d726eff4c97ef1e07cdc4aeb56652c367895186a5d685a8e0f80ba02093361737daba04fe04905fe4e6e9926c150841985b955a13eabaf5ddb6b
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-virtual@npm:^3.0.0":
-  version: 3.0.2
-  resolution: "@rollup/plugin-virtual@npm:3.0.2"
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 10c0/7115edb7989096d1ce334939fcf6e1ba365586b487bf61b2dd4f915386197f350db70904030342c0720fe58f5a52828975c645c4d415c1d432d9b1b6760a22ef
   languageName: node
   linkType: hard
 
@@ -2244,10 +2213,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.4.2, dotenv@npm:^16.5.0":
+"dotenv@npm:^16.4.2":
   version: 16.5.0
   resolution: "dotenv@npm:16.5.0"
   checksum: 10c0/5bc94c919fbd955bf0ba44d33922a1e93d1078e64a1db5c30faeded1d996e7a83c55332cb8ea4fae5a9ca4d0be44cbceb95c5811e70f9f095298df09d1997dd9
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^17.0.0":
+  version: 17.2.1
+  resolution: "dotenv@npm:17.2.1"
+  checksum: 10c0/918dd2f9d8b8f86b0afabad9534793d51de3718c437f9e7b6525628cf68c1d4ae768cc37a5afff38c066f58a8ecf549f4ac6cd5617485bd328e826112cc2650a
   languageName: node
   linkType: hard
 
@@ -3565,8 +3541,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luxe-jahia-demo@workspace:packages/template-set"
   dependencies:
-    "@jahia/javascript-modules-library": "npm:0.8.0"
-    "@jahia/vite-plugin": "npm:0.8.0"
+    "@jahia/javascript-modules-library": "npm:0.9.0-alpha-20250902084455780"
+    "@jahia/vite-plugin": "npm:0.9.0-alpha-20250902084455780"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.9"
     "@types/react-dom": "npm:^19.1.7"
@@ -3621,16 +3597,6 @@ __metadata:
     promise-retry: "npm:^2.0.1"
     ssri: "npm:^10.0.0"
   checksum: 10c0/43b9f6dcbc6fe8b8604cb6396957c3698857a15ba4dbc38284f7f0e61f248300585ef1eb8cc62df54e9c724af977e45b5cdfd88320ef7f53e45070ed3488da55
-  languageName: node
-  linkType: hard
-
-"matched@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "matched@npm:5.0.1"
-  dependencies:
-    glob: "npm:^7.1.6"
-    picomatch: "npm:^2.2.1"
-  checksum: 10c0/aa4c271edcfe3ecc2a27a35770d0e22acde986b6984a1e2b2deff684d2b749e3f72d3d2892178081c8f2d66d212eea6ecc0354b789bfb3bd1d3eacf200b2ae8f
   languageName: node
   linkType: hard
 
@@ -4136,7 +4102,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^2.2.1, picomatch@npm:^2.3.1":
+"picomatch@npm:^2.3.1":
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 10c0/26c02b8d06f03206fc2ab8d16f19960f2ff9e81a658f831ecb656d8f17d9edc799e8364b1f4a7873e89d9702dff96204be0fa26fe4181f6843f040f819dac4be
