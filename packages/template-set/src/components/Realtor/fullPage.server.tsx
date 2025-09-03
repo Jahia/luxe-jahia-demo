@@ -2,7 +2,7 @@ import {
 	buildModuleFileUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
-	HydrateInBrowser,
+	Island,
 	jahiaComponent,
 	Render,
 	server,
@@ -158,8 +158,8 @@ jahiaComponent(
 				<Section>
 					<Row>
 						<Col>
-							<HydrateInBrowser
-								child={ContactClient}
+							<Island
+								component={ContactClient}
 								props={{
 									addresses: addressItems,
 									email: email,

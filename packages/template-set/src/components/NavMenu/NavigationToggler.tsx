@@ -1,7 +1,7 @@
 import {
 	buildNodeUrl,
 	getChildNodes,
-	HydrateInBrowser,
+	Island,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
 import NavigationTogglerClient from "~/components/NavMenu/NavigationToggler.client";
@@ -32,5 +32,5 @@ export const NavigationToggler = () => {
 		active: node === mainNode || mainPath.includes(node.getPath()),
 	}));
 
-	return <HydrateInBrowser child={NavigationTogglerClient} props={{ menu: refinedMenu }} />;
+	return <Island component={NavigationTogglerClient} props={{ menu: refinedMenu }} />;
 };
