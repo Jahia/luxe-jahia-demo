@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 export type Option = { value: string | number; label: string };
 
@@ -8,8 +9,8 @@ type Props = {
 	options: Option[];
 	initialSelected?: (string | number)[];
 	onChange?: (values: (string | number)[]) => void;
-	className?: string; // 🔹 pour se faire styler par Field
-	placeholder?: string; // 🔹 UX quand vide
+	className?: string;
+	placeholder?: string;
 };
 
 export function MultiSelectTags({
@@ -22,7 +23,7 @@ export function MultiSelectTags({
 }: Props) {
 	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
 	const [isOpen, setIsOpen] = useState(false);
-	const dropdownRef = useRef<HTMLDivElement>(null);
+	const wrapperRef = useRef<HTMLDivElement>(null);
 
 	const toggleOption = (value: string | number) => {
 		setSelected((prev) => {
@@ -41,9 +42,10 @@ export function MultiSelectTags({
 		});
 	};
 
+	// Close dropdown on outside click
 	useEffect(() => {
 		const handleClickOutside = (e: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+			if (!wrapperRef.current?.contains(e.target as Node)) {
 				setIsOpen(false);
 			}
 		};
@@ -52,41 +54,74 @@ export function MultiSelectTags({
 	}, []);
 
 	return (
-		<div className={`${styles.container} ${className ?? ""}`} ref={dropdownRef}>
-			<button
-				type="button"
+		<div
+			className={clsx(styles.container, className)}
+			ref={wrapperRef}
+			// onClick={(e) => {
+			// 	e.stopPropagation();
+			// 	e.preventDefault();
+			// }}
+		>
+			<ul
 				className={styles.tags}
-				onClick={() => setIsOpen((p) => !p)}
-				aria-haspopup="listbox"
-				aria-expanded={isOpen}
+				onClick={(e) => {
+					e.stopPropagation();
+					e.preventDefault();
+					setIsOpen((prev) => !prev);
+				}}
 			>
-				{selected.length === 0 && <span className={styles.placeholder}>{placeholder}</span>}
+				{selected.length === 0 ? (
+					<li className={styles.placeholder}>{placeholder}</li>
+				) : (
+					selected.map((val) => {
+						const opt = options.find((o) => o.value === val);
+						if (!opt) return null;
 
-				{selected.map((val) => {
-					const opt = options.find((o) => o.value === val);
-					if (!opt) return null;
-					return (
-						<span key={val} className={styles.tag}>
-							{opt.label}
-							<button
-								type="button"
+						return (
+							<li
+								key={val}
+								className={styles.tag}
+								tabIndex={0}
 								onClick={(e) => {
 									e.stopPropagation();
+									e.preventDefault();
 									removeTag(val);
 								}}
-								className={styles.removeBtn}
 								aria-label={`Retirer ${opt.label}`}
+								onKeyDown={(e) => {
+									if (e.key === "Enter" || e.key === " ") {
+										e.preventDefault();
+										removeTag(val);
+									}
+								}}
 							>
-								×
-							</button>
-							<input type="hidden" name={name} value={val} />
-						</span>
-					);
-				})}
-				<span className={styles.chevron} aria-hidden>
-					▾
-				</span>
-			</button>
+								{opt.label}
+								{/* No nested button: just a span with onClick */}
+								<span role="button" className={styles.removeBtn}>
+									×
+								</span>
+								<input type="hidden" name={name} value={val} />
+							</li>
+						);
+					})
+				)}
+			</ul>
+			<span className={styles.chevron}>{isOpen ? "▲" : "▼"}</span>
+
+			{/* Toggle Dropdown */}
+			{/*<button*/}
+			{/*	type="button"*/}
+			{/*	className={styles.dropdownToggle}*/}
+			{/*	onClick={(e) => {*/}
+			{/*		e.stopPropagation();*/}
+			{/*		e.preventDefault();*/}
+			{/*		setIsOpen((prev) => !prev);*/}
+			{/*	}}*/}
+			{/*	aria-haspopup="listbox"*/}
+			{/*	aria-expanded={isOpen}*/}
+			{/*>*/}
+			{/*	▾*/}
+			{/*</button>*/}
 
 			{isOpen && (
 				<div className={styles.dropdown} role="listbox" aria-multiselectable="true">

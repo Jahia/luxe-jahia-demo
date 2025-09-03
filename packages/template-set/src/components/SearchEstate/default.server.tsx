@@ -1,4 +1,4 @@
-import { buildNodeUrl, HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, Island, jahiaComponent } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 
@@ -10,8 +10,8 @@ jahiaComponent(
 	},
 	({ resultsPage }: { resultsPage: JCRNodeWrapper }) => {
 		return (
-			<HydrateInBrowser
-				child={SearchEstateFormClient}
+			<Island
+				component={SearchEstateFormClient}
 				props={{ target: resultsPage && buildNodeUrl(resultsPage) }}
 			/>
 		);

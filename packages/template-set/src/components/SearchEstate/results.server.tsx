@@ -1,15 +1,7 @@
-import {
-	buildNodeUrl,
-	getNodesByJCRQuery,
-	HydrateInBrowser,
-	jahiaComponent,
-	server,
-	useGQLQuery,
-} from "@jahia/javascript-modules-library";
-import type { JCRNodeWrapper } from "org.jahia.services.content";
-import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
+import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
 import { gqlNodesQueryString, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type {
+	Constraint,
 	GqlNode,
 	JCRQueryConfig,
 	RenderNodeProps,
@@ -23,7 +15,7 @@ jahiaComponent(
 		displayName: "Search Estate Results",
 		componentType: "view",
 	},
-	({ resultsPage }: { resultsPage: JCRNodeWrapper }, { renderContext, currentNode }) => {
+	(_, { renderContext, currentNode }) => {
 		const builderConfig: JCRQueryConfig = {
 			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
 			type: "luxe:estate",
@@ -40,28 +32,30 @@ jahiaComponent(
 		const builder = new JCRQueryBuilder(builderConfig);
 
 		const paramMap = renderContext.getRequest().getParameterMap();
+		const constraintMap: Record<string, { type: "string" | "number" }> = {
+			country: { type: "string" },
+			type: { type: "string" },
+			bedrooms: { type: "number" },
+		};
 
-		// country: string[]
-		const countries = paramMap["country"];
-		if (countries?.length) {
-			builder.setConstraints([{ prop: "country", operator: "IN", values: countries }]);
-		}
+		const constraints: Constraint[] = [];
 
-		// type: string[]
-		const types = paramMap["type"];
-		if (types?.length) {
-			builder.setConstraints([{ prop: "type", operator: "IN", values: types }]);
-		}
+		for (const [prop, { type }] of Object.entries(constraintMap)) {
+			const values = paramMap[prop];
+			if (!values?.length) continue;
 
-		// rooms: string[] → number[]
-		const roomsParam = paramMap["rooms"];
-		if (roomsParam?.length) {
-			const parsed = roomsParam
-				.map((r) => Number.parseInt(r, 10))
-				.filter((n) => Number.isInteger(n));
-			if (parsed.length) {
-				builder.setConstraints([{ prop: "rooms", operator: "IN", values: parsed }]);
+			if (type === "number") {
+				const parsed = values.map((v) => Number.parseInt(v, 10)).filter((n) => Number.isInteger(n));
+				if (parsed.length) {
+					constraints.push({ prop, operator: "IN", values: parsed });
+				}
+			} else {
+				constraints.push({ prop, operator: "IN", values });
 			}
+		}
+
+		if (constraints.length) {
+			builder.setConstraints(constraints);
 		}
 
 		const { jcrQuery, cacheDependency } = builder.build();
@@ -91,8 +85,8 @@ jahiaComponent(
 		}));
 
 		return (
-			<HydrateInBrowser
-				child={SearchEstateClient}
+			<Island
+				component={SearchEstateClient}
 				props={{
 					builderConfig,
 					builderConstraints: builder.getConstraints(),

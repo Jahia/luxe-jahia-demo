@@ -19,8 +19,11 @@ export default function SearchEstateClient({
 	builderConstraints: Constraint[];
 	nodes: RenderNodeProps[];
 }) {
-	const builder = useMemo(() => new JCRQueryBuilder(builderConfig), [builderConfig]);
-	builder.setConstraints(builderConstraints);
+	const builder = useMemo(() => {
+		const b = new JCRQueryBuilder(builderConfig);
+		b.setConstraints(builderConstraints);
+		return b;
+	}, [builderConfig, builderConstraints]);
 
 	const [nodes, setNodes] = useState<RenderNodeProps[]>(initialNodes);
 
