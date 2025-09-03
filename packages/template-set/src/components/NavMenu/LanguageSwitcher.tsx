@@ -1,7 +1,7 @@
 import {
 	buildNodeUrl,
 	getSiteLocales,
-	HydrateInBrowser,
+	Island,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
 import LanguageSwitcherClient from "./LanguageSwitcher.client";
@@ -22,8 +22,8 @@ export const LanguageSwitcher = () => {
 	});
 
 	return (
-		<HydrateInBrowser
-			child={LanguageSwitcherClient}
+		<Island
+			component={LanguageSwitcherClient}
 			props={{ currentLocaleName, localesAndUrls, mode }}
 		/>
 	);

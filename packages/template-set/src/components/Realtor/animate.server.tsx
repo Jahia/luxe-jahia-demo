@@ -1,7 +1,7 @@
 import {
 	buildModuleFileUrl,
 	buildNodeUrl,
-	HydrateInBrowser,
+	Island,
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
@@ -44,8 +44,8 @@ jahiaComponent(
 		};
 
 		return (
-			<HydrateInBrowser
-				child={AnimateClient}
+			<Island
+				component={AnimateClient}
 				props={{
 					firstName,
 					lastName,

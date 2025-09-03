@@ -1,6 +1,6 @@
 import {
 	buildModuleFileUrl,
-	HydrateInBrowser,
+	Island,
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
@@ -106,8 +106,8 @@ jahiaComponent(
 						<PageTitle title={title} className={classes.title} />
 					</header>
 					<Row>
-						<HydrateInBrowser
-							child={GalleryClient}
+						<Island
+							component={GalleryClient}
 							props={{ title, images: galleryImages, className: classes.gallery }}
 						/>
 					</Row>
