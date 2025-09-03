@@ -1,4 +1,4 @@
-import { HydrateInBrowser, jahiaComponent } from "@jahia/javascript-modules-library";
+import { Island, jahiaComponent } from "@jahia/javascript-modules-library";
 import ContactClient from "./Contact.client";
 
 jahiaComponent(
@@ -10,6 +10,6 @@ jahiaComponent(
 	},
 	({ target, feedbackMsg }: { target?: string; feedbackMsg: string }, { renderContext }) => {
 		const mode = renderContext.getMode();
-		return <HydrateInBrowser child={ContactClient} props={{ target, feedbackMsg, mode }} />;
+		return <Island component={ContactClient} props={{ target, feedbackMsg, mode }} />;
 	},
 );

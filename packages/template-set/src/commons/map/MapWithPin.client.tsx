@@ -3,7 +3,6 @@ import { geocodeAddress } from "~/commons/map/geocodeAddress";
 import "leaflet/dist/leaflet.css";
 import classes from "~/commons/map/MapWithPin.client.module.css";
 import type { AddressItem, LeafletMapClientProps } from "~/commons/map/types";
-import clsx from "clsx";
 import { t } from "i18next";
 
 type Coordinates = {
@@ -14,10 +13,9 @@ type Coordinates = {
 
 type MapWithPinClientProps = {
 	addresses: AddressItem[];
-	className?: string; // Optional className for custom styling
 };
 
-const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, className }) => {
+const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses }) => {
 	// State for coordinates (latitude and longitude)
 	const [coords, setCoords] = useState<Coordinates[]>([]);
 	const [LeafletMapClient, setLeafletMapClient] =
@@ -63,8 +61,8 @@ const MapWithPinClient: React.FC<MapWithPinClientProps> = ({ addresses, classNam
 
 	if (!LeafletMapClient) return <div>{t("maps.loading.map")}</div>;
 	return (
-		<div className={clsx(classes.mapWrapper, className)}>
-			<LeafletMapClient pins={coords} className={clsx(classes.mapContainer, className)} />
+		<div className={classes.mapWrapper}>
+			<LeafletMapClient pins={coords} className={classes.mapContainer} />
 			{error && <div className={classes.errorOverlay}>{error}</div>}
 		</div>
 	);

@@ -3,10 +3,9 @@ import {
 	buildModuleFileUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
-	HydrateInBrowser,
+	Island,
 	jahiaComponent,
 	Render,
-	RenderInBrowser,
 	server,
 } from "@jahia/javascript-modules-library";
 import type { RenderContext } from "org.jahia.services.render";
@@ -154,8 +153,8 @@ jahiaComponent(
 				<Section>
 					<Row>
 						<Col>
-							<HydrateInBrowser
-								child={ContactClient}
+							<Island
+								component={ContactClient}
 								props={{
 									addresses: addressItems,
 									email: email,
@@ -166,10 +165,7 @@ jahiaComponent(
 							/>
 						</Col>
 						<Col>
-							<RenderInBrowser
-								child={MapWithPinClient}
-								props={{ addresses: addressItems, className: "" }}
-							/>
+							<Island clientOnly component={MapWithPinClient} props={{ addresses: addressItems }} />
 						</Col>
 					</Row>
 				</Section>

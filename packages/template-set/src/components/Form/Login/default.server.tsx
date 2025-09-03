@@ -1,7 +1,7 @@
 import {
 	buildEndpointUrl,
 	buildModuleFileUrl,
-	HydrateInBrowser,
+	Island,
 	jahiaComponent,
 } from "@jahia/javascript-modules-library";
 import LoginClient from "./Login.client";
@@ -57,8 +57,8 @@ jahiaComponent(
 		}));
 
 		return (
-			<HydrateInBrowser
-				child={LoginClient}
+			<Island
+				component={LoginClient}
 				props={{
 					isLoggedIn,
 					userHydrated,
