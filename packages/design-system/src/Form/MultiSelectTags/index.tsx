@@ -54,20 +54,19 @@ export function MultiSelectTags({
 	}, []);
 
 	return (
-		<div
-			className={clsx(styles.container, className)}
-			ref={wrapperRef}
-			// onClick={(e) => {
-			// 	e.stopPropagation();
-			// 	e.preventDefault();
-			// }}
-		>
+		<div className={clsx(styles.container, className)} ref={wrapperRef}>
 			<ul
+				tabIndex={0}
 				className={styles.tags}
 				onClick={(e) => {
-					e.stopPropagation();
 					e.preventDefault();
 					setIsOpen((prev) => !prev);
+				}}
+				onKeyDown={(e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						setIsOpen((prev) => !prev);
+					}
 				}}
 			>
 				{selected.length === 0 ? (
@@ -84,19 +83,17 @@ export function MultiSelectTags({
 								tabIndex={0}
 								onClick={(e) => {
 									e.stopPropagation();
-									e.preventDefault();
 									removeTag(val);
 								}}
 								aria-label={`Retirer ${opt.label}`}
 								onKeyDown={(e) => {
 									if (e.key === "Enter" || e.key === " ") {
-										e.preventDefault();
+										e.stopPropagation();
 										removeTag(val);
 									}
 								}}
 							>
 								{opt.label}
-								{/* No nested button: just a span with onClick */}
 								<span role="button" className={styles.removeBtn}>
 									×
 								</span>
@@ -107,22 +104,6 @@ export function MultiSelectTags({
 				)}
 			</ul>
 			<span className={styles.chevron}>{isOpen ? "▲" : "▼"}</span>
-
-			{/* Toggle Dropdown */}
-			{/*<button*/}
-			{/*	type="button"*/}
-			{/*	className={styles.dropdownToggle}*/}
-			{/*	onClick={(e) => {*/}
-			{/*		e.stopPropagation();*/}
-			{/*		e.preventDefault();*/}
-			{/*		setIsOpen((prev) => !prev);*/}
-			{/*	}}*/}
-			{/*	aria-haspopup="listbox"*/}
-			{/*	aria-expanded={isOpen}*/}
-			{/*>*/}
-			{/*	▾*/}
-			{/*</button>*/}
-
 			{isOpen && (
 				<div className={styles.dropdown} role="listbox" aria-multiselectable="true">
 					{options.map(({ value, label }) => (
