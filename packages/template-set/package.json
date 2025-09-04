@@ -27,7 +27,7 @@
 		"react-leaflet": "^5.0.0"
 	},
 	"devDependencies": {
-		"@jahia/javascript-modules-library": "0.9.0-alpha-20250902084455780",
+		"@jahia/javascript-modules-library": "0.9.0",
 		"@jahia/vite-plugin": "0.9.0-alpha-20250902084455780",
 		"@types/leaflet": "^1.9.20",
 		"@types/react": "^19.1.12",
