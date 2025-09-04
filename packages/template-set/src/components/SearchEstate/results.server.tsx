@@ -14,6 +14,10 @@ jahiaComponent(
 		name: "results",
 		displayName: "Search Estate Results",
 		componentType: "view",
+		properties: {
+			// "cache.queryString": "true",
+			"cache.expiration": "0",
+		},
 	},
 	(_, { renderContext, currentNode }) => {
 		const builderConfig: JCRQueryConfig = {

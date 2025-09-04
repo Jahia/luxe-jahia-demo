@@ -12,7 +12,7 @@ jahiaComponent(
 		return (
 			<Island
 				component={SearchEstateFormClient}
-				props={{ target: resultsPage && buildNodeUrl(resultsPage) }}
+				props={{ target: resultsPage && buildNodeUrl(resultsPage), mode: "url" }}
 			/>
 		);
 	},

@@ -30,7 +30,7 @@ export default function SearchEstateClient({
 	return (
 		<Section>
 			<Row>
-				<SearchEstateFormClient builder={builder} setNodes={setNodes} />
+				<SearchEstateFormClient builder={builder} setNodes={setNodes} mode="instant" />
 			</Row>
 			<Row className={classes.resultsRow}>
 				<SearchResultsClient nodes={nodes} />

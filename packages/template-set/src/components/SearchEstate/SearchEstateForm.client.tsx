@@ -3,61 +3,73 @@ import { Form, Field, MultiSelectTags } from "design-system";
 import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
 import type { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 type Props = {
 	target?: string;
 	builder?: JCRQueryBuilder;
 	setNodes?: (nodes: RenderNodeProps[]) => void;
+	mode?: "url" | "instant";
 };
 
-const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
+const SearchEstateFormClient = ({
+	target,
+	builder,
+	setNodes,
+	mode = target ? "url" : "instant",
+}: Props) => {
 	const { updateParam, getUrlString } = useFormQuerySync(target ?? null);
 
-	const handleChange = // useCallback(
+	const handleChange = useCallback(
 		async (name: string, rawValues: (string | number)[]) => {
-			if (target) {
-				// Update URL params
+			if (mode === "url" && target) {
 				updateParam(name, rawValues);
 				return;
 			}
 
-			if (!builder || !setNodes) return;
-			console.log("type:", name, "values:", rawValues);
-			// Update builder constraints, clean and replace
-			// if (rawValues.length === 0) {
-			builder.deleteConstraints(name);
-			// } else {
-			builder.setConstraints([{ prop: name, operator: "IN", values: rawValues }]);
-			// }
-			console.log("builder constraints 2", builder.getConstraints());
-			const nodes = await builder.execute();
-			setNodes(nodes);
-		};
-	// 	[target, updateParam, builder, setNodes],
-	// );
+			if (mode === "instant" && builder && setNodes) {
+				builder.deleteConstraints(name);
+				builder.setConstraints([{ prop: name, operator: "IN", values: rawValues }]);
+				const nodes = await builder.execute();
+				setNodes(nodes);
+			}
+		},
+		[target, updateParam, builder, setNodes],
+	);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (target) {
+		if (mode === "url" && target) {
 			window.location.href = getUrlString();
 		}
 	};
 
-	const getInitialValues = //useCallback(
-		(propName: string): (string | number)[] => {
-			if (!builder) return [];
+	const initialValues = useMemo(() => {
+		if (!builder) return {};
 
-			return builder.getConstraints().reduce<(string | number)[]>((acc, { prop, values }) => {
-				if (prop !== propName || !Array.isArray(values)) return acc;
+		const constraints = builder.getConstraints();
+		return constraints.reduce<Record<string, (string | number)[]>>((acc, { prop, values }) => {
+			if (Array.isArray(values)) {
+				const filteredValues = values.filter((v) => typeof v === "string" || typeof v === "number");
 
-				const filtered = values.filter(
-					(v): v is string | number => typeof v === "string" || typeof v === "number",
-				);
+				if (acc[prop]) {
+					acc[prop] = [...acc[prop], ...filteredValues];
+				} else {
+					acc[prop] = filteredValues;
+				}
+			}
+			return acc;
+		}, {});
+	}, [builder]);
 
-				return [...acc, ...filtered];
-			}, []);
-		};
+	// const getInitialValues = //useCallback(
+	// 	(propName: string): (string | number)[] => {
+	// 		if (!builder) return [];
+	// 		return builder.getConstraints().reduce<(string | number)[]>((acc, { prop, values }) => {
+	// 			if (prop !== propName || !Array.isArray(values)) return acc;
+	// 			return [...acc, ...values.filter((v) => typeof v === "string" || typeof v === "number")];
+	// 		}, []);
+	// 	};
 	// 	[builder],
 	// );
 
@@ -70,7 +82,7 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 						{ value: "FR", label: "France" },
 						{ value: "US", label: "United States" },
 					]}
-					initialSelected={getInitialValues("country")}
+					initialSelected={initialValues["country"] || []}
 					onChange={(vals) => handleChange("country", vals)}
 					placeholder="Pays"
 				/>
@@ -84,7 +96,7 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 						{ value: "apartment", label: "Appartement" },
 						{ value: "building", label: "Building" },
 					]}
-					initialSelected={getInitialValues("type")}
+					initialSelected={initialValues["type"] || []}
 					onChange={(vals) => handleChange("type", vals)}
 					placeholder="Type de bien"
 				/>
@@ -97,15 +109,17 @@ const SearchEstateFormClient = ({ target, builder, setNodes }: Props) => {
 						value: i,
 						label: `${i === 0 ? "Studio" : i}`,
 					}))}
-					initialSelected={getInitialValues("bedrooms")}
+					initialSelected={initialValues["bedrooms"] || []}
 					onChange={(vals) => handleChange("bedrooms", vals)}
 					placeholder="# Chambres"
 				/>
 			</Field>
 
-			<button type="submit" className="searchButton">
-				Search
-			</button>
+			{mode === "url" && (
+				<button type="submit" className="searchButton">
+					Search
+				</button>
+			)}
 		</Form>
 	);
 };
