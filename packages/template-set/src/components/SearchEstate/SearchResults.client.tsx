@@ -1,38 +1,37 @@
+import React from "react";
 import { Col } from "~/commons";
-import classes from "./SearchResults.client.module.css";
-import { useEffect, useState } from "react";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
+import { ProgressiveList } from "design-system";
 
 export default function SearchResultsClient({ nodes }: { nodes: RenderNodeProps[] }) {
-	// Garde une copie complète de la liste d'origine
-	const [allNodes, setAllNodes] = useState<RenderNodeProps[]>(nodes);
+	const noResults = nodes.length === 0 || (nodes.length === 1 && nodes[0].uuid === "no-results");
 
-	// Recharge la liste complète si "nodes" change (nouvelle recherche, etc)
-	useEffect(() => {
-		// eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect
-		setAllNodes(nodes);
-	}, [nodes]);
-
-	const noResults =
-		allNodes.length === 0 || (allNodes.length === 1 && allNodes[0].uuid === "no-results");
-	if (noResults)
+	if (noResults) {
 		return (
 			<Col>
-				<div className={classes.noResults}>
-					<p className="noResults">No results found</p>
+				<div>
+					<p>No results found</p>
 				</div>
 			</Col>
 		);
+	}
+
 	return (
-		<>
-			{allNodes.map(({ html, uuid }) => (
+		<ProgressiveList
+			items={nodes}
+			itemKey="uuid"
+			delayMs={200}
+			animationType="fadeInUp"
+			key={`search-${nodes.length}-${Date.now()}`} // Force re-mount
+		>
+			{(node, index, key, style, className) => (
 				<Col
-					key={uuid}
-					dangerouslySetInnerHTML={{
-						__html: html,
-					}}
+					key={key}
+					style={style}
+					className={className}
+					dangerouslySetInnerHTML={{ __html: node.html }}
 				/>
-			))}
-		</>
+			)}
+		</ProgressiveList>
 	);
 }

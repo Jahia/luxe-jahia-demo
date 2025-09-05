@@ -18,3 +18,21 @@ h6 {
 		text-transform: uppercase;
 	}
 }
+
+.card {
+	border-radius: 16px;
+	text-decoration: none;
+	color: inherit;
+	padding: 20px;
+	transform: scale(1);
+	transition: all 0.2s ease-in;
+
+	&:hover {
+		transform: scale(1.05);
+		box-shadow: var(--luxe-box-shadow);
+	}
+
+	& > * {
+		margin-bottom: 0;
+	}
+}

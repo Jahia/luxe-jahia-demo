@@ -1,10 +1,10 @@
-@value variables: "~/templates/css/variables.css";
+@value variables: "../variables.module.css";
 
-@value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_xl, space_3, space_4 from variables;
+@value breakpoints_sm, breakpoints_md, breakpoints_xl, space_3, space_4 from variables;
 
 .main {
 	width: 100%;
-	@media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
+	@media (max-width: calc(breakpoints_sm - 0.02px)) {
 		padding-right: calc(var(--luxe-gutter-x) * 0.5);
 		padding-left: calc(var(--luxe-gutter-x) * 0.5);
 	}
@@ -41,15 +41,15 @@
 		display: flex;
 		flex: 0 1 100%;
 		max-width: 100%;
-		@media (min-width: gridBreakpoints_sm) {
+		@media (min-width: breakpoints_sm) {
 			flex: 0 1 50%;
 			max-width: 50%;
 		}
-		@media (min-width: gridBreakpoints_md) {
+		@media (min-width: breakpoints_md) {
 			flex: 0 1 33.3333%;
 			max-width: 33.3333%;
 		}
-		@media (min-width: gridBreakpoints_xl) {
+		@media (min-width: breakpoints_xl) {
 			flex: 0 1 20%;
 			max-width: 20%;
 		}
@@ -58,18 +58,11 @@
 
 .more,
 .item {
-	composes: card from "~/templates/css/global.module.css";
+	composes: card from "../global.css";
 	padding: 0 !important;
 	min-width: 0;
 	min-height: 0;
-	visibility: hidden;
-	opacity: 0;
 	cursor: pointer;
-
-	&.visible {
-		visibility: visible;
-		opacity: 1;
-	}
 }
 
 .more {

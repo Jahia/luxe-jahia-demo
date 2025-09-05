@@ -10,12 +10,14 @@ type Props = {
 	builder?: JCRQueryBuilder;
 	setNodes?: (nodes: RenderNodeProps[]) => void;
 	mode?: "url" | "instant";
+	className?: string;
 };
 
 const SearchEstateFormClient = ({
 	target,
 	builder,
 	setNodes,
+	className,
 	mode = target ? "url" : "instant",
 }: Props) => {
 	const { updateParam, getUrlString } = useFormQuerySync(target ?? null);
@@ -74,7 +76,7 @@ const SearchEstateFormClient = ({
 	// );
 
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit} className={className}>
 			<Field label="Country" icon={<MapPinIcon />}>
 				<MultiSelectTags
 					name="country"

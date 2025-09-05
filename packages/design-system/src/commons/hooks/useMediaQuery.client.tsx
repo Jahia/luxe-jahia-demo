@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useMediaQuery = (query: string): boolean => {
-	const [matches, setMatches] = useState(false); // Toujours false au début (SSR)
+	const [matches, setMatches] = useState(false); // always false (SSR)
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;

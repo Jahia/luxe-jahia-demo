@@ -15,8 +15,16 @@ jahiaComponent(
 		displayName: "Search Estate Results",
 		componentType: "view",
 		properties: {
-			// "cache.queryString": "true",
-			"cache.expiration": "0",
+			// Ensures only one thread rebuilds the cache; others wait and reuse the same cached fragment.
+			"cache.latch": "true",
+
+			// Declares which request parameters are part of the cache key.
+			// Different values for these parameters will generate separate cache entries.
+			"cache.requestParameters": "country,type,bedrooms",
+
+			// Time-to-live (TTL) for this cached fragment, in seconds.
+			// Here: 600s = 10 minutes, after which the cache entry expires and is recomputed.
+			"cache.expiration": "600",
 		},
 	},
 	(_, { renderContext, currentNode }) => {
@@ -63,10 +71,7 @@ jahiaComponent(
 		}
 
 		const { jcrQuery, cacheDependency } = builder.build();
-		server?.render.addCacheDependency(
-			{ flushOnPathMatchingRegexp: cacheDependency },
-			renderContext,
-		);
+		server.render.addCacheDependency({ flushOnPathMatchingRegexp: cacheDependency }, renderContext);
 
 		const gqlContents = useGQLQuery({
 			query: gqlNodesQueryString({
@@ -83,10 +88,12 @@ jahiaComponent(
 		});
 
 		const gqlNodes: GqlNode[] = gqlContents?.data?.jcr?.nodesByQuery?.nodes;
-		const nodes: RenderNodeProps[] = gqlNodes?.map((node) => ({
-			html: node.renderedContent.output,
-			uuid: node.uuid,
-		}));
+		const nodes: RenderNodeProps[] = gqlNodes?.map((node) => {
+			return {
+				html: node.renderedContent.output,
+				uuid: node.uuid,
+			};
+		});
 
 		return (
 			<Island
