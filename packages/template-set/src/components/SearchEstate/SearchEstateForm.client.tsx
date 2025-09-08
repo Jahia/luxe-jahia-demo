@@ -4,6 +4,8 @@ import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
 import type { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import { useCallback, useMemo } from "react";
+import clsx from "clsx";
+import classes from "./SearchEstateForm.client.module.css";
 
 type Props = {
 	target?: string;
@@ -11,6 +13,7 @@ type Props = {
 	setNodes?: (nodes: RenderNodeProps[]) => void;
 	mode?: "url" | "instant";
 	className?: string;
+	style?: React.CSSProperties;
 };
 
 const SearchEstateFormClient = ({
@@ -18,6 +21,7 @@ const SearchEstateFormClient = ({
 	builder,
 	setNodes,
 	className,
+	style,
 	mode = target ? "url" : "instant",
 }: Props) => {
 	const { updateParam, getUrlString } = useFormQuerySync(target ?? null);
@@ -64,19 +68,12 @@ const SearchEstateFormClient = ({
 		}, {});
 	}, [builder]);
 
-	// const getInitialValues = //useCallback(
-	// 	(propName: string): (string | number)[] => {
-	// 		if (!builder) return [];
-	// 		return builder.getConstraints().reduce<(string | number)[]>((acc, { prop, values }) => {
-	// 			if (prop !== propName || !Array.isArray(values)) return acc;
-	// 			return [...acc, ...values.filter((v) => typeof v === "string" || typeof v === "number")];
-	// 		}, []);
-	// 	};
-	// 	[builder],
-	// );
-
 	return (
-		<Form onSubmit={handleSubmit} className={className}>
+		<Form
+			onSubmit={handleSubmit}
+			className={clsx(classes.form, classes.extended, className)}
+			style={style}
+		>
 			<Field label="Country" icon={<MapPinIcon />}>
 				<MultiSelectTags
 					name="country"
@@ -118,7 +115,7 @@ const SearchEstateFormClient = ({
 			</Field>
 
 			{mode === "url" && (
-				<button type="submit" className="searchButton">
+				<button type="submit" className={classes.searchButton}>
 					Search
 				</button>
 			)}

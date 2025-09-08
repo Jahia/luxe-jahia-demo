@@ -4,7 +4,7 @@
 	align-items: center;
 	padding: 1rem;
 	border-radius: 0.5rem;
-	background: white;
+	background-color: white;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
@@ -27,9 +27,9 @@
 
 .control {
 	width: 100%;
-	padding: 0.5rem 0.75rem;
-	border: 1px solid #ccc;
-	border-radius: 0.375rem;
+	padding: 8px;
+	border: 1px solid var(--luxe-color-darkBlue40);
+	border-radius: 2px;
 	font-size: 0.95rem;
 	background: #fff;
 	min-height: 2.25rem; /* align with inputs */

@@ -5,6 +5,7 @@
 	--luxe-color-gray: #f6f6f6;
 	--luxe-color-gold: #c29b40;
 	--luxe-color-darkBlue: #1b1a4e;
+	--luxe-color-darkBlue40: #a4a3b8;
 
 	/* Semantic tokens */
 	--luxe-font-body: 400 1.25rem/1.75 var(--luxe-font-family-base);

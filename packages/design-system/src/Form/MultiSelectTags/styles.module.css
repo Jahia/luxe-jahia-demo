@@ -12,6 +12,7 @@
 	flex-wrap: wrap;
 	flex-grow: 1;
 	gap: 4px;
+	height: 24px;
 }
 
 .placeholder {
@@ -22,11 +23,13 @@
 .tag {
 	display: flex;
 	align-items: center;
-	background: #e0e0e0;
+	background: var(--luxe-bg-secondary);
 	border-radius: 12px;
 	padding: 4px 8px;
 	font-size: 14px;
+	line-height: 16px;
 	gap: 4px;
+	cursor: pointer;
 }
 
 .removeBtn {
