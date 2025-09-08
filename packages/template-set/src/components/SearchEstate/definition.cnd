@@ -1,2 +1,3 @@
 [luxe:searchEstate] > jnt:content, jmix:mainResource, luxemix:luxeLayout
 - resultsPage (weakreference,picker[type='page']) < 'jnt:page'
+- cssClassName (string) multiple

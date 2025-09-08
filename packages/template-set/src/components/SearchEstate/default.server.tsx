@@ -3,6 +3,7 @@ import type { JCRNodeWrapper } from "org.jahia.services.content";
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 import classes from "./default.module.css";
 import { Section } from "~/commons";
+import clsx from "clsx";
 jahiaComponent(
 	{
 		nodeType: "luxe:searchEstate",
@@ -14,11 +15,11 @@ jahiaComponent(
 		cssClassName,
 	}: {
 		resultsPage: JCRNodeWrapper;
-		cssClassName?: string;
+		cssClassName?: string[];
 		cssStyle?: string;
 	}) => {
 		return (
-			<Section component="div" className={cssClassName ? classes[cssClassName] : ""}>
+			<Section component="div" className={clsx(cssClassName?.map((cls) => classes[cls]))}>
 				<Island
 					component={SearchEstateFormClient}
 					props={{
