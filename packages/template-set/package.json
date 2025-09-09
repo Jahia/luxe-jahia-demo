@@ -48,7 +48,7 @@
 		"snapshot": true,
 		"required-version": "8.2.1.0",
 		"module-type": "templatesSet",
-		"module-dependencies": "default,javascript-modules-engine",
+		"module-dependencies": "default,javascript-modules-engine=[0.9,1)",
 		"static-resources": "/dist/assets,/dist/client,/icons",
 		"server": "dist/server/index.js",
 		"maven": {
