@@ -5,7 +5,7 @@ import { Dialog, Image, Slideshow, ProgressiveList } from "../index.ts";
 import progressiveListClasses from "../ProgressiveList/styles.module.css";
 import { useMediaQuery } from "../commons/hooks/useMediaQuery.client";
 
-export interface GalleryProps {
+interface GalleryProps {
 	title: string;
 	images: React.ImgHTMLAttributes<HTMLImageElement>[];
 	className?: string;

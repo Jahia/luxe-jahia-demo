@@ -1,4 +1,2 @@
-import { Gallery, type GalleryProps } from "design-system";
-
-const GalleryClient = (props: GalleryProps) => <Gallery {...props} />;
-export default GalleryClient;
+import { Gallery } from "design-system";
+export default Gallery;
