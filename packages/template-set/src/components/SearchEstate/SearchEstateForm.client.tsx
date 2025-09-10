@@ -1,5 +1,5 @@
 import { useFormQuerySync } from "~/commons/hooks/useFormQuerySync";
-import { Form, Field, MultiSelectTags } from "design-system";
+import { Form, MultiSelectTags } from "design-system";
 import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
 import type { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
@@ -74,45 +74,48 @@ const SearchEstateFormClient = ({
 			className={clsx(classes.form, classes.extended, className)}
 			style={style}
 		>
-			<Field label="Country" icon={<MapPinIcon />}>
-				<MultiSelectTags
-					name="country"
-					options={[
-						{ value: "FR", label: "France" },
-						{ value: "US", label: "United States" },
-					]}
-					initialSelected={initialValues["country"] || []}
-					onChange={(vals) => handleChange("country", vals)}
-					placeholder="Pays"
-				/>
-			</Field>
+			{/*<Field label="Country" icon={<MapPinIcon />}>*/}
+			<MultiSelectTags
+				name="country"
+				icon={<MapPinIcon />}
+				options={[
+					{ value: "FR", label: "France" },
+					{ value: "US", label: "United States" },
+				]}
+				initialSelected={initialValues["country"] || []}
+				onChange={(vals) => handleChange("country", vals)}
+				placeholder="Pays"
+			/>
+			{/*</Field>*/}
 
-			<Field label="Type" icon={<HomeIcon />}>
-				<MultiSelectTags
-					name="type"
-					options={[
-						{ value: "house", label: "Maison" },
-						{ value: "apartment", label: "Appartement" },
-						{ value: "building", label: "Building" },
-					]}
-					initialSelected={initialValues["type"] || []}
-					onChange={(vals) => handleChange("type", vals)}
-					placeholder="Type de bien"
-				/>
-			</Field>
+			{/*<Field label="Type" icon={<HomeIcon />}>*/}
+			<MultiSelectTags
+				name="type"
+				icon={<HomeIcon />}
+				options={[
+					{ value: "house", label: "Maison" },
+					{ value: "apartment", label: "Appartement" },
+					{ value: "building", label: "Building" },
+				]}
+				initialSelected={initialValues["type"] || []}
+				onChange={(vals) => handleChange("type", vals)}
+				placeholder="Type de bien"
+			/>
+			{/*</Field>*/}
 
-			<Field label="Chambres" icon={<RoomIcon />}>
-				<MultiSelectTags
-					name="bedrooms"
-					options={Array.from({ length: 13 }, (_, i) => ({
-						value: i,
-						label: `${i === 0 ? "Studio" : i}`,
-					}))}
-					initialSelected={initialValues["bedrooms"] || []}
-					onChange={(vals) => handleChange("bedrooms", vals)}
-					placeholder="# Chambres"
-				/>
-			</Field>
+			{/*<Field label="Chambres" icon={<RoomIcon />}>*/}
+			<MultiSelectTags
+				name="bedrooms"
+				icon={<RoomIcon />}
+				options={Array.from({ length: 13 }, (_, i) => ({
+					value: i,
+					label: `${i === 0 ? "Studio" : i}`,
+				}))}
+				initialSelected={initialValues["bedrooms"] || []}
+				onChange={(vals) => handleChange("bedrooms", vals)}
+				placeholder="# Chambres"
+			/>
+			{/*</Field>*/}
 
 			{mode === "url" && (
 				<button type="submit" className={classes.searchButton}>

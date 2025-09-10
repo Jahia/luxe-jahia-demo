@@ -1,5 +1,5 @@
 import { type FC, type FormHTMLAttributes } from "react";
-import styles from "./Form.module.css";
+import classes from "./Form.module.css";
 import clsx from "clsx";
 
 export const Form: FC<FormHTMLAttributes<HTMLFormElement>> = ({
@@ -7,7 +7,7 @@ export const Form: FC<FormHTMLAttributes<HTMLFormElement>> = ({
 	className,
 	...props
 }) => (
-	<form className={clsx(styles.form, className)} {...props}>
+	<form className={clsx(classes.form, className)} {...props}>
 		{children}
 	</form>
 );

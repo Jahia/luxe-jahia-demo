@@ -1,7 +1,11 @@
+@value variables: "~/templates/css/variables.css";
+@value gridBreakpoints_lg from variables;
+
 .form.extended {
 	gap: 24px;
-	height: 96px;
-	width: 110%;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
 	max-width: 110%;
 	z-index: 10;
 	padding: 24px;
@@ -13,6 +17,11 @@
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+
+	@media (min-width: gridBreakpoints_lg) {
+			flex-direction: row;
+			width: 110%;
+	}
 }
 
 .form.extended svg {
@@ -27,4 +36,5 @@
 	border-radius: 8px;
 	padding: 8px 24px;
 	background: rgba(var(--luxe-color-gold-rgb),1);
+	cursor: pointer;
 }

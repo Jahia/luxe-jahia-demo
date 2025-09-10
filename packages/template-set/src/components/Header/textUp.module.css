@@ -16,9 +16,9 @@
 	}
 
 	@media (min-width: gridBreakpoints_md) {
-		& {
+
 			padding-top: space_4;
 			padding-bottom: space_4;
-		}
+
 	}
 }

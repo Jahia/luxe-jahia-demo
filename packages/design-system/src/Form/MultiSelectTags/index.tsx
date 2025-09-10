@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import styles from "./styles.module.css";
+import { useState, useRef, useEffect, type ReactNode } from "react";
+import classes from "./styles.module.css";
 import clsx from "clsx";
 
 export type Option = { value: string | number; label: string };
@@ -11,6 +11,7 @@ type Props = {
 	onChange?: (values: (string | number)[]) => void;
 	className?: string;
 	placeholder?: string;
+	icon?: ReactNode;
 };
 
 export function MultiSelectTags({
@@ -20,6 +21,7 @@ export function MultiSelectTags({
 	onChange,
 	className,
 	placeholder = "Sélectionner…",
+	icon,
 }: Props) {
 	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
 	const [isOpen, setIsOpen] = useState(false);
@@ -54,10 +56,11 @@ export function MultiSelectTags({
 	}, []);
 
 	return (
-		<div className={clsx(styles.container, className)} ref={wrapperRef}>
+		<div className={clsx(classes.container, className)} ref={wrapperRef}>
+			{icon && <span className={classes.icon}>{icon}</span>}
 			<ul
 				tabIndex={0}
-				className={styles.tags}
+				className={clsx(classes.tags)}
 				onClick={(e) => {
 					e.preventDefault();
 					setIsOpen((prev) => !prev);
@@ -70,7 +73,7 @@ export function MultiSelectTags({
 				}}
 			>
 				{selected.length === 0 ? (
-					<li className={styles.placeholder}>{placeholder}</li>
+					<li className={classes.placeholder}>{placeholder}</li>
 				) : (
 					selected.map((val) => {
 						const opt = options.find((o) => o.value === val);
@@ -79,7 +82,7 @@ export function MultiSelectTags({
 						return (
 							<li
 								key={val}
-								className={styles.tag}
+								className={classes.tag}
 								tabIndex={0}
 								onClick={(e) => {
 									e.stopPropagation();
@@ -94,7 +97,7 @@ export function MultiSelectTags({
 								}}
 							>
 								{opt.label}
-								<span role="button" className={styles.removeBtn}>
+								<span role="button" className={classes.removeBtn}>
 									×
 								</span>
 								<input type="hidden" name={name} value={val} />
@@ -103,11 +106,11 @@ export function MultiSelectTags({
 					})
 				)}
 			</ul>
-			<span className={styles.chevron}>{isOpen ? "▲" : "▼"}</span>
+			<span className={classes.chevron}>{isOpen ? "▲" : "▼"}</span>
 			{isOpen && (
-				<div className={styles.dropdown} role="listbox" aria-multiselectable="true">
+				<div className={classes.dropdown} role="listbox" aria-multiselectable="true">
 					{options.map(({ value, label }) => (
-						<label key={value} className={styles.option}>
+						<label key={value} className={classes.option}>
 							<input
 								type="checkbox"
 								checked={selected.includes(value)}
