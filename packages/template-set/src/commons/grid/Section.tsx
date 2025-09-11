@@ -3,7 +3,7 @@ import classes from "./grid.module.css";
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
 	component?: ElementType;
-	cssStyle: string | undefined;
+	cssStyle?: string;
 }
 
 export const Section = ({

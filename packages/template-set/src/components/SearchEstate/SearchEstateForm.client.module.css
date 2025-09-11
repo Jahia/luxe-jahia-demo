@@ -2,7 +2,7 @@
 @value gridBreakpoints_lg from variables;
 
 .form.extended {
-	gap: 24px;
+	gap: 12px;
 	flex-direction: column;
 	height: 100%;
 	width: 100%;
@@ -20,6 +20,7 @@
 
 	@media (min-width: gridBreakpoints_lg) {
 			flex-direction: row;
+		gap: 24px;
 			width: 110%;
 	}
 }

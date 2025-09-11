@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import classes from "./styles.module.css";
-import { Dialog, Image, Slideshow, ProgressiveList } from "../index.ts";
+import { Dialog } from "../Dialog/index.tsx";
+import { Image } from "../Image/index.tsx";
+import { Slideshow } from "../Slideshow/index.tsx";
+import { ProgressiveList } from "../ProgressiveList/index.tsx";
 import progressiveListClasses from "../ProgressiveList/styles.module.css";
 import { useMediaQuery } from "../commons/hooks/useMediaQuery.client";
 

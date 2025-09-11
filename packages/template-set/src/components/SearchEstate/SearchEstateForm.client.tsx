@@ -6,6 +6,7 @@ import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import { useCallback, useMemo } from "react";
 import clsx from "clsx";
 import classes from "./SearchEstateForm.client.module.css";
+import { t } from "i18next";
 
 type Props = {
 	target?: string;
@@ -25,6 +26,17 @@ const SearchEstateFormClient = ({
 	mode = target ? "url" : "instant",
 }: Props) => {
 	const { updateParam, getUrlString } = useFormQuerySync(target ?? null);
+
+	const estateTypeTranslation = {
+		house: t("estate.type.house"),
+		apartment: t("estate.type.apartment"),
+		building: t("estate.type.building"),
+	};
+
+	const estateCountryTranslation = {
+		FR: t("country.FR"),
+		US: t("country.US"),
+	};
 
 	const handleChange = useCallback(
 		async (name: string, rawValues: (string | number)[]) => {
@@ -74,52 +86,45 @@ const SearchEstateFormClient = ({
 			className={clsx(classes.form, classes.extended, className)}
 			style={style}
 		>
-			{/*<Field label="Country" icon={<MapPinIcon />}>*/}
 			<MultiSelectTags
 				name="country"
 				icon={<MapPinIcon />}
-				options={[
-					{ value: "FR", label: "France" },
-					{ value: "US", label: "United States" },
-				]}
+				options={Object.keys(estateCountryTranslation).map((k) => ({
+					value: k,
+					label: estateCountryTranslation[k],
+				}))}
 				initialSelected={initialValues["country"] || []}
 				onChange={(vals) => handleChange("country", vals)}
-				placeholder="Pays"
+				placeholder={t("form.estate.placeholder.country")}
 			/>
-			{/*</Field>*/}
 
-			{/*<Field label="Type" icon={<HomeIcon />}>*/}
 			<MultiSelectTags
 				name="type"
 				icon={<HomeIcon />}
-				options={[
-					{ value: "house", label: "Maison" },
-					{ value: "apartment", label: "Appartement" },
-					{ value: "building", label: "Building" },
-				]}
+				options={Object.keys(estateTypeTranslation).map((k) => ({
+					value: k,
+					label: estateTypeTranslation[k],
+				}))}
 				initialSelected={initialValues["type"] || []}
 				onChange={(vals) => handleChange("type", vals)}
-				placeholder="Type de bien"
+				placeholder={t("form.estate.placeholder.type")}
 			/>
-			{/*</Field>*/}
 
-			{/*<Field label="Chambres" icon={<RoomIcon />}>*/}
 			<MultiSelectTags
 				name="bedrooms"
 				icon={<RoomIcon />}
 				options={Array.from({ length: 13 }, (_, i) => ({
 					value: i,
-					label: `${i === 0 ? "Studio" : i}`,
+					label: `${i === 0 ? t("estate.bedrooms.studio") : i}`,
 				}))}
 				initialSelected={initialValues["bedrooms"] || []}
 				onChange={(vals) => handleChange("bedrooms", vals)}
-				placeholder="# Chambres"
+				placeholder={t("form.estate.placeholder.bedrooms")}
 			/>
-			{/*</Field>*/}
 
 			{mode === "url" && (
 				<button type="submit" className={classes.searchButton}>
-					Search
+					{t("form.estate.submit")}
 				</button>
 			)}
 		</Form>
