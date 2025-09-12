@@ -201,7 +201,7 @@ export class JCRQueryBuilder {
 
 			return nodes.map(({ uuid, renderedContent }) => ({
 				uuid,
-				html: renderedContent.output,
+				html: renderedContent?.output ?? "",
 			}));
 		} finally {
 			clearTimeout(id);
