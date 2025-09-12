@@ -19,9 +19,9 @@
 	transform: translateX(-50%);
 
 	@media (min-width: gridBreakpoints_lg) {
-			flex-direction: row;
+		flex-direction: row;
 		gap: 24px;
-			width: 110%;
+		width: 110%;
 	}
 }
 
@@ -30,12 +30,12 @@
 	height: 20px;
 }
 
-.searchButton{
+.searchButton {
 	color: #fff;
 	border: none;
 	gap: 24px;
 	border-radius: 8px;
 	padding: 8px 24px;
-	background: rgba(var(--luxe-color-gold-rgb),1);
+	background: rgba(var(--luxe-color-gold-rgb), 1);
 	cursor: pointer;
 }
