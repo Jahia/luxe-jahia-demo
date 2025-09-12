@@ -20,7 +20,7 @@ export function MultiSelectTags({
 	initialSelected = [],
 	onChange,
 	className,
-	placeholder = "Sélectionner…",
+	placeholder = "Select…",
 	icon,
 }: Props) {
 	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
