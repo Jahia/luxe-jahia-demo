@@ -3,8 +3,10 @@ import { Col } from "~/commons";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import { ProgressiveList } from "design-system";
 
+const NO_RESULTS_UUID = "no-results";
+
 export default function SearchResultsClient({ nodes }: { nodes: RenderNodeProps[] }) {
-	const noResults = nodes.length === 0 || (nodes.length === 1 && nodes[0].uuid === "no-results");
+	const noResults = nodes.length === 0 || (nodes.length === 1 && nodes[0].uuid === NO_RESULTS_UUID);
 
 	if (noResults) {
 		return (
