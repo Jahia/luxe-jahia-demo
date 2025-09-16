@@ -7,13 +7,13 @@
   >
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>jahia-modules</artifactId>
+    <artifactId>luxe-root</artifactId>
     <groupId>org.jahia.modules</groupId>
-    <version>8.2.1.0</version>
+    <version>0.9.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
   <artifactId>luxe-prepackaged-website</artifactId>
   <name>Luxe pre-packaged website</name>
-  <version>0.9.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <description>This is the custom module (Luxe pre-packaged website) for running on a Jahia server.</description>
 
