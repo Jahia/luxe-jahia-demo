@@ -16,6 +16,13 @@
   <packaging>pom</packaging>
   <description>Luxe monorepo root</description>
 
+  <scm>
+    <connection>scm:git:git@github.com:Jahia/luxe-jahia-demo.git</connection>
+    <developerConnection>scm:git:git@github.com:Jahia/luxe-jahia-demo.git</developerConnection>
+    <url>scm:git:git@github.com:Jahia/luxe-jahia-demo.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <modules>
     <module>packages/prepackaged-site</module>
     <module>packages/template-set</module>
