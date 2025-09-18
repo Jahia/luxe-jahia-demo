@@ -1,6 +1,6 @@
 {
 	"name": "luxe-jahia-demo",
-	"version": "0.9.0",
+	"version": "0.10.0-SNAPSHOT",
 	"license": "MIT",
 	"type": "module",
 	"files": [
@@ -45,7 +45,6 @@
 		"yarn": ">=4.0.0"
 	},
 	"jahia": {
-		"snapshot": true,
 		"required-version": "8.2.1.0",
 		"module-type": "templatesSet",
 		"module-dependencies": "default,javascript-modules-engine=[0.9,1)",
