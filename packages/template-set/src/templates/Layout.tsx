@@ -7,13 +7,13 @@ import {
 	Render,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
-import { Col, Row, Section } from "~/commons";
 import { t } from "i18next";
 import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
-import grid from "~/commons/grid/grid.module.css";
+import grid from "design-system/Grid/styles.module.css";
 import favicon from "/static/favicon-32x32.png";
+import { Col, Row, Section } from "design-system";
 
 /**
  * Layout : Places 'children' in an html page.

@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { Row } from "~/commons/grid";
-import classes from "./HeadingSection.module.css";
+import { Row } from "../Grid";
+import classes from "./styles.module.css";
 
 export const HeadingSection = ({ title, className }: { title: string; className?: string }) => {
 	return (

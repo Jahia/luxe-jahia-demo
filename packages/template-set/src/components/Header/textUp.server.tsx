@@ -1,6 +1,5 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { PageTitle, Row } from "~/commons";
-import { Figure, Image } from "design-system";
+import { Figure, Image, PageTitle, Row } from "design-system";
 import type { HeaderProps } from "./types.js";
 import classes from "./textUp.module.css";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";

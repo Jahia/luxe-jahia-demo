@@ -8,7 +8,7 @@ import type {
 import { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 import SearchResultsClient from "~/components/SearchEstate/SearchResults.client.tsx";
-import { Row, Section } from "~/commons";
+import { Row, Section } from "design-system";
 
 export default function SearchEstateClient({
 	builderConfig,

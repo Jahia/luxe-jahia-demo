@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import classes from "./List.module.css";
+import classes from "./styles.module.css";
 import type { JSX } from "react";
 
 export interface ListRowProps {

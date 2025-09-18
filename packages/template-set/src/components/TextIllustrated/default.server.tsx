@@ -2,12 +2,11 @@ import { buildModuleFileUrl, jahiaComponent, server } from "@jahia/javascript-mo
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import placeholder from "/static/img/img-placeholder.jpg";
 import classes from "~/components/TextIllustrated/default.module.css";
-import { Col, Row } from "~/commons";
 import clsx from "clsx";
-import React from "react";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import { Image } from "design-system";
+import { Col, Image, Row } from "design-system";
 import { CTA, type CTAProps } from "~/mixins/CTA/index.tsx";
+import type { ImgHTMLAttributes } from "react";
 
 type Props = {
 	title?: string;
@@ -22,7 +21,7 @@ jahiaComponent(
 		nodeType: "luxe:textIllustrated",
 	},
 	({ title, text, image: imageNode, arrangement, ...props }: Props, { renderContext }) => {
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 		if (imageNode) {

@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import classes from "./ContentHeader.module.css";
-import { Image } from "design-system";
+import classes from "./styles.module.css";
+import { Image } from "../Image";
 import type { ImgHTMLAttributes } from "react";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */

@@ -1,0 +1,9 @@
+.main {
+	padding-bottom: 1.5rem;
+}
+
+.title {
+	composes: capitalize from "../global.css";
+	composes: hasDiamond from "../global.css";
+	margin-bottom: 0;
+}

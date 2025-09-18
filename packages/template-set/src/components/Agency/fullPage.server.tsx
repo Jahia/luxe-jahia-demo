@@ -12,24 +12,24 @@ import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 import { t } from "i18next";
-import {
-	Col,
-	ContentHeader,
-	HeadingSection,
-	List,
-	type ListRowProps,
-	Row,
-	Section,
-} from "~/commons";
 import ContactClient from "~/commons/Contact.client";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
-import MapWithPinClient from "~/commons/map/MapWithPin.client";
-import type { AddressItem } from "~/commons/map/types";
+import MapWithPinClient from "~/commons/Map/MapWithPin.client";
+import type { AddressItem } from "~/commons/Map/MapWithPin.client";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import React from "react";
+import {
+	Col,
+	ContentHeader,
+	HeadingSection,
+	List,
+	Row,
+	Section,
+	type ListRowProps,
+} from "design-system";
+import type { ImgHTMLAttributes } from "react";
 
 const MAX_ESTATE = 6;
 
@@ -118,7 +118,7 @@ jahiaComponent(
 		];
 
 		// Image: placeholder by default; override when a real node exists
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 
@@ -165,7 +165,19 @@ jahiaComponent(
 							/>
 						</Col>
 						<Col>
-							<Island clientOnly component={MapWithPinClient} props={{ addresses: addressItems }} />
+							<Island
+								clientOnly
+								component={MapWithPinClient}
+								props={{
+									addresses: addressItems,
+									loadingText: t("maps.loading.map"),
+									errorMessages: {
+										mapLoading: t("maps.error.mapLoading", { error: "{{error}}" }),
+										addressNotFound: t("maps.error.addressNotFound"),
+										addressGeo: t("maps.error.addressGeo"),
+									},
+								}}
+							/>
 						</Col>
 					</Row>
 				</Section>

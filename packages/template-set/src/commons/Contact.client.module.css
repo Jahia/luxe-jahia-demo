@@ -27,6 +27,9 @@ section .btn {
 
 .dialog {
 	--luxe-dialog-opacity: 1;
+	> div {
+		max-width: max(800px, 50vw);
+	}
 }
 
 .title {

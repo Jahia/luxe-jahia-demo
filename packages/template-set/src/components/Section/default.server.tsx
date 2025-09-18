@@ -5,7 +5,7 @@ import {
 	Render,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { Section } from "~/commons";
+import { Section } from "design-system";
 
 export interface SectionProps {
 	arrangement: "left" | "center" | "right";

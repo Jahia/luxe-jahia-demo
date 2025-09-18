@@ -1,6 +1,5 @@
 import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { Row } from "~/commons";
-import { Figure, Image } from "design-system";
+import { Figure, Image, Row } from "design-system";
 import type { HeaderProps } from "./types";
 import classes from "./textDown.module.css";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";

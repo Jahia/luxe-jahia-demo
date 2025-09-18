@@ -10,7 +10,7 @@ import classes from "./card.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import { Image } from "design-system";
-import React from "react";
+import type { ImgHTMLAttributes } from "react";
 
 jahiaComponent(
 	{
@@ -20,7 +20,7 @@ jahiaComponent(
 		componentType: "view",
 	},
 	({ title, subtitle, image: imageNode }: BlogPostProps, { currentNode, renderContext }) => {
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 		if (imageNode) {

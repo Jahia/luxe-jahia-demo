@@ -3,7 +3,7 @@
 @value gridBreakpoints_md, space_5, space_4, space_0 from variables;
 
 .header {
-	composes: container from "~/commons/grid/grid.module.css";
+	composes: container from "design-system/Grid/styles.module.css";
 	padding-top: space_4;
 	padding-bottom: space_4;
 	margin-bottom: space_5;

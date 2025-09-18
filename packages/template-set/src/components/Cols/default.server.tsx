@@ -1,7 +1,7 @@
 import { AbsoluteArea, jahiaComponent } from "@jahia/javascript-modules-library";
-import { Col, Row } from "~/commons";
 import classes from "./default.module.css";
 import type { SectionProps } from "~/components/Section/default.server";
+import { Col, Row } from "design-system";
 
 jahiaComponent(
 	{

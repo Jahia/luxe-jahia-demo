@@ -1,7 +1,7 @@
 import { buildNodeUrl, Island, jahiaComponent } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
-import { Section } from "~/commons";
+import { Section } from "design-system";
 jahiaComponent(
 	{
 		nodeType: "luxe:searchEstate",

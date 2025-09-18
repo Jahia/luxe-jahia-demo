@@ -1,6 +1,5 @@
-@value variables: "~/templates/css/variables.css";
-
-@value gridBreakpoints_sm, gridBreakpoints_md, gridBreakpoints_lg, gridBreakpoints_xl, gridBreakpoints_xxl from variables;
+@value variables: "../variables.module.css";
+@value breakpoints_sm, breakpoints_md, breakpoints_lg, breakpoints_xl, breakpoints_xxl from variables;
 
 .default {
 	--luxe-gutter-x: 1.5rem;
@@ -18,30 +17,20 @@
 
 .container {
 	composes: default;
-	@media (min-width: gridBreakpoints_sm) {
-		& {
-			max-width: 540px;
-		}
+	@media (min-width: breakpoints_sm) {
+		max-width: 540px;
 	}
-	@media (min-width: gridBreakpoints_md) {
-		& {
-			max-width: 720px;
-		}
+	@media (min-width: breakpoints_md) {
+		max-width: 720px;
 	}
-	@media (min-width: gridBreakpoints_lg) {
-		& {
-			max-width: 960px;
-		}
+	@media (min-width: breakpoints_lg) {
+		max-width: 960px;
 	}
-	@media (min-width: gridBreakpoints_xl) {
-		& {
-			max-width: 1140px;
-		}
+	@media (min-width: breakpoints_xl) {
+		max-width: 1140px;
 	}
-	@media (min-width: gridBreakpoints_xxl) {
-		& {
-			max-width: 1320px;
-		}
+	@media (min-width: breakpoints_xxl) {
+		max-width: 1320px;
 	}
 }
 
@@ -188,7 +177,7 @@
 	width: 100%;
 }
 
-@media (min-width: gridBreakpoints_sm) {
+@media (min-width: breakpoints_sm) {
 	.col_sm {
 		flex: 1 0 0;
 	}
@@ -229,7 +218,7 @@
 	}
 }
 
-@media (min-width: gridBreakpoints_md) {
+@media (min-width: breakpoints_md) {
 	.col_md {
 		flex: 1 0 0;
 	}
@@ -270,7 +259,7 @@
 	}
 }
 
-@media (min-width: gridBreakpoints_lg) {
+@media (min-width: breakpoints_lg) {
 	.col_lg {
 		flex: 1 0 0;
 	}
@@ -311,7 +300,7 @@
 	}
 }
 
-@media (max-width: calc(gridBreakpoints_sm - 0.02px)) {
+@media (max-width: calc(breakpoints_sm - 0.02px)) {
 	[class*="col_"],
 	.col {
 		flex: 0 0 auto;

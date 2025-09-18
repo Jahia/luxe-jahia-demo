@@ -1,5 +1,5 @@
 import type { ElementType, HTMLAttributes } from "react";
-import classes from "./grid.module.css";
+import classes from "../styles.module.css";
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
 	component?: ElementType;

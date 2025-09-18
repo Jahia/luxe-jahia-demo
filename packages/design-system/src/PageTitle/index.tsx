@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { Row } from "~/commons/grid";
-import classes from "./PageTitle.module.css";
+import { Row } from "../Grid";
+import classes from "./styles.module.css";
 
 export const PageTitle = ({
 	title,

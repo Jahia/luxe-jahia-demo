@@ -5,7 +5,7 @@
 .rowEstates {
 	--luxe-gutter-x: space_0;
 	--luxe-gutter-y: space_0;
-	composes: rowCols_3 from "~/commons/grid/grid.module.css";
+	composes: rowCols_3 from "design-system/Grid/styles.module.css";
 
 	> div {
 		--luxe-gutter-x: space_0;

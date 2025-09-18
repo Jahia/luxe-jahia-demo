@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import classes from "./grid.module.css";
+import classes from "../styles.module.css";
 import type { ElementType, HTMLAttributes } from "react";
 
 export const Row = <T,>({
