@@ -9,8 +9,8 @@
 		"./Icons": {
 			"import": "./src/Icons/index.ts"
 		},
-		"./ProgressiveList/styles.module.css": "./src/ProgressiveList/styles.module.css"
-
+		"./ProgressiveList/styles.module.css": "./src/ProgressiveList/styles.module.css",
+		"./Grid/styles.module.css": "./src/Grid/styles.module.css"
 	},
 	"scripts": {
 		"build-storybook": "storybook build",

@@ -5,13 +5,13 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
 import clsx from "clsx";
 import type { JcrQueryProps } from "./types";
 import alert from "~/templates/css/alert.module.css";
-import grid from "~/commons/grid/grid.module.css";
+import grid from "design-system/Grid/styles.module.css";
+import { Col, HeadingSection, Row } from "design-system";
 
 jahiaComponent(
 	{

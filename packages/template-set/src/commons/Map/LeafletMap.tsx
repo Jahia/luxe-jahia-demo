@@ -4,7 +4,7 @@ import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import type { LeafletMapClientProps, Pin } from "~/commons/map/types";
+import type { LeafletMapProps, Pin } from "./MapWithPin.client.tsx";
 
 // Set default marker icon paths
 L.Icon.Default.mergeOptions({
@@ -28,7 +28,7 @@ const FitBounds: React.FC<{ pins: Pin[] }> = ({ pins }) => {
 	return null;
 };
 
-const LeafletMapClient: React.FC<LeafletMapClientProps> = ({ pins, className }) => {
+const LeafletMap: React.FC<LeafletMapProps> = ({ pins, className }) => {
 	// If at least one pin, use the first as map center
 	const center: [number, number] = pins.length > 0 ? [pins[0].lat, pins[0].lng] : [48.8566, 2.3522]; // Paris fallback
 
@@ -52,4 +52,4 @@ const LeafletMapClient: React.FC<LeafletMapClientProps> = ({ pins, className }) 
 	);
 };
 
-export default LeafletMapClient;
+export default LeafletMap;

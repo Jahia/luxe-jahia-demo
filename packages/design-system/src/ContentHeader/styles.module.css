@@ -1,0 +1,73 @@
+@value variables: "../variables.module.css";
+
+@value breakpoints_lg from variables;
+
+/*
+  Note: cannot use var in media query due to possible launching order issue and miss calculation
+ of the max-width. So use '@value' instead
+ KO: @media (max-width: calc(var(--luxe-grid-breakpoints-lg) - 0.02px)) {
+*/
+
+.main {
+	composes: container from "../Grid/styles.module.css";
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0;
+	padding-bottom: 0;
+
+	@media (min-width: breakpoints_lg) {
+		flex-direction: row;
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	gap: 3rem;
+}
+
+.title {
+	font-family: var(--luxe-font-family-display);
+	display: flex;
+	align-items: center;
+	height: 350px;
+	text-wrap: balance;
+	margin-bottom: 0;
+	margin-left: 3rem;
+
+	@media (max-width: calc(breakpoints_lg - 0.02px)) {
+		height: auto;
+		margin-top: 3rem;
+		justify-content: center;
+		text-align: center;
+		margin-left: 0;
+	}
+}
+
+.image {
+	width: 500px;
+	height: 500px;
+
+	@media (max-width: calc(breakpoints_lg - 0.02px)) {
+		width: 100%;
+		height: 250px;
+	}
+}
+
+.description {
+	--description-offset: 50px;
+	background-color: var(--luxe-bg-secondary);
+	padding: 80px;
+	font-size: 1.5rem;
+	z-index: -1;
+	margin-left: calc(var(--description-offset) * -1);
+	border-radius: 16px;
+
+	@media (max-width: calc(breakpoints_lg - 0.02px)) {
+		width: 100%;
+		margin-left: 0;
+		padding: 40px;
+		font-size: inherit;
+	}
+}

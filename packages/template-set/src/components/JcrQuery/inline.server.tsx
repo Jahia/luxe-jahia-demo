@@ -5,11 +5,11 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { HeadingSection } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
 import alert from "~/templates/css/alert.module.css";
+import { HeadingSection } from "design-system";
 
 jahiaComponent(
 	{

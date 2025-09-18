@@ -4,13 +4,13 @@ import {
 	Render,
 	server,
 } from "@jahia/javascript-modules-library";
-import { Col, HeadingSection, Row, Section } from "~/commons";
 import { t } from "i18next";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
-import { Figure, Image } from "design-system";
+import { Col, Figure, HeadingSection, Image, Row, Section } from "design-system";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import type { ImgHTMLAttributes } from "react";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -33,7 +33,7 @@ jahiaComponent(
 		{ currentNode, renderContext },
 	) => {
 		// Image: placeholder by default; override when a real node exists
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 

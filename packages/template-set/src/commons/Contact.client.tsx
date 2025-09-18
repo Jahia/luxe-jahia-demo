@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HeadingSection } from "~/commons/HeadingSection";
+import { HeadingSection } from "design-system";
 import { t } from "i18next";
 import classes from "./Contact.client.module.css";
 import { Dialog } from "design-system";
@@ -14,14 +14,14 @@ export interface ContactProps {
 	contextMode?: string;
 }
 
-const ContactClient = ({
+export default function ContactClient({
 	addresses,
 	phone,
 	email,
 	contactTarget,
 	feedbackMsg = "",
 	contextMode = "default",
-}: ContactProps) => {
+}: ContactProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<>
@@ -59,6 +59,4 @@ const ContactClient = ({
 			</Dialog>
 		</>
 	);
-};
-
-export default ContactClient;
+}

@@ -58,7 +58,7 @@
 }
 
 .containerFluid {
-	composes: containerFluid from "~/commons/grid/grid.module.css";
+	composes: containerFluid from "design-system/Grid/styles.module.css";
 	display: flex;
 	flex-wrap: inherit;
 	align-items: center;

@@ -36,3 +36,12 @@ h6 {
 		margin-bottom: 0;
 	}
 }
+
+.hasDiamond {
+	&:after {
+		content: "✦";
+		color: var(--luxe-color-primary);
+		font-size: 0.4em;
+		margin-left: 4px;
+	}
+}

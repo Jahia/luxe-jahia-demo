@@ -1,7 +1,5 @@
-import React from "react";
-import { Col } from "~/commons";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
-import { ProgressiveList } from "design-system";
+import { Col, ProgressiveList } from "design-system";
 
 const NO_RESULTS_UUID = "no-results";
 

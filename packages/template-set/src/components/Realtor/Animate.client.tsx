@@ -1,12 +1,12 @@
 import classes from "~/components/Realtor/default.module.css";
-import React, { useRef, useState } from "react";
+import { type ImgHTMLAttributes, useRef, useState } from "react";
 import { Image } from "design-system";
 
 interface AnimateClientProps {
 	firstName: string;
 	lastName: string;
 	jobPosition: string;
-	image: React.ImgHTMLAttributes<HTMLImageElement>;
+	image: ImgHTMLAttributes<HTMLImageElement>;
 	videoUrl?: string;
 	currentNodeUrl: string;
 }

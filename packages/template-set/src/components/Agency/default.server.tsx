@@ -9,8 +9,8 @@ import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import React from "react";
 import { Image } from "design-system";
+import type { ImgHTMLAttributes } from "react";
 
 jahiaComponent(
 	{
@@ -19,7 +19,7 @@ jahiaComponent(
 		componentType: "view",
 	},
 	({ name, address, phone, image: imageNode }: AgencyProps, { currentNode, renderContext }) => {
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 		if (imageNode) {

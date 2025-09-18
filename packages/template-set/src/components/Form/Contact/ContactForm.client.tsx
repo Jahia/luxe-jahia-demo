@@ -37,7 +37,6 @@ const ContactFormClient = ({
 					{t("form.contact.firstName")}
 				</label>
 				<input
-					autoFocus
 					required
 					id="inputContactFirstName"
 					defaultValue={firstName}

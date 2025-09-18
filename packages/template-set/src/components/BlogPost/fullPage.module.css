@@ -3,7 +3,7 @@
 @value gridBreakpoints_md, space_5, space_4, space_0, fs_6 from variables;
 
 .header {
-	composes: container from "~/commons/grid/grid.module.css";
+	composes: container from "design-system/Grid/styles.module.css";
 	padding-top: space_4;
 	padding-bottom: space_4;
 	margin-bottom: space_5;
@@ -48,9 +48,9 @@
 }
 
 .rowRelatedBlogPosts {
-	composes: rowCols_lg_3 from "~/commons/grid/grid.module.css";
-	composes: rowCols_md_2 from "~/commons/grid/grid.module.css";
-	composes: rowCols_sm_1 from "~/commons/grid/grid.module.css";
+	composes: rowCols_lg_3 from "design-system/Grid/styles.module.css";
+	composes: rowCols_md_2 from "design-system/Grid/styles.module.css";
+	composes: rowCols_sm_1 from "design-system/Grid/styles.module.css";
 }
 
 section .rowRelatedBlogPosts {

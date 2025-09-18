@@ -16,8 +16,8 @@
 }
 
 .rowDescription {
-	composes: rowCols_1 from "~/commons/grid/grid.module.css";
-	composes: rowCols_lg_2 from "~/commons/grid/grid.module.css";
+	composes: rowCols_1 from "design-system/Grid/styles.module.css";
+	composes: rowCols_lg_2 from "design-system/Grid/styles.module.css";
 }
 
 section .rowDescription {

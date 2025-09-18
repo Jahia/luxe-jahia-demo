@@ -8,9 +8,9 @@ import { t } from "i18next";
 import type { EstateProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
-import React from "react";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import { Image } from "design-system";
+import type { ImgHTMLAttributes } from "react";
 
 jahiaComponent(
 	{
@@ -25,7 +25,7 @@ jahiaComponent(
 		const locale = currentResource.getLocale().getLanguage();
 
 		// Image: placeholder by default; override when a real node exists
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 		if (images[0]) {

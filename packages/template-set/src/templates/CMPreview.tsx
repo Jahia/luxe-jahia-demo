@@ -1,5 +1,10 @@
 import { AddResources, buildModuleFileUrl } from "@jahia/javascript-modules-library";
-import type { CommonsProps } from "~/commons/types";
+import type { ReactNode } from "react";
+
+type CommonsProps = {
+	className?: string;
+	children: ReactNode;
+};
 
 export const CMPreview = ({ className, children }: CommonsProps) => (
 	<>

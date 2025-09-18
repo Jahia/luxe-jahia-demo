@@ -7,10 +7,10 @@ import {
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./default.module.css";
 import alert from "~/templates/css/alert.module.css";
-import { Col, HeadingSection, Row } from "~/commons";
 import { t } from "i18next";
 import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
+import { Col, HeadingSection, Row } from "design-system";
 
 jahiaComponent(
 	{

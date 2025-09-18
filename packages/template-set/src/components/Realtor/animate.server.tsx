@@ -9,8 +9,8 @@ import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
-import React from "react";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import type { ImgHTMLAttributes } from "react";
 
 jahiaComponent(
 	{
@@ -23,7 +23,7 @@ jahiaComponent(
 		{ firstName, lastName, jobPosition, image: imageNode, animate: videoNode }: RealtorProps,
 		{ currentNode, renderContext },
 	) => {
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 		if (imageNode) {

@@ -9,21 +9,22 @@ import {
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { t } from "i18next";
+import type { RealtorProps } from "./types.js";
+import classes from "./fullPage.module.css";
+import placeholder from "/static/img/agent-placeholder.jpg";
+import ContactClient from "~/commons/Contact.client";
+import type { AddressItem } from "~/commons/Map/MapWithPin.client";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import {
 	Col,
 	ContentHeader,
 	HeadingSection,
 	List,
-	type ListRowProps,
 	Row,
 	Section,
-} from "~/commons";
-import type { RealtorProps } from "./types.js";
-import classes from "./fullPage.module.css";
-import placeholder from "/static/img/agent-placeholder.jpg";
-import type { AddressItem } from "~/commons/map/types";
-import ContactClient from "~/commons/Contact.client";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+	type ListRowProps,
+} from "design-system";
+import type { ImgHTMLAttributes } from "react";
 
 const MAX_ESTATE = 6;
 
@@ -118,7 +119,7 @@ jahiaComponent(
 		];
 
 		// Image: placeholder by default; override when a real node exists
-		let imageProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
 
