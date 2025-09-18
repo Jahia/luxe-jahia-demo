@@ -5,10 +5,10 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import { Col, List, PageTitle, Row, Section } from "~/commons";
-import GalleryClient from "~/commons/gallery/Gallery.client";
+import GalleryClient from "~/commons/Gallery.client.tsx";
 import { t } from "i18next";
 import type { EstateProps } from "./types.js";
-import CheckIcon from "~/commons/icons/CheckIcon";
+import { CheckIcon } from "design-system/Icons";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
@@ -108,7 +108,7 @@ jahiaComponent(
 					<Row>
 						<Island
 							component={GalleryClient}
-							props={{ title, images: galleryImages, className: classes.gallery }}
+							props={{ title, images: galleryImages, className: classes.gallery, delayMs: 150 }}
 						/>
 					</Row>
 					<Row className={classes.rowDescription}>

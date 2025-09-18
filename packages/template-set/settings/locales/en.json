@@ -94,7 +94,15 @@
 				"title": "contact us"
 			}
 		},
-		"unknownError": "an error occured"
+		"unknownError": "an error occured",
+		"estate": {
+			"placeholder": {
+				"bedrooms": "# bedrooms",
+				"type": "property type",
+				"country": "country"
+			},
+			"submit": "search"
+		}
 	},
 	"realtor": {
 		"jobPosition": {
@@ -119,7 +127,8 @@
 		},
 		"bedrooms": {
 			"label": "bedrooms",
-			"numberOf": "number of bedrooms"
+			"numberOf": "number of bedrooms",
+			"studio": "studio"
 		},
 		"bathrooms": {
 			"label": "bathrooms",
@@ -165,5 +174,12 @@
 		"loading": {
 			"map": "Loading map..."
 		}
+	},
+	"country": {
+		"US": "United States",
+		"FR": "France",
+		"DE": "Germany",
+		"ES": "Spain",
+		"IT": "Italy"
 	}
 }

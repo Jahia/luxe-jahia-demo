@@ -8,10 +8,8 @@
 	padding-bottom: space_4;
 	margin-bottom: space_5;
 	@media (min-width: gridBreakpoints_md) {
-		& {
-			padding-top: space_5;
-			padding-bottom: space_5;
-		}
+		padding-top: space_5;
+		padding-bottom: space_5;
 	}
 
 	hgroup {

@@ -1,0 +1,20 @@
+.resultsRow {
+	composes: rowCols_lg_3 from "~/commons/grid/grid.module.css";
+	composes: rowCols_md_2 from "~/commons/grid/grid.module.css";
+	composes: rowCols_sm_1 from "~/commons/grid/grid.module.css";
+}
+.resultsRow {
+	--luxe-gutter-x: 0;
+	--luxe-gutter-y: 0;
+
+	> div {
+		--luxe-gutter-x: 0;
+		--luxe-gutter-y: 0;
+	}
+}
+
+.searchRow {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+}

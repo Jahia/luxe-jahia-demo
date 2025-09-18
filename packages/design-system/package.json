@@ -3,8 +3,14 @@
 	"private": true,
 	"type": "module",
 	"exports": {
-		"types": "./src/index.ts",
-		"default": "./src/index.ts"
+		".": {
+			"import": "./src/index.ts"
+		},
+		"./Icons": {
+			"import": "./src/Icons/index.ts"
+		},
+		"./ProgressiveList/styles.module.css": "./src/ProgressiveList/styles.module.css"
+
 	},
 	"scripts": {
 		"build-storybook": "storybook build",

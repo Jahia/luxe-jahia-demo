@@ -1,0 +1,11 @@
+# default configuration - won't be overridden
+
+luxe:
+  description: "Authorization to query live Luxe content through the GraphQL API."
+  auto_apply:
+    - origin: hosted
+  grants:
+    - api:
+        include: graphql
+    - node:
+        pathPattern: /,/files(/.*)?

@@ -1,0 +1,41 @@
+@value variables: "~/templates/css/variables.css";
+@value gridBreakpoints_lg from variables;
+
+.form.extended {
+	gap: 12px;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	max-width: 110%;
+	z-index: 10;
+	padding: 24px;
+	background: rgba(var(--luxe-color-gray-rgb), 1);
+	border: 1px solid var(--luxe-color-darkBlue40, rgba(164, 163, 184, 1));
+	border-radius: 8px;
+	box-shadow: 2px 2px 30px 0 rgba(35, 33, 110, 0.1);
+	margin: 0 auto;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+
+	@media (min-width: gridBreakpoints_lg) {
+		flex-direction: row;
+		gap: 24px;
+		width: 110%;
+	}
+}
+
+.form.extended svg {
+	width: 20px;
+	height: 20px;
+}
+
+.searchButton {
+	color: #fff;
+	border: none;
+	gap: 24px;
+	border-radius: 8px;
+	padding: 8px 24px;
+	background: rgba(var(--luxe-color-gold-rgb), 1);
+	cursor: pointer;
+}

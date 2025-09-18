@@ -1,12 +1,7 @@
-import type { FC, SVGAttributes } from "react";
+import type { FC } from "react";
+import type { SvgIconProps } from "./types.ts";
 
-interface SvgIconProps extends SVGAttributes<SVGElement> {
-	width?: string;
-	height?: string;
-	strokeColor?: string;
-}
-
-const CheckIcon: FC<SvgIconProps> = ({
+export const CheckIcon: FC<SvgIconProps> = ({
 	width = "24px",
 	height = "24px",
 	strokeColor = "currentColor",
@@ -25,5 +20,3 @@ const CheckIcon: FC<SvgIconProps> = ({
 		<path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
 	</svg>
 );
-
-export default CheckIcon;

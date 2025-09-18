@@ -94,7 +94,15 @@
 				"title": "contáctanos"
 			}
 		},
-		"unknownError": "ocurrió un error"
+		"unknownError": "ocurrió un error",
+		"estate": {
+			"placeholder": {
+				"bedrooms": "# habitaciones",
+				"type": "tipo de propiedad",
+				"country": "país"
+			},
+			"submit": "buscar"
+		}
 	},
 	"realtor": {
 		"jobPosition": {
@@ -119,7 +127,8 @@
 		},
 		"bedrooms": {
 			"label": "dormitorios",
-			"numberOf": "número de dormitorios"
+			"numberOf": "número de dormitorios",
+			"studio": "estudio"
 		},
 		"bathrooms": {
 			"label": "baños",
@@ -165,5 +174,12 @@
 		"loading": {
 			"map": "Cargando el mapa..."
 		}
+	},
+	"country": {
+		"US": "Estados Unidos",
+		"FR": "Francia",
+		"DE": "Alemania",
+		"ES": "España",
+		"IT": "Italia"
 	}
 }
