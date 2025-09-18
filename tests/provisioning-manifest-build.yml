@@ -1,2 +1,2 @@
 - installBundle:
-      - 'mvn:org.jahia.modules/javascript-modules-engine/0.9.0-SNAPSHOT'
+      - 'mvn:org.jahia.modules/javascript-modules-engine/0.10.0-SNAPSHOT'
