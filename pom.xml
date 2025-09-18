@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  >
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>jahia-modules</artifactId>
@@ -98,6 +102,37 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <!-- when releasing, the checksum of the javascript-modules-library package in the
+          yarn.lock files changes -->
+          <!-- 'clean verify/install' is used to recompute the checksum of the yarn.lock files as
+          part of the regular Maven build -->
+          <!-- scm:checkin allows to commit those files -->
+          <preparationGoals>-P release-prepare clean verify scm:checkin</preparationGoals>
+          <completionGoals>-P release-prepare clean install scm:checkin</completionGoals>
+          <releaseProfiles>release-perform</releaseProfiles>
+          <useReleaseProfile>true</useReleaseProfile>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>release-prepare</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-scm-plugin</artifactId>
+            <configuration>
+              <includes>yarn.lock</includes>
+              <message>chore(release): Prepare release ${project.version}</message>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
