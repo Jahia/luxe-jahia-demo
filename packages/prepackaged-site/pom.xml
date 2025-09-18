@@ -13,13 +13,6 @@
   <packaging>bundle</packaging>
   <description>This is the custom module (Luxe pre-packaged website) for running on a Jahia server.</description>
 
-  <scm>
-    <connection>scm:git:git@github.com:Jahia/luxe-prepackaged-website.git</connection>
-    <developerConnection>scm:git:git@github.com:Jahia/luxe-prepackaged-website.git</developerConnection>
-    <url>https://github.com/Jahia/luxe-prepackaged-website</url>
-    <tag>HEAD</tag>
-  </scm>
-
   <properties>
     <jahia-module-type>system</jahia-module-type>
     <jahia-depends>default,luxe-jahia-demo</jahia-depends>
