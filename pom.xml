@@ -12,7 +12,7 @@
   </parent>
   <artifactId>luxe-root</artifactId>
   <name>Luxe Root</name>
-  <version>0.10.0-SNAPSHOT</version>
+  <version>0.9.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>Luxe monorepo root</description>
 
