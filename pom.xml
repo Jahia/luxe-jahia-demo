@@ -89,6 +89,7 @@
           </execution>
           <execution>
             <id>yarn build</id>
+            <phase>package</phase>
             <goals>
               <goal>yarn</goal>
             </goals>
@@ -123,7 +124,7 @@
           <plugin>
             <artifactId>maven-scm-plugin</artifactId>
             <configuration>
-              <includes>yarn.lock</includes>
+              <includes>yarn.lock,**/package.json</includes>
               <message>chore(release): Prepare release ${project.version}</message>
             </configuration>
           </plugin>
