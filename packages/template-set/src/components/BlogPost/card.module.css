@@ -3,6 +3,11 @@
 	display: block;
 	height: 100%;
 
+	.image {
+		aspect-ratio: 16 / 10;
+		height: auto;
+	}
+
 	h4 {
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;

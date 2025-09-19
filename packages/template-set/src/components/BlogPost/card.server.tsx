@@ -36,7 +36,7 @@ jahiaComponent(
 
 		return (
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
-				<Image {...imageProps} />
+				<Image className={classes.image} {...imageProps} />
 				<h4>{title}</h4>
 				{subtitle && <p>{subtitle}</p>}
 			</a>
