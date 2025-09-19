@@ -1,6 +1,6 @@
 {
 	"name": "luxe-jahia-demo",
-	"version": "0.10.0-SNAPSHOT",
+	"version": "0.9.0-SNAPSHOT",
 	"license": "MIT",
 	"type": "module",
 	"files": [
