@@ -89,6 +89,7 @@
           </execution>
           <execution>
             <id>yarn build</id>
+            <phase>package</phase>
             <goals>
               <goal>yarn</goal>
             </goals>
