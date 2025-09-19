@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  >
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>luxe-root</artifactId>
@@ -16,7 +20,7 @@
   <properties>
     <jahia-module-type>system</jahia-module-type>
     <jahia-depends>default,luxe-jahia-demo</jahia-depends>
-    <jahia-module-signature>MC0CFQCHE2QAPXDGP5t5/Jk2PrLatL0qNgIUB/etlW6zKBnqciqxYp5R7AmMVi4=</jahia-module-signature>
+    <jahia-module-signature>MC0CFCWj7S08sjmSEBws9VTPPqbi6nIDAhUAhCfy4h+lAw13cFKZq6v947taCRI=</jahia-module-signature>
   </properties>
 
   <repositories>
@@ -57,10 +61,16 @@
             </goals>
             <configuration>
               <target>
-                <zip destfile="${project.build.directory}/dist/luxe.zip" basedir="${basedir}/src/main/luxe-prepackaged-website" />
+                <zip
+                  destfile="${project.build.directory}/dist/luxe.zip"
+                  basedir="${basedir}/src/main/luxe-prepackaged-website"
+                  />
                 <zip destfile="${project.build.directory}/classes/META-INF/prepackagedSites/luxe.zip">
                   <fileset dir="${project.build.directory}/dist" />
-                  <fileset dir="${basedir}/src/main/prepackagedSites" includes="export.properties" />
+                  <fileset
+                    dir="${basedir}/src/main/prepackagedSites"
+                    includes="export.properties"
+                    />
                 </zip>
                 <delete dir="${project.build.directory}/dist" />
               </target>
