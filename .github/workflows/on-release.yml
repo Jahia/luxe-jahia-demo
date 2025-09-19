@@ -45,6 +45,12 @@ jobs:
           nexus_password: ${{ secrets.NEXUS_PASSWORD }}
           slack-webhook-qa: ${{ secrets.SLACK_WEBHOOK_URL_RC_FOR_QA }}
 
+      - uses: jahia/jahia-modules-action/update-signature@v2
+        with:
+          nexus_username: ${{ secrets.NEXUS_USERNAME }}
+          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          force_signature: true
+
       # Tmate only starts if any of the previous steps fails.
       # Be careful since it also means that if a step fails the workflow will
       # keep running until it reaches the timeout
