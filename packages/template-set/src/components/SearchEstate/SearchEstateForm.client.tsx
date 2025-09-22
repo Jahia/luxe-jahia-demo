@@ -36,6 +36,7 @@ const SearchEstateFormClient = ({
 	const estateCountryTranslation = {
 		FR: t("country.FR"),
 		US: t("country.US"),
+		ID: t("country.ID"),
 	};
 
 	const handleChange = useCallback(
