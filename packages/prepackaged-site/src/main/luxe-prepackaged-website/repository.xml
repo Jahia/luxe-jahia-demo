@@ -1176,7 +1176,7 @@
                               jcr:primaryType="jnt:resource"
                               jcr:uuid="cbaa6d18-f015-4d0c-89d6-aa71cb0f45a5"/>
                </_x0036_40-S-Ocean-Boulevard-Manalapan-Florida_55_PM.webp>
-               <Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_31_PM.webp j:height="592"
+               <dubai-asora-bay_31_PM.webp j:height="592"
                                                                                                        j:lastPublished="2025-09-01T11:34:42.483Z"
                                                                                                        j:lastPublishedBy="robin"
                                                                                                        j:originWS="default"
@@ -1207,8 +1207,8 @@
                               jcr:mimeType="image/webp"
                               jcr:primaryType="jnt:resource"
                               jcr:uuid="2259827f-61f8-4a55-8a51-8b965fac4efb"/>
-               </Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_31_PM.webp>
-               <Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_32_PM_x0020__x0028_3_x0029_.webp j:height="592"
+               </dubai-asora-bay_31_PM.webp>
+               <dubai-asora-bay_32_PM_x0020__x0028_3_x0029_.webp j:height="592"
                                                                                                                              j:lastPublished="2025-09-01T11:34:42.483Z"
                                                                                                                              j:lastPublishedBy="robin"
                                                                                                                              j:originWS="default"
@@ -1239,7 +1239,7 @@
                               jcr:mimeType="image/webp"
                               jcr:primaryType="jnt:resource"
                               jcr:uuid="7efab7b0-6e65-4d59-b57a-6ae014260a4c"/>
-               </Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_32_PM_x0020__x0028_3_x0029_.webp>
+               </dubai-asora-bay_32_PM_x0020__x0028_3_x0029_.webp>
                <Asia j:lastPublished="2025-09-18T08:28:52.005Z"
                      j:lastPublishedBy="robin"
                      j:originWS="default"
@@ -6038,7 +6038,7 @@
                        jcr:lastModifiedBy="robin"
                        jcr:primaryType="jnt:folder"
                        jcr:uuid="1a438262-8a0b-441c-867a-e509d5158453">
-                  <Saint-Jean-Cap-Ferrat-Provence-Alpes-Cote-D-Azur_08_PM_x0020__x0028_2_x0029_.webp j:height="573"
+                  <france-cap-ferrat_08_PM_x0020__x0028_2_x0029_.webp j:height="573"
                                                                                                      j:lastPublished="2025-09-01T16:10:36.872Z"
                                                                                                      j:lastPublishedBy="robin"
                                                                                                      j:originWS="default"
@@ -6069,8 +6069,8 @@
                                  jcr:mimeType="image/webp"
                                  jcr:primaryType="jnt:resource"
                                  jcr:uuid="21a4f2a2-4044-488b-8101-483da1d06b3a"/>
-                  </Saint-Jean-Cap-Ferrat-Provence-Alpes-Cote-D-Azur_08_PM_x0020__x0028_2_x0029_.webp>
-                  <Saint-Jean-Cap-Ferrat-Provence-Alpes-Cote-D-Azur_08_PM.webp j:height="566"
+                  </france-cap-ferrat_08_PM_x0020__x0028_2_x0029_.webp>
+                  <france-cap-ferrat_08_PM.webp j:height="566"
                                                                                j:lastPublished="2025-09-01T16:10:36.872Z"
                                                                                j:lastPublishedBy="robin"
                                                                                j:originWS="default"
@@ -6101,7 +6101,7 @@
                                  jcr:mimeType="image/webp"
                                  jcr:primaryType="jnt:resource"
                                  jcr:uuid="2ead77c1-8be1-4876-939e-0dc072b848ce"/>
-                  </Saint-Jean-Cap-Ferrat-Provence-Alpes-Cote-D-Azur_08_PM.webp>
+                  </france-cap-ferrat_08_PM.webp>
                   <Bunyola-Bunyola-Mallorca-Spain_57_PM_x0020__x0028_1_x0029_.webp j:height="768"
                                                                                    j:lastPublished="2025-09-05T10:02:19.183Z"
                                                                                    j:lastPublishedBy="robin"
@@ -20820,7 +20820,7 @@
                                          bathrooms="4"
                                          bedrooms="6"
                                          country="US"
-                                         images="#/sites/luxe/files/houses/Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_31_PM.webp #/sites/luxe/files/houses/640-S-Ocean-Boulevard-Manalapan-Florida_55_PM_x0020_(3).webp"
+                                         images="#/sites/luxe/files/houses/dubai-asora-bay_31_PM.webp #/sites/luxe/files/houses/640-S-Ocean-Boulevard-Manalapan-Florida_55_PM_x0020_(3).webp"
                                          j:lastPublished="2025-09-17T09:28:54.590Z"
                                          j:lastPublishedBy="robin"
                                          j:originWS="default"
@@ -21842,7 +21842,7 @@
                                          bathrooms="5"
                                          bedrooms="4"
                                          country="US"
-                                         images="#/sites/luxe/files/houses/640-S-Ocean-Boulevard-Manalapan-Florida_51_PM.webp #/sites/luxe/files/houses/Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_31_PM.webp #/sites/luxe/files/houses/640-S-Ocean-Boulevard-Manalapan-Florida_55_PM_x0020_(1).webp"
+                                         images="#/sites/luxe/files/houses/640-S-Ocean-Boulevard-Manalapan-Florida_51_PM.webp #/sites/luxe/files/houses/dubai-asora-bay_31_PM.webp #/sites/luxe/files/houses/640-S-Ocean-Boulevard-Manalapan-Florida_55_PM_x0020_(1).webp"
                                          j:lastPublished="2025-09-17T09:35:22.799Z"
                                          j:lastPublishedBy="robin"
                                          j:originWS="default"
@@ -23187,7 +23187,7 @@
                                          bathrooms="5"
                                          bedrooms="7"
                                          country="US"
-                                         images="#/sites/luxe/files/houses/Dubai-Jumeirah-Jumeirah-Asora-Bay-Jumeirah-Dubai-Dubai-United-Arab-Emirates_32_PM_x0020_(3).webp"
+                                         images="#/sites/luxe/files/houses/dubai-asora-bay_32_PM_x0020_(3).webp"
                                          j:lastPublished="2025-09-17T09:38:55.979Z"
                                          j:lastPublishedBy="robin"
                                          j:originWS="default"
@@ -23948,7 +23948,7 @@
                                          bathrooms="5"
                                          bedrooms="8"
                                          country="TH"
-                                         images="#/sites/luxe/files/houses/europe/Saint-Jean-Cap-Ferrat-Provence-Alpes-Cote-D-Azur_08_PM.webp"
+                                         images="#/sites/luxe/files/houses/europe/france-cap-ferrat_08_PM.webp"
                                          j:lastPublished="2025-09-01T08:34:07.192Z"
                                          j:lastPublishedBy="robin"
                                          j:originWS="default"
@@ -23991,7 +23991,7 @@
                                          bathrooms="3"
                                          bedrooms="5"
                                          country="CN"
-                                         images="#/sites/luxe/files/houses/europe/Saint-Jean-Cap-Ferrat-Provence-Alpes-Cote-D-Azur_08_PM_x0020_(2).webp"
+                                         images="#/sites/luxe/files/houses/europe/france-cap-ferrat_08_PM_x0020_(2).webp"
                                          j:lastPublished="2025-09-01T08:34:07.192Z"
                                          j:lastPublishedBy="robin"
                                          j:originWS="default"
