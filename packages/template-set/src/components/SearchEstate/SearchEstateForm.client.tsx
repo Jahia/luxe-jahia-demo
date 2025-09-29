@@ -39,15 +39,17 @@ const SearchEstateFormClient = ({
 		ID: t("country.ID"),
 	};
 
+	// Memoize the URL string to avoid excessive effect executions
+	const urlString = useMemo(() => getUrlString(), [getUrlString]);
+
 	// Update browser history when URL changes in instant mode
 	useEffect(() => {
 		if (mode === "instant") {
-			const urlString = getUrlString();
 			if (urlString) {
 				window.history.pushState(null, "", urlString);
 			}
 		}
-	}, [getUrlString, mode]);
+	}, [urlString, mode]);
 
 	const handleChange = useCallback(
 		async (name: string, rawValues: (string | number)[]) => {
