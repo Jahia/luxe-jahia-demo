@@ -44,10 +44,8 @@ const SearchEstateFormClient = ({
 
 	// Update browser history when URL changes in instant mode
 	useEffect(() => {
-		if (mode === "instant") {
-			if (urlString) {
-				window.history.pushState(null, "", urlString);
-			}
+		if (mode === "instant" && urlString) {
+			window.history.pushState(null, "", urlString);
 		}
 	}, [urlString, mode]);
 
