@@ -11,8 +11,7 @@ export function useFormQuerySync(target: string | null) {
 
 	// Init on hydration
 	useEffect(() => {
-		if (!target || typeof window === "undefined") return;
-		setUrl(new URL(target, window.location.origin));
+		setUrl(new URL(target || window.location.href, window.location.origin));
 	}, [target]);
 
 	/**

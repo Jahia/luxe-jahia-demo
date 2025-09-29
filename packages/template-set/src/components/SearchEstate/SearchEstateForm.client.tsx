@@ -3,7 +3,7 @@ import { Form, MultiSelectTags } from "design-system";
 import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
 import type { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
-import { useCallback, useMemo } from "react";
+import { type FormEvent, useCallback, useMemo, useEffect } from "react";
 import clsx from "clsx";
 import classes from "./SearchEstateForm.client.module.css";
 import { t } from "i18next";
@@ -39,12 +39,20 @@ const SearchEstateFormClient = ({
 		ID: t("country.ID"),
 	};
 
+	// Memoize the URL string to avoid excessive effect executions
+	const urlString = useMemo(() => getUrlString(), [getUrlString]);
+
+	// Update browser history when URL changes in instant mode
+	useEffect(() => {
+		if (mode === "instant" && urlString) {
+			window.history.pushState(null, "", urlString);
+		}
+	}, [urlString, mode]);
+
 	const handleChange = useCallback(
 		async (name: string, rawValues: (string | number)[]) => {
-			if (mode === "url" && target) {
-				updateParam(name, rawValues);
-				return;
-			}
+			// Always update URL to preserve navigation history
+			updateParam(name, rawValues);
 
 			if (mode === "instant" && builder && setNodes) {
 				builder.deleteConstraints(name);
@@ -53,10 +61,10 @@ const SearchEstateFormClient = ({
 				setNodes(nodes);
 			}
 		},
-		[target, updateParam, builder, setNodes],
+		[target, updateParam, builder, setNodes, mode],
 	);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (mode === "url" && target) {
 			window.location.href = getUrlString();
