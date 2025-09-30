@@ -199,10 +199,15 @@ export class JCRQueryBuilder {
 				json.data?.jcr?.nodesByQuery?.nodes ??
 				([] as Array<{ uuid: string; renderedContent?: { output: string } }>);
 
-			return nodes.map(({ uuid, renderedContent }) => ({
-				uuid,
-				html: renderedContent?.output ?? "",
-			}));
+			return nodes.map(({ uuid, renderedContent }) => {
+				if (!renderedContent?.output) {
+					console.warn(`No rendered content for node ${uuid}`);
+				}
+				return {
+					uuid,
+					html: renderedContent?.output ?? "",
+				};
+			});
 		} finally {
 			clearTimeout(id);
 		}
