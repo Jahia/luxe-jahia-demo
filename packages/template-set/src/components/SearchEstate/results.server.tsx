@@ -89,8 +89,11 @@ jahiaComponent(
 
 		const gqlNodes: GqlNode[] = gqlContents?.data?.jcr?.nodesByQuery?.nodes;
 		const nodes: RenderNodeProps[] = gqlNodes?.map((node) => {
+			if (!node.renderedContent?.output) {
+				console.warn(`No rendered content for node ${node.uuid}`);
+			}
 			return {
-				html: node.renderedContent.output,
+				html: node.renderedContent?.output || "",
 				uuid: node.uuid,
 			};
 		});
