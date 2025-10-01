@@ -105,6 +105,7 @@ jahiaComponent(
 					builderConfig,
 					builderConstraints: builder.getConstraints(),
 					nodes,
+					isEditMode: renderContext.isEditMode(),
 				}}
 			/>
 		);

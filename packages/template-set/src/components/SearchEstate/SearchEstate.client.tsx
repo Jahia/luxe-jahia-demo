@@ -14,10 +14,12 @@ export default function SearchEstateClient({
 	builderConfig,
 	builderConstraints,
 	nodes: initialNodes,
+	isEditMode,
 }: {
 	builderConfig: JCRQueryConfig;
 	builderConstraints: Constraint[];
 	nodes: RenderNodeProps[];
+	isEditMode: boolean;
 }) {
 	const builder = useMemo(() => {
 		const b = new JCRQueryBuilder(builderConfig);
@@ -33,7 +35,7 @@ export default function SearchEstateClient({
 				<SearchEstateFormClient builder={builder} setNodes={setNodes} mode="instant" />
 			</Row>
 			<Row className={classes.resultsRow}>
-				<SearchResultsClient nodes={nodes} />
+				<SearchResultsClient nodes={nodes} isEditMode={isEditMode} />
 			</Row>
 		</Section>
 	);
