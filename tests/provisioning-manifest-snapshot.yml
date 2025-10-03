@@ -1,9 +1,9 @@
 - installBundle:
-      - 'mvn:org.jahia.modules/javascript-modules-engine/0.10.0-SNAPSHOT'
+      - 'mvn:org.jahia.modules/javascript-modules-engine'
   autoStart: true
   uninstallPreviousVersion: true
 
 - installBundle:
-      - 'js:mvn:org.jahia.modules.javascript/luxe-jahia-demo/0.10.0-SNAPSHOT/tgz'
+      - 'js:mvn:org.jahia.modules.javascript/luxe-jahia-demo/1.0.0/tgz'
   autoStart: true
   uninstallPreviousVersion: true
