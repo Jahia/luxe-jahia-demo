@@ -38,7 +38,7 @@ jobs:
     secrets: inherit
     needs: build
     with:
-      jahia_image: jahia/jahia-ee-dev:8-SNAPSHOT
+      jahia_image: ghcr.io/jahia/jahia-ee-dev:8-SNAPSHOT
       module_id: luxe-jahia-demo
       should_skip_testrail: true
       pagerduty_skip_notification: true
