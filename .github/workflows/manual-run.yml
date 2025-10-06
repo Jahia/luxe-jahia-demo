@@ -19,7 +19,7 @@ jobs:
     uses: Jahia/jahia-modules-action/.github/workflows/reusable-integration-tests.yml@v2
     secrets: inherit
     with:
-      jahia_image: Jahia/jahia-ee-dev:8-SNAPSHOT
+      jahia_image: ${{ github.event.inputs.jahia_image }}
       module_id: luxe-jahia-demo
       should_skip_testrail: true
       pagerduty_skip_notification: true
