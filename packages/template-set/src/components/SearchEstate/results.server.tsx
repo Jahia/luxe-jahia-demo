@@ -31,7 +31,7 @@ jahiaComponent(
 		const builderConfig: JCRQueryConfig = {
 			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
 			type: "luxe:estate",
-			startNodePath: "/sites/luxe/contents/agencies",
+			startNodePath: `${renderContext.getSite().getPath()}/contents/agencies`,
 			criteria: "j:lastPublished",
 			sortDirection: "desc",
 			categories: [],
