@@ -722,9 +722,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:0.9.2":
-  version: 0.9.2
-  resolution: "@jahia/vite-plugin@npm:0.9.2"
+"@jahia/vite-plugin@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@jahia/vite-plugin@npm:1.0.1"
   dependencies:
     "@rollup/pluginutils": "npm:^5.2.0"
     magic-string: "npm:^0.30.18"
@@ -733,7 +733,7 @@ __metadata:
     vite: ">=6.0.0"
   bin:
     jahia-deploy: bin/jahia-deploy.js
-  checksum: 10c0/aa2265c9476ee2c54e5a84f5390e54b36f407b089d54dafef55055117fca415b782fd2cc8604efbbf2988e8e3a3386661e5f1b223ea7bed426e9e2af7992e4cb
+  checksum: 10c0/2528d3e116081cdeade2826c4307c55d918990bd53eb634de0d676914964f5e73ae6c61f4bc7d703b3f4cd03a534025536ce543934e397a544d80efd66675f7c
   languageName: node
   linkType: hard
 
@@ -3577,7 +3577,7 @@ __metadata:
   resolution: "luxe-jahia-demo@workspace:packages/template-set"
   dependencies:
     "@jahia/javascript-modules-library": "npm:0.9.2"
-    "@jahia/vite-plugin": "npm:0.9.2"
+    "@jahia/vite-plugin": "npm:1.0.1"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
     "@types/react-dom": "npm:^19.1.9"
