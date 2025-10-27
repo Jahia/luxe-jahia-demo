@@ -699,16 +699,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:0.9.2":
-  version: 0.9.2
-  resolution: "@jahia/javascript-modules-library@npm:0.9.2"
+"@jahia/javascript-modules-library@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@jahia/javascript-modules-library@npm:1.0.1"
   dependencies:
     dotenv: "npm:^17.2.2"
   peerDependencies:
     i18next: ^25.0.0
     react: ^19.0.0
     react-dom: ^19.0.0
-    react-i18next: ^15.4.0
+    react-i18next: ^15.4.0 || ^16.0.0
   peerDependenciesMeta:
     i18next:
       optional: true
@@ -718,7 +718,7 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-  checksum: 10c0/4dbd24dbd440a627e91afabd3ce7ebc318e37acc77b3a332c126033f3ea9d9270089098b473fe58f85861c3dfd7ebce8865fa05a7609c399614af92f6afa2b21
+  checksum: 10c0/8ecb87fa217dbd2e96ae555299beba29fd9f745c26d54d5ad1d77586955d52fdd65281f17a554c37440a893393d29056cccf06cde3903b4dbbbac9874c837ef9
   languageName: node
   linkType: hard
 
@@ -3576,7 +3576,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luxe-jahia-demo@workspace:packages/template-set"
   dependencies:
-    "@jahia/javascript-modules-library": "npm:0.9.2"
+    "@jahia/javascript-modules-library": "npm:1.0.1"
     "@jahia/vite-plugin": "npm:1.0.1"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
