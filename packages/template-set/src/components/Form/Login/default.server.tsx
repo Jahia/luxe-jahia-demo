@@ -23,8 +23,7 @@ jahiaComponent(
 	) => {
 		const isLoggedIn = renderContext.isLoggedIn();
 
-		// @ts-expect-error getName() is not available in getUser
-		const userHydrated = renderContext.getUser().getName();
+		const userHydrated = renderContext.getUser().getUsername();
 
 		// URL management, usage of buildEndpointUrl ensure urls are correct (vanity, url rewriting, webapp context, etc.)
 		const urls = {

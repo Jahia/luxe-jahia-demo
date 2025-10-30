@@ -5,44 +5,29 @@ import type {
 	RenderNodeProps,
 } from "~/commons/libs/jcrQueryBuilder/types";
 
-export const gqlNodesQueryString = ({
-	fragment,
-	isRenderEnabled,
-	limit,
-	offset,
-}: {
-	fragment?: { name: string; value: string };
-	isRenderEnabled: boolean;
-	limit?: number;
-	offset?: number;
-}): string => {
-	return `
-    query GetContentPropertiesQuery(
-    	$workspace: Workspace!,
-    	$query: String!,
-    	${isRenderEnabled ? "$view: String!," : ""}
-    	$language: String!
-		){
-     jcr(workspace: $workspace) {
-      nodesByQuery(
-        query: $query
-        ${limit && limit >= 0 ? `limit: ${limit}` : ""}
-        ${offset && offset >= 0 ? `offset: ${offset}` : ""}
-      ) {
-        nodes {
-          workspace
-          uuid
-          path
-          name
-          ${fragment?.value ? `...${fragment.name}` : ""}
-          ${isRenderEnabled ? "renderedContent(view: $view, language: $language){ output }" : ""}
-        }
-      }
-     }
-    }
-    ${fragment?.value ?? ""}
-  `.trim();
-};
+export const gqlNodesQuery = /* GraphQL */ `
+	query GetContentPropertiesQuery(
+		$workspace: Workspace!
+		$query: String!
+		$view: String!
+		$language: String!
+		$limit: Int
+	) {
+		jcr(workspace: $workspace) {
+			nodesByQuery(query: $query, limit: $limit) {
+				nodes {
+					workspace
+					uuid
+					path
+					name
+					renderedContent(view: $view, language: $language) {
+						output
+					}
+				}
+			}
+		}
+	}
+`;
 
 export class JCRQueryBuilder {
 	private readonly config: JCRQueryConfig;
@@ -165,12 +150,6 @@ export class JCRQueryBuilder {
 	}: { limit?: number; offset?: number; timeoutMs?: number } = {}): Promise<RenderNodeProps[]> {
 		const { jcrQuery } = this.build();
 
-		const query = gqlNodesQueryString({
-			isRenderEnabled: true,
-			limit: limit ?? this.config.limit ?? -1,
-			offset: offset ?? this.config.offset ?? 0,
-		});
-
 		const controller = new AbortController();
 		const id = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -179,12 +158,13 @@ export class JCRQueryBuilder {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					query,
+					query: gqlNodesQuery,
 					variables: {
 						workspace: this.config.workspace,
 						query: jcrQuery,
 						view: this.config.subNodeView,
 						language: this.config.language,
+						limit: limit ?? this.config.limit,
 					},
 				}),
 				signal: controller.signal,

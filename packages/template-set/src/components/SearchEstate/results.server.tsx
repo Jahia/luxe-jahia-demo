@@ -1,5 +1,5 @@
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { gqlNodesQueryString, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
+import { gqlNodesQuery, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type {
 	Constraint,
 	GqlNode,
@@ -74,16 +74,13 @@ jahiaComponent(
 		server.render.addCacheDependency({ flushOnPathMatchingRegexp: cacheDependency }, renderContext);
 
 		const gqlContents = useGQLQuery({
-			query: gqlNodesQueryString({
-				isRenderEnabled: true,
-				limit: builderConfig.limit,
-				offset: 0,
-			}),
+			query: gqlNodesQuery,
 			variables: {
 				workspace: builderConfig.workspace,
 				query: jcrQuery,
 				language: builderConfig.language,
 				view: builderConfig.subNodeView,
+				limit: builderConfig.limit,
 			},
 		});
 
