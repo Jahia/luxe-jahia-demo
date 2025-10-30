@@ -25,8 +25,3 @@ export type Constraint = {
 };
 
 export type ConstraintJoiner = "AND" | "OR";
-
-export type GqlNode = {
-	uuid: string;
-	renderedContent: { output: string };
-};

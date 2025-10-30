@@ -1,11 +1,37 @@
+import { graphql, type TadaDocumentNode } from "gql.tada";
 import type {
 	Constraint,
 	ConstraintJoiner,
 	JCRQueryConfig,
 	RenderNodeProps,
 } from "~/commons/libs/jcrQueryBuilder/types";
+import { print } from "@0no-co/graphql.web";
 
-export const gqlNodesQuery = /* GraphQL */ `
+async function execute<Result = any, Variables = any>(
+	query: TadaDocumentNode<Result, Variables>,
+	variables: Variables,
+	{ signal }: { signal?: AbortSignal } = {},
+): Promise<Result> {
+	const response = await fetch("/modules/graphql", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+			query: print(query),
+			variables,
+		}),
+		signal,
+	});
+
+	if (!response.ok)
+		throw new Error(`GraphQL HTTP error: ${response.status} ${response.statusText}`);
+
+	const { data, errors } = await response.json();
+	if (errors?.length) throw new Error(`GraphQL errors: ${JSON.stringify(errors)}`);
+
+	return data;
+}
+
+export const gqlNodesQuery = graphql(`
 	query GetContentPropertiesQuery(
 		$workspace: Workspace!
 		$query: String!
@@ -27,7 +53,7 @@ export const gqlNodesQuery = /* GraphQL */ `
 			}
 		}
 	}
-`;
+`);
 
 export class JCRQueryBuilder {
 	private readonly config: JCRQueryConfig;
@@ -145,41 +171,29 @@ export class JCRQueryBuilder {
 
 	async execute({
 		limit,
-		offset,
 		timeoutMs = 5000,
 	}: { limit?: number; offset?: number; timeoutMs?: number } = {}): Promise<RenderNodeProps[]> {
 		const { jcrQuery } = this.build();
 
-		const controller = new AbortController();
-		const id = setTimeout(() => controller.abort(), timeoutMs);
+		const data = await execute(
+			gqlNodesQuery,
+			{
+				workspace: this.config.workspace,
+				query: jcrQuery,
+				view: this.config.subNodeView,
+				language: this.config.language,
+				limit: limit ?? this.config.limit,
+			},
+			{
+				signal: AbortSignal.timeout(timeoutMs),
+			},
+		);
 
-		try {
-			const res = await fetch("/modules/graphql", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					query: gqlNodesQuery,
-					variables: {
-						workspace: this.config.workspace,
-						query: jcrQuery,
-						view: this.config.subNodeView,
-						language: this.config.language,
-						limit: limit ?? this.config.limit,
-					},
-				}),
-				signal: controller.signal,
-			});
+		const nodes = data.jcr.nodesByQuery?.nodes ?? [];
 
-			if (!res.ok) throw new Error(`GraphQL HTTP error: ${res.status} ${res.statusText}`);
-
-			const json = await res.json();
-			if (json.errors?.length) throw new Error(`GraphQL errors: ${JSON.stringify(json.errors)}`);
-
-			const nodes =
-				json.data?.jcr?.nodesByQuery?.nodes ??
-				([] as Array<{ uuid: string; renderedContent?: { output: string } }>);
-
-			return nodes.map(({ uuid, renderedContent }) => {
+		return nodes
+			.filter((node) => node !== null)
+			.map(({ uuid, renderedContent }) => {
 				if (!renderedContent?.output) {
 					console.warn(`No rendered content for node ${uuid}`);
 				}
@@ -188,9 +202,6 @@ export class JCRQueryBuilder {
 					html: renderedContent?.output ?? "",
 				};
 			});
-		} finally {
-			clearTimeout(id);
-		}
 	}
 
 	/** Utility to detect if a constraint already exists in a Set */
