@@ -21,6 +21,7 @@
 	"dependencies": {
 		"clsx": "^2.1.1",
 		"design-system": "workspace:*",
+		"gql.tada": "^1.8.13",
 		"leaflet": "^1.9.4",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
