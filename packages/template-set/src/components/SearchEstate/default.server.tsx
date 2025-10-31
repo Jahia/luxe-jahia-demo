@@ -15,7 +15,6 @@ jahiaComponent(
 					component={SearchEstateFormClient}
 					props={{
 						target: resultsPage && buildNodeUrl(resultsPage),
-						mode: "url",
 					}}
 				/>
 			</Section>
