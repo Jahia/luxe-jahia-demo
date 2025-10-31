@@ -5,34 +5,32 @@ import type {
 	JCRQueryConfig,
 	RenderNodeProps,
 } from "~/commons/libs/jcrQueryBuilder/types.ts";
-import { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 import SearchResultsClient from "~/components/SearchEstate/SearchResults.client.tsx";
 import { Row, Section } from "design-system";
 
 export default function SearchEstateClient({
 	builderConfig,
-	builderConstraints,
+	params,
 	nodes: initialNodes,
 	isEditMode,
 }: {
 	builderConfig: JCRQueryConfig;
-	builderConstraints: Constraint[];
+	params: Record<string, string[]>;
 	nodes: RenderNodeProps[];
 	isEditMode: boolean;
 }) {
-	const builder = useMemo(() => {
-		const b = new JCRQueryBuilder(builderConfig);
-		b.setConstraints(builderConstraints);
-		return b;
-	}, [builderConfig, builderConstraints]);
-
 	const [nodes, setNodes] = useState<RenderNodeProps[]>(initialNodes);
 
 	return (
 		<Section>
 			<Row className={classes.searchRow}>
-				<SearchEstateFormClient builder={builder} setNodes={setNodes} mode="instant" />
+				<SearchEstateFormClient
+					config={builderConfig}
+					params={params}
+					setNodes={setNodes}
+					mode="instant"
+				/>
 			</Row>
 			<Row className={classes.resultsRow}>
 				<SearchResultsClient nodes={nodes} isEditMode={isEditMode} />

@@ -1,16 +1,17 @@
 import { useFormQuerySync } from "~/commons/hooks/useFormQuerySync";
 import { Form, MultiSelectTags } from "design-system";
 import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
-import type { JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
-import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
+import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import { type FormEvent, useCallback, useMemo, useEffect } from "react";
 import clsx from "clsx";
 import classes from "./SearchEstateForm.client.module.css";
 import { t } from "i18next";
+import { execute, gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder/index.ts";
 
 type Props = {
 	target?: string;
-	builder?: JCRQueryBuilder;
+	config: JCRQueryConfig;
+	params: Record<string, string[]>;
 	setNodes?: (nodes: RenderNodeProps[]) => void;
 	mode?: "url" | "instant";
 	className?: string;
@@ -19,7 +20,8 @@ type Props = {
 
 const SearchEstateFormClient = ({
 	target,
-	builder,
+	params,
+	config,
 	setNodes,
 	className,
 	style,
@@ -50,18 +52,62 @@ const SearchEstateFormClient = ({
 	}, [urlString, mode]);
 
 	const handleChange = useCallback(
-		async (name: string, rawValues: (string | number)[]) => {
+		async (name: string, rawValues: string[]) => {
 			// Always update URL to preserve navigation history
+			params[name] = rawValues;
+			console.log(name, rawValues);
 			updateParam(name, rawValues);
 
-			if (mode === "instant" && builder && setNodes) {
-				builder.deleteConstraints(name);
-				builder.setConstraints([{ prop: name, operator: "IN", values: rawValues }]);
-				const nodes = await builder.execute();
+			if (mode === "instant" && setNodes) {
+				// builder.deleteConstraints(name);
+				// builder.setConstraints([{ prop: name, operator: "IN", values: rawValues }]);
+				// const nodes = await builder.execute();
+				// setNodes(nodes);
+
+				const data = await execute(
+					gqlNodesQuery,
+					{
+						workspace: config.workspace,
+						query: {
+							nodeType: config.type,
+							nodeConstraint: {
+								all: Object.entries(params)
+									.map(([param, values]) => ({
+										any: values.map((value) => ({ property: param, equals: value })),
+									}))
+									// Remove constraints with no values
+									.filter(({ any }) => any.length > 0),
+							},
+							ordering: {
+								property: config.criteria,
+								orderType: config.sortDirection.toUpperCase() as "ASC" | "DESC",
+							},
+						},
+						view: config.subNodeView,
+						language: config.language,
+						limit: config.limit,
+					},
+					{
+						signal: AbortSignal.timeout(5000),
+					},
+				);
+
+				const nodes = (data.jcr.nodesByCriteria?.nodes ?? [])
+					.filter((node) => node !== null)
+					.map(({ uuid, renderedContent }) => {
+						if (!renderedContent?.output) {
+							console.warn(`No rendered content for node ${uuid}`);
+						}
+						return {
+							uuid,
+							html: renderedContent?.output ?? "",
+						};
+					});
+
 				setNodes(nodes);
 			}
 		},
-		[target, updateParam, builder, setNodes, mode],
+		[target, updateParam, setNodes, mode],
 	);
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -71,23 +117,7 @@ const SearchEstateFormClient = ({
 		}
 	};
 
-	const initialValues = useMemo(() => {
-		if (!builder) return {};
-
-		const constraints = builder.getConstraints();
-		return constraints.reduce<Record<string, (string | number)[]>>((acc, { prop, values }) => {
-			if (Array.isArray(values)) {
-				const filteredValues = values.filter((v) => typeof v === "string" || typeof v === "number");
-
-				if (acc[prop]) {
-					acc[prop] = [...acc[prop], ...filteredValues];
-				} else {
-					acc[prop] = filteredValues;
-				}
-			}
-			return acc;
-		}, {});
-	}, [builder]);
+	const initialValues = params;
 
 	return (
 		<Form
@@ -123,7 +153,7 @@ const SearchEstateFormClient = ({
 				name="bedrooms"
 				icon={<RoomIcon />}
 				options={Array.from({ length: 13 }, (_, i) => ({
-					value: i,
+					value: i.toString(),
 					label: `${i === 0 ? t("estate.bedrooms.studio") : i}`,
 				}))}
 				initialSelected={initialValues["bedrooms"] || []}

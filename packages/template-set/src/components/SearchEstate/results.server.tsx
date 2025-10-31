@@ -1,12 +1,7 @@
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { gqlNodesQuery, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
-import type {
-	Constraint,
-	JCRQueryConfig,
-	RenderNodeProps,
-} from "~/commons/libs/jcrQueryBuilder/types.ts";
+import { gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder";
+import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
-import { print } from "@0no-co/graphql.web";
 
 jahiaComponent(
 	{
@@ -41,51 +36,46 @@ jahiaComponent(
 			language: currentNode.getLanguage(),
 			limit: 30,
 		};
-		const builder = new JCRQueryBuilder(builderConfig);
+		server.render.addCacheDependency(
+			{ flushOnPathMatchingRegexp: builderConfig.startNodePath + "/.*" },
+			renderContext,
+		);
 
-		const paramMap = renderContext.getRequest().getParameterMap();
-		const constraintMap: Record<string, { type: "string" | "number" }> = {
-			country: { type: "string" },
-			type: { type: "string" },
-			bedrooms: { type: "number" },
-		};
-
-		const constraints: Constraint[] = [];
-
-		for (const [prop, { type }] of Object.entries(constraintMap)) {
-			const values = paramMap[prop];
-			if (!values?.length) continue;
-
-			if (type === "number") {
-				const parsed = values.map((v) => Number.parseInt(v, 10)).filter((n) => Number.isInteger(n));
-				if (parsed.length) {
-					constraints.push({ prop, operator: "IN", values: parsed });
-				}
-			} else {
-				constraints.push({ prop, operator: "IN", values });
-			}
-		}
-
-		if (constraints.length) {
-			builder.setConstraints(constraints);
-		}
-
-		const { jcrQuery, cacheDependency } = builder.build();
-		server.render.addCacheDependency({ flushOnPathMatchingRegexp: cacheDependency }, renderContext);
+		const javaParamMap = renderContext.getRequest().getParameterMap();
+		const params = Object.fromEntries(
+			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
+		);
 
 		const gqlContents = useGQLQuery({
-			// TODO JSM 1.1.0: remove print, it will be done automatically
-			query: print(gqlNodesQuery),
+			query: gqlNodesQuery,
 			variables: {
 				workspace: builderConfig.workspace,
-				query: jcrQuery,
+				query: {
+					nodeType: builderConfig.type,
+					nodeConstraint: {
+						all: Object.entries(params)
+							.map(([param, values]) => ({
+								any: values.map((value) => ({ property: param, equals: value })),
+							}))
+							// Remove constraints with no values
+							.filter(({ any }) => any.length > 0),
+					},
+					ordering: {
+						property: builderConfig.criteria,
+						orderType: builderConfig.sortDirection.toUpperCase() as "ASC" | "DESC",
+					},
+				},
 				language: builderConfig.language,
 				view: builderConfig.subNodeView,
 				limit: builderConfig.limit,
 			},
 		});
 
-		const gqlNodes = (gqlContents?.data?.jcr?.nodesByQuery?.nodes ?? []).filter(
+		if (gqlContents.errors) {
+			console.error(JSON.stringify(gqlContents.errors));
+		}
+
+		const gqlNodes = (gqlContents?.data?.jcr?.nodesByCriteria?.nodes ?? []).filter(
 			(node) => node !== null,
 		);
 		const nodes = gqlNodes?.map((node) => {
@@ -103,7 +93,7 @@ jahiaComponent(
 				component={SearchEstateClient}
 				props={{
 					builderConfig,
-					builderConstraints: builder.getConstraints(),
+					params,
 					nodes,
 					isEditMode: renderContext.isEditMode(),
 				}}

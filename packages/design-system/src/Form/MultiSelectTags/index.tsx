@@ -2,13 +2,13 @@ import { useState, useRef, useEffect, type ReactNode } from "react";
 import classes from "./styles.module.css";
 import clsx from "clsx";
 
-export type Option = { value: string | number; label: string };
+export type Option = { value: string; label: string };
 
 type Props = {
 	name: string;
 	options: Option[];
-	initialSelected?: (string | number)[];
-	onChange?: (values: (string | number)[]) => void;
+	initialSelected?: string[];
+	onChange?: (values: string[]) => void;
 	className?: string;
 	placeholder?: string;
 	icon?: ReactNode;
@@ -23,11 +23,11 @@ export function MultiSelectTags({
 	placeholder = "Select…",
 	icon,
 }: Props) {
-	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
+	const [selected, setSelected] = useState<string[]>(initialSelected);
 	const [isOpen, setIsOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
-	const toggleOption = (value: string | number) => {
+	const toggleOption = (value: string) => {
 		setSelected((prev) => {
 			const exists = prev.includes(value);
 			const updated = exists ? prev.filter((v) => v !== value) : [...prev, value];
@@ -36,7 +36,7 @@ export function MultiSelectTags({
 		});
 	};
 
-	const removeTag = (value: string | number) => {
+	const removeTag = (value: string) => {
 		setSelected((prev) => {
 			const updated = prev.filter((v) => v !== value);
 			onChange?.(updated);
