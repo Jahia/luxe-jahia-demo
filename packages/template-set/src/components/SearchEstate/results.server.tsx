@@ -1,12 +1,7 @@
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { gqlNodesQuery, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
-import type {
-	Constraint,
-	JCRQueryConfig,
-	RenderNodeProps,
-} from "~/commons/libs/jcrQueryBuilder/types.ts";
+import { fetchEstate } from "~/commons/libs/jcrQueryBuilder";
+import type { JCRQueryConfig } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
-import { print } from "@0no-co/graphql.web";
 
 jahiaComponent(
 	{
@@ -41,69 +36,24 @@ jahiaComponent(
 			language: currentNode.getLanguage(),
 			limit: 30,
 		};
-		const builder = new JCRQueryBuilder(builderConfig);
-
-		const paramMap = renderContext.getRequest().getParameterMap();
-		const constraintMap: Record<string, { type: "string" | "number" }> = {
-			country: { type: "string" },
-			type: { type: "string" },
-			bedrooms: { type: "number" },
-		};
-
-		const constraints: Constraint[] = [];
-
-		for (const [prop, { type }] of Object.entries(constraintMap)) {
-			const values = paramMap[prop];
-			if (!values?.length) continue;
-
-			if (type === "number") {
-				const parsed = values.map((v) => Number.parseInt(v, 10)).filter((n) => Number.isInteger(n));
-				if (parsed.length) {
-					constraints.push({ prop, operator: "IN", values: parsed });
-				}
-			} else {
-				constraints.push({ prop, operator: "IN", values });
-			}
-		}
-
-		if (constraints.length) {
-			builder.setConstraints(constraints);
-		}
-
-		const { jcrQuery, cacheDependency } = builder.build();
-		server.render.addCacheDependency({ flushOnPathMatchingRegexp: cacheDependency }, renderContext);
-
-		const gqlContents = useGQLQuery({
-			// TODO JSM 1.1.0: remove print, it will be done automatically
-			query: print(gqlNodesQuery),
-			variables: {
-				workspace: builderConfig.workspace,
-				query: jcrQuery,
-				language: builderConfig.language,
-				view: builderConfig.subNodeView,
-				limit: builderConfig.limit,
-			},
-		});
-
-		const gqlNodes = (gqlContents?.data?.jcr?.nodesByQuery?.nodes ?? []).filter(
-			(node) => node !== null,
+		server.render.addCacheDependency(
+			{ flushOnPathMatchingRegexp: builderConfig.startNodePath + "/.*" },
+			renderContext,
 		);
-		const nodes = gqlNodes?.map((node) => {
-			if (!node.renderedContent?.output) {
-				console.warn(`No rendered content for node ${node.uuid}`);
-			}
-			return {
-				html: node.renderedContent?.output || "",
-				uuid: node.uuid,
-			};
-		}) satisfies RenderNodeProps[];
+
+		const javaParamMap = renderContext.getRequest().getParameterMap();
+		const params = Object.fromEntries(
+			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
+		);
+
+		const nodes = fetchEstate(useGQLQuery, builderConfig, params);
 
 		return (
 			<Island
 				component={SearchEstateClient}
 				props={{
 					builderConfig,
-					builderConstraints: builder.getConstraints(),
+					params,
 					nodes,
 					isEditMode: renderContext.isEditMode(),
 				}}

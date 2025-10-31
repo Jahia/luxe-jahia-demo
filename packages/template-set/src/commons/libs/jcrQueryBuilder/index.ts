@@ -1,17 +1,22 @@
-import { graphql, type TadaDocumentNode } from "gql.tada";
-import type {
-	Constraint,
-	ConstraintJoiner,
-	JCRQueryConfig,
-	RenderNodeProps,
-} from "~/commons/libs/jcrQueryBuilder/types";
+import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
+import type { JCRQueryConfig, RenderNodeProps } from "./types.ts";
+import type { GraphQLFormattedError } from "graphql";
 
-async function execute<Result = any, Variables = any>(
-	query: TadaDocumentNode<Result, Variables>,
-	variables: Variables,
-	{ signal }: { signal?: AbortSignal } = {},
-): Promise<Result> {
+const graphql = initGraphQLTada<{
+	introspection: setupSchema["introspection"];
+	scalars: {
+		Long: number;
+	};
+}>();
+
+export async function execute<Result = any, Variables = any>({
+	query,
+	variables,
+}: {
+	query: TadaDocumentNode<Result, Variables>;
+	variables: Variables;
+}): Promise<{ data?: Result; errors?: GraphQLFormattedError[] }> {
 	const response = await fetch("/modules/graphql", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -19,35 +24,45 @@ async function execute<Result = any, Variables = any>(
 			query: print(query),
 			variables,
 		}),
-		signal,
 	});
 
 	if (!response.ok)
 		throw new Error(`GraphQL HTTP error: ${response.status} ${response.statusText}`);
 
-	const { data, errors } = await response.json();
-	if (errors?.length) throw new Error(`GraphQL errors: ${JSON.stringify(errors)}`);
-
-	return data;
+	return response.json();
 }
 
 export const gqlNodesQuery = graphql(`
 	query GetContentPropertiesQuery(
 		$workspace: Workspace!
-		$query: String!
-		$view: String!
 		$language: String!
+		$query: InputGqlJcrNodeCriteriaInput!
 		$limit: Int
 	) {
 		jcr(workspace: $workspace) {
-			nodesByQuery(query: $query, limit: $limit) {
+			nodesByCriteria(criteria: $query, limit: $limit) {
 				nodes {
 					workspace
 					uuid
 					path
 					name
-					renderedContent(view: $view, language: $language) {
-						output
+					url: renderUrl(language: $language, workspace: $workspace)
+					title: property(name: "title", language: $language) {
+						value
+					}
+					price: property(name: "price") {
+						longValue
+					}
+					images: property(name: "images") {
+						refNodes {
+							url
+						}
+					}
+					surface: property(name: "surface") {
+						longValue
+					}
+					bedrooms: property(name: "bedrooms") {
+						longValue
 					}
 				}
 			}
@@ -55,238 +70,73 @@ export const gqlNodesQuery = graphql(`
 	}
 `);
 
-export class JCRQueryBuilder {
-	private readonly config: JCRQueryConfig;
-	private readonly cacheDependency: string;
-	private constraints = new Map<string, Set<Constraint>>();
-	private constraintJoiners = new Map<string, ConstraintJoiner>();
+export const getCriteria = (params: Record<string, string[]>, config: JCRQueryConfig) => {
+	const constraints = Object.entries(params)
+		.map(([param, values]) => ({
+			any: values.map((value) => ({ property: param, equals: value })),
+		}))
+		// Remove constraints with no values
+		.filter(({ any }) => any.length > 0);
 
-	constructor(config: JCRQueryConfig) {
-		this.config = { ...config };
-		this.cacheDependency = `${config.startNodePath}/.*`;
+	return graphql.scalar("InputGqlJcrNodeCriteriaInput", {
+		nodeType: config.type,
+		nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
+		ordering: {
+			property: config.criteria,
+			orderType: config.sortDirection.toUpperCase() as "ASC" | "DESC",
+		},
+	});
+};
 
-		if (config.categories?.length) {
-			this.setConstraints([
-				{
-					prop: "j:defaultCategory",
-					operator: "IN",
-					values: config.categories.map(({ id }) => id),
-				},
-			]);
+export function fetchEstate(
+	doGQLQuery: (opts: any) => { data?: any },
+	config: JCRQueryConfig,
+	params: Record<string, string[]>,
+): RenderNodeProps[];
+export function fetchEstate(
+	doGQLQuery: (opts: any) => Promise<{ data?: any }>,
+	config: JCRQueryConfig,
+	params: Record<string, string[]>,
+): Promise<RenderNodeProps[]>;
+
+export function fetchEstate(
+	doGQLQuery: <Result = any, Variables = any>(opts: {
+		query: TadaDocumentNode<Result, Variables>;
+		variables: Variables;
+	}) =>
+		| { data?: Result; errors?: GraphQLFormattedError[] }
+		| Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
+	config: JCRQueryConfig,
+	params: Record<string, string[]>,
+): RenderNodeProps[] | Promise<RenderNodeProps[]> {
+	const gqlContents = doGQLQuery({
+		query: gqlNodesQuery,
+		variables: {
+			workspace: config.workspace,
+			query: getCriteria(params, config),
+			language: config.language,
+			limit: config.limit,
+		},
+	});
+
+	const process = ({ errors, data }: Awaited<typeof gqlContents>) => {
+		if (errors) {
+			console.error(JSON.stringify(errors));
 		}
-	}
 
-	/** Define the logical joiner (AND/OR) to use for a specific property */
-	setConstraintJoiner(prop: string, joiner: ConstraintJoiner): this {
-		this.constraintJoiners.set(prop, joiner);
-		return this;
-	}
-
-	/** Merge constraints grouped by property */
-	setConstraints(list: Constraint[]): this {
-		for (const c of list) {
-			if (!this.isAllowedOperator(c.operator)) {
-				throw new Error(`Unsupported or suspicious operator "${c.operator}" for prop "${c.prop}"`);
-			}
-
-			const op = c.operator.toUpperCase();
-			const values = c.values;
-
-			if (!Array.isArray(values) || values.length === 0) {
-				continue;
-			}
-
-			// Auto-expand IN / NOT IN into multiple atomic constraints
-			if (op === "IN" || op === "NOT IN") {
-				const atomicOp = op === "IN" ? "=" : "<>";
-				const joiner = op === "IN" ? "OR" : "AND";
-
-				this.setConstraintJoiner(c.prop, joiner);
-
-				for (const v of values) {
-					const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
-					const candidate = { prop: c.prop, operator: atomicOp, values: [v] };
-					if (!this.isConstraintDuplicate(set, candidate)) {
-						set.add(candidate);
-						this.constraints.set(c.prop, set);
-					}
-				}
-			} else {
-				// Default case: push constraint as-is, avoid duplicates
-				const set = this.constraints.get(c.prop) ?? new Set<Constraint>();
-				if (!this.isConstraintDuplicate(set, c)) {
-					set.add(c);
-					this.constraints.set(c.prop, set);
-				}
-			}
-		}
-		return this;
-	}
-
-	// /** Returns all constraints associated with a given property */
-	// getConstraint(prop: string): Constraint[] {
-	// 	return [...(this.constraints.get(prop) ?? [])];
-	// }
-
-	/** Return current constraints as a flat array (for rehydration or serialization) */
-	getConstraints(): Constraint[] {
-		const all: Constraint[] = [];
-		for (const [, set] of this.constraints) {
-			for (const c of set) {
-				all.push(c);
-			}
-		}
-		return all;
-	}
-
-	deleteConstraints(prop: string): this {
-		this.constraints.delete(prop);
-		this.constraintJoiners.delete(prop);
-		return this;
-	}
-
-	clearConstraints(): this {
-		this.constraints.clear();
-		this.constraintJoiners.clear();
-		return this;
-	}
-
-	build(): { jcrQuery: string; cacheDependency: string } {
-		const as = "content";
-		const { type, startNodePath } = this.config;
-
-		const where: string[] = [`ISDESCENDANTNODE('${this.esc(startNodePath)}')`];
-
-		const excl = this.buildExclude(as);
-		if (excl) where.push(excl);
-
-		const cons = this.buildConstraints(as);
-		if (cons) where.push(cons);
-
-		const order = `ORDER BY ${as}.[${this.config.criteria}] ${this.config.sortDirection.toUpperCase()}`;
-		const jcrQuery = `SELECT * FROM [${type}] AS ${as} WHERE ${where.join(" AND ")} ${order}`;
-
-		return { jcrQuery, cacheDependency: this.cacheDependency };
-	}
-
-	async execute({
-		limit,
-		timeoutMs = 5000,
-	}: { limit?: number; offset?: number; timeoutMs?: number } = {}): Promise<RenderNodeProps[]> {
-		const { jcrQuery } = this.build();
-
-		const data = await execute(
-			gqlNodesQuery,
-			{
-				workspace: this.config.workspace,
-				query: jcrQuery,
-				view: this.config.subNodeView,
-				language: this.config.language,
-				limit: limit ?? this.config.limit,
-			},
-			{
-				signal: AbortSignal.timeout(timeoutMs),
-			},
-		);
-
-		const nodes = data.jcr.nodesByQuery?.nodes ?? [];
-
-		return nodes
+		return (data?.jcr?.nodesByCriteria?.nodes ?? [])
 			.filter((node) => node !== null)
-			.map(({ uuid, renderedContent }) => {
-				if (!renderedContent?.output) {
-					console.warn(`No rendered content for node ${uuid}`);
-				}
-				return {
-					uuid,
-					html: renderedContent?.output ?? "",
-				};
-			});
-	}
+			.map((node) => ({
+				uuid: node.uuid,
+				url: node.url!,
+				title: node.title?.value || "",
+				image: node.images?.refNodes?.[0]?.url || "",
+				price: node.price?.longValue || 0,
+				surface: node.surface?.longValue || 0,
+				bedrooms: node.bedrooms?.longValue || 0,
+			})) satisfies RenderNodeProps[];
+	};
 
-	/** Utility to detect if a constraint already exists in a Set */
-	private isConstraintDuplicate(set: Set<Constraint>, candidate: Constraint): boolean {
-		for (const existing of set) {
-			if (
-				existing.operator === candidate.operator &&
-				JSON.stringify(existing.values) === JSON.stringify(candidate.values)
-			) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private isAllowedOperator(op: string): boolean {
-		return ["=", "<>", ">", "<", ">=", "<=", "LIKE", "IN", "NOT IN"].includes(op.toUpperCase());
-	}
-
-	/** Build constraints as grouped OR/AND expressions per property */
-	private buildConstraints(as: string): string {
-		if (!this.constraints.size) return "";
-
-		const groups: string[] = [];
-
-		for (const [prop, set] of this.constraints) {
-			if (!set.size) continue;
-
-			const joiner = this.constraintJoiners.get(prop) ?? "OR";
-
-			const clauses = [...set]
-				.map(({ operator, values }) => {
-					const op = operator.toUpperCase();
-					if (!Array.isArray(values) || values.length === 0) return null;
-
-					// Compact IN / NOT IN if multiple values
-					if ((op === "IN" || op === "NOT IN") && values.length >= 1) {
-						return `${as}.[${prop}] ${op} (${this.formatValue(values)})`;
-					}
-
-					// Single value case: =, <>, >=, etc.
-					if (values.length === 1) {
-						return `${as}.[${prop}] ${op} ${this.formatScalar(values[0])}`;
-					}
-
-					// Fallback: OR-chained multiple comparisons (e.g. (a = x OR a = y))
-					return `(${values
-						.map((v) => `${as}.[${prop}] ${op} ${this.formatScalar(v)}`)
-						.join(" OR ")})`;
-				})
-				.filter(Boolean);
-
-			if (clauses.length) {
-				groups.push(`(${clauses.join(` ${joiner} `)})`);
-			}
-		}
-
-		return groups.join(" AND ");
-	}
-
-	private formatValue(values: Array<string | number | boolean | Date>): string {
-		return values.map((v) => this.formatScalar(v)).join(", ");
-	}
-
-	private formatScalar(value: string | number | boolean | Date): string {
-		if (typeof value === "string") return `'${this.esc(value)}'`;
-		if (typeof value === "number") return String(value);
-		if (typeof value === "boolean") return value ? "true" : "false";
-		if (value instanceof Date) return `'${this.esc(value.toISOString())}'`;
-		return "''"; // fallback for unknown types
-	}
-
-	private buildExclude(as: string): string {
-		const ex = this.config.excludeNodes ?? [];
-		if (!ex.length) return "";
-		return `(${ex
-			.map(({ id, translationId }) => {
-				const parts = [`${as}.[jcr:uuid] <> '${this.esc(id)}'`];
-				if (translationId) parts.push(`${as}.[jcr:uuid] <> '${this.esc(translationId)}'`);
-				return `(${parts.join(" AND ")})`;
-			})
-			.join(" OR ")})`;
-	}
-
-	private esc(s: string): string {
-		return s.replace(/'/g, "''");
-	}
+	if ("then" in gqlContents) return gqlContents.then(process);
+	return process(gqlContents);
 }

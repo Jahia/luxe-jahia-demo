@@ -15,13 +15,10 @@ export type JCRQueryConfig = {
 
 export interface RenderNodeProps {
 	uuid: string;
-	html: string;
+	url: string;
+	title: string;
+	image: string;
+	price: number;
+	surface: number;
+	bedrooms: number;
 }
-
-export type Constraint = {
-	prop: string;
-	operator: string;
-	values: Array<string | number | boolean | Date>;
-};
-
-export type ConstraintJoiner = "AND" | "OR";

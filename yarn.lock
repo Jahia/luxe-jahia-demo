@@ -706,6 +706,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-typed-document-node/core@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@graphql-typed-document-node/core@npm:3.2.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 10c0/94e9d75c1f178bbae8d874f5a9361708a3350c8def7eaeb6920f2c820e82403b7d4f55b3735856d68e145e86c85cbfe2adc444fdc25519cd51f108697e99346c
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -758,17 +767,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@jahia/javascript-modules-library@npm:1.0.1"
+"@jahia/javascript-modules-library@npm:1.1.0-alpha-20251030085757033":
+  version: 1.1.0-alpha-20251030085757033
+  resolution: "@jahia/javascript-modules-library@npm:1.1.0-alpha-20251030085757033"
   dependencies:
     dotenv: "npm:^17.2.2"
   peerDependencies:
+    "@graphql-typed-document-node/core": ^3.2.0
+    graphql: "*"
     i18next: ^25.0.0
     react: ^19.0.0
     react-dom: ^19.0.0
     react-i18next: ^15.4.0 || ^16.0.0
   peerDependenciesMeta:
+    "@graphql-typed-document-node/core":
+      optional: true
+    graphql:
+      optional: true
     i18next:
       optional: true
     react:
@@ -777,7 +792,7 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-  checksum: 10c0/8ecb87fa217dbd2e96ae555299beba29fd9f745c26d54d5ad1d77586955d52fdd65281f17a554c37440a893393d29056cccf06cde3903b4dbbbac9874c837ef9
+  checksum: 10c0/d3945446faaca8017837ad52a0b5853a8651e06794a3234ce202a24432c688c79a8333016e7abfafe5c0811a7af54e27ace2fd620da49a06cb12c7b4b5418493
   languageName: node
   linkType: hard
 
@@ -3659,7 +3674,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luxe-jahia-demo@workspace:packages/template-set"
   dependencies:
-    "@jahia/javascript-modules-library": "npm:1.0.1"
+    "@graphql-typed-document-node/core": "npm:^3.2.0"
+    "@jahia/javascript-modules-library": "npm:1.1.0-alpha-20251030085757033"
     "@jahia/vite-plugin": "npm:1.0.1"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
