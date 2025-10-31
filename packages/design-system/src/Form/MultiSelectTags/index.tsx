@@ -33,7 +33,7 @@ export function MultiSelectTags({
 			if (exists) prev.delete(value);
 			else prev.add(value);
 			onChange?.([...prev]);
-			return prev;
+			return new Set(prev);
 		});
 	};
 
@@ -41,7 +41,7 @@ export function MultiSelectTags({
 		setSelected((prev) => {
 			prev.delete(value);
 			onChange?.([...prev]);
-			return prev;
+			return new Set(prev);
 		});
 	};
 
