@@ -46,20 +46,20 @@ jahiaComponent(
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
+		const constraints = Object.entries(params)
+			.map(([param, values]) => ({
+				any: values.map((value) => ({ property: param, equals: value })),
+			}))
+			// Remove constraints with no values
+			.filter(({ any }) => any.length > 0);
+
 		const gqlContents = useGQLQuery({
 			query: gqlNodesQuery,
 			variables: {
 				workspace: builderConfig.workspace,
 				query: {
 					nodeType: builderConfig.type,
-					nodeConstraint: {
-						all: Object.entries(params)
-							.map(([param, values]) => ({
-								any: values.map((value) => ({ property: param, equals: value })),
-							}))
-							// Remove constraints with no values
-							.filter(({ any }) => any.length > 0),
-					},
+					nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
 					ordering: {
 						property: builderConfig.criteria,
 						orderType: builderConfig.sortDirection.toUpperCase() as "ASC" | "DESC",

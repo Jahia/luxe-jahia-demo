@@ -11,6 +11,7 @@
 			}
 		],
 		"strict": true,
-		"verbatimModuleSyntax": true
+		"verbatimModuleSyntax": true,
+		"target": "esnext"
 	}
 }

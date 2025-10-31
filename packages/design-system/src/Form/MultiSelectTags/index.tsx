@@ -23,24 +23,25 @@ export function MultiSelectTags({
 	placeholder = "Select…",
 	icon,
 }: Props) {
-	const [selected, setSelected] = useState<string[]>(initialSelected);
+	const [selected, setSelected] = useState<Set<string>>(new Set(initialSelected));
 	const [isOpen, setIsOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
 	const toggleOption = (value: string) => {
 		setSelected((prev) => {
-			const exists = prev.includes(value);
-			const updated = exists ? prev.filter((v) => v !== value) : [...prev, value];
-			onChange?.(updated);
-			return updated;
+			const exists = prev.has(value);
+			if (exists) prev.delete(value);
+			else prev.add(value);
+			onChange?.([...prev]);
+			return prev;
 		});
 	};
 
 	const removeTag = (value: string) => {
 		setSelected((prev) => {
-			const updated = prev.filter((v) => v !== value);
-			onChange?.(updated);
-			return updated;
+			prev.delete(value);
+			onChange?.([...prev]);
+			return prev;
 		});
 	};
 
@@ -72,35 +73,34 @@ export function MultiSelectTags({
 					}
 				}}
 			>
-				{selected.length === 0 ? (
+				{selected.size === 0 ? (
 					<li className={classes.placeholder}>{placeholder}</li>
 				) : (
-					selected.map((val) => {
-						const opt = options.find((o) => o.value === val);
-						if (!opt) return null;
+					options.map(({ value, label }) => {
+						if (!selected.has(value)) return null;
 
 						return (
 							<li
-								key={val}
+								key={value}
 								className={classes.tag}
 								tabIndex={0}
 								onClick={(e) => {
 									e.stopPropagation();
-									removeTag(val);
+									removeTag(value);
 								}}
-								aria-label={`Retirer ${opt.label}`}
+								aria-label={`Retirer ${label}`}
 								onKeyDown={(e) => {
 									if (e.key === "Enter" || e.key === " ") {
 										e.stopPropagation();
-										removeTag(val);
+										removeTag(value);
 									}
 								}}
 							>
-								{opt.label}
+								{label}
 								<span role="button" className={classes.removeBtn}>
 									×
 								</span>
-								<input type="hidden" name={name} value={val} />
+								<input type="hidden" name={name} value={value} />
 							</li>
 						);
 					})
@@ -113,7 +113,7 @@ export function MultiSelectTags({
 						<label key={value} className={classes.option}>
 							<input
 								type="checkbox"
-								checked={selected.includes(value)}
+								checked={selected.has(value)}
 								onChange={() => toggleOption(value)}
 							/>
 							{label}
