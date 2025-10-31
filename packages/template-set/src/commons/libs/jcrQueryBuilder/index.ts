@@ -1,6 +1,13 @@
-import { graphql, type TadaDocumentNode } from "gql.tada";
+import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
 import type { JCRQueryConfig } from "./types.ts";
+
+const graphql = initGraphQLTada<{
+	introspection: setupSchema["introspection"];
+	scalars: {
+		Long: number;
+	};
+}>();
 
 export async function execute<Result = any, Variables = any>(
 	query: TadaDocumentNode<Result, Variables>,
@@ -29,7 +36,6 @@ export async function execute<Result = any, Variables = any>(
 export const gqlNodesQuery = graphql(`
 	query GetContentPropertiesQuery(
 		$workspace: Workspace!
-		$view: String!
 		$language: String!
 		$query: InputGqlJcrNodeCriteriaInput!
 		$limit: Int
@@ -41,8 +47,23 @@ export const gqlNodesQuery = graphql(`
 					uuid
 					path
 					name
-					renderedContent(view: $view, language: $language) {
-						output
+					url: renderUrl(language: $language, workspace: $workspace)
+					title: property(name: "title", language: $language) {
+						value
+					}
+					price: property(name: "price") {
+						longValue
+					}
+					images: property(name: "images") {
+						refNodes {
+							url
+						}
+					}
+					surface: property(name: "surface") {
+						longValue
+					}
+					bedrooms: property(name: "bedrooms") {
+						longValue
 					}
 				}
 			}
