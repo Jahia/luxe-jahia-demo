@@ -1,6 +1,6 @@
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { getCriteria, gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder";
-import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
+import { fetchEstate } from "~/commons/libs/jcrQueryBuilder";
+import type { JCRQueryConfig } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
 
 jahiaComponent(
@@ -46,31 +46,7 @@ jahiaComponent(
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
-		const gqlContents = useGQLQuery({
-			query: gqlNodesQuery,
-			variables: {
-				workspace: builderConfig.workspace,
-				query: getCriteria(params, builderConfig),
-				language: builderConfig.language,
-				limit: builderConfig.limit,
-			},
-		});
-
-		if (gqlContents.errors) {
-			console.error(JSON.stringify(gqlContents.errors));
-		}
-
-		const nodes = (gqlContents?.data?.jcr?.nodesByCriteria?.nodes ?? [])
-			.filter((node) => node !== null)
-			.map((node) => ({
-				uuid: node.uuid,
-				url: node.url!,
-				title: node.title?.value || "",
-				image: node.images?.refNodes?.[0]?.url || "",
-				price: node.price?.longValue || 0,
-				surface: node.surface?.longValue || 0,
-				bedrooms: node.bedrooms?.longValue || 0,
-			})) satisfies RenderNodeProps[];
+		const nodes = fetchEstate(useGQLQuery, builderConfig, params);
 
 		return (
 			<Island
