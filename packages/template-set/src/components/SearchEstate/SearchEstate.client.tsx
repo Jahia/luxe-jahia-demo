@@ -4,7 +4,7 @@ import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBui
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 import SearchResultsClient from "~/components/SearchEstate/SearchResults.client.tsx";
 import { Row, Section } from "design-system";
-import { execute, gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder/index.ts";
+import { execute, getCriteria, gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder/index.ts";
 
 export default function SearchEstateClient({
 	builderConfig: config,
@@ -36,25 +36,11 @@ export default function SearchEstateClient({
 							`${window.location.pathname}${q.size > 0 ? `?${q.toString()}` : ""}`,
 						);
 
-						const constraints = Object.entries(params)
-							.map(([param, values]) => ({
-								any: values.map((value) => ({ property: param, equals: value })),
-							}))
-							// Remove constraints with no values
-							.filter(({ any }) => any.length > 0);
-
 						const data = await execute(
 							gqlNodesQuery,
 							{
 								workspace: config.workspace,
-								query: {
-									nodeType: config.type,
-									nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
-									ordering: {
-										property: config.criteria,
-										orderType: config.sortDirection.toUpperCase() as "ASC" | "DESC",
-									},
-								},
+								query: getCriteria(params, config),
 								view: config.subNodeView,
 								language: config.language,
 								limit: config.limit,
