@@ -36,20 +36,20 @@ export default function SearchEstateClient({
 							`${window.location.pathname}${q.size > 0 ? `?${q.toString()}` : ""}`,
 						);
 
+						const constraints = Object.entries(params)
+							.map(([param, values]) => ({
+								any: values.map((value) => ({ property: param, equals: value })),
+							}))
+							// Remove constraints with no values
+							.filter(({ any }) => any.length > 0);
+
 						const data = await execute(
 							gqlNodesQuery,
 							{
 								workspace: config.workspace,
 								query: {
 									nodeType: config.type,
-									nodeConstraint: {
-										all: Object.entries(params)
-											.map(([param, values]) => ({
-												any: values.map((value) => ({ property: param, equals: value })),
-											}))
-											// Remove constraints with no values
-											.filter(({ any }) => any.length > 0),
-									},
+									nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
 									ordering: {
 										property: config.criteria,
 										orderType: config.sortDirection.toUpperCase() as "ASC" | "DESC",
