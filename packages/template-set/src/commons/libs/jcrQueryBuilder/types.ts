@@ -17,11 +17,3 @@ export interface RenderNodeProps {
 	uuid: string;
 	html: string;
 }
-
-export type Constraint = {
-	prop: string;
-	operator: string;
-	values: Array<string | number | boolean | Date>;
-};
-
-export type ConstraintJoiner = "AND" | "OR";
