@@ -52,7 +52,6 @@ jahiaComponent(
 				workspace: builderConfig.workspace,
 				query: getCriteria(params, builderConfig),
 				language: builderConfig.language,
-				view: builderConfig.subNodeView,
 				limit: builderConfig.limit,
 			},
 		});
@@ -61,18 +60,17 @@ jahiaComponent(
 			console.error(JSON.stringify(gqlContents.errors));
 		}
 
-		const gqlNodes = (gqlContents?.data?.jcr?.nodesByCriteria?.nodes ?? []).filter(
-			(node) => node !== null,
-		);
-		const nodes = gqlNodes?.map((node) => {
-			if (!node.renderedContent?.output) {
-				console.warn(`No rendered content for node ${node.uuid}`);
-			}
-			return {
-				html: node.renderedContent?.output || "",
+		const nodes = (gqlContents?.data?.jcr?.nodesByCriteria?.nodes ?? [])
+			.filter((node) => node !== null)
+			.map((node) => ({
 				uuid: node.uuid,
-			};
-		}) satisfies RenderNodeProps[];
+				url: node.url!,
+				title: node.title?.value || "",
+				image: node.images?.refNodes?.[0]?.url || "",
+				price: node.price?.longValue || 0,
+				surface: node.surface?.longValue || 0,
+				bedrooms: node.bedrooms?.longValue || 0,
+			})) satisfies RenderNodeProps[];
 
 		return (
 			<Island

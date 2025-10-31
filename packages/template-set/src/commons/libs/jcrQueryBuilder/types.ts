@@ -15,5 +15,10 @@ export type JCRQueryConfig = {
 
 export interface RenderNodeProps {
 	uuid: string;
-	html: string;
+	url: string;
+	title: string;
+	image: string;
+	price: number;
+	surface: number;
+	bedrooms: number;
 }

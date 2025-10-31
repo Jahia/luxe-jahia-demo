@@ -41,7 +41,6 @@ export default function SearchEstateClient({
 							{
 								workspace: config.workspace,
 								query: getCriteria(params, config),
-								view: config.subNodeView,
 								language: config.language,
 								limit: config.limit,
 							},
@@ -52,15 +51,15 @@ export default function SearchEstateClient({
 
 						const nodes = (data.jcr.nodesByCriteria?.nodes ?? [])
 							.filter((node) => node !== null)
-							.map(({ uuid, renderedContent }) => {
-								if (!renderedContent?.output) {
-									console.warn(`No rendered content for node ${uuid}`);
-								}
-								return {
-									uuid,
-									html: renderedContent?.output ?? "",
-								};
-							});
+							.map((node) => ({
+								uuid: node.uuid,
+								url: node.url!,
+								title: node.title?.value || "",
+								image: node.images?.refNodes?.[0]?.url || "",
+								price: node.price?.longValue || 0,
+								surface: node.surface?.longValue || 0,
+								bedrooms: node.bedrooms?.longValue || 0,
+							}));
 
 						setNodes(nodes);
 					}}
@@ -68,7 +67,7 @@ export default function SearchEstateClient({
 				/>
 			</Row>
 			<Row className={classes.resultsRow}>
-				<SearchResultsClient nodes={nodes} isEditMode={isEditMode} />
+				<SearchResultsClient nodes={nodes} isEditMode={isEditMode} locale={config.language} />
 			</Row>
 		</Section>
 	);
