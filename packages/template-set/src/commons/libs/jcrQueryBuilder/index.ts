@@ -89,21 +89,16 @@ export const getCriteria = (params: Record<string, string[]>, config: JCRQueryCo
 };
 
 export function fetchEstate(
-	doGQLQuery: <Result = any, Variables = any>(opts: {
-		query: TadaDocumentNode<Result, Variables>;
-		variables: Variables;
-	}) => { data?: Result; errors?: GraphQLFormattedError[] },
+	doGQLQuery: (opts: any) => { data?: any },
 	config: JCRQueryConfig,
 	params: Record<string, string[]>,
 ): RenderNodeProps[];
 export function fetchEstate(
-	doGQLQuery: <Result = any, Variables = any>(opts: {
-		query: TadaDocumentNode<Result, Variables>;
-		variables: Variables;
-	}) => Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
+	doGQLQuery: (opts: any) => Promise<{ data?: any }>,
 	config: JCRQueryConfig,
 	params: Record<string, string[]>,
 ): Promise<RenderNodeProps[]>;
+
 export function fetchEstate(
 	doGQLQuery: <Result = any, Variables = any>(opts: {
 		query: TadaDocumentNode<Result, Variables>;
