@@ -4,7 +4,7 @@ import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBui
 import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
 import SearchResultsClient from "~/components/SearchEstate/SearchResults.client.tsx";
 import { Row, Section } from "design-system";
-import { execute, getCriteria, gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder/index.ts";
+import { execute, fetchEstate } from "~/commons/libs/jcrQueryBuilder/index.ts";
 
 export default function SearchEstateClient({
 	builderConfig: config,
@@ -35,32 +35,7 @@ export default function SearchEstateClient({
 							"",
 							`${window.location.pathname}${q.size > 0 ? `?${q.toString()}` : ""}`,
 						);
-
-						const data = await execute(
-							gqlNodesQuery,
-							{
-								workspace: config.workspace,
-								query: getCriteria(params, config),
-								language: config.language,
-								limit: config.limit,
-							},
-							{
-								signal: AbortSignal.timeout(5000),
-							},
-						);
-
-						const nodes = (data.jcr.nodesByCriteria?.nodes ?? [])
-							.filter((node) => node !== null)
-							.map((node) => ({
-								uuid: node.uuid,
-								url: node.url!,
-								title: node.title?.value || "",
-								image: node.images?.refNodes?.[0]?.url || "",
-								price: node.price?.longValue || 0,
-								surface: node.surface?.longValue || 0,
-								bedrooms: node.bedrooms?.longValue || 0,
-							}));
-
+						const nodes = await fetchEstate(execute, config, params);
 						setNodes(nodes);
 					}}
 					params={params}

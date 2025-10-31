@@ -1,6 +1,7 @@
 import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
-import type { JCRQueryConfig } from "./types.ts";
+import type { JCRQueryConfig, RenderNodeProps } from "./types.ts";
+import type { GraphQLFormattedError } from "graphql";
 
 const graphql = initGraphQLTada<{
 	introspection: setupSchema["introspection"];
@@ -9,11 +10,13 @@ const graphql = initGraphQLTada<{
 	};
 }>();
 
-export async function execute<Result = any, Variables = any>(
-	query: TadaDocumentNode<Result, Variables>,
-	variables: Variables,
-	{ signal }: { signal?: AbortSignal } = {},
-): Promise<Result> {
+export async function execute<Result = any, Variables = any>({
+	query,
+	variables,
+}: {
+	query: TadaDocumentNode<Result, Variables>;
+	variables: Variables;
+}): Promise<{ data?: Result; errors?: GraphQLFormattedError[] }> {
 	const response = await fetch("/modules/graphql", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -21,16 +24,12 @@ export async function execute<Result = any, Variables = any>(
 			query: print(query),
 			variables,
 		}),
-		signal,
 	});
 
 	if (!response.ok)
 		throw new Error(`GraphQL HTTP error: ${response.status} ${response.statusText}`);
 
-	const { data, errors } = await response.json();
-	if (errors?.length) throw new Error(`GraphQL errors: ${JSON.stringify(errors)}`);
-
-	return data;
+	return response.json();
 }
 
 export const gqlNodesQuery = graphql(`
@@ -88,3 +87,61 @@ export const getCriteria = (params: Record<string, string[]>, config: JCRQueryCo
 		},
 	});
 };
+
+export function fetchEstate(
+	doGQLQuery: <Result = any, Variables = any>(opts: {
+		query: TadaDocumentNode<Result, Variables>;
+		variables: Variables;
+	}) => { data?: Result; errors?: GraphQLFormattedError[] },
+	config: JCRQueryConfig,
+	params: Record<string, string[]>,
+): RenderNodeProps[];
+export function fetchEstate(
+	doGQLQuery: <Result = any, Variables = any>(opts: {
+		query: TadaDocumentNode<Result, Variables>;
+		variables: Variables;
+	}) => Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
+	config: JCRQueryConfig,
+	params: Record<string, string[]>,
+): Promise<RenderNodeProps[]>;
+export function fetchEstate(
+	doGQLQuery: <Result = any, Variables = any>(opts: {
+		query: TadaDocumentNode<Result, Variables>;
+		variables: Variables;
+	}) =>
+		| { data?: Result; errors?: GraphQLFormattedError[] }
+		| Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
+	config: JCRQueryConfig,
+	params: Record<string, string[]>,
+): RenderNodeProps[] | Promise<RenderNodeProps[]> {
+	const gqlContents = doGQLQuery({
+		query: gqlNodesQuery,
+		variables: {
+			workspace: config.workspace,
+			query: getCriteria(params, config),
+			language: config.language,
+			limit: config.limit,
+		},
+	});
+
+	const process = ({ errors, data }: Awaited<typeof gqlContents>) => {
+		if (errors) {
+			console.error(JSON.stringify(errors));
+		}
+
+		return (data?.jcr?.nodesByCriteria?.nodes ?? [])
+			.filter((node) => node !== null)
+			.map((node) => ({
+				uuid: node.uuid,
+				url: node.url!,
+				title: node.title?.value || "",
+				image: node.images?.refNodes?.[0]?.url || "",
+				price: node.price?.longValue || 0,
+				surface: node.surface?.longValue || 0,
+				bedrooms: node.bedrooms?.longValue || 0,
+			})) satisfies RenderNodeProps[];
+	};
+
+	if ("then" in gqlContents) return gqlContents.then(process);
+	return process(gqlContents);
+}
