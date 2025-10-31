@@ -37,12 +37,12 @@ function MultiSelectTagsStory({
 }: {
 	options: Option[];
 	placeholder?: string;
-	initialSelected?: (string | number)[];
+	initialSelected?: string[];
 }) {
-	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
+	const [selected, setSelected] = useState<string[]>(initialSelected);
 	const [key, setKey] = useState(0);
 
-	const handleChange = (values: (string | number)[]) => {
+	const handleChange = (values: string[]) => {
 		setSelected(values);
 	};
 

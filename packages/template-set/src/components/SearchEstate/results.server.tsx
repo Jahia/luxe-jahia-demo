@@ -1,5 +1,5 @@
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder";
+import { getCriteria, gqlNodesQuery } from "~/commons/libs/jcrQueryBuilder";
 import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
 
@@ -46,25 +46,11 @@ jahiaComponent(
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
-		const constraints = Object.entries(params)
-			.map(([param, values]) => ({
-				any: values.map((value) => ({ property: param, equals: value })),
-			}))
-			// Remove constraints with no values
-			.filter(({ any }) => any.length > 0);
-
 		const gqlContents = useGQLQuery({
 			query: gqlNodesQuery,
 			variables: {
 				workspace: builderConfig.workspace,
-				query: {
-					nodeType: builderConfig.type,
-					nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
-					ordering: {
-						property: builderConfig.criteria,
-						orderType: builderConfig.sortDirection.toUpperCase() as "ASC" | "DESC",
-					},
-				},
+				query: getCriteria(params, builderConfig),
 				language: builderConfig.language,
 				view: builderConfig.subNodeView,
 				limit: builderConfig.limit,
