@@ -14,16 +14,17 @@ type Props = {
 	icon?: ReactNode;
 };
 
+const emptyArray: string[] = [];
 export function MultiSelectTags({
 	name,
 	options,
-	initialSelected = [],
+	initialSelected = emptyArray,
 	onChange,
 	className,
 	placeholder = "Select…",
 	icon,
 }: Props) {
-	const [selected, setSelected] = useState<Set<string>>(new Set(initialSelected));
+	const [selected, setSelected] = useState<Set<string>>(() => new Set(initialSelected));
 	const [isOpen, setIsOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 

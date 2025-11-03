@@ -60,6 +60,7 @@ function ProgressiveListStory({
 		<div style={storybookStyles}>
 			<div style={{ marginBottom: "20px", textAlign: "center" }}>
 				<button
+					type="button"
 					onClick={handleReplay}
 					style={{
 						padding: "10px 20px",

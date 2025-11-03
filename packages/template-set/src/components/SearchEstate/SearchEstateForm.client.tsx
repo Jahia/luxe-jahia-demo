@@ -12,7 +12,13 @@ type Props = {
 	style?: React.CSSProperties;
 };
 
-const SearchEstateFormClient = ({ action, onChange, params = {}, className, style }: Props) => {
+export default function SearchEstateFormClient({
+	action,
+	onChange,
+	params,
+	className,
+	style,
+}: Props) {
 	const estateTypeTranslation = {
 		house: t("estate.type.house"),
 		apartment: t("estate.type.apartment"),
@@ -34,7 +40,7 @@ const SearchEstateFormClient = ({ action, onChange, params = {}, className, styl
 					value: k,
 					label: estateCountryTranslation[k],
 				}))}
-				initialSelected={params["country"] || []}
+				initialSelected={params?.["country"] ?? []}
 				onChange={(values) => {
 					onChange?.({ ...params, country: values });
 				}}
@@ -51,7 +57,7 @@ const SearchEstateFormClient = ({ action, onChange, params = {}, className, styl
 				onChange={(values) => {
 					onChange?.({ ...params, type: values });
 				}}
-				initialSelected={params["type"] || []}
+				initialSelected={params?.["type"] ?? []}
 				placeholder={t("form.estate.placeholder.type")}
 			/>
 
@@ -65,7 +71,7 @@ const SearchEstateFormClient = ({ action, onChange, params = {}, className, styl
 				onChange={(values) => {
 					onChange?.({ ...params, bedrooms: values });
 				}}
-				initialSelected={params["bedrooms"] || []}
+				initialSelected={params?.["bedrooms"] ?? []}
 				placeholder={t("form.estate.placeholder.bedrooms")}
 			/>
 
@@ -76,6 +82,4 @@ const SearchEstateFormClient = ({ action, onChange, params = {}, className, styl
 			)}
 		</Form>
 	);
-};
-
-export default SearchEstateFormClient;
+}

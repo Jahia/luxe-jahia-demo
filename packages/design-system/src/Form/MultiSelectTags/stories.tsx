@@ -67,6 +67,7 @@ function MultiSelectTagsStory({
 			<div style={{ width: "100%" }}>
 				<div style={{ marginBottom: "20px", textAlign: "center" }}>
 					<button
+						type="button"
 						onClick={handleReset}
 						style={{
 							padding: "10px 20px",

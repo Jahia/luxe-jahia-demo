@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
 import type { JCRQueryConfig, RenderNodeProps } from "./types.ts";
@@ -67,21 +68,7 @@ const gqlNodesQuery = graphql(`
 	}
 `);
 
-const getCriteria = ({ params, ordering }: JCRQueryConfig) => {
-	const constraints = Object.entries(params)
-		.map(([param, values]) => ({
-			any: values.map((value) => ({ property: param, equals: value })),
-		}))
-		// Remove constraints with no values
-		.filter(({ any }) => any.length > 0);
-
-	return graphql.scalar("InputGqlJcrNodeCriteriaInput", {
-		nodeType: "luxe:estate",
-		nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
-		ordering,
-	});
-};
-
+// Two overloads, to expose both a sync and an async version
 export function fetchEstate(
 	doGQLQuery: (opts: any) => { data?: any },
 	config: JCRQueryConfig,
@@ -91,6 +78,7 @@ export function fetchEstate(
 	config: JCRQueryConfig,
 ): Promise<RenderNodeProps[]>;
 
+// Actual implementation, support both sync and async
 export function fetchEstate(
 	doGQLQuery: <Result = any, Variables = any>(opts: {
 		query: TadaDocumentNode<Result, Variables>;
@@ -100,16 +88,30 @@ export function fetchEstate(
 		| Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
 	config: JCRQueryConfig,
 ): RenderNodeProps[] | Promise<RenderNodeProps[]> {
+	// Prepare a JQOM query based on the provided params
+	const constraints = Object.entries(config.params)
+		.map(([param, values]) => ({
+			any: values.map((value) => ({ property: param, equals: value })),
+		}))
+		// Remove constraints with no values
+		.filter(({ any }) => any.length > 0);
+
 	const gqlContents = doGQLQuery({
 		query: gqlNodesQuery,
 		variables: {
 			workspace: config.workspace,
-			query: getCriteria(config),
+			query: {
+				// Complete the query with type and ordering
+				nodeType: "luxe:estate",
+				ordering: config.ordering,
+				nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
+			},
 			language: config.language,
 			limit: config.limit,
 		},
 	});
 
+	/** Simplifies the GraphQL response */
 	const process = ({ errors, data }: Awaited<typeof gqlContents>) => {
 		if (errors) {
 			console.error(JSON.stringify(errors));

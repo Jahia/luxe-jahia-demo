@@ -2,7 +2,7 @@ import clsx from "clsx";
 import classes from "./styles.module.css";
 import type { ReactNode } from "react";
 
-export function ProgressiveList<T extends { [key in Key]: any }, Key extends string>({
+export function ProgressiveList<T extends { [key in Key]: unknown }, Key extends string>({
 	items,
 	itemKey,
 	children,

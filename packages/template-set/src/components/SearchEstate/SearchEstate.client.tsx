@@ -35,7 +35,7 @@ export default function SearchEstateClient({
 							"",
 							`${window.location.pathname}${q.size > 0 ? `?${q.toString()}` : ""}`,
 						);
-						const nodes = await fetchEstate(execute, config, params);
+						const nodes = await fetchEstate(execute, config);
 						setNodes(nodes);
 					}}
 					params={params}

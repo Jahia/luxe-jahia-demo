@@ -1,4 +1,4 @@
-import type { FC, JSXElementConstructor, ReactElement, ReactNode } from "react";
+import type { FC, JSXElementConstructor, ReactNode } from "react";
 import classes from "./styles.module.css";
 
 interface Props {
