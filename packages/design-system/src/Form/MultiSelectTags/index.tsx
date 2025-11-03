@@ -29,21 +29,18 @@ export function MultiSelectTags({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
 	const toggleOption = (value: string) => {
-		setSelected((prev) => {
-			const exists = prev.has(value);
-			if (exists) prev.delete(value);
-			else prev.add(value);
-			onChange?.([...prev]);
-			return new Set(prev);
-		});
+		const next = new Set(selected);
+		if (next.has(value)) next.delete(value);
+		else next.add(value);
+		onChange?.([...next]);
+		setSelected(next);
 	};
 
 	const removeTag = (value: string) => {
-		setSelected((prev) => {
-			prev.delete(value);
-			onChange?.([...prev]);
-			return new Set(prev);
-		});
+		const next = new Set(selected);
+		next.delete(value);
+		onChange?.([...next]);
+		setSelected(next);
 	};
 
 	// Close dropdown on outside click
