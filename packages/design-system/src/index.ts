@@ -16,5 +16,6 @@ export { PageTitle } from "./PageTitle/index.tsx";
 export { Section, Row, Col } from "./Grid";
 export { HeadingSection } from "./HeadingSection/index.tsx";
 export { ContentHeader } from "./ContentHeader/index.tsx";
+export { ClickableCard } from "./ClickableCard/index.tsx";
 
 export * from "./Form";

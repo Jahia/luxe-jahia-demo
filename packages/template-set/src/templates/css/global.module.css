@@ -17,12 +17,8 @@
 	--luxe-tertiary-color: rgba(222, 226, 230, 0.5);
 	--luxe-tertiary-color-rgb: 222, 226, 230;
 
-	--luxe-primary: var(--luxe-color-primary);
-	--luxe-primary-rgb: var(--luxe-color-primary-rgb);
 	--luxe-secondary: var(--luxe-color-secondary);
 	--luxe-secondary-rgb: var(--luxe-color-secondary-rgb);
-
-	--luxe-box-shadow: 4px 6px 17px 15px rgba(35, 33, 110, 0.1);
 
 	--luxe-secondary-color: var(--luxe-color-darkBlue60);
 	--luxe-emphasis-color: var(--luxe-color-dark);
@@ -32,7 +28,7 @@
 	--luxe-secondary-bg-rgb: var(--luxe-color-gray-rgb);
 	--luxe-tertiary-bg: var(--luxe-color-gray);
 
-	--luxe-link-color: var(--luxe-primary);
+	--luxe-link-color: var(--luxe-color-primary);
 	--luxe-link-color-rgb: var(--luxe-primary-rgb);
 	--luxe-link-hover-color: rgb(155.2, 124, 51.2);
 	--luxe-link-hover-color-rgb: 155, 124, 51;
@@ -57,7 +53,6 @@
 	--luxe-border-color-translucent: rgba(0, 0, 0, 0.175);
 
 	--luxe-border-radius-lg: 0.5rem;
-	--luxe-box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 
 	--luxe-dialog-opacity: 0.4;
 	--map-border-radius: var(--luxe-border-radius);

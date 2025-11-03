@@ -2,7 +2,6 @@
 	margin-bottom: 0;
 
 	p {
-		--luxe-text-opacity: 1;
 		color: var(--luxe-color-secondary);
 	}
 }

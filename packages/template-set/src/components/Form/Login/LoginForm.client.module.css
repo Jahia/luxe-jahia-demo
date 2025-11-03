@@ -75,7 +75,6 @@
 	}
 
 	> p {
-		--luxe-text-opacity: 1;
 		color: var(--luxe-secondary-color);
 		font-size: fs_small;
 	}
@@ -95,7 +94,6 @@
 	}
 
 	> p {
-		--luxe-text-opacity: 1;
 		color: var(--luxe-secondary-color);
 		font-size: fs_small;
 	}

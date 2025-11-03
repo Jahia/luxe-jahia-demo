@@ -6,6 +6,7 @@ import type { GraphQLFormattedError } from "graphql";
 const graphql = initGraphQLTada<{
 	introspection: setupSchema["introspection"];
 	scalars: {
+		Date: string;
 		Long: number;
 	};
 }>();

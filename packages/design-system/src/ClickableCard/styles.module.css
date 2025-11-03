@@ -1,0 +1,28 @@
+.card {
+	composes: card from "../global.css";
+	display: block;
+	height: 100%;
+
+	.image {
+		aspect-ratio: 16 / 10;
+		height: auto;
+	}
+
+	h4 {
+		margin-block: 0.5rem;
+	}
+
+	p {
+		font-size: 16px;
+		color: var(--luxe-color-secondary);
+
+		span {
+			font-size: 11px;
+		}
+	}
+
+	strong {
+		font-size: 18px;
+		color: var(--luxe-color-primary);
+	}
+}
