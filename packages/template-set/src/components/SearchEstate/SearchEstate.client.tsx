@@ -7,26 +7,25 @@ import { Row, Section } from "design-system";
 import { execute, fetchEstate } from "~/commons/libs/jcrQueryBuilder/index.ts";
 
 export default function SearchEstateClient({
-	builderConfig: config,
-	params: initialParams,
+	config,
 	nodes: initialNodes,
 	isEditMode,
 }: {
-	builderConfig: JCRQueryConfig;
-	params: Record<string, string[]>;
+	config: JCRQueryConfig;
 	nodes: RenderNodeProps[];
 	isEditMode: boolean;
 }) {
-	const [params, setParams] = useState(initialParams);
+	const [params, setParams] = useState(config.params);
 	const [nodes, setNodes] = useState(initialNodes);
 
 	return (
 		<Section>
 			<Row className={classes.searchRow}>
 				<SearchEstateFormClient
-					onChange={async (params) => {
-						// Always update URL to preserve navigation history
+					onChange={(params) => {
 						setParams(params);
+
+						// Update URL to create a shareable link
 						const q = new URLSearchParams(
 							Object.entries(params).flatMap(([k, vals]) => vals.map((v) => [k, v])),
 						);
@@ -35,8 +34,9 @@ export default function SearchEstateClient({
 							"",
 							`${window.location.pathname}${q.size > 0 ? `?${q.toString()}` : ""}`,
 						);
-						const nodes = await fetchEstate(execute, config);
-						setNodes(nodes);
+
+						// Fetch new results
+						fetchEstate(execute, { ...config, params }).then(setNodes);
 					}}
 					params={params}
 				/>

@@ -27,7 +27,7 @@ export default function SearchResultsClient({
 		<ProgressiveList
 			items={nodes}
 			itemKey="url"
-			delayMs={200}
+			delayMs={100}
 			animationType="fadeInUp"
 			key={`search-${Date.now()}`} // Force re-mount
 		>

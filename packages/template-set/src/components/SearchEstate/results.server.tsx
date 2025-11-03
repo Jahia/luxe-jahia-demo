@@ -47,8 +47,7 @@ jahiaComponent(
 			<Island
 				component={SearchEstateClient}
 				props={{
-					builderConfig: config,
-					params,
+					config,
 					nodes,
 					isEditMode: renderContext.isEditMode(),
 				}}
