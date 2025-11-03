@@ -30,25 +30,26 @@ jahiaComponent(
 
 		const javaParamMap = renderContext.getRequest().getParameterMap();
 		const params = Object.fromEntries(
+			// Only retrieve known parameters, ignore others
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
+		// All the data required to fetch the estate nodes
 		const config: QueryConfig = {
-			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
+			workspace: renderContext.isLiveMode() ? "LIVE" : "EDIT",
 			language: currentNode.getLanguage(),
 			params,
 			ordering: { property: "j:lastPublished", orderType: "DESC" },
 			limit: 30,
 		};
-
-		const nodes = fetchEstate(useGQLQuery, config);
+		const results = fetchEstate(useGQLQuery, config);
 
 		return (
 			<Island
 				component={SearchEstateClient}
 				props={{
 					config,
-					nodes,
+					results,
 					isEditMode: renderContext.isEditMode(),
 				}}
 			/>

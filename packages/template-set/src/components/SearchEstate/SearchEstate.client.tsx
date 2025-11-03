@@ -4,19 +4,19 @@ import { fetchEstate, graphqlFetch } from "./graphql.ts";
 import classes from "./SearchEstate.client.module.css";
 import SearchEstateFormClient from "./SearchEstateForm.client.tsx";
 import SearchResultsClient from "./SearchResults.tsx";
-import type { QueryConfig, RenderNodeProps } from "./types.ts";
+import type { QueryConfig, Estate } from "./types.ts";
 
 export default function SearchEstateClient({
 	config,
-	nodes: initialNodes,
+	results: initialResults,
 	isEditMode,
 }: {
 	config: QueryConfig;
-	nodes: RenderNodeProps[];
+	results: Estate[];
 	isEditMode: boolean;
 }) {
 	const [params, setParams] = useState(config.params);
-	const [nodes, setNodes] = useState(initialNodes);
+	const [results, setResults] = useState(initialResults);
 
 	return (
 		<Section>
@@ -25,7 +25,7 @@ export default function SearchEstateClient({
 					onChange={(params) => {
 						setParams(params);
 
-						// Update URL to create a shareable link
+						// Update the URL to create a shareable link
 						const q = new URLSearchParams(
 							Object.entries(params).flatMap(([k, vals]) => vals.map((v) => [k, v])),
 						);
@@ -36,13 +36,13 @@ export default function SearchEstateClient({
 						);
 
 						// Fetch new results
-						fetchEstate(graphqlFetch, { ...config, params }).then(setNodes);
+						fetchEstate(graphqlFetch, { ...config, params }).then(setResults);
 					}}
 					params={params}
 				/>
 			</Row>
 			<Row className={classes.resultsRow}>
-				<SearchResultsClient nodes={nodes} isEditMode={isEditMode} locale={config.language} />
+				<SearchResultsClient results={results} isEditMode={isEditMode} locale={config.language} />
 			</Row>
 		</Section>
 	);

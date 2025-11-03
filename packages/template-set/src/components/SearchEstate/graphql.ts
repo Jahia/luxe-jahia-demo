@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
-import type { QueryConfig, RenderNodeProps } from "./types.ts";
+import type { QueryConfig, Estate } from "./types.ts";
 import type { GraphQLFormattedError } from "graphql";
 
 /** Transforms a textual GraphQL query into a DocumentNode. */
@@ -30,21 +30,19 @@ export async function graphqlFetch<Result = any, Variables = any>({
 		}),
 	});
 
-	if (!response.ok)
+	if (!response.ok) {
 		throw new Error(`GraphQL HTTP error: ${response.status} ${response.statusText}`);
+	}
 
 	return response.json();
 }
 
 // Two overloads, to expose both a sync and an async version
-export function fetchEstate(
-	f: (opts: any) => { data?: any },
-	config: QueryConfig,
-): RenderNodeProps[];
+export function fetchEstate(f: (opts: any) => { data?: any }, config: QueryConfig): Estate[];
 export function fetchEstate(
 	f: (opts: any) => Promise<{ data?: any }>,
 	config: QueryConfig,
-): Promise<RenderNodeProps[]>;
+): Promise<Estate[]>;
 
 // Actual implementation, support both sync and async
 export function fetchEstate(
@@ -55,11 +53,11 @@ export function fetchEstate(
 		| { data?: Result; errors?: GraphQLFormattedError[] }
 		| Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
 	config: QueryConfig,
-): RenderNodeProps[] | Promise<RenderNodeProps[]> {
+): Estate[] | Promise<Estate[]> {
 	// Prepare a JQOM query based on the provided params
 	const constraints = Object.entries(config.params)
-		.map(([param, values]) => ({
-			any: values.map((value) => ({ property: param, equals: value })),
+		.map(([property, values]) => ({
+			any: values.map((value) => ({ property, equals: value })),
 		}))
 		// Remove constraints with no values
 		.filter(({ any }) => any.length > 0);
@@ -70,7 +68,7 @@ export function fetchEstate(
 				$workspace: Workspace!
 				$language: String!
 				$query: InputGqlJcrNodeCriteriaInput!
-				$limit: Int
+				$limit: Int!
 			) {
 				jcr(workspace: $workspace) {
 					nodesByCriteria(criteria: $query, limit: $limit) {
@@ -104,6 +102,7 @@ export function fetchEstate(
 				// Complete the query with type and ordering
 				nodeType: "luxe:estate",
 				ordering: config.ordering,
+				// In case there are no constraints, retrieve all nodes
 				nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
 			},
 			language: config.language,
@@ -114,7 +113,7 @@ export function fetchEstate(
 	/** Simplifies the GraphQL response */
 	const process = ({ errors, data }: Awaited<typeof response>) => {
 		if (errors) {
-			console.error(JSON.stringify(errors));
+			console.error("Something went wrong:", JSON.stringify(errors));
 		}
 
 		return (data?.jcr?.nodesByCriteria?.nodes ?? [])
@@ -129,6 +128,7 @@ export function fetchEstate(
 			}));
 	};
 
+	// If response is a promise, process it when resolved
 	if ("then" in response) return response.then(process);
 	return process(response);
 }

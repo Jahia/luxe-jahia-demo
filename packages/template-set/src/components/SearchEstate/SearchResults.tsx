@@ -1,31 +1,29 @@
 import clsx from "clsx";
 import { ClickableCard, Col, Image, ProgressiveList } from "design-system";
 import { t } from "i18next";
-import classes from "./SearchResults.client.module.css";
-import type { RenderNodeProps } from "./types.ts";
+import classes from "./SearchResults.module.css";
+import type { Estate } from "./types.ts";
 
 export default function SearchResultsClient({
-	nodes,
+	results,
 	isEditMode,
 	locale,
 }: {
-	nodes: RenderNodeProps[];
+	results: Estate[];
 	isEditMode: boolean;
 	locale: string;
 }) {
-	if (nodes.length === 0) {
+	if (results.length === 0) {
 		return (
 			<Col>
-				<div>
-					<p>No results found</p>
-				</div>
+				<p>No results found</p>
 			</Col>
 		);
 	}
 
 	return (
 		<ProgressiveList
-			items={nodes}
+			items={results}
 			itemKey="url"
 			delayMs={100}
 			animationType="fadeInUp"

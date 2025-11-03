@@ -6,7 +6,7 @@ export type QueryConfig = {
 	limit: number;
 };
 
-export interface RenderNodeProps {
+export interface Estate {
 	url: string;
 	title: string;
 	image: string;
