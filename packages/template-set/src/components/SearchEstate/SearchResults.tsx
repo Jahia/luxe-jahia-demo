@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { ClickableCard, Col, Image, ProgressiveList } from "design-system";
 import { t } from "i18next";
-import type { RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import classes from "./SearchResults.client.module.css";
+import type { RenderNodeProps } from "./types.ts";
 
 export default function SearchResultsClient({
 	nodes,

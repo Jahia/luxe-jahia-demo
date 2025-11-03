@@ -1,17 +1,17 @@
-import { useState } from "react";
-import classes from "./SearchEstate.client.module.css";
-import type { JCRQueryConfig, RenderNodeProps } from "~/commons/libs/jcrQueryBuilder/types.ts";
-import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
-import SearchResultsClient from "~/components/SearchEstate/SearchResults.client.tsx";
 import { Row, Section } from "design-system";
-import { execute, fetchEstate } from "~/commons/libs/jcrQueryBuilder/index.ts";
+import { useState } from "react";
+import { fetchEstate, graphqlFetch } from "./graphql.ts";
+import classes from "./SearchEstate.client.module.css";
+import SearchEstateFormClient from "./SearchEstateForm.client.tsx";
+import SearchResultsClient from "./SearchResults.tsx";
+import type { QueryConfig, RenderNodeProps } from "./types.ts";
 
 export default function SearchEstateClient({
 	config,
 	nodes: initialNodes,
 	isEditMode,
 }: {
-	config: JCRQueryConfig;
+	config: QueryConfig;
 	nodes: RenderNodeProps[];
 	isEditMode: boolean;
 }) {
@@ -36,7 +36,7 @@ export default function SearchEstateClient({
 						);
 
 						// Fetch new results
-						fetchEstate(execute, { ...config, params }).then(setNodes);
+						fetchEstate(graphqlFetch, { ...config, params }).then(setNodes);
 					}}
 					params={params}
 				/>

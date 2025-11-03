@@ -1,7 +1,7 @@
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { fetchEstate } from "~/commons/libs/jcrQueryBuilder";
-import type { JCRQueryConfig } from "~/commons/libs/jcrQueryBuilder/types.ts";
-import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
+import { fetchEstate } from "./graphql.ts";
+import SearchEstateClient from "./SearchEstate.client.tsx";
+import type { QueryConfig } from "./types.ts";
 
 jahiaComponent(
 	{
@@ -33,7 +33,7 @@ jahiaComponent(
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
-		const config: JCRQueryConfig = {
+		const config: QueryConfig = {
 			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
 			language: currentNode.getLanguage(),
 			params,

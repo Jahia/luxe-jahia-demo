@@ -1,4 +1,4 @@
-export type JCRQueryConfig = {
+export type QueryConfig = {
 	workspace: "EDIT" | "LIVE";
 	language: string;
 	params: Record<string, string[]>;
