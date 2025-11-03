@@ -5,10 +5,10 @@ import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.ts
 
 jahiaComponent(
 	{
+		componentType: "view",
 		nodeType: "luxe:searchEstate",
 		name: "results",
 		displayName: "Search Estate Results",
-		componentType: "view",
 		properties: {
 			// Ensures only one thread rebuilds the cache; others wait and reuse the same cached fragment.
 			"cache.latch": "true",
@@ -23,21 +23,8 @@ jahiaComponent(
 		},
 	},
 	(_, { renderContext, currentNode }) => {
-		const builderConfig: JCRQueryConfig = {
-			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
-			type: "luxe:estate",
-			startNodePath: `${renderContext.getSite().getPath()}/contents/agencies`,
-			criteria: "j:lastPublished",
-			sortDirection: "desc",
-			categories: [],
-			excludeNodes: [],
-			uuid: currentNode.getIdentifier(),
-			subNodeView: "default",
-			language: currentNode.getLanguage(),
-			limit: 30,
-		};
 		server.render.addCacheDependency(
-			{ flushOnPathMatchingRegexp: builderConfig.startNodePath + "/.*" },
+			{ flushOnPathMatchingRegexp: `${renderContext.getSite().getPath()}/contents/agencies/.*` },
 			renderContext,
 		);
 
@@ -46,13 +33,21 @@ jahiaComponent(
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
-		const nodes = fetchEstate(useGQLQuery, builderConfig, params);
+		const config: JCRQueryConfig = {
+			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
+			language: currentNode.getLanguage(),
+			params,
+			ordering: { property: "j:lastPublished", orderType: "DESC" },
+			limit: 30,
+		};
+
+		const nodes = fetchEstate(useGQLQuery, config);
 
 		return (
 			<Island
 				component={SearchEstateClient}
 				props={{
-					builderConfig,
+					builderConfig: config,
 					params,
 					nodes,
 					isEditMode: renderContext.isEditMode(),

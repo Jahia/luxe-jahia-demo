@@ -2,9 +2,16 @@ import clsx from "clsx";
 import classes from "./styles.module.css";
 import type { ReactNode } from "react";
 
-interface ProgressiveListProps<T> {
+export function ProgressiveList<T extends { [key in Key]: any }, Key extends string>({
+	items,
+	itemKey,
+	children,
+	delayMs = 200,
+	animationType = "fadeIn",
+	className,
+}: {
 	items: T[];
-	itemKey?: keyof T;
+	itemKey?: Key;
 	children: (
 		item: T,
 		index: number,
@@ -15,16 +22,7 @@ interface ProgressiveListProps<T> {
 	delayMs?: number;
 	animationType?: "fadeIn" | "fadeInUp";
 	className?: string;
-}
-
-export function ProgressiveList<T>({
-	items,
-	itemKey,
-	children,
-	delayMs = 200,
-	animationType = "fadeIn",
-	className,
-}: ProgressiveListProps<T>) {
+}) {
 	return (
 		<>
 			{items.map((item, index) => {

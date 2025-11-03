@@ -26,10 +26,10 @@ export default function SearchResultsClient({
 	return (
 		<ProgressiveList
 			items={nodes}
-			itemKey="uuid"
+			itemKey="url"
 			delayMs={200}
 			animationType="fadeInUp"
-			key={`search-${nodes.length}-${Date.now()}`} // Force re-mount
+			key={`search-${Date.now()}`} // Force re-mount
 		>
 			{(node, index, key, style, className) => (
 				<Col key={key} style={style} className={clsx(className, isEditMode && classes.editMode)}>

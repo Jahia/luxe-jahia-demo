@@ -33,7 +33,7 @@ export async function execute<Result = any, Variables = any>({
 	return response.json();
 }
 
-export const gqlNodesQuery = graphql(`
+const gqlNodesQuery = graphql(`
 	query GetContentPropertiesQuery(
 		$workspace: Workspace!
 		$language: String!
@@ -43,10 +43,6 @@ export const gqlNodesQuery = graphql(`
 		jcr(workspace: $workspace) {
 			nodesByCriteria(criteria: $query, limit: $limit) {
 				nodes {
-					workspace
-					uuid
-					path
-					name
 					url: renderUrl(language: $language, workspace: $workspace)
 					title: property(name: "title", language: $language) {
 						value
@@ -71,7 +67,7 @@ export const gqlNodesQuery = graphql(`
 	}
 `);
 
-export const getCriteria = (params: Record<string, string[]>, config: JCRQueryConfig) => {
+const getCriteria = ({ params, ordering }: JCRQueryConfig) => {
 	const constraints = Object.entries(params)
 		.map(([param, values]) => ({
 			any: values.map((value) => ({ property: param, equals: value })),
@@ -80,24 +76,19 @@ export const getCriteria = (params: Record<string, string[]>, config: JCRQueryCo
 		.filter(({ any }) => any.length > 0);
 
 	return graphql.scalar("InputGqlJcrNodeCriteriaInput", {
-		nodeType: config.type,
+		nodeType: "luxe:estate",
 		nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
-		ordering: {
-			property: config.criteria,
-			orderType: config.sortDirection.toUpperCase() as "ASC" | "DESC",
-		},
+		ordering,
 	});
 };
 
 export function fetchEstate(
 	doGQLQuery: (opts: any) => { data?: any },
 	config: JCRQueryConfig,
-	params: Record<string, string[]>,
 ): RenderNodeProps[];
 export function fetchEstate(
 	doGQLQuery: (opts: any) => Promise<{ data?: any }>,
 	config: JCRQueryConfig,
-	params: Record<string, string[]>,
 ): Promise<RenderNodeProps[]>;
 
 export function fetchEstate(
@@ -108,13 +99,12 @@ export function fetchEstate(
 		| { data?: Result; errors?: GraphQLFormattedError[] }
 		| Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
 	config: JCRQueryConfig,
-	params: Record<string, string[]>,
 ): RenderNodeProps[] | Promise<RenderNodeProps[]> {
 	const gqlContents = doGQLQuery({
 		query: gqlNodesQuery,
 		variables: {
 			workspace: config.workspace,
-			query: getCriteria(params, config),
+			query: getCriteria(config),
 			language: config.language,
 			limit: config.limit,
 		},
@@ -128,14 +118,13 @@ export function fetchEstate(
 		return (data?.jcr?.nodesByCriteria?.nodes ?? [])
 			.filter((node) => node !== null)
 			.map((node) => ({
-				uuid: node.uuid,
 				url: node.url!,
 				title: node.title?.value || "",
 				image: node.images?.refNodes?.[0]?.url || "",
 				price: node.price?.longValue || 0,
 				surface: node.surface?.longValue || 0,
 				bedrooms: node.bedrooms?.longValue || 0,
-			})) satisfies RenderNodeProps[];
+			}));
 	};
 
 	if ("then" in gqlContents) return gqlContents.then(process);

@@ -10,7 +10,7 @@ import { useMediaQuery } from "../commons/hooks/useMediaQuery.client";
 
 interface GalleryProps {
 	title: string;
-	images: React.ImgHTMLAttributes<HTMLImageElement>[];
+	images: Array<React.ImgHTMLAttributes<HTMLImageElement> & { src: string }>;
 	className?: string;
 	delayMs?: number;
 }

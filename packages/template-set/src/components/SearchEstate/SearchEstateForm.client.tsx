@@ -5,14 +5,14 @@ import classes from "./SearchEstateForm.client.module.css";
 import { t } from "i18next";
 
 type Props = {
-	target?: string;
+	action?: string;
 	params?: Record<string, string[]>;
 	onChange?: (params: Record<string, string[]>) => void;
 	className?: string;
 	style?: React.CSSProperties;
 };
 
-const SearchEstateFormClient = ({ target, onChange, params = {}, className, style }: Props) => {
+const SearchEstateFormClient = ({ action, onChange, params = {}, className, style }: Props) => {
 	const estateTypeTranslation = {
 		house: t("estate.type.house"),
 		apartment: t("estate.type.apartment"),
@@ -26,7 +26,7 @@ const SearchEstateFormClient = ({ target, onChange, params = {}, className, styl
 	};
 
 	return (
-		<Form action={target} className={clsx(classes.form, classes.extended, className)} style={style}>
+		<Form action={action} className={clsx(classes.form, classes.extended, className)} style={style}>
 			<MultiSelectTags
 				name="country"
 				icon={<MapPinIcon />}
