@@ -85,23 +85,23 @@ jahiaComponent(
 			},
 			{
 				title: t("estate.rooms.label"),
-				value: rooms.toString(),
+				value: rooms,
 			},
 			{
 				title: t("estate.bedrooms.label"),
-				value: bedrooms.toString(),
+				value: bedrooms,
 			},
 			{
 				title: t("estate.bathrooms.label"),
-				value: bathrooms.toString(),
+				value: bathrooms,
 			},
-			// Spread additional rows based on options, if any
-			...(options?.map((option) => ({
+		].concat(
+			(options ?? []).map((option) => ({
 				title: estateOptionsTranslation[option],
 				value: <CheckIcon />,
 				className: "icon",
-			})) || []),
-		];
+			})),
+		);
 
 		return (
 			<>
@@ -124,7 +124,6 @@ jahiaComponent(
 						<Col>
 							<p className={classes.price}>{price.toLocaleString(locale)} €</p>
 							<List rows={tableRows} />
-							{/* <AgentItem imgURL={profile1} name="Robert Fox"/> */}
 						</Col>
 					</Row>
 				</Section>

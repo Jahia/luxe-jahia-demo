@@ -108,7 +108,7 @@ jahiaComponent(
 			},
 			{
 				title: t("list.data.yOfExperience"),
-				value: `${yOfExperience}`,
+				value: yOfExperience,
 			},
 		];
 
