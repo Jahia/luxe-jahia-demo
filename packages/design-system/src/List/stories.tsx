@@ -11,20 +11,6 @@ const sampleRows: ListRowProps[] = [
 	{ title: "Location", value: "New York, NY" },
 ];
 
-const htmlRows: ListRowProps[] = [
-	{ title: "Description", value: "<em>Software Engineer</em> with 5+ years of experience" },
-	{ title: "Skills", value: "<ul><li>React</li><li>TypeScript</li><li>Node.js</li></ul>" },
-	{
-		title: "Website",
-		value: '<a href="https://example.com" target="_blank">https://example.com</a>',
-	},
-	{
-		title: "Bio",
-		value:
-			"Passionate developer who loves <strong>clean code</strong> and <em>modern technologies</em>.",
-	},
-];
-
 const jsxRows: ListRowProps[] = [
 	{ title: "Status", value: <span style={{ color: "green", fontWeight: "bold" }}>✓ Active</span> },
 	{
@@ -101,12 +87,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithHtmlContent: Story = {
-	args: {
-		rows: htmlRows,
-	},
-};
-
 export const WithJsxElements: Story = {
 	args: {
 		rows: jsxRows,
@@ -147,8 +127,19 @@ export const LongContent: Story = {
 			},
 			{
 				title: "Technical Details",
-				value:
-					"<p>Built with <strong>React</strong> and <em>TypeScript</em>.</p><p>Features include:</p><ul><li>HTML content support</li><li>JSX element rendering</li><li>Responsive design</li></ul>",
+				value: (
+					<>
+						<p>
+							Built with <strong>React</strong> and <em>TypeScript</em>.
+						</p>
+						<p>Features include:</p>
+						<ul>
+							<li>HTML content support</li>
+							<li>JSX element rendering</li>
+							<li>Responsive design</li>
+						</ul>
+					</>
+				),
 			},
 		],
 	},

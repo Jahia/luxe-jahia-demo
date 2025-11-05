@@ -108,7 +108,7 @@ jahiaComponent(
 			},
 			{
 				title: t("list.data.creationDate"),
-				value: new Date(creationDate).getFullYear().toString(10) || "-",
+				value: new Date(creationDate).getFullYear().toString(),
 			},
 			{
 				title: t("list.data.spokenLanguage.label"),

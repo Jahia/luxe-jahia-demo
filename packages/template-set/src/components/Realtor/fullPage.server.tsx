@@ -99,13 +99,7 @@ jahiaComponent(
 		const listRows: ListRowProps[] = [
 			{
 				title: t("list.data.agency"),
-				value: agencies.reduce((value, { name }, index) => {
-					if (index === 0) {
-						return name;
-					}
-
-					return `${value} / ${name}`;
-				}, ""),
+				value: agencies.map((agency) => agency.name).join(" / "),
 			},
 			{
 				title: t("list.data.spokenLanguage.label"),
