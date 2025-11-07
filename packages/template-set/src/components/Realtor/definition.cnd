@@ -3,7 +3,7 @@
  - firstName (string) mandatory
  - lastName (string) primary mandatory
  - jobPosition (string,choicelist[resourceBundle]) = 'junior' mandatory < 'junior', 'senior', 'director'
- - description (string,richtext[ckeditor.toolbar='Light']) i18n mandatory
+ - description (string,richtext) i18n mandatory
  - image (weakreference, picker[type='image']) < 'jmix:image'
  - animate (weakreference, picker[type='video']) < 'jnt:file'
  - languages (string,choicelist[resourceBundle]) = 'fr' multiple autocreated mandatory < 'fr', 'en', 'de', 'es'
