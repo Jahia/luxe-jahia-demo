@@ -101,7 +101,8 @@
 				"type": "type de bien",
 				"country": "pays"
 			},
-			"submit": "rechercher"
+			"submit": "rechercher",
+			"empty": "Aucun résultat trouvé."
 		}
 	},
 	"realtor": {

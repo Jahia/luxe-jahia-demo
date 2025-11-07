@@ -41,7 +41,7 @@
 .category {
 	composes: richtext from "~/templates/css/global.module.css";
 	display: flex;
-	border-top: 1px solid var(--luxe-primary);
+	border-top: 1px solid var(--luxe-color-primary);
 	gap: 16px;
 	padding: 40px 0;
 	margin-top: 40px;

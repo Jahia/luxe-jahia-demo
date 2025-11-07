@@ -2,46 +2,45 @@ import { useState, useRef, useEffect, type ReactNode } from "react";
 import classes from "./styles.module.css";
 import clsx from "clsx";
 
-export type Option = { value: string | number; label: string };
+export type Option = { value: string; label: string };
 
 type Props = {
 	name: string;
 	options: Option[];
-	initialSelected?: (string | number)[];
-	onChange?: (values: (string | number)[]) => void;
+	initialSelected?: string[];
+	onChange?: (values: string[]) => void;
 	className?: string;
 	placeholder?: string;
 	icon?: ReactNode;
 };
 
+const emptyArray: string[] = [];
 export function MultiSelectTags({
 	name,
 	options,
-	initialSelected = [],
+	initialSelected = emptyArray,
 	onChange,
 	className,
 	placeholder = "Select…",
 	icon,
 }: Props) {
-	const [selected, setSelected] = useState<(string | number)[]>(initialSelected);
+	const [selected, setSelected] = useState<Set<string>>(() => new Set(initialSelected));
 	const [isOpen, setIsOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
-	const toggleOption = (value: string | number) => {
-		setSelected((prev) => {
-			const exists = prev.includes(value);
-			const updated = exists ? prev.filter((v) => v !== value) : [...prev, value];
-			onChange?.(updated);
-			return updated;
-		});
+	const toggleOption = (value: string) => {
+		const next = new Set(selected);
+		if (next.has(value)) next.delete(value);
+		else next.add(value);
+		onChange?.([...next]);
+		setSelected(next);
 	};
 
-	const removeTag = (value: string | number) => {
-		setSelected((prev) => {
-			const updated = prev.filter((v) => v !== value);
-			onChange?.(updated);
-			return updated;
-		});
+	const removeTag = (value: string) => {
+		const next = new Set(selected);
+		next.delete(value);
+		onChange?.([...next]);
+		setSelected(next);
 	};
 
 	// Close dropdown on outside click
@@ -72,35 +71,34 @@ export function MultiSelectTags({
 					}
 				}}
 			>
-				{selected.length === 0 ? (
+				{selected.size === 0 ? (
 					<li className={classes.placeholder}>{placeholder}</li>
 				) : (
-					selected.map((val) => {
-						const opt = options.find((o) => o.value === val);
-						if (!opt) return null;
+					options.map(({ value, label }) => {
+						if (!selected.has(value)) return null;
 
 						return (
 							<li
-								key={val}
+								key={value}
 								className={classes.tag}
 								tabIndex={0}
 								onClick={(e) => {
 									e.stopPropagation();
-									removeTag(val);
+									removeTag(value);
 								}}
-								aria-label={`Retirer ${opt.label}`}
+								aria-label={`Retirer ${label}`}
 								onKeyDown={(e) => {
 									if (e.key === "Enter" || e.key === " ") {
 										e.stopPropagation();
-										removeTag(val);
+										removeTag(value);
 									}
 								}}
 							>
-								{opt.label}
+								{label}
 								<span role="button" className={classes.removeBtn}>
 									×
 								</span>
-								<input type="hidden" name={name} value={val} />
+								<input type="hidden" name={name} value={value} />
 							</li>
 						);
 					})
@@ -113,7 +111,7 @@ export function MultiSelectTags({
 						<label key={value} className={classes.option}>
 							<input
 								type="checkbox"
-								checked={selected.includes(value)}
+								checked={selected.has(value)}
 								onChange={() => toggleOption(value)}
 							/>
 							{label}

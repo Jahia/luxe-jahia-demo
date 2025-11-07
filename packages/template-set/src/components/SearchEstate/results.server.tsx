@@ -1,19 +1,16 @@
-import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
-import { gqlNodesQuery, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
-import type {
-	Constraint,
-	JCRQueryConfig,
-	RenderNodeProps,
-} from "~/commons/libs/jcrQueryBuilder/types.ts";
-import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
 import { print } from "@0no-co/graphql.web";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
+import { fetchEstate } from "./graphql.ts";
+import SearchEstateClient from "./SearchEstate.client.tsx";
+import type { QueryConfig } from "./types.ts";
 
 jahiaComponent(
 	{
+		componentType: "view",
 		nodeType: "luxe:searchEstate",
 		name: "results",
 		displayName: "Search Estate Results",
-		componentType: "view",
 		properties: {
 			// Ensures only one thread rebuilds the cache; others wait and reuse the same cached fragment.
 			"cache.latch": "true",
@@ -28,83 +25,43 @@ jahiaComponent(
 		},
 	},
 	(_, { renderContext, currentNode }) => {
-		const builderConfig: JCRQueryConfig = {
-			workspace: renderContext.getWorkspace() === "default" ? "EDIT" : "LIVE",
-			type: "luxe:estate",
-			startNodePath: `${renderContext.getSite().getPath()}/contents/agencies`,
-			criteria: "j:lastPublished",
-			sortDirection: "desc",
-			categories: [],
-			excludeNodes: [],
-			uuid: currentNode.getIdentifier(),
-			subNodeView: "default",
-			language: currentNode.getLanguage(),
-			limit: 30,
-		};
-		const builder = new JCRQueryBuilder(builderConfig);
-
-		const paramMap = renderContext.getRequest().getParameterMap();
-		const constraintMap: Record<string, { type: "string" | "number" }> = {
-			country: { type: "string" },
-			type: { type: "string" },
-			bedrooms: { type: "number" },
-		};
-
-		const constraints: Constraint[] = [];
-
-		for (const [prop, { type }] of Object.entries(constraintMap)) {
-			const values = paramMap[prop];
-			if (!values?.length) continue;
-
-			if (type === "number") {
-				const parsed = values.map((v) => Number.parseInt(v, 10)).filter((n) => Number.isInteger(n));
-				if (parsed.length) {
-					constraints.push({ prop, operator: "IN", values: parsed });
-				}
-			} else {
-				constraints.push({ prop, operator: "IN", values });
-			}
-		}
-
-		if (constraints.length) {
-			builder.setConstraints(constraints);
-		}
-
-		const { jcrQuery, cacheDependency } = builder.build();
-		server.render.addCacheDependency({ flushOnPathMatchingRegexp: cacheDependency }, renderContext);
-
-		const gqlContents = useGQLQuery({
-			// TODO JSM 1.1.0: remove print, it will be done automatically
-			query: print(gqlNodesQuery),
-			variables: {
-				workspace: builderConfig.workspace,
-				query: jcrQuery,
-				language: builderConfig.language,
-				view: builderConfig.subNodeView,
-				limit: builderConfig.limit,
-			},
-		});
-
-		const gqlNodes = (gqlContents?.data?.jcr?.nodesByQuery?.nodes ?? []).filter(
-			(node) => node !== null,
+		server.render.addCacheDependency(
+			{ flushOnPathMatchingRegexp: `${renderContext.getSite().getPath()}/contents/agencies/.*` },
+			renderContext,
 		);
-		const nodes = gqlNodes?.map((node) => {
-			if (!node.renderedContent?.output) {
-				console.warn(`No rendered content for node ${node.uuid}`);
-			}
-			return {
-				html: node.renderedContent?.output || "",
-				uuid: node.uuid,
-			};
-		}) satisfies RenderNodeProps[];
+
+		const javaParamMap = renderContext.getRequest().getParameterMap();
+		const params = Object.fromEntries(
+			// Only retrieve known parameters, ignore others
+			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
+		);
+
+		// All the data required to fetch the estate nodes
+		const config: QueryConfig = {
+			workspace: renderContext.isLiveMode() ? "LIVE" : "EDIT",
+			language: currentNode.getLanguage(),
+			params,
+		};
+		const results = fetchEstate(
+			// TODO: in JSM 1.1.0 we can use useGQLQuery directly
+			({
+				query,
+				variables,
+				operationName,
+			}: {
+				query: TypedDocumentNode;
+				variables?: Record<string, any>;
+				operationName?: string;
+			}) => useGQLQuery({ query: print(query), variables, operationName }),
+			config,
+		);
 
 		return (
 			<Island
 				component={SearchEstateClient}
 				props={{
-					builderConfig,
-					builderConstraints: builder.getConstraints(),
-					nodes,
+					config,
+					results,
 					isEditMode: renderContext.isEditMode(),
 				}}
 			/>

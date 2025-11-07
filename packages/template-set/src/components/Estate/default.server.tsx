@@ -4,13 +4,12 @@ import {
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
+import { ClickableCard, Image } from "design-system";
 import { t } from "i18next";
-import type { EstateProps } from "./types";
-import classes from "./default.module.css";
-import placeholder from "/static/img/img-placeholder.jpg";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import { Image } from "design-system";
 import type { ImgHTMLAttributes } from "react";
+import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import type { EstateProps } from "./types";
+import placeholder from "/static/img/img-placeholder.jpg";
 
 jahiaComponent(
 	{
@@ -47,15 +46,18 @@ jahiaComponent(
 		}
 
 		return (
-			<a href={buildNodeUrl(currentNode)} className={classes.card}>
-				<Image className={classes.image} {...imageProps} />
-				<h4>{title}</h4>
-				<p>
-					{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface.toLocaleString(locale)} m
-					<sup>2</sup>
-				</p>
-				<strong>{price.toLocaleString(locale)}€</strong>
-			</a>
+			<ClickableCard
+				href={buildNodeUrl(currentNode)}
+				title={title}
+				image={({ className }) => <Image className={className} {...imageProps} />}
+				description={
+					<>
+						{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface.toLocaleString(locale)}{" "}
+						m<sup>2</sup>
+					</>
+				}
+				footer={`${price.toLocaleString(locale)}€`}
+			/>
 		);
 	},
 );

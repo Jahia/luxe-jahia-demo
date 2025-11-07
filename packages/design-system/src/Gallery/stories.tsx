@@ -3,7 +3,7 @@ import { Gallery } from "./index.tsx";
 import { type ImgHTMLAttributes, useState } from "react";
 
 // Demo data with more images to showcase the gallery properly
-const images: ImgHTMLAttributes<HTMLImageElement>[] = [
+const images = [
 	{
 		src: "https://placehold.co/800x600?text=Main+Image",
 		alt: "Main placeholder image",
@@ -71,7 +71,7 @@ function GalleryStory({
 	delayMs = 200,
 }: {
 	title: string;
-	images: ImgHTMLAttributes<HTMLImageElement>[];
+	images: Array<ImgHTMLAttributes<HTMLImageElement> & { src: string }>;
 	delayMs?: number;
 }) {
 	const [key, setKey] = useState(0);
@@ -84,6 +84,7 @@ function GalleryStory({
 		<div style={storybookStyles}>
 			<div style={{ marginBottom: "20px", textAlign: "center" }}>
 				<button
+					type="button"
 					onClick={handleReset}
 					style={{
 						padding: "10px 20px",

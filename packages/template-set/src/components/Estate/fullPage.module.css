@@ -26,8 +26,7 @@ section .rowDescription {
 }
 
 .price {
-	--luxe-text-opacity: 1;
 	composes: display_5 from "~/templates/css/global.module.css";
-	color: rgba(var(--luxe-primary-rgb), var(--luxe-text-opacity));
+	color: var(--luxe-color-primary);
 	font-weight: 500;
 }

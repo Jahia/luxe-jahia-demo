@@ -101,7 +101,8 @@
 				"type": "property type",
 				"country": "country"
 			},
-			"submit": "search"
+			"submit": "search",
+			"empty": "No results found."
 		}
 	},
 	"realtor": {

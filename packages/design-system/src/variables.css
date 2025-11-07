@@ -7,6 +7,7 @@
 	--luxe-color-darkBlue: #1b1a4e;
 	--luxe-color-darkBlue40: #a4a3b8;
 	--luxe-color-darkBlue60: #767695;
+	--luxe-box-shadow: 4px 6px 17px 15px rgba(35, 33, 110, 0.1);
 
 	/* Semantic tokens */
 	--luxe-font-body: 400 1.25rem/1.75 var(--luxe-font-family-base);

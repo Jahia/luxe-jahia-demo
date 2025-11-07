@@ -101,7 +101,8 @@
 				"type": "Immobilienart",
 				"country": "Land"
 			},
-			"submit": "suchen"
+			"submit": "suchen",
+			"empty": "Keine Ergebnisse gefunden."
 		}
 	},
 	"realtor": {

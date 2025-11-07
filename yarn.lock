@@ -5,7 +5,7 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@0no-co/graphql.web@npm:^1.0.5":
+"@0no-co/graphql.web@npm:^1.0.5, @0no-co/graphql.web@npm:^1.2.0":
   version: 1.2.0
   resolution: "@0no-co/graphql.web@npm:1.2.0"
   peerDependencies:
@@ -703,6 +703,15 @@ __metadata:
     graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
     typescript: ^5.0.0
   checksum: 10c0/dd9b34296160f7eb4374b1791dd9353fd4147f4d7e2a3a8e2974c2319dc6165a4458c19d9b517a3f7764da4e7a4401c099fdf1936841de02c0e565db95d64a5d
+  languageName: node
+  linkType: hard
+
+"@graphql-typed-document-node/core@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@graphql-typed-document-node/core@npm:3.2.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 10c0/94e9d75c1f178bbae8d874f5a9361708a3350c8def7eaeb6920f2c820e82403b7d4f55b3735856d68e145e86c85cbfe2adc444fdc25519cd51f108697e99346c
   languageName: node
   linkType: hard
 
@@ -3659,6 +3668,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luxe-jahia-demo@workspace:packages/template-set"
   dependencies:
+    "@0no-co/graphql.web": "npm:^1.2.0"
+    "@graphql-typed-document-node/core": "npm:^3.2.0"
     "@jahia/javascript-modules-library": "npm:1.0.1"
     "@jahia/vite-plugin": "npm:1.0.1"
     "@types/leaflet": "npm:^1.9.20"

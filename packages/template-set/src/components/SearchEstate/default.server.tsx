@@ -1,21 +1,20 @@
 import { buildNodeUrl, Island, jahiaComponent } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import SearchEstateFormClient from "~/components/SearchEstate/SearchEstateForm.client.tsx";
+import SearchEstateFormClient from "./SearchEstateForm.client.tsx";
 import { Section } from "design-system";
+
 jahiaComponent(
 	{
-		nodeType: "luxe:searchEstate",
-		name: "default",
 		componentType: "view",
+		nodeType: "luxe:searchEstate",
 	},
-	({ resultsPage, cssStyle }: { resultsPage: JCRNodeWrapper; cssStyle?: string }) => {
+	({ resultsPage, cssStyle }: { resultsPage?: JCRNodeWrapper; cssStyle?: string }) => {
 		return (
 			<Section component="div" cssStyle={cssStyle}>
 				<Island
 					component={SearchEstateFormClient}
 					props={{
-						target: resultsPage && buildNodeUrl(resultsPage),
-						mode: "url",
+						action: resultsPage && buildNodeUrl(resultsPage),
 					}}
 				/>
 			</Section>

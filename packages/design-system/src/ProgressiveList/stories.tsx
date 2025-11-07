@@ -3,7 +3,7 @@ import { ProgressiveList } from "./index.tsx";
 import { type ImgHTMLAttributes, useState } from "react";
 
 // Demo data
-const images: ImgHTMLAttributes<HTMLImageElement>[] = [
+const images = [
 	{
 		src: "https://placehold.co/400x300?text=Image+1",
 		alt: "Placeholder image 1",
@@ -46,7 +46,7 @@ function ProgressiveListStory({
 	delayMs = 200,
 	animationType = "fadeInUp",
 }: {
-	items: ImgHTMLAttributes<HTMLImageElement>[];
+	items: Array<ImgHTMLAttributes<HTMLImageElement> & { src: string }>;
 	delayMs?: number;
 	animationType?: "fadeIn" | "fadeInUp";
 }) {
@@ -60,6 +60,7 @@ function ProgressiveListStory({
 		<div style={storybookStyles}>
 			<div style={{ marginBottom: "20px", textAlign: "center" }}>
 				<button
+					type="button"
 					onClick={handleReplay}
 					style={{
 						padding: "10px 20px",

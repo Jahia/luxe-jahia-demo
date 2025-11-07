@@ -15,7 +15,7 @@ footer {
 
 		&:hover {
 			color: var(--luxe-color-gray);
-			border-bottom: 2px solid var(--luxe-primary);
+			border-bottom: 2px solid var(--luxe-color-primary);
 		}
 	}
 }

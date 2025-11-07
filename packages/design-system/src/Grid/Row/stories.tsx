@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Row } from "./index.tsx";
 import { Section } from "../Section/index.tsx";
-import { WithMultipleColumns } from "../Col/stories.tsx";
 
 const meta = {
 	title: "Layout/Row",
