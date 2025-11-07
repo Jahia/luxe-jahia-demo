@@ -1,3 +1,5 @@
+import { print } from "@0no-co/graphql.web";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
 import { fetchEstate } from "./graphql.ts";
 import SearchEstateClient from "./SearchEstate.client.tsx";
@@ -40,7 +42,19 @@ jahiaComponent(
 			language: currentNode.getLanguage(),
 			params,
 		};
-		const results = fetchEstate(useGQLQuery, config);
+		const results = fetchEstate(
+			// TODO: in JSM 1.1.0 we can use useGQLQuery directly
+			({
+				query,
+				variables,
+				operationName,
+			}: {
+				query: TypedDocumentNode;
+				variables?: Record<string, any>;
+				operationName?: string;
+			}) => useGQLQuery({ query: print(query), variables, operationName }),
+			config,
+		);
 
 		return (
 			<Island

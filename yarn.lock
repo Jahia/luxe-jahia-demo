@@ -5,7 +5,7 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@0no-co/graphql.web@npm:^1.0.5":
+"@0no-co/graphql.web@npm:^1.0.5, @0no-co/graphql.web@npm:^1.2.0":
   version: 1.2.0
   resolution: "@0no-co/graphql.web@npm:1.2.0"
   peerDependencies:
@@ -767,23 +767,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:1.1.0-alpha-20251030085757033":
-  version: 1.1.0-alpha-20251030085757033
-  resolution: "@jahia/javascript-modules-library@npm:1.1.0-alpha-20251030085757033"
+"@jahia/javascript-modules-library@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@jahia/javascript-modules-library@npm:1.0.1"
   dependencies:
     dotenv: "npm:^17.2.2"
   peerDependencies:
-    "@graphql-typed-document-node/core": ^3.2.0
-    graphql: "*"
     i18next: ^25.0.0
     react: ^19.0.0
     react-dom: ^19.0.0
     react-i18next: ^15.4.0 || ^16.0.0
   peerDependenciesMeta:
-    "@graphql-typed-document-node/core":
-      optional: true
-    graphql:
-      optional: true
     i18next:
       optional: true
     react:
@@ -792,7 +786,7 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-  checksum: 10c0/d3945446faaca8017837ad52a0b5853a8651e06794a3234ce202a24432c688c79a8333016e7abfafe5c0811a7af54e27ace2fd620da49a06cb12c7b4b5418493
+  checksum: 10c0/8ecb87fa217dbd2e96ae555299beba29fd9f745c26d54d5ad1d77586955d52fdd65281f17a554c37440a893393d29056cccf06cde3903b4dbbbac9874c837ef9
   languageName: node
   linkType: hard
 
@@ -3674,8 +3668,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luxe-jahia-demo@workspace:packages/template-set"
   dependencies:
+    "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
-    "@jahia/javascript-modules-library": "npm:1.1.0-alpha-20251030085757033"
+    "@jahia/javascript-modules-library": "npm:1.0.1"
     "@jahia/vite-plugin": "npm:1.0.1"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
