@@ -41,3 +41,6 @@ javascript/client/*
 
 *storybook.log
 storybook-static
+
+# https://gql-tada.0no.co/get-started/installation#step-3-%E2%80%94-configuring-typings
+graphql-env.d.ts

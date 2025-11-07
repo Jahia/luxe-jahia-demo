@@ -2,11 +2,11 @@ import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-m
 import { gqlNodesQuery, JCRQueryBuilder } from "~/commons/libs/jcrQueryBuilder";
 import type {
 	Constraint,
-	GqlNode,
 	JCRQueryConfig,
 	RenderNodeProps,
 } from "~/commons/libs/jcrQueryBuilder/types.ts";
 import SearchEstateClient from "~/components/SearchEstate/SearchEstate.client.tsx";
+import { print } from "@0no-co/graphql.web";
 
 jahiaComponent(
 	{
@@ -74,7 +74,8 @@ jahiaComponent(
 		server.render.addCacheDependency({ flushOnPathMatchingRegexp: cacheDependency }, renderContext);
 
 		const gqlContents = useGQLQuery({
-			query: gqlNodesQuery,
+			// TODO JSM 1.1.0: remove print, it will be done automatically
+			query: print(gqlNodesQuery),
 			variables: {
 				workspace: builderConfig.workspace,
 				query: jcrQuery,
@@ -84,8 +85,10 @@ jahiaComponent(
 			},
 		});
 
-		const gqlNodes: GqlNode[] = gqlContents?.data?.jcr?.nodesByQuery?.nodes;
-		const nodes: RenderNodeProps[] = gqlNodes?.map((node) => {
+		const gqlNodes = (gqlContents?.data?.jcr?.nodesByQuery?.nodes ?? []).filter(
+			(node) => node !== null,
+		);
+		const nodes = gqlNodes?.map((node) => {
 			if (!node.renderedContent?.output) {
 				console.warn(`No rendered content for node ${node.uuid}`);
 			}
@@ -93,7 +96,7 @@ jahiaComponent(
 				html: node.renderedContent?.output || "",
 				uuid: node.uuid,
 			};
-		});
+		}) satisfies RenderNodeProps[];
 
 		return (
 			<Island
