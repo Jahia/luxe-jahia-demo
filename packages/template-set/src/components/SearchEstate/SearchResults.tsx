@@ -16,7 +16,7 @@ export default function SearchResultsClient({
 	if (results.length === 0) {
 		return (
 			<Col>
-				<p>No results found</p>
+				<p>{t("form.estate.empty")}</p>
 			</Col>
 		);
 	}

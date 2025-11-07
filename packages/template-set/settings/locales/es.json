@@ -101,7 +101,8 @@
 				"type": "tipo de propiedad",
 				"country": "país"
 			},
-			"submit": "buscar"
+			"submit": "buscar",
+			"empty": "No se encontraron resultados."
 		}
 	},
 	"realtor": {
