@@ -1,5 +1,7 @@
 # Luxe Design System
 
+Need context or build instructions? [Head to the Luxe README](../..).
+
 This package contains a minimal design system for Luxe, factoring common design elements and concepts.
 
 The goal of this package is to provide a functional sample on how to use a React design system in Jahia through the use

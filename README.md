@@ -34,7 +34,7 @@ This repository is a [monorepo](https://monorepo.tools/#what-is-a-monorepo) that
 
 ### Building for Production
 
-To produce production artifacts of the template set and the prepackaged site, you'll need [Maven](https://maven.apache.org/):
+To create production artifacts of the template set and the prepackaged site, you'll need [Maven](https://maven.apache.org/):
 
 ```bash
 # Build the monorepo
@@ -54,6 +54,8 @@ This will create the following artifacts:
   This artifact is available on the Jahia Store under the [Luxe pre-packaged website](https://store.jahia.com/contents/modules-repository/org/jahia/modules/luxe-prepackaged-website.html) name.
 
   The module can be installed manually on any Jahia instance through the **Modules** administration interface. Once installed, you can import its content by selecting "Luxe Demo Website - Prepackaged" in the **Import prepackaged project** section of the **Projects** page: [localhost:8080/jahia/administration/webProjectSettings](http://localhost:8080/jahia/administration/webProjectSettings).
+
+The design system has no production artifact as it is not used externally to this monorepo.
 
 ### Running in Development Mode
 
