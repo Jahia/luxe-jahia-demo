@@ -39,8 +39,6 @@ jahiaComponent(
 			workspace: renderContext.isLiveMode() ? "LIVE" : "EDIT",
 			language: currentNode.getLanguage(),
 			params,
-			ordering: { property: "price", orderType: "DESC" },
-			limit: 30,
 		};
 		const results = fetchEstate(useGQLQuery, config);
 

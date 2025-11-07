@@ -2,8 +2,6 @@ export type QueryConfig = {
 	workspace: "EDIT" | "LIVE";
 	language: string;
 	params: Record<string, string[]>;
-	ordering: { property: string; orderType: "ASC" | "DESC" };
-	limit: number;
 };
 
 export interface Estate {

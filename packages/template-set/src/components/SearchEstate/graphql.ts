@@ -101,12 +101,12 @@ export function fetchEstate(
 			query: {
 				// Complete the query with type and ordering
 				nodeType: "luxe:estate",
-				ordering: config.ordering,
+				ordering: { property: "price", orderType: "DESC" },
 				// In case there are no constraints, retrieve all nodes
 				nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
 			},
 			language: config.language,
-			limit: config.limit,
+			limit: 30,
 		},
 	});
 
