@@ -8,8 +8,8 @@ export interface RealtorProps {
 	description: string;
 	image?: JCRNodeWrapper;
 	animate?: JCRNodeWrapper;
-	languages: ["fr" | "en" | "de" | "es"];
-	yOfExperience: bigint;
+	languages: Array<"fr" | "en" | "de" | "es">;
+	yOfExperience: number;
 	phone: string;
 	email: string;
 }

@@ -22,6 +22,7 @@ yarn-error.log
 target
 
 packages/template-set/.env
+packages/prepackaged-site/bin
 .env.local
 luxe-jahia-demo-v*
 

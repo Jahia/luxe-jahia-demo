@@ -104,11 +104,11 @@ jahiaComponent(
 		const listRows: ListRowProps[] = [
 			{
 				title: t("list.data.nbRealtor"),
-				value: `${realtors?.length || 0}`,
+				value: realtors?.length || 0,
 			},
 			{
 				title: t("list.data.creationDate"),
-				value: new Date(creationDate).getFullYear().toString(10) || "-",
+				value: new Date(creationDate).getFullYear(),
 			},
 			{
 				title: t("list.data.spokenLanguage.label"),
