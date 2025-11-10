@@ -16,7 +16,7 @@
   <properties>
     <jahia-module-type>system</jahia-module-type>
     <jahia-depends>default,luxe-jahia-demo</jahia-depends>
-    <jahia-module-signature>MCwCFAnfxTeEE8d8GE8waNhFyLdWSEDYAhRZ3pKb7zQhrQ430GPzsUf1BUpliw==</jahia-module-signature>
+    <jahia-module-signature>MC0CFQCM+kj3TdIIedSKo6F2lefBbWvfmwIUBYnZVmOpTlIpl2oKU5/MJSOtcvQ=</jahia-module-signature>
   </properties>
 
   <repositories>
