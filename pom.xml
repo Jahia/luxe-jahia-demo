@@ -8,7 +8,7 @@
   </parent>
   <artifactId>luxe-root</artifactId>
   <name>Luxe Root</name>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
   <description>Luxe monorepo root</description>
 
@@ -16,7 +16,7 @@
     <connection>scm:git:git@github.com:Jahia/luxe-jahia-demo.git</connection>
     <developerConnection>scm:git:git@github.com:Jahia/luxe-jahia-demo.git</developerConnection>
     <url>scm:git:git@github.com:Jahia/luxe-jahia-demo.git</url>
-    <tag>HEAD</tag>
+    <tag>1_0_1</tag>
   </scm>
 
   <modules>
