@@ -54,8 +54,8 @@ export const sizedUrlOrOriginal = (
 			? undefined
 			: {
 					args: {
-						...(requestedW != null && { w: String(requestedW) }),
-						...(requestedH != null && { h: String(requestedH) }),
+...(requestedW != null && { w: requestedW }),
+...(requestedH != null && { h: requestedH }),
 					},
 				},
 	);
