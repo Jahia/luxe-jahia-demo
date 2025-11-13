@@ -53,9 +53,9 @@ export const sizedUrlOrOriginal = (
 		noParams || allNoop
 			? undefined
 			: {
-					parameters: {
-						...(requestedW != null && { w: String(requestedW) }),
-						...(requestedH != null && { h: String(requestedH) }),
+					args: {
+...(requestedW != null && { w: requestedW }),
+...(requestedH != null && { h: requestedH }),
 					},
 				},
 	);
