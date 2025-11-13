@@ -767,17 +767,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@jahia/javascript-modules-library@npm:1.0.1"
+"@jahia/javascript-modules-library@npm:1.1.0-alpha-20251113104620885":
+  version: 1.1.0-alpha-20251113104620885
+  resolution: "@jahia/javascript-modules-library@npm:1.1.0-alpha-20251113104620885"
   dependencies:
     dotenv: "npm:^17.2.2"
   peerDependencies:
+    "@graphql-typed-document-node/core": ^3.2.0
+    graphql: "*"
     i18next: ^25.0.0
     react: ^19.0.0
     react-dom: ^19.0.0
     react-i18next: ^15.4.0 || ^16.0.0
   peerDependenciesMeta:
+    "@graphql-typed-document-node/core":
+      optional: true
+    graphql:
+      optional: true
     i18next:
       optional: true
     react:
@@ -786,13 +792,13 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-  checksum: 10c0/8ecb87fa217dbd2e96ae555299beba29fd9f745c26d54d5ad1d77586955d52fdd65281f17a554c37440a893393d29056cccf06cde3903b4dbbbac9874c837ef9
+  checksum: 10c0/4a934d15d95c5f856127b496dbe9e1f84db06615cbad8ff3b2a8028ca43292455cdc68d2a5631ca020af8ad2821d4de0dc47e18958f3ad75c74093cba5e3995b
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@jahia/vite-plugin@npm:1.0.1"
+"@jahia/vite-plugin@npm:1.1.0-alpha-20251113104620885":
+  version: 1.1.0-alpha-20251113104620885
+  resolution: "@jahia/vite-plugin@npm:1.1.0-alpha-20251113104620885"
   dependencies:
     "@rollup/pluginutils": "npm:^5.2.0"
     magic-string: "npm:^0.30.18"
@@ -801,7 +807,7 @@ __metadata:
     vite: ">=6.0.0"
   bin:
     jahia-deploy: bin/jahia-deploy.js
-  checksum: 10c0/2528d3e116081cdeade2826c4307c55d918990bd53eb634de0d676914964f5e73ae6c61f4bc7d703b3f4cd03a534025536ce543934e397a544d80efd66675f7c
+  checksum: 10c0/3bbd1a19785297c79f2ac248d7dafd73cd0a11f07729285a9f357be5feba21fe8ec68b2646067b6f5baa45e3412cc287dba809d8a760d863fa8a389ecf96431f
   languageName: node
   linkType: hard
 
@@ -3670,8 +3676,8 @@ __metadata:
   dependencies:
     "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
-    "@jahia/javascript-modules-library": "npm:1.0.1"
-    "@jahia/vite-plugin": "npm:1.0.1"
+    "@jahia/javascript-modules-library": "npm:1.1.0-alpha-20251113104620885"
+    "@jahia/vite-plugin": "npm:1.1.0-alpha-20251113104620885"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
     "@types/react-dom": "npm:^19.1.9"
