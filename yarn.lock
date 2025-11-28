@@ -796,9 +796,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:1.1.0-alpha-20251113104620885":
-  version: 1.1.0-alpha-20251113104620885
-  resolution: "@jahia/vite-plugin@npm:1.1.0-alpha-20251113104620885"
+"@jahia/vite-plugin@npm:1.1.0-alpha-20251128163522044":
+  version: 1.1.0-alpha-20251128163522044
+  resolution: "@jahia/vite-plugin@npm:1.1.0-alpha-20251128163522044"
   dependencies:
     "@rollup/pluginutils": "npm:^5.2.0"
     magic-string: "npm:^0.30.18"
@@ -807,7 +807,7 @@ __metadata:
     vite: ">=6.0.0"
   bin:
     jahia-deploy: bin/jahia-deploy.js
-  checksum: 10c0/3bbd1a19785297c79f2ac248d7dafd73cd0a11f07729285a9f357be5feba21fe8ec68b2646067b6f5baa45e3412cc287dba809d8a760d863fa8a389ecf96431f
+  checksum: 10c0/eefa8b46aaccff487f3fe1724c8b0f2314b12c35f35d3b7c05c595b2571095f8d959bbed194d2dc05470cacd0905e8401bdfa74fec4a97b0c930f330c2f75e05
   languageName: node
   linkType: hard
 
@@ -3677,7 +3677,7 @@ __metadata:
     "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     "@jahia/javascript-modules-library": "npm:1.1.0-alpha-20251113104620885"
-    "@jahia/vite-plugin": "npm:1.1.0-alpha-20251113104620885"
+    "@jahia/vite-plugin": "npm:1.1.0-alpha-20251128163522044"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
     "@types/react-dom": "npm:^19.1.9"
