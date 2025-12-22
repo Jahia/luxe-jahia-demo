@@ -796,18 +796,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:1.1.0-alpha-20251113104620885":
-  version: 1.1.0-alpha-20251113104620885
-  resolution: "@jahia/vite-plugin@npm:1.1.0-alpha-20251113104620885"
+"@jahia/vite-plugin@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@jahia/vite-plugin@npm:1.1.0"
   dependencies:
-    "@rollup/pluginutils": "npm:^5.2.0"
-    magic-string: "npm:^0.30.18"
-    tinyglobby: "npm:^0.2.14"
+    "@rollup/pluginutils": "npm:^5.3.0"
+    dotenv: "npm:^17.2.3"
+    magic-string: "npm:^0.30.21"
+    tinyglobby: "npm:^0.2.15"
   peerDependencies:
     vite: ">=6.0.0"
   bin:
     jahia-deploy: bin/jahia-deploy.js
-  checksum: 10c0/3bbd1a19785297c79f2ac248d7dafd73cd0a11f07729285a9f357be5feba21fe8ec68b2646067b6f5baa45e3412cc287dba809d8a760d863fa8a389ecf96431f
+  checksum: 10c0/2f83cf1cab3f4f2d718c59d7163d6a93e313a0894bf1566346a200924bcfd5c1286fba73ced3a191a459be8d3ca6fa6853c48a96d98085e56bb48cd7e8b94512
   languageName: node
   linkType: hard
 
@@ -1126,7 +1127,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^5.0.2, @rollup/pluginutils@npm:^5.2.0":
+"@rollup/pluginutils@npm:^5.0.2, @rollup/pluginutils@npm:^5.3.0":
   version: 5.3.0
   resolution: "@rollup/pluginutils@npm:5.3.0"
   dependencies:
@@ -2324,6 +2325,13 @@ __metadata:
   version: 17.2.2
   resolution: "dotenv@npm:17.2.2"
   checksum: 10c0/be66513504590aff6eccb14167625aed9bd42ce80547f4fe5d195860211971a7060949b57108dfaeaf90658f79e40edccd3f233f0a978bff507b5b1565ae162b
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^17.2.3":
+  version: 17.2.3
+  resolution: "dotenv@npm:17.2.3"
+  checksum: 10c0/c884403209f713214a1b64d4d1defa4934c2aa5b0002f5a670ae298a51e3c3ad3ba79dfee2f8df49f01ae74290fcd9acdb1ab1d09c7bfb42b539036108bb2ba0
   languageName: node
   linkType: hard
 
@@ -3677,7 +3685,7 @@ __metadata:
     "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     "@jahia/javascript-modules-library": "npm:1.1.0-alpha-20251113104620885"
-    "@jahia/vite-plugin": "npm:1.1.0-alpha-20251113104620885"
+    "@jahia/vite-plugin": "npm:1.1.0"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
     "@types/react-dom": "npm:^19.1.9"
@@ -3698,12 +3706,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"magic-string@npm:^0.30.0, magic-string@npm:^0.30.17, magic-string@npm:^0.30.18":
+"magic-string@npm:^0.30.0, magic-string@npm:^0.30.17":
   version: 0.30.19
   resolution: "magic-string@npm:0.30.19"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.5.5"
   checksum: 10c0/db23fd2e2ee98a1aeb88a4cdb2353137fcf05819b883c856dd79e4c7dfb25151e2a5a4d5dbd88add5e30ed8ae5c51bcf4accbc6becb75249d924ec7b4fbcae27
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^0.30.21":
+  version: 0.30.21
+  resolution: "magic-string@npm:0.30.21"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.5.5"
+  checksum: 10c0/299378e38f9a270069fc62358522ddfb44e94244baa0d6a8980ab2a9b2490a1d03b236b447eee309e17eb3bddfa482c61259d47960eb018a904f0ded52780c4a
   languageName: node
   linkType: hard
 
@@ -5445,6 +5462,16 @@ __metadata:
     fdir: "npm:^6.4.4"
     picomatch: "npm:^4.0.2"
   checksum: 10c0/f789ed6c924287a9b7d3612056ed0cda67306cd2c80c249fd280cf1504742b12583a2089b61f4abbd24605f390809017240e250241f09938054c9b363e51c0a6
+  languageName: node
+  linkType: hard
+
+"tinyglobby@npm:^0.2.15":
+  version: 0.2.15
+  resolution: "tinyglobby@npm:0.2.15"
+  dependencies:
+    fdir: "npm:^6.5.0"
+    picomatch: "npm:^4.0.3"
+  checksum: 10c0/869c31490d0d88eedb8305d178d4c75e7463e820df5a9b9d388291daf93e8b1eb5de1dad1c1e139767e4269fe75f3b10d5009b2cc14db96ff98986920a186844
   languageName: node
   linkType: hard
 
