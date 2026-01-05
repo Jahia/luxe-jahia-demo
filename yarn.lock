@@ -767,11 +767,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:1.1.0-alpha-20251113104620885":
-  version: 1.1.0-alpha-20251113104620885
-  resolution: "@jahia/javascript-modules-library@npm:1.1.0-alpha-20251113104620885"
-  dependencies:
-    dotenv: "npm:^17.2.2"
+"@jahia/javascript-modules-library@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@jahia/javascript-modules-library@npm:1.1.0"
   peerDependencies:
     "@graphql-typed-document-node/core": ^3.2.0
     graphql: "*"
@@ -792,7 +790,7 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-  checksum: 10c0/4a934d15d95c5f856127b496dbe9e1f84db06615cbad8ff3b2a8028ca43292455cdc68d2a5631ca020af8ad2821d4de0dc47e18958f3ad75c74093cba5e3995b
+  checksum: 10c0/1fe2fd5e7fa88037a5be10e94229214ad999cf5def170bd960a4ee907ae6665d5fa7b98486da679d44e59ebee9578c7437b21f055339def82f44613452d76dd1
   languageName: node
   linkType: hard
 
@@ -2321,13 +2319,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^17.2.2":
-  version: 17.2.2
-  resolution: "dotenv@npm:17.2.2"
-  checksum: 10c0/be66513504590aff6eccb14167625aed9bd42ce80547f4fe5d195860211971a7060949b57108dfaeaf90658f79e40edccd3f233f0a978bff507b5b1565ae162b
-  languageName: node
-  linkType: hard
-
 "dotenv@npm:^17.2.3":
   version: 17.2.3
   resolution: "dotenv@npm:17.2.3"
@@ -3684,7 +3675,7 @@ __metadata:
   dependencies:
     "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
-    "@jahia/javascript-modules-library": "npm:1.1.0-alpha-20251113104620885"
+    "@jahia/javascript-modules-library": "npm:1.1.0"
     "@jahia/vite-plugin": "npm:1.1.0"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"

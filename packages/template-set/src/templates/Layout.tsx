@@ -85,26 +85,29 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
 const VirtualNavMenu = (): JSX.Element => {
 	const { renderContext } = useServerContext();
 	const homeNode = renderContext.getSite().getHome();
-	const navProps = homeNode.hasNode("nav")
+	const props = homeNode.hasNode("nav")
 		? homeNode.getNode("nav").getPropertiesAsString()
 		: new Map();
-	// copy the known properties of "luxe:navigationMenu" to discard the read-only/protected ones (jcr:created, etc.)
-	const props = new Map();
-	props.set("brandText", navProps.get("brandText"));
-	props.set("brandImage", navProps.get("brandImage"));
-	props.set("brandImageMobile", navProps.get("brandImageMobile"));
-	const virtualArea = {
-		name: "virtualArea",
-		nodeType: "jnt:contentList",
-		children: [
-			{
-				name: "menu",
-				nodeType: "luxe:navigationMenu",
-				properties: props,
-			},
-		],
-	};
-	return <Render content={virtualArea} />;
+	return (
+		<Render
+			content={{
+				name: "virtualArea",
+				nodeType: "jnt:contentList",
+				children: [
+					{
+						name: "menu",
+						nodeType: "luxe:navigationMenu",
+						// copy the known properties of "luxe:navigationMenu" to discard the read-only/protected ones (jcr:created, etc.)
+						properties: {
+							brandText: props.get("brandText"),
+							brandImage: props.get("brandImage"),
+							brandImageMobile: props.get("brandImageMobile"),
+						},
+					},
+				],
+			}}
+		/>
+	);
 };
 
 // The login form is implemented as static content.
