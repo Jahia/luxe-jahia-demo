@@ -37,6 +37,7 @@ jahiaComponent(
 		// All the data required to fetch the estate nodes
 		const config: QueryConfig = {
 			workspace: renderContext.isLiveMode() ? "LIVE" : "EDIT",
+			rootPath: renderContext.getSite().getPath(),
 			language: currentNode.getLanguage(),
 			params,
 		};
