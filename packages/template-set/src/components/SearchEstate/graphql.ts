@@ -100,7 +100,7 @@ export function fetchEstate(
 			workspace: config.workspace,
 			query: {
 				// Restrict search to the site root path
-				paths: [config.root],
+				paths: [config.rootPath],
 				// Complete the query with type and ordering
 				nodeType: "luxe:estate",
 				ordering: { property: "price", orderType: "DESC" },

@@ -1,6 +1,6 @@
 export type QueryConfig = {
 	workspace: "EDIT" | "LIVE";
-	root: string;
+	rootPath: string;
 	language: string;
 	params: Record<string, string[]>;
 };
