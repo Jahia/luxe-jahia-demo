@@ -19,9 +19,15 @@ import './commands'
 import 'cypress-wait-until'
 import addContext from 'mochawesome/addContext'
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// Ensure fetch is always bound to window
+if (typeof window !== 'undefined' && window.fetch) {
+	// eslint-disable-next-line no-undef
+	globalThis.fetch = window.fetch.bind(window)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('cypress-terminal-report/src/installLogsCollector')()
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('@jahia/cypress/dist/support/registerSupport').registerSupport()
 
 Cypress.on('uncaught:exception', () => {
@@ -48,5 +54,16 @@ Cypress.on('test:after:run', (test, runnable) => {
 	if (test.state === 'failed') {
 		const screenshot = `screenshots/${Cypress.spec.relative.replace('cypress/e2e/', '')}/${runnable.parent.title} -- ${test.title} (failed).png`
 		addContext({ test }, screenshot)
+	}
+})
+
+before('Create test site', () => {
+	// use separate hooks for Luxe and generic sites to avoid creating unnecessary data
+	if (Cypress.spec.relative.includes('hydrogen-tutorial')) {
+		deleteSite(HYDROGEN_SITE_KEY)
+		createHydrogenSite(HYDROGEN_SITE_KEY, HYDROGEN_PREPACKAGED_SITE)
+	} else {
+		deleteSite(GENERIC_SITE_KEY)
+		createTestSite(GENERIC_SITE_KEY)
 	}
 })

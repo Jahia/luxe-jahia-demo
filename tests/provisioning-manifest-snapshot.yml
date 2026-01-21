@@ -4,6 +4,11 @@
   uninstallPreviousVersion: true
 
 - installBundle:
-      - 'js:mvn:org.jahia.modules.javascript/luxe-jahia-demo/1.0.0/tgz'
+      - 'js:mvn:org.jahia.modules.javascript/luxe-jahia-demo/LATEST/tgz'
+  autoStart: true
+  uninstallPreviousVersion: true
+
+- installBundle:
+    - 'mvn:org.jahia.modules/luxe-prepackaged-website'
   autoStart: true
   uninstallPreviousVersion: true

@@ -1,27 +1,30 @@
 import { createSite, deleteSite, publishAndWaitJobEnding } from '@jahia/cypress'
 import { uploadFile } from '../fixtures/seoMeta/uploadFile'
+import { GENERIC_SITE_KEY } from '../support/constants'
 
 describe('SEO meta test', () => {
 	const siteKey = 'metaSite'
-	const homePath = `/sites/${siteKey}/home`
+	const homePath = `/sites/${GENERIC_SITE_KEY}/home`
 
 	before('Create site and add SEO meta props to home', () => {
 		cy.login()
-		createSite(siteKey, {
-			templateSet: 'luxe-jahia-demo',
-			locale: 'en',
-			languages: 'en,fr',
-			serverName: 'localhost',
-		})
+		// createSite(siteKey, {
+		// 	templateSet: 'luxe-jahia-demo',
+		// 	locale: 'en',
+		// 	languages: 'en,fr',
+		// 	serverName: 'localhost',
+		// })
 
-		uploadFile('seoMeta/image.jpg', `/sites/${siteKey}/files`, 'metaImage.jpg', 'image/jpeg').then((node) => {
-			const imageUuid = node?.data?.jcr.addNode.uuid
-			cy.apollo({
-				mutationFile: 'seoMeta/addMetaProps.graphql',
-				variables: { pathOrId: homePath, imageUuid },
-			})
-			publishAndWaitJobEnding(homePath, ['en', 'fr'])
-		})
+		uploadFile('seoMeta/image.jpg', `/sites/${GENERIC_SITE_KEY}/files`, 'metaImage.jpg', 'image/jpeg').then(
+			(node) => {
+				const imageUuid = node?.data?.jcr.addNode.uuid
+				cy.apollo({
+					mutationFile: 'seoMeta/addMetaProps.graphql',
+					variables: { pathOrId: homePath, imageUuid },
+				})
+				publishAndWaitJobEnding(homePath, ['en', 'fr'])
+			},
+		)
 
 		cy.logout()
 	})

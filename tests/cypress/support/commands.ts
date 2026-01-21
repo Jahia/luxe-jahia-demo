@@ -23,3 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import 'cypress-iframe'
+import 'cypress-real-events'
+import '@4tw/cypress-drag-drop'
+import 'cypress-wait-until'
