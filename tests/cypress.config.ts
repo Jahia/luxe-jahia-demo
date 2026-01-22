@@ -4,8 +4,8 @@ import fs from 'fs'
 export default defineConfig({
 	chromeWebSecurity: false,
 	defaultCommandTimeout: 10000,
-	requestTimeout: 180000, // 3 minutes - needed for site provisioning
-	responseTimeout: 180000, // 3 minutes - needed for site provisioning
+	requestTimeout: 300000, // 5 minutes - needed for site provisioning
+	responseTimeout: 300000, // 5 minutes - needed for site provisioning
 	// videoUploadOnPasses: false,
 	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
