@@ -20,7 +20,7 @@ import 'cypress-wait-until'
 import addContext from 'mochawesome/addContext'
 import { deleteSite } from '@jahia/cypress'
 import { createLuxeSite, createTestSite } from './test-helpers'
-import { GENERIC_SITE_KEY, LUXE_PREPACKAGED_SITE, LUXE_SITE_KEY } from './constants'
+import { GENERIC_SITE_KEY, LUXE_PATH_KEY, LUXE_PREPACKAGED_SITE, LUXE_SITE_KEY } from './constants'
 
 // Ensure fetch is always bound to window
 if (typeof window !== 'undefined' && window.fetch) {
@@ -62,7 +62,7 @@ Cypress.on('test:after:run', (test, runnable) => {
 
 before('Create test site', () => {
 	// use separate hooks for Luxe and generic sites to avoid creating unnecessary data
-	if (Cypress.spec.relative.includes(LUXE_SITE_KEY)) {
+	if (Cypress.spec.relative.includes(LUXE_PATH_KEY)) {
 		deleteSite(LUXE_SITE_KEY)
 		createLuxeSite(LUXE_SITE_KEY, LUXE_PREPACKAGED_SITE)
 	} else {

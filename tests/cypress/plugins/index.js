@@ -34,5 +34,6 @@ module.exports = (on, config) => {
 	on('task', {
 		unzipArtifact: unzipping.unzipArtifact,
 	})
+
 	return config
 }

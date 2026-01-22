@@ -38,7 +38,7 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 				fileContent: `- importSite: "${prepackagedSiteURL}"`,
 				type: 'application/yaml',
 			},
-		}).then(() => publishAndWaitJobEnding(`/sites/${siteKey}`, ['en']))
+		}).then(() => publishAndWaitJobEnding(`/sites/${siteKey}`, ['en', 'fr']))
 	} else {
 		// otherwise, assume it's a glob filename related to the ./artifacts/ folder
 		cy.log(`Unzipping ${prepackagedSiteURL}...`)

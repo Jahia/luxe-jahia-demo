@@ -1,12 +1,11 @@
 import { defineConfig } from 'cypress'
-import { baseConfig } from './cypress.config.common'
 import fs from 'fs'
 
 export default defineConfig({
 	chromeWebSecurity: false,
-	defaultCommandTimeout: 5000,
-	requestTimeout: 5000,
-	responseTimeout: 7000,
+	defaultCommandTimeout: 10000,
+	requestTimeout: 180000, // 3 minutes - needed for site provisioning
+	responseTimeout: 180000, // 3 minutes - needed for site provisioning
 	// videoUploadOnPasses: false,
 	reporter: 'cypress-multi-reporters',
 	reporterOptions: {
@@ -18,7 +17,6 @@ export default defineConfig({
 	viewportHeight: 768,
 	watchForFileChanges: false,
 	experimentalModifyObstructiveThirdPartyCode: true, // Required for SSO/social authentication
-	experimentalSessionAndOrigin: true, // Enable better session and origin handling for cross-origin tests
 	includeShadowDom: true, // Enable automatic shadow DOM traversal (including closed shadow roots)
 	e2e: {
 		specPattern: ['**/**.cy.ts'],
