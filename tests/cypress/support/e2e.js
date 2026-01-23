@@ -63,8 +63,8 @@ Cypress.on('test:after:run', (test, runnable) => {
 before('Create test site', () => {
 	// use separate hooks for Luxe and generic sites to avoid creating unnecessary data
 	if (Cypress.spec.relative.includes(LUXE_PATH_KEY)) {
-		deleteSite(LUXE_SITE_KEY)
-		createLuxeSite(LUXE_SITE_KEY, LUXE_PREPACKAGED_SITE)
+		// deleteSite(LUXE_SITE_KEY)
+		// createLuxeSite(LUXE_SITE_KEY, LUXE_PREPACKAGED_SITE)
 	} else {
 		deleteSite(GENERIC_SITE_KEY)
 		createTestSite(GENERIC_SITE_KEY)

@@ -12,3 +12,5 @@
     - 'mvn:org.jahia.modules/luxe-prepackaged-website'
   autoStart: true
   uninstallPreviousVersion: true
+# Create luxe test site
+- importSite: "jar:mvn:org.jahia.modules/luxe-prepackaged-website/LATEST/zip/import!/luxe.zip"
