@@ -1,2 +1,2 @@
-- installBundle:
+- installModule:
       - 'mvn:org.jahia.modules/javascript-modules-engine'

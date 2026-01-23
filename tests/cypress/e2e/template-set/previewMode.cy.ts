@@ -1,11 +1,11 @@
 import { addNode, createSite, deleteSite, publishAndWaitJobEnding } from '@jahia/cypress'
 
-const siteKey = 'previewMode'
+import { GENERIC_SITE_KEY } from '../../support/constants'
 
 describe('Preview mode', () => {
 	function createPage(pageName: string) {
 		addNode({
-			parentPathOrId: `/sites/${siteKey}/home`,
+			parentPathOrId: `/sites/${GENERIC_SITE_KEY}/home`,
 			name: pageName,
 			primaryNodeType: 'jnt:page',
 			properties: [
@@ -15,28 +15,19 @@ describe('Preview mode', () => {
 		})
 	}
 	before('Create test data', () => {
-		cy.login()
-		createSite(siteKey, { templateSet: 'luxe-jahia-demo', locale: 'en', serverName: 'localhost' })
 		createPage('subPage1')
 		createPage('subPage2')
-		publishAndWaitJobEnding(`/sites/${siteKey}`)
-		cy.logout()
-	})
-
-	after('Delete test data', () => {
-		cy.login()
-		deleteSite(siteKey)
-		cy.logout()
+		publishAndWaitJobEnding(`/sites/${GENERIC_SITE_KEY}`)
 	})
 
 	function testNavigationExists(baseUrl: string = '') {
-		cy.visit(`${baseUrl}/sites/${siteKey}/home.html`)
+		cy.visit(`${baseUrl}/sites/${GENERIC_SITE_KEY}/home.html`)
 		cy.get('body nav #navbarSupportedContent ul').within(() => {
 			cy.get('li').should('have.length', 2)
-			cy.get(`li a[href="${baseUrl}/sites/${siteKey}/home/subPage1.html"]`)
+			cy.get(`li a[href="${baseUrl}/sites/${GENERIC_SITE_KEY}/home/subPage1.html"]`)
 				.should('exist')
 				.and('have.text', 'subPage1')
-			cy.get(`li a[href="${baseUrl}/sites/${siteKey}/home/subPage2.html"]`)
+			cy.get(`li a[href="${baseUrl}/sites/${GENERIC_SITE_KEY}/home/subPage2.html"]`)
 				.should('exist')
 				.and('have.text', 'subPage2')
 		})

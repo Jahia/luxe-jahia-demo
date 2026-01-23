@@ -9,7 +9,7 @@ export const addSimplePage = (
 	children = [],
 	mixins = [],
 	properties = [],
-): any => {
+): Cypress.Chainable<unknown> => {
 	const variables = {
 		parentPathOrId: parentPathOrId,
 		name: pageName,
@@ -85,26 +85,26 @@ export const createTestSite = (siteKey: string) => {
 			serverName: 'localhost',
 		})
 
-		addSimplePage(`/sites/${siteKey}/home`, 'testPage', 'testPage', 'en', 'simple', [
-			{
-				name: 'pagecontent',
-				primaryNodeType: 'jnt:contentList',
-			},
-		]).then(() => {
-			// addNode({
-			// 	parentPathOrId: `/sites/${siteKey}/home/testPage/pagecontent`,
-			// 	name: 'test',
-			// 	primaryNodeType: 'javascriptExample:test',
-			// 	properties: [
-			// 		{ name: 'jcr:title', value: 'test component' },
-			// 		{ name: 'prop1', value: 'prop1 value' },
-			// 		{ name: 'propMultiple', values: ['value 1', 'value 2', 'value 3'] },
-			// 		{
-			// 			name: 'propRichText',
-			// 			value: '<p data-testid="propRichTextValue">Hello this is a sample rich text</p>',
-			// 		},
-			// 	],
-			// })
-		})
+		// addSimplePage(`/sites/${siteKey}/home`, 'testPage', 'testPage', 'en', 'simple', [
+		// 	{
+		// 		name: 'pagecontent',
+		// 		primaryNodeType: 'jnt:contentList',
+		// 	},
+		// ]).then(() => {
+		// addNode({
+		// 	parentPathOrId: `/sites/${siteKey}/home/testPage/pagecontent`,
+		// 	name: 'test',
+		// 	primaryNodeType: 'javascriptExample:test',
+		// 	properties: [
+		// 		{ name: 'jcr:title', value: 'test component' },
+		// 		{ name: 'prop1', value: 'prop1 value' },
+		// 		{ name: 'propMultiple', values: ['value 1', 'value 2', 'value 3'] },
+		// 		{
+		// 			name: 'propRichText',
+		// 			value: '<p data-testid="propRichTextValue">Hello this is a sample rich text</p>',
+		// 		},
+		// 	],
+		// })
+		// })
 	})
 }

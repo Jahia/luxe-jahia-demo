@@ -21,5 +21,25 @@ export default tseslint.config(
 
 	// Ignore the same files as .gitignore
 	includeIgnoreFile(path.resolve(import.meta.dirname, ".gitignore")),
-	{ ignores: ["tests"] },
+	// { ignores: ["tests"] },
+	// Tests
+	{
+		files: ["tests/cypress/**/*.{js,ts}"],
+		languageOptions: {
+			globals: {
+				cy: "readonly",
+				Cypress: "readonly",
+				expect: "readonly",
+				assert: "readonly",
+				before: "readonly",
+				beforeEach: "readonly",
+				after: "readonly",
+				afterEach: "readonly",
+				it: "readonly",
+				describe: "readonly",
+				context: "readonly",
+				specify: "readonly",
+			},
+		},
+	},
 );

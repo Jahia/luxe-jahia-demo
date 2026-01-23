@@ -1,13 +1,11 @@
 import { deleteSite, publishAndWaitJobEnding, uploadFile } from '@jahia/cypress'
 
-import { GENERIC_SITE_KEY } from '../support/constants'
+import { GENERIC_SITE_KEY } from '../../support/constants'
 
 describe('SEO meta test', () => {
 	const homePath = `/sites/${GENERIC_SITE_KEY}/home`
 
 	before('Create site and add SEO meta props to home', () => {
-		cy.login()
-
 		uploadFile('data/seoMeta/image.jpg', `/sites/${GENERIC_SITE_KEY}/files`, 'metaImage.jpg', 'image/jpeg').then(
 			(node) => {
 				const imageUuid = node?.data?.jcr.addNode.uuid
@@ -18,13 +16,6 @@ describe('SEO meta test', () => {
 				publishAndWaitJobEnding(homePath, ['en', 'fr'])
 			},
 		)
-
-		cy.logout()
-	})
-
-	after('Delete site', () => {
-		deleteSite(GENERIC_SITE_KEY)
-		cy.logout()
 	})
 
 	beforeEach('Login', () => {
