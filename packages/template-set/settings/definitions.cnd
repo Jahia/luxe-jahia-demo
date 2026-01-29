@@ -1,3 +1,6 @@
+<nt = 'http://www.jcp.org/jcr/nt/1.0'>
+<mix = 'http://www.jcp.org/jcr/mix/1.0'>
+<jcr = 'http://www.jcp.org/jcr/1.0'>
 <j = 'http://www.jahia.org/jahia/1.0'>
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <jmix = 'http://www.jahia.org/jahia/mix/1.0'>
@@ -20,5 +23,3 @@
 // This mixin is used to define which content is allowed to be returned by the JcrQuery content type. Add this mixin
 // to your content type to be able to select it from the "type" props of a JcrQuery content
 [luxemix:queryContent] mixin
-
-
