@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { HeadingSection } from "design-system";
-import { t } from "i18next";
 import classes from "./Contact.client.module.css";
 import { Dialog } from "design-system";
 import ContactFormClient from "~/components/Form/Contact/Contact.client";
+import { useTranslation } from "react-i18next";
 
 export interface ContactProps {
 	addresses: { address: string; id: string }[];
@@ -22,6 +22,7 @@ export default function ContactClient({
 	feedbackMsg = "",
 	contextMode = "default",
 }: ContactProps) {
+	const { t } = useTranslation();
 	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<>
