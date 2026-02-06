@@ -1,12 +1,12 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
 import LoginCardClient from "./LoginCard.client";
-import { t } from "i18next";
 import { login } from "./utils.client";
 import type { LoginCommonProps, LoginPersonaProps } from "./types";
 import classes from "~/components/Form/Login/LoginForm.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import form from "~/templates/css/form.module.css";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 interface LoginFormClientProps {
 	loginUrl: string;
@@ -25,6 +25,7 @@ const LoginFormClient = ({
 	isShowRememberMe = true,
 	persona,
 }: LoginFormClientProps) => {
+	const { t } = useTranslation();
 	const [incorrectLogin, setIncorrectLogin] = useState(false);
 	const [unknownError, setUnknownError] = useState(false);
 	const [username, setUsername] = useState("");

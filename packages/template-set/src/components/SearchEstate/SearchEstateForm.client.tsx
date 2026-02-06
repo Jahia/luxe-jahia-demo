@@ -1,8 +1,8 @@
 import { Form, MultiSelectTags } from "design-system";
-import { MapPinIcon, HomeIcon, RoomIcon } from "design-system/Icons";
+import { HomeIcon, MapPinIcon, RoomIcon } from "design-system/Icons";
 import clsx from "clsx";
 import classes from "./SearchEstateForm.client.module.css";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 type Props = {
 	action?: string;
@@ -19,6 +19,7 @@ export default function SearchEstateFormClient({
 	className,
 	style,
 }: Props) {
+	const { t } = useTranslation();
 	const estateTypeTranslation = {
 		house: t("estate.type.house"),
 		apartment: t("estate.type.apartment"),

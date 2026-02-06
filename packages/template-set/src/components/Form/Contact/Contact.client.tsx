@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
-import { t } from "i18next";
 import ContactFormClient from "./ContactForm.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 import classes from "~/components/Form/Contact/Contact.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 // This code runs when Jahia DxP is configured.
 // If available, it will prefill the form with the user's context.
@@ -20,6 +20,7 @@ export default function ContactClient({
 	feedbackMsg: string;
 	mode: string;
 }) {
+	const { t } = useTranslation();
 	const [feedback, setFeedback] = useState<FeedbackProps>({ show: false, msgProps: {} });
 	const [unknownError, setUnknownError] = useState<boolean>(false);
 
