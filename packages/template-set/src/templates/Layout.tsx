@@ -42,7 +42,7 @@ export const Layout = ({
 	<>
 		<HtmlHead>{head}</HtmlHead>
 		<body>
-			<SkipLinkArea />
+			<a href="#main" className={classes.skipLink}>Skip to content</a>
 			<VirtualNavMenu />
 			<main id="main" className={className}>{children}</main>
 			<HtmlFooter />
@@ -83,30 +83,6 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
  *       />
  * </code>
  */
-
-const SkipLinkArea = (): JSX.Element => {
-	const { renderContext } = useServerContext();
-	const homeNode = renderContext.getSite().getHome();
-	const props = homeNode.hasNode("skipLinkArea")
-		? homeNode.getNode("skipLinkArea").getPropertiesAsString()
-		: new Map();
-	return (
-		<Render
-			content={{
-				name: "skipLinkArea",
-				nodeType: "jnt:contentList",
-				children: [
-					{
-						name: "skipLink",
-						nodeType: "luxe:skipLink",
-					},
-				],
-			}}
-		/>
-	);
-};
-
-
 const VirtualNavMenu = (): JSX.Element => {
 	const { renderContext } = useServerContext();
 	const homeNode = renderContext.getSite().getHome();
