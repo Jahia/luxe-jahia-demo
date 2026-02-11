@@ -42,7 +42,7 @@ export const Layout = ({
 	<>
 		<HtmlHead>{head}</HtmlHead>
 		<body>
-			<a href="#main" className={classes.skipLink}>Skip to content</a>
+			<a href="#main" className={classes.skipLink}>{t("skipToContent")}</a>
 			<VirtualNavMenu />
 			<main id="main" className={className}>{children}</main>
 			<HtmlFooter />
