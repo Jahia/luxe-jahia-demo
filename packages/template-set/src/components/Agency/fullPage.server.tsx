@@ -11,7 +11,6 @@ import {
 import type { RenderContext } from "org.jahia.services.render";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
-import { t } from "i18next";
 import ContactClient from "~/commons/Contact.client";
 import type { AgencyProps } from "./types";
 import type { RealtorProps } from "~/components/Realtor/types";
@@ -30,6 +29,7 @@ import {
 	type ListRowProps,
 } from "design-system";
 import type { ImgHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 const MAX_ESTATE = 6;
 
@@ -76,6 +76,7 @@ jahiaComponent(
 		}: AgencyProps,
 		{ currentNode, renderContext },
 	) => {
+		const { t } = useTranslation();
 		const currentNodePath = currentNode.getPath();
 		const contextMode = renderContext.getMode();
 

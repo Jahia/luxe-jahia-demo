@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { ClickableCard, Col, Image, ProgressiveList } from "design-system";
-import { t } from "i18next";
 import classes from "./SearchResults.module.css";
 import type { Estate } from "./types.ts";
+import { useTranslation } from "react-i18next";
 
 export default function SearchResultsClient({
 	results,
@@ -13,6 +13,7 @@ export default function SearchResultsClient({
 	isEditMode: boolean;
 	locale: string;
 }) {
+	const { t } = useTranslation();
 	if (results.length === 0) {
 		return (
 			<Col>

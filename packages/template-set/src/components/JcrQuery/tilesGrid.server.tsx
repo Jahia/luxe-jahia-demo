@@ -5,13 +5,13 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { t } from "i18next";
 import { buildQuery } from "./utils";
 import clsx from "clsx";
 import type { JcrQueryProps } from "./types";
 import alert from "~/templates/css/alert.module.css";
 import grid from "design-system/Grid/styles.module.css";
 import { Col, HeadingSection, Row } from "design-system";
+import { useTranslation } from "react-i18next";
 
 jahiaComponent(
 	{
@@ -35,6 +35,7 @@ jahiaComponent(
 		}: JcrQueryProps,
 		{ currentNode, renderContext },
 	) => {
+		const { t } = useTranslation();
 		const { jcrQuery, warn } = buildQuery({
 			luxeQuery: {
 				"jcr:title": title,
