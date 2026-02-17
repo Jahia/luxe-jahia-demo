@@ -16,7 +16,6 @@ export const baseConfig = {
     viewportHeight: 768,
     watchForFileChanges: false,
     experimentalModifyObstructiveThirdPartyCode: true, // Required for SSO/social authentication
-    experimentalSessionAndOrigin: true, // Enable better session and origin handling for cross-origin tests
     includeShadowDom: true, // Enable automatic shadow DOM traversal (including closed shadow roots)
     e2e: {
         specPattern: ['**/**.cy.ts'],
