@@ -12,7 +12,7 @@
 			"error",
 			{ "rule": "^((is|has)[A-Z]([A-Za-z0-9]?)+|disabled|readOnly|autoFocus)" }
 		],
-		"react-hooks/exhaustive-deps": [2]
+		"react-hooks/exhaustive-deps": [2],
 		"@typescript-eslint/no-shadow": ["error"],
 		"max-nested-callbacks": "off",
 		"max-params": "off"
