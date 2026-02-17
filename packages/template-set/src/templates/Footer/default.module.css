@@ -1,0 +1,26 @@
+.list {
+	composes: listUnstyled from "~/templates/css/global.module.css";
+}
+
+.capitalize {
+	composes: capitalize from "~/templates/css/global.module.css";
+}
+
+.fullTextCapitalize {
+	display: inline-block;
+	text-transform: capitalize;
+}
+
+.disclaimer {
+	font-size: 12px;
+	opacity: 0.6;
+	padding-bottom: 1rem;
+
+	a {
+		font-size: inherit;
+	}
+}
+
+.copyright {
+	text-align: right;
+}

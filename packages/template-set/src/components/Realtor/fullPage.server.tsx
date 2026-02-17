@@ -8,7 +8,6 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
@@ -25,6 +24,7 @@ import {
 	type ListRowProps,
 } from "design-system";
 import type { ImgHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 const MAX_ESTATE = 6;
 
@@ -48,6 +48,7 @@ jahiaComponent(
 		}: RealtorProps,
 		{ currentNode, renderContext },
 	) => {
+		const { t } = useTranslation();
 		const contextMode = renderContext.getMode();
 		const refBy = currentNode.getWeakReferences();
 		const refByNode: JCRNodeWrapper[] = [];

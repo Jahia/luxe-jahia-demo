@@ -5,11 +5,11 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import { ClickableCard, Image } from "design-system";
-import { t } from "i18next";
 import type { ImgHTMLAttributes } from "react";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import type { EstateProps } from "./types";
 import placeholder from "/static/img/img-placeholder.jpg";
+import { useTranslation } from "react-i18next";
 
 jahiaComponent(
 	{
@@ -21,6 +21,7 @@ jahiaComponent(
 		{ title, price, images, surface, bedrooms }: EstateProps,
 		{ currentNode, currentResource, renderContext },
 	) => {
+		const { t } = useTranslation();
 		const locale = currentResource.getLocale().getLanguage();
 
 		// Image: placeholder by default; override when a real node exists

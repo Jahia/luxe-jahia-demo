@@ -7,6 +7,7 @@
 
 <luxe = 'http://www.jahia.org/jahia/demo/luxe/nt/1.0'>
 <luxemix = 'http://www.jahia.org/jahia/demo/luxe/mix/1.0'>
+<luxetemplate = 'http://www.jahia.org/jahia/demo/luxe/template/1.0'>
 
 // Defining the content types is similar to defining a data model: once deployed, you cannot change the type of a property.
 // If you need to do changes during the development phase, it is possible to remove the definitions from the tools:

@@ -1,4 +1,4 @@
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const cache = new Map<string, { lat: number; lng: number }>();
 
@@ -25,5 +25,6 @@ export const geocodeAddress = async (address: string): Promise<{ lat: number; ln
 
 		return result;
 	}
+	const { t } = useTranslation();
 	throw new Error(t("maps.error.addressNotFound"));
 };

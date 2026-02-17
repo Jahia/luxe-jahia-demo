@@ -1,19 +1,24 @@
 import type { JSX, ReactNode } from "react";
 import {
-	AbsoluteArea,
 	AddResources,
 	buildModuleFileUrl,
 	getNodeProps,
 	Render,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
-import { t } from "i18next";
 import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
-import grid from "design-system/Grid/styles.module.css";
 import favicon from "/static/favicon-32x32.png";
-import { Col, Row, Section } from "design-system";
+import { useTranslation } from "react-i18next";
+
+// Use a Jahia component to render the footer template,
+// so it can benefit from the I18nextProvider (injected by the JavaScript Modules Engine)
+// and rely on useTranslation() with the correct namespace.
+const templateFooter = {
+	name: "templateFooter",
+	nodeType: "luxetemplate:footer",
+};
 
 /**
  * Layout : Places 'children' in an html page.
@@ -38,17 +43,24 @@ export const Layout = ({
 	head?: ReactNode;
 	className?: string;
 	children: ReactNode;
-}): JSX.Element => (
-	<>
-		<HtmlHead>{head}</HtmlHead>
-		<body>
-			<a href="#main" className={classes.skipLink}>{t("skipToContent")}</a>
-			<VirtualNavMenu />
-			<main id="main" className={className}>{children}</main>
-			<HtmlFooter />
-		</body>
-	</>
-);
+}): JSX.Element => {
+	const { t } = useTranslation();
+	return (
+		<>
+			<HtmlHead>{head}</HtmlHead>
+			<body>
+				<a href="#main" className={classes.skipLink}>
+					{t("skipToContent")}
+				</a>
+				<VirtualNavMenu />
+				<main id="main" className={className}>
+					{children}
+				</main>
+				<Render content={templateFooter} />
+			</body>
+		</>
+	);
+};
 
 /**
  * HtmlHead
@@ -108,84 +120,6 @@ const VirtualNavMenu = (): JSX.Element => {
 				],
 			}}
 		/>
-	);
-};
-
-// The login form is implemented as static content.
-// It will be added to the footer and cannot be modified by Jahia contributors.
-const loginForm = {
-	name: "loginForm",
-	nodeType: "luxe:loginForm",
-	properties: {
-		"j:displayRememberMeButton": "true",
-	},
-};
-
-/**
- * HtmlFooter
- * @param className
- * @returns {JSX.Element}
- * @constructor
- */
-const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
-	const { renderContext } = useServerContext();
-	return (
-		<Section component="footer" className={className}>
-			<Row>
-				<Col className={grid.col_4}>
-					<h5 className={classes.capitalize}>{t("footer.resources")}</h5>
-					<ul className={classes.list}>
-						<li>
-							<a
-								className={classes.fullTextCapitalize}
-								href="https://academy.jahia.com/home"
-								target="_blank"
-								rel="noreferrer"
-							>
-								{t("footer.academy")}
-							</a>
-						</li>
-						<li>
-							<a
-								className={classes.capitalize}
-								href="https://academy.jahia.com/get-started"
-								target="_blank"
-								rel="noreferrer"
-							>
-								{t("footer.tutorial")}
-							</a>
-						</li>
-						<li>
-							<a
-								className={classes.capitalize}
-								href="https://github.com/Jahia/luxe-jahia-demo/"
-								target="_blank"
-								rel="noreferrer"
-							>
-								{t("footer.sourceCode")}
-							</a>
-						</li>
-					</ul>
-				</Col>
-				<Col className={grid.col_5}>
-					<Render content={loginForm} />
-				</Col>
-			</Row>
-			<Row className={classes.disclaimer}>
-				<Col>
-					{/* numberOfItems={4} */}
-					<AbsoluteArea
-						name="footerNavLinkArea"
-						parent={renderContext.getSite().getHome()}
-						nodeType="jnt:linkList"
-						allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
-					/>
-				</Col>
-				<Col className={classes.copyright}>
-					<span>{t("footer.copyright", { currentDate: new Date().getFullYear() })}</span>
-				</Col>
-			</Row>
-		</Section>
 	);
 };
 
