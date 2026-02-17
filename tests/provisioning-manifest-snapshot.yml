@@ -9,6 +9,6 @@
   uninstallPreviousVersion: true
 
 - installBundle:
-    - 'mvn:org.jahia.modules/luxe-prepackaged-website'
+      - 'mvn:org.jahia.modules/luxe-prepackaged-website'
   autoStart: true
   uninstallPreviousVersion: true
