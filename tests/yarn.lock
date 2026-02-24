@@ -1686,9 +1686,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/cypress@npm:^6.4.5":
-  version: 6.4.5
-  resolution: "@jahia/cypress@npm:6.4.5"
+"@jahia/cypress@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@jahia/cypress@npm:7.1.0"
   dependencies:
     "@apollo/client": "npm:^3.4.9"
     cypress-real-events: "npm:^1.11.0"
@@ -1699,7 +1699,7 @@ __metadata:
     ci.startup: ./ci.startup.sh
     env.debug: ./env.debug.sh
     env.run: ./env.run.sh
-  checksum: 10c0/a168edc3249d02174e7886a0bbdfdea42dc59746ec0811fd853a0a31e2dc4e62bef4a0664c80fa4f46c1ae19b32c08f8bea7cbc7e7b8984aff1e6f42838aa045
+  checksum: 10c0/61b0bdc5255741ffc44781c47560d0e5936cf1fbe56ab83be8fee792d6a70d23b3201be09bfb82880909c56460c6912b5f0126f43121d948a796dce09604e001
   languageName: node
   linkType: hard
 
@@ -6169,7 +6169,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "luxe-jahia-demo-cypress@workspace:."
   dependencies:
-    "@jahia/cypress": "npm:^6.4.5"
+    "@jahia/cypress": "npm:^7.1.0"
     "@jahia/eslint-config": "npm:^2.1.2"
     "@jahia/jahia-reporter": "npm:^1.6.0"
     "@types/decompress": "npm:^4.2.7"
