@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { t } from "i18next";
 import type { JahiaUrlsProps } from "./types";
+import { useTranslation } from "react-i18next";
 
 const hasPermission = async (gqlUrl: string, permission: string, path: string) => {
 	const response = await fetch(gqlUrl, {
@@ -38,6 +38,7 @@ const WorkspaceNavigationClient = ({
 	mode: string;
 	nodePath: string;
 }) => {
+	const { t } = useTranslation();
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasJContentPermission, setHasJContentPermission] = useState(false);
 

@@ -1,8 +1,8 @@
 import { login } from "./utils.client";
-import { t } from "i18next";
 import type { LoginCommonProps } from "./types";
 import classes from "~/components/Form/Login/LoginCard.client.module.css";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface LoginCardClientProps {
 	username: string;
@@ -32,6 +32,7 @@ export const LoginCardClient = ({
 	loginCommonProps,
 	...props
 }: LoginCardClientProps) => {
+	const { t } = useTranslation();
 	const handleClick = () =>
 		login({
 			username,

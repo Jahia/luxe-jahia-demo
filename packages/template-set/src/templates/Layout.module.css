@@ -46,3 +46,28 @@ footer {
 .copyright {
 	text-align: right;
 }
+
+.skipLink {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+	background: #000;
+	color: #fff;
+	padding: 8px;
+	z-index: 9999;
+
+	&:focus,
+	&:focus-visible {
+		clip: auto;
+		clip-path: none;
+		width: auto;
+		height: auto;
+		overflow: visible;
+		top: 0;
+		left: 0;
+	}
+}

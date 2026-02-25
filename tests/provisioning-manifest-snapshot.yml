@@ -1,15 +1,15 @@
-- installModule:
+- installBundle:
       - 'mvn:org.jahia.modules/javascript-modules-engine'
   autoStart: true
   uninstallPreviousVersion: true
 
-- installModule:
+- installBundle:
       - 'js:mvn:org.jahia.modules.javascript/luxe-jahia-demo/LATEST/tgz'
   autoStart: true
   uninstallPreviousVersion: true
 
-- installModule:
-    - 'mvn:org.jahia.modules/luxe-prepackaged-website'
+- installBundle:
+      - 'mvn:org.jahia.modules/luxe-prepackaged-website'
   autoStart: true
   uninstallPreviousVersion: true
 # Create luxe test site

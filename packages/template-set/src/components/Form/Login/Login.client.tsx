@@ -1,12 +1,12 @@
 import { type MouseEvent, useState } from "react";
 import LoginFormClient from "./LoginForm.client.js";
 import WorkspaceNavigationClient from "./WorkspaceNavigation.client.js";
-import { t } from "i18next";
 import type { JahiaUrlsProps, LoginPersonaProps } from "./types";
 import classes from "~/components/Form/Login/Login.client.module.css";
 import alert from "~/templates/css/alert.module.css";
 import clsx from "clsx";
 import { Dialog } from "design-system";
+import { useTranslation } from "react-i18next";
 
 interface LoginClientProps {
 	isLoggedIn: boolean;
@@ -29,6 +29,7 @@ export default function LoginClient({
 	siteKey,
 	persona,
 }: LoginClientProps) {
+	const { t } = useTranslation();
 	const [user, setUser] = useState(userHydrated);
 	const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 	const [isOpen, setIsOpen] = useState(false);
