@@ -3,15 +3,16 @@
 		"@jahia",
 		"plugin:cypress/recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:chai-friendly/recommended"
+		"plugin:prettier/recommended"
 	],
-	"plugins": ["cypress", "chai-friendly"],
+	"plugins": ["cypress", "@typescript-eslint"],
 	"parser": "@typescript-eslint/parser",
 	"rules": {
 		"react/boolean-prop-naming": [
 			"error",
 			{ "rule": "^((is|has)[A-Z]([A-Za-z0-9]?)+|disabled|readOnly|autoFocus)" }
 		],
+		"react-hooks/exhaustive-deps": [2],
 		"@typescript-eslint/no-shadow": ["error"],
 		"max-nested-callbacks": "off",
 		"max-params": "off"

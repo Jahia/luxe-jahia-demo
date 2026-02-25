@@ -8,6 +8,7 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
+const unzipping = require('./unzipping')
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
@@ -16,9 +17,7 @@
  */
 module.exports = (on, config) => {
 	require('./env')(on, config)
-	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	require('@jahia/cypress/dist/plugins/registerPlugins').registerPlugins(on, config)
-	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	require('cypress-terminal-report/src/installLogsPrinter')(on, {
 		printLogsToConsole: 'onFail',
 		printLogsToFile: 'always',
@@ -32,5 +31,9 @@ module.exports = (on, config) => {
 		commandTrimLength: 5000,
 		routeTrimLength: 5000,
 	})
+	on('task', {
+		unzipArtifact: unzipping.unzipArtifact,
+	})
+
 	return config
 }
