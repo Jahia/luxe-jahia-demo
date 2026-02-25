@@ -7,13 +7,13 @@ import {
 	Render,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
-import { t } from "i18next";
 import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
 import grid from "design-system/Grid/styles.module.css";
 import favicon from "/static/favicon-32x32.png";
 import { Col, Row, Section } from "design-system";
+import { useTranslation } from "react-i18next";
 
 /**
  * Layout : Places 'children' in an html page.
@@ -38,17 +38,24 @@ export const Layout = ({
 	head?: ReactNode;
 	className?: string;
 	children: ReactNode;
-}): JSX.Element => (
-	<>
-		<HtmlHead>{head}</HtmlHead>
-		<body>
-			<a href="#main" className={classes.skipLink}>{t("skipToContent")}</a>
-			<VirtualNavMenu />
-			<main id="main" className={className}>{children}</main>
-			<HtmlFooter />
-		</body>
-	</>
-);
+}): JSX.Element => {
+	const { t } = useTranslation();
+	return (
+		<>
+			<HtmlHead>{head}</HtmlHead>
+			<body>
+				<a href="#main" className={classes.skipLink}>
+					{t("skipToContent")}
+				</a>
+				<VirtualNavMenu />
+				<main id="main" className={className}>
+					{children}
+				</main>
+				<HtmlFooter />
+			</body>
+		</>
+	);
+};
 
 /**
  * HtmlHead
@@ -129,6 +136,7 @@ const loginForm = {
  */
 const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 	const { renderContext } = useServerContext();
+	const { t } = useTranslation();
 	return (
 		<Section component="footer" className={className}>
 			<Row>

@@ -5,13 +5,13 @@ import {
 	server,
 } from "@jahia/javascript-modules-library";
 import GalleryClient from "~/commons/Gallery.client.tsx";
-import { t } from "i18next";
 import type { EstateProps } from "./types.js";
 import { CheckIcon } from "design-system/Icons";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import { Col, List, type ListRowProps, PageTitle, Row, Section } from "design-system";
+import { useTranslation } from "react-i18next";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 jahiaComponent(
@@ -36,6 +36,7 @@ jahiaComponent(
 		}: EstateProps,
 		{ currentResource, renderContext },
 	) => {
+		const { t } = useTranslation();
 		const locale = currentResource.getLocale().getLanguage();
 
 		const galleryImages = images

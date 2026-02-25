@@ -5,12 +5,12 @@ import {
 	jahiaComponent,
 	server,
 } from "@jahia/javascript-modules-library";
-import { t } from "i18next";
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
 import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import type { ImgHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 
 jahiaComponent(
 	{
@@ -23,6 +23,7 @@ jahiaComponent(
 		{ firstName, lastName, jobPosition, image: imageNode, animate: videoNode }: RealtorProps,
 		{ currentNode, renderContext },
 	) => {
+		const { t } = useTranslation();
 		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
