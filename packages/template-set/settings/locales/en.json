@@ -78,7 +78,8 @@
 					"description": "I administer the Jahia platform, ensuring that the system is properly configured and optimized.",
 					"alt": "User avatar: {{username}}"
 				}
-			}
+			},
+			"unknownError": "an error occurred"
 		},
 		"contact": {
 			"firstName": "firstname",
@@ -94,7 +95,6 @@
 				"title": "contact us"
 			}
 		},
-		"unknownError": "an error occured",
 		"estate": {
 			"placeholder": {
 				"bedrooms": "# bedrooms",

@@ -78,7 +78,8 @@
 					"description": "J'administre la plateforme Jahia, et veille à ce que le système soit correctement configuré et optimisé.",
 					"alt": "Avatar de l'utilisateur : {{username}}"
 				}
-			}
+			},
+			"unknownError": "une erreur s'est produite"
 		},
 		"contact": {
 			"firstName": "prénom",
@@ -94,7 +95,6 @@
 				"title": "nous contacter"
 			}
 		},
-		"unknownError": "une erreur s'est produite",
 		"estate": {
 			"placeholder": {
 				"bedrooms": "# chambres",
