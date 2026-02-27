@@ -78,7 +78,8 @@
 					"description": "Ich verwalte die Jahia-Plattform und stelle sicher, dass das System ordnungsgemäß konfiguriert und optimiert ist.",
 					"alt": "Benutzeravatar: {{username}}"
 				}
-			}
+			},
+			"unknownError": "ein Fehler ist aufgetreten"
 		},
 		"contact": {
 			"firstName": "Vorname",
@@ -94,7 +95,6 @@
 				"title": "kontaktieren sie uns"
 			}
 		},
-		"unknownError": "ein Fehler ist aufgetreten",
 		"estate": {
 			"placeholder": {
 				"bedrooms": "# Schlafzimmer",
