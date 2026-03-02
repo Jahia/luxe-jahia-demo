@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ClickableCard, Col, Image, ProgressiveList } from "design-system";
-import classes from "./SearchResults.module.css";
+import classes from "./SearchResults.client.module.css";
 import type { Estate } from "./types.ts";
 import { useTranslation } from "react-i18next";
 
@@ -14,6 +14,7 @@ export default function SearchResultsClient({
 	locale: string;
 }) {
 	const { t } = useTranslation();
+
 	if (results.length === 0) {
 		return (
 			<Col>
@@ -28,7 +29,7 @@ export default function SearchResultsClient({
 			itemKey="url"
 			delayMs={100}
 			animationType="fadeInUp"
-			key={`search-${Date.now()}`} // Force re-mount
+			key={`search-${Date.now()}`}
 		>
 			{(node, index, key, style, className) => (
 				<Col key={key} style={style} className={clsx(className, isEditMode && classes.editMode)}>

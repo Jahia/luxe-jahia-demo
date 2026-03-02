@@ -105,6 +105,14 @@
 			"empty": "No se encontraron resultados."
 		}
 	},
+	"pagination": {
+		"label": "Paginación",
+		"previous": "Anterior",
+		"next": "Siguiente",
+		"page": "Página {{page}}",
+		"showing": "Mostrando {{from}} a {{to}} de {{total}} resultados",
+		"itemsPerPage": "Elementos por página:"
+	},
 	"realtor": {
 		"jobPosition": {
 			"junior": "agente junior",
