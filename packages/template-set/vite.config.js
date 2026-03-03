@@ -13,7 +13,7 @@ export default defineConfig({
 		jahia({
 			// This function is called every time a build succeeds in watch mode
 			watchCallback() {
-				spawnSync("yarn", ["watch:callback"], { stdio: "inherit" });
+				spawnSync("yarn", ["watch:callback"], { stdio: "inherit", shell: true });
 			},
 		}),
 	],
