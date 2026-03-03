@@ -3,4 +3,4 @@
 luxe-jahia-demo: patch
 ---
 
-fix: Map rendering fallback and remove unnecessary clientOnly flag (#410)
+Render a placeholder until the [Leaflet](https://leafletjs.com/) map has loaded (#410)
