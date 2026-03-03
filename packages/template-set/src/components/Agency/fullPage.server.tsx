@@ -167,7 +167,6 @@ jahiaComponent(
 						</Col>
 						<Col>
 							<Island
-								clientOnly
 								component={MapWithPinClient}
 								props={{
 									addresses: addressItems,
