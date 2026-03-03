@@ -86,10 +86,13 @@ const MapWithPin: React.FC<MapWithPinProps> = ({
 			.catch(() => setError(errorMessages.addressGeo || "Error during geocoding"));
 	}, [addresses]);
 
-	if (!LeafletMapClient) return <div>{loadingText}</div>;
 	return (
 		<div className={classes.mapWrapper}>
-			<LeafletMapClient pins={coords} className={classes.mapContainer} />
+			{!LeafletMapClient ? (
+				<div className={classes.mapContainer}>{loadingText}</div>
+			) : (
+				<LeafletMapClient pins={coords} className={classes.mapContainer} />
+			)}
 			{error && <div className={classes.errorOverlay}>{error}</div>}
 		</div>
 	);
