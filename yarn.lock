@@ -847,9 +847,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/vite-plugin@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@jahia/vite-plugin@npm:1.1.0"
+"@jahia/vite-plugin@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@jahia/vite-plugin@npm:1.2.0"
   dependencies:
     "@rollup/pluginutils": "npm:^5.3.0"
     dotenv: "npm:^17.2.3"
@@ -859,7 +859,7 @@ __metadata:
     vite: ">=6.0.0"
   bin:
     jahia-deploy: bin/jahia-deploy.js
-  checksum: 10c0/2f83cf1cab3f4f2d718c59d7163d6a93e313a0894bf1566346a200924bcfd5c1286fba73ced3a191a459be8d3ca6fa6853c48a96d98085e56bb48cd7e8b94512
+  checksum: 10c0/2f2dec4e041dd9b2a6ce4d64b8bd529bdb4c1d8a59d6ead97a9d93b5e5f285599d1ea8038f919b97d25e5bb8678b302c80e30a6506f6cb8cebad775e8b56dc96
   languageName: node
   linkType: hard
 
@@ -3813,7 +3813,7 @@ __metadata:
     "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     "@jahia/javascript-modules-library": "npm:1.1.0"
-    "@jahia/vite-plugin": "npm:1.1.0"
+    "@jahia/vite-plugin": "npm:1.2.0"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
     "@types/react-dom": "npm:^19.1.9"
