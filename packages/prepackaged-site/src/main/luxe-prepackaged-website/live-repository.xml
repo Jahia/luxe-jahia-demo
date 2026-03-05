@@ -8941,17 +8941,6 @@
                                                 jcr:lastModifiedBy=""
                                                 jcr:primaryType="jnt:member"
                                                 jcr:uuid="7956e511-f95c-4f7e-a7d1-c9ae1664db55"/>
-                           <realtors j:lastPublished="2025-09-18T09:26:16.960Z"
-                                     j:lastPublishedBy="root"
-                                     j:member="#/sites/luxe/groups/realtors"
-                                     j:originWS="default"
-                                     j:published="true"
-                                     jcr:created="2024-04-15T13:26:09.668Z"
-                                     jcr:createdBy="system"
-                                     jcr:lastModified="2025-09-18T09:26:16.799Z"
-                                     jcr:lastModifiedBy=""
-                                     jcr:primaryType="jnt:member"
-                                     jcr:uuid="094ef850-4f77-4f0a-aa28-40472580cff9"/>
                         </groups>
                      </luxe>
                   </sites>
