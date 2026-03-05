@@ -1,0 +1,7 @@
+.info {
+	text-align: center;
+	padding: 0.75rem 0;
+	color: var(--luxe-color-darkBlue60, #767695);
+	font-size: 0.875rem;
+}
+

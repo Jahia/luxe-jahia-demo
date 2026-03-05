@@ -15,7 +15,7 @@ jahiaComponent(
 
 			// Declares which request parameters are part of the cache key.
 			// Different values for these parameters will generate separate cache entries.
-			"cache.requestParameters": "country,type,bedrooms",
+			"cache.requestParameters": "country,type,bedrooms,page,limit",
 
 			// Time-to-live (TTL) for this cached fragment, in seconds.
 			// Here: 600s = 10 minutes, after which the cache entry expires and is recomputed.
@@ -34,21 +34,33 @@ jahiaComponent(
 			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
 		);
 
+		// Extract pagination parameters from URL
+		const pageParam = javaParamMap.getOrDefault("page", ["1"])[0];
+		const limitParam = javaParamMap.getOrDefault("limit", ["30"])[0];
+		const page = Math.max(1, parseInt(pageParam, 10) || 1);
+		const limit = Math.max(1, Math.min(100, parseInt(limitParam, 10) || 30)); // Max 100 items per page
+		const offset = (page - 1) * limit;
+
 		// All the data required to fetch the estate nodes
 		const config: QueryConfig = {
 			workspace: renderContext.isLiveMode() ? "LIVE" : "EDIT",
 			rootPath: renderContext.getSite().getPath(),
 			language: currentNode.getLanguage(),
 			params,
+			pagination: {
+				offset,
+				limit,
+			},
 		};
-		const results = fetchEstate(useGQLQuery, config);
+		const result = fetchEstate(useGQLQuery, config);
 
 		return (
 			<Island
 				component={SearchEstateClient}
 				props={{
 					config,
-					results,
+					results: result.estates,
+					pagination: result.pagination,
 					isEditMode: renderContext.isEditMode(),
 				}}
 			/>
