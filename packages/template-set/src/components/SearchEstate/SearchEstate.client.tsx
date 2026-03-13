@@ -19,21 +19,18 @@ export default function SearchEstateClient({
 	const { t } = useTranslation();
 	const [params, setParams] = useState(config.params);
 	const [results, setResults] = useState(initialResults);
+	const [limit, setLimit] = useState(config.limit);
 
-	const totalPages = Math.ceil(results.totalCount / config.limit);
-	const showPagination = totalPages > 1;
+	const totalPages = Math.ceil(results.totalCount / limit);
 
-	const updateSearchResults = (newParams: typeof params, pageNumber: number, limit: number) => {
-		const offset = (pageNumber - 1) * limit;
-
+	const updateSearchResults = (newParams: typeof params, page: number, limit: number) => {
 		// Build URL query string
 		const q = new URLSearchParams(
 			Object.entries(newParams).flatMap(([k, vals]) => vals.map((v) => [k, v])),
 		);
-		q.set("page", pageNumber.toString());
-		if (limit !== 30) {
-			q.set("limit", limit.toString());
-		}
+
+		q.set("page", page.toString());
+		if (limit !== 30) q.set("limit", limit.toString());
 
 		// Update browser history
 		const url = `${window.location.pathname}${q.size > 0 ? `?${q.toString()}` : ""}`;
@@ -43,23 +40,25 @@ export default function SearchEstateClient({
 		fetchEstate(graphqlFetch, {
 			...config,
 			params: newParams,
+			offset: (page - 1) * limit,
+			limit,
 		}).then((result) => {
 			setResults(result);
 		});
 	};
 
-	const handlePageChange = (newPageNumber: number) => {
-		updateSearchResults(params, newPageNumber, pageSize);
+	const handlePageChange = (newPage: number) => {
+		updateSearchResults(params, newPage, limit);
 	};
 
-	const handlePageSizeChange = (newPageSize: number) => {
-		setPageSize(newPageSize);
-		updateSearchResults(params, 1, newPageSize); // Reset to page 1 when page size changes
+	const handlePageSizeChange = (newLimit: number) => {
+		setLimit(newLimit);
+		updateSearchResults(params, 1, newLimit); // Reset to page 1 when page size changes
 	};
 
 	const handleFilterChange = (newParams: typeof params) => {
 		setParams(newParams);
-		updateSearchResults(newParams, 1, pageSize); // Reset to page 1 when filters change
+		updateSearchResults(newParams, 1, limit); // Reset to page 1 when filters change
 	};
 
 	return (
@@ -68,18 +67,15 @@ export default function SearchEstateClient({
 				<SearchEstateFormClient onChange={handleFilterChange} params={params} />
 			</Row>
 
-			{showPagination && (
+			{totalPages > 1 && (
 				<Row>
 					<PaginationHeader
-						from={(pagination.currentPage - 1) * pageSize + 1}
-						to={Math.min(pagination.currentPage * pageSize, pagination.totalCount)}
-						total={pagination.totalCount}
 						label={t("pagination.showing", {
-							from: (pagination.currentPage - 1) * pageSize + 1,
-							to: Math.min(pagination.currentPage * pageSize, pagination.totalCount),
-							total: pagination.totalCount,
+							from: (results.currentPage - 1) * limit + 1,
+							to: Math.min(results.currentPage * limit, results.totalCount),
+							total: results.totalCount,
 						})}
-						pageSize={pageSize}
+						pageSize={limit}
 						pageSizeOptions={[9, 18, 30, 48, 90]}
 						onPageSizeChange={handlePageSizeChange}
 						pageSizeLabel={t("pagination.itemsPerPage")}
@@ -88,20 +84,23 @@ export default function SearchEstateClient({
 			)}
 
 			<Row className={classes.resultsRow}>
-				<SearchResultsClient results={results} isEditMode={isEditMode} locale={config.language} />
+				<SearchResultsClient
+					results={results.estates}
+					isEditMode={isEditMode}
+					locale={config.language}
+				/>
 			</Row>
 
-			{showPagination && (
+			{totalPages > 1 && (
 				<Row>
 					<Pagination
 						currentPage={results.currentPage}
-						totalPages={Math.ceil(results.totalCount / config.limit)}
+						totalPages={Math.ceil(results.totalCount / limit)}
 						onPageChange={handlePageChange}
-						variant="icon-only"
 						labels={{
 							previous: t("pagination.previous"),
 							next: t("pagination.next"),
-							page: t("pagination.page", { page: "" }).trim(),
+							page: t("pagination.page", { page: results.currentPage }),
 							ariaLabel: t("pagination.label"),
 						}}
 					/>

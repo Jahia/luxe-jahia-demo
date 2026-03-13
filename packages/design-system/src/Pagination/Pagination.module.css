@@ -59,7 +59,6 @@
 
 .button:hover:not(:disabled) {
 	background-color: var(--luxe-color-gold, #c29b40);
-	/*border-color: var(--luxe-color-gold, #c29b40);*/
 	color: white;
 }
 
@@ -80,7 +79,6 @@
 .button.active {
 	background-color: var(--luxe-color-gold, #c29b40);
 	color: white;
-	/*border-color: var(--luxe-color-gold, #c29b40);*/
 }
 
 .iconButton {
@@ -116,4 +114,3 @@
 		display: none;
 	}
 }
-

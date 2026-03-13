@@ -6,40 +6,26 @@ export interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
 	onPageChange: (page: number) => void;
-	labels?: {
-		previous?: string;
-		next?: string;
-		page?: string;
-		ariaLabel?: string;
+	labels: {
+		previous: string;
+		next: string;
+		page: string;
+		ariaLabel: string;
 	};
-	variant?: "default" | "icon-only";
 	scrollToTop?: boolean;
-	className?: string;
 	maxVisiblePages?: number;
 }
-
-const DEFAULT_LABELS = {
-	previous: "Previous",
-	next: "Next",
-	page: "Page",
-	ariaLabel: "Pagination",
-};
 
 export function Pagination({
 	currentPage,
 	totalPages,
 	onPageChange,
 	labels,
-	variant = "default",
 	scrollToTop = true,
-	className,
 	maxVisiblePages = 7,
 }: PaginationProps) {
 	const hasNextPage = currentPage < totalPages;
 	const hasPreviousPage = currentPage > 1;
-
-	const { previous, next, page, ariaLabel } = { ...DEFAULT_LABELS, ...labels };
-	const isIconOnly = variant === "icon-only";
 
 	const handlePageChange = (newPageNumber: number) => {
 		onPageChange(newPageNumber);
@@ -91,15 +77,15 @@ export function Pagination({
 	const pageNumbers = getPageNumbers();
 
 	return (
-		<nav className={clsx(classes.pagination, className)} aria-label={ariaLabel}>
+		<nav className={classes.pagination} aria-label={labels.ariaLabel}>
 			<button
 				type="button"
 				onClick={() => handlePageChange(currentPage - 1)}
 				disabled={!hasPreviousPage}
-				className={clsx(classes.button, isIconOnly && classes.iconButton)}
-				aria-label={previous}
+				className={clsx(classes.button, classes.iconButton)}
+				aria-label={labels.previous}
 			>
-				{isIconOnly ? "‹" : previous}
+				‹
 			</button>
 
 			<div className={classes.pages}>
@@ -124,7 +110,7 @@ export function Pagination({
 									pageNum === currentPage && classes.active,
 									hideOnMobile && classes.hideOnMobile,
 								)}
-								aria-label={`${page} ${pageNum}`}
+								aria-label={labels.page}
 								aria-current={pageNum === currentPage ? "page" : undefined}
 							>
 								{pageNum}
@@ -138,10 +124,10 @@ export function Pagination({
 				type="button"
 				onClick={() => handlePageChange(currentPage + 1)}
 				disabled={!hasNextPage}
-				className={clsx(classes.button, isIconOnly && classes.iconButton)}
-				aria-label={next}
+				className={clsx(classes.button, classes.iconButton)}
+				aria-label={labels.next}
 			>
-				{isIconOnly ? "›" : next}
+				›
 			</button>
 		</nav>
 	);

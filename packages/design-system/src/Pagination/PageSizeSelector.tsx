@@ -1,32 +1,25 @@
-import clsx from "clsx";
 import classes from "./PageSizeSelector.module.css";
+import type { ReactNode } from "react";
 
 export interface PageSizeSelectorProps {
 	pageSize: number;
-	pageSizeOptions?: number[];
-	onPageSizeChange: (newPageSize: number) => void;
-	label?: string;
-	className?: string;
+	pageSizeOptions: number[];
+	onPageSizeChange?: (newPageSize: number) => void;
+	label: ReactNode;
 }
-
-const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 30, 50, 100];
 
 export function PageSizeSelector({
 	pageSize,
-	pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
+	pageSizeOptions,
 	onPageSizeChange,
-	label = "Items per page:",
-	className,
+	label,
 }: PageSizeSelectorProps) {
 	return (
-		<div className={clsx(classes.container, className)}>
-			<label htmlFor="page-size-selector" className={classes.label}>
-				{label}
-			</label>
+		<label className={classes.container}>
+			<span className={classes.label}>{label}</span>
 			<select
-				id="page-size-selector"
 				value={pageSize}
-				onChange={(e) => onPageSizeChange(Number(e.target.value))}
+				onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
 				className={classes.select}
 			>
 				{pageSizeOptions.map((size) => (
@@ -35,6 +28,6 @@ export function PageSizeSelector({
 					</option>
 				))}
 			</select>
-		</div>
+		</label>
 	);
 }
