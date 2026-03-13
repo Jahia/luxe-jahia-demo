@@ -29,7 +29,7 @@ export default function SearchEstateClient({
 			Object.entries(newParams).flatMap(([k, vals]) => vals.map((v) => [k, v])),
 		);
 
-		q.set("page", page.toString());
+		if (page !== 1) q.set("page", page.toString());
 		if (limit !== 30) q.set("limit", limit.toString());
 
 		// Update browser history
