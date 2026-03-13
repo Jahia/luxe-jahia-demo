@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ClickableCard, Col, Image, ProgressiveList } from "design-system";
-import classes from "./SearchResults.client.module.css";
-import type { Estate } from "./types.ts";
+import classes from "./SearchResults.module.css";
+import type { FetchEstateResult } from "./types.ts";
 import { useTranslation } from "react-i18next";
 
 export default function SearchResultsClient({
@@ -9,13 +9,12 @@ export default function SearchResultsClient({
 	isEditMode,
 	locale,
 }: {
-	results: Estate[];
+	results: FetchEstateResult;
 	isEditMode: boolean;
 	locale: string;
 }) {
 	const { t } = useTranslation();
-
-	if (results.length === 0) {
+	if (results.estates.length === 0) {
 		return (
 			<Col>
 				<p>{t("form.estate.empty")}</p>
@@ -25,11 +24,11 @@ export default function SearchResultsClient({
 
 	return (
 		<ProgressiveList
-			items={results}
+			items={results.estates}
 			itemKey="url"
 			delayMs={100}
 			animationType="fadeInUp"
-			key={`search-${Date.now()}`}
+			key={`search-${Date.now()}`} // Force re-mount
 		>
 			{(node, index, key, style, className) => (
 				<Col key={key} style={style} className={clsx(className, isEditMode && classes.editMode)}>

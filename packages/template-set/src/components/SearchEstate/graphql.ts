@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
-import type { QueryConfig, Estate, PaginationInfo } from "./types.ts";
+import type { QueryConfig, FetchEstateResult } from "./types.ts";
 import type { GraphQLFormattedError } from "graphql";
 
 /** Transforms a textual GraphQL query into a DocumentNode. */
@@ -37,11 +37,6 @@ export async function graphqlFetch<Result = any, Variables = any>({
 	return response.json();
 }
 
-export interface FetchEstateResult {
-	estates: Estate[];
-	pagination: PaginationInfo;
-}
-
 // Two overloads, to expose both a sync and an async version
 export function fetchEstate(
 	f: (opts: any) => { data?: any },
@@ -71,8 +66,8 @@ export function fetchEstate(
 		.filter(({ any }) => any.length > 0);
 
 	// Prepare pagination parameters
-	const offset = config.pagination?.offset ?? 0;
-	const limit = config.pagination?.limit ?? 30;
+	const offset = config.offset ?? 0;
+	const limit = config.limit ?? 30;
 
 	const response = graphqlFetch({
 		query: graphql(`
@@ -106,10 +101,7 @@ export function fetchEstate(
 							}
 						}
 						pageInfo {
-							hasNextPage
-							hasPreviousPage
 							totalCount
-							nodesCount
 						}
 					}
 				}
@@ -150,19 +142,10 @@ export function fetchEstate(
 				bedrooms: node.bedrooms?.longValue || 0,
 			}));
 
-		const pageInfo = nodesByCriteria?.pageInfo;
-		const totalCount = pageInfo?.totalCount ?? 0;
-		const currentPage = Math.floor(offset / limit) + 1;
-
 		return {
+			currentPage: Math.floor(offset / limit) + 1,
+			totalCount: nodesByCriteria?.pageInfo?.totalCount ?? 0,
 			estates,
-			pagination: {
-				currentPage,
-				pageSize: limit,
-				totalCount,
-				hasNextPage: pageInfo?.hasNextPage ?? false,
-				hasPreviousPage: pageInfo?.hasPreviousPage ?? false,
-			},
 		};
 	};
 

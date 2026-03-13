@@ -6,8 +6,6 @@ export interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
 	onPageChange: (page: number) => void;
-	hasNextPage?: boolean;
-	hasPreviousPage?: boolean;
 	labels?: {
 		previous?: string;
 		next?: string;
@@ -31,14 +29,15 @@ export function Pagination({
 	currentPage,
 	totalPages,
 	onPageChange,
-	hasNextPage = currentPage < totalPages,
-	hasPreviousPage = currentPage > 1,
 	labels,
 	variant = "default",
 	scrollToTop = true,
 	className,
 	maxVisiblePages = 7,
 }: PaginationProps) {
+	const hasNextPage = currentPage < totalPages;
+	const hasPreviousPage = currentPage > 1;
+
 	const { previous, next, page, ariaLabel } = { ...DEFAULT_LABELS, ...labels };
 	const isIconOnly = variant === "icon-only";
 

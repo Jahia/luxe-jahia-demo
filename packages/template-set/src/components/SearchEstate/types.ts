@@ -3,10 +3,8 @@ export type QueryConfig = {
 	rootPath: string;
 	language: string;
 	params: Record<string, string[]>;
-	pagination?: {
-		offset: number;
-		limit: number;
-	};
+	offset: number;
+	limit: number;
 };
 
 export interface Estate {
@@ -18,10 +16,8 @@ export interface Estate {
 	bedrooms: number;
 }
 
-export interface PaginationInfo {
+export interface FetchEstateResult {
 	currentPage: number;
-	pageSize: number;
 	totalCount: number;
-	hasNextPage: boolean;
-	hasPreviousPage: boolean;
+	estates: Estate[];
 }

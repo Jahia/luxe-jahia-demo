@@ -47,20 +47,17 @@ jahiaComponent(
 			rootPath: renderContext.getSite().getPath(),
 			language: currentNode.getLanguage(),
 			params,
-			pagination: {
-				offset,
-				limit,
-			},
+			offset,
+			limit,
 		};
-		const result = fetchEstate(useGQLQuery, config);
+		const results = fetchEstate(useGQLQuery, config);
 
 		return (
 			<Island
 				component={SearchEstateClient}
 				props={{
 					config,
-					results: result.estates,
-					pagination: result.pagination,
+					results,
 					isEditMode: renderContext.isEditMode(),
 				}}
 			/>

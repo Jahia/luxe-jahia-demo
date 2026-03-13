@@ -3,28 +3,24 @@ import { useState } from "react";
 import { fetchEstate, graphqlFetch } from "./graphql.ts";
 import classes from "./SearchEstate.client.module.css";
 import SearchEstateFormClient from "./SearchEstateForm.client.tsx";
-import SearchResultsClient from "./SearchResults.client.tsx";
-import type { QueryConfig, Estate, PaginationInfo as PaginationInfoType } from "./types.ts";
+import SearchResultsClient from "./SearchResults.tsx";
+import type { QueryConfig, FetchEstateResult } from "./types.ts";
 import { useTranslation } from "react-i18next";
 
 export default function SearchEstateClient({
 	config,
 	results: initialResults,
-	pagination: initialPagination,
 	isEditMode,
 }: {
 	config: QueryConfig;
-	results: Estate[];
-	pagination: PaginationInfoType;
+	results: FetchEstateResult;
 	isEditMode: boolean;
 }) {
 	const { t } = useTranslation();
 	const [params, setParams] = useState(config.params);
 	const [results, setResults] = useState(initialResults);
-	const [pagination, setPagination] = useState(initialPagination);
-	const [pageSize, setPageSize] = useState(initialPagination.pageSize);
 
-	const totalPages = Math.ceil(pagination.totalCount / pageSize);
+	const totalPages = Math.ceil(results.totalCount / config.limit);
 	const showPagination = totalPages > 1;
 
 	const updateSearchResults = (newParams: typeof params, pageNumber: number, limit: number) => {
@@ -47,10 +43,8 @@ export default function SearchEstateClient({
 		fetchEstate(graphqlFetch, {
 			...config,
 			params: newParams,
-			pagination: { offset, limit },
 		}).then((result) => {
-			setResults(result.estates);
-			setPagination(result.pagination);
+			setResults(result);
 		});
 	};
 
@@ -100,11 +94,9 @@ export default function SearchEstateClient({
 			{showPagination && (
 				<Row>
 					<Pagination
-						currentPage={pagination.currentPage}
-						totalPages={totalPages}
+						currentPage={results.currentPage}
+						totalPages={Math.ceil(results.totalCount / config.limit)}
 						onPageChange={handlePageChange}
-						hasNextPage={pagination.hasNextPage}
-						hasPreviousPage={pagination.hasPreviousPage}
 						variant="icon-only"
 						labels={{
 							previous: t("pagination.previous"),
