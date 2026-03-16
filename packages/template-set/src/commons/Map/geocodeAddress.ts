@@ -1,5 +1,3 @@
-import { useTranslation } from "react-i18next";
-
 const cache = new Map<string, { lat: number; lng: number }>();
 
 // Utility function to get coordinates from an address using Nominatim API
@@ -25,6 +23,5 @@ export const geocodeAddress = async (address: string): Promise<{ lat: number; ln
 
 		return result;
 	}
-	const { t } = useTranslation();
-	throw new Error(t("maps.error.addressNotFound"));
+	throw new Error("Address not found");
 };
