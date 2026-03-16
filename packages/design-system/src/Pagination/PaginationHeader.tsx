@@ -8,7 +8,6 @@ export interface PaginationHeaderProps {
 	pageSizeOptions: number[];
 	onPageSizeChange?: (newPageSize: number) => void;
 	pageSizeLabel?: string;
-	showPageSizeSelector?: boolean;
 }
 
 export function PaginationHeader({

@@ -19,7 +19,7 @@ export function PageSizeSelector({
 			<span className={classes.label}>{label}</span>
 			<select
 				value={pageSize}
-				onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
+				onChange={(e) => onPageSizeChange?.(Number(e.currentTarget.value))}
 				className={classes.select}
 			>
 				{pageSizeOptions.map((size) => (

@@ -6,12 +6,10 @@ export interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
 	onPageChange: (page: number) => void;
-	labels: {
-		previous: string;
-		next: string;
-		page: string;
-		ariaLabel: string;
-	};
+	previousLabel: string;
+	nextLabel: string;
+	ariaLabel: string;
+	pageLabel: (page: number) => string;
 	scrollToTop?: boolean;
 	maxVisiblePages?: number;
 }
@@ -20,7 +18,10 @@ export function Pagination({
 	currentPage,
 	totalPages,
 	onPageChange,
-	labels,
+	previousLabel,
+	nextLabel,
+	ariaLabel,
+	pageLabel,
 	scrollToTop = true,
 	maxVisiblePages = 7,
 }: PaginationProps) {
@@ -77,13 +78,13 @@ export function Pagination({
 	const pageNumbers = getPageNumbers();
 
 	return (
-		<nav className={classes.pagination} aria-label={labels.ariaLabel}>
+		<nav className={classes.pagination} aria-label={ariaLabel}>
 			<button
 				type="button"
 				onClick={() => handlePageChange(currentPage - 1)}
 				disabled={!hasPreviousPage}
 				className={clsx(classes.button, classes.iconButton)}
-				aria-label={labels.previous}
+				aria-label={previousLabel}
 			>
 				‹
 			</button>
@@ -110,7 +111,7 @@ export function Pagination({
 									pageNum === currentPage && classes.active,
 									hideOnMobile && classes.hideOnMobile,
 								)}
-								aria-label={labels.page}
+								aria-label={pageLabel(pageNum)}
 								aria-current={pageNum === currentPage ? "page" : undefined}
 							>
 								{pageNum}
@@ -125,7 +126,7 @@ export function Pagination({
 				onClick={() => handlePageChange(currentPage + 1)}
 				disabled={!hasNextPage}
 				className={clsx(classes.button, classes.iconButton)}
-				aria-label={labels.next}
+				aria-label={nextLabel}
 			>
 				›
 			</button>

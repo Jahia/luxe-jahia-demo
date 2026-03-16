@@ -42,9 +42,15 @@ export default function SearchEstateClient({
 			params: newParams,
 			offset: (page - 1) * limit,
 			limit,
-		}).then((result) => {
-			setResults(result);
-		});
+		})
+			.then((result) => {
+				setResults(result);
+			})
+			.catch((error) => {
+				// If you are copying this code, consider adding an error state to display a user-friendly message
+				// and invite the user to retry the search. For simplicity, we just log the error here.
+				console.error("Failed to fetch search results:", error);
+			});
 	};
 
 	const handlePageChange = (newPage: number) => {
@@ -97,12 +103,10 @@ export default function SearchEstateClient({
 						currentPage={results.currentPage}
 						totalPages={Math.ceil(results.totalCount / limit)}
 						onPageChange={handlePageChange}
-						labels={{
-							previous: t("pagination.previous"),
-							next: t("pagination.next"),
-							page: t("pagination.page", { page: results.currentPage }),
-							ariaLabel: t("pagination.label"),
-						}}
+						previousLabel={t("pagination.previous")}
+						nextLabel={t("pagination.next")}
+						pageLabel={(page) => t("pagination.page", { page })}
+						ariaLabel={t("pagination.label")}
 					/>
 				</Row>
 			)}
