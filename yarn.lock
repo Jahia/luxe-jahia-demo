@@ -803,9 +803,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/cypress@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "@jahia/cypress@npm:4.5.0"
+"@jahia/cypress@npm:^7.0.0":
+  version: 7.4.0
+  resolution: "@jahia/cypress@npm:7.4.0"
   dependencies:
     "@apollo/client": "npm:^3.4.9"
     cypress-real-events: "npm:^1.11.0"
@@ -816,7 +816,7 @@ __metadata:
     ci.startup: ./ci.startup.sh
     env.debug: ./env.debug.sh
     env.run: ./env.run.sh
-  checksum: 10c0/c4da9ca43b39dd10503780ac0173499be336d000b6a7e36d30521cf25f74632bc59734d427efeffc4184bf7b53e2dd50fecf597657794cd3f32413748aa10bfa
+  checksum: 10c0/e6aff07e5ee6b5616ebbd29d441321b9dbabcb4a1500efecb9f7b6b8e51def3bf0cf1a5bfd4dde1158e34ef993b697fb91839efa4d924582029ad3aa83eb13e9
   languageName: node
   linkType: hard
 
@@ -921,7 +921,7 @@ __metadata:
     "@eslint-react/eslint-plugin": "npm:^1.52.9"
     "@eslint/compat": "npm:^1.3.2"
     "@eslint/js": "npm:^9.34.0"
-    "@jahia/cypress": "npm:^4.5.0"
+    "@jahia/cypress": "npm:^7.0.0"
     "@types/node": "npm:^24.3.0"
     eslint: "npm:^9.34.0"
     globals: "npm:^16.3.0"
