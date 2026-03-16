@@ -24,10 +24,6 @@ export const Gallery = ({ title, images, className, delayMs = 200 }: GalleryProp
 		setHydrated(true);
 	}, []);
 
-	if (Array.isArray(images) === false || images.length === 0) {
-		return null;
-	}
-
 	const mainImage = { ...images[0], sizes: "(max-width: 1320px) 100vw, 1320px" };
 
 	const isMdAndUp = useMediaQuery("(min-width: 768px)");
