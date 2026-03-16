@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { initGraphQLTada, type TadaDocumentNode, type setupSchema } from "gql.tada";
 import { print } from "@0no-co/graphql.web";
-import type { QueryConfig, Estate } from "./types.ts";
+import type { QueryConfig, FetchEstateResult } from "./types.ts";
 import type { GraphQLFormattedError } from "graphql";
 
 /** Transforms a textual GraphQL query into a DocumentNode. */
@@ -38,11 +38,14 @@ export async function graphqlFetch<Result = any, Variables = any>({
 }
 
 // Two overloads, to expose both a sync and an async version
-export function fetchEstate(f: (opts: any) => { data?: any }, config: QueryConfig): Estate[];
+export function fetchEstate(
+	f: (opts: any) => { data?: any },
+	config: QueryConfig,
+): FetchEstateResult;
 export function fetchEstate(
 	f: (opts: any) => Promise<{ data?: any }>,
 	config: QueryConfig,
-): Promise<Estate[]>;
+): Promise<FetchEstateResult>;
 
 // Actual implementation, support both sync and async
 export function fetchEstate(
@@ -53,7 +56,7 @@ export function fetchEstate(
 		| { data?: Result; errors?: GraphQLFormattedError[] }
 		| Promise<{ data?: Result; errors?: GraphQLFormattedError[] }>,
 	config: QueryConfig,
-): Estate[] | Promise<Estate[]> {
+): FetchEstateResult | Promise<FetchEstateResult> {
 	// Prepare a JQOM query based on the provided params
 	const constraints = Object.entries(config.params)
 		.map(([property, values]) => ({
@@ -62,16 +65,21 @@ export function fetchEstate(
 		// Remove constraints with no values
 		.filter(({ any }) => any.length > 0);
 
+	// Prepare pagination parameters
+	const offset = config.offset ?? 0;
+	const limit = config.limit ?? 30;
+
 	const response = graphqlFetch({
 		query: graphql(`
 			query GetContentPropertiesQuery(
 				$workspace: Workspace!
 				$language: String!
 				$query: InputGqlJcrNodeCriteriaInput!
+				$offset: Int!
 				$limit: Int!
 			) {
 				jcr(workspace: $workspace) {
-					nodesByCriteria(criteria: $query, limit: $limit) {
+					nodesByCriteria(criteria: $query, offset: $offset, limit: $limit) {
 						nodes {
 							url: renderUrl(language: $language, workspace: $workspace)
 							title: property(name: "title", language: $language) {
@@ -92,6 +100,9 @@ export function fetchEstate(
 								longValue
 							}
 						}
+						pageInfo {
+							totalCount
+						}
 					}
 				}
 			}
@@ -108,17 +119,19 @@ export function fetchEstate(
 				nodeConstraint: constraints.length > 0 ? { all: constraints } : null,
 			},
 			language: config.language,
-			limit: 30,
+			offset,
+			limit,
 		},
 	});
 
 	/** Simplifies the GraphQL response */
-	const process = ({ errors, data }: Awaited<typeof response>) => {
+	const process = ({ errors, data }: Awaited<typeof response>): FetchEstateResult => {
 		if (errors) {
 			console.error("Something went wrong:", JSON.stringify(errors));
 		}
 
-		return (data?.jcr?.nodesByCriteria?.nodes ?? [])
+		const nodesByCriteria = data?.jcr?.nodesByCriteria;
+		const estates = (nodesByCriteria?.nodes ?? [])
 			.filter((node) => node !== null)
 			.map((node) => ({
 				url: node.url!,
@@ -128,6 +141,12 @@ export function fetchEstate(
 				surface: node.surface?.longValue || 0,
 				bedrooms: node.bedrooms?.longValue || 0,
 			}));
+
+		return {
+			currentPage: Math.floor(offset / limit) + 1,
+			totalCount: nodesByCriteria?.pageInfo?.totalCount ?? 0,
+			estates,
+		};
 	};
 
 	// If response is a promise, process it when resolved

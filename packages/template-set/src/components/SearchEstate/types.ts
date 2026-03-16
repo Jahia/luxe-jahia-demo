@@ -3,6 +3,8 @@ export type QueryConfig = {
 	rootPath: string;
 	language: string;
 	params: Record<string, string[]>;
+	offset: number;
+	limit: number;
 };
 
 export interface Estate {
@@ -12,4 +14,10 @@ export interface Estate {
 	price: number;
 	surface: number;
 	bedrooms: number;
+}
+
+export interface FetchEstateResult {
+	currentPage: number;
+	totalCount: number;
+	estates: Estate[];
 }
