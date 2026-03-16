@@ -820,9 +820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/javascript-modules-library@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@jahia/javascript-modules-library@npm:1.1.0"
+"@jahia/javascript-modules-library@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@jahia/javascript-modules-library@npm:1.2.0"
   peerDependencies:
     "@graphql-typed-document-node/core": ^3.2.0
     graphql: "*"
@@ -843,7 +843,7 @@ __metadata:
       optional: true
     react-i18next:
       optional: true
-  checksum: 10c0/1fe2fd5e7fa88037a5be10e94229214ad999cf5def170bd960a4ee907ae6665d5fa7b98486da679d44e59ebee9578c7437b21f055339def82f44613452d76dd1
+  checksum: 10c0/c97a5caaf406a3ed5d36de529cd950eb72882a0695ce423280ee40e1822172ff8c70679b7f4b10d989822cee8f6d496e75c51823a73fa2e5f79a9408a890e83f
   languageName: node
   linkType: hard
 
@@ -3812,7 +3812,7 @@ __metadata:
   dependencies:
     "@0no-co/graphql.web": "npm:^1.2.0"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
-    "@jahia/javascript-modules-library": "npm:1.1.0"
+    "@jahia/javascript-modules-library": "npm:1.2.0"
     "@jahia/vite-plugin": "npm:1.1.0"
     "@types/leaflet": "npm:^1.9.20"
     "@types/react": "npm:^19.1.12"
