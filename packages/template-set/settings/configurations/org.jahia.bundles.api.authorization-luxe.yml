@@ -5,6 +5,6 @@ luxe:
   auto_apply:
     - origin: hosted
   grants:
-    - api: graphql
+    - api: graphql1
       node:
-        pathPattern: /files(/.*)?,/sites/[^/]+/contents(/.*)?
+        pathPattern: /files(/.*)?,/sites/[^/]+,/sites/[^/]+/contents(/.*)?
