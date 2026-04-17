@@ -5,7 +5,8 @@ luxe:
   auto_apply:
     - origin: hosted
   grants:
+    - api: graphql
+      node:
+        excludedPathPattern: "/users(/.*)?,/groups(/.*)?,/sites/[^/]+/users(/.*)?,/sites/[^/]+/groups(/.*)?"
     - node:
-        pathPattern: "/,/sites(/.*)?,/modules(/.*)?,/mounts(/.*)?"
-        excludedPathPattern: "/sites/[^/]+/users(/.*)?,/sites/[^/]+/groups(/.*)?"
-      api: graphql
+        pathPattern: /
