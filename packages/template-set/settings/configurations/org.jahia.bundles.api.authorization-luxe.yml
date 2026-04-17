@@ -7,3 +7,7 @@ luxe:
   grants:
     - api: graphql
       node: none
+    - api: graphql
+      node:
+        pathPattern: "/,/sites(/.*)?,/modules(/.*)?,/mounts(/.*)?"
+        excludedPathPattern: "/sites/[^/]+/users(/.*)?,/sites/[^/]+/groups(/.*)?"
