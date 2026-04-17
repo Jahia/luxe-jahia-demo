@@ -7,4 +7,6 @@ luxe:
   grants:
     - api: graphql
       node:
-        pathPattern: /files(/.*)?,/sites/[^/]+,/sites/[^/]+/contents(/.*)?
+        excludedPathPattern: "/users(/.*)?,/groups(/.*)?,/sites/[^/]+/users(/.*)?,/sites/[^/]+/groups(/.*)?"
+    - node:
+        pathPattern: /,/files(/.*)?
