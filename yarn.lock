@@ -682,6 +682,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^10.3.0":
+  version: 10.5.0
+  resolution: "@faker-js/faker@npm:10.5.0"
+  checksum: 10c0/2de3c7b8f41592d52cefc3ab4c99536656249bca78d5ad184a3b7ac43ecc9d946056cef2c4d37060373ef06ad992d82530de08479fabe16fdbe77b911d842446
+  languageName: node
+  linkType: hard
+
 "@fontsource-variable/inter@npm:^5.2.8":
   version: 5.2.8
   resolution: "@fontsource-variable/inter@npm:5.2.8"
@@ -791,11 +798,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jahia/cypress@npm:^7.4.0":
-  version: 7.4.0
-  resolution: "@jahia/cypress@npm:7.4.0"
+"@jahia/cypress@npm:^8.0.0":
+  version: 8.2.1
+  resolution: "@jahia/cypress@npm:8.2.1"
   dependencies:
     "@apollo/client": "npm:^3.4.9"
+    "@faker-js/faker": "npm:^10.3.0"
+    compare-versions: "npm:^6.1.1"
     cypress-real-events: "npm:^1.11.0"
     graphql: "npm:^15.5.0"
     graphql-tag: "npm:^2.11.0"
@@ -804,7 +813,7 @@ __metadata:
     ci.startup: ./ci.startup.sh
     env.debug: ./env.debug.sh
     env.run: ./env.run.sh
-  checksum: 10c0/e6aff07e5ee6b5616ebbd29d441321b9dbabcb4a1500efecb9f7b6b8e51def3bf0cf1a5bfd4dde1158e34ef993b697fb91839efa4d924582029ad3aa83eb13e9
+  checksum: 10c0/d20f6133e5643801cd19938361ec4725cee96b54950555e18a3d99bb9829ac6e26f008d5b2dd4243731aee6429a0d54e32b15aacf04063e60f663e979ab767ad
   languageName: node
   linkType: hard
 
@@ -918,7 +927,7 @@ __metadata:
     "@eslint-react/eslint-plugin": "npm:^3.0.0"
     "@eslint/compat": "npm:^2.0.3"
     "@eslint/js": "npm:^10.0.1"
-    "@jahia/cypress": "npm:^7.4.0"
+    "@jahia/cypress": "npm:^8.0.0"
     "@types/node": "npm:^24.12.0"
     eslint: "npm:^10.0.3"
     globals: "npm:^17.4.0"
