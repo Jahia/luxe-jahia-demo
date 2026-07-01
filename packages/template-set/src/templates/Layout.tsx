@@ -51,7 +51,7 @@ export const Layout = ({
 				<main id="main" className={className}>
 					{children}
 				</main>
-				<HtmlFooter />
+				<HtmlFooter className={classes.footer} />
 			</body>
 		</>
 	);
