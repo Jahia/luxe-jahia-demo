@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "jahia": {
+      "type": "http",
+      "url": "http://localhost:8080/modules/mcp",
+      "headers": {
+        "Authorization": "Basic cm9vdDpyb290MTIzNA=="
+      }
+    }
+  }
+}
