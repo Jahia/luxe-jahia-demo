@@ -80,7 +80,7 @@ jahiaComponent(
 				title: t("estate.surface.label"),
 				value: (
 					<>
-						${surface.toLocaleString(locale)} m<sup>2</sup>
+						{surface.toLocaleString(locale)} m<sup>2</sup>
 					</>
 				),
 			},

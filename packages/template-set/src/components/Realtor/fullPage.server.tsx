@@ -81,14 +81,19 @@ jahiaComponent(
 										 ${queryRefinement}
 									 ORDER BY estate.[jcr:created] DESC`;
 
-		refByNode.forEach((agencyNode) =>
+		refByNode.forEach((agencyNode) => {
+			server.render.addCacheDependency({ node: agencyNode }, renderContext);
 			server.render.addCacheDependency(
 				{ flushOnPathMatchingRegexp: `${agencyNode.getPath()}/.*` },
 				renderContext,
-			),
-		);
+			);
+		});
 
-		const estates = getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE);
+		// No agency → no WHERE clause: the query would list every estate in the
+		// whole repository, across sites. Skip it entirely.
+		const estates = refByNode.length
+			? getNodesByJCRQuery(currentNode.getSession(), query, MAX_ESTATE)
+			: [];
 
 		const spokenLanguagesTranslation = {
 			fr: t("list.data.spokenLanguage.fr"),
@@ -167,16 +172,18 @@ jahiaComponent(
 						</Col>
 					</Row>
 				</Section>
-				<Section>
-					<HeadingSection title={t("section.heading.exclusiveEstates")} />
-					<Row className={classes.rowEstates}>
-						{estates.map((estate) => (
-							<Col key={estate.getIdentifier()}>
-								<Render node={estate as JCRNodeWrapper} />
-							</Col>
-						))}
-					</Row>
-				</Section>
+				{estates.length > 0 && (
+					<Section>
+						<HeadingSection title={t("section.heading.exclusiveEstates")} />
+						<Row className={classes.rowEstates}>
+							{estates.map((estate) => (
+								<Col key={estate.getIdentifier()}>
+									<Render node={estate as JCRNodeWrapper} />
+								</Col>
+							))}
+						</Row>
+					</Section>
+				)}
 			</>
 		);
 	},
