@@ -48,7 +48,7 @@ export default function SearchEstateClient({
 		history.pushState(null, "", url);
 
 		// Fetch new results
-		fetchEstate(graphqlFetch, {
+		fetchEstate(graphqlFetch(config.gqlUrl), {
 			...config,
 			params: newParams,
 			offset: (page - 1) * limit,

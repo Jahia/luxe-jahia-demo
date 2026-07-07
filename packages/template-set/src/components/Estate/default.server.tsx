@@ -28,7 +28,7 @@ jahiaComponent(
 		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
-		if (images[0]) {
+		if (images?.[0]) {
 			const imageNode = images[0];
 			// SSR cache dep for this image node
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
@@ -53,11 +53,11 @@ jahiaComponent(
 				image={({ className }) => <Image className={className} {...imageProps} />}
 				description={
 					<>
-						{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface.toLocaleString(locale)}{" "}
+						{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface?.toLocaleString(locale)}{" "}
 						m<sup>2</sup>
 					</>
 				}
-				footer={`${price.toLocaleString(locale)}€`}
+				footer={price != null ? `${price.toLocaleString(locale)}€` : undefined}
 			/>
 		);
 	},

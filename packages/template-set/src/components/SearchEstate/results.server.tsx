@@ -1,4 +1,10 @@
-import { Island, jahiaComponent, server, useGQLQuery } from "@jahia/javascript-modules-library";
+import {
+	buildEndpointUrl,
+	Island,
+	jahiaComponent,
+	server,
+	useGQLQuery,
+} from "@jahia/javascript-modules-library";
 import { fetchEstate } from "./graphql.ts";
 import SearchEstateClient from "./SearchEstate.client.tsx";
 import type { QueryConfig } from "./types.ts";
@@ -55,6 +61,7 @@ jahiaComponent(
 			params,
 			offset,
 			limit,
+			gqlUrl: buildEndpointUrl("/modules/graphql"),
 		};
 		const results = fetchEstate(useGQLQuery, config);
 

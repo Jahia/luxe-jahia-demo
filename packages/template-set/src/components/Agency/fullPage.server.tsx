@@ -44,7 +44,8 @@ const getAgencyLanguage = ({
 }) => {
 	if (Array.isArray(realtors)) {
 		return new Set(
-			realtors.flatMap((realtor) => {
+			// A deleted reference leaves a null entry in weakreference arrays
+			realtors.filter(Boolean).flatMap((realtor) => {
 				server.render.addCacheDependency({ node: realtor }, renderContext);
 				const props = getNodeProps(realtor, ["languages"]) as RealtorProps;
 				return props.languages || [];
@@ -185,7 +186,7 @@ jahiaComponent(
 				<Section>
 					<HeadingSection title={t("section.heading.experts")} />
 					<Row className={classes.rowRealtors}>
-						{realtors?.map((realtor) => (
+						{realtors?.filter(Boolean).map((realtor) => (
 							<Col key={realtor.getIdentifier()}>
 								<Render node={realtor} view="animate" readOnly />
 							</Col>

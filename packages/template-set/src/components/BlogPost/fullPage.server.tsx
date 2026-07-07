@@ -53,14 +53,21 @@ jahiaComponent(
 			imageProps.sizes = "(max-width: 1320px) 100vw, 1320px";
 		}
 
-		const date: Date = new Date(stringDate);
+		// Guard against a missing or invalid date: new Date(undefined) is an
+		// Invalid Date and toISOString() would throw a RangeError
+		const date = stringDate ? new Date(stringDate) : undefined;
 		const formatedDate =
-			date.toLocaleDateString(currentNode.getLanguage(), {
-				// Weekday: 'long',
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-			}) || null;
+			date && !Number.isNaN(date.getTime())
+				? date.toLocaleDateString(currentNode.getLanguage(), {
+						// Weekday: 'long',
+						year: "numeric",
+						month: "long",
+						day: "numeric",
+					})
+				: null;
+
+		// A deleted reference leaves a null entry in weakreference arrays
+		const related = relatedBlogPosts?.filter(Boolean).slice(0, 3) ?? [];
 
 		return (
 			<>
@@ -72,7 +79,7 @@ jahiaComponent(
 							</Figure>
 						</Row>
 						<Row component="hgroup">
-							<time dateTime={date.toISOString()}>{formatedDate}</time>
+							{formatedDate && date && <time dateTime={date.toISOString()}>{formatedDate}</time>}
 							<h1 className={classes.title}>{title}</h1>
 							{subtitle && <p className={classes.hp}>{subtitle}</p>}
 						</Row>
@@ -81,23 +88,23 @@ jahiaComponent(
 						<Row
 							className={classes.richtext}
 							dangerouslySetInnerHTML={{
-								__html: body,
+								__html: body ?? "",
 							}}
 						/>
 						{categories && (
 							<div className={classes.category}>
-								{categories.map((node) => (
+								{categories.filter(Boolean).map((node) => (
 									<Render key={node.getIdentifier()} node={node} view="badge" readOnly />
 								))}
 							</div>
 						)}
 					</Section>
 				</article>
-				{relatedBlogPosts && relatedBlogPosts.length > 0 && (
+				{related.length > 0 && (
 					<Section>
 						<HeadingSection title={t("section.heading.relatedBlogPosts")} />
 						<Row className={classes.rowRelatedBlogPosts}>
-							{relatedBlogPosts.slice(0, 3).map((node) => {
+							{related.map((node) => {
 								return (
 									<Col key={node.getIdentifier()}>
 										<Render node={node} view="card" readOnly />

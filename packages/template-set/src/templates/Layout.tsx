@@ -4,9 +4,11 @@ import {
 	AddResources,
 	buildModuleFileUrl,
 	getNodeProps,
+	Island,
 	Render,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
+import CopyrightYearClient from "./CopyrightYear.client";
 import "./css/global.module.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
@@ -190,7 +192,7 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 					/>
 				</Col>
 				<Col className={classes.copyright}>
-					<span>{t("footer.copyright", { currentDate: new Date().getFullYear() })}</span>
+					<Island component={CopyrightYearClient} />
 				</Col>
 			</Row>
 		</Section>

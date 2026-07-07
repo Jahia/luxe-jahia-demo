@@ -5,6 +5,8 @@ export type QueryConfig = {
 	params: Record<string, string[]>;
 	offset: number;
 	limit: number;
+	/** GraphQL endpoint URL, built server-side to honour the context path. */
+	gqlUrl: string;
 };
 
 export interface Estate {

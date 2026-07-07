@@ -13,29 +13,35 @@ const graphql = initGraphQLTada<{
 	};
 }>();
 
-/** Performs a GraphQL query on the client using `fetch`. */
-export async function graphqlFetch<Result = any, Variables = any>({
-	query,
-	variables,
-}: {
-	query: TadaDocumentNode<Result, Variables>;
-	variables: Variables;
-}): Promise<{ data?: Result; errors?: GraphQLFormattedError[] }> {
-	const response = await fetch("/modules/graphql", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			query: print(query),
-			variables,
-		}),
-	});
+/**
+ * Performs a GraphQL query on the client using `fetch`, on the endpoint URL
+ * built server-side with buildEndpointUrl (a hardcoded path would break when
+ * Jahia runs under a non-root context path).
+ */
+export const graphqlFetch =
+	(url: string) =>
+	async <Result = any, Variables = any>({
+		query,
+		variables,
+	}: {
+		query: TadaDocumentNode<Result, Variables>;
+		variables: Variables;
+	}): Promise<{ data?: Result; errors?: GraphQLFormattedError[] }> => {
+		const response = await fetch(url, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				query: print(query),
+				variables,
+			}),
+		});
 
-	if (!response.ok) {
-		throw new Error(`GraphQL HTTP error: ${response.status} ${response.statusText}`);
-	}
+		if (!response.ok) {
+			throw new Error(`GraphQL HTTP error: ${response.status} ${response.statusText}`);
+		}
 
-	return response.json();
-}
+		return response.json();
+	};
 
 // Two overloads, to expose both a sync and an async version
 export function fetchEstate(
