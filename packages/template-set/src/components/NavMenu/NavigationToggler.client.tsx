@@ -2,8 +2,10 @@ import { useState } from "react";
 import classes from "~/components/NavMenu/NavigationToggler.client.module.css";
 import clsx from "clsx";
 import type { RefinedNavMenuProps } from "~/components/NavMenu/NavigationToggler";
+import { useTranslation } from "react-i18next";
 
 export default function NavigationTogglerClient({ menu }: { menu: RefinedNavMenuProps[] }) {
+	const { t } = useTranslation();
 	const [isOpen, setIsOpen] = useState(false);
 	const togglerHandler = () => {
 		setIsOpen((isOpen) => !isOpen);
@@ -15,7 +17,7 @@ export default function NavigationTogglerClient({ menu }: { menu: RefinedNavMenu
 				type="button"
 				aria-controls="navbarSupportedContent"
 				aria-expanded={isOpen}
-				aria-label="Toggle navigation"
+				aria-label={t("nav.toggle")}
 				onClick={togglerHandler}
 			>
 				<span className={classes.icon} />

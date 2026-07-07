@@ -1,4 +1,7 @@
 {
+	"nav": {
+		"toggle": "mostrar u ocultar la navegación"
+	},
 	"section": {
 		"heading": {
 			"contact": "contacto",

@@ -42,7 +42,8 @@ jahiaComponent(
 					<h2 className={classes.title}>{title}</h2>
 					{/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
 					{text && <div dangerouslySetInnerHTML={{ __html: text }} />}
-					{props.ctaType !== "none" && (
+					{/* ctaType is undefined on content predating the CTA mixin */}
+				{props.ctaType && props.ctaType !== "none" && (
 						<p>
 							<CTA {...props} />
 						</p>

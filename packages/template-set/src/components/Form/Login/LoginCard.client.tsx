@@ -63,11 +63,20 @@ export const LoginCardClient = ({
 	return (
 		<div
 			role="button"
+			tabIndex={0}
 			className={classes.card}
 			{...props}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
+			onFocus={handleMouseEnter}
+			onBlur={handleMouseLeave}
 			onClick={handleClick}
+			onKeyDown={(event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					event.preventDefault(); // Space would scroll the page
+					handleClick();
+				}
+			}}
 		>
 			{userinfo.avatar.image && !isHovered && (
 				<img src={userinfo.avatar.image.url} alt={t(userinfo.avatar.image.alt, { username })} />

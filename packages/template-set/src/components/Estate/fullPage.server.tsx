@@ -53,7 +53,7 @@ jahiaComponent(
 		if (!galleryImages.length) {
 			galleryImages.push({
 				src: buildModuleFileUrl(placeholder),
-				alt: "Placeholder",
+				alt: t("alt.estate", { estate: title ?? "" }),
 			});
 		}
 
