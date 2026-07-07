@@ -30,8 +30,14 @@ jahiaComponent(
 
 		const javaParamMap = renderContext.getRequest().getParameterMap();
 		const params = Object.fromEntries(
-			// Only retrieve known parameters, ignore others
-			["country", "type", "bedrooms"].map((param) => [param, javaParamMap.getOrDefault(param, [])]),
+			// Only retrieve known parameters, ignore others.
+			// getParameterMap() values are Java String[]: copy them into plain JS
+			// string arrays, otherwise the Island props serializer encodes their
+			// elements as array holes and the client receives [undefined].
+			["country", "type", "bedrooms"].map((param) => [
+				param,
+				Array.from(javaParamMap.getOrDefault(param, []), String),
+			]),
 		);
 
 		// Extract pagination parameters from URL
