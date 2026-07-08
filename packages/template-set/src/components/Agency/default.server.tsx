@@ -1,15 +1,8 @@
-import {
-	buildModuleFileUrl,
-	buildNodeUrl,
-	jahiaComponent,
-	server,
-} from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
 import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import { Image } from "design-system";
-import type { ImgHTMLAttributes } from "react";
+import { LuxeImage } from "~/commons/LuxeImage";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -18,24 +11,19 @@ jahiaComponent(
 		name: "default",
 		componentType: "view",
 	},
-	({ name, address, phone, image: imageNode }: AgencyProps, { currentNode, renderContext }) => {
+	({ name, address, phone, image: imageNode }: AgencyProps, { currentNode }) => {
 		const { t } = useTranslation();
-		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
-			src: buildModuleFileUrl(placeholder),
-		};
-		if (imageNode) {
-			// Cache dependency for all nodes involved
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.agency", { agency: name }),
-				widths: [200, 400], // 400 is for double density screens
-			});
-			imageProps.sizes = "200px"; // Ensure the image is always 200px wide
-		}
 
 		return (
 			<a className={classes.card} href={buildNodeUrl(currentNode)}>
-				<Image {...imageProps} className={classes.image} />
+				<LuxeImage
+					node={imageNode}
+					alt={t("alt.agency", { agency: name })}
+					fallback={placeholder}
+					className={classes.image}
+					widths={[200, 400]} // 400 is for double density screens
+					sizes="200px"
+				/>
 				<div className={classes.containerText}>
 					<h2 className={classes.title}>{name}</h2>
 					{address && <p>{address}</p>}

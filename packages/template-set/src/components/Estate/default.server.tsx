@@ -1,14 +1,7 @@
-import {
-	buildModuleFileUrl,
-	buildNodeUrl,
-	jahiaComponent,
-	server,
-} from "@jahia/javascript-modules-library";
-import { ClickableCard, Image } from "design-system";
-import type { ImgHTMLAttributes } from "react";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
+import { ClickableCard } from "design-system";
+import { LuxeImage } from "~/commons/LuxeImage";
 import type { EstateProps } from "./types";
-import placeholder from "/static/img/img-placeholder.jpg";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -17,39 +10,24 @@ jahiaComponent(
 		name: "default",
 		componentType: "view",
 	},
-	(
-		{ title, price, images, surface, bedrooms }: EstateProps,
-		{ currentNode, currentResource, renderContext },
-	) => {
+	({ title, price, images, surface, bedrooms }: EstateProps, { currentNode, currentResource }) => {
 		const { t } = useTranslation();
 		const locale = currentResource.getLocale().getLanguage();
-
-		// Image: placeholder by default; override when a real node exists
-		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
-			src: buildModuleFileUrl(placeholder),
-		};
-		if (images?.[0]) {
-			const imageNode = images[0];
-			// SSR cache dep for this image node
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-
-			// Map Jahia node -> <img> props (+ i18n alt)
-			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.estate", { estate: title }),
-			});
-
-			// Responsive slot hint: ≤768px → 100vw,≤992px → 50vw, ≤1320px → 30vw, otherwise ≈400px
-			// (keep in sync with grid breakpoints; effective with width-based srcset)
-			// default is usually used in 3 cols grid, so 400px is a good default for larger screens
-			imageProps.sizes =
-				"(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px";
-		}
 
 		return (
 			<ClickableCard
 				href={buildNodeUrl(currentNode)}
 				title={title}
-				image={({ className }) => <Image className={className} {...imageProps} />}
+				image={({ className }) => (
+					<LuxeImage
+						node={images?.[0]}
+						alt={t("alt.estate", { estate: title })}
+						className={className}
+						// Slot hint: default view is usually used in a 3-cols grid,
+						// so ≈400px is a good default for larger screens
+						sizes="(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px"
+					/>
+				)}
 				description={
 					<>
 						{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface?.toLocaleString(locale)}{" "}

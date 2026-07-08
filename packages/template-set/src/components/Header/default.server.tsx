@@ -1,8 +1,7 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { jahiaComponent } from "@jahia/javascript-modules-library";
 import type { HeaderProps } from "./types";
 import classes from "./default.module.css";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import { Image } from "design-system";
+import { LuxeImage } from "~/commons/LuxeImage";
 
 jahiaComponent(
 	{
@@ -10,16 +9,10 @@ jahiaComponent(
 		name: "default",
 		componentType: "view",
 	},
-	({ title, image: imageNode }: HeaderProps, { renderContext }) => {
-		if (imageNode) server.render.addCacheDependency({ node: imageNode }, renderContext);
-
-		return (
-			<section className={classes.cover}>
-				{imageNode && (
-					<Image className={classes.image} priority {...imageNodeToImgProps(imageNode)} />
-				)}
-				<h1 className={classes.title}>{title}</h1>
-			</section>
-		);
-	},
+	({ title, image: imageNode }: HeaderProps) => (
+		<section className={classes.cover}>
+			{imageNode && <LuxeImage node={imageNode} className={classes.image} priority />}
+			<h1 className={classes.title}>{title}</h1>
+		</section>
+	),
 );
