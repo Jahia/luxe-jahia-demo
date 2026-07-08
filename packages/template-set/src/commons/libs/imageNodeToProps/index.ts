@@ -14,8 +14,9 @@ export type ImgOptions = {
 	baseHeight?: number;
 	/**
 	 * Candidate widths (px) for `srcSet`; defaults to {@link DEFAULT_WIDTHS}.
-	 * Candidates are clamped to the intrinsic width, and the intrinsic width
-	 * itself is always added as a candidate when known.
+	 * Candidates are clamped to the intrinsic width; the intrinsic width is
+	 * added as a candidate when it is at most 2× the largest requested width
+	 * (so a huge master asset never becomes a candidate).
 	 */
 	widths?: number[];
 };
@@ -59,11 +60,14 @@ export function imageNodeToImgProps(
 	const requestedBase = baseWidth ?? widths?.[0] ?? DEFAULT_WIDTHS[0];
 	const src = sizedUrl(imageNode, meta, requestedBase, baseHeight);
 
-	// srcSet candidates: requested widths clamped to intrinsic, plus the intrinsic width itself
+	// srcSet candidates: requested widths clamped to intrinsic
 	const candidates = (widths ?? DEFAULT_WIDTHS)
 		.map((w) => clampToIntrinsic(w, meta.intrinsicWidth))
 		.filter((w): w is number => typeof w === "number" && Number.isFinite(w) && w > 0);
-	if (meta.intrinsicWidth) {
+	// The intrinsic width joins the candidates only when the original is
+	// reasonably close to the largest requested width: a huge master asset
+	// (e.g. an 8000px DAM original) must never be served for a 1536px slot.
+	if (meta.intrinsicWidth && meta.intrinsicWidth <= 2 * Math.max(0, ...candidates)) {
 		candidates.push(meta.intrinsicWidth);
 	}
 

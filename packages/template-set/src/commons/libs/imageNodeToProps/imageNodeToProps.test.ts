@@ -160,9 +160,8 @@ describe("imageNodeToImgProps", () => {
 			baseWidth: 400,
 		});
 		expect(props.src).toBe("/files/img.jpg?w=400");
-		expect(props.srcSet).toBe(
-			"/files/img.jpg?w=200 200w, /files/img.jpg?w=400 400w, /files/img.jpg 2000w",
-		);
+		// The 2000px original is far beyond 2×400: not a candidate
+		expect(props.srcSet).toBe("/files/img.jpg?w=200 200w, /files/img.jpg?w=400 400w");
 	});
 
 	it("de-duplicates candidates that clamp to the same width", () => {
@@ -180,12 +179,23 @@ describe("imageNodeToImgProps", () => {
 			defaultProvider: false,
 		});
 		const props = imageNodeToImgProps(node, { widths: [600, 1200] });
-		// Sized variants go through the decorator (signed URL), never ?w= query params
+		// Sized variants go through the decorator (signed URL), never ?w= query
+		// params; the huge master (8256px >> 2×1200) is not a candidate
 		expect(props.src).toBe("https://assets.keepeek.example/media.jpg#signed(w:600)");
 		expect(props.srcSet).toBe(
 			"https://assets.keepeek.example/media.jpg#signed(w:600) 600w, " +
-				"https://assets.keepeek.example/media.jpg#signed(w:1200) 1200w, " +
-				"https://assets.keepeek.example/media.jpg 8256w",
+				"https://assets.keepeek.example/media.jpg#signed(w:1200) 1200w",
+		);
+	});
+
+	it("keeps the intrinsic width as a candidate only when close to the requested widths", () => {
+		// 2000 <= 2×1536: the original is a useful top candidate
+		expect(imageNodeToImgProps(fakeImageNode({ width: 2000, height: 1000 })).srcSet).toContain(
+			"/files/img.jpg 2000w",
+		);
+		// 8256 > 2×1536: the master asset must never be served
+		expect(imageNodeToImgProps(fakeImageNode({ width: 8256, height: 5504 })).srcSet).not.toContain(
+			"8256w",
 		);
 	});
 
