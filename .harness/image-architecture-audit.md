@@ -118,10 +118,12 @@ Investigating why rendered URLs carried no `?w=`/`?h=` params revealed a real bu
 - The plain Jahia file servlet does not resize either: `?w=` as a query param returns identical bytes (verified empirically). Only pre-generated named thumbnails exist (`?t=thumbnail` ≈150px, `?t=thumbnail2` ≈350px).
 - **But `?w=`/`?h=` query params are the official pattern** for the [Media Optimization (Cloudimage) feature](https://academy.jahia.com/documentation/jahia-cms/jahia-8-2/developer/optional-features/media-optimization-cloudimage) (Jahia Cloud, live mode): a module rewrites `/files` URLs through the Cloudimage CDN, which honors `w`/`h` (`photo.jpeg?h=200&w=300`). The documented JSX pattern is exactly `` `${buildNodeUrl(image)}?w=480` `` inside `srcSet`.
 
+- **DAM assets use the other channel**: external providers override `getUrl(List)` — e.g. `KeepeekDecorator` parses `["w:600", "h:300"]` and returns a **signed transformed URL** (webp, fill-down resize, POI) from the Keepeek signature service. For those nodes, appending `?w=` to the original asset URL bypasses the resize service entirely (verified live with a Keepeek asset).
+
 **Fixes and decision:**
 
-- `sizedUrl` now emits sizes as **query string `parameters`** (honored by Cloudimage, harmlessly ignored by the plain servlet) instead of the discarded `args`. With media optimization enabled, the whole `srcSet` machinery becomes functional without any further change.
-- The machinery is kept (team decision): dynamic resize arrives through Jahia Cloud media optimization and/or DAM integrations ([Cloudinary picker](https://github.com/Jahia/cloudinary-picker), ScailFlex). `LuxeImage` / `imageNodeToImgProps` is the single seam where provider-specific URL building plugs in; views and their `widths`/`sizes` hints stay untouched.
+- `sizedUrl` routes the resize hint per provider: `node.getProvider().isDefault()` → **query `parameters`** (`?w=`/`?h=`, Cloudimage pattern, no-op on a plain servlet); external provider (DAM mount) → **`args`** so the decorator builds the signed per-width variant. Verified live on both: Keepeek hero renders per-width signed webp URLs, local assets render `?w=` candidates.
+- The srcSet machinery is kept (team decision): it is functional today for DAM assets (Keepeek) and becomes functional for local files when Media Optimization is enabled on Jahia Cloud. `LuxeImage` / `imageNodeToImgProps` is the single seam for provider-specific URL building; views and their `widths`/`sizes` hints stay untouched.
 
 ### P-4 outcome (revised)
 
