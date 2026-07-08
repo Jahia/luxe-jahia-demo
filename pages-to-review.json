@@ -1,0 +1,14 @@
+[
+	"http://localhost:8080/sites/luxe/home.html",
+	"http://localhost:8080/fr/sites/luxe/home.html",
+	"http://localhost:8080/sites/luxe/home/buy.html",
+	"http://localhost:8080/sites/luxe/home/sell.html",
+	"http://localhost:8080/sites/luxe/home/about-us.html",
+	"http://localhost:8080/sites/luxe/home/agencies.html",
+	"http://localhost:8080/sites/luxe/home/blog.html",
+	"http://localhost:8080/sites/luxe/home/blog/main/blog-posts/geneva.html",
+	"http://localhost:8080/sites/luxe/contents/agencies/luxe-europe/bien-immobilier.html",
+	"http://localhost:8080/sites/luxe/contents/agencies/luxe-europe.html",
+	"http://localhost:8080/sites/luxe/contents/realtors/eleanor-pearl.html",
+	"http://localhost:8080/sites/luxe/legal/fees.html"
+]

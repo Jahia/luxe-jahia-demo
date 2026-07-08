@@ -16,7 +16,8 @@
 		"dev": "vite build --watch",
 		"package": "yarn pack --out dist/package.tgz",
 		"watch": "run dev",
-		"watch:callback": "run package && run deploy"
+		"watch:callback": "run package && run deploy",
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",
@@ -41,7 +42,8 @@
 		"sass-embedded": "^1.98.0",
 		"typescript": "^5.9.3",
 		"typescript-plugin-css-modules": "^5.2.0",
-		"vite": "^8.0.0"
+		"vite": "^8.0.0",
+		"vitest": "^4.1.10"
 	},
 	"engines": {
 		"node": ">=20.19.0",

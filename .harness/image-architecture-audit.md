@@ -110,6 +110,23 @@ Next.js-style: `priority` → `loading="eager"` + `fetchPriority="high"`, forwar
 
 Cover: clamp to intrinsic, vector short-circuit, no-op URL detection, `srcSet` dedup, base URL always present in `srcSet`, empty `widths: []` disables `srcSet`.
 
+### Reality check (2026-07-08, during implementation)
+
+Investigating why rendered URLs carry no `?w=`/`?h=` params revealed that **dynamic resize is a no-op for plain JCR file nodes**:
+
+- `buildNodeUrl(node, { args: { w } })` maps to `node.getUrl(["w:600"])`, and Jahia core discards the params: `JCRNodeWrapperImpl.getUrl(List<String> params)` is literally `return getUrl();` (core, `JCRNodeWrapperImpl.java:875`).
+- The file servlet ignores `?w=` as a query param (verified empirically: identical byte size with and without). Only pre-generated named thumbnails work (`?t=thumbnail` ≈150px, `?t=thumbnail2` ≈350px).
+- Consequence: every `srcSet` collapses to a single entry — the original URL with a misleading width descriptor. This predates the refactor; it has always been the case.
+
+**Decision (validated with the team): keep the srcSet machinery.** Dynamic resize arrives through DAM integrations — [Cloudinary picker](https://github.com/Jahia/cloudinary-picker) or ScailFlex (Jahia Cloud) — whose asset URLs carry real transformation params. `LuxeImage` / `imageNodeToImgProps` is the single seam where provider-specific URL building will plug in; views and their `widths`/`sizes` hints stay untouched.
+
+### P-4 outcome (revised)
+
+Both remaining raw `<img>` are **intentional exceptions**, not oversights:
+
+- `NavMenu/default.server.tsx` (logo): the design-system `Image` base class applies `width: 100%; object-fit: cover; border-radius: 16px` — wrong for a fixed-width logo. The missing cache dependency has since been added, which was the real issue.
+- `LoginCard.client.tsx` (avatar): same base-style mismatch; plain URL on the client, no srcSet possible, alt already handled.
+
 ### Estimated impact
 
 ~−150 lines across views, ~−60 lines in the lib, +1 component (~50 lines) + tests; hero LCP fixed as a side effect.
