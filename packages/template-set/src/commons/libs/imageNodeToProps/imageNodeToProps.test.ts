@@ -2,19 +2,25 @@ import { describe, expect, it, vi } from "vitest";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 // "@jahia/javascript-modules-library" is a virtual module only available at
-// runtime inside Jahia. The mock emulates a resize-capable URL builder so the
-// srcSet machinery can be exercised (real Jahia file nodes currently ignore
-// the args — see the image-architecture audit).
+// runtime inside Jahia. The mock reproduces both resize channels of the real
+// buildNodeUrl:
+// - `parameters` are appended as a query string (default provider — honored
+//   by the Media Optimization/Cloudimage proxy, ignored by the file servlet);
+// - `args` go through node.getUrl(["w:600", …]), which DAM decorators
+//   (e.g. KeepeekDecorator) turn into a signed transformed URL.
 vi.mock("@jahia/javascript-modules-library", () => ({
 	buildNodeUrl: (
-		node: { url: string },
-		config?: { args?: Record<string, string | number | boolean> },
-	) =>
-		config?.args
-			? `${node.url}?${Object.entries(config.args)
-					.map(([k, v]) => `${k}=${v}`)
-					.join("&")}`
-			: node.url,
+		node: { url: string; getUrl: (params: string[]) => string },
+		config?: {
+			parameters?: Record<string, string>;
+			args?: Record<string, string | number | boolean>;
+		},
+	) => {
+		if (config?.args) {
+			return node.getUrl(Object.entries(config.args).map(([k, v]) => `${k}:${v}`));
+		}
+		return config?.parameters ? `${node.url}?${new URLSearchParams(config.parameters)}` : node.url;
+	},
 }));
 
 import { imageNodeToImgProps } from "./index";
@@ -27,15 +33,21 @@ const fakeImageNode = ({
 	mime = "image/jpeg",
 	width,
 	height,
+	defaultProvider = true,
 }: {
 	url?: string;
 	name?: string;
 	mime?: string;
 	width?: number;
 	height?: number;
+	/** false emulates a DAM node (external provider mount, e.g. Keepeek) */
+	defaultProvider?: boolean;
 } = {}) =>
 	({
 		url,
+		getProvider: () => ({ isDefault: () => defaultProvider }),
+		// Emulates a DAM decorator: signed transformed URL built from the params
+		getUrl: (params: string[]) => `${url}#signed(${params.join(",")})`,
 		getDisplayableName: () => name,
 		getNode: (child: string) =>
 			child === "jcr:content"
@@ -158,6 +170,23 @@ describe("imageNodeToImgProps", () => {
 			widths: [600, 600, 700],
 		});
 		expect(props.srcSet).toBe("/files/img.jpg?w=600 600w, /files/img.jpg 650w");
+	});
+
+	it("routes resizes through node.getUrl(List) args for DAM provider nodes", () => {
+		const node = fakeImageNode({
+			url: "https://assets.keepeek.example/media.jpg",
+			width: 8256,
+			height: 5504,
+			defaultProvider: false,
+		});
+		const props = imageNodeToImgProps(node, { widths: [600, 1200] });
+		// Sized variants go through the decorator (signed URL), never ?w= query params
+		expect(props.src).toBe("https://assets.keepeek.example/media.jpg#signed(w:600)");
+		expect(props.srcSet).toBe(
+			"https://assets.keepeek.example/media.jpg#signed(w:600) 600w, " +
+				"https://assets.keepeek.example/media.jpg#signed(w:1200) 1200w, " +
+				"https://assets.keepeek.example/media.jpg 8256w",
+		);
 	});
 
 	it("defaults alt to the node displayable name and trims a custom alt", () => {

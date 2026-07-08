@@ -112,13 +112,16 @@ Cover: clamp to intrinsic, vector short-circuit, no-op URL detection, `srcSet` d
 
 ### Reality check (2026-07-08, during implementation)
 
-Investigating why rendered URLs carry no `?w=`/`?h=` params revealed that **dynamic resize is a no-op for plain JCR file nodes**:
+Investigating why rendered URLs carried no `?w=`/`?h=` params revealed a real bug in how the resize params were emitted, and clarified where resizing actually happens:
 
-- `buildNodeUrl(node, { args: { w } })` maps to `node.getUrl(["w:600"])`, and Jahia core discards the params: `JCRNodeWrapperImpl.getUrl(List<String> params)` is literally `return getUrl();` (core, `JCRNodeWrapperImpl.java:875`).
-- The file servlet ignores `?w=` as a query param (verified empirically: identical byte size with and without). Only pre-generated named thumbnails work (`?t=thumbnail` ≈150px, `?t=thumbnail2` ≈350px).
-- Consequence: every `srcSet` collapses to a single entry — the original URL with a misleading width descriptor. This predates the refactor; it has always been the case.
+- The lib passed sizes through `buildNodeUrl(node, { args: { w } })`, which maps to `node.getUrl(["w:600"])` — and Jahia core discards those params: `JCRNodeWrapperImpl.getUrl(List<String> params)` is literally `return getUrl();` (core, `JCRNodeWrapperImpl.java:875`). So no URL ever carried a size. This predates the refactor.
+- The plain Jahia file servlet does not resize either: `?w=` as a query param returns identical bytes (verified empirically). Only pre-generated named thumbnails exist (`?t=thumbnail` ≈150px, `?t=thumbnail2` ≈350px).
+- **But `?w=`/`?h=` query params are the official pattern** for the [Media Optimization (Cloudimage) feature](https://academy.jahia.com/documentation/jahia-cms/jahia-8-2/developer/optional-features/media-optimization-cloudimage) (Jahia Cloud, live mode): a module rewrites `/files` URLs through the Cloudimage CDN, which honors `w`/`h` (`photo.jpeg?h=200&w=300`). The documented JSX pattern is exactly `` `${buildNodeUrl(image)}?w=480` `` inside `srcSet`.
 
-**Decision (validated with the team): keep the srcSet machinery.** Dynamic resize arrives through DAM integrations — [Cloudinary picker](https://github.com/Jahia/cloudinary-picker) or ScailFlex (Jahia Cloud) — whose asset URLs carry real transformation params. `LuxeImage` / `imageNodeToImgProps` is the single seam where provider-specific URL building will plug in; views and their `widths`/`sizes` hints stay untouched.
+**Fixes and decision:**
+
+- `sizedUrl` now emits sizes as **query string `parameters`** (honored by Cloudimage, harmlessly ignored by the plain servlet) instead of the discarded `args`. With media optimization enabled, the whole `srcSet` machinery becomes functional without any further change.
+- The machinery is kept (team decision): dynamic resize arrives through Jahia Cloud media optimization and/or DAM integrations ([Cloudinary picker](https://github.com/Jahia/cloudinary-picker), ScailFlex). `LuxeImage` / `imageNodeToImgProps` is the single seam where provider-specific URL building plugs in; views and their `widths`/`sizes` hints stay untouched.
 
 ### P-4 outcome (revised)
 
