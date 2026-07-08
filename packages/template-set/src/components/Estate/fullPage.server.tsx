@@ -118,6 +118,7 @@ jahiaComponent(
 								images: galleryImages,
 								className: classes.gallery,
 								delayMs: 150,
+								priority: true,
 							}}
 						/>
 					</Row>

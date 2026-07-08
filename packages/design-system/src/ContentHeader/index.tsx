@@ -7,7 +7,7 @@ import type { ImgHTMLAttributes } from "react";
 export const ContentHeader = ({
 	title,
 	description,
-	image,
+	image: { className: imageClassName, ...imageProps },
 	className,
 }: {
 	title: string;
@@ -17,7 +17,8 @@ export const ContentHeader = ({
 }) => {
 	return (
 		<header className={clsx(classes.main, className)}>
-			<Image className={clsx(classes.image, image.className)} {...image} />
+			{/* A content header is above the fold by definition: its image is the LCP candidate */}
+			<Image className={clsx(classes.image, imageClassName)} priority {...imageProps} />
 			<div className={classes.content}>
 				<h1 className={classes.title}>{title}</h1>
 				{description && (

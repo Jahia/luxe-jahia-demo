@@ -25,6 +25,7 @@ jahiaComponent(
 						className={className}
 						// Slot hint: default view is usually used in a 3-cols grid,
 						// so ≈400px is a good default for larger screens
+						widths={[400, 800]} // 800 is for double density screens
 						sizes="(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px"
 					/>
 				)}
