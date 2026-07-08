@@ -85,10 +85,16 @@ export function imageNodeToImgProps(
 		pairs.unshift({ url: src, w: clampToIntrinsic(requestedBase, meta.intrinsicWidth) as number });
 	}
 
+	// Commas are legal inside a srcSet URL but ambiguous with the candidate
+	// separator, and Jahia's srcset URL rewriter (SrcSetURLReplacer) splits on
+	// every comma — corrupting e.g. Cloudinary transformation URLs
+	// (…/upload/f_auto,w_600/…). Percent-encode them within srcSet only.
+	const srcSetSafe = (url: string) => url.replaceAll(",", "%2C");
+
 	return {
 		src,
 		alt: alt.trim(),
-		srcSet: pairs.map(({ url, w }) => `${url} ${w}w`).join(", ") || undefined,
+		srcSet: pairs.map(({ url, w }) => `${srcSetSafe(url)} ${w}w`).join(", ") || undefined,
 		width: meta.intrinsicWidth,
 		height: meta.intrinsicHeight,
 	};

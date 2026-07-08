@@ -188,6 +188,24 @@ describe("imageNodeToImgProps", () => {
 		);
 	});
 
+	it("percent-encodes commas inside srcSet URLs (Cloudinary transformations)", () => {
+		const node = {
+			...fakeImageNode({ url: "https://cdn.example/image/upload/v1/img.jpg", width: 1024, height: 500, defaultProvider: false }),
+			// Emulates CloudinaryDecorator: transformations joined with commas in the path
+			getUrl: (params: string[]) =>
+				`https://cdn.example/image/upload/f_auto,${params.join(",").replace(":", "_")}/v1/img.jpg`,
+		} as unknown as JCRNodeWrapper;
+		const props = imageNodeToImgProps(node, { widths: [600] });
+		// src is a single URL: the raw comma is unambiguous there
+		expect(props.src).toBe("https://cdn.example/image/upload/f_auto,w_600/v1/img.jpg");
+		// srcSet entries must not contain raw commas (candidate separator +
+		// Jahia's SrcSetURLReplacer splits on them)
+		expect(props.srcSet).toBe(
+			"https://cdn.example/image/upload/f_auto%2Cw_600/v1/img.jpg 600w, " +
+				"https://cdn.example/image/upload/v1/img.jpg 1024w",
+		);
+	});
+
 	it("keeps the intrinsic width as a candidate only when close to the requested widths", () => {
 		// 2000 <= 2×1536: the original is a useful top candidate
 		expect(imageNodeToImgProps(fakeImageNode({ width: 2000, height: 1000 })).srcSet).toContain(
