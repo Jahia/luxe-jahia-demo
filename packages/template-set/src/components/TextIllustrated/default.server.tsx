@@ -27,7 +27,7 @@ jahiaComponent(
 		if (imageNode) {
 			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps({ imageNode });
+			imageProps = imageNodeToImgProps(imageNode);
 			// Responsive slot hint: ≤576px → 100vw, ≤1320px → 45vw, otherwise ≈650px
 			// (keep in sync with grid breakpoints; effective with width-based srcset)
 			imageProps.sizes = "(max-width: 576px) 100vw,(max-width: 1320px) 45vw, 650px";

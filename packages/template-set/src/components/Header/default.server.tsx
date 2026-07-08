@@ -15,7 +15,9 @@ jahiaComponent(
 
 		return (
 			<section className={classes.cover}>
-				{imageNode && <Image className={classes.image} {...imageNodeToImgProps({ imageNode })} />}
+				{imageNode && (
+					<Image className={classes.image} priority {...imageNodeToImgProps(imageNode)} />
+				)}
 				<h1 className={classes.title}>{title}</h1>
 			</section>
 		);

@@ -25,7 +25,8 @@ jahiaComponent(
 							<Image
 								className={classes.image}
 								sizes="(max-width: 1320px) 100vw, 1320px"
-								{...imageNodeToImgProps({ imageNode })}
+								priority
+								{...imageNodeToImgProps(imageNode)}
 							/>
 						</Figure>
 					</Row>

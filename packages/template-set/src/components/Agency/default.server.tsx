@@ -26,10 +26,9 @@ jahiaComponent(
 		if (imageNode) {
 			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps({
-				imageNode,
+			imageProps = imageNodeToImgProps(imageNode, {
 				alt: t("alt.agency", { agency: name }),
-				config: { widths: [200, 400] }, // 400 is for double density screens
+				widths: [200, 400], // 400 is for double density screens
 			});
 			imageProps.sizes = "200px"; // Ensure the image is always 200px wide
 		}

@@ -27,10 +27,9 @@ jahiaComponent(
 		if (imageNode) {
 			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps({
-				imageNode,
+			imageProps = imageNodeToImgProps(imageNode, {
 				alt: t("alt.blog", { blog: title }),
-				config: { widths: [200, 400] },
+				widths: [200, 400],
 			});
 			imageProps.sizes = "200px"; //Ensure the image is always 200px wide
 		}

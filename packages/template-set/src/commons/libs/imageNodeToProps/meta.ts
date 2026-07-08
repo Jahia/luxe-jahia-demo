@@ -1,8 +1,14 @@
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { buildNodeUrl } from "@jahia/javascript-modules-library";
 
+export type ImageMeta = {
+	vector: boolean;
+	intrinsicWidth?: number;
+	intrinsicHeight?: number;
+};
+
 /** Read mime + (if raster) intrinsic dimensions; tolerate missing props */
-export const readNodeMeta = (node: JCRNodeWrapper) => {
+export const readNodeMeta = (node: JCRNodeWrapper): ImageMeta => {
 	let vector = false;
 	let intrinsicWidth: number | undefined;
 	let intrinsicHeight: number | undefined;
@@ -35,39 +41,23 @@ export const clampToIntrinsic = (requested: number | undefined, intrinsic?: numb
 		? Math.min(requested, intrinsic)
 		: requested;
 
-/** Return original URL when resize is a no-op */
-export const sizedUrlOrOriginal = (
-	node: JCRNodeWrapper,
-	requestedW?: number,
-	intrinsicW?: number,
-	requestedH?: number,
-	intrinsicH?: number,
-) => {
-	const sameW = requestedW != null && intrinsicW != null && requestedW === intrinsicW;
-	const sameH = requestedH != null && intrinsicH != null && requestedH === intrinsicH;
-	const noParams = requestedW == null && requestedH == null;
-	const allNoop = (requestedW == null || sameW) && (requestedH == null || sameH);
-
-	return buildNodeUrl(
-		node,
-		noParams || allNoop
-			? undefined
-			: {
-					args: {
-...(requestedW != null && { w: requestedW }),
-...(requestedH != null && { h: requestedH }),
-					},
-				},
-	);
-};
-
-/** Map a requested width to an actual number:
- * - Infinity → intrinsic width if known, otherwise drop (returns undefined)
- * - finite  → clamped to intrinsic
+/**
+ * Build the node URL, resized to the requested dimensions.
+ * Requested values are clamped to the intrinsic size; an axis that is not
+ * requested, or that ends up matching the intrinsic size, emits no resize
+ * param — so a no-op resize returns the original URL.
  */
-export const mapWidth = (w: number | undefined, intrinsic?: number) =>
-	w === Infinity
-		? typeof intrinsic === "number" && intrinsic > 0
-			? intrinsic
-			: undefined
-		: clampToIntrinsic(w, intrinsic);
+export const sizedUrl = (
+	node: JCRNodeWrapper,
+	meta: ImageMeta,
+	requestedWidth?: number,
+	requestedHeight?: number,
+) => {
+	const w = clampToIntrinsic(requestedWidth, meta.intrinsicWidth);
+	const h = clampToIntrinsic(requestedHeight, meta.intrinsicHeight);
+	const args = {
+		...(w != null && w !== meta.intrinsicWidth && { w }),
+		...(h != null && h !== meta.intrinsicHeight && { h }),
+	};
+	return buildNodeUrl(node, Object.keys(args).length > 0 ? { args } : undefined);
+};

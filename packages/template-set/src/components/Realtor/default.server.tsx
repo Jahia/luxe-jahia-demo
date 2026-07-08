@@ -29,10 +29,9 @@ jahiaComponent(
 		if (imageNode) {
 			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps({
-				imageNode,
+			imageProps = imageNodeToImgProps(imageNode, {
 				alt: t("alt.realtor", { realtor: `${firstName} ${lastName}` }),
-				config: { widths: [300, 600] }, // 600 is for double density screens
+				widths: [300, 600], // 600 is for double density screens
 			});
 			imageProps.sizes = "300px"; //Ensure the image is always 300px wide
 		}

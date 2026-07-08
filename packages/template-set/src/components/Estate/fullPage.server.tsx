@@ -44,8 +44,7 @@ jahiaComponent(
 			.map((imageNode) => {
 				// Cache dependency for all nodes involved
 				server.render.addCacheDependency({ node: imageNode }, renderContext);
-				return imageNodeToImgProps({
-					imageNode,
+				return imageNodeToImgProps(imageNode, {
 					alt: t("alt.estate", { estate: title }),
 				});
 			});

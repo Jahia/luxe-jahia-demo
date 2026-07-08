@@ -31,8 +31,7 @@ jahiaComponent(
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
 
 			// Map Jahia node -> <img> props (+ i18n alt)
-			imageProps = imageNodeToImgProps({
-				imageNode,
+			imageProps = imageNodeToImgProps(imageNode, {
 				alt: t("alt.blog", { blog: title }),
 			});
 
