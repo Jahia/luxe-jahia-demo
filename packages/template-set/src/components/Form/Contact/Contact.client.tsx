@@ -58,7 +58,9 @@ export default function ContactClient({
 						__html: personalizedFeedbackMsg,
 					}}
 					className={classes.fs6}
-					role="info"
+					// "info" is not a valid ARIA role; "status" is a polite live
+					// region so the confirmation is announced to screen readers
+					role="status"
 				/>
 			);
 		}
@@ -74,9 +76,13 @@ export default function ContactClient({
 				/>
 
 				<p>
-					<a href="" className={classes.capitalize} onClick={handleRedo}>
+					<button
+						type="button"
+						className={clsx(classes.capitalize, classes.linkButton)}
+						onClick={handleRedo}
+					>
 						{t("form.contact.sendMessageAgain")}
-					</a>
+					</button>
 				</p>
 			</>
 		);

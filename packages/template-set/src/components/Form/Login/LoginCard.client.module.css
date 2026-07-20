@@ -21,6 +21,16 @@
 		}
 	}
 
+	/* Keyboard-focus indicator: the card is a role="button" reachable with Tab */
+	&:focus-visible {
+		outline: 2px solid var(--luxe-color-gold);
+		outline-offset: 2px;
+
+		img {
+			filter: grayscale(0%);
+		}
+	}
+
 	> div {
 		flex: 1 1 auto;
 	}

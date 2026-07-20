@@ -7,8 +7,8 @@ jahiaComponent(
 		displayName: "Default",
 		componentType: "view",
 	},
-	({ text, number }: { text: string; number: bigint }, { currentResource }) => {
+	({ text, number }: { text?: string; number?: bigint }, { currentResource }) => {
 		const locale = currentResource.getLocale().getLanguage();
-		return <HighlightNumber big={number.toLocaleString(locale)} small={text} />;
+		return <HighlightNumber big={number?.toLocaleString(locale) ?? ""} small={text ?? ""} />;
 	},
 );

@@ -39,7 +39,7 @@ jahiaComponent(
 		const { t } = useTranslation();
 		const locale = currentResource.getLocale().getLanguage();
 
-		const galleryImages = images
+		const galleryImages = (images ?? [])
 			.filter((imageNode) => Boolean(imageNode))
 			.map((imageNode) => {
 				// Cache dependency for all nodes involved
@@ -53,7 +53,7 @@ jahiaComponent(
 		if (!galleryImages.length) {
 			galleryImages.push({
 				src: buildModuleFileUrl(placeholder),
-				alt: "Placeholder",
+				alt: t("alt.estate", { estate: title ?? "" }),
 			});
 		}
 
@@ -74,15 +74,16 @@ jahiaComponent(
 		const tableRows: ListRowProps[] = [
 			{
 				title: t("estate.type.label"),
-				value: estateTypeTranslation[type],
+				value: type ? estateTypeTranslation[type] : undefined,
 			},
 			{
 				title: t("estate.surface.label"),
-				value: (
-					<>
-						${surface.toLocaleString(locale)} m<sup>2</sup>
-					</>
-				),
+				value:
+					surface != null ? (
+						<>
+							{surface.toLocaleString(locale)} m<sup>2</sup>
+						</>
+					) : undefined,
 			},
 			{
 				title: t("estate.rooms.label"),
@@ -108,22 +109,27 @@ jahiaComponent(
 			<>
 				<Section>
 					<header className={classes.header}>
-						<PageTitle title={title} className={classes.title} />
+						<PageTitle title={title ?? ""} className={classes.title} />
 					</header>
 					<Row>
 						<Island
 							component={GalleryClient}
-							props={{ title, images: galleryImages, className: classes.gallery, delayMs: 150 }}
+							props={{
+								title: title ?? "",
+								images: galleryImages,
+								className: classes.gallery,
+								delayMs: 150,
+							}}
 						/>
 					</Row>
 					<Row className={classes.rowDescription}>
 						<Col
 							dangerouslySetInnerHTML={{
-								__html: description,
+								__html: description ?? "",
 							}}
 						/>
 						<Col>
-							<p className={classes.price}>{price.toLocaleString(locale)} €</p>
+							{price != null && <p className={classes.price}>{price.toLocaleString(locale)} €</p>}
 							<List rows={tableRows} />
 						</Col>
 					</Row>

@@ -28,7 +28,9 @@ export default function SearchResultsClient({
 			itemKey="url"
 			delayMs={100}
 			animationType="fadeInUp"
-			key={`search-${Date.now()}`} // Force re-mount
+			// Re-mount (and replay the reveal animation) only when the result
+			// set actually changes, not on every parent render
+			key={results.map((node) => node.url).join("|")}
 		>
 			{(node, index, key, style, className) => (
 				<Col key={key} style={style} className={clsx(className, isEditMode && classes.editMode)}>

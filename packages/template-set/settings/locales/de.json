@@ -1,4 +1,7 @@
 {
+	"nav": {
+		"toggle": "Navigation ein-/ausblenden"
+	},
 	"section": {
 		"heading": {
 			"contact": "Kontakt",

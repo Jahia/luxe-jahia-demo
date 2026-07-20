@@ -1,5 +1,5 @@
 import { Row, Section, Pagination, PaginationHeader } from "design-system";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchEstate, graphqlFetch } from "./graphql.ts";
 import classes from "./SearchEstate.client.module.css";
 import SearchEstateFormClient from "./SearchEstateForm.client.tsx";
@@ -21,6 +21,17 @@ export default function SearchEstateClient({
 	const [results, setResults] = useState(initialResults);
 	const [limit, setLimit] = useState(config.limit);
 
+	// Scroll to top once the new page of results is committed to the DOM.
+	// Scrolling at click time races with the fetch: the list replacement and
+	// its progressive reveal resize the document mid-animation and the
+	// browser cancels the smooth scroll.
+	const scrollAfterUpdate = useRef(false);
+	useEffect(() => {
+		if (!scrollAfterUpdate.current) return;
+		scrollAfterUpdate.current = false;
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, [results]);
+
 	const totalPages = Math.ceil(results.totalCount / limit);
 
 	const updateSearchResults = (newParams: typeof params, page: number, limit: number) => {
@@ -37,7 +48,7 @@ export default function SearchEstateClient({
 		history.pushState(null, "", url);
 
 		// Fetch new results
-		fetchEstate(graphqlFetch, {
+		fetchEstate(graphqlFetch(config.gqlUrl), {
 			...config,
 			params: newParams,
 			offset: (page - 1) * limit,
@@ -54,6 +65,7 @@ export default function SearchEstateClient({
 	};
 
 	const handlePageChange = (newPage: number) => {
+		scrollAfterUpdate.current = true;
 		updateSearchResults(params, newPage, limit);
 	};
 
@@ -103,6 +115,7 @@ export default function SearchEstateClient({
 						currentPage={results.currentPage}
 						totalPages={Math.ceil(results.totalCount / limit)}
 						onPageChange={handlePageChange}
+						scrollToTop={false}
 						previousLabel={t("pagination.previous")}
 						nextLabel={t("pagination.next")}
 						pageLabel={(page) => t("pagination.page", { page })}

@@ -1,4 +1,7 @@
 {
+	"nav": {
+		"toggle": "toggle navigation"
+	},
 	"section": {
 		"heading": {
 			"contact": "contact",

@@ -1,4 +1,4 @@
-import { buildNodeUrl } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, server, useServerContext } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
 /* Type when `ctaType` is not set to `none`. */
@@ -23,6 +23,13 @@ export type CTAProps = { ctaType: "none" } | DefinedCTAProps;
 
 /** Renders a Call to Action (CTA) link. */
 export function CTA(cta: DefinedCTAProps) {
+	const { renderContext } = useServerContext();
+	const linkNode = cta.ctaType === "internal" ? cta["j:linknode"] : undefined;
+	if (linkNode) {
+		// The cached fragment reads the linked page's title and URL: flush it
+		// when that page changes (rename, move, title edit).
+		server.render.addCacheDependency({ node: linkNode }, renderContext);
+	}
 	return (
 		<a
 			href={
