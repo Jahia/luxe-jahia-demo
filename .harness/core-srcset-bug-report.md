@@ -74,3 +74,46 @@ Any rewriting of individual candidates must also re-assemble the attribute witho
 ## Workaround (module side)
 
 Percent-encode commas (`%2C`) inside srcset URLs at emission time. Verified byte-identical on the Cloudinary CDN and it removes the ambiguity for the core splitter. Implemented in luxe-jahia-demo `packages/template-set/src/commons/libs/imageNodeToProps/index.ts` (PR #436).
+
+## Related finding — React SSR emits camelCase attribute names (2026-07-27)
+
+Pages rendered by JavaScript modules serve attributes with their JSX casing:
+`srcSet=`, `fetchPriority=` on `<img>`, and `imageSrcSet=` on the
+`<link rel="preload" as="image">` elements that React 19 hoists into the output.
+
+This is **stock react-dom behavior, not an engine bug**: the engine uses plain
+`ReactDOMServer.renderToString` (`javascript-modules-engine/src/server/init-react.tsx`,
+`react-dom/server.edge`), and `renderToString` in both react-dom 18 and 19.2.4
+(verified locally with both `server` and `server.edge` entry points) emits these
+attribute names verbatim instead of the canonical lowercase forms. Browsers are
+unaffected (HTML attribute parsing is case-insensitive), but any server-side
+processing that matches attribute names case-sensitively silently skips them.
+
+Impact on the core rewriting pipeline (checked against current sources):
+
+- **`<img srcSet>` is safe**: Jericho's `Attributes.get()` is case-insensitive
+  (`HtmlTagAttributeTraverser.java:137`), `UrlRewriteVisitor` lowercases tag and
+  attribute names before comparing (`UrlRewriteVisitor.java:99-103`), and
+  `SrcSetURLReplacer.handles()` uses `toLowerCase().endsWith("srcset")`. So the
+  camelCase attribute still goes through the srcset-aware branch — and therefore
+  still hits the comma-splitting bug reported above.
+- **`<link rel="preload" imageSrcSet>` is a gap**: the srcset-aware branch is
+  restricted to the `img` tag (`UrlRewriteVisitor.java:103`,
+  `StringUtils.equals(SrcSetURLReplacer.IMG, tagNameLowerCase)`). React 19
+  preload hints carrying multi-candidate `imageSrcSet` values are either not
+  visited at all (if `link`/`imagesrcset` is absent from the traverser
+  configuration) or routed through the single-URL branch, which passes the whole
+  candidate list to `rewriteOutbound` as one URL. Either way, when rewriting
+  changes the `<img>` URLs (vanity URLs, server names), the preload URL no
+  longer matches the image URL — the preload is wasted and the asset downloads
+  twice.
+
+Suggested hardening while fixing the splitter: treat `imagesrcset` on `link`
+like `srcset` on `img` (spec: both use the image-candidate syntax), and keep all
+attribute-name matching case-insensitive — React-SSR pages make camelCase
+attribute names a mainstream input, not an edge case.
+
+Tooling note: case-sensitive text matching misses these attributes (`grep
+'srcset'` finds nothing on a React-SSR page); CSS/Cypress selectors like
+`img[srcset]` are unaffected because the browser lowercases attribute names at
+parse time.
