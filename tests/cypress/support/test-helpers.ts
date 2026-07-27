@@ -1,4 +1,4 @@
-import { createSite, deleteSite, addNode, publishAndWaitJobEnding } from '@jahia/cypress'
+import { createSite, deleteSite, addNode, getNodeByPath, publishAndWaitJobEnding } from '@jahia/cypress'
 
 export const addSimplePage = (
 	parentPathOrId: string,
@@ -70,6 +70,24 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 				publishAndWaitJobEnding(`/sites/${siteKey}`, ['en'])
 			})
 	}
+}
+
+/**
+ * Import the prepackaged luxe site only when it is not already on the
+ * instance. The import takes 2-3 minutes, so it must NOT run per spec file:
+ * every spec under `luxe-prepackaged-website/` treats the site as a read-only
+ * fixture and reuses it. Delete `/sites/luxe` manually (or via jContent) to
+ * force a fresh import.
+ */
+export const ensureLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
+	getNodeByPath(`/sites/${siteKey}`).then((response) => {
+		if (response?.data?.jcr?.nodeByPath?.uuid) {
+			cy.log(`Site ${siteKey} already present, reusing it`)
+			return
+		}
+
+		createLuxeSite(siteKey, prepackagedSiteURL)
+	})
 }
 
 export const createTestSite = (siteKey: string) => {

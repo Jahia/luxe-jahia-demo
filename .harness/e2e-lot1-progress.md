@@ -27,7 +27,7 @@ Full local run (Jahia docker, root/root1234): `content/` 21/21, `i18n-seo/` 3/3,
 4. **`luxe:estate` cannot live in `jnt:contentFolder`** — only `luxe:agency` declares `+ * (luxe:estate)`. Estates must be created under an agency.
 5. **Local GraphQL curl needs `Referer: http://localhost:8080`** header with `-u root:root1234`, else "Permission denied". (MCP `executeGraphQL` works directly.)
 6. **MCP server URL** is `/modules/community-mcp` (NOT `/modules/mcp` from the store doc) — fixed in root `.mcp.json`; token valid.
-7. **Provisioning hook** (`support/e2e.js`): specs under `luxe-prepackaged-website/` delete & re-import the `luxe` prepackaged site per spec file (~2 min 30 each); all other folders delete & recreate `luxe-test-site`. Folder placement of a spec decides its fixture site.
+7. **Provisioning hook** (`support/e2e.js`): specs under `luxe-prepackaged-website/` reuse the `luxe` prepackaged site — `ensureLuxeSite` imports it only when `/sites/luxe` is missing (the import takes 2-3 min; per-spec re-import made the suite ~15 min, reuse brings it to ~30 s). These specs MUST stay read-only on the site. All other folders delete & recreate `luxe-test-site` per spec file. Folder placement of a spec decides its fixture site.
 
 ## Remaining steps
 
