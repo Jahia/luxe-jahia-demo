@@ -16,6 +16,12 @@ declare global {
 			visitAndCaptureConsole(url: string, options?: Partial<Cypress.VisitOptions>): Chainable<Cypress.AUTWindow>
 			/** Fail the test if the last captured visit produced unexpected console errors. */
 			assertNoConsoleErrors(allowedPatterns?: RegExp[]): Chainable<void>
+			/**
+			 * Click `clickSelector` until `expectSelector` appears. Client islands are
+			 * server-rendered before their handlers are attached, so a single click
+			 * can land before hydration and silently do nothing.
+			 */
+			clickUntilVisible(clickSelector: string, expectSelector: string): Chainable<void>
 		}
 	}
 }
@@ -50,6 +56,27 @@ Cypress.Commands.add(
 		})
 	},
 )
+
+Cypress.Commands.add('clickUntilVisible', (clickSelector: string, expectSelector: string) => {
+	const attempt = (retriesLeft: number) => {
+		cy.get(clickSelector).click()
+		cy.get('body').then(($body) => {
+			if ($body.find(`${expectSelector}:visible`).length > 0) {
+				return
+			}
+
+			if (retriesLeft === 0) {
+				throw new Error(`Element ${expectSelector} never appeared after clicking ${clickSelector}`)
+			}
+
+			// eslint-disable-next-line cypress/no-unnecessary-waiting
+			cy.wait(500)
+			attempt(retriesLeft - 1)
+		})
+	}
+
+	attempt(10)
+})
 
 Cypress.Commands.add('assertNoConsoleErrors', (allowedPatterns: RegExp[] = []) => {
 	// Wrapped in cy.then so the check runs after every queued command completed

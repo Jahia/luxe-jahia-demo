@@ -29,7 +29,13 @@
 
 ## 3. Cypress E2E plan
 
-Folder layout under `tests/cypress/e2e/` (existing specs migrate into it):
+Folder layout under `tests/cypress/e2e/` (existing specs migrate into it).
+
+> **Note (lot 1):** the layout is constrained by the provisioning hook in
+> `support/e2e.js` — specs under `luxe-prepackaged-website/` get the `luxe`
+> prepackaged site import (deleted & re-imported per spec file), every other
+> folder gets the generic `luxe-test-site` (deleted & recreated per spec file,
+> content built by `support/fixtures/`). Place new specs accordingly.
 
 ### `smoke/` — landing & navigation (external reco: landing page, navigation, browser logs)
 

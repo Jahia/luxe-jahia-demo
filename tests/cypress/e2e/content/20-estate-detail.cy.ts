@@ -74,7 +74,7 @@ describe('Content - 20 Estate detail page', () => {
 
 	it('opens the gallery slideshow from the main image (island hydration)', () => {
 		cy.visit(`${agencyPath}/full-estate.html`)
-		cy.get('img[data-part="mainImage"]').click()
+		cy.clickUntilVisible('img[data-part="mainImage"]', 'button[aria-label="Next image"]')
 		cy.get('button[aria-label="Next image"]').should('be.visible')
 		cy.get('button[aria-label="Previous image"]').should('be.visible')
 	})

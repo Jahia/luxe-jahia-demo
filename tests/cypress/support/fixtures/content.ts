@@ -73,7 +73,10 @@ export const createEstate = (parentPath: string, estate: EstateInput): Cypress.C
 		{ name: 'images', values: estate.imageUuids, type: 'WEAKREFERENCE' },
 	]
 	if (estate.titleFr) {
+		// Touching a locale makes the JCR validate every mandatory i18n field
+		// for that locale too, so the fr description must be provided as well.
 		properties.push({ name: 'title', value: estate.titleFr, language: 'fr' })
+		properties.push({ name: 'description', value: estate.description ?? '<p>A test estate.</p>', language: 'fr' })
 	}
 
 	if (estate.surface !== undefined) {
