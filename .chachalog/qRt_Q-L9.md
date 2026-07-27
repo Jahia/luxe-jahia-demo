@@ -3,4 +3,4 @@
 luxe-jahia-demo: patch
 ---
 
-LuxeImage component, per-provider image resize routing & srcSet fixes (#436)
+Improved image loading and resizing so pages render faster and images stay sharp. (#436)
