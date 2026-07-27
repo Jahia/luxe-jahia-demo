@@ -6,6 +6,7 @@ import clsx from "clsx";
  * Image
  * - Accepts native <img> props only.
  * - Does NOT compute any dimensions.
+ * - `priority` marks an above-the-fold/LCP image: eager loading + high fetch priority.
  * - Adds loading="lazy" only when BOTH width and height are provided.
  * - Ensures an explicit `alt` attribute (default "") for a11y linters.
  */
@@ -13,15 +14,20 @@ export const Image = ({
 	ref,
 	alt = "",
 	loading,
+	fetchPriority,
+	priority = false,
 	width,
 	height,
 	className,
 	...rest
 }: ImgHTMLAttributes<HTMLImageElement> & {
 	ref?: RefObject<HTMLImageElement | null>;
+	/** Set on the LCP/hero image so it is not lazy-loaded. */
+	priority?: boolean;
 }) => {
 	// Only set loading="lazy" if both width and height exist and user didn't specify loading.
-	const finalLoading = loading ?? (width != null && height != null ? "lazy" : undefined);
+	const finalLoading =
+		loading ?? (priority ? "eager" : width != null && height != null ? "lazy" : undefined);
 
 	return (
 		<img
@@ -30,6 +36,7 @@ export const Image = ({
 			width={width}
 			height={height}
 			loading={finalLoading}
+			fetchPriority={fetchPriority ?? (priority ? "high" : undefined)}
 			className={clsx(classes.img, className)}
 			{...rest}
 		/>

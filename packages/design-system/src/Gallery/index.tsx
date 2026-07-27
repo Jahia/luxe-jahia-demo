@@ -13,9 +13,11 @@ interface GalleryProps {
 	images: Array<React.ImgHTMLAttributes<HTMLImageElement> & { src: string }>;
 	className?: string;
 	delayMs?: number;
+	/** Set when the gallery is above the fold: its main image is the LCP candidate. */
+	priority?: boolean;
 }
 
-export const Gallery = ({ title, images, className, delayMs = 200 }: GalleryProps) => {
+export const Gallery = ({ title, images, className, delayMs = 200, priority }: GalleryProps) => {
 	const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [hydrated, setHydrated] = useState(false);
@@ -24,7 +26,7 @@ export const Gallery = ({ title, images, className, delayMs = 200 }: GalleryProp
 		setHydrated(true);
 	}, []);
 
-	const mainImage = { ...images[0], sizes: "(max-width: 1320px) 100vw, 1320px" };
+	const mainImage = { ...images[0], sizes: "(max-width: 1320px) 100vw, 1320px", priority };
 
 	const isMdAndUp = useMediaQuery("(min-width: 768px)");
 	const isXlAndUp = useMediaQuery("(min-width: 1200px)");

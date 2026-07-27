@@ -1,51 +1,29 @@
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { mapWidth, clampToIntrinsic, readNodeMeta, sizedUrlOrOriginal } from "./meta";
-import { DEFAULT_WIDTHS } from "~/commons/libs/imageNodeToProps/constants.ts";
+import { clampToIntrinsic, readNodeMeta, sizedUrl } from "./meta";
+import { DEFAULT_WIDTHS } from "./constants";
 
 /**
- * Single `<source>` input for `<picture>`.
- * - `media`: CSS media query, e.g. `(min-width: 1024px)`.
- * - `width`/`height`: requested pixel size for URL generation; clamped to intrinsic when known.
- *   `Infinity` may be passed by callers to mean “use intrinsic/original size” (handled by the builder).
- * - `node`: optional override asset for this variant.
+ * Options for building props for an `<img>` element.
  */
-export type SourceInput = {
-	media: string;
-	width?: number;
-	height?: number;
-	node?: JCRNodeWrapper;
-};
-
-/**
- * Configuration for building props for an `<img>` element.
- * - `baseWidth`/`baseHeight`: base resize for the returned `src` (clamped to intrinsic).
- * - `widths`: candidate widths (px) to construct `srcSet`; defaults are used when omitted.
- *   `Infinity` entries are interpreted as “intrinsic width if known”.
- */
-export type ImgConfig = {
+export type ImgOptions = {
+	/** Alternative text; defaults to the node's displayable name. */
+	alt?: string;
+	/** Base resize width (px) for the returned `src`; defaults to the first candidate width. */
 	baseWidth?: number;
+	/** Base resize height (px) for the returned `src`. */
 	baseHeight?: number;
+	/**
+	 * Candidate widths (px) for `srcSet`; defaults to {@link DEFAULT_WIDTHS}.
+	 * Candidates are clamped to the intrinsic width; the intrinsic width is
+	 * added as a candidate when it is at most 2× the largest requested width
+	 * (so a huge master asset never becomes a candidate).
+	 */
 	widths?: number[];
 };
 
 /**
- * Configuration for building props for a `<picture>` element.
- * - `baseWidth`/`baseHeight`: base resize for the returned `src` (clamped to intrinsic).
- * - `sources`: optional per-breakpoint list for `<source>`; if omitted, defaults are generated.
- */
-export type PictureConfig = {
-	baseWidth?: number;
-	baseHeight?: number;
-	sources?: SourceInput[];
-};
-
-/**
- * Returned props for an `<img>` element (no `sizes` by design).
- * - `src`: base URL (may include resize params when not a no-op).
- * - `alt`: alternative text (trimmed).
- * - `srcSet`: comma-separated width-descriptor candidates; includes the base `src` exactly once,
- *   with URLs de-duplicated. Omitted for vector images or when no candidates remain.
- * - `width`/`height`: intrinsic dimensions when available.
+ * Returned props for an `<img>` element (no `sizes` by design — it describes
+ * the layout slot, so it belongs to the call site; `LuxeImage` exposes it).
  */
 export type ImgProps = {
 	src: string;
@@ -58,119 +36,65 @@ export type ImgProps = {
 /**
  * Build `<img>`-ready props from a Jahia image node.
  *
- * @param options - Object with `{ imageNode, alt?, config? }`.
- * @param options.imageNode - Source node. Vector images are returned as-is.
- * @param options.alt - Fallbacks to the node's displayable name if omitted.
- * @param options.config - Responsive config; `baseWidth` enables width descriptors in `srcSet`.
- *
- * @returns {@link ImgProps}
- * An object you can spread onto an `<img>` element:
- * - `src: string` — Base URL for the image. May include resize params (`?w=` / `?h=`) when resizing is not a no-op.
- * - `alt: string` — Trimmed alternative text; defaults to the node’s display name.
- * - `srcSet?: string` — Comma-separated width-descriptor candidates **including** the base `src` URL exactly once
- *   (as the first entry when it wasn’t already produced by a candidate width). URLs are de-duplicated; each entry
- *   is of the form `"URL NNNw"`. Omitted for vector images or when no candidate remains.
- * - `width?: number`, `height?: number` — Intrinsic dimensions when known (`j:width`/`j:height`); otherwise omitted.
- *
- * @remarks
- * - Raster images: requested width/height are clamped to the intrinsic dimensions when known.
- * - Vector images (e.g. SVG): no resize parameters and no `srcSet` are produced; the original URL is used.
- * - `srcSet` candidates come from `config.widths` or the defaults {@link DEFAULT_WIDTHS}.
- * - If `config.baseWidth` is omitted, the first candidate width is used (`config.widths?.[0]` or `DEFAULT_WIDTHS[0]`).
- * - `Infinity` in `baseWidth` or in `widths` is replaced by the intrinsic width when known; otherwise that entry is dropped
- *   (no `w=Infinity` is ever emitted).
- * - This function does **not** return a `sizes` attribute by design; provide it at call-site if needed.
+ * - Raster images: requested sizes are clamped to the intrinsic dimensions
+ *   (`j:width` / `j:height`) when known; `srcSet` URLs are de-duplicated and
+ *   always include the base `src`.
+ * - Vector images (e.g. SVG): original URL, no resize params, no `srcSet`.
  *
  * @example
  * ```tsx
- * const props = imageNodeToImgProps({
- *   imageNode,
- *   alt: "Hero",
- *   config: {
- *     baseWidth: 1280,
- *     widths: [600, 900, 1200, 1536, Infinity],
- *   },
- * });
- *
- * <img {...props} />
+ * <img {...imageNodeToImgProps(imageNode, { alt: "Hero", widths: [600, 1200] })} />
  * ```
- *
- * @see ImgConfig
- * @see ImgProps
  */
-
-export function imageNodeToImgProps({
-	imageNode,
-	alt = imageNode.getDisplayableName(),
-	config,
-}: {
-	imageNode: JCRNodeWrapper;
-	alt?: string;
-	config?: ImgConfig;
-}): ImgProps {
+export function imageNodeToImgProps(
+	imageNode: JCRNodeWrapper,
+	{ alt = imageNode.getDisplayableName(), baseWidth, baseHeight, widths }: ImgOptions = {},
+): ImgProps {
 	const meta = readNodeMeta(imageNode);
 
 	// Vectors: never resized, no srcSet
 	if (meta.vector) {
-		return {
-			src: sizedUrlOrOriginal(imageNode),
-			alt: alt.trim(),
-		};
+		return { src: sizedUrl(imageNode, meta), alt: alt.trim() };
 	}
 
-	// Base URL (fallback: config.widths[0] -> DEFAULT_WIDTHS[0])
-	const baseWidthCandidate = config?.baseWidth ?? config?.widths?.[0] ?? DEFAULT_WIDTHS[0];
-	const baseW = mapWidth(baseWidthCandidate, meta.intrinsicWidth);
-	const baseH = clampToIntrinsic(config?.baseHeight, meta.intrinsicHeight);
+	const requestedBase = baseWidth ?? widths?.[0] ?? DEFAULT_WIDTHS[0];
+	const src = sizedUrl(imageNode, meta, requestedBase, baseHeight);
 
-	const baseUrl = sizedUrlOrOriginal(
-		imageNode,
-		baseW,
-		meta.intrinsicWidth,
-		baseH,
-		meta.intrinsicHeight,
-	);
+	// srcSet candidates: requested widths clamped to intrinsic
+	const candidates = (widths ?? DEFAULT_WIDTHS)
+		.map((w) => clampToIntrinsic(w, meta.intrinsicWidth))
+		.filter((w): w is number => typeof w === "number" && Number.isFinite(w) && w > 0);
+	// The intrinsic width joins the candidates only when the original is
+	// reasonably close to the largest requested width: a huge master asset
+	// (e.g. an 8000px DAM original) must never be served for a 1536px slot.
+	if (meta.intrinsicWidth && meta.intrinsicWidth <= 2 * Math.max(0, ...candidates)) {
+		candidates.push(meta.intrinsicWidth);
+	}
 
-	// Build width candidates:
-	// - If `config.widths` is defined but empty -> [] (invalidate defaults)
-	// - If undefined -> use DEFAULT_WIDTHS
-	const rawWidths = config?.widths ?? DEFAULT_WIDTHS;
-
-	const requested = rawWidths
-		.map((w) => mapWidth(w, meta.intrinsicWidth))
-		.filter((w): w is number => typeof w === "number" && isFinite(w) && w > 0);
-
-	// Generate unique URLs and assemble srcSet
+	// One srcSet entry per unique URL; make sure the base src is listed
 	const seen = new Set<string>();
-	const pairs: Array<{ url: string; w?: number }> = [];
-
-	for (const w of requested) {
-		const url = sizedUrlOrOriginal(
-			imageNode,
-			w,
-			meta.intrinsicWidth,
-			undefined,
-			meta.intrinsicHeight,
-		);
+	const pairs: { url: string; w: number }[] = [];
+	for (const w of candidates) {
+		const url = sizedUrl(imageNode, meta, w);
 		if (!seen.has(url)) {
 			seen.add(url);
 			pairs.push({ url, w });
 		}
 	}
-
-	// Ensure baseUrl appears at least once
-	if (!seen.has(baseUrl)) {
-		pairs.unshift({ url: baseUrl, w: baseW });
+	if (!seen.has(src)) {
+		pairs.unshift({ url: src, w: clampToIntrinsic(requestedBase, meta.intrinsicWidth) as number });
 	}
 
-	const srcSet = pairs.length
-		? pairs.map((p) => (p.w ? `${p.url} ${p.w}w` : p.url)).join(", ")
-		: undefined;
+	// Commas are legal inside a srcSet URL but ambiguous with the candidate
+	// separator, and Jahia's srcset URL rewriter (SrcSetURLReplacer) splits on
+	// every comma — corrupting e.g. Cloudinary transformation URLs
+	// (…/upload/f_auto,w_600/…). Percent-encode them within srcSet only.
+	const srcSetSafe = (url: string) => url.replaceAll(",", "%2C");
 
 	return {
-		src: baseUrl,
+		src,
 		alt: alt.trim(),
-		srcSet,
+		srcSet: pairs.map(({ url, w }) => `${srcSetSafe(url)} ${w}w`).join(", ") || undefined,
 		width: meta.intrinsicWidth,
 		height: meta.intrinsicHeight,
 	};

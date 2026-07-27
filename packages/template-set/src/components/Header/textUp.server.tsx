@@ -1,8 +1,8 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
-import { Figure, Image, PageTitle, Row } from "design-system";
+import { jahiaComponent } from "@jahia/javascript-modules-library";
+import { Figure, PageTitle, Row } from "design-system";
 import type { HeaderProps } from "./types.js";
 import classes from "./textUp.module.css";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { LuxeImage } from "~/commons/LuxeImage";
 
 jahiaComponent(
 	{
@@ -11,26 +11,23 @@ jahiaComponent(
 		displayName: "Image & Text Up",
 		componentType: "view",
 	},
-	({ title, subtitle, image: imageNode }: HeaderProps, { renderContext }) => {
-		if (imageNode) server.render.addCacheDependency({ node: imageNode }, renderContext);
-
-		return (
-			<header className={classes.header}>
+	({ title, subtitle, image: imageNode }: HeaderProps) => (
+		<header className={classes.header}>
+			<Row>
+				<PageTitle title={title} description={subtitle} />
+			</Row>
+			{imageNode && (
 				<Row>
-					<PageTitle title={title} description={subtitle} />
+					<Figure layout="imgFull">
+						<LuxeImage
+							node={imageNode}
+							className={classes.image}
+							sizes="(max-width: 1320px) 100vw, 1320px"
+							priority
+						/>
+					</Figure>
 				</Row>
-				{imageNode && (
-					<Row>
-						<Figure layout="imgFull">
-							<Image
-								className={classes.image}
-								sizes="(max-width: 1320px) 100vw, 1320px"
-								{...imageNodeToImgProps({ imageNode })}
-							/>
-						</Figure>
-					</Row>
-				)}
-			</header>
-		);
-	},
+			)}
+		</header>
+	),
 );

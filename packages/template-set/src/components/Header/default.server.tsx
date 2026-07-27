@@ -1,8 +1,7 @@
-import { jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { jahiaComponent } from "@jahia/javascript-modules-library";
 import type { HeaderProps } from "./types";
 import classes from "./default.module.css";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import { Image } from "design-system";
+import { LuxeImage } from "~/commons/LuxeImage";
 
 jahiaComponent(
 	{
@@ -10,14 +9,19 @@ jahiaComponent(
 		name: "default",
 		componentType: "view",
 	},
-	({ title, image: imageNode }: HeaderProps, { renderContext }) => {
-		if (imageNode) server.render.addCacheDependency({ node: imageNode }, renderContext);
-
-		return (
-			<section className={classes.cover}>
-				{imageNode && <Image className={classes.image} {...imageNodeToImgProps({ imageNode })} />}
-				<h1 className={classes.title}>{title}</h1>
-			</section>
-		);
-	},
+	({ title, image: imageNode }: HeaderProps) => (
+		<section className={classes.cover}>
+			{imageNode && (
+				<LuxeImage
+					node={imageNode}
+					className={classes.image}
+					// Full-bleed hero: covers the viewport width, 4K/retina candidates included
+					sizes="100vw"
+					widths={[600, 900, 1200, 1536, 1920, 2560]}
+					priority
+				/>
+			)}
+			<h1 className={classes.title}>{title}</h1>
+		</section>
+	),
 );

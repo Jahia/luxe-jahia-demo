@@ -1,15 +1,8 @@
-import {
-	buildModuleFileUrl,
-	jahiaComponent,
-	Render,
-	server,
-} from "@jahia/javascript-modules-library";
+import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
-import placeholder from "/static/img/img-placeholder.jpg";
-import { Col, Figure, HeadingSection, Image, Row, Section } from "design-system";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import type { ImgHTMLAttributes } from "react";
+import { Col, Figure, HeadingSection, Row, Section } from "design-system";
+import { LuxeImage } from "~/commons/LuxeImage";
 import { useTranslation } from "react-i18next";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
@@ -30,28 +23,9 @@ jahiaComponent(
 			"j:defaultCategory": categories,
 			relatedBlogPosts,
 		}: BlogPostProps,
-		{ currentNode, renderContext },
+		{ currentNode },
 	) => {
 		const { t } = useTranslation();
-		// Image: placeholder by default; override when a real node exists
-		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
-			src: buildModuleFileUrl(placeholder),
-		};
-
-		if (imageNode) {
-			// SSR cache dep for this image node
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-
-			// Map Jahia node -> <img> props (+ i18n alt)
-			imageProps = imageNodeToImgProps({
-				imageNode,
-				alt: t("alt.blog", { blog: title }),
-			});
-
-			// Responsive slot hint: ≤1320px → 100vw, otherwise ≈1320px
-			// (keep in sync with grid breakpoints; effective with width-based srcset)
-			imageProps.sizes = "(max-width: 1320px) 100vw, 1320px";
-		}
 
 		// Guard against a missing or invalid date: new Date(undefined) is an
 		// Invalid Date and toISOString() would throw a RangeError
@@ -75,7 +49,12 @@ jahiaComponent(
 					<header className={classes.header}>
 						<Row>
 							<Figure layout="imgFull">
-								<Image {...imageProps} />
+								<LuxeImage
+									node={imageNode}
+									alt={t("alt.blog", { blog: title })}
+									sizes="(max-width: 1320px) 100vw, 1320px"
+									priority
+								/>
 							</Figure>
 						</Row>
 						<Row component="hgroup">
