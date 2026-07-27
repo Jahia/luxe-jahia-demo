@@ -1,12 +1,35 @@
 # E2E Lot 1 — Progress & Restoration Point
 
-> Date: 2026-07-27 — branch `feature/e2e-test` (from origin/main @ bfefc0b; generic name on purpose — it will carry the next lots too)
-> Plan: see `.harness/cypress-test-plan.md`. PR title: `test: cypress e2e infrastructure & lot 1 coverage (smoke, content regressions, images)`
+> Date: 2026-07-27 (end of day) — branch `feature/e2e-test` (from origin/main @ bfefc0b; generic name on purpose — it will carry the next lots too)
+> Plan: see `.harness/cypress-test-plan.md`.
 
-## Status: lot 1 COMPLETE — all specs green locally
+## Status: lot 1 COMPLETE & SHIPPED — PR #438 open
+
+**PR #438** (https://github.com/Jahia/luxe-jahia-demo/pull/438) opened 2026-07-27:
+`test: cypress e2e infrastructure & lot 1 coverage (smoke, content regressions, images)`.
+Branch commits: a79f635 (infra + specs) → 16a2e40 (stabilization: fr i18n
+constraint, island hydration, srcset coverage) → 36150cd (srcset bug report
+sections) → 7023b6d (prepackaged site imported once & reused, suite ~30 s).
 
 Full local run (Jahia docker, root/root1234): `content/` 21/21, `i18n-seo/` 3/3,
-`editing/` 2/2, `smoke/` 8/8, `images/` 6/6, `search/` 3/3. Lint + `tsc --noEmit` green.
+`editing/` 2/2, `smoke/` 8/8, `images/` 6/6, `search/` 3/3 — 43 tests green.
+Lint + `tsc --noEmit` green.
+
+## Tomorrow (resume here)
+
+1. **Follow the PR #438 review**; only the "Tests provided" checklist box is
+   ticked — the author confirms the rest.
+2. **File the core srcset bug report** — draft ready in
+   `.harness/core-srcset-bug-report.md`, now including the React-SSR camelCase
+   findings (react-dom 18/19 emit `srcSet=`/`imageSrcSet=`/`fetchPriority=`
+   verbatim; core `<img srcSet>` path is case-insensitive → still hits the comma
+   bug; `<link rel=preload imageSrcSet>` escapes the srcset-aware branch →
+   wasted preloads under URL rewriting). Tracker to pick: JIRA core vs GitHub —
+   ask the user.
+3. **Next E2E lots** (plan §3): `query/` 40-41, `search/` 51-52, `forms/`,
+   remaining `i18n-seo`/`editing`/`import`; Vitest plan §4. Same branch,
+   granular commits.
+4. Then **issue #435** (site-review findings: html lang, titles, contrasts…).
 
 ## Done
 
@@ -28,11 +51,6 @@ Full local run (Jahia docker, root/root1234): `content/` 21/21, `i18n-seo/` 3/3,
 5. **Local GraphQL curl needs `Referer: http://localhost:8080`** header with `-u root:root1234`, else "Permission denied". (MCP `executeGraphQL` works directly.)
 6. **MCP server URL** is `/modules/community-mcp` (NOT `/modules/mcp` from the store doc) — fixed in root `.mcp.json`; token valid.
 7. **Provisioning hook** (`support/e2e.js`): specs under `luxe-prepackaged-website/` reuse the `luxe` prepackaged site — `ensureLuxeSite` imports it only when `/sites/luxe` is missing (the import takes 2-3 min; per-spec re-import made the suite ~15 min, reuse brings it to ~30 s). These specs MUST stay read-only on the site. All other folders delete & recreate `luxe-test-site` per spec file. Folder placement of a spec decides its fixture site.
-
-## Remaining steps
-
-1. Commit (this session's fixes), push, open PR (title above, standard body template from `~/.claude/CLAUDE.md`).
-2. Next lots (see plan §3): `query/` 40-41, `search/` 51-52, `forms/`, remaining `i18n-seo`/`editing`/`import` specs, Vitest plan §4.
 
 ## Environment notes
 
