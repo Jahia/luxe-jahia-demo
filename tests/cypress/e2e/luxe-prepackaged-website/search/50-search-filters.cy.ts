@@ -1,4 +1,4 @@
-import { LUXE_SITE_KEY } from '../../support/constants'
+import { LUXE_SITE_KEY } from '../../../support/constants'
 
 describe('Search Estate - Buy page', () => {
 	it('should filter estates by number of bedrooms and display correct results', () => {

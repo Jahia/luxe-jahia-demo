@@ -5,7 +5,7 @@
 		"instrument": "nyc instrument --compact=false cypress instrumented",
 		"e2e:ci": "cypress run",
 		"e2e:debug": "cypress open",
-		"lint": "eslint . -c .eslintrc.json --ext .ts",
+		"lint": "ESLINT_USE_FLAT_CONFIG=false eslint . -c .eslintrc.json --ext .ts",
 		"report:merge": "mochawesome-merge results/reports/mochawesome*.json > results/reports/report.json && rm results/reports/mochawesome*.json",
 		"report:html": "marge --inline results/reports/report.json --reportDir results/reports/"
 	},

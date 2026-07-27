@@ -14,6 +14,7 @@ describe('Preview mode', () => {
 			],
 		})
 	}
+
 	before('Create test data', () => {
 		cy.login()
 		createSite(siteKey, { templateSet: 'luxe-jahia-demo', locale: 'en', serverName: 'localhost' })
