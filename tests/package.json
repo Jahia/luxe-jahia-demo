@@ -5,7 +5,7 @@
 		"instrument": "nyc instrument --compact=false cypress instrumented",
 		"e2e:ci": "cypress run",
 		"e2e:debug": "cypress open",
-		"lint": "ESLINT_USE_FLAT_CONFIG=false eslint . -c .eslintrc.json --ext .ts",
+		"lint": "cross-env ESLINT_USE_FLAT_CONFIG=false eslint . -c .eslintrc.json --ext .ts",
 		"report:merge": "mochawesome-merge results/reports/mochawesome*.json > results/reports/report.json && rm results/reports/mochawesome*.json",
 		"report:html": "marge --inline results/reports/report.json --reportDir results/reports/"
 	},
@@ -18,6 +18,7 @@
 		"@types/decompress": "^4.2.7",
 		"@typescript-eslint/eslint-plugin": "^8.29.1",
 		"@typescript-eslint/parser": "^8.29.1",
+		"cross-env": "^10.1.0",
 		"cypress": "^14.5.4",
 		"cypress-multi-reporters": "^2.0.5",
 		"cypress-terminal-report": "^5.3.12",
