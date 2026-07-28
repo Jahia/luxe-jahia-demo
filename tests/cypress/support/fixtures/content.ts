@@ -9,7 +9,7 @@
  * indirectly, e.g. by deleting a referenced image node (dangling
  * weakreference).
  */
-import { addNode, uploadFile } from '@jahia/cypress'
+import { addNode, deleteNode, getNodeByPath, uploadFile } from '@jahia/cypress'
 
 export interface NodeRef {
 	uuid: string
@@ -162,6 +162,8 @@ export interface BlogPostInput {
 	title?: string
 	body?: string
 	relatedUuids?: string[]
+	/** Category uuids set as j:defaultCategory (adds the jmix:categorized mixin). */
+	categoryUuids?: string[]
 }
 
 export const createBlogPost = (parentPath: string, blogPost: BlogPostInput): Cypress.Chainable<NodeRef> => {
@@ -170,13 +172,110 @@ export const createBlogPost = (parentPath: string, blogPost: BlogPostInput): Cyp
 		{ name: 'body', value: blogPost.body ?? '<p>A test blog post.</p>', language: 'en' },
 		{ name: 'image', value: blogPost.imageUuid, type: 'WEAKREFERENCE' },
 	]
+	const mixins: string[] = []
 	if (blogPost.relatedUuids?.length) {
 		properties.push({ name: 'relatedBlogPosts', values: blogPost.relatedUuids, type: 'WEAKREFERENCE' })
 	}
 
+	if (blogPost.categoryUuids?.length) {
+		mixins.push('jmix:categorized')
+		properties.push({ name: 'j:defaultCategory', values: blogPost.categoryUuids, type: 'WEAKREFERENCE' })
+	}
+
 	return yieldRef(
-		addNode({ parentPathOrId: parentPath, name: blogPost.name, primaryNodeType: 'luxe:blogPost', properties }),
+		addNode({
+			parentPathOrId: parentPath,
+			name: blogPost.name,
+			primaryNodeType: 'luxe:blogPost',
+			properties,
+			mixins,
+		}),
 		`${parentPath}/${blogPost.name}`,
+	)
+}
+
+/**
+ * Create a category under the system-site category tree. Categories are global
+ * (they survive the per-spec site teardown), so specs must clean them up —
+ * see `deleteCategoryIfExists`.
+ */
+export const createCategory = (name: string, title?: string): Cypress.Chainable<NodeRef> =>
+	yieldRef(
+		addNode({
+			parentPathOrId: '/sites/systemsite/categories',
+			name,
+			primaryNodeType: 'jnt:category',
+			properties: [{ name: 'jcr:title', value: title ?? name, language: 'en' }],
+		}),
+		`/sites/systemsite/categories/${name}`,
+	)
+
+export const deleteCategoryIfExists = (name: string): void => {
+	const path = `/sites/systemsite/categories/${name}`
+	getNodeByPath(path).then((response) => {
+		if (response?.data?.jcr?.nodeByPath?.uuid) {
+			deleteNode(path)
+		}
+	})
+}
+
+export interface JcrQueryInput {
+	name: string
+	/** Mandatory in the CND: the node type to query (e.g. `luxe:blogPost`). */
+	type: string
+	title?: string
+	criteria?: 'jcr:created' | 'jcr:lastModified' | 'j:lastPublished'
+	sortDirection?: 'asc' | 'desc'
+	maxItems?: number
+	startNodeUuid?: string
+	excludeNodeUuids?: string[]
+	/** Category uuids for the j:defaultCategory filter. */
+	filterCategoryUuids?: string[]
+	noResultText?: string
+	subNodesView?: string
+}
+
+export const createJcrQuery = (parentPath: string, query: JcrQueryInput): Cypress.Chainable<NodeRef> => {
+	const properties: JcrProperty[] = [{ name: 'type', value: query.type }]
+	if (query.title) {
+		properties.push({ name: 'jcr:title', value: query.title, language: 'en' })
+	}
+
+	if (query.criteria) {
+		properties.push({ name: 'criteria', value: query.criteria })
+	}
+
+	if (query.sortDirection) {
+		properties.push({ name: 'sortDirection', value: query.sortDirection })
+	}
+
+	if (query.maxItems !== undefined) {
+		properties.push({ name: 'maxItems', value: String(query.maxItems) })
+	}
+
+	if (query.startNodeUuid) {
+		properties.push({ name: 'startNode', value: query.startNodeUuid, type: 'WEAKREFERENCE' })
+	}
+
+	if (query.excludeNodeUuids?.length) {
+		properties.push({ name: 'excludeNodes', values: query.excludeNodeUuids, type: 'WEAKREFERENCE' })
+	}
+
+	if (query.filterCategoryUuids?.length) {
+		properties.push({ name: 'filter', values: query.filterCategoryUuids, type: 'WEAKREFERENCE' })
+	}
+
+	if (query.noResultText) {
+		properties.push({ name: 'noResultText', value: query.noResultText, language: 'en' })
+	}
+
+	if (query.subNodesView) {
+		properties.push({ name: 'j:subNodesView', value: query.subNodesView })
+	}
+
+	return yieldRef(
+		addNode({ parentPathOrId: parentPath, name: query.name, primaryNodeType: 'luxe:jcrQuery', properties }),
+		`${parentPath}/${query.name}`,
 	)
 }
 
