@@ -91,7 +91,7 @@ export default function ContactClient({
 	if (unknownError) {
 		return (
 			<p className={clsx(alert.danger, classes.fs6)} role="alert">
-				{t("form.unknownError")}
+				{t("form.contact.unknownError")}
 			</p>
 		);
 	}
