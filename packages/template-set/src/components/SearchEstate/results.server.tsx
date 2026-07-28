@@ -6,6 +6,7 @@ import {
 	useGQLQuery,
 } from "@jahia/javascript-modules-library";
 import { fetchEstate } from "./graphql.ts";
+import { parsePagination } from "./pagination.ts";
 import SearchEstateClient from "./SearchEstate.client.tsx";
 import type { QueryConfig } from "./types.ts";
 
@@ -49,9 +50,7 @@ jahiaComponent(
 		// Extract pagination parameters from URL
 		const pageParam = javaParamMap.getOrDefault("page", ["1"])[0];
 		const limitParam = javaParamMap.getOrDefault("limit", ["30"])[0];
-		const page = Math.max(1, parseInt(pageParam, 10) || 1);
-		const limit = Math.max(1, Math.min(100, parseInt(limitParam, 10) || 30)); // Max 100 items per page
-		const offset = (page - 1) * limit;
+		const { limit, offset } = parsePagination(pageParam, limitParam);
 
 		// All the data required to fetch the estate nodes
 		const config: QueryConfig = {
