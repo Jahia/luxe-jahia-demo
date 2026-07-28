@@ -7,7 +7,9 @@
 
 **PR #438** (https://github.com/Jahia/luxe-jahia-demo/pull/438), still awaiting
 human review (only Copilot commented; its lint-script portability remark is
-fixed with cross-env in 6981e3d and answered on the thread).
+fixed with cross-env in 6981e3d and answered on the thread). Title and body
+updated on 2026-07-28 to cover lots 1-2 + Vitest (`test: cypress e2e
+infrastructure, lots 1-2 coverage & first vitest suites`).
 
 Lot 2 commits (2026-07-28): d64eae8 (spec 50 stale-DOM race fix) → 6981e3d
 (cross-env lint) → ef90769 (spec 51 + SearchEstatePage page object) → 8016a8f
@@ -20,16 +22,28 @@ Full local run (Jahia docker, root/root1234): **75/75 e2e over 20 spec files
 (~2 min 24)** + **48/48 Vitest** in packages/template-set. Lint + tsc green in
 both `tests/` and `packages/template-set`.
 
-## Next session (resume here)
+## Next session — 2026-07-29: LOT 3 (user-confirmed)
 
-1. **Follow the PR #438 review** — now covers lots 1+2.
-2. **File the core srcset bug report** — draft ready in
-   `.harness/core-srcset-bug-report.md`. Tracker to pick (JIRA core vs
-   GitHub): ask the user.
-3. **Lot 3** (plan §3): `i18n-seo/` 70-71, `editing/` 80-81 (needs
-   `@jahia/jcontent-cypress` — Formidable's pagebuilder specs are the model),
-   `import/` 90-91; Vitest 4-6 (submitContact, CTA mapping, geocodeAddress).
-4. Then **issue #435** (site-review findings: html lang, titles, contrasts…).
+Main task: **lot 3** (plan §3-4). Suggested order:
+1. `i18n-seo/70-language-switcher` + `71-seo-main-resource` — no new infra,
+   prepackaged site (70 needs the fr locale: `luxe` site has en+fr published).
+2. `editing/80-jcontent-preview` + `81-pagebuilder-crud` — needs
+   `@jahia/jcontent-cypress` (add to tests devDependencies); the model is
+   Formidable's `pagebuilder/70-pagebuilder-form-editing.cy.ts`
+   (`/home/hduchesn/Jahia/modules/Formidable/modules/formidable/tests`).
+3. `import/90-import-site` (parameterized site keys + duration via cy.task,
+   warn-only threshold) and optional `91-content-integrity`.
+4. Vitest 4-6: `submitContact` (mocked fetch incl. window.wem), CTA mixin
+   props mapping, `geocodeAddress`.
+
+Same branch, granular commits, PR #438 grows with lot 3.
+
+Also pending (not lot 3):
+- **Follow the PR #438 review** (still no human review).
+- **File the core srcset bug report** — draft in
+  `.harness/core-srcset-bug-report.md`; tracker (JIRA core vs GitHub): ask
+  the user.
+- Then **issue #435** (site-review findings: html lang, titles, contrasts…).
 
 ### Observations for the team (not yet filed)
 
