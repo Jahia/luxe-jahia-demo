@@ -279,6 +279,40 @@ export const createJcrQuery = (parentPath: string, query: JcrQueryInput): Cypres
 	)
 }
 
+export interface ContactFormInput {
+	name: string
+	title?: string
+	/** Endpoint POSTed to on submit; without it the form runs in demo mode. */
+	target?: string
+	/** Rich text supporting the $name / $email / $message placeholders. */
+	feedbackMsg?: string
+}
+
+export const createContactForm = (
+	parentPath: string,
+	{ name, title, target, feedbackMsg }: ContactFormInput,
+): Cypress.Chainable<NodeRef> => {
+	const properties: JcrProperty[] = [
+		{
+			name: 'feedbackMsg',
+			value: feedbackMsg ?? '<p>Dear $name, your message was received.</p>',
+			language: 'en',
+		},
+	]
+	if (title) {
+		properties.push({ name: 'jcr:title', value: title, language: 'en' })
+	}
+
+	if (target) {
+		properties.push({ name: 'target', value: target })
+	}
+
+	return yieldRef(
+		addNode({ parentPathOrId: parentPath, name, primaryNodeType: 'luxe:contactForm', properties }),
+		`${parentPath}/${name}`,
+	)
+}
+
 export type CtaVariant =
 	| { ctaType: 'none' }
 	| { ctaType: 'internal'; linkNodeUuid: string; ctaLabel?: string }
