@@ -1,120 +1,114 @@
-# E2E Lots 1 & 2 — Progress & Restoration Point
+# E2E Lots 1-3 — Progress & Restoration Point
 
-> Date: 2026-07-28 (end of session) — branch `feature/e2e-test` (from origin/main @ bfefc0b; generic name on purpose — it carries all lots)
+> Date: 2026-07-29 (end of session) — branch `feature/e2e-test` (from origin/main @ bfefc0b; generic name on purpose — it carries all lots)
 > Plan: see `.harness/cypress-test-plan.md`.
 
-## Status: lots 1 AND 2 COMPLETE — all pushed to PR #438
+## Status: lots 1, 2 AND 3 COMPLETE
 
-**PR #438** (https://github.com/Jahia/luxe-jahia-demo/pull/438), still awaiting
-human review (only Copilot commented; its lint-script portability remark is
-fixed with cross-env in 6981e3d and answered on the thread). Title and body
-updated on 2026-07-28 to cover lots 1-2 + Vitest (`test: cypress e2e
-infrastructure, lots 1-2 coverage & first vitest suites`).
+**PR #438** (https://github.com/Jahia/luxe-jahia-demo/pull/438) — update title/body
+to cover lot 3 if not done yet (check `git log origin/feature/e2e-test`).
 
-Lot 2 commits (2026-07-28): d64eae8 (spec 50 stale-DOM race fix) → 6981e3d
-(cross-env lint) → ef90769 (spec 51 + SearchEstatePage page object) → 8016a8f
-(spec 52 SSR params) → 2c04458 (spec 40 + category/jcrQuery fixtures) →
-926b38f (spec 41 editframe alerts) → 9979278 (**fix**: contact form raw i18n
-key) → a466344 (spec 60) → ea9acdb (spec 61) → 4c7964b (Vitest 1-3 +
-parsePagination extraction).
+Lot 3 commits (2026-07-29): 9195b62 (spec 70 + LanguageSwitcher page object) →
+df64217 (spec 71) → f43bea2 (spec 80 + @jahia/jcontent-cypress dep) → 816f393
+(spec 81) → 39d3ac7 (spec 90) → 61adf7f (Vitest 4-6 + vitest.config.ts).
 
-Full local run (Jahia docker, root/root1234): **75/75 e2e over 20 spec files
-(~2 min 24)** + **48/48 Vitest** in packages/template-set. Lint + tsc green in
-both `tests/` and `packages/template-set`.
+Coverage after lot 3: **86 e2e over 24 spec files** + **65 Vitest**.
 
-## Next session — 2026-07-29: LOT 3 (user-confirmed)
+## Done — lot 3 (this session)
 
-Main task: **lot 3** (plan §3-4). Suggested order:
-1. `i18n-seo/70-language-switcher` + `71-seo-main-resource` — no new infra,
-   prepackaged site (70 needs the fr locale: `luxe` site has en+fr published).
-2. `editing/80-jcontent-preview` + `81-pagebuilder-crud` — needs
-   `@jahia/jcontent-cypress` (add to tests devDependencies); the model is
-   Formidable's `pagebuilder/70-pagebuilder-form-editing.cy.ts`
-   (`/home/hduchesn/Jahia/modules/Formidable/modules/formidable/tests`).
-3. `import/90-import-site` (parameterized site keys + duration via cy.task,
-   warn-only threshold) and optional `91-content-integrity`.
-4. Vitest 4-6: `submitContact` (mocked fetch incl. window.wem), CTA mixin
-   props mapping, `geocodeAddress`.
+- **i18n-seo/70-language-switcher** (prepackaged): locale links + aria-current,
+  home EN→FR (URL /fr/, skip-link label translated), detail page switch both
+  ways (same pathname ± /fr). New `page-object/LanguageSwitcher.ts`.
+- **i18n-seo/71-seo-main-resource** (prepackaged): og:locale/og:type/
+  og:site_name/absolute og:url + single h1 on estate/realtor/agency/blogPost
+  detail pages, FR variant. **KNOWN GAP documented in an `it.skip`**: detail
+  pages render NO `<title>`/og:title — mainResource types store their name in
+  a type-specific `title` property, SeoMetaTags only reads `jcr:title` (feeds
+  issue #435).
+- **editing/80-jcontent-preview** (generic site): cm views of Estate/Realtor/
+  Agency through JContent list mode → row context menu → Preview → iframe
+  `[data-sel-role="edit-preview-frame"]`. Deps added: `@jahia/jcontent-cypress`
+  ^3.6.0-tests.2 (works with @jahia/cypress 7.1), `cypress-real-events`,
+  `cypress-iframe` (all imported in support/e2e.js).
+- **editing/81-pagebuilder-crud** (generic site): create luxe:section from the
+  area "New content" button (ContentTypeSelector), nest luxe:textIllustrated
+  (title + richtext + mandatory image picked in the GRID-mode media picker),
+  edit via module double-click, publish site → live render asserted, delete via
+  list view (mark for deletion → PB deletion status → Publish deletion →
+  "Publish now" dashboard → waitUntil gone from live).
+- **import/90-import-site**: fresh measured import (deletes /sites/luxe first;
+  ~148s import+publish, warn-only 5-min threshold), anonymous en+fr home
+  render, light integrity scan (counts per content family in LIVE).
+- **Vitest 4-6**: `Form/Contact/utils.client.test.ts` (submitContact: demo
+  mode, target 200/500/network, window.wem bridge — 8 tests),
+  `mixins/CTA/index.test.ts` (internal/external/dangling/label fallback/cache
+  dependency — 6 tests), `commons/Map/geocodeAddress.test.ts` (found/cache/not
+  found/network — 4 tests). Added `packages/template-set/vitest.config.ts`.
 
-Same branch, granular commits, PR #438 grows with lot 3.
+## Key discoveries (lot 3 — do not rediscover)
 
-Also pending (not lot 3):
-- **Follow the PR #438 review** (still no human review).
-- **File the core srcset bug report** — draft in
-  `.harness/core-srcset-bug-report.md`; tracker (JIRA core vs GitHub): ask
-  the user.
-- Then **issue #435** (site-review findings: html lang, titles, contrasts…).
+14. **jcontent-cypress page objects need `cypress-iframe` and
+    `cypress-real-events`** imported in support/e2e.js — `cy.iframe is not a
+    function` otherwise.
+15. **`clickUntilVisible` expect-selectors must NOT start with `body`** — the
+    command resolves them via `$body.find(...)`.
+16. **CE field selectors**: `<primaryType>_<property>` (e.g.
+    `luxe:section_jcr:title`) and `nt:base_ce:systemName`. Pin the system name
+    (clearValue(true).addNewValue(name, true) — force, the field can be below
+    the fold) to get deterministic module paths.
+17. **After ce.create()/save() the PB iframe reloads** — re-open Page Builder
+    (JContent.visit + switchToPageBuilder) before asserting; pb.refresh() is
+    not reliable enough.
+18. **Empty unrestricted areas show ONE "New content" button** →
+    ContentTypeSelector dialog (`selectContentType('luxe:section')` by type
+    id, search by display name).
+19. **The media picker opens in grid mode** — `picker.search()` asserts on the
+    table view and fails; use `picker.getGrid().getCardByName(...)`.
+20. **Page list view flattens area lists** — components are direct rows of the
+    page (no 'main' row to enter).
+21. **The luxe-test-site pages only render in live once the whole site is
+    published** — Layout's `getSite().getHome()` returns null in LIVE while
+    home is unpublished → 500 `Cannot read property 'hasNode' of null`.
+22. **Provisioning `importSite` has NO siteKey override in 8.2.4** (verified by
+    decompiling org.jahia.bundles.provisioning ImportSite: only the URL is
+    read; the skill/provisioning docs describing `siteKey:` apply to another
+    version). Parameterized site keys are impossible → spec 90 documents it.
+23. **Vitest + .tsx sources**: tsconfig has `jsx: "preserve"` (Jahia build owns
+    the transform) → vitest needs `oxc: { jsx: { runtime: "automatic" } }` in
+    its own vitest.config.ts (rolldown-vite ignores `esbuild.jsx`). JSX in
+    *test files* still doesn't transform — write component tests in .ts and
+    call the component as a function (hooks are mocked anyway).
 
 ### Observations for the team (not yet filed)
 
-- **SearchEstate island has no popstate listener**: browser back/forward
-  restores the URL but not the displayed results (locked as-is in spec 51).
-- **Contact form does not validate the email format**: submit enables on any
-  non-empty string (`isFormValid` truthiness only); `type=email` never runs
-  because the submit button is `type="button"`.
+- **CORE BUG — PB context-menu Delete crashes jContent**: on 8.2.4.0-SNAPSHOT,
+  right-click module → Delete throws `TypeError: Cannot read properties of
+  undefined (reading 'sort')`, blanks the app, dialog never opens (screenshot
+  reproducible via spec 81 if the workaround is reverted). Same family: header
+  Edit button after `getHeader(true)` throws `... (reading 'uuid')`.
+  Double-click works. Workaround in spec 81: delete via the page list view.
+- **Detail pages have no `<title>`/og:title** (see spec 71 `it.skip`) — feeds
+  issue #435 (titles).
+- **Layout crashes in live when the site home isn't published** (discovery 21)
+  — `getHome()` null-guard missing in VirtualNavMenu/Layout.
+- (lot 2, still open) SearchEstate island has no popstate listener; contact
+  form does not validate the email format.
 
-## Done — lot 2 (this session)
+## Next session
 
-- **Spec 50 flake root-caused**: after checking a filter, the old cards match
-  the same selectors — `should('exist')` passed on stale DOM and the test
-  clicked a card from the previous result set. Fix: alias the island's
-  GetContentPropertiesQuery via `cy.intercept` (match on operation name — the
-  endpoint serves other queries) and retry until the DOM hrefs `deep.equal`
-  the response URLs. Pattern lives in `page-object/SearchEstate.ts`
-  (`interceptSearch` / `waitForResults` / `applyFilter`).
-- **search/51**: page nav, page-size reset to page 1, URL pushState +
-  back/forward, scroll-to-top after commit, empty state (house+1bd = 0 hits).
-- **search/52**: SSR asserted via `cy.request` raw HTML (no JS → island can't
-  mask server regressions); expected results recomputed via GraphQL with the
-  view's criteria; limit clamped [1,100], defaults on junk, page 0 = page 1.
-- **query/40**: order asc/desc (sequential creation fixes jcr:created),
-  maxItems, startNode scoping, category filter, excludeNodes. Fixtures:
-  `createJcrQuery`, `createCategory`/`deleteCategoryIfExists` (global
-  system-site nodes: unique names, cleanup + publish of
-  `/sites/systemsite/categories` to sync live), blogPost `categoryUuids`.
-- **query/41**: edit-mode-only alerts rendered through
-  `/cms/editframe/default/en/...` (200 + full page markup with
-  `div[jahiatype=module][path=...]` wrappers to scope per component;
-  `/cms/edit/...` 302s to the SPA — useless for assertions). Empty queries
-  must be scoped via startNode to an empty folder — a site-scoped query sees
-  the other fixtures regardless of creation order.
-- **forms/60**: gate on all-fields-filled, demo feedback (role=status,
-  $name replacement), target POST payload asserted via intercept, 500 →
-  translated alert. Each variant on its own page (hardcoded input ids).
-- **fix shipped**: `Contact.client.tsx` used `t("form.unknownError")` — key
-  exists only as `form.login.unknownError` → raw key shown to visitors on
-  POST failure. Moved to `form.contact.unknownError` + added to all 4 locales.
-- **forms/61**: uses the **footer** loginForm (Layout renders one on every
-  page — creating another one duplicates ids/anchors). Anonymous card, dialog
-  login (root), workspace links, bad-creds alert, Enter/Escape, logout,
-  cache.perUser both directions (login → reload → clearCookies → reload).
-  Hydration race: pre-hydration click follows the anchor href to /cms/login —
-  fix: `removeAttr('href')` (handler preventDefaults anyway) + clickUntilVisible.
-- **Vitest**: `JcrQuery/utils.test.ts` (buildQuery SQL2, 10 tests),
-  `SearchEstate/pagination.ts` extracted from results.server.tsx +
-  `pagination.test.ts` (8), `SearchEstate/graphql.test.ts` (criteria building
-  + response mapping, 9). 48 total with imageNodeToProps.
+1. **Update PR #438 title/body** to include lot 3 (jcontent preview, page
+   builder crud, i18n/seo, import, Vitest 4-6) — keep conventional-commit
+   title, no capital after type.
+2. **Follow the PR #438 review** (was still awaiting human review).
+3. **File the core bug reports**: PB delete crash (observation above) and the
+   srcset one (draft in `.harness/core-srcset-bug-report.md`; tracker to
+   confirm with the user).
+4. Then **issue #435** (site-review findings: html lang, titles — the spec 71
+   skip re-enables once fixed, contrasts…).
+5. Optional leftovers: spec 91 content-integrity (Formidable pattern), vanity
+   URLs (blocked on prepackaged site update).
 
-## Key discoveries (lot 2 — do not rediscover)
-
-8. **Island re-render races**: any assertion after a filter/pagination action
-   must sync against the network response (see SearchEstatePage) — `exist`
-   assertions pass on stale DOM.
-9. **`/cms/editframe/default/en/<path>.html` renders edit mode directly**
-   (basic auth/session OK) — the only URL-addressable way to assert
-   edit-mode-only markup without driving the Page Builder SPA.
-10. **Categories are global** (`/sites/systemsite/categories`) and their
-    weakrefs resolve in LIVE too → publish the categories tree after create
-    AND after cleanup delete; use unique `luxe-e2e-*` names.
-11. **The Layout footer embeds a loginForm on every page** — never create a
-    second one on a test page (duplicate `#loginForm`/ids break selectors).
-12. **Pre-hydration clicks on island anchors navigate away** (href is real,
-    handler not yet attached). Neutralize the href, then retry-click.
-13. **Docker Desktop crashed mid-run once** (ECONNRESET on provisioning API,
-    container "Up 2 minutes") — spec failures right after that are
-    infrastructure noise; wait for :8080 then re-run.
-
-## Key discoveries (lot 1 — kept)
+## Key discoveries (lots 1-2 — kept)
 
 1. **JCR enforces `mandatory` on save** (creation AND property deletion) via GraphQL — fixtures auto-fill; W-1 scenarios via dangling weakrefs.
 2. **Touching a locale triggers full mandatory-i18n validation for that locale.**
@@ -123,11 +117,18 @@ Also pending (not lot 3):
 5. **Local GraphQL curl needs `Referer: http://localhost:8080`** with `-u root:root1234`. (MCP `executeGraphQL` works directly.)
 6. **MCP server URL** is `/modules/community-mcp` — fixed in root `.mcp.json`.
 7. **Provisioning hook** (`support/e2e.js`): `luxe-prepackaged-website/` specs reuse the imported `luxe` site (read-only!); other folders get `luxe-test-site` recreated per spec file. Folder placement decides the fixture site.
+8. **Island re-render races**: sync assertions against the network response (SearchEstatePage pattern) — `exist` assertions pass on stale DOM.
+9. **`/cms/editframe/default/en/<path>.html` renders edit mode directly** — the only URL-addressable way to assert edit-mode-only markup.
+10. **Categories are global** (`/sites/systemsite/categories`) — publish the tree after create AND cleanup; unique `luxe-e2e-*` names.
+11. **The Layout footer embeds a loginForm on every page** — never create a second one.
+12. **Pre-hydration clicks on island anchors navigate away** — neutralize href, retry-click.
+13. **Docker Desktop crashed mid-run once** — spec failures right after are infrastructure noise.
 
 ## Environment notes
 
-- Local Jahia: docker `jahia` (jahia-ee-dev:8-SNAPSHOT), root/root1234, hosts `FormidableSite4Tests` — do not disturb. `luxe-jahia-demo` 1.1.0-SNAPSHOT deployed from this branch (includes the contact-form i18n fix + parsePagination refactor).
+- Local Jahia: docker `jahia` (jahia-ee-dev:8-SNAPSHOT), root/root1234, hosts `FormidableSite4Tests` — do not disturb. `luxe-jahia-demo` 1.1.0-SNAPSHOT deployed from this branch.
 - Run e2e: `cd tests && JAHIA_URL=http://localhost:8080 SUPER_USER_PASSWORD=root1234 npx cypress run --spec "cypress/e2e/<folder>/XX.cy.ts"`.
 - Run unit: `cd packages/template-set && yarn vitest run`.
-- Failure details: `results/reports/mochawesome*.json` (`.err.message`), `results/cypress-logs/`.
-- **`yarn`/`tsc`/`eslint` for tests run from `tests/`, not the module root** (recurring footgun this session).
+- Failure details: `results/reports/mochawesome*.json` (`.err.message`), `results/cypress-logs/`; screenshots under `results/screenshots/` are worth Reading (they show the app state AND the command log).
+- **`yarn`/`tsc`/`eslint` for tests run from `tests/`, not the module root** (recurring footgun). Template-set lint = `yarn lint` from the repo root (workspace-wide).
+- Spec 90 deletes and re-imports `/sites/luxe` (~2.5 min) — alphabetically it runs before `luxe-prepackaged-website/`, which then reuses the fresh site.
