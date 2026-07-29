@@ -16,6 +16,7 @@
 // Import commands.js using ES2015 syntax:
 
 import './commands'
+import 'cypress-real-events'
 import 'cypress-wait-until'
 import addContext from 'mochawesome/addContext'
 import { deleteSite } from '@jahia/cypress'

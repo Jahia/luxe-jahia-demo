@@ -1777,6 +1777,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jahia/jcontent-cypress@npm:^3.6.0-tests.2":
+  version: 3.6.0-tests.2
+  resolution: "@jahia/jcontent-cypress@npm:3.6.0-tests.2"
+  dependencies:
+    cypress-real-events: "npm:^1.14.0"
+  checksum: 10c0/124a92c78fee620fb1b1b956b06ff19b71d47e9413ba479f3864b40b371befebc6119fe650d66a00c98f52ba689844bb965614317e8716c41f5c760635779d51
+  languageName: node
+  linkType: hard
+
 "@jridgewell/gen-mapping@npm:^0.3.0, @jridgewell/gen-mapping@npm:^0.3.2":
   version: 0.3.3
   resolution: "@jridgewell/gen-mapping@npm:0.3.3"
@@ -3454,6 +3463,15 @@ __metadata:
   peerDependencies:
     cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x
   checksum: 10c0/b924b6f802f1a0675940d29edf67deb9da07cdbea9292ad3c87443c57810b7e85970ff2344fed6d83bb275fc467064dd2b5163065253dee2d5b6f3b470234c4a
+  languageName: node
+  linkType: hard
+
+"cypress-real-events@npm:^1.14.0, cypress-real-events@npm:^1.15.0":
+  version: 1.15.0
+  resolution: "cypress-real-events@npm:1.15.0"
+  peerDependencies:
+    cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x || ^14.x || ^15.x
+  checksum: 10c0/effb064bed46c8f059ff0b4d315e3cf0a23e2d411948431475ef1b939db8cc1624a7ca033a57dd8d8e3a297240deb298423464bf12a441330d449a06060ba423
   languageName: node
   linkType: hard
 
@@ -6203,12 +6221,14 @@ __metadata:
     "@jahia/cypress": "npm:^7.1.0"
     "@jahia/eslint-config": "npm:^2.1.2"
     "@jahia/jahia-reporter": "npm:^1.6.0"
+    "@jahia/jcontent-cypress": "npm:^3.6.0-tests.2"
     "@types/decompress": "npm:^4.2.7"
     "@typescript-eslint/eslint-plugin": "npm:^8.29.1"
     "@typescript-eslint/parser": "npm:^8.29.1"
     cross-env: "npm:^10.1.0"
     cypress: "npm:^14.5.4"
     cypress-multi-reporters: "npm:^2.0.5"
+    cypress-real-events: "npm:^1.15.0"
     cypress-terminal-report: "npm:^5.3.12"
     cypress-wait-until: "npm:^3.0.2"
     decompress: "npm:^4.2.1"
