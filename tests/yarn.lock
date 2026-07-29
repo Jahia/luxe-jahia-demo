@@ -3444,6 +3444,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cypress-iframe@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "cypress-iframe@npm:1.0.1"
+  peerDependencies:
+    "@types/cypress": ^1.1.0
+  checksum: 10c0/90b4d5bc8583806254418d90bbbfd6c3c70c7be21894f11dc47073d646e5b6e4f944eff45578fe7817d999a93171737d4903d161fe06576db0aad0ce2d7a47cb
+  languageName: node
+  linkType: hard
+
 "cypress-multi-reporters@npm:^2.0.5":
   version: 2.0.5
   resolution: "cypress-multi-reporters@npm:2.0.5"
@@ -6227,6 +6236,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.29.1"
     cross-env: "npm:^10.1.0"
     cypress: "npm:^14.5.4"
+    cypress-iframe: "npm:^1.0.1"
     cypress-multi-reporters: "npm:^2.0.5"
     cypress-real-events: "npm:^1.15.0"
     cypress-terminal-report: "npm:^5.3.12"

@@ -4,7 +4,7 @@ import { createAgency, createContentFolder, createEstate, createRealtor, uploadI
 
 const sitePath = `/sites/${GENERIC_SITE_KEY}`
 
-// jContent renders the internal preview inside this drawer iframe (the cm
+// JContent renders the internal preview inside this drawer iframe (the cm
 // views of Estate/Realtor/Agency wrap their fullPage view with CMPreview)
 const previewIframe = 'iframe[data-sel-role="edit-preview-frame"]'
 
@@ -48,7 +48,11 @@ describe('Editing - 80 jContent preview (cm views)', () => {
 	const openPreview = (folderPath: string, nodeName: string): Cypress.Chainable<JQuery> => {
 		const jcontent = JContent.visit(GENERIC_SITE_KEY, 'en', `content-folders/${folderPath}`).switchToListMode()
 		jcontent.getTable().getRowByName(nodeName).contextMenu().select('Preview')
-		return cy.get(previewIframe).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap)
+		return cy
+			.get(previewIframe)
+			.its('0.contentDocument.body')
+			.should('not.be.empty')
+			.then((body) => cy.wrap(body as JQuery))
 	}
 
 	it('renders the estate cm view in the preview panel', () => {
