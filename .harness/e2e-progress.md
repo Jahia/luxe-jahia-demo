@@ -12,7 +12,7 @@ Lot 3 commits (2026-07-29): 9195b62 (spec 70 + LanguageSwitcher page object) →
 df64217 (spec 71) → f43bea2 (spec 80 + @jahia/jcontent-cypress dep) → 816f393
 (spec 81) → 39d3ac7 (spec 90) → 61adf7f (Vitest 4-6 + vitest.config.ts).
 
-Coverage after lot 3: **86 e2e over 24 spec files** + **65 Vitest**.
+Coverage after lot 3: **95 e2e over 24 spec files (94 pass + 1 documented skip, full run 6 min 11)** + **65 Vitest**.
 
 ## Done — lot 3 (this session)
 
