@@ -46,12 +46,10 @@ describe('SEO - 71 Main-resource detail pages', () => {
 			.and('include', path)
 	})
 
-	// KNOWN GAP (feeds the site-review findings of issue #435): mainResource
-	// types store their name in a type-specific `title` property while the
-	// Layout's SeoMetaTags only reads `jcr:title` — detail pages therefore
-	// render NO <title> and no og:title today. Re-enable once SeoMetaTags
-	// falls back on the node display name (expected: `{title} | {siteName}`).
-	it.skip('renders a <title> tag on every detail page', () => {
+	// SeoMetaTags falls back on the node display name for mainResource types
+	// (they store their name in a type-specific `title` property, not
+	// jcr:title) and always renders `{title} | {siteName}` (issue #435)
+	it('renders a <title> tag on every detail page', () => {
 		detailPages.forEach(({ path }) => {
 			cy.visit(path)
 			cy.title().should('not.be.empty').and('contain', SITE_NAME)
