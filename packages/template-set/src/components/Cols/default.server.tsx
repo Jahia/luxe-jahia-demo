@@ -9,7 +9,10 @@ jahiaComponent(
 		name: "default",
 		componentType: "view",
 	},
-	({ colsNumber }: { colsNumber: string }, { currentNode, currentResource }) => {
+	(
+		{ colsNumber }: { "jcr:title"?: string; "colsNumber"?: string },
+		{ currentNode, currentResource },
+	) => {
 		const iColsNumber = Number(colsNumber);
 		const limit = isNaN(iColsNumber) ? 1 : iColsNumber;
 		// Create an array of integers from 0 to 'limit - 1'

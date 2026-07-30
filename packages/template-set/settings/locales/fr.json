@@ -49,6 +49,7 @@
 			"logout": "se déconnecter",
 			"badCreds": "nom d'utilisateur ou mot de passe incorrect",
 			"username": "nom d'utilisateur",
+			"usernamePlaceholder": "robin",
 			"password": "mot de passe",
 			"rememberMe": "se souvenir de moi",
 			"liveWorkspace": "live",
@@ -177,7 +178,8 @@
 		"estate": "vue du bien immobilier : {{estate}}",
 		"realtor": "portrait de l'agent : {{realtor}}",
 		"agency": "vue de l'agence : {{agency}}",
-		"blog": "illustration du blog : {{blog}}"
+		"blog": "illustration du blog : {{blog}}",
+		"logo": "logo de {{siteName}}"
 	},
 	"maps": {
 		"error": {
