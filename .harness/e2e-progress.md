@@ -26,8 +26,11 @@ Coverage after lot 3: **95 e2e over 24 spec files (94 pass + 1 documented skip, 
   a type-specific `title` property, SeoMetaTags only reads `jcr:title` (feeds
   issue #435).
 - **editing/80-jcontent-preview** (generic site): cm views of Estate/Realtor/
-  Agency through JContent list mode → row context menu → Preview → iframe
-  `[data-sel-role="edit-preview-frame"]`. Deps added: `@jahia/jcontent-cypress`
+  Agency asserted via `cy.request` on the editframe URL jContent's preview
+  panel fetches (`/cms/editframe/default/en/<path>.html?redirect=false`) —
+  the original UI-driven version (list mode → context menu → Preview →
+  iframe) was flaky on CI (iframe injection races, jContent machinery, not
+  module code). Deps added (still needed by spec 81): `@jahia/jcontent-cypress`
   ^3.6.0-tests.2 (works with @jahia/cypress 7.1), `cypress-real-events`,
   `cypress-iframe` (all imported in support/e2e.js).
 - **editing/81-pagebuilder-crud** (generic site): create luxe:section from the

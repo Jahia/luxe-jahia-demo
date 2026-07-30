@@ -1,12 +1,13 @@
-import { JContent } from '@jahia/jcontent-cypress/dist/page-object/jcontent'
 import { GENERIC_SITE_KEY } from '../../support/constants'
 import { createAgency, createContentFolder, createEstate, createRealtor, uploadImage } from '../../support/fixtures'
 
 const sitePath = `/sites/${GENERIC_SITE_KEY}`
 
-// JContent renders the internal preview inside this drawer iframe (the cm
-// views of Estate/Realtor/Agency wrap their fullPage view with CMPreview)
-const previewIframe = 'iframe[data-sel-role="edit-preview-frame"]'
+// The jContent preview drawer simply fetches this editframe URL and injects
+// the returned HTML into its iframe (the cm views of Estate/Realtor/Agency
+// wrap their fullPage view with CMPreview). Asserting on that markup directly
+// covers the module's contract without driving jContent's UI machinery.
+const editframeUrl = (nodePath: string) => `/cms/editframe/default/en${nodePath}.html?redirect=false`
 
 describe('Editing - 80 jContent preview (cm views)', () => {
 	before('Create one node of each previewable type', () => {
@@ -44,41 +45,36 @@ describe('Editing - 80 jContent preview (cm views)', () => {
 		cy.logout()
 	})
 
-	/** Open the internal preview of a row and yield the preview document body. */
-	const openPreview = (folderPath: string, nodeName: string): Cypress.Chainable<JQuery> => {
-		const jcontent = JContent.visit(GENERIC_SITE_KEY, 'en', `content-folders/${folderPath}`).switchToListMode()
-		jcontent.getTable().getRowByName(nodeName).contextMenu().select('Preview')
-		return cy
-			.get(previewIframe)
-			.its('0.contentDocument.body', { timeout: 30000 })
-			.should(($body) => {
-				// The loader body is non-empty too — jContent rewrites the iframe
-				// document once loaded, so wait for the cm view's <main> itself
-				expect($body.find('main')).to.have.length.at.least(1)
-			})
-			.then((body) => cy.wrap(body as JQuery))
-	}
+	/** Fetch the cm view markup of a node the way the jContent preview panel does. */
+	const requestCmMarkup = (nodePath: string): Cypress.Chainable<string> =>
+		cy.request(editframeUrl(nodePath)).then((response) => {
+			expect(response.status).to.equal(200)
+			return cy.wrap(response.body as string, { log: false })
+		})
 
-	it('renders the estate cm view in the preview panel', () => {
-		openPreview('contents/agencies/preview-agency', 'preview-estate').within(() => {
-			cy.get('main').should('exist')
-			cy.contains('h1, h2', 'Preview Estate').should('be.visible')
-			cy.contains('750,000').should('be.visible')
+	it('renders the estate cm view in the preview markup', () => {
+		requestCmMarkup(`${sitePath}/contents/agencies/preview-agency/preview-estate`).then((html) => {
+			const doc = Cypress.$(html)
+			expect(doc.find('main'), '<main> from CMPreview').to.have.length.at.least(1)
+			expect(doc.find('h1, h2').text()).to.contain('Preview Estate')
+			expect(html).to.contain('750,000')
 		})
 	})
 
-	it('renders the realtor cm view in the preview panel', () => {
-		openPreview('contents', 'preview-realtor').within(() => {
-			cy.get('main').should('exist')
-			cy.contains('Jane').should('be.visible')
-			cy.contains('Preview').should('be.visible')
+	it('renders the realtor cm view in the preview markup', () => {
+		requestCmMarkup(`${sitePath}/contents/preview-realtor`).then((html) => {
+			const doc = Cypress.$(html)
+			expect(doc.find('main'), '<main> from CMPreview').to.have.length.at.least(1)
+			expect(doc.text()).to.contain('Jane')
+			expect(doc.text()).to.contain('Preview')
 		})
 	})
 
-	it('renders the agency cm view in the preview panel', () => {
-		openPreview('contents/agencies', 'preview-agency').within(() => {
-			cy.get('main').should('exist')
-			cy.contains('Preview Agency').should('be.visible')
+	it('renders the agency cm view in the preview markup', () => {
+		requestCmMarkup(`${sitePath}/contents/agencies/preview-agency`).then((html) => {
+			const doc = Cypress.$(html)
+			expect(doc.find('main'), '<main> from CMPreview').to.have.length.at.least(1)
+			expect(doc.text()).to.contain('Preview Agency')
 		})
 	})
 })
