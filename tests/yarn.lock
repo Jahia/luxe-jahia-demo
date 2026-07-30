@@ -1551,6 +1551,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@epic-web/invariant@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@epic-web/invariant@npm:1.0.0"
+  checksum: 10c0/72dbeb026e4e4eb3bc9c65739b91408ca77ab7d603a2494fa2eff3790ec22892c4caba751cffdf30f5ccf0e7ba79c1e9c96cf0a357404b9432bf1365baac23ca
+  languageName: node
+  linkType: hard
+
 "@eslint-community/eslint-utils@npm:^4.1.2, @eslint-community/eslint-utils@npm:^4.2.0, @eslint-community/eslint-utils@npm:^4.4.0":
   version: 4.4.0
   resolution: "@eslint-community/eslint-utils@npm:4.4.0"
@@ -1767,6 +1774,15 @@ __metadata:
   bin:
     jahia-reporter: bin/run
   checksum: 10c0/c0cc6630dd64b3c0ae922648ec38f9d1e66fb9913636a3b11aa248df235c195d1411189cbbd2da9210a65f6ecad78c4b933e2eecc8317d5bbe540cc5a463e1f1
+  languageName: node
+  linkType: hard
+
+"@jahia/jcontent-cypress@npm:^3.6.0-tests.2":
+  version: 3.6.0-tests.2
+  resolution: "@jahia/jcontent-cypress@npm:3.6.0-tests.2"
+  dependencies:
+    cypress-real-events: "npm:^1.14.0"
+  checksum: 10c0/124a92c78fee620fb1b1b956b06ff19b71d47e9413ba479f3864b40b371befebc6119fe650d66a00c98f52ba689844bb965614317e8716c41f5c760635779d51
   languageName: node
   linkType: hard
 
@@ -3377,6 +3393,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-env@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "cross-env@npm:10.1.0"
+  dependencies:
+    "@epic-web/invariant": "npm:^1.0.0"
+    cross-spawn: "npm:^7.0.6"
+  bin:
+    cross-env: dist/bin/cross-env.js
+    cross-env-shell: dist/bin/cross-env-shell.js
+  checksum: 10c0/834a862db456ba1fedf6c6da43436b123ae38f514fa286d6f0937c14fa83f13469f77f70f2812db041ae2d84f82bac627040b8686030aca27fbdf113dfa38b63
+  languageName: node
+  linkType: hard
+
 "cross-fetch@npm:^3.0.6":
   version: 3.1.8
   resolution: "cross-fetch@npm:3.1.8"
@@ -3397,10 +3426,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-spawn@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "cross-spawn@npm:7.0.6"
+  dependencies:
+    path-key: "npm:^3.1.0"
+    shebang-command: "npm:^2.0.0"
+    which: "npm:^2.0.1"
+  checksum: 10c0/053ea8b2135caff68a9e81470e845613e374e7309a47731e81639de3eaeb90c3d01af0e0b44d2ab9d50b43467223b88567dfeb3262db942dc063b9976718ffc1
+  languageName: node
+  linkType: hard
+
 "crypt@npm:0.0.2":
   version: 0.0.2
   resolution: "crypt@npm:0.0.2"
   checksum: 10c0/adbf263441dd801665d5425f044647533f39f4612544071b1471962209d235042fb703c27eea2795c7c53e1dfc242405173003f83cf4f4761a633d11f9653f18
+  languageName: node
+  linkType: hard
+
+"cypress-iframe@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "cypress-iframe@npm:1.0.1"
+  peerDependencies:
+    "@types/cypress": ^1.1.0
+  checksum: 10c0/90b4d5bc8583806254418d90bbbfd6c3c70c7be21894f11dc47073d646e5b6e4f944eff45578fe7817d999a93171737d4903d161fe06576db0aad0ce2d7a47cb
   languageName: node
   linkType: hard
 
@@ -3423,6 +3472,15 @@ __metadata:
   peerDependencies:
     cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x
   checksum: 10c0/b924b6f802f1a0675940d29edf67deb9da07cdbea9292ad3c87443c57810b7e85970ff2344fed6d83bb275fc467064dd2b5163065253dee2d5b6f3b470234c4a
+  languageName: node
+  linkType: hard
+
+"cypress-real-events@npm:^1.14.0, cypress-real-events@npm:^1.15.0":
+  version: 1.15.0
+  resolution: "cypress-real-events@npm:1.15.0"
+  peerDependencies:
+    cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x || ^14.x || ^15.x
+  checksum: 10c0/effb064bed46c8f059ff0b4d315e3cf0a23e2d411948431475ef1b939db8cc1624a7ca033a57dd8d8e3a297240deb298423464bf12a441330d449a06060ba423
   languageName: node
   linkType: hard
 
@@ -6172,11 +6230,15 @@ __metadata:
     "@jahia/cypress": "npm:^7.1.0"
     "@jahia/eslint-config": "npm:^2.1.2"
     "@jahia/jahia-reporter": "npm:^1.6.0"
+    "@jahia/jcontent-cypress": "npm:^3.6.0-tests.2"
     "@types/decompress": "npm:^4.2.7"
     "@typescript-eslint/eslint-plugin": "npm:^8.29.1"
     "@typescript-eslint/parser": "npm:^8.29.1"
+    cross-env: "npm:^10.1.0"
     cypress: "npm:^14.5.4"
+    cypress-iframe: "npm:^1.0.1"
     cypress-multi-reporters: "npm:^2.0.5"
+    cypress-real-events: "npm:^1.15.0"
     cypress-terminal-report: "npm:^5.3.12"
     cypress-wait-until: "npm:^3.0.2"
     decompress: "npm:^4.2.1"

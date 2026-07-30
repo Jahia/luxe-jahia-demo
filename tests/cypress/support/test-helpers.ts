@@ -1,4 +1,4 @@
-import { createSite, deleteSite, addNode, publishAndWaitJobEnding } from '@jahia/cypress'
+import { createSite, deleteSite, addNode, getNodeByPath, publishAndWaitJobEnding } from '@jahia/cypress'
 
 export const addSimplePage = (
 	parentPathOrId: string,
@@ -9,7 +9,7 @@ export const addSimplePage = (
 	children = [],
 	mixins = [],
 	properties = [],
-): any => {
+): Cypress.Chainable => {
 	const variables = {
 		parentPathOrId: parentPathOrId,
 		name: pageName,
@@ -32,7 +32,7 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 	cy.log('Cypress prepackaged site URL', prepackagedSiteURL)
 
 	if (prepackagedSiteURL && prepackagedSiteURL.startsWith('jar:mvn:')) {
-		// the prepackaged site should be fetched from a Maven URL
+		// The prepackaged site should be fetched from a Maven URL
 		cy.runProvisioningScript({
 			script: {
 				fileContent: `- importSite: "${prepackagedSiteURL}"`,
@@ -40,29 +40,29 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 			},
 		}).then(() => publishAndWaitJobEnding(`/sites/${siteKey}`, ['en', 'fr']))
 	} else {
-		// otherwise, assume it's a glob filename related to the ./artifacts/ folder
+		// Otherwise, assume it's a glob filename related to the ./artifacts/ folder
 		cy.log(`Unzipping ${prepackagedSiteURL}...`)
-		const prepackaged_archive_path = 'META-INF/prepackagedSites/luxe-prepackaged.zip'
+		const prepackagedArchivePath = 'META-INF/prepackagedSites/luxe-prepackaged.zip'
 		cy.task('unzipArtifact', {
 			artifactFilename: prepackagedSiteURL,
-			filteredPath: prepackaged_archive_path,
+			filteredPath: prepackagedArchivePath,
 		})
 			.then(() => {
-				cy.log(`Extracting site.zip from  ${prepackaged_archive_path}...`)
+				cy.log(`Extracting site.zip from ${prepackagedArchivePath}...`)
 				return cy.task('unzipArtifact', {
-					artifactFilename: prepackaged_archive_path,
+					artifactFilename: prepackagedArchivePath,
 					filteredPath: 'site.zip',
 				})
 			})
 			.then(() => {
 				cy.log('Importing site.zip...')
-				const site_archive_path = '../artifacts/site.zip'
+				const siteArchivePath = '../artifacts/site.zip'
 				return cy.runProvisioningScript({
 					script: {
-						fileContent: `- importSite: "${site_archive_path}"`,
+						fileContent: `- importSite: "${siteArchivePath}"`,
 						type: 'application/yaml',
 					},
-					files: [{ fileName: site_archive_path }],
+					files: [{ fileName: siteArchivePath }],
 				})
 			})
 			.then(() => {
@@ -70,6 +70,24 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 				publishAndWaitJobEnding(`/sites/${siteKey}`, ['en'])
 			})
 	}
+}
+
+/**
+ * Import the prepackaged luxe site only when it is not already on the
+ * instance. The import takes 2-3 minutes, so it must NOT run per spec file:
+ * every spec under `luxe-prepackaged-website/` treats the site as a read-only
+ * fixture and reuses it. Delete `/sites/luxe` manually (or via jContent) to
+ * force a fresh import.
+ */
+export const ensureLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
+	getNodeByPath(`/sites/${siteKey}`).then((response) => {
+		if (response?.data?.jcr?.nodeByPath?.uuid) {
+			cy.log(`Site ${siteKey} already present, reusing it`)
+			return
+		}
+
+		createLuxeSite(siteKey, prepackagedSiteURL)
+	})
 }
 
 export const createTestSite = (siteKey: string) => {
@@ -91,7 +109,7 @@ export const createTestSite = (siteKey: string) => {
 				primaryNodeType: 'jnt:contentList',
 			},
 		]).then(() => {
-			// addNode({
+			// AddNode({
 			// 	parentPathOrId: `/sites/${siteKey}/home/testPage/pagecontent`,
 			// 	name: 'test',
 			// 	primaryNodeType: 'javascriptExample:test',

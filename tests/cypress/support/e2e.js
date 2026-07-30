@@ -16,10 +16,12 @@
 // Import commands.js using ES2015 syntax:
 
 import './commands'
+import 'cypress-iframe'
+import 'cypress-real-events'
 import 'cypress-wait-until'
 import addContext from 'mochawesome/addContext'
 import { deleteSite } from '@jahia/cypress'
-import { createLuxeSite, createTestSite } from './test-helpers'
+import { createTestSite, ensureLuxeSite } from './test-helpers'
 import { GENERIC_SITE_KEY, LUXE_PATH_KEY, LUXE_PREPACKAGED_SITE, LUXE_SITE_KEY } from './constants'
 
 // Ensure fetch is always bound to window
@@ -63,8 +65,9 @@ Cypress.on('test:after:run', (test, runnable) => {
 before('Create test site', () => {
 	// use separate hooks for Luxe and generic sites to avoid creating unnecessary data
 	if (Cypress.spec.relative.includes(LUXE_PATH_KEY)) {
-		deleteSite(LUXE_SITE_KEY)
-		createLuxeSite(LUXE_SITE_KEY, LUXE_PREPACKAGED_SITE)
+		// The prepackaged import takes 2-3 minutes: import once, reuse across
+		// specs (they are read-only on this site)
+		ensureLuxeSite(LUXE_SITE_KEY, LUXE_PREPACKAGED_SITE)
 	} else {
 		deleteSite(GENERIC_SITE_KEY)
 		createTestSite(GENERIC_SITE_KEY)

@@ -1,6 +1,6 @@
 import { deleteSite, publishAndWaitJobEnding, uploadFile } from '@jahia/cypress'
 
-import { GENERIC_SITE_KEY } from '../support/constants'
+import { GENERIC_SITE_KEY } from '../../support/constants'
 
 describe('SEO meta test', () => {
 	const homePath = `/sites/${GENERIC_SITE_KEY}/home`
