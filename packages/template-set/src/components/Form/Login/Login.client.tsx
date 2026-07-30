@@ -65,7 +65,7 @@ export default function LoginClient({
 		<>
 			{loggedIn && (
 				<>
-					<h5 className={classes.capitalize}>{user}</h5>
+					<h3 className={classes.heading}>{user}</h3>
 					<ul className={classes.list}>
 						<WorkspaceNavigationClient
 							{...{
@@ -84,7 +84,7 @@ export default function LoginClient({
 			)}
 			{!loggedIn && (
 				<>
-					<h5 className={classes.capitalize}>{t("footer.backOffice")}</h5>
+					<h3 className={classes.heading}>{t("footer.backOffice")}</h3>
 					<p>
 						<a href={urls.loginUrl} className={classes.capitalize} onClick={showModal}>
 							{t("form.login.login")}

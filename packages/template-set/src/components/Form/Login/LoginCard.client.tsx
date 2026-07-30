@@ -94,8 +94,9 @@ export const LoginCardClient = ({
 			/>
 
 			<div>
-				<h2>{userinfo.fullname}</h2>
-				{userinfo.function && <h4>{t(userinfo.function)}</h4>}
+				{/* h4/h5 under the dialog's h3 group headings (heading order) */}
+				<h4>{userinfo.fullname}</h4>
+				{userinfo.function && <h5>{t(userinfo.function)}</h5>}
 				{userinfo.description && <p>{t(userinfo.description)}</p>}
 			</div>
 		</div>

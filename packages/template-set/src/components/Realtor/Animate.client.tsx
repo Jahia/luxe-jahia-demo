@@ -65,9 +65,9 @@ export default function AnimateClient({
 				/>
 			)}
 			<div className={classes.main}>
-				<h4>
+				<h3>
 					{firstName} {lastName}
-				</h4>
+				</h3>
 				<p className={classes.jobPosition}>{jobPosition}</p>
 			</div>
 		</a>

@@ -23,7 +23,7 @@ jahiaComponent(
 					widths={[200, 400]}
 					sizes="200px"
 				/>
-				<h4>{title}</h4>
+				<h3>{title}</h3>
 				{subtitle && <p>{subtitle}</p>}
 			</a>
 		);

@@ -8,8 +8,10 @@
 		height: auto;
 	}
 
-	h4 {
+	/* h3 for a correct heading hierarchy in listings, sized like the former h4 */
+	h3 {
 		margin-block: 0.5rem;
+		font-size: 22px;
 	}
 
 	p {

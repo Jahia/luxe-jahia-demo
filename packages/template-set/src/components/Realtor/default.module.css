@@ -21,9 +21,11 @@
 	font-size: 16px;
 	color: rgba(var(--luxe-color-dark-rgb), 0.4);
 
-	h4 {
+	/* h3 for a correct heading hierarchy in listings, sized like the former h4 */
+	h3 {
 		margin-top: space_0;
 		margin-bottom: space_0;
+		font-size: 22px;
 	}
 }
 

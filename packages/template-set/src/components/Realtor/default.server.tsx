@@ -32,9 +32,9 @@ jahiaComponent(
 					sizes="300px"
 				/>
 				<div className={classes.main}>
-					<h4>
+					<h3>
 						{firstName} {lastName}
-					</h4>
+					</h3>
 					{jobPosition && (
 						<p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
 					)}
