@@ -1,3 +1,12 @@
+.srOnly {
+	position: absolute;
+	clip-path: inset(50%);
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 .resultsRow {
 	composes: rowCols_lg_3 from "design-system/Grid/styles.module.css";
 	composes: rowCols_md_2 from "design-system/Grid/styles.module.css";

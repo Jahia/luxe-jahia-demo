@@ -107,7 +107,8 @@
 				"country": "pays"
 			},
 			"submit": "rechercher",
-			"empty": "Aucun résultat trouvé."
+			"empty": "Aucun résultat trouvé.",
+			"resultsHeading": "Résultats de la recherche"
 		}
 	},
 	"pagination": {
