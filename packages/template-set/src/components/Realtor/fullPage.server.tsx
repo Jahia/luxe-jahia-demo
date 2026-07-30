@@ -50,6 +50,10 @@ jahiaComponent(
 	) => {
 		const { t } = useTranslation();
 		const contextMode = renderContext.getMode();
+		// Guard against a partially filled realtor: `${firstName} ${lastName}`
+		// would render "undefined undefined" as the page title
+		const fullName =
+			[firstName, lastName].filter(Boolean).join(" ") || currentNode.getDisplayableName();
 		const refBy = currentNode.getWeakReferences();
 		const refByNode: JCRNodeWrapper[] = [];
 		while (refBy.hasNext()) {
@@ -129,7 +133,7 @@ jahiaComponent(
 
 			// Map Jahia node -> <img> props (+ i18n alt)
 			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.realtor", { realtor: `${firstName} ${lastName}` }),
+				alt: t("alt.realtor", { realtor: fullName }),
 			});
 
 			// Responsive slot hint: ≤992px → 90vw, otherwise ≈500px
@@ -146,11 +150,7 @@ jahiaComponent(
 		return (
 			<>
 				<Section>
-					<ContentHeader
-						title={`${firstName} ${lastName}`}
-						image={imageProps}
-						description={description}
-					/>
+					<ContentHeader title={fullName} image={imageProps} description={description} />
 				</Section>
 				<Section>
 					<List rows={listRows} />

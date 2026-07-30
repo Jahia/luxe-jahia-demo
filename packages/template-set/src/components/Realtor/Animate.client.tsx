@@ -3,9 +3,9 @@ import { type ImgHTMLAttributes, useRef, useState } from "react";
 import { Image } from "design-system";
 
 interface AnimateClientProps {
-	firstName: string;
-	lastName: string;
-	jobPosition: string;
+	firstName?: string;
+	lastName?: string;
+	jobPosition?: string | false;
 	image: ImgHTMLAttributes<HTMLImageElement>;
 	videoUrl?: string;
 	currentNodeUrl: string;

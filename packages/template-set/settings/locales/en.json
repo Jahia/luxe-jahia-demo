@@ -164,7 +164,8 @@
 	"query": {
 		"noResult": "no result returned for this query",
 		"catIsMissing": "one category was removed or is missing, please review the query  : '{{queryName}}'",
-		"excludeIsMissing": "one excluded node was removed or is missing, please review the query  : '{{queryName}}'"
+		"excludeIsMissing": "one excluded node was removed or is missing, please review the query  : '{{queryName}}'",
+		"typeIsMissing": "no content type set yet, please complete the query : '{{queryName}}'"
 	},
 	"page": {
 		"relatedContent": {

@@ -39,7 +39,7 @@ const getAgencyLanguage = ({
 	renderContext,
 }: {
 	realtors: JCRNodeWrapper[] | undefined;
-	country: string;
+	country: string | undefined;
 	renderContext: RenderContext;
 }) => {
 	if (Array.isArray(realtors)) {
@@ -53,7 +53,7 @@ const getAgencyLanguage = ({
 		);
 	}
 
-	return [country.toLowerCase()];
+	return country ? [country.toLowerCase()] : [];
 };
 
 jahiaComponent(
@@ -110,7 +110,7 @@ jahiaComponent(
 			},
 			{
 				title: t("list.data.creationDate"),
-				value: new Date(creationDate).getFullYear(),
+				value: creationDate ? new Date(creationDate).getFullYear() : "",
 			},
 			{
 				title: t("list.data.spokenLanguage.label"),
@@ -146,7 +146,11 @@ jahiaComponent(
 		return (
 			<>
 				<Section>
-					<ContentHeader title={name} image={imageProps} description={description} />
+					<ContentHeader
+						title={name || currentNode.getDisplayableName()}
+						image={imageProps}
+						description={description}
+					/>
 				</Section>
 				<Section>
 					<List rows={listRows} />

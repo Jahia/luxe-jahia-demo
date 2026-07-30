@@ -164,7 +164,8 @@
 	"query": {
 		"noResult": "aucun résultat retourné pour cette requête",
 		"catIsMissing": "une catégorie a été supprimée ou est manquante, veuillez vérifier la requête : '{{queryName}}'",
-		"excludeIsMissing": "un nœud exclu a été supprimé ou est manquant, veuillez vérifier la requête : '{{queryName}}'"
+		"excludeIsMissing": "un nœud exclu a été supprimé ou est manquant, veuillez vérifier la requête : '{{queryName}}'",
+		"typeIsMissing": "aucun type de contenu défini, veuillez compléter la requête : '{{queryName}}'"
 	},
 	"page": {
 		"relatedContent": {

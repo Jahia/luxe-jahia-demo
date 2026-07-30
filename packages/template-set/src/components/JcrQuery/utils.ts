@@ -21,6 +21,18 @@ export const buildQuery = ({
 }: BuildQueryProps) => {
 	let warn: string | null = null;
 	const asContent = "content";
+
+	// A fresh node reaches the view before its mandatory fields are filled
+	// in: without a type the query would be `SELECT * FROM [undefined]`
+	if (!luxeQuery.type) {
+		return {
+			jcrQuery: null,
+			warn: t("query.typeIsMissing", { queryName: luxeQuery["jcr:title"] }) as string,
+		};
+	}
+
+	const criteria = luxeQuery.criteria || "jcr:created";
+	const sortDirection = luxeQuery.sortDirection || "desc";
 	// Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
 
 	const descendantPath =
@@ -65,7 +77,7 @@ export const buildQuery = ({
 	const jcrQuery = `SELECT *
                       FROM [${luxeQuery.type}] AS ${asContent}
                       WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
-                      ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
+                      ORDER BY ${asContent}.[${criteria}] ${sortDirection}`;
 
 	server.render.addCacheDependency(
 		{ flushOnPathMatchingRegexp: `${descendantPath}/.*` },
