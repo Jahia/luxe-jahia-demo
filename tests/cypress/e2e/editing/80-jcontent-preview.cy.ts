@@ -50,8 +50,12 @@ describe('Editing - 80 jContent preview (cm views)', () => {
 		jcontent.getTable().getRowByName(nodeName).contextMenu().select('Preview')
 		return cy
 			.get(previewIframe)
-			.its('0.contentDocument.body')
-			.should('not.be.empty')
+			.its('0.contentDocument.body', { timeout: 30000 })
+			.should(($body) => {
+				// The loader body is non-empty too — jContent rewrites the iframe
+				// document once loaded, so wait for the cm view's <main> itself
+				expect($body.find('main')).to.have.length.at.least(1)
+			})
 			.then((body) => cy.wrap(body as JQuery))
 	}
 
