@@ -6,10 +6,11 @@
 	composes: capitalize from "~/templates/css/global.module.css";
 }
 
-/* h3 for a correct heading hierarchy in the footer, sized like the former h5 */
+/* h3 for a correct heading hierarchy in the footer, styled like the former h5 */
 .heading {
 	composes: capitalize from "~/templates/css/global.module.css";
 	composes: h5 from "~/templates/css/global.module.css";
+	color: var(--luxe-color-gray);
 }
 
 .fs6 {

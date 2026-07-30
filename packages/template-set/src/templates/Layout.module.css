@@ -3,10 +3,6 @@
 	padding-top: 40px;
 	color: var(--luxe-color-gray);
 
-	h2 {
-		color: var(--luxe-color-gray);
-	}
-
 	a {
 		color: rgba(var(--luxe-color-gray-rgb), 0.8);
 		text-decoration: none;
@@ -28,10 +24,10 @@
 	composes: capitalize from "~/templates/css/global.module.css";
 }
 
-/* h2 for a correct heading hierarchy, sized like the former h5 */
+/* h2 for a correct heading hierarchy, styled like the former h5 */
 .footerHeading {
-	font-size: 0.83rem;
-	margin: 1.67rem 0;
+	composes: h5 from "~/templates/css/global.module.css";
+	color: var(--luxe-color-gray);
 }
 
 .fullTextCapitalize {
