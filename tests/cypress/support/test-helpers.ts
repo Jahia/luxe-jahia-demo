@@ -48,7 +48,7 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 			filteredPath: prepackagedArchivePath,
 		})
 			.then(() => {
-				cy.log(`Extracting site.zip from  ${prepackagedArchivePath}...`)
+				cy.log(`Extracting site.zip from ${prepackagedArchivePath}...`)
 				return cy.task('unzipArtifact', {
 					artifactFilename: prepackagedArchivePath,
 					filteredPath: 'site.zip',

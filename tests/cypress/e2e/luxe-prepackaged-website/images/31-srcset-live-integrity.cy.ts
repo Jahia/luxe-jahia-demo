@@ -21,6 +21,11 @@ describe('Images - 31 srcset integrity in live', () => {
 					.should('have.length.greaterThan', 0)
 					.each(($img) => {
 						const srcset = $img.attr('srcset') ?? ''
+						// Deliberately split on ", " only (not bare commas): the module's
+						// contract is to percent-encode commas inside URLs and separate
+						// candidates with ", ". Treating a bare comma as a separator would
+						// slice a corrupted srcset into fragments that each look like a
+						// valid candidate, masking the exact corruption guarded against.
 						srcset.split(/,\s+/).forEach((candidate) => {
 							const trimmed = candidate.trim()
 							expect(trimmed, `candidate "${trimmed}" of "${srcset}"`).to.match(CANDIDATE_PATTERN)
