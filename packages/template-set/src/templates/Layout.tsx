@@ -214,7 +214,9 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 };
 
 interface SeoMetaTagsProps {
-	"jcr:title": string;
+	// Main-resource types store their name in a type-specific property, so
+	// jcr:title can be absent at runtime — the view falls back on the display name
+	"jcr:title"?: string;
 	"jcr:description"?: string;
 	"openGraphImage"?: JCRNodeWrapper;
 	"seoKeywords"?: string[];

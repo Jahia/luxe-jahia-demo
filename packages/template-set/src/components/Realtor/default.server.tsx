@@ -32,9 +32,7 @@ jahiaComponent(
 					sizes="300px"
 				/>
 				<div className={classes.main}>
-					<h3>
-						{firstName} {lastName}
-					</h3>
+					<h3>{fullName || currentNode.getDisplayableName()}</h3>
 					{jobPosition && (
 						<p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
 					)}

@@ -3,4 +3,4 @@
 luxe-jahia-demo: patch
 ---
 
-A11y & seo findings from the full module review (#435) (#440)
+Fixed accessibility and SEO issues found by the full module review. (#440)

@@ -48,8 +48,7 @@ jahiaComponent(
 			<Island
 				component={AnimateClient}
 				props={{
-					firstName,
-					lastName,
+					fullName: fullName || currentNode.getDisplayableName(),
 					jobPosition: jobPosition && jobPositionLanguagesTranslation[jobPosition],
 					image: imageProps,
 					videoUrl: videoNode ? buildNodeUrl(videoNode) : undefined,
