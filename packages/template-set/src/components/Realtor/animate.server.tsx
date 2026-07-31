@@ -49,7 +49,7 @@ jahiaComponent(
 				component={AnimateClient}
 				props={{
 					fullName: fullName || currentNode.getDisplayableName(),
-					jobPosition: jobPosition && jobPositionLanguagesTranslation[jobPosition],
+					jobPosition: jobPosition ? jobPositionLanguagesTranslation[jobPosition] : undefined,
 					image: imageProps,
 					videoUrl: videoNode ? buildNodeUrl(videoNode) : undefined,
 					currentNodeUrl: buildNodeUrl(currentNode),

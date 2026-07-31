@@ -13,7 +13,14 @@ import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
 
 /** Collapse whitespace so assertions ignore the template-literal indentation. */
-const normalize = (query: string | null) => (query ?? "").replace(/\s+/g, " ").trim();
+const normalize = (query: string | null) => {
+	if (query === null) {
+		// An empty string would let not.toContain() assertions pass silently
+		throw new Error("Expected a JCR query, buildQuery() returned null");
+	}
+
+	return query.replace(/\s+/g, " ").trim();
+};
 
 const t = ((key: string, options?: { queryName?: string }) =>
 	options?.queryName ? `${key}[${options.queryName}]` : key) as TFunction;

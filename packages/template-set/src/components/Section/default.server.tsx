@@ -9,7 +9,7 @@ import { Section } from "design-system";
 
 export interface SectionProps {
 	"jcr:title"?: string;
-	"arrangement": "left" | "center" | "right";
+	"arrangement"?: "left" | "center" | "right";
 }
 
 jahiaComponent(

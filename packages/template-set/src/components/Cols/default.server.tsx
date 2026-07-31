@@ -18,9 +18,10 @@ jahiaComponent(
 		// Create an array of integers from 0 to 'limit - 1'
 		const cols = Array.from({ length: limit }, (_, i) => i);
 
-		const arrangement = currentResource
-			.getModuleParams()
-			.get("arrangement") as SectionProps["arrangement"];
+		// The param is only set when rendered through a Section — same default as its view
+		const arrangement =
+			(currentResource.getModuleParams().get("arrangement") as SectionProps["arrangement"]) ??
+			"center";
 
 		return (
 			<Row className={classes[arrangement]}>

@@ -4,7 +4,7 @@ import { Image } from "design-system";
 
 interface AnimateClientProps {
 	fullName: string;
-	jobPosition?: string | false;
+	jobPosition?: string;
 	image: ImgHTMLAttributes<HTMLImageElement>;
 	videoUrl?: string;
 	currentNodeUrl: string;
