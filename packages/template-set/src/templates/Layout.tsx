@@ -151,6 +151,8 @@ const loginForm = {
 const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 	const { renderContext } = useServerContext();
 	const { t } = useTranslation();
+	// getHome() returns null in live until the home page is published
+	const homeNode = renderContext.getSite().getHome();
 	return (
 		<Section component="footer" className={className}>
 			<Row>
@@ -198,12 +200,14 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 			<Row className={classes.disclaimer}>
 				<Col>
 					{/* numberOfItems={4} */}
-					<AbsoluteArea
-						name="footerNavLinkArea"
-						parent={renderContext.getSite().getHome()}
-						nodeType="jnt:linkList"
-						allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
-					/>
+					{homeNode && (
+						<AbsoluteArea
+							name="footerNavLinkArea"
+							parent={homeNode}
+							nodeType="jnt:linkList"
+							allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
+						/>
+					)}
 				</Col>
 				<Col className={classes.copyright}>
 					<Island component={CopyrightYearClient} />
