@@ -8,8 +8,11 @@ jahiaComponent(
 		displayName: "default (hydrate)",
 		componentType: "view",
 	},
-	({ target, feedbackMsg }: { target?: string; feedbackMsg: string }, { renderContext }) => {
+	(
+		{ target, feedbackMsg }: { "jcr:title"?: string; "target"?: string; "feedbackMsg"?: string },
+		{ renderContext },
+	) => {
 		const mode = renderContext.getMode();
-		return <Island component={ContactClient} props={{ target, feedbackMsg, mode }} />;
+		return <Island component={ContactClient} props={{ target, feedbackMsg: feedbackMsg ?? "", mode }} />;
 	},
 );

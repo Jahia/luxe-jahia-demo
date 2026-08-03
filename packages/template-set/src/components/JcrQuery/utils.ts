@@ -21,6 +21,21 @@ export const buildQuery = ({
 }: BuildQueryProps) => {
 	let warn: string | null = null;
 	const asContent = "content";
+	// jcr:title is optional on a fresh node — fall back on the display name so
+	// warnings never show "undefined" to the contributor
+	const queryName = luxeQuery["jcr:title"] || currentNode.getDisplayableName();
+
+	// A fresh node reaches the view before its mandatory fields are filled
+	// in: without a type the query would be `SELECT * FROM [undefined]`
+	if (!luxeQuery.type) {
+		return {
+			jcrQuery: null,
+			warn: t("query.typeIsMissing", { queryName }) as string,
+		};
+	}
+
+	const criteria = luxeQuery.criteria || "jcr:created";
+	const sortDirection = luxeQuery.sortDirection || "desc";
 	// Const descendantPath = luxeQuery.startNode?.getPath() || `/sites/${currentNode.getResolveSite().getSiteKey()}`;
 
 	const descendantPath =
@@ -33,7 +48,7 @@ export const buildQuery = ({
 		luxeQuery.filter?.reduce((condition, categoryNode, index) => {
 			// If category is deleted, the filter contains "undefined" for the deleted category
 			if (!categoryNode) {
-				warn = t("query.catIsMissing", { queryName: luxeQuery["jcr:title"] });
+				warn = t("query.catIsMissing", { queryName });
 				return condition;
 			}
 
@@ -48,7 +63,7 @@ export const buildQuery = ({
 		luxeQuery.excludeNodes?.reduce((condition, excludeNode, index) => {
 			// If excludeNode is deleted, the filter contains "undefined" for the deleted category
 			if (!excludeNode) {
-				warn = t("query.excludeIsMissing", { queryName: luxeQuery["jcr:title"] });
+				warn = t("query.excludeIsMissing", { queryName });
 				return condition;
 			}
 
@@ -65,7 +80,7 @@ export const buildQuery = ({
 	const jcrQuery = `SELECT *
                       FROM [${luxeQuery.type}] AS ${asContent}
                       WHERE ISDESCENDANTNODE('${descendantPath}') ${queryFilter} ${queryExcludeNodes}
-                      ORDER BY ${asContent}.[${luxeQuery.criteria}] ${luxeQuery.sortDirection}`;
+                      ORDER BY ${asContent}.[${criteria}] ${sortDirection}`;
 
 	server.render.addCacheDependency(
 		{ flushOnPathMatchingRegexp: `${descendantPath}/.*` },

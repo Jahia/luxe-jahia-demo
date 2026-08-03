@@ -12,7 +12,7 @@ interface Props {
 export const ClickableCard: FC<Props> = ({ href, title, image: Image, description, footer }) => (
 	<a href={href} className={classes.card}>
 		<Image className={classes.image} />
-		<h4>{title}</h4>
+		<h3>{title}</h3>
 		<p>{description}</p>
 		<strong>{footer}</strong>
 	</a>

@@ -13,7 +13,14 @@ import { buildQuery } from "./utils";
 import type { JcrQueryProps } from "./types";
 
 /** Collapse whitespace so assertions ignore the template-literal indentation. */
-const normalize = (query: string) => query.replace(/\s+/g, " ").trim();
+const normalize = (query: string | null) => {
+	if (query === null) {
+		// An empty string would let not.toContain() assertions pass silently
+		throw new Error("Expected a JCR query, buildQuery() returned null");
+	}
+
+	return query.replace(/\s+/g, " ").trim();
+};
 
 const t = ((key: string, options?: { queryName?: string }) =>
 	options?.queryName ? `${key}[${options.queryName}]` : key) as TFunction;
@@ -122,6 +129,17 @@ describe("buildQuery", () => {
 		});
 		expect(warn).toBe("query.excludeIsMissing[My Query]");
 		expect(normalize(jcrQuery)).not.toContain("jcr:uuid");
+	});
+
+	it("returns no query and warns when the type is not set yet", () => {
+		const { jcrQuery, warn } = build({ type: undefined });
+		expect(jcrQuery).toBeNull();
+		expect(warn).toBe("query.typeIsMissing[My Query]");
+	});
+
+	it("defaults criteria and sort direction when they are not set yet", () => {
+		const { jcrQuery } = build({ criteria: undefined, sortDirection: undefined });
+		expect(normalize(jcrQuery)).toContain("ORDER BY content.[jcr:created] desc");
 	});
 
 	it("registers a cache dependency on the queried subtree", () => {

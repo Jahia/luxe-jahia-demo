@@ -28,20 +28,26 @@ export default function ContactClient({
 		<>
 			<HeadingSection title={t("section.heading.contact")} />
 			<address>
-				<div className={classes.row}>
-					<strong className={classes.label}>{t("section.contact.address")}</strong>
-					{addresses.map(({ address, id }) => {
-						return <span key={id}>{address}</span>;
-					})}
-				</div>
-				<div className={classes.row}>
-					<strong className={classes.label}>{t("section.contact.phone")}</strong>
-					<a href={`tel:${phone}`}>{phone}</a>
-				</div>
-				<div className={classes.row}>
-					<strong className={classes.label}>{t("section.contact.email")}</strong>
-					<a href={`mailto:${email}`}>{email}</a>
-				</div>
+				{addresses.length > 0 && (
+					<div className={classes.row}>
+						<strong className={classes.label}>{t("section.contact.address")}</strong>
+						{addresses.map(({ address, id }) => {
+							return <span key={id}>{address}</span>;
+						})}
+					</div>
+				)}
+				{phone && (
+					<div className={classes.row}>
+						<strong className={classes.label}>{t("section.contact.phone")}</strong>
+						<a href={`tel:${phone}`}>{phone}</a>
+					</div>
+				)}
+				{email && (
+					<div className={classes.row}>
+						<strong className={classes.label}>{t("section.contact.email")}</strong>
+						<a href={`mailto:${email}`}>{email}</a>
+					</div>
+				)}
 			</address>
 			<button type="button" className={classes.btn} onClick={() => setIsOpen(true)}>
 				{t("section.contact.btn")}

@@ -8,7 +8,8 @@ import type { JCRNodeWrapper } from "org.jahia.services.content";
 import { Section } from "design-system";
 
 export interface SectionProps {
-	arrangement: "left" | "center" | "right";
+	"jcr:title"?: string;
+	"arrangement"?: "left" | "center" | "right";
 }
 
 jahiaComponent(

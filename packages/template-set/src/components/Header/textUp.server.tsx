@@ -13,9 +13,11 @@ jahiaComponent(
 	},
 	({ title, subtitle, image: imageNode }: HeaderProps) => (
 		<header className={classes.header}>
-			<Row>
-				<PageTitle title={title} description={subtitle} />
-			</Row>
+			{title && (
+				<Row>
+					<PageTitle title={title} description={subtitle} />
+				</Row>
+			)}
 			{imageNode && (
 				<Row>
 					<Figure layout="imgFull">

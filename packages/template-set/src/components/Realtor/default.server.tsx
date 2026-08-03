@@ -13,6 +13,7 @@ jahiaComponent(
 	},
 	({ firstName, lastName, jobPosition, image: imageNode }: RealtorProps, { currentNode }) => {
 		const { t } = useTranslation();
+		const fullName = [firstName, lastName].filter(Boolean).join(" ");
 
 		const jobPositionLanguagesTranslation = {
 			junior: t("realtor.jobPosition.junior"),
@@ -24,17 +25,17 @@ jahiaComponent(
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
 				<LuxeImage
 					node={imageNode}
-					alt={t("alt.realtor", { realtor: `${firstName} ${lastName}` })}
+					alt={t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() })}
 					fallback={placeholder}
 					className={classes.image}
 					widths={[300, 600]} // 600 is for double density screens
 					sizes="300px"
 				/>
 				<div className={classes.main}>
-					<h4>
-						{firstName} {lastName}
-					</h4>
-					<p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
+					<h3>{fullName || currentNode.getDisplayableName()}</h3>
+					{jobPosition && (
+						<p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
+					)}
 				</div>
 			</a>
 		);

@@ -25,7 +25,7 @@ const fillCredentials = (username: string, password: string) => {
 }
 
 const assertLoggedInCard = (username: string) => {
-	footer().contains('h5', username).should('be.visible')
+	footer().contains('h3', username).should('be.visible')
 	// In live mode, root gets the preview and edit workspace links
 	footer().contains('a', 'preview').should('have.attr', 'href')
 	footer().contains('a', 'edit').should('have.attr', 'href')
@@ -33,7 +33,7 @@ const assertLoggedInCard = (username: string) => {
 }
 
 const assertAnonymousCard = () => {
-	footer().contains('h5', 'manage website').should('be.visible')
+	footer().contains('h3', 'manage website').should('be.visible')
 	footer().contains('a', 'login').should('be.visible')
 	footer().contains('button', 'logout').should('not.exist')
 }

@@ -101,6 +101,9 @@ export default function SearchEstateClient({
 				</Row>
 			)}
 
+			{/* Visually-hidden section heading: the estate card h3s would
+			    otherwise follow the page h1 directly (heading order) */}
+			<h2 className={classes.srOnly}>{t("form.estate.resultsHeading")}</h2>
 			<Row className={classes.resultsRow}>
 				<SearchResultsClient
 					results={results.estates}

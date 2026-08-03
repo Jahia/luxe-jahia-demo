@@ -24,6 +24,7 @@ jahiaComponent(
 		{ currentNode, renderContext },
 	) => {
 		const { t } = useTranslation();
+		const fullName = [firstName, lastName].filter(Boolean).join(" ");
 		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
 		};
@@ -31,7 +32,7 @@ jahiaComponent(
 			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
 			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.realtor", { realtor: `${firstName} ${lastName}` }),
+				alt: t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() }),
 				widths: [300, 600], // 600 is for double density screens
 			});
 			imageProps.sizes = "300px"; // Ensure the image is always 300px wide
@@ -47,9 +48,8 @@ jahiaComponent(
 			<Island
 				component={AnimateClient}
 				props={{
-					firstName,
-					lastName,
-					jobPosition: jobPositionLanguagesTranslation[jobPosition],
+					fullName: fullName || currentNode.getDisplayableName(),
+					jobPosition: jobPosition ? jobPositionLanguagesTranslation[jobPosition] : undefined,
 					image: imageProps,
 					videoUrl: videoNode ? buildNodeUrl(videoNode) : undefined,
 					currentNodeUrl: buildNodeUrl(currentNode),

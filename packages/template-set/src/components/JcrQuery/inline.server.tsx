@@ -49,7 +49,9 @@ jahiaComponent(
 			currentNode,
 			renderContext,
 		});
-		const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
+		const queryContent = jcrQuery
+			? getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1)
+			: [];
 
 		return (
 			<>

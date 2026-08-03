@@ -18,7 +18,9 @@ jahiaComponent(
 		},
 	},
 	(
-		{ "j:displayRememberMeButton": isShowRememberMe }: { "j:displayRememberMeButton"?: boolean },
+		{
+			"j:displayRememberMeButton": isShowRememberMe,
+		}: { "jcr:title"?: string; "j:displayRememberMeButton"?: boolean },
 		{ renderContext },
 	) => {
 		const isLoggedIn = renderContext.isLoggedIn();

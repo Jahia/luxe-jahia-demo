@@ -6,6 +6,7 @@ import {
 	getNodeProps,
 	Island,
 	Render,
+	server,
 	useServerContext,
 } from "@jahia/javascript-modules-library";
 import CopyrightYearClient from "./CopyrightYear.client";
@@ -42,8 +43,9 @@ export const Layout = ({
 	children: ReactNode;
 }): JSX.Element => {
 	const { t } = useTranslation();
+	const { currentResource } = useServerContext();
 	return (
-		<>
+		<html lang={currentResource.getLocale().getLanguage()}>
 			<HtmlHead>{head}</HtmlHead>
 			<body>
 				<a href="#main" className={classes.skipLink}>
@@ -55,7 +57,7 @@ export const Layout = ({
 				</main>
 				<HtmlFooter className={classes.footer} />
 			</body>
-		</>
+		</html>
 	);
 };
 
@@ -92,12 +94,22 @@ const HtmlHead = ({ children }: { children: ReactNode }): JSX.Element => {
  *       />
  * </code>
  */
-const VirtualNavMenu = (): JSX.Element => {
+const VirtualNavMenu = (): JSX.Element | null => {
 	const { renderContext } = useServerContext();
+	// getHome() returns null in live until the home page is published
 	const homeNode = renderContext.getSite().getHome();
-	const props = homeNode.hasNode("nav")
-		? homeNode.getNode("nav").getPropertiesAsString()
-		: new Map();
+	if (!homeNode) {
+		return null;
+	}
+
+	const navNode = homeNode.hasNode("nav") ? homeNode.getNode("nav") : null;
+	if (navNode) {
+		// The menu is built from the nav node's properties: without this
+		// dependency the cached fragment goes stale when the node changes
+		server.render.addCacheDependency({ node: navNode }, renderContext);
+	}
+
+	const props = navNode ? navNode.getPropertiesAsString() : new Map();
 	return (
 		<Render
 			content={{
@@ -139,11 +151,15 @@ const loginForm = {
 const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 	const { renderContext } = useServerContext();
 	const { t } = useTranslation();
+	// getHome() returns null in live until the home page is published
+	const homeNode = renderContext.getSite().getHome();
 	return (
 		<Section component="footer" className={className}>
 			<Row>
 				<Col className={grid.col_4}>
-					<h5 className={classes.capitalize}>{t("footer.resources")}</h5>
+					<h2 className={[classes.capitalize, classes.footerHeading].join(" ")}>
+						{t("footer.resources")}
+					</h2>
 					<ul className={classes.list}>
 						<li>
 							<a
@@ -184,12 +200,14 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 			<Row className={classes.disclaimer}>
 				<Col>
 					{/* numberOfItems={4} */}
-					<AbsoluteArea
-						name="footerNavLinkArea"
-						parent={renderContext.getSite().getHome()}
-						nodeType="jnt:linkList"
-						allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
-					/>
+					{homeNode && (
+						<AbsoluteArea
+							name="footerNavLinkArea"
+							parent={homeNode}
+							nodeType="jnt:linkList"
+							allowedNodeTypes={["jnt:nodeLink", "jnt:externalLink"]}
+						/>
+					)}
 				</Col>
 				<Col className={classes.copyright}>
 					<Island component={CopyrightYearClient} />
@@ -200,7 +218,9 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 };
 
 interface SeoMetaTagsProps {
-	"jcr:title": string;
+	// Main-resource types store their name in a type-specific property, so
+	// jcr:title can be absent at runtime — the view falls back on the display name
+	"jcr:title"?: string;
 	"jcr:description"?: string;
 	"openGraphImage"?: JCRNodeWrapper;
 	"seoKeywords"?: string[];
@@ -238,20 +258,26 @@ const SeoMetaTags = (): JSX.Element | null => {
 	let openGraphImageSizes: { "j:width"?: number; "j:height"?: number } = {};
 
 	if (openGraphImage) {
+		// og:image URL and dimensions come from the referenced node: without
+		// this dependency they go stale when the image is replaced
+		server.render.addCacheDependency({ node: openGraphImage }, renderContext);
 		openGraphImageSizes = getNodeProps(openGraphImage, ["j:width", "j:height"]) as {
 			"j:width"?: number;
 			"j:height"?: number;
 		};
 	}
 
+	// Main-resource types (estate, realtor…) store their name in a
+	// type-specific property, not jcr:title — fall back on the display name
+	const pageTitle = seoTitle || currentNode.getDisplayableName();
+	const fullTitle = pageTitle
+		? `${pageTitle} | ${renderContext.getSite().getTitle()}`
+		: renderContext.getSite().getTitle();
+
 	return (
 		<>
-			{seoTitle && (
-				<>
-					<title>{seoTitle}</title>
-					<meta property="og:title" content={seoTitle} />
-				</>
-			)}
+			<title>{fullTitle}</title>
+			<meta property="og:title" content={fullTitle} />
 			<meta property="og:locale" content={locale} />
 			<meta property="og:type" content="website" />
 			{seoDescription && (

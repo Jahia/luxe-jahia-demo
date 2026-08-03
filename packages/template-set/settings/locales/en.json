@@ -49,6 +49,7 @@
 			"logout": "logout",
 			"badCreds": "username or password incorrect",
 			"username": "username",
+			"usernamePlaceholder": "robin",
 			"password": "password",
 			"rememberMe": "remember me",
 			"liveWorkspace": "live",
@@ -106,7 +107,8 @@
 				"country": "country"
 			},
 			"submit": "search",
-			"empty": "No results found."
+			"empty": "No results found.",
+			"resultsHeading": "Search results"
 		}
 	},
 	"pagination": {
@@ -164,7 +166,8 @@
 	"query": {
 		"noResult": "no result returned for this query",
 		"catIsMissing": "one category was removed or is missing, please review the query  : '{{queryName}}'",
-		"excludeIsMissing": "one excluded node was removed or is missing, please review the query  : '{{queryName}}'"
+		"excludeIsMissing": "one excluded node was removed or is missing, please review the query  : '{{queryName}}'",
+		"typeIsMissing": "no content type set yet, please complete the query : '{{queryName}}'"
 	},
 	"page": {
 		"relatedContent": {
@@ -176,7 +179,8 @@
 		"estate": "view of the real estate : {{estate}}",
 		"realtor": "portrait of the agent : {{realtor}}",
 		"agency": "view of the agency : {{agency}}",
-		"blog": "illustration of the blog : {{blog}}"
+		"blog": "illustration of the blog : {{blog}}",
+		"logo": "{{siteName}} logo"
 	},
 	"maps": {
 		"error": {

@@ -86,7 +86,7 @@ const LoginFormClient = ({
 								id="inputUser"
 								type="text"
 								name="username"
-								placeholder="robin"
+								placeholder={t("form.login.usernamePlaceholder")}
 								className={form.control}
 								autoComplete="username"
 								onChange={(e) => setUsername(e.target.value)}

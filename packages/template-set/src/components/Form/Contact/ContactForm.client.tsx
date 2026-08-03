@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from "react";
 import { submitContact } from "./utils.client";
 import type { EmptyObject, FeedbackProps, MsgPropsProps } from "./types";
 import classes from "~/components/Form/Contact/ContactForm.client.module.css";
@@ -24,15 +24,37 @@ const ContactFormClient = ({
 	mode,
 }: ContactFormProps) => {
 	const { t } = useTranslation();
+	const formRef = useRef<HTMLFormElement>(null);
 	const [firstName, setFirstName] = useState(prefill.firstName);
 	const [lastName, setLastName] = useState(prefill.lastName);
 	const [email, setEmail] = useState(prefill.email);
 	const [message, setMessage] = useState(prefill.message);
 
+	// The SSR markup accepts input before the island hydrates, and that text
+	// never fires onChange — sync it from the DOM once handlers are attached,
+	// otherwise the submit button stays disabled despite a fully filled form
+	useEffect(() => {
+		const form = formRef.current;
+		if (!form) {
+			return;
+		}
+
+		const domValue = (name: string) =>
+			(form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null)?.value ?? "";
+		/* eslint-disable @eslint-react/set-state-in-effect --
+		   reading the DOM is only possible after mount, and the extra render only
+		   happens when pre-hydration input is actually recovered */
+		setFirstName((current) => current || domValue("contact-firstName"));
+		setLastName((current) => current || domValue("contact-lastName"));
+		setEmail((current) => current || domValue("contact-email"));
+		setMessage((current) => current || domValue("contact-message"));
+		/* eslint-enable @eslint-react/set-state-in-effect */
+	}, []);
+
 	const isFormValid = firstName && lastName && email && message && mode !== "edit";
 
 	return (
-		<form id="contactForm" className={classes.form}>
+		<form id="contactForm" ref={formRef} className={classes.form}>
 			<div>
 				<label htmlFor="inputContactFirstName" className={classes.label}>
 					{t("form.contact.firstName")}

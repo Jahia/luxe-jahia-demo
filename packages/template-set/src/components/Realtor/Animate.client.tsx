@@ -3,17 +3,15 @@ import { type ImgHTMLAttributes, useRef, useState } from "react";
 import { Image } from "design-system";
 
 interface AnimateClientProps {
-	firstName: string;
-	lastName: string;
-	jobPosition: string;
+	fullName: string;
+	jobPosition?: string;
 	image: ImgHTMLAttributes<HTMLImageElement>;
 	videoUrl?: string;
 	currentNodeUrl: string;
 }
 
 export default function AnimateClient({
-	firstName,
-	lastName,
+	fullName,
 	jobPosition,
 	image,
 	videoUrl,
@@ -65,10 +63,8 @@ export default function AnimateClient({
 				/>
 			)}
 			<div className={classes.main}>
-				<h4>
-					{firstName} {lastName}
-				</h4>
-				<p className={classes.jobPosition}>{jobPosition}</p>
+				<h3>{fullName}</h3>
+				{jobPosition && <p className={classes.jobPosition}>{jobPosition}</p>}
 			</div>
 		</a>
 	);

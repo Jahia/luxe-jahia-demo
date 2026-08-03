@@ -51,7 +51,9 @@ jahiaComponent(
 			currentNode,
 			renderContext,
 		});
-		const queryContent = getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1);
+		const queryContent = jcrQuery
+			? getNodesByJCRQuery(currentNode.getSession(), jcrQuery, maxItems || -1)
+			: [];
 		const rowQueryContent = queryContent.reduce((row: JCRNodeWrapper[][], node, index) => {
 			if (index % 2 === 0) {
 				row.push([node as JCRNodeWrapper]);

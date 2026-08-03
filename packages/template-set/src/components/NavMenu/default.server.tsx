@@ -4,11 +4,13 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./default.module.css";
 import { NavigationToggler } from "~/components/NavMenu/NavigationToggler";
+import { useTranslation } from "react-i18next";
 
 interface Props {
-	brandText?: string;
-	brandImage?: JCRNodeWrapper;
-	brandImageMobile?: JCRNodeWrapper;
+	"jcr:title"?: string;
+	"brandText"?: string;
+	"brandImage"?: JCRNodeWrapper;
+	"brandImageMobile"?: JCRNodeWrapper;
 }
 
 jahiaComponent(
@@ -22,6 +24,7 @@ jahiaComponent(
 		},
 	},
 	({ brandText, brandImage }: Props, { renderContext }) => {
+		const { t } = useTranslation();
 		const siteName = renderContext.getSite().getTitle();
 		const home = renderContext.getSite().getHome();
 
@@ -34,7 +37,7 @@ jahiaComponent(
 				<div className={classes.containerFluid}>
 					<a href={buildNodeUrl(home)} className={classes.brand}>
 						{brandImage && (
-							<img src={buildNodeUrl(brandImage)} alt={`Logo-${siteName}`} width="100" />
+							<img src={buildNodeUrl(brandImage)} alt={t("alt.logo", { siteName })} width="100" />
 						)}
 						{brandText}
 					</a>
