@@ -3,4 +3,4 @@
 luxe-jahia-demo: patch
 ---
 
-Removed the built-in root user and its password hash from the prepackaged site export. (#442)
+Stopped shipping a copy of the Jahia root account (including its credentials) inside the prepackaged website archive: importing the demo site can no longer expose or interfere with the root user of the target instance. (#442)
