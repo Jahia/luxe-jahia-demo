@@ -3,4 +3,4 @@
 luxe-jahia-demo: patch
 ---
 
-Cleared all security alerts in the build tooling dependencies. (#444)
+Fixed known security vulnerabilities in the module's dependencies. (#444)
