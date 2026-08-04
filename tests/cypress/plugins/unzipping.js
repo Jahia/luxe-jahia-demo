@@ -1,4 +1,4 @@
-const decompress = require("decompress");
+const AdmZip = require("adm-zip");
 const glob = require("glob");
 
 const unzipArtifact = ({ artifactFilename, filteredPath }) => {
@@ -6,11 +6,15 @@ const unzipArtifact = ({ artifactFilename, filteredPath }) => {
   if (files.length === 0) {
     throw new Error(`No files found matching pattern: ${artifactFilename}`);
   }
-  return decompress(files[0], "./artifacts", {
-    filter: (file) => {
-      return filteredPath === file.path;
-    },
-  });
+  const zip = new AdmZip(files[0]);
+  const entry = zip.getEntry(filteredPath);
+  if (!entry) {
+    throw new Error(`Entry not found in ${files[0]}: ${filteredPath}`);
+  }
+  // Same layout as the previous decompress-based implementation: the entry is
+  // extracted under ./artifacts with its archive path preserved.
+  zip.extractEntryTo(entry, "./artifacts", true, true);
+  return null;
 };
 
 module.exports = {
