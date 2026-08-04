@@ -1,8 +1,25 @@
 const AdmZip = require("adm-zip");
-const glob = require("glob");
+const { globSync } = require("glob");
+const path = require("path");
+
+// Both values end up in filesystem paths under ./artifacts; reject anything
+// that could escape it (zip-slip / path traversal).
+const assertSafeRelativePath = (value, name) => {
+  if (
+    typeof value !== "string" ||
+    value.length === 0 ||
+    path.isAbsolute(value) ||
+    value.split(/[\\/]+/).includes("..")
+  ) {
+    throw new Error(`Unsafe ${name}: ${value}`);
+  }
+};
 
 const unzipArtifact = ({ artifactFilename, filteredPath }) => {
-  const files = glob.sync("./artifacts/" + artifactFilename);
+  assertSafeRelativePath(artifactFilename, "artifactFilename");
+  assertSafeRelativePath(filteredPath, "filteredPath");
+
+  const files = globSync("./artifacts/" + artifactFilename);
   if (files.length === 0) {
     throw new Error(`No files found matching pattern: ${artifactFilename}`);
   }
