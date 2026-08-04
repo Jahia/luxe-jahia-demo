@@ -3,4 +3,4 @@
 luxe-jahia-demo: patch
 ---
 
-Cleared all security alerts in the end-to-end test dependencies. (#443)
+Fixed known security vulnerabilities in the end-to-end test dependencies. (#443)

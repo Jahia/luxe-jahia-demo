@@ -7,13 +7,12 @@ const unzipArtifact = ({ artifactFilename, filteredPath }) => {
     throw new Error(`No files found matching pattern: ${artifactFilename}`);
   }
   const zip = new AdmZip(files[0]);
-  const entry = zip.getEntry(filteredPath);
-  if (!entry) {
+  if (!zip.getEntry(filteredPath)) {
     throw new Error(`Entry not found in ${files[0]}: ${filteredPath}`);
   }
   // Same layout as the previous decompress-based implementation: the entry is
   // extracted under ./artifacts with its archive path preserved.
-  zip.extractEntryTo(entry, "./artifacts", true, true);
+  zip.extractEntryTo(filteredPath, "./artifacts", true, true);
   return null;
 };
 
