@@ -1,4 +1,4 @@
-import { publishAndWaitJobEnding } from '@jahia/cypress'
+import { createUser, deleteUser, grantRoles, publishAndWaitJobEnding } from '@jahia/cypress'
 import { GENERIC_SITE_KEY } from '../../support/constants'
 
 const sitePath = `/sites/${GENERIC_SITE_KEY}`
@@ -39,9 +39,19 @@ const assertAnonymousCard = () => {
 }
 
 describe('Forms - 61 Login form (footer)', () => {
-	before('Publish the site', () => {
+	before('Publish the site and create the pam persona user', () => {
 		cy.login()
+		// The persona cards auto-login with hardcoded demo users; the generic test
+		// site does not import them, so the spec provides its own pam
+		createUser('pam', 'password')
+		grantRoles(sitePath, ['editor'], 'pam', 'USER')
 		publishAndWaitJobEnding(sitePath, ['en'])
+		cy.logout()
+	})
+
+	after('Delete the pam persona user', () => {
+		cy.login()
+		deleteUser('pam')
 		cy.logout()
 	})
 
@@ -60,6 +70,15 @@ describe('Forms - 61 Login form (footer)', () => {
 
 		cy.get('dialog').should('not.be.visible')
 		assertLoggedInCard('root')
+	})
+
+	it('logs in and lands in the edition interface when clicking a persona card (#352)', () => {
+		openLoginDialog()
+		cy.get('dialog').contains('h4', 'Pam Pasteur').closest('[role="button"]').click()
+
+		// The persona login redirects to the edit-mode URL of the current page,
+		// which the server resolves to the jContent Page Builder
+		cy.url({ timeout: 30000 }).should('include', '/jahia/jcontent')
 	})
 
 	it('shows the translated error on wrong credentials', () => {
