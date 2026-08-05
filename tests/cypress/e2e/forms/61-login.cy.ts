@@ -1,4 +1,4 @@
-import { createUser, deleteUser, grantRoles, publishAndWaitJobEnding } from '@jahia/cypress'
+import { createUser, deleteUser, getUserPath, grantRoles, publishAndWaitJobEnding } from '@jahia/cypress'
 import { GENERIC_SITE_KEY } from '../../support/constants'
 
 const sitePath = `/sites/${GENERIC_SITE_KEY}`
@@ -39,17 +39,32 @@ const assertAnonymousCard = () => {
 }
 
 describe('Forms - 61 Login form (footer)', () => {
-	before('Publish the site and create the pam persona user', () => {
+	// The persona cards auto-login with hardcoded demo users; the generic CI site
+	// does not import them, so the spec provisions its own pam. On a shared
+	// instance pam is a real demo user: deleting her would wipe her ACLs, so the
+	// spec must only clean up a user it created itself.
+	let pamCreatedBySpec = false
+
+	before('Publish the site and provision the pam persona user if missing', () => {
 		cy.login()
-		// The persona cards auto-login with hardcoded demo users; the generic test
-		// site does not import them, so the spec provides its own pam
-		createUser('pam', 'password')
-		grantRoles(sitePath, ['editor'], 'pam', 'USER')
+		getUserPath('pam').then((response) => {
+			if (response?.data?.admin?.userAdmin?.user) {
+				return
+			}
+
+			createUser('pam', 'password')
+			grantRoles(sitePath, ['editor'], 'pam', 'USER')
+			pamCreatedBySpec = true
+		})
 		publishAndWaitJobEnding(sitePath, ['en'])
 		cy.logout()
 	})
 
-	after('Delete the pam persona user', () => {
+	after('Delete the pam persona user if the spec created it', () => {
+		if (!pamCreatedBySpec) {
+			return
+		}
+
 		cy.login()
 		deleteUser('pam')
 		cy.logout()
