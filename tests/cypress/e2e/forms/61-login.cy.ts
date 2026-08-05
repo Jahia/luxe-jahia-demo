@@ -1,4 +1,4 @@
-import { publishAndWaitJobEnding } from '@jahia/cypress'
+import { createUser, deleteUser, getUserPath, grantRoles, publishAndWaitJobEnding } from '@jahia/cypress'
 import { GENERIC_SITE_KEY } from '../../support/constants'
 
 const sitePath = `/sites/${GENERIC_SITE_KEY}`
@@ -39,9 +39,34 @@ const assertAnonymousCard = () => {
 }
 
 describe('Forms - 61 Login form (footer)', () => {
-	before('Publish the site', () => {
+	// The persona cards auto-login with hardcoded demo users; the generic CI site
+	// does not import them, so the spec provisions its own pam. On a shared
+	// instance pam is a real demo user: deleting her would wipe her ACLs, so the
+	// spec must only clean up a user it created itself.
+	let pamCreatedBySpec = false
+
+	before('Publish the site and provision the pam persona user if missing', () => {
 		cy.login()
+		getUserPath('pam').then((response) => {
+			if (response?.data?.admin?.userAdmin?.user) {
+				return
+			}
+
+			createUser('pam', 'password')
+			grantRoles(sitePath, ['editor'], 'pam', 'USER')
+			pamCreatedBySpec = true
+		})
 		publishAndWaitJobEnding(sitePath, ['en'])
+		cy.logout()
+	})
+
+	after('Delete the pam persona user if the spec created it', () => {
+		if (!pamCreatedBySpec) {
+			return
+		}
+
+		cy.login()
+		deleteUser('pam')
 		cy.logout()
 	})
 
@@ -60,6 +85,15 @@ describe('Forms - 61 Login form (footer)', () => {
 
 		cy.get('dialog').should('not.be.visible')
 		assertLoggedInCard('root')
+	})
+
+	it('logs in and lands in the edition interface when clicking a persona card (#352)', () => {
+		openLoginDialog()
+		cy.get('dialog').contains('h4', 'Pam Pasteur').closest('[role="button"]').click()
+
+		// The persona login redirects to the edit-mode URL of the current page,
+		// which the server resolves to the jContent Page Builder
+		cy.url({ timeout: 30000 }).should('include', '/jahia/jcontent')
 	})
 
 	it('shows the translated error on wrong credentials', () => {

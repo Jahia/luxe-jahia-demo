@@ -12,6 +12,7 @@ interface LoginFormClientProps {
 	loginUrl: string;
 	setUser: Dispatch<SetStateAction<string | undefined>>;
 	handleLoggedIn: () => void;
+	handlePersonaLoggedIn: () => void;
 	isShowRememberMe: boolean;
 	siteKey?: string;
 	persona: LoginPersonaProps[];
@@ -21,6 +22,7 @@ const LoginFormClient = ({
 	loginUrl,
 	setUser,
 	handleLoggedIn,
+	handlePersonaLoggedIn,
 	siteKey,
 	isShowRememberMe = true,
 	persona,
@@ -41,6 +43,11 @@ const LoginFormClient = ({
 		setUnknownError,
 	};
 
+	const personaLoginProps: LoginCommonProps = {
+		...loginCommonProps,
+		handleLoggedIn: handlePersonaLoggedIn,
+	};
+
 	const handleLogin = () =>
 		login({
 			username,
@@ -57,7 +64,7 @@ const LoginFormClient = ({
 					<p>{t("form.login.sections.persona.teaser")}</p>
 					<div>
 						{persona?.map((user) => (
-							<LoginCardClient key={user.username} {...user} {...{ loginCommonProps }} />
+							<LoginCardClient key={user.username} {...user} loginCommonProps={personaLoginProps} />
 						))}
 					</div>
 				</div>

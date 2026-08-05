@@ -53,6 +53,12 @@ export default function LoginClient({
 		setIsOpen(false);
 	};
 
+	// Persona cards are a guided demo entry point: land users directly in the
+	// edition interface (Page Builder) instead of staying on the live site.
+	const handlePersonaLoggedIn = () => {
+		window.location.assign(urls.editUrl);
+	};
+
 	if (mode === "edit") {
 		return (
 			<div className={clsx(alert.dark, classes.fs6)} role="alert">
@@ -104,6 +110,7 @@ export default function LoginClient({
 					isShowRememberMe={isShowRememberMe}
 					setUser={setUser}
 					handleLoggedIn={handleLoggedIn}
+					handlePersonaLoggedIn={handlePersonaLoggedIn}
 					siteKey={siteKey}
 					persona={persona}
 				/>
