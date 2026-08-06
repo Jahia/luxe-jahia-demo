@@ -1,6 +1,8 @@
 # Bug report — srcset URL rewriting corrupts URLs containing commas
 
-> Ready to paste into the core tracker. Found on 2026-07-08 while integrating the Cloudinary picker in a JavaScript module (luxe-jahia-demo, PR #436).
+> **Filed on 2026-08-06 as https://github.com/Jahia/jahia/issues/23** (label `need-triage`). Found on 2026-07-08 while integrating the Cloudinary picker in a JavaScript module (luxe-jahia-demo, PR #436). This file is kept as the working draft; follow the discussion on the issue.
+>
+> The two other platform findings from the e2e work were filed at the same time: Page Builder Delete crash → https://github.com/Jahia/jahia/issues/24, provisioning `importSite` site key → https://github.com/Jahia/jahia/issues/25.
 
 ## Summary
 
