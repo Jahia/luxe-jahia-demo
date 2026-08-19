@@ -23,9 +23,13 @@ vi.mock("@jahia/javascript-modules-library", () => ({
 	},
 }));
 
-import { imageNodeToImgProps } from "./imgProps";
-import { clampToIntrinsic, readNodeMeta, sizedUrl } from "./meta";
-import { DEFAULT_WIDTHS } from "./constants";
+import {
+	clampToIntrinsic,
+	DEFAULT_WIDTHS,
+	imageNodeToImgProps,
+	readNodeMeta,
+	sizedUrl,
+} from "./imgProps";
 
 const fakeImageNode = ({
 	url = "/files/img.jpg",
@@ -73,10 +77,6 @@ describe("clampToIntrinsic", () => {
 	it("passes the request through when the intrinsic size is unknown", () => {
 		expect(clampToIntrinsic(1200, undefined)).toBe(1200);
 	});
-
-	it("passes undefined through", () => {
-		expect(clampToIntrinsic(undefined, 800)).toBeUndefined();
-	});
 });
 
 describe("readNodeMeta", () => {
@@ -105,17 +105,8 @@ describe("sizedUrl", () => {
 	});
 
 	it("returns the original URL when the resize is a no-op", () => {
-		expect(sizedUrl(node, meta)).toBe("/files/img.jpg");
 		expect(sizedUrl(node, meta, 2000)).toBe("/files/img.jpg");
 		expect(sizedUrl(node, meta, 3000)).toBe("/files/img.jpg"); // clamped to intrinsic
-	});
-
-	it("emits both width and height params", () => {
-		expect(sizedUrl(node, meta, 600, 300)).toBe("/files/img.jpg?w=600&h=300");
-	});
-
-	it("drops only the no-op axis", () => {
-		expect(sizedUrl(node, meta, 2000, 300)).toBe("/files/img.jpg?h=300");
 	});
 });
 
@@ -154,12 +145,12 @@ describe("imageNodeToImgProps", () => {
 		expect(props.height).toBeUndefined();
 	});
 
-	it("honours custom widths and baseWidth", () => {
+	it("honours custom widths", () => {
 		const props = imageNodeToImgProps(fakeImageNode({ width: 2000, height: 1000 }), {
 			widths: [200, 400],
-			baseWidth: 400,
 		});
-		expect(props.src).toBe("/files/img.jpg?w=400");
+		// The base src is the first candidate
+		expect(props.src).toBe("/files/img.jpg?w=200");
 		// The 2000px original is far beyond 2×400: not a candidate
 		expect(props.srcSet).toBe("/files/img.jpg?w=200 200w, /files/img.jpg?w=400 400w");
 	});
@@ -190,7 +181,12 @@ describe("imageNodeToImgProps", () => {
 
 	it("percent-encodes commas inside srcSet URLs (Cloudinary transformations)", () => {
 		const node = {
-			...fakeImageNode({ url: "https://cdn.example/image/upload/v1/img.jpg", width: 1024, height: 500, defaultProvider: false }),
+			...fakeImageNode({
+				url: "https://cdn.example/image/upload/v1/img.jpg",
+				width: 1024,
+				height: 500,
+				defaultProvider: false,
+			}),
 			// Emulates CloudinaryDecorator: transformations joined with commas in the path
 			getUrl: (params: string[]) =>
 				`https://cdn.example/image/upload/f_auto,${params.join(",").replace(":", "_")}/v1/img.jpg`,

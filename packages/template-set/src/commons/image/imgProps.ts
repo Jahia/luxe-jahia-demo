@@ -1,29 +1,23 @@
+import { buildNodeUrl } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
-import { clampToIntrinsic, readNodeMeta, sizedUrl } from "./meta";
-import { DEFAULT_WIDTHS } from "./constants";
 
 /**
- * Options for building props for an `<img>` element.
+ * Default `srcSet` candidate widths (CSS px), from the Material UI
+ * breakpoints: 600 (sm), 900 (md), 1200 (lg), 1536 (xl).
  */
+export const DEFAULT_WIDTHS = [600, 900, 1200, 1536];
+
+/** Options of {@link imageNodeToImgProps}. */
 export type ImgOptions = {
 	/** Alternative text; defaults to the node's displayable name. */
 	alt?: string;
-	/** Base resize width (px) for the returned `src`; defaults to the first candidate width. */
-	baseWidth?: number;
-	/** Base resize height (px) for the returned `src`. */
-	baseHeight?: number;
-	/**
-	 * Candidate widths (px) for `srcSet`; defaults to {@link DEFAULT_WIDTHS}.
-	 * Candidates are clamped to the intrinsic width; the intrinsic width is
-	 * added as a candidate when it is at most 2× the largest requested width
-	 * (so a huge master asset never becomes a candidate).
-	 */
+	/** Candidate widths (px) for `srcSet`; defaults to {@link DEFAULT_WIDTHS}. */
 	widths?: number[];
 };
 
 /**
- * Returned props for an `<img>` element (no `sizes` by design — it describes
- * the layout slot, so it belongs to the call site; `LuxeImage` exposes it).
+ * `<img>` props built from a JCR image node. No `sizes`: it describes the
+ * layout slot, so it belongs to the call site — `LuxeImage` forwards it.
  */
 export type ImgProps = {
 	src: string;
@@ -33,68 +27,131 @@ export type ImgProps = {
 	height?: number;
 };
 
+type ImageMeta = {
+	vector: boolean;
+	intrinsicWidth?: number;
+	intrinsicHeight?: number;
+};
+
+/** A JCR node throws on a property it does not carry, and `j:*` are optional. */
+const readPositiveLong = (node: JCRNodeWrapper, property: string) => {
+	try {
+		const value = Number(node.getProperty(property)?.getLong());
+		return value > 0 ? value : undefined;
+	} catch {
+		return undefined;
+	}
+};
+
+/** Mime type, plus the intrinsic dimensions of a raster image. */
+export const readNodeMeta = (node: JCRNodeWrapper): ImageMeta => {
+	let mime = "";
+	try {
+		mime = node.getNode("jcr:content")?.getPropertyAsString("jcr:mimeType") ?? "";
+	} catch {
+		// Ignore errors
+	}
+
+	return mime.startsWith("image/svg") || mime.startsWith("image/vnd")
+		? { vector: true }
+		: {
+				vector: false,
+				intrinsicWidth: readPositiveLong(node, "j:width"),
+				intrinsicHeight: readPositiveLong(node, "j:height"),
+			};
+};
+
+/** Never request more than the intrinsic width, when it is known. */
+export const clampToIntrinsic = (requested: number, intrinsic?: number) =>
+	intrinsic ? Math.min(requested, intrinsic) : requested;
+
 /**
- * Build `<img>`-ready props from a Jahia image node.
+ * True when the node lives in the default JCR provider (a local /files asset),
+ * false when it comes from an external provider mount (DAM: Keepeek,
+ * Cloudinary picker…). `getProvider()` is absent from the published typings,
+ * but present on every JCRNodeWrapper at runtime.
+ */
+const isDefaultProvider = (node: JCRNodeWrapper) => {
+	try {
+		return (node as unknown as { getProvider(): { isDefault(): boolean } })
+			.getProvider()
+			.isDefault();
+	} catch {
+		return true;
+	}
+};
+
+/**
+ * The node URL, resized to `width` — clamped to the intrinsic width, and left
+ * untouched when the resize would be a no-op.
  *
- * - Raster images: requested sizes are clamped to the intrinsic dimensions
- *   (`j:width` / `j:height`) when known; `srcSet` URLs are de-duplicated and
- *   always include the base `src`.
- * - Vector images (e.g. SVG): original URL, no resize params, no `srcSet`.
+ * The requested size reaches the image through a different channel per
+ * provider:
+ * - an external DAM provider overrides `node.getUrl(List)` and builds a signed,
+ *   transformed URL out of the `args`;
+ * - the default provider discards those args (`JCRNodeWrapperImpl.getUrl(List)`
+ *   is `return getUrl()`), so the size travels in the query string instead —
+ *   the pattern the Media Optimization (Cloudimage) proxy honours in live mode,
+ *   harmlessly ignored by the plain file servlet.
+ *   https://academy.jahia.com/documentation/jahia-cms/jahia-8-2/developer/optional-features/media-optimization-cloudimage
+ */
+export const sizedUrl = (node: JCRNodeWrapper, meta: ImageMeta, width: number) => {
+	const w = clampToIntrinsic(width, meta.intrinsicWidth);
+	if (w === meta.intrinsicWidth) return buildNodeUrl(node);
+
+	return isDefaultProvider(node)
+		? buildNodeUrl(node, { parameters: { w: String(w) } })
+		: buildNodeUrl(node, { args: { w } });
+};
+
+/**
+ * Commas are legal inside a URL but ambiguous with the `srcSet` candidate
+ * separator, and Jahia's srcset rewriter (SrcSetURLReplacer) splits on every
+ * comma — corrupting e.g. a Cloudinary transformation URL
+ * (…/upload/f_auto,w_600/…). https://github.com/Jahia/jahia/issues/23
+ */
+const srcSetSafe = (url: string) => url.replaceAll(",", "%2C");
+
+/**
+ * Build `<img>` props from a Jahia image node.
  *
- * @example
- * ```tsx
- * <img {...imageNodeToImgProps(imageNode, { alt: "Hero", widths: [600, 1200] })} />
- * ```
+ * Prefer the `LuxeImage` component; call this directly only when the props have
+ * to cross an `Island` boundary — see the module documentation of `LuxeImage`.
  */
 export function imageNodeToImgProps(
 	imageNode: JCRNodeWrapper,
-	{ alt = imageNode.getDisplayableName(), baseWidth, baseHeight, widths }: ImgOptions = {},
+	{ alt = imageNode.getDisplayableName(), widths = DEFAULT_WIDTHS }: ImgOptions = {},
 ): ImgProps {
 	const meta = readNodeMeta(imageNode);
 
-	// Vectors: never resized, no srcSet
+	// A vector is never resized, and a one-URL srcSet would say nothing
 	if (meta.vector) {
-		return { src: sizedUrl(imageNode, meta), alt: alt.trim() };
+		return { src: buildNodeUrl(imageNode), alt: alt.trim() };
 	}
 
-	const requestedBase = baseWidth ?? widths?.[0] ?? DEFAULT_WIDTHS[0];
-	const src = sizedUrl(imageNode, meta, requestedBase, baseHeight);
-
-	// srcSet candidates: requested widths clamped to intrinsic
-	const candidates = (widths ?? DEFAULT_WIDTHS)
-		.map((w) => clampToIntrinsic(w, meta.intrinsicWidth))
-		.filter((w): w is number => typeof w === "number" && Number.isFinite(w) && w > 0);
-	// The intrinsic width joins the candidates only when the original is
-	// reasonably close to the largest requested width: a huge master asset
-	// (e.g. an 8000px DAM original) must never be served for a 1536px slot.
-	if (meta.intrinsicWidth && meta.intrinsicWidth <= 2 * Math.max(0, ...candidates)) {
-		candidates.push(meta.intrinsicWidth);
+	// Never empty, which is what makes `src` the first candidate below
+	const usable = widths.filter((width) => width > 0);
+	const requested = (usable.length ? usable : DEFAULT_WIDTHS).map((width) =>
+		clampToIntrinsic(width, meta.intrinsicWidth),
+	);
+	// The intrinsic width joins the candidates only when the original is close
+	// enough to the largest requested width: a huge master asset (an 8000px DAM
+	// original, say) must never be served into a 1536px slot.
+	if (meta.intrinsicWidth && meta.intrinsicWidth <= 2 * Math.max(...requested)) {
+		requested.push(meta.intrinsicWidth);
 	}
 
-	// One srcSet entry per unique URL; make sure the base src is listed
-	const seen = new Set<string>();
-	const pairs: { url: string; w: number }[] = [];
-	for (const w of candidates) {
-		const url = sizedUrl(imageNode, meta, w);
-		if (!seen.has(url)) {
-			seen.add(url);
-			pairs.push({ url, w });
-		}
-	}
-	if (!seen.has(src)) {
-		pairs.unshift({ url: src, w: clampToIntrinsic(requestedBase, meta.intrinsicWidth) as number });
-	}
-
-	// Commas are legal inside a srcSet URL but ambiguous with the candidate
-	// separator, and Jahia's srcset URL rewriter (SrcSetURLReplacer) splits on
-	// every comma — corrupting e.g. Cloudinary transformation URLs
-	// (…/upload/f_auto,w_600/…). Percent-encode them within srcSet only.
-	const srcSetSafe = (url: string) => url.replaceAll(",", "%2C");
+	// Keying by URL is the de-duplication: on an original smaller than the slot,
+	// several requested widths clamp to the same size and share one URL.
+	const widthByUrl = new Map<string, number>(
+		requested.map((width) => [sizedUrl(imageNode, meta, width), width]),
+	);
+	const candidates = [...widthByUrl].map(([url, width]) => `${srcSetSafe(url)} ${width}w`);
 
 	return {
-		src,
+		src: sizedUrl(imageNode, meta, requested[0]),
 		alt: alt.trim(),
-		srcSet: pairs.map(({ url, w }) => `${srcSetSafe(url)} ${w}w`).join(", ") || undefined,
+		srcSet: candidates.join(", "),
 		width: meta.intrinsicWidth,
 		height: meta.intrinsicHeight,
 	};
