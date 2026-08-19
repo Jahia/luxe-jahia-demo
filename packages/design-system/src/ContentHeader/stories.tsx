@@ -1,9 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { FC } from "react";
 import { ContentHeader } from "./index.tsx";
+import { Image } from "../Image/index.tsx";
 
+// The real callers pass an Image, so the story does too: the base img class
+// (object-fit, radius) is part of what the header looks like.
 const SampleImage: FC<{ className: string }> = ({ className }) => (
-	<img
+	<Image
 		src="https://placehold.co/500x500?text=Sample+Image"
 		alt="Sample placeholder image"
 		width={500}
