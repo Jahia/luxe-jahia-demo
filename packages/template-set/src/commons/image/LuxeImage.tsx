@@ -2,7 +2,7 @@ import { buildModuleFileUrl, server, useServerContext } from "@jahia/javascript-
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { ComponentProps } from "react";
 import { Image } from "design-system";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { imageNodeToImgProps } from "~/commons/image/imgProps";
 import defaultFallback from "/static/img/img-placeholder.jpg";
 
 type LuxeImageProps = {

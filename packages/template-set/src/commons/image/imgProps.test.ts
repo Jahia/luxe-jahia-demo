@@ -23,7 +23,7 @@ vi.mock("@jahia/javascript-modules-library", () => ({
 	},
 }));
 
-import { imageNodeToImgProps } from "./index";
+import { imageNodeToImgProps } from "./imgProps";
 import { clampToIntrinsic, readNodeMeta, sizedUrl } from "./meta";
 import { DEFAULT_WIDTHS } from "./constants";
 

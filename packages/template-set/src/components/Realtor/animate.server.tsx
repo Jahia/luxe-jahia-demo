@@ -8,7 +8,7 @@ import {
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { imageNodeToImgProps } from "~/commons/image/imgProps";
 import type { ImgHTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 

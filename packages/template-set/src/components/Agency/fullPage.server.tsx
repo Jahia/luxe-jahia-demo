@@ -18,7 +18,7 @@ import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
 import MapWithPinClient from "~/commons/Map/MapWithPin.client";
 import type { AddressItem } from "~/commons/Map/MapWithPin.client";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { imageNodeToImgProps } from "~/commons/image/imgProps";
 import {
 	Col,
 	ContentHeader,
