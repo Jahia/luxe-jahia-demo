@@ -9,7 +9,7 @@ import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
 import { imageNodeToImgProps } from "~/commons/image/imgProps";
-import type { ImgHTMLAttributes } from "react";
+import type { ImageProps } from "design-system";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -25,7 +25,7 @@ jahiaComponent(
 	) => {
 		const { t } = useTranslation();
 		const fullName = [firstName, lastName].filter(Boolean).join(" ");
-		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
+		let imageProps: ImageProps = {
 			src: buildModuleFileUrl(placeholder),
 		};
 		if (imageNode) {
