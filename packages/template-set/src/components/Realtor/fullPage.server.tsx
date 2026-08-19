@@ -1,5 +1,4 @@
 import {
-	buildModuleFileUrl,
 	getNodeProps,
 	getNodesByJCRQuery,
 	Island,
@@ -13,7 +12,7 @@ import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import ContactClient from "~/commons/Contact.client";
 import type { AddressItem } from "~/commons/Map/MapWithPin.client";
-import { imageNodeToImgProps } from "~/commons/image/imgProps";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 import {
 	Col,
 	ContentHeader,
@@ -23,7 +22,6 @@ import {
 	Section,
 	type ListRowProps,
 } from "design-system";
-import type { ImgHTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 
 const MAX_ESTATE = 6;
@@ -122,25 +120,6 @@ jahiaComponent(
 			},
 		];
 
-		// Image: placeholder by default; override when a real node exists
-		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
-			src: buildModuleFileUrl(placeholder),
-		};
-
-		if (imageNode) {
-			// SSR cache dep for this image node
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-
-			// Map Jahia node -> <img> props (+ i18n alt)
-			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.realtor", { realtor: fullName }),
-			});
-
-			// Responsive slot hint: ≤992px → 90vw, otherwise ≈500px
-			// (keep in sync with grid breakpoints; effective with width-based srcset)
-			imageProps.sizes = "(max-width: 992px) 90vw, 500px";
-		}
-
 		const addressItems: AddressItem[] = agencies
 			.filter((item): item is { address: string; id: string; name: string } =>
 				Boolean(item.address),
@@ -150,7 +129,22 @@ jahiaComponent(
 		return (
 			<>
 				<Section>
-					<ContentHeader title={fullName} image={imageProps} description={description} />
+					<ContentHeader
+						title={fullName}
+						image={({ className, priority }) => (
+							<LuxeImage
+								node={imageNode}
+								alt={t("alt.realtor", { realtor: fullName })}
+								fallback={placeholder}
+								className={className}
+								priority={priority}
+								// Responsive slot hint: ≤992px → 90vw, otherwise ≈500px
+								// (keep in sync with grid breakpoints; effective with width-based srcset)
+								sizes="(max-width: 992px) 90vw, 500px"
+							/>
+						)}
+						description={description}
+					/>
 				</Section>
 				<Section>
 					<List rows={listRows} />

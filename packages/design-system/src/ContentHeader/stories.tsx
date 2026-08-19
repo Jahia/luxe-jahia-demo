@@ -1,13 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { FC } from "react";
 import { ContentHeader } from "./index.tsx";
 
-// Sample image using placehold.co
-const sampleImage = {
-	src: "https://placehold.co/500x500?text=Sample+Image",
-	alt: "Sample placeholder image",
-	width: 500,
-	height: 500,
-};
+const SampleImage: FC<{ className: string }> = ({ className }) => (
+	<img
+		src="https://placehold.co/500x500?text=Sample+Image"
+		alt="Sample placeholder image"
+		width={500}
+		height={500}
+		className={className}
+	/>
+);
 
 const meta = {
 	title: "Molecules/ContentHeader",
@@ -31,7 +34,7 @@ const meta = {
 	args: {
 		title: "Main Title",
 		description: undefined,
-		image: sampleImage,
+		image: SampleImage,
 		className: undefined,
 	},
 	argTypes: {
@@ -44,8 +47,10 @@ const meta = {
 			description: "Optional description (supports HTML)",
 		},
 		image: {
-			control: { type: "object" },
-			description: "Image properties (src, alt, width, height, etc.)",
+			// A slot component, not data: rendered with the header's own class and
+			// loading priority, so there is nothing to edit from the controls panel.
+			control: false,
+			description: "Image slot, called with `{ className, priority }`",
 		},
 		className: {
 			control: { type: "text" },
@@ -76,6 +81,6 @@ export const LongContent: Story = {
 
       <p>Start now and discover why thousands of users trust us.</p>
     `,
-		image: sampleImage,
+		image: SampleImage,
 	},
 };
