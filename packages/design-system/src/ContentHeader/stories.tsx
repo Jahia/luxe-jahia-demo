@@ -5,13 +5,14 @@ import { Image } from "../Image/index.tsx";
 
 // The real callers pass an Image, so the story does too: the base img class
 // (object-fit, radius) is part of what the header looks like.
-const SampleImage: FC<{ className: string }> = ({ className }) => (
+const SampleImage: FC<{ className: string; priority: boolean }> = ({ className, priority }) => (
 	<Image
 		src="https://placehold.co/500x500?text=Sample+Image"
 		alt="Sample placeholder image"
 		width={500}
 		height={500}
 		className={className}
+		priority={priority}
 	/>
 );
 
