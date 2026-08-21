@@ -142,10 +142,15 @@ export function imageNodeToImgProps(
 	}
 
 	// Keying by URL is the de-duplication: on an original smaller than the slot,
-	// several requested widths clamp to the same size and share one URL.
-	const widthByUrl = new Map<string, number>(
-		requested.map((width) => [sizedUrl(imageNode, meta, width), width]),
-	);
+	// several requested widths clamp to the same size and share one URL. Keep the
+	// FIRST (smallest) width for a duplicate: a DAM may collapse several widths
+	// onto one rendition URL, and under-claiming its width makes the browser pick
+	// a bigger candidate rather than paint a soft one.
+	const widthByUrl = new Map<string, number>();
+	for (const width of requested) {
+		const url = sizedUrl(imageNode, meta, width);
+		if (!widthByUrl.has(url)) widthByUrl.set(url, width);
+	}
 	const candidates = [...widthByUrl].map(([url, width]) => `${srcSetSafe(url)} ${width}w`);
 
 	return {

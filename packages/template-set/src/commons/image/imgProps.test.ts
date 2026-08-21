@@ -202,6 +202,27 @@ describe("imageNodeToImgProps", () => {
 		);
 	});
 
+	it("keeps the smallest width when a DAM collapses several widths onto one rendition", () => {
+		const node = {
+			...fakeImageNode({
+				url: "https://dam.example/photo.jpg",
+				width: 2048,
+				defaultProvider: false,
+			}),
+			// Emulates a fixed-rendition DAM: every requested width snaps to 320/1024/2048
+			getUrl: (params: string[]) => {
+				const w = Number(params[0].split(":")[1]);
+				const rendition = [320, 1024, 2048].find((r) => r >= w) ?? 2048;
+				return `https://dam.example/photo.jpg#rendition(${rendition})`;
+			},
+		} as unknown as JCRNodeWrapper;
+		const props = imageNodeToImgProps(node, { widths: [600, 900] });
+		// 600 and 900 both snap to the 1024 rendition: the descriptor must
+		// under-claim (600w), so the browser climbs to a bigger candidate
+		// instead of painting the 1024px rendition into a 900 CSS-px slot
+		expect(props.srcSet).toBe("https://dam.example/photo.jpg#rendition(1024) 600w");
+	});
+
 	it("keeps the intrinsic width as a candidate only when close to the requested widths", () => {
 		// 2000 <= 2×1536: the original is a useful top candidate
 		expect(imageNodeToImgProps(fakeImageNode({ width: 2000, height: 1000 })).srcSet).toContain(
