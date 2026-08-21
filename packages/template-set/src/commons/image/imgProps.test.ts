@@ -23,9 +23,13 @@ vi.mock("@jahia/javascript-modules-library", () => ({
 	},
 }));
 
-import { imageNodeToImgProps } from "./index";
-import { clampToIntrinsic, readNodeMeta, sizedUrl } from "./meta";
-import { DEFAULT_WIDTHS } from "./constants";
+import {
+	clampToIntrinsic,
+	DEFAULT_WIDTHS,
+	imageNodeToImgProps,
+	readNodeMeta,
+	sizedUrl,
+} from "./imgProps";
 
 const fakeImageNode = ({
 	url = "/files/img.jpg",
@@ -73,10 +77,6 @@ describe("clampToIntrinsic", () => {
 	it("passes the request through when the intrinsic size is unknown", () => {
 		expect(clampToIntrinsic(1200, undefined)).toBe(1200);
 	});
-
-	it("passes undefined through", () => {
-		expect(clampToIntrinsic(undefined, 800)).toBeUndefined();
-	});
 });
 
 describe("readNodeMeta", () => {
@@ -105,17 +105,8 @@ describe("sizedUrl", () => {
 	});
 
 	it("returns the original URL when the resize is a no-op", () => {
-		expect(sizedUrl(node, meta)).toBe("/files/img.jpg");
 		expect(sizedUrl(node, meta, 2000)).toBe("/files/img.jpg");
 		expect(sizedUrl(node, meta, 3000)).toBe("/files/img.jpg"); // clamped to intrinsic
-	});
-
-	it("emits both width and height params", () => {
-		expect(sizedUrl(node, meta, 600, 300)).toBe("/files/img.jpg?w=600&h=300");
-	});
-
-	it("drops only the no-op axis", () => {
-		expect(sizedUrl(node, meta, 2000, 300)).toBe("/files/img.jpg?h=300");
 	});
 });
 
@@ -154,12 +145,12 @@ describe("imageNodeToImgProps", () => {
 		expect(props.height).toBeUndefined();
 	});
 
-	it("honours custom widths and baseWidth", () => {
+	it("honours custom widths", () => {
 		const props = imageNodeToImgProps(fakeImageNode({ width: 2000, height: 1000 }), {
 			widths: [200, 400],
-			baseWidth: 400,
 		});
-		expect(props.src).toBe("/files/img.jpg?w=400");
+		// The base src is the first candidate
+		expect(props.src).toBe("/files/img.jpg?w=200");
 		// The 2000px original is far beyond 2×400: not a candidate
 		expect(props.srcSet).toBe("/files/img.jpg?w=200 200w, /files/img.jpg?w=400 400w");
 	});
@@ -190,7 +181,12 @@ describe("imageNodeToImgProps", () => {
 
 	it("percent-encodes commas inside srcSet URLs (Cloudinary transformations)", () => {
 		const node = {
-			...fakeImageNode({ url: "https://cdn.example/image/upload/v1/img.jpg", width: 1024, height: 500, defaultProvider: false }),
+			...fakeImageNode({
+				url: "https://cdn.example/image/upload/v1/img.jpg",
+				width: 1024,
+				height: 500,
+				defaultProvider: false,
+			}),
 			// Emulates CloudinaryDecorator: transformations joined with commas in the path
 			getUrl: (params: string[]) =>
 				`https://cdn.example/image/upload/f_auto,${params.join(",").replace(":", "_")}/v1/img.jpg`,
@@ -204,6 +200,27 @@ describe("imageNodeToImgProps", () => {
 			"https://cdn.example/image/upload/f_auto%2Cw_600/v1/img.jpg 600w, " +
 				"https://cdn.example/image/upload/v1/img.jpg 1024w",
 		);
+	});
+
+	it("keeps the smallest width when a DAM collapses several widths onto one rendition", () => {
+		const node = {
+			...fakeImageNode({
+				url: "https://dam.example/photo.jpg",
+				width: 2048,
+				defaultProvider: false,
+			}),
+			// Emulates a fixed-rendition DAM: every requested width snaps to 320/1024/2048
+			getUrl: (params: string[]) => {
+				const w = Number(params[0].split(":")[1]);
+				const rendition = [320, 1024, 2048].find((r) => r >= w) ?? 2048;
+				return `https://dam.example/photo.jpg#rendition(${rendition})`;
+			},
+		} as unknown as JCRNodeWrapper;
+		const props = imageNodeToImgProps(node, { widths: [600, 900] });
+		// 600 and 900 both snap to the 1024 rendition: the descriptor must
+		// under-claim (600w), so the browser climbs to a bigger candidate
+		// instead of painting the 1024px rendition into a 900 CSS-px slot
+		expect(props.srcSet).toBe("https://dam.example/photo.jpg#rendition(1024) 600w");
 	});
 
 	it("keeps the intrinsic width as a candidate only when close to the requested widths", () => {

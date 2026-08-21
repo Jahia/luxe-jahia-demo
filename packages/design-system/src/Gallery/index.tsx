@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import classes from "./styles.module.css";
 import { Dialog } from "../Dialog/index.tsx";
-import { Image } from "../Image/index.tsx";
+import { Image, type ImageProps } from "../Image/index.tsx";
 import { Slideshow } from "../Slideshow/index.tsx";
 import { ProgressiveList } from "../ProgressiveList/index.tsx";
 import progressiveListClasses from "../ProgressiveList/styles.module.css";
@@ -10,7 +10,7 @@ import { useMediaQuery } from "../commons/hooks/useMediaQuery.client";
 
 interface GalleryProps {
 	title: string;
-	images: Array<React.ImgHTMLAttributes<HTMLImageElement> & { src: string }>;
+	images: (ImageProps & { src: string })[];
 	className?: string;
 	delayMs?: number;
 	/** Set when the gallery is above the fold: its main image is the LCP candidate. */

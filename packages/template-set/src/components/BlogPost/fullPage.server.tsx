@@ -2,7 +2,7 @@ import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
 import { Col, Figure, HeadingSection, Row, Section } from "design-system";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 import { useTranslation } from "react-i18next";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */

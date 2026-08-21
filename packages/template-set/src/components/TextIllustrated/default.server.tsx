@@ -2,7 +2,7 @@ import { jahiaComponent } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "~/components/TextIllustrated/default.module.css";
 import clsx from "clsx";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 import { Col, Row } from "design-system";
 import { CTA, type CTAProps } from "~/mixins/CTA/index.tsx";
 
