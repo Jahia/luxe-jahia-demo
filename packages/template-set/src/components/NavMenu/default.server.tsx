@@ -1,4 +1,4 @@
-import { buildNodeUrl, jahiaComponent, server } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
 import clsx from "clsx";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
@@ -28,16 +28,18 @@ jahiaComponent(
 		const siteName = renderContext.getSite().getTitle();
 		const home = renderContext.getSite().getHome();
 
-		if (brandImage) {
-			server.render.addCacheDependency({ node: brandImage }, renderContext);
-		}
-
 		return (
 			<nav className={clsx(classes.navbar)}>
 				<div className={classes.containerFluid}>
 					<a href={buildNodeUrl(home)} className={classes.brand}>
 						{brandImage && (
-							<img src={buildNodeUrl(brandImage)} alt={t("alt.logo", { siteName })} width="100" />
+							<JImage
+								node={brandImage}
+								alt={t("alt.logo", { siteName })}
+								className={classes.brandImage}
+								layout="fixed"
+								slotWidth={100}
+							/>
 						)}
 						{brandText}
 					</a>

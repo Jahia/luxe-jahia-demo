@@ -1,15 +1,15 @@
 import {
 	buildModuleFileUrl,
+	getImageProps,
 	Island,
 	jahiaComponent,
-	server,
+	useServerContext,
 } from "@jahia/javascript-modules-library";
 import GalleryClient from "~/commons/Gallery.client.tsx";
 import type { EstateProps } from "./types.js";
 import { CheckIcon } from "design-system/Icons";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
-import { imageNodeToImgProps } from "~/commons/image/imgProps";
 import { Col, List, type ListRowProps, PageTitle, Row, Section } from "design-system";
 import { useTranslation } from "react-i18next";
 
@@ -34,20 +34,23 @@ jahiaComponent(
 			bathrooms,
 			options,
 		}: EstateProps,
-		{ currentResource, renderContext },
+		{ currentResource },
 	) => {
 		const { t } = useTranslation();
 		const locale = currentResource.getLocale().getLanguage();
+		// The gallery is hydrated, so it receives serializable props rather than JSX: getImageProps
+		// is the tier below <JImage>, and it registers the cache dependency the same way
+		const context = useServerContext();
 
 		const galleryImages = (images ?? [])
 			.filter((imageNode) => Boolean(imageNode))
-			.map((imageNode) => {
-				// Cache dependency for all nodes involved
-				server.render.addCacheDependency({ node: imageNode }, renderContext);
-				return imageNodeToImgProps(imageNode, {
-					alt: t("alt.estate", { estate: title }),
-				});
-			});
+			.map((imageNode) =>
+				getImageProps(
+					imageNode,
+					{ alt: t("alt.estate", { estate: title }), layout: "full-width" },
+					context,
+				),
+			);
 
 		if (!galleryImages.length) {
 			galleryImages.push({

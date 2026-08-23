@@ -68,3 +68,10 @@
 		display: contents;
 	}
 }
+
+/* The logo's box: 100px wide, the height following the asset's own ratio. It was the img's `width`
+   attribute, which the markup can no longer state alone — width and height there are one box. */
+.brandImage {
+	width: 100px;
+	height: auto;
+}

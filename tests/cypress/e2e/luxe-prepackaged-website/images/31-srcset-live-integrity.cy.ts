@@ -9,8 +9,8 @@ import { LUXE_SITE_KEY } from '../../../support/constants'
 describe('Images - 31 srcset integrity in live', () => {
 	const CANDIDATE_PATTERN = /^\S+(\s+\d+(\.\d+)?[wx])?$/
 
-	// Pages known to serve srcSet in live: the home page (hero + estate cards
-	// through LuxeImage) and a blog post detail. The buy page is NOT covered:
+	// Pages known to serve srcSet in live: the home page (hero + estate cards)
+	// and a blog post detail. The buy page is NOT covered:
 	// its estate cards come from the SearchEstate client island, which renders
 	// plain src URLs without srcSet.
 	;[`/sites/${LUXE_SITE_KEY}/home.html`, `/sites/${LUXE_SITE_KEY}/home/blog/main/blog-posts/geneva.html`].forEach(
