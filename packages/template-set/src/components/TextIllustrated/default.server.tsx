@@ -1,9 +1,9 @@
-import { jahiaComponent } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "~/components/TextIllustrated/default.module.css";
 import clsx from "clsx";
-import { LuxeImage } from "~/commons/image/LuxeImage";
-import { Col, Row } from "design-system";
+import placeholder from "/static/img/img-placeholder.jpg";
+import { Col, imageClass, Row } from "design-system";
 import { CTA, type CTAProps } from "~/mixins/CTA/index.tsx";
 
 type Props = {
@@ -21,9 +21,15 @@ jahiaComponent(
 	({ title, text, image: imageNode, arrangement, ...props }: Props) => (
 		<Row className={classes.main}>
 			<Col className={classes.imageCol}>
-				<LuxeImage
+				<JImage
 					node={imageNode}
-					className={classes.image}
+					// Unchanged from the previous default; meaningful text is tracked in #454
+					alt={imageNode?.getDisplayableName() ?? ""}
+					fallback={placeholder}
+					className={clsx(imageClass, classes.image)}
+					layout="constrained"
+					slotWidth={650}
+					// Two columns above sm, a full-bleed backdrop below it
 					sizes="(max-width: 576px) 100vw,(max-width: 1320px) 45vw, 650px"
 				/>
 			</Col>

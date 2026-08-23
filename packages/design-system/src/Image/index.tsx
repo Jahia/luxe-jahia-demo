@@ -2,6 +2,14 @@ import type { ImgHTMLAttributes, RefObject } from "react";
 import classes from "./styles.module.css";
 import clsx from "clsx";
 
+/**
+ * The Luxe image look — fills its slot, crops to it, rounded corners.
+ *
+ * Exported as a class rather than kept inside {@link Image} because the images rendered from JCR
+ * content are the platform's `<JImage>`, which carries no styling of its own.
+ */
+export const imageClass = classes.img;
+
 /** Props of {@link Image}: the native `<img>` attributes, plus `priority`. */
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
 	ref?: RefObject<HTMLImageElement | null>;

@@ -1,8 +1,8 @@
-import { jahiaComponent, Render } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage, Render } from "@jahia/javascript-modules-library";
 import type { BlogPostProps } from "./types.js";
 import classes from "./fullPage.module.css";
-import { Col, Figure, HeadingSection, Row, Section } from "design-system";
-import { LuxeImage } from "~/commons/image/LuxeImage";
+import { Col, Figure, HeadingSection, imageClass, Row, Section } from "design-system";
+import placeholder from "/static/img/img-placeholder.jpg";
 import { useTranslation } from "react-i18next";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
@@ -49,11 +49,14 @@ jahiaComponent(
 					<header className={classes.header}>
 						<Row>
 							<Figure layout="imgFull">
-								<LuxeImage
+								<JImage
 									node={imageNode}
 									alt={t("alt.blog", { blog: title })}
-									sizes="(max-width: 1320px) 100vw, 1320px"
-									priority
+									fallback={placeholder}
+									className={imageClass}
+									layout="constrained"
+									slotWidth={1320}
+									preload
 								/>
 							</Figure>
 						</Row>

@@ -3,6 +3,7 @@ import {
 	getNodesByJCRQuery,
 	Island,
 	jahiaComponent,
+	JImage,
 	Render,
 	server,
 } from "@jahia/javascript-modules-library";
@@ -12,7 +13,6 @@ import classes from "./fullPage.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import ContactClient from "~/commons/Contact.client";
 import type { AddressItem } from "~/commons/Map/MapWithPin.client";
-import { LuxeImage } from "~/commons/image/LuxeImage";
 import {
 	Col,
 	ContentHeader,
@@ -131,15 +131,16 @@ jahiaComponent(
 				<Section>
 					<ContentHeader
 						title={fullName}
-						image={({ className, priority }) => (
-							<LuxeImage
+						image={({ className, preload }) => (
+							<JImage
 								node={imageNode}
 								alt={t("alt.realtor", { realtor: fullName })}
 								fallback={placeholder}
 								className={className}
-								priority={priority}
-								// Responsive slot hint: ≤992px → 90vw, otherwise ≈500px
-								// (keep in sync with grid breakpoints; effective with width-based srcset)
+								preload={preload}
+								layout="constrained"
+								slotWidth={500}
+								// The header stacks below lg, where the image spans the container
 								sizes="(max-width: 992px) 90vw, 500px"
 							/>
 						)}

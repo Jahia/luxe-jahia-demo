@@ -1,15 +1,15 @@
 import {
 	buildModuleFileUrl,
 	buildNodeUrl,
+	getImageProps,
+	type ImageProps,
 	Island,
 	jahiaComponent,
-	server,
+	useServerContext,
 } from "@jahia/javascript-modules-library";
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
-import { imageNodeToImgProps } from "~/commons/image/imgProps";
-import type { ImageProps } from "design-system";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -21,22 +21,18 @@ jahiaComponent(
 	},
 	(
 		{ firstName, lastName, jobPosition, image: imageNode, animate: videoNode }: RealtorProps,
-		{ currentNode, renderContext },
+		{ currentNode },
 	) => {
 		const { t } = useTranslation();
 		const fullName = [firstName, lastName].filter(Boolean).join(" ");
-		let imageProps: ImageProps = {
-			src: buildModuleFileUrl(placeholder),
-		};
-		if (imageNode) {
-			// Cache dependency for all nodes involved
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() }),
-				widths: [300, 600], // 600 is for double density screens
-			});
-			imageProps.sizes = "300px"; // Ensure the image is always 300px wide
-		}
+		// The card is hydrated, so it receives serializable props rather than JSX: getImageProps is
+		// the tier below <JImage>, and it registers the cache dependency the same way
+		const context = useServerContext();
+		const alt = t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() });
+		// getImageProps needs a node, so the missing-image fallback stays the call site's to build
+		const imageProps: ImageProps = imageNode
+			? getImageProps(imageNode, { alt, layout: "fixed", slotWidth: 300 }, context)
+			: { src: buildModuleFileUrl(placeholder), alt };
 
 		const jobPositionLanguagesTranslation = {
 			junior: t("realtor.jobPosition.junior"),

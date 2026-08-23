@@ -1,8 +1,9 @@
-import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
 import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
-import { LuxeImage } from "~/commons/image/LuxeImage";
+import { imageClass } from "design-system";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -16,13 +17,13 @@ jahiaComponent(
 
 		return (
 			<a className={classes.card} href={buildNodeUrl(currentNode)}>
-				<LuxeImage
+				<JImage
 					node={imageNode}
 					alt={t("alt.agency", { agency: name })}
 					fallback={placeholder}
-					className={classes.image}
-					widths={[200, 400]} // 400 is for double density screens
-					sizes="200px"
+					className={clsx(imageClass, classes.image)}
+					layout="fixed"
+					slotWidth={200}
 				/>
 				<div className={classes.containerText}>
 					<h2 className={classes.title}>{name}</h2>

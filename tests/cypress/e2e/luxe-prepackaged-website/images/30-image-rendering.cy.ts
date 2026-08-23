@@ -5,8 +5,8 @@ import { LUXE_SITE_KEY } from '../../../support/constants'
  * prioritized (LCP fix), lazy images reserve their dimensions (CLS), and JCR
  * raster images expose width-based srcset candidates.
  *
- * The agency and realtor detail pages cover the ContentHeader/LuxeImage path
- * (PR #452): they are the only views rendering an image through ContentHeader.
+ * The agency and realtor detail pages cover the ContentHeader image slot: they
+ * are the only views rendering an image through ContentHeader.
  */
 const urls = [
 	`/sites/${LUXE_SITE_KEY}/home.html`,

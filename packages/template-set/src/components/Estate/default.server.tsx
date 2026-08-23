@@ -1,6 +1,6 @@
-import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
 import { ClickableCard } from "design-system";
-import { LuxeImage } from "~/commons/image/LuxeImage";
+import placeholder from "/static/img/img-placeholder.jpg";
 import type { EstateProps } from "./types";
 import { useTranslation } from "react-i18next";
 
@@ -19,13 +19,15 @@ jahiaComponent(
 				href={buildNodeUrl(currentNode)}
 				title={title}
 				image={({ className }) => (
-					<LuxeImage
+					<JImage
 						node={images?.[0]}
 						alt={t("alt.estate", { estate: title })}
+						fallback={placeholder}
 						className={className}
-						// Slot hint: default view is usually used in a 3-cols grid,
-						// so ≈400px is a good default for larger screens
-						widths={[400, 800]} // 800 is for double density screens
+						layout="constrained"
+						slotWidth={400}
+						// The card is one cell of a grid that goes from one to three columns, which
+						// no single slot width describes
 						sizes="(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px"
 					/>
 				)}

@@ -1,6 +1,7 @@
 import classes from "~/components/Realtor/default.module.css";
 import { useRef, useState } from "react";
-import { Image, type ImageProps } from "design-system";
+import type { ImageProps } from "@jahia/javascript-modules-library";
+import { Image } from "design-system";
 
 interface AnimateClientProps {
 	fullName: string;
