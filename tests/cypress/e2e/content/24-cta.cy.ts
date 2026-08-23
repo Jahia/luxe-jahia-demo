@@ -47,6 +47,15 @@ describe('Content - 24 CTA mixin (TextIllustrated)', () => {
 					cta: { ctaType: 'external', url: 'https://example.com/luxe', ctaLabel: 'Visit example' },
 				})
 
+				// ctaType says internal but no reference was ever picked (audit S-6, second shape)
+				createTextIllustrated(areaPath, {
+					name: 'cta-internal-no-target',
+					title: 'Internal CTA without target',
+					text: '<p>Internal link, no target.</p>',
+					imageUuid,
+					cta: { ctaType: 'internal', ctaLabel: 'Nowhere' },
+				})
+
 				createTextIllustrated(areaPath, {
 					name: 'cta-none',
 					title: 'No CTA',
@@ -98,5 +107,13 @@ describe('Content - 24 CTA mixin (TextIllustrated)', () => {
 
 	it('renders no dead link on legacy content without ctaType (audit S-6)', () => {
 		cy.contains('h2', 'Legacy CTA').parent().find('a').should('not.exist')
+	})
+
+	it('renders no anchor when ctaType is internal but no page was picked', () => {
+		// The hand-written CTA used to emit `<a>Nowhere</a>` — an anchor with no href, which is a
+		// dead control for a keyboard and a screen reader. The node carries no link at all, so
+		// nothing is rendered for it now.
+		ctaOf('Internal CTA without target').should('not.exist')
+		cy.contains('h2', 'Internal CTA without target').parent().should('not.contain.text', 'Nowhere')
 	})
 })

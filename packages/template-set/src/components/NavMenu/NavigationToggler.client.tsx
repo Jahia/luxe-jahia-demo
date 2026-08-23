@@ -24,16 +24,20 @@ export default function NavigationTogglerClient({ menu }: { menu: RefinedNavMenu
 			</button>
 			<div id="navbarSupportedContent" className={clsx(classes.collapse, { show: isOpen })}>
 				<ul className={classes.nav}>
-					{menu.map(({ node, active }) => (
-						<li key={node.uuid}>
-							<a
-								href={node.url}
-								className={clsx(classes.link, {
-									active: active,
-								})}
-							>
-								{node.name}
-							</a>
+					{menu.map(({ uuid, label, anchor, active }) => (
+						<li key={uuid}>
+							{anchor.href ? (
+								<a
+									{...anchor}
+									className={clsx(classes.link, {
+										active: active,
+									})}
+								>
+									{label}
+								</a>
+							) : (
+								<span className={classes.link}>{label}</span>
+							)}
 						</li>
 					))}
 				</ul>

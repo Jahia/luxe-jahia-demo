@@ -4,8 +4,10 @@ import { BaseComponent } from '@jahia/cypress'
  * Page object for the LanguageSwitcher island rendered inside the nav.
  *
  * Selector notes:
- * - the locale anchors are the only elements carrying `aria-current` in the
- *   whole layout (menu entries use an `active` class instead);
+ * - the locale anchors are the only anchors carrying `hreflang`, which is what
+ *   a link to the same page in another language states;
+ * - only the rendered locale carries `aria-current="page"`; the others carry
+ *   no `aria-current` at all, which is what the platform link API emits;
  * - the dropdown toggle is the only `aria-expanded` button WITHOUT
  *   `aria-controls` (the mobile nav toggler has one);
  * - the dropdown menu is `display: none` until the island toggles the `show`
@@ -17,7 +19,7 @@ export class LanguageSwitcher extends BaseComponent {
 	// No `body` prefix: clickUntilVisible resolves the expect selector with
 	// `$body.find(...)`, where a body-prefixed selector can never match.
 	static readonly toggleSelector = 'nav button[aria-expanded]:not([aria-controls])'
-	static readonly localeLinkSelector = 'nav a[aria-current]'
+	static readonly localeLinkSelector = 'nav a[hreflang]'
 
 	static get(): LanguageSwitcher {
 		return new LanguageSwitcher(cy.get(LanguageSwitcher.defaultSelector))
@@ -30,12 +32,12 @@ export class LanguageSwitcher extends BaseComponent {
 
 	/** All locale anchors (rendered server-side, hidden until the dropdown opens). */
 	getLocaleLinks(): Cypress.Chainable<JQuery> {
-		return this.get().find('a[aria-current]')
+		return this.get().find('a[hreflang]')
 	}
 
-	/** The anchor of the locale currently rendered (`aria-current="true"`). */
+	/** The anchor of the locale currently rendered (`aria-current="page"`). */
 	getActiveLocale(): Cypress.Chainable<JQuery> {
-		return this.get().find('a[aria-current="true"]')
+		return this.get().find('a[hreflang][aria-current="page"]')
 	}
 
 	/** The anchor for a locale by its display name (e.g. `français`). */

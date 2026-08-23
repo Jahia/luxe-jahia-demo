@@ -1,75 +1,52 @@
 import { describe, expect, it, vi } from "vitest";
-import { renderToStaticMarkup } from "react-dom/server";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
-// "@jahia/javascript-modules-library" is a virtual module only available at
-// runtime inside Jahia: mock the three APIs the CTA uses. The vite pipeline
-// does not transform JSX in test files, so the component is invoked as a
-// plain function (its useServerContext "hook" is mocked away).
-const addCacheDependency = vi.fn();
+// "@jahia/javascript-modules-library" is a virtual module only available at runtime inside Jahia.
+// Resolving a link is the library's job and is tested there; what belongs to luxe is the mapping
+// from the `luxemix:cta` vocabulary onto the resolver's parameters, so <JLink> is replaced by a
+// capture of the props it is given: CTA returns the <JLink> element, whose props are the mapping.
 vi.mock("@jahia/javascript-modules-library", () => ({
-	buildNodeUrl: (node: { url: string }) => node.url,
-	// Not a real hook factory: this is the vi.mock replacement of the library
-	// eslint-disable-next-line @eslint-react/component-hook-factories
-	useServerContext: () => ({ renderContext: {} }),
-	server: { render: { addCacheDependency: (...args: unknown[]) => addCacheDependency(...args) } },
+	JLink: () => null,
+	getNodeProps: (node: { properties?: Record<string, string> }, props: string[]) =>
+		Object.fromEntries(props.map((name) => [name, node.properties?.[name]])),
 }));
 
+import type { ReactElement } from "react";
 import { CTA } from "./index";
 
-type CTARenderProps = Parameters<typeof CTA>[0];
+const ctaNode = (properties: Record<string, string> = {}) =>
+	({ properties }) as unknown as JCRNodeWrapper;
 
-const render = (props: CTARenderProps) => renderToStaticMarkup(CTA(props));
+/** The props CTA hands to <JLink>. */
+const propsOf = (node: JCRNodeWrapper) =>
+	(CTA({ node }) as ReactElement<Record<string, unknown>>).props;
 
-const fakePageNode = ({ url = "/cms/render/live/en/sites/luxe/home/buy.html", title = "Buy" } = {}) =>
-	({
-		url,
-		getPropertyAsString: (prop: string) => (prop === "jcr:title" ? title : ""),
-	}) as unknown as JCRNodeWrapper;
-
-describe("CTA — internal link", () => {
-	it("builds the href from the linked node and uses the explicit label", () => {
-		const html = render({
-			"ctaType": "internal",
-			"j:linknode": fakePageNode(),
-			"ctaLabel": "See the offers",
-		});
-		expect(html).toBe('<a href="/cms/render/live/en/sites/luxe/home/buy.html">See the offers</a>');
+describe("CTA — the luxemix:cta vocabulary", () => {
+	it("names ctaType as the discriminator, so 'none' means no link", () => {
+		expect(propsOf(ctaNode())).toMatchObject({ typeProperty: "ctaType" });
 	});
 
-	it("falls back to the linked page title when no label is set", () => {
-		const html = render({ "ctaType": "internal", "j:linknode": fakePageNode({ title: "Buy" }) });
-		expect(html).toContain(">Buy</a>");
+	it("reads the internal target from j:linknode only", () => {
+		// `j:node` is core's own jnt:nodeLink property and never appears on this mixin: reading it
+		// would resolve a reference the mixin does not define
+		expect(propsOf(ctaNode())).toMatchObject({ referenceProperties: ["j:linknode"] });
 	});
 
-	it("registers a cache dependency on the linked node", () => {
-		addCacheDependency.mockClear();
-		const node = fakePageNode();
-		render({ "ctaType": "internal", "j:linknode": node, "ctaLabel": "Go" });
-		expect(addCacheDependency).toHaveBeenCalledWith({ node }, {});
+	it("takes the label from ctaLabel, not from the host node's heading", () => {
+		// jcr:title on a luxe:textIllustrated is the section heading, not the link text
+		expect(propsOf(ctaNode())).toMatchObject({ labelProperties: ["ctaLabel"] });
 	});
 
-	it("renders no href and no cache dependency when the linked node is missing (dangling ref)", () => {
-		addCacheDependency.mockClear();
-		const html = render({ ctaType: "internal", ctaLabel: "Broken" });
-		expect(html).toBe("<a>Broken</a>");
-		expect(addCacheDependency).not.toHaveBeenCalled();
-	});
-});
-
-describe("CTA — external link", () => {
-	it("uses the contributed URL and link title", () => {
-		const html = render({
-			"ctaType": "external",
-			"j:url": "https://example.com",
-			"j:linkTitle": "Example",
-			"ctaLabel": "Visit",
-		});
-		expect(html).toBe('<a href="https://example.com" title="Example">Visit</a>');
+	it("passes the node itself, so the resolver reads the properties off it", () => {
+		const node = ctaNode();
+		expect(propsOf(node)).toMatchObject({ content: node });
 	});
 
-	it("renders the label even without a URL", () => {
-		const html = render({ ctaType: "external", ctaLabel: "No URL" });
-		expect(html).toBe("<a>No URL</a>");
+	it("carries j:linkTitle over as the anchor title", () => {
+		expect(propsOf(ctaNode({ "j:linkTitle": "Example" }))).toMatchObject({ title: "Example" });
+	});
+
+	it("omits the title when the external link has none", () => {
+		expect(propsOf(ctaNode()).title).toBeUndefined();
 	});
 });

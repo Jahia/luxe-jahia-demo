@@ -1,4 +1,4 @@
-import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage, JLink } from "@jahia/javascript-modules-library";
 import type { RealtorProps } from "./types.js";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
@@ -23,7 +23,7 @@ jahiaComponent(
 		};
 
 		return (
-			<a href={buildNodeUrl(currentNode)} className={classes.card}>
+			<JLink node={currentNode} className={classes.card}>
 				<JImage
 					node={imageNode}
 					alt={t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() })}
@@ -38,7 +38,7 @@ jahiaComponent(
 						<p className={classes.jobPosition}>{jobPositionLanguagesTranslation[jobPosition]}</p>
 					)}
 				</div>
-			</a>
+			</JLink>
 		);
 	},
 );

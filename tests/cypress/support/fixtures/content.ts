@@ -315,7 +315,7 @@ export const createContactForm = (
 
 export type CtaVariant =
 	| { ctaType: 'none' }
-	| { ctaType: 'internal'; linkNodeUuid: string; ctaLabel?: string }
+	| { ctaType: 'internal'; linkNodeUuid?: string; ctaLabel?: string }
 	| { ctaType: 'external'; url: string; ctaLabel?: string }
 
 export interface TextIllustratedInput {
@@ -348,7 +348,10 @@ export const createTextIllustrated = (
 		properties.push({ name: 'ctaType', value: cta.ctaType })
 		if (cta.ctaType === 'internal') {
 			mixins.push('jmix:internalLink')
-			properties.push({ name: 'j:linknode', value: cta.linkNodeUuid, type: 'WEAKREFERENCE', language: 'en' })
+			// The mixin without the reference is the "editor picked internal and stopped" state
+			if (cta.linkNodeUuid) {
+				properties.push({ name: 'j:linknode', value: cta.linkNodeUuid, type: 'WEAKREFERENCE', language: 'en' })
+			}
 		}
 
 		if (cta.ctaType === 'external') {

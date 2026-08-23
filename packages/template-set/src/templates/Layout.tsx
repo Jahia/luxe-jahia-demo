@@ -5,6 +5,7 @@ import {
 	buildModuleFileUrl,
 	getNodeProps,
 	Island,
+	JLink,
 	Render,
 	server,
 	useServerContext,
@@ -162,34 +163,32 @@ const HtmlFooter = ({ className }: { className?: string }): JSX.Element => {
 					</h2>
 					<ul className={classes.list}>
 						<li>
-							<a
+							{/* target="_blank" carries its own rel="noopener noreferrer" */}
+							<JLink
 								className={classes.fullTextCapitalize}
 								href="https://academy.jahia.com/home"
 								target="_blank"
-								rel="noreferrer"
 							>
 								{t("footer.academy")}
-							</a>
+							</JLink>
 						</li>
 						<li>
-							<a
+							<JLink
 								className={classes.capitalize}
 								href="https://academy.jahia.com/get-started"
 								target="_blank"
-								rel="noreferrer"
 							>
 								{t("footer.tutorial")}
-							</a>
+							</JLink>
 						</li>
 						<li>
-							<a
+							<JLink
 								className={classes.capitalize}
 								href="https://github.com/Jahia/luxe-jahia-demo/"
 								target="_blank"
-								rel="noreferrer"
 							>
 								{t("footer.sourceCode")}
-							</a>
+							</JLink>
 						</li>
 					</ul>
 				</Col>
