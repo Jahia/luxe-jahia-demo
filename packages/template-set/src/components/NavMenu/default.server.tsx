@@ -36,9 +36,9 @@ jahiaComponent(
 							<JImage
 								node={brandImage}
 								alt={t("alt.logo", { siteName })}
+								className={classes.brandImage}
 								layout="fixed"
 								slotWidth={100}
-								width={100}
 							/>
 						)}
 						{brandText}

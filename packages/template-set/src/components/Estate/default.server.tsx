@@ -25,7 +25,6 @@ jahiaComponent(
 						fallback={placeholder}
 						className={className}
 						layout="constrained"
-						slotWidth={400}
 						// The card is one cell of a grid that goes from one to three columns, which
 						// no single slot width describes
 						sizes="(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px"

@@ -24,7 +24,6 @@ jahiaComponent(
 						fallback={placeholder}
 						className={imageClass}
 						layout="constrained"
-						slotWidth={880}
 						// One or two tiles per row depending on the viewport
 						sizes="(max-width: 576px) 100vw,(max-width: 1320px) 50vw, 880px"
 					/>

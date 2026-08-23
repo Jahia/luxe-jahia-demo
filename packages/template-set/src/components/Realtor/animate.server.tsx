@@ -2,7 +2,7 @@ import {
 	buildModuleFileUrl,
 	buildNodeUrl,
 	getImageProps,
-	type ImageProps,
+	type ImgProps,
 	Island,
 	jahiaComponent,
 	useServerContext,
@@ -30,7 +30,7 @@ jahiaComponent(
 		const context = useServerContext();
 		const alt = t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() });
 		// getImageProps needs a node, so the missing-image fallback stays the call site's to build
-		const imageProps: ImageProps = imageNode
+		const imageProps: ImgProps = imageNode
 			? getImageProps(imageNode, { alt, layout: "fixed", slotWidth: 300 }, context)
 			: { src: buildModuleFileUrl(placeholder), alt };
 

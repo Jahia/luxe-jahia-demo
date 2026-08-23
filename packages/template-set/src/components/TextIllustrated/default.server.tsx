@@ -28,7 +28,6 @@ jahiaComponent(
 					fallback={placeholder}
 					className={clsx(imageClass, classes.image)}
 					layout="constrained"
-					slotWidth={650}
 					// Two columns above sm, a full-bleed backdrop below it
 					sizes="(max-width: 576px) 100vw,(max-width: 1320px) 45vw, 650px"
 				/>

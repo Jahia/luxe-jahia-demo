@@ -135,7 +135,6 @@ jahiaComponent(
 								className={className}
 								preload={preload}
 								layout="constrained"
-								slotWidth={500}
 								// The header stacks below lg, where the image spans the container
 								sizes="(max-width: 992px) 90vw, 500px"
 							/>
