@@ -1,6 +1,6 @@
 import classes from "~/components/Realtor/default.module.css";
 import { useRef, useState } from "react";
-import type { ImgProps } from "@jahia/javascript-modules-library";
+import type { AnchorProps, ImgProps } from "@jahia/javascript-modules-library";
 import { Image } from "design-system";
 
 interface AnimateClientProps {
@@ -8,7 +8,7 @@ interface AnimateClientProps {
 	jobPosition?: string;
 	image: ImgProps;
 	videoUrl?: string;
-	currentNodeUrl: string;
+	anchor: AnchorProps;
 }
 
 export default function AnimateClient({
@@ -16,7 +16,7 @@ export default function AnimateClient({
 	jobPosition,
 	image,
 	videoUrl,
-	currentNodeUrl,
+	anchor,
 }: AnimateClientProps) {
 	const isVideoAvailable = !!videoUrl;
 	const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -40,7 +40,7 @@ export default function AnimateClient({
 
 	return (
 		<a
-			href={currentNodeUrl}
+			{...anchor}
 			className={classes.card}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}

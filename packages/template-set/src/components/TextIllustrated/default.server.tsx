@@ -18,7 +18,7 @@ jahiaComponent(
 		componentType: "view",
 		nodeType: "luxe:textIllustrated",
 	},
-	({ title, text, image: imageNode, arrangement, ...props }: Props) => (
+	({ title, text, image: imageNode, arrangement, ...props }: Props, { currentNode }) => (
 		<Row className={classes.main}>
 			<Col className={classes.imageCol}>
 				<JImage
@@ -36,10 +36,12 @@ jahiaComponent(
 				<h2 className={classes.title}>{title}</h2>
 				{/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
 				{text && <div dangerouslySetInnerHTML={{ __html: text }} />}
-				{/* ctaType is undefined on content predating the CTA mixin */}
+				{/* ctaType is undefined on content predating the CTA mixin. The test has to stay
+				    here: <JLink content> renders nothing for a node carrying no link, but the <p>
+				    around it would still be emitted. */}
 				{props.ctaType && props.ctaType !== "none" && (
 					<p>
-						<CTA {...props} />
+						<CTA node={currentNode} />
 					</p>
 				)}
 			</Col>

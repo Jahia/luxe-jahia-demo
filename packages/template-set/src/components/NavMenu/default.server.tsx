@@ -1,4 +1,4 @@
-import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage, JLink } from "@jahia/javascript-modules-library";
 import clsx from "clsx";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
@@ -31,7 +31,8 @@ jahiaComponent(
 		return (
 			<nav className={clsx(classes.navbar)}>
 				<div className={classes.containerFluid}>
-					<a href={buildNodeUrl(home)} className={classes.brand}>
+					{/* A logo is not one of a set of pages, so it takes no aria-current even on home */}
+					<JLink node={home} isCurrent={false} className={classes.brand}>
 						{brandImage && (
 							<JImage
 								node={brandImage}
@@ -42,7 +43,7 @@ jahiaComponent(
 							/>
 						)}
 						{brandText}
-					</a>
+					</JLink>
 					<NavigationToggler />
 					<LanguageSwitcher />
 				</div>

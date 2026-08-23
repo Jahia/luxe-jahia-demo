@@ -5,7 +5,7 @@ const homeUrl = `/sites/${LUXE_SITE_KEY}/home.html`
 
 /**
  * The prepackaged `luxe` site ships two published locales (en + fr): the
- * switcher must list both, mark the rendered one with `aria-current="true"`,
+ * switcher must list both, mark the rendered one with `aria-current="page"`,
  * and keep the visitor on the same page — including mainResource detail
  * pages — when switching.
  */
@@ -16,9 +16,12 @@ describe('i18n - 70 Language switcher', () => {
 		LanguageSwitcher.get().getLocaleLinks().should('have.length', 2)
 		LanguageSwitcher.get().getToggle().should('contain.text', 'English')
 		LanguageSwitcher.get().getActiveLocale().should('contain.text', 'English')
+		// An inactive locale carries no aria-current at all: `aria-current="false"` is what the
+		// hand-written switcher used to emit, and the platform link API emits the attribute only
+		// on the page being rendered
 		LanguageSwitcher.get()
 			.getLocaleLink('français')
-			.should('have.attr', 'aria-current', 'false')
+			.should('not.have.attr', 'aria-current')
 			.and('have.attr', 'href')
 			.and('include', `/fr/sites/${LUXE_SITE_KEY}/home.html`)
 	})
