@@ -1,4 +1,4 @@
-import { createSite, deleteSite, addPage, getNodeByPath, publishAndWaitJobEnding } from '@jahia/cypress'
+import { createSite, deleteSite, addNode, getNodeByPath, publishAndWaitJobEnding } from '@jahia/cypress'
 
 export const addSimplePage = (
 	parentPathOrId: string,
@@ -9,17 +9,23 @@ export const addSimplePage = (
 	children = [],
 	mixins = [],
 	properties = [],
-): Cypress.Chainable =>
-	addPage({
+): Cypress.Chainable => {
+	const variables = {
 		parentPathOrId: parentPathOrId,
 		name: pageName,
 		title: pageTitle,
-		language: language,
+		primaryNodeType: 'jnt:page',
 		template: template,
 		mixins: mixins,
-		properties: properties,
+		properties: [
+			...properties,
+			{ name: 'jcr:title', value: pageTitle, language: language },
+			{ name: 'j:templateName', type: 'STRING', value: template },
+		],
 		children: children,
-	})
+	}
+	return addNode(variables)
+}
 
 export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 	cy.log('Creating sample site ' + siteKey + '...')
