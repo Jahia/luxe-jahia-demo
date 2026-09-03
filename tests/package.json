@@ -12,7 +12,7 @@
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
-		"@jahia/cypress": "^8.4.0",
+		"@jahia/cypress": "^8.5.0",
 		"@jahia/eslint-config": "^2.1.2",
 		"@jahia/jcontent-cypress": "^3.6.0-tests.2",
 		"@types/adm-zip": "^0.5.7",
