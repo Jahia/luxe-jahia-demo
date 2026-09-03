@@ -5,7 +5,7 @@
   <parent>
     <artifactId>luxe-root</artifactId>
     <groupId>org.jahia.modules</groupId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <artifactId>luxe-prepackaged-website</artifactId>
@@ -16,7 +16,7 @@
   <properties>
     <jahia-module-type>system</jahia-module-type>
     <jahia-depends>default,luxe-jahia-demo</jahia-depends>
-    <jahia-module-signature>MC0CFQCM+kj3TdIIedSKo6F2lefBbWvfmwIUBYnZVmOpTlIpl2oKU5/MJSOtcvQ=</jahia-module-signature>
+    <jahia-module-signature>MCwCFDGwiyX6akPGa0BJ9R5pot3dhmuIAhRcPw4kaD9vNsPeA+I9/M6JSoM6Tw==</jahia-module-signature>
   </properties>
 
   <repositories>
