@@ -108,9 +108,10 @@
 	text-transform: uppercase;
 }
 
+/* A legend is not a flex item, so the group's gap does not apply after it: the margin plays that role */
 .fmdb-group-legend {
 	padding: 0;
-	margin-bottom: 0.25rem;
+	margin-bottom: 0.5rem;
 }
 
 .fmdb-required-indicator {
