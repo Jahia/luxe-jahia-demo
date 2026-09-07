@@ -11,6 +11,7 @@ import {
 } from "@jahia/javascript-modules-library";
 import CopyrightYearClient from "./CopyrightYear.client";
 import "./css/global.module.css";
+import "./css/formidable.css";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import classes from "./Layout.module.css";
 import grid from "design-system/Grid/styles.module.css";
