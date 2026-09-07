@@ -90,13 +90,15 @@
 	min-width: 0;
 }
 
+/* Labels as in the site's contact form: regular weight, body colour, one rem */
 .fmdb-form-label,
 .fmdb-file-label,
 .fmdb-group-legend {
 	display: inline-block;
-	font-weight: 500;
+	font-size: 1rem;
+	font-weight: 400;
 	line-height: 1.25;
-	color: var(--luxe-color-heading);
+	color: var(--luxe-body-color);
 }
 
 .fmdb-form-label::first-letter,
@@ -442,7 +444,8 @@ select.fmdb-form-control[multiple] {
 	color: var(--luxe-color-heading);
 }
 
-/* Buttons (button.module.css .root and .primary; .secondary is the outline variant) */
+/* Buttons: button.module.css .root and .primary as the contact form uses them, full width and stacked;
+   .secondary is the outline variant */
 .fmdb-form-actions {
 	display: flex;
 	flex-direction: column;
@@ -460,10 +463,11 @@ select.fmdb-form-control[multiple] {
 	--luxe-btn-disabled-color: var(--luxe-color-secondary);
 	--luxe-btn-disabled-bg: transparent;
 	--luxe-btn-disabled-border-color: var(--luxe-border-color);
-	display: inline-block;
+	display: block;
+	width: 100%;
 	padding: 0.5rem 1rem;
 	font: inherit;
-	font-size: 1.125rem;
+	font-size: 1.25rem;
 	line-height: 1.5;
 	color: var(--luxe-btn-color);
 	text-align: center;
@@ -578,17 +582,4 @@ select.fmdb-form-control[multiple] {
 .fmdb-visual-edit {
 	--fmdb-visual-edit-max-width: 52rem;
 	--fmdb-visual-edit-padding: 2rem 1rem 4rem;
-}
-
-@media (min-width: 768px) {
-	.fmdb-form-actions {
-		flex-direction: row;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: flex-end;
-	}
-
-	.fmdb-form-actions .fmdb-prev-btn {
-		margin-right: auto;
-	}
 }
