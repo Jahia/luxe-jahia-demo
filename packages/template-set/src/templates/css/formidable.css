@@ -47,7 +47,7 @@
 	--fmdbext-focus: var(--luxe-form-control-focus-border);
 	--fmdbext-end-labels-color: var(--luxe-color-secondary);
 	/* Local tokens */
-	--luxe-form-gap: 1.5rem;
+	--luxe-form-gap: 1rem;
 	--luxe-form-control-focus-border: #e1cda0;
 	--luxe-form-control-focus-shadow: 0 0 0 0.25rem rgba(var(--luxe-color-primary-rgb), 0.251);
 
@@ -97,7 +97,6 @@
 	display: inline-block;
 	font-size: 1rem;
 	font-weight: 400;
-	line-height: 1.25;
 	color: var(--luxe-body-color);
 }
 
@@ -122,7 +121,7 @@
 .fmdb-form-help,
 .fmdb-file-selection-note {
 	/* Smaller than the label and pulled toward it: the help belongs to the label, not to the control */
-	margin: -0.4rem 0 0;
+	margin: -0.6rem 0 0;
 	font-size: 0.8125rem;
 	line-height: 1.35;
 	color: var(--luxe-color-secondary);
@@ -444,8 +443,8 @@ select.fmdb-form-control[multiple] {
 	color: var(--luxe-color-heading);
 }
 
-/* Buttons: button.module.css .root and .primary as the contact form uses them, full width and stacked;
-   .secondary is the outline variant */
+/* Buttons: button.module.css .root and .primary as the contact form renders them (one rem, 38px high,
+   full width, stacked); .secondary is the outline variant */
 .fmdb-form-actions {
 	display: flex;
 	flex-direction: column;
@@ -465,9 +464,9 @@ select.fmdb-form-control[multiple] {
 	--luxe-btn-disabled-border-color: var(--luxe-border-color);
 	display: block;
 	width: 100%;
-	padding: 0.5rem 1rem;
+	padding: 0.375rem 0.75rem;
 	font: inherit;
-	font-size: 1.25rem;
+	font-size: 1rem;
 	line-height: 1.5;
 	color: var(--luxe-btn-color);
 	text-align: center;
@@ -477,7 +476,7 @@ select.fmdb-form-control[multiple] {
 	user-select: none;
 	background-color: var(--luxe-btn-bg);
 	border: var(--luxe-border-width) solid var(--luxe-btn-border-color);
-	border-radius: var(--luxe-border-radius-lg);
+	border-radius: var(--luxe-border-radius);
 	transition:
 		color 0.15s ease-in-out,
 		background-color 0.15s ease-in-out,
