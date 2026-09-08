@@ -1,0 +1,596 @@
+/* Forms built with Formidable, in the luxe design.
+   Formidable only ships functional rules (validation, step navigation, spinner, authoring cues)
+   and exposes every value it hard-codes as a variable; the site gives forms their look through
+   the stable class hooks documented in the module (docs/styling.md). Plain CSS on purpose: the
+   hooks are fixed names, not module classes. Mirrors form.module.css, button.module.css and
+   alert.module.css so a Formidable form and the site's own forms look the same.
+   Seventeen of the hooks below are not in that document yet — they exist in the module's source,
+   but a rename there would unstyle this demo without a build error or a failing test: the file
+   input's list (fmdb-file-* and fmdb-selected-files*, fmdb-file-label excepted), the rating and
+   scale classes of the extended inputs (fmdbext-rating-*, fmdbext-scale-*), fmdb-field-error,
+   fmdb-fieldset-elements and fmdb-content. Check those first after a Formidable upgrade. */
+
+.fmdb-form {
+	/* Formidable's variables, tuned to the palette */
+	--fmdb-validation-error-color: var(--luxe-danger-text-emphasis);
+	--fmdb-invalid-border-color: var(--luxe-danger-border-subtle);
+	--fmdb-invalid-outline-color: var(--luxe-danger-border-subtle);
+	--fmdb-steps-nav-gap: 0.5rem;
+	--fmdb-steps-nav-mb: 2rem;
+	--fmdb-step-color: var(--luxe-color-secondary);
+	--fmdb-step-border: var(--luxe-border-color);
+	--fmdb-step-active-color: var(--luxe-color-heading);
+	--fmdb-step-active-border: var(--luxe-color-primary);
+	--fmdb-step-done-color: var(--luxe-color-heading);
+	--fmdb-step-done-border: var(--luxe-color-darkBlue60);
+	--fmdb-step-number-bg: var(--luxe-color-gray);
+	--fmdb-step-number-color: var(--luxe-color-heading);
+	--fmdb-step-active-number-bg: var(--luxe-color-primary);
+	--fmdb-step-active-number-color: var(--luxe-color-gray);
+	--fmdb-step-done-number-bg: var(--luxe-color-darkBlue60);
+	--fmdb-step-done-number-color: var(--luxe-body-bg);
+	--fmdb-spinner-color: var(--luxe-color-primary);
+	--fmdb-spinner-track-color: var(--luxe-color-gray);
+	--fmdb-spinner-text-color: var(--luxe-color-secondary);
+	--fmdb-spinner-overlay-radius: var(--luxe-border-radius);
+	--fmdb-range-gap: 0.75rem;
+	/* Conditional fields in the Page Builder: Formidable lifts them on a card shrunk to their content;
+	   keep the card, in the site's palette, but full width like every other field */
+	--fmdb-logic-target-card-display: block;
+	--fmdb-logic-target-card-bg: var(--luxe-color-gray);
+	--fmdb-logic-target-card-shadow: 0 0 0 6px var(--luxe-color-gray);
+	--fmdb-logic-target-card-radius: var(--luxe-border-radius);
+	/* Extended inputs (rating stars, scale and NPS chips): the module's own variables */
+	--fmdbext-rating-on: var(--luxe-color-gold);
+	--fmdbext-rating-off: var(--luxe-color-darkBlue40);
+	--fmdbext-rating-gap: 0.375rem;
+	--fmdbext-chip-border: var(--luxe-border-color);
+	--fmdbext-chip-radius: var(--luxe-border-radius);
+	--fmdbext-chip-bg: var(--luxe-body-bg);
+	--fmdbext-chip-on-bg: var(--luxe-color-gold);
+	--fmdbext-chip-on-fg: var(--luxe-color-gray);
+	--fmdbext-focus: var(--luxe-form-control-focus-border);
+	--fmdbext-end-labels-color: var(--luxe-form-muted-color);
+	/* Local tokens */
+	--luxe-form-gap: 1rem;
+	/* The site's secondary colour (#767695) sits at 4.38:1 on white and 4.05:1 on the gray card,
+	   under the 4.5:1 WCAG AA asks of normal text; the form's small muted texts (help, file size,
+	   range labels) get this darker shade of the same hue: 5.13:1 and 4.74:1 */
+	--luxe-form-muted-color: #6b6b8a;
+	--luxe-form-control-focus-border: #e1cda0;
+	--luxe-form-control-focus-shadow: 0 0 0 0.25rem rgba(var(--luxe-color-primary-rgb), 0.251);
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--luxe-form-gap);
+	font-family: var(--luxe-font-family-base);
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--luxe-body-color);
+}
+
+/* Introduction, step intros and content blocks: the editorial parts of a form */
+.fmdb-form-intro,
+.fmdb-step-intro,
+.fmdb-content {
+	color: var(--luxe-color-secondary);
+}
+
+.fmdb-form-intro > :first-child,
+.fmdb-step-intro > :first-child,
+.fmdb-content > :first-child {
+	margin-top: 0;
+}
+
+.fmdb-form-intro > :last-child,
+.fmdb-step-intro > :last-child,
+.fmdb-content > :last-child {
+	margin-bottom: 0;
+}
+
+/* One field: label, help, control */
+.fmdb-form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	min-width: 0;
+}
+
+/* Labels as in the site's contact form: regular weight, body colour, one rem */
+.fmdb-form-label,
+.fmdb-file-label,
+.fmdb-group-legend {
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--luxe-body-color);
+}
+
+.fmdb-form-label::first-letter,
+.fmdb-file-label::first-letter,
+.fmdb-group-legend::first-letter,
+.fmdb-fieldset-legend::first-letter,
+.fmdb-step-title::first-letter {
+	text-transform: uppercase;
+}
+
+/* A legend is not a flex item, so the group's gap does not apply after it: the margin plays that role */
+.fmdb-group-legend {
+	padding: 0;
+	margin-bottom: 0.5rem;
+}
+
+.fmdb-required-indicator {
+	margin-left: 0.2em;
+	color: var(--luxe-color-primary);
+}
+
+.fmdb-form-help,
+.fmdb-file-selection-note {
+	/* Smaller than the label and pulled toward it: the help belongs to the label, not to the control */
+	margin: -0.6rem 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.35;
+	color: var(--luxe-form-muted-color);
+}
+
+.fmdb-form-help > :first-child {
+	margin-top: 0;
+}
+
+.fmdb-form-help > :last-child {
+	margin-bottom: 0;
+}
+
+/* Text-like controls: inputs, selects, textareas (form.module.css .control) */
+.fmdb-form-control {
+	display: block;
+	width: 100%;
+	padding: 0.375rem 0.75rem;
+	font: inherit;
+	color: var(--luxe-body-color);
+	appearance: none;
+	background-color: var(--luxe-body-bg);
+	background-clip: padding-box;
+	border: var(--luxe-border-width) solid var(--luxe-border-color);
+	border-radius: var(--luxe-border-radius);
+	transition:
+		border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+.fmdb-form-control:focus {
+	border-color: var(--luxe-form-control-focus-border);
+	outline: 0;
+	box-shadow: var(--luxe-form-control-focus-shadow);
+}
+
+.fmdb-form-control::placeholder {
+	color: var(--luxe-color-darkBlue40);
+	opacity: 1;
+}
+
+.fmdb-form-control:disabled {
+	background-color: var(--luxe-color-gray);
+	opacity: 1;
+}
+
+textarea.fmdb-form-control {
+	min-height: calc(1.5em * 4 + 0.75rem + 2 * var(--luxe-border-width));
+	resize: vertical;
+}
+
+select.fmdb-form-control:not([multiple]) {
+	padding-right: 2.25rem;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23393847' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 16px 12px;
+}
+
+select.fmdb-form-control[multiple] {
+	padding-right: 0.75rem;
+}
+
+.fmdb-form-control[type="color"] {
+	width: 3rem;
+	height: 2.5rem;
+	padding: 0.25rem;
+}
+
+.fmdb-form-control[type="color"]::-webkit-color-swatch,
+.fmdb-form-control[type="color"]::-moz-color-swatch {
+	border: 0;
+	border-radius: calc(var(--luxe-border-radius) - 0.25rem);
+}
+
+/* File input: the native button carries the primary button look */
+.fmdb-form-control[type="file"] {
+	padding: 0;
+	overflow: hidden;
+}
+
+.fmdb-form-control[type="file"]::file-selector-button {
+	margin: 0 0.75rem 0 0;
+	padding: 0.375rem 0.75rem;
+	font: inherit;
+	color: var(--luxe-color-gray);
+	background-color: var(--luxe-color-gold);
+	border: 0;
+	border-right: var(--luxe-border-width) solid var(--luxe-border-color);
+	cursor: pointer;
+}
+
+.fmdb-file-input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.fmdb-selected-files {
+	margin-top: 0.25rem;
+}
+
+.fmdb-selected-files-title {
+	margin: 0 0 0.5rem;
+	font-family: var(--luxe-font-family-base);
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--luxe-color-heading);
+}
+
+.fmdb-file-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fmdb-file-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.5rem 0.75rem;
+	background-color: var(--luxe-color-gray);
+	border-radius: var(--luxe-border-radius);
+}
+
+.fmdb-file-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: baseline;
+	min-width: 0;
+}
+
+.fmdb-file-name {
+	overflow-wrap: anywhere;
+}
+
+.fmdb-file-size {
+	font-size: 0.875em;
+	color: var(--luxe-form-muted-color);
+}
+
+.fmdb-file-remove {
+	padding: 0.25rem 0.5rem;
+	font: inherit;
+	font-size: 0.875em;
+	color: var(--luxe-danger-text-emphasis);
+	background: transparent;
+	border: 0;
+	border-radius: var(--luxe-border-radius);
+	cursor: pointer;
+}
+
+.fmdb-file-remove:hover,
+.fmdb-file-remove:focus-visible {
+	background-color: var(--luxe-danger-bg-subtle);
+	outline: 0;
+}
+
+/* Checkboxes and radios (form.module.css .checkInput) */
+.fmdb-group-items {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.fmdb-group-item,
+.fmdb-form-group:has(> .fmdb-form-control[type="checkbox"]) {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.fmdb-form-group:has(> .fmdb-form-control[type="checkbox"]) {
+	flex-wrap: wrap;
+}
+
+.fmdb-form-group:has(> .fmdb-form-control[type="checkbox"]) > .fmdb-form-help {
+	flex-basis: 100%;
+	margin-top: 0;
+	padding-left: calc(1em + 0.5rem);
+}
+
+.fmdb-checkbox-label,
+.fmdb-radio-label {
+	font-weight: 400;
+	color: var(--luxe-body-color);
+}
+
+.fmdb-form-control[type="checkbox"],
+.fmdb-form-control[type="radio"] {
+	--luxe-form-check-bg: var(--luxe-body-bg);
+	flex-shrink: 0;
+	width: 1em;
+	height: 1em;
+	margin-top: 0.25em;
+	padding: 0;
+	vertical-align: top;
+	appearance: none;
+	background-color: var(--luxe-form-check-bg);
+	background-image: var(--luxe-form-check-bg-image);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border: var(--luxe-border-width) solid var(--luxe-border-color);
+	border-radius: 0.25em;
+	print-color-adjust: exact;
+}
+
+.fmdb-form-control[type="radio"] {
+	border-radius: 50%;
+}
+
+.fmdb-form-control[type="checkbox"]:checked,
+.fmdb-form-control[type="radio"]:checked {
+	background-color: var(--luxe-color-primary);
+	border-color: var(--luxe-color-primary);
+}
+
+.fmdb-form-control[type="checkbox"]:checked {
+	--luxe-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+.fmdb-form-control[type="radio"]:checked {
+	--luxe-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* Range slider */
+.fmdb-form-control[type="range"] {
+	padding: 0;
+	background: transparent;
+	border: 0;
+	accent-color: var(--luxe-color-primary);
+}
+
+.fmdb-form-control[type="range"]:focus {
+	box-shadow: none;
+}
+
+.fmdb-form-control[type="range"]:focus-visible {
+	outline: 2px solid var(--luxe-form-control-focus-border);
+	outline-offset: 2px;
+}
+
+.fmdb-range-end-label,
+.fmdb-range-output {
+	font-size: 0.875em;
+	color: var(--luxe-form-muted-color);
+}
+
+.fmdb-range-output {
+	font-weight: 500;
+	color: var(--luxe-color-heading);
+}
+
+/* Scale and NPS chips: the module only recolours the border on hover; give the hover the site's
+   secondary-button feel, and keep the selected chip's look on hover so it stays readable */
+.fmdb-form .fmdbext-scale-label {
+	font-weight: 500;
+	color: var(--luxe-color-heading);
+}
+
+.fmdb-form .fmdbext-scale-label:hover {
+	background: rgba(var(--luxe-color-gold-rgb), 0.15);
+	border-color: var(--luxe-color-gold);
+	color: var(--luxe-color-darkBlue);
+}
+
+.fmdb-form .fmdbext-scale-input:checked + .fmdbext-scale-label:hover {
+	background: var(--fmdbext-chip-on-bg);
+	color: var(--fmdbext-chip-on-fg);
+}
+
+/* Number-chip rating shares the chips' look */
+.fmdb-form .fmdbext-rating-items[data-fmdbext-icon="number"] .fmdbext-rating-label {
+	font-weight: 500;
+	color: var(--luxe-color-heading);
+}
+
+/* Fieldsets and steps: the grouping levels */
+.fmdb-fieldset {
+	margin: 0;
+	padding: 1.25rem 1.25rem 1.5rem;
+	border: var(--luxe-border-width) solid var(--luxe-border-color);
+	border-radius: var(--luxe-border-radius);
+	min-width: 0;
+}
+
+.fmdb-fieldset-legend {
+	padding: 0 0.5rem;
+	font-family: var(--luxe-font-family-display);
+	font-size: 1.25rem;
+	color: var(--luxe-color-heading);
+}
+
+.fmdb-fieldset-elements {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.fmdb-step {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.fmdb-step-title {
+	margin: 0;
+	font-family: var(--luxe-font-family-display);
+	font-size: 1.5rem;
+	font-weight: 400;
+	line-height: 1.25;
+	color: var(--luxe-color-heading);
+}
+
+/* Buttons: button.module.css .root and .primary as the contact form renders them (one rem, 38px high,
+   full width, stacked); .secondary is the outline variant */
+.fmdb-form-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.fmdb-btn {
+	--luxe-btn-color: var(--luxe-body-color);
+	--luxe-btn-bg: transparent;
+	--luxe-btn-border-color: var(--luxe-border-color);
+	--luxe-btn-hover-color: var(--luxe-body-color);
+	--luxe-btn-hover-bg: var(--luxe-color-gray);
+	--luxe-btn-hover-border-color: var(--luxe-border-color);
+	--luxe-btn-focus-shadow-rgb: 165, 132, 54;
+	--luxe-btn-disabled-color: var(--luxe-color-secondary);
+	--luxe-btn-disabled-bg: transparent;
+	--luxe-btn-disabled-border-color: var(--luxe-border-color);
+	display: block;
+	width: 100%;
+	padding: 0.375rem 0.75rem;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--luxe-btn-color);
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	user-select: none;
+	background-color: var(--luxe-btn-bg);
+	border: var(--luxe-border-width) solid var(--luxe-btn-border-color);
+	border-radius: var(--luxe-border-radius);
+	transition:
+		color 0.15s ease-in-out,
+		background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+.fmdb-btn::first-letter {
+	text-transform: uppercase;
+}
+
+.fmdb-btn:hover {
+	color: var(--luxe-btn-hover-color);
+	background-color: var(--luxe-btn-hover-bg);
+	border-color: var(--luxe-btn-hover-border-color);
+}
+
+.fmdb-btn:focus-visible {
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(var(--luxe-btn-focus-shadow-rgb), 0.5);
+}
+
+.fmdb-btn:disabled {
+	color: var(--luxe-btn-disabled-color);
+	pointer-events: none;
+	background-color: var(--luxe-btn-disabled-bg);
+	border-color: var(--luxe-btn-disabled-border-color);
+	opacity: 0.65;
+}
+
+.fmdb-btn-primary {
+	--luxe-btn-color: var(--luxe-color-gray);
+	--luxe-btn-bg: var(--luxe-color-gold);
+	--luxe-btn-border-color: var(--luxe-color-gold);
+	--luxe-btn-hover-color: var(--luxe-color-darkBlue);
+	--luxe-btn-hover-bg: rgba(var(--luxe-color-gold-rgb), 0.6);
+	--luxe-btn-hover-border-color: transparent;
+	--luxe-btn-disabled-color: #000;
+	--luxe-btn-disabled-bg: var(--luxe-color-gold);
+	--luxe-btn-disabled-border-color: var(--luxe-color-gold);
+}
+
+.fmdb-btn-secondary {
+	--luxe-btn-color: var(--luxe-color-heading);
+	--luxe-btn-border-color: var(--luxe-color-gold);
+	--luxe-btn-hover-color: var(--luxe-color-darkBlue);
+	--luxe-btn-hover-bg: rgba(var(--luxe-color-gold-rgb), 0.15);
+	--luxe-btn-hover-border-color: var(--luxe-color-gold);
+}
+
+/* Submission feedback (alert.module.css) */
+.fmdb-message {
+	--luxe-alert-color: var(--luxe-emphasis-color);
+	--luxe-alert-bg: var(--luxe-color-gray);
+	--luxe-alert-border-color: var(--luxe-border-color);
+	position: relative;
+	padding: 1rem;
+	color: var(--luxe-alert-color);
+	background-color: var(--luxe-alert-bg);
+	border: var(--luxe-border-width) solid var(--luxe-alert-border-color);
+	border-radius: var(--luxe-border-radius);
+}
+
+.fmdb-message-success {
+	--luxe-alert-color: var(--luxe-color-heading);
+	--luxe-alert-bg: rgba(var(--luxe-color-gold-rgb), 0.12);
+	--luxe-alert-border-color: var(--luxe-color-gold);
+}
+
+.fmdb-message-error {
+	--luxe-alert-color: var(--luxe-danger-text-emphasis);
+	--luxe-alert-bg: var(--luxe-danger-bg-subtle);
+	--luxe-alert-border-color: var(--luxe-danger-border-subtle);
+}
+
+.fmdb-message-maintenance {
+	--luxe-alert-color: var(--luxe-warning-text-emphasis);
+	--luxe-alert-bg: rgba(var(--luxe-color-gold-rgb), 0.12);
+	--luxe-alert-border-color: var(--luxe-warning-border-subtle);
+}
+
+.fmdb-message-content > :first-child {
+	margin-top: 0;
+}
+
+.fmdb-message-content > :last-child {
+	margin-bottom: 0;
+}
+
+.fmdb-message .fmdb-btn {
+	margin-top: 1rem;
+}
+
+/* Inline errors that Formidable does not derive from a variable */
+.fmdb-field-error {
+	margin: 0;
+	font-size: 0.875em;
+	color: var(--luxe-danger-text-emphasis);
+}
+
+/* A form opened on its own in the Page Builder: a column like the site's sections. The wrapper and
+   its variables come with Formidable's visually-editable form (Jahia/formidable#297, not released
+   yet): until a Formidable carrying it is deployed, this rule matches nothing. */
+.fmdb-visual-edit {
+	--fmdb-visual-edit-max-width: 52rem;
+	--fmdb-visual-edit-padding: 2rem 1rem 4rem;
+}
