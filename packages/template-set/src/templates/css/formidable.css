@@ -4,11 +4,11 @@
    the stable class hooks documented in the module (docs/styling.md). Plain CSS on purpose: the
    hooks are fixed names, not module classes. Mirrors form.module.css, button.module.css and
    alert.module.css so a Formidable form and the site's own forms look the same.
-   Seventeen of the hooks below are not in that document yet — they exist in the module's source,
-   but a rename there would unstyle this demo without a build error or a failing test: the file
-   input's list (fmdb-file-* and fmdb-selected-files*, fmdb-file-label excepted), the rating and
-   scale classes of the extended inputs (fmdbext-rating-*, fmdbext-scale-*), fmdb-field-error,
-   fmdb-fieldset-elements and fmdb-content. Check those first after a Formidable upgrade. */
+   Ten of the hooks below are not in the released version of that document — fmdb-content,
+   fmdb-field-error, fmdb-fieldset-elements, fmdb-file-info, fmdb-selected-files,
+   fmdb-selected-files-title, fmdbext-rating-items, fmdbext-rating-label, fmdbext-scale-input,
+   fmdbext-scale-label — and Jahia/formidable#303 adds them to it; fmdb-visual-edit comes with
+   Jahia/formidable#297. Until those ship, check these first after a Formidable upgrade. */
 
 .fmdb-form {
 	/* Formidable's variables, tuned to the palette */
