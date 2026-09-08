@@ -3,7 +3,12 @@
    and exposes every value it hard-codes as a variable; the site gives forms their look through
    the stable class hooks documented in the module (docs/styling.md). Plain CSS on purpose: the
    hooks are fixed names, not module classes. Mirrors form.module.css, button.module.css and
-   alert.module.css so a Formidable form and the site's own forms look the same. */
+   alert.module.css so a Formidable form and the site's own forms look the same.
+   Seventeen of the hooks below are not in that document yet — they exist in the module's source,
+   but a rename there would unstyle this demo without a build error or a failing test: the file
+   input's list (fmdb-file-* and fmdb-selected-files*, fmdb-file-label excepted), the rating and
+   scale classes of the extended inputs (fmdbext-rating-*, fmdbext-scale-*), fmdb-field-error,
+   fmdb-fieldset-elements and fmdb-content. Check those first after a Formidable upgrade. */
 
 .fmdb-form {
 	/* Formidable's variables, tuned to the palette */
@@ -45,9 +50,13 @@
 	--fmdbext-chip-on-bg: var(--luxe-color-gold);
 	--fmdbext-chip-on-fg: var(--luxe-color-gray);
 	--fmdbext-focus: var(--luxe-form-control-focus-border);
-	--fmdbext-end-labels-color: var(--luxe-color-secondary);
+	--fmdbext-end-labels-color: var(--luxe-form-muted-color);
 	/* Local tokens */
 	--luxe-form-gap: 1rem;
+	/* The site's secondary colour (#767695) sits at 4.38:1 on white and 4.05:1 on the gray card,
+	   under the 4.5:1 WCAG AA asks of normal text; the form's small muted texts (help, file size,
+	   range labels) get this darker shade of the same hue: 5.13:1 and 4.74:1 */
+	--luxe-form-muted-color: #6b6b8a;
 	--luxe-form-control-focus-border: #e1cda0;
 	--luxe-form-control-focus-shadow: 0 0 0 0.25rem rgba(var(--luxe-color-primary-rgb), 0.251);
 
@@ -125,7 +134,7 @@
 	margin: -0.6rem 0 0;
 	font-size: 0.8125rem;
 	line-height: 1.35;
-	color: var(--luxe-color-secondary);
+	color: var(--luxe-form-muted-color);
 }
 
 .fmdb-form-help > :first-child {
@@ -266,7 +275,7 @@ select.fmdb-form-control[multiple] {
 
 .fmdb-file-size {
 	font-size: 0.875em;
-	color: var(--luxe-color-secondary);
+	color: var(--luxe-form-muted-color);
 }
 
 .fmdb-file-remove {
@@ -375,7 +384,7 @@ select.fmdb-form-control[multiple] {
 .fmdb-range-end-label,
 .fmdb-range-output {
 	font-size: 0.875em;
-	color: var(--luxe-color-secondary);
+	color: var(--luxe-form-muted-color);
 }
 
 .fmdb-range-output {
@@ -578,7 +587,9 @@ select.fmdb-form-control[multiple] {
 	color: var(--luxe-danger-text-emphasis);
 }
 
-/* A form opened on its own in the Page Builder: a column like the site's sections */
+/* A form opened on its own in the Page Builder: a column like the site's sections. The wrapper and
+   its variables come with Formidable's visually-editable form (Jahia/formidable#297, not released
+   yet): until a Formidable carrying it is deployed, this rule matches nothing. */
 .fmdb-visual-edit {
 	--fmdb-visual-edit-max-width: 52rem;
 	--fmdb-visual-edit-padding: 2rem 1rem 4rem;
