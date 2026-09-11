@@ -1,7 +1,7 @@
 import { jahiaComponent } from "@jahia/javascript-modules-library";
 import type { HeaderProps } from "./types";
 import classes from "./default.module.css";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 
 jahiaComponent(
 	{

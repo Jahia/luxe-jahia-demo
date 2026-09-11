@@ -1,10 +1,9 @@
 import classes from "./styles.module.css";
 import clsx from "clsx";
-import { Image } from "../Image";
-import type { ImgHTMLAttributes } from "react";
+import { Image, type ImageProps } from "../Image";
 
 interface SlideshowProps {
-	images: ImgHTMLAttributes<HTMLImageElement>[];
+	images: ImageProps[];
 	selectedImageIndex: number | null;
 	setSelectedImageIndex: (index: number | null) => void;
 }

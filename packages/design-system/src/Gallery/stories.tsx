@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Gallery } from "./index.tsx";
-import { type ImgHTMLAttributes, useState } from "react";
+import type { ImageProps } from "../Image/index.tsx";
+import { useState } from "react";
 
 // Demo data with more images to showcase the gallery properly
 const images = [
@@ -71,7 +72,7 @@ function GalleryStory({
 	delayMs = 200,
 }: {
 	title: string;
-	images: Array<ImgHTMLAttributes<HTMLImageElement> & { src: string }>;
+	images: (ImageProps & { src: string })[];
 	delayMs?: number;
 }) {
 	const [key, setKey] = useState(0);

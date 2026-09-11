@@ -9,7 +9,7 @@ import type { EstateProps } from "./types.js";
 import { CheckIcon } from "design-system/Icons";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { imageNodeToImgProps } from "~/commons/image/imgProps";
 import { Col, List, type ListRowProps, PageTitle, Row, Section } from "design-system";
 import { useTranslation } from "react-i18next";
 

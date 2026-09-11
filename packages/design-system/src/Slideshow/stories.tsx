@@ -1,12 +1,13 @@
 // Slideshow.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState, type ImgHTMLAttributes } from "react";
+import { useState } from "react";
 import { Slideshow } from "./index.tsx";
+import type { ImageProps } from "../Image/index.tsx";
 
 // More on writing stories: https://storybook.js.org/docs/writing-stories
 
 // Demo data
-const images: ImgHTMLAttributes<HTMLImageElement>[] = [
+const images: ImageProps[] = [
 	{
 		src: "https://placehold.co/400x300?text=Image+1",
 		alt: "Placeholder image 1",
@@ -45,7 +46,7 @@ const storybookStyles: React.CSSProperties = {
  * It owns the index state and forwards required props to Slideshow.
  * This keeps Storybook `args` minimal (only `images`), avoiding TS conflicts.
  */
-function SlideshowStory({ images }: { images: ImgHTMLAttributes<HTMLImageElement>[] }) {
+function SlideshowStory({ images }: { images: ImageProps[] }) {
 	// Local state so Prev/Next buttons can change the slide
 	const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(0);
 

@@ -2,7 +2,7 @@ import { jahiaComponent } from "@jahia/javascript-modules-library";
 import { Figure, PageTitle, Row } from "design-system";
 import type { HeaderProps } from "./types.js";
 import classes from "./textUp.module.css";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 
 jahiaComponent(
 	{

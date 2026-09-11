@@ -2,7 +2,7 @@ import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library"
 import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
