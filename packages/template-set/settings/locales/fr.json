@@ -180,6 +180,7 @@
 		"realtor": "portrait de l'agent : {{realtor}}",
 		"agency": "vue de l'agence : {{agency}}",
 		"blog": "illustration du blog : {{blog}}",
+		"illustration": "illustration de la section : {{title}}",
 		"logo": "logo de {{siteName}}"
 	},
 	"maps": {

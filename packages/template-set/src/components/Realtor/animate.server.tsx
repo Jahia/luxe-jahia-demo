@@ -25,14 +25,17 @@ jahiaComponent(
 	) => {
 		const { t } = useTranslation();
 		const fullName = [firstName, lastName].filter(Boolean).join(" ");
+		const alt = t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() });
+		// The placeholder describes the realtor too: an empty alt leaves the card unlabelled
 		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
 			src: buildModuleFileUrl(placeholder),
+			alt,
 		};
 		if (imageNode) {
 			// Cache dependency for all nodes involved
 			server.render.addCacheDependency({ node: imageNode }, renderContext);
 			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() }),
+				alt,
 				widths: [300, 600], // 600 is for double density screens
 			});
 			imageProps.sizes = "300px"; // Ensure the image is always 300px wide
