@@ -136,6 +136,8 @@ describe("submitContact — jExperience bridge (window.wem)", () => {
 
 	it("does not crash when wem is absent", () => {
 		stubWindow();
-		expect(() => submitContact({ form, body, setFeedback: vi.fn(), setUnknownError: vi.fn() })).not.toThrow();
+		expect(() =>
+			submitContact({ form, body, setFeedback: vi.fn(), setUnknownError: vi.fn() }),
+		).not.toThrow();
 	});
 });

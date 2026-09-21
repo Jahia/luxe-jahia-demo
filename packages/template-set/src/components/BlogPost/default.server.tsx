@@ -16,11 +16,10 @@ jahiaComponent(
 		return (
 			<a className={classes.card} href={buildNodeUrl(currentNode)}>
 				<LuxeImage
-					node={imageNode}
+					src={imageNode}
 					alt={t("alt.blog", { blog: title })}
 					className={classes.image}
-					widths={[380, 760]} // 760 is for double density screens
-					sizes="380px"
+					width={380}
 				/>
 				<div className={classes.main}>
 					<h2 className={classes.title}>{title}</h2>
