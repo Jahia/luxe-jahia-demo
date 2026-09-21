@@ -3,6 +3,7 @@ import { Figure, Row } from "design-system";
 import type { HeaderProps } from "./types";
 import classes from "./textDown.module.css";
 import { LuxeImage } from "~/commons/LuxeImage";
+import { useTranslation } from "react-i18next";
 
 jahiaComponent(
 	{
@@ -11,24 +12,31 @@ jahiaComponent(
 		displayName: "Image & Text Down",
 		componentType: "view",
 	},
-	({ title, subtitle, image: imageNode }: HeaderProps) => (
-		<header className={classes.header}>
-			{imageNode && (
-				<Row>
-					<Figure layout="imgFull">
-						<LuxeImage
-							node={imageNode}
-							className={classes.image}
-							sizes="(max-width: 1320px) 100vw, 1320px"
-							priority
-						/>
-					</Figure>
+	({ title, subtitle, image: imageNode }: HeaderProps) => {
+		const { t } = useTranslation();
+
+		return (
+			<header className={classes.header}>
+				{imageNode && (
+					<Row>
+						<Figure layout="imgFull">
+							<LuxeImage
+								src={imageNode}
+								alt={t("alt.hero", { title })}
+								className={classes.image}
+								sizes={["(max-width: 1320px) 100vw", "1320px"]}
+								// Above the fold: the LCP candidate
+								loading="eager"
+								fetchPriority="high"
+							/>
+						</Figure>
+					</Row>
+				)}
+				<Row component="hgroup">
+					<h1 className={classes.title}>{title}</h1>
+					<p className={classes.hp}>{subtitle}</p>
 				</Row>
-			)}
-			<Row component="hgroup">
-				<h1 className={classes.title}>{title}</h1>
-				<p className={classes.hp}>{subtitle}</p>
-			</Row>
-		</header>
-	),
+			</header>
+		);
+	},
 );

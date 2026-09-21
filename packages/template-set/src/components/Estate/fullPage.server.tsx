@@ -1,15 +1,14 @@
 import {
 	buildModuleFileUrl,
+	getImageProps,
 	Island,
 	jahiaComponent,
-	server,
 } from "@jahia/javascript-modules-library";
 import GalleryClient from "~/commons/Gallery.client.tsx";
 import type { EstateProps } from "./types.js";
 import { CheckIcon } from "design-system/Icons";
 import classes from "./fullPage.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
 import { Col, List, type ListRowProps, PageTitle, Row, Section } from "design-system";
 import { useTranslation } from "react-i18next";
 
@@ -34,26 +33,20 @@ jahiaComponent(
 			bathrooms,
 			options,
 		}: EstateProps,
-		{ currentResource, renderContext },
+		{ currentResource },
 	) => {
 		const { t } = useTranslation();
 		const locale = currentResource.getLocale().getLanguage();
+		const alt = t("alt.estate", { estate: title });
 
+		// The gallery is an island, so it receives serializable props: getImageProps is the tier
+		// below <JImage>, and it registers the cache dependency on each node the same way
 		const galleryImages = (images ?? [])
 			.filter((imageNode) => Boolean(imageNode))
-			.map((imageNode) => {
-				// Cache dependency for all nodes involved
-				server.render.addCacheDependency({ node: imageNode }, renderContext);
-				return imageNodeToImgProps(imageNode, {
-					alt: t("alt.estate", { estate: title }),
-				});
-			});
+			.map((imageNode) => getImageProps(imageNode, { alt }));
 
 		if (!galleryImages.length) {
-			galleryImages.push({
-				src: buildModuleFileUrl(placeholder),
-				alt: t("alt.estate", { estate: title ?? "" }),
-			});
+			galleryImages.push({ src: buildModuleFileUrl(placeholder), alt, loading: "eager" });
 		}
 
 		// Define translation mappings

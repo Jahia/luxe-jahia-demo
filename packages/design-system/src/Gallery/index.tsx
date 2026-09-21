@@ -77,8 +77,10 @@ export const Gallery = ({ title, images, className, delayMs = 200, priority }: G
 									data-part="thumbImage"
 									className={classes.thumbImage}
 									src={src}
-									sizes="320px"
 									{...rest}
+									// The thumbnail slot is a fixed 320px column; it overrides any sizes
+									// the props carry
+									sizes="320px"
 								/>
 							</li>
 						)}

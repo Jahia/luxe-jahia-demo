@@ -590,7 +590,7 @@
                                jcr:lastModifiedBy="pam"
                                jcr:mixinTypes="jmix:image"
                                jcr:primaryType="jnt:file"
-                               jcr:uuid="cfb9bcfc-e46f-445f-aa68-0c9e5da41a49">
+                               jcr:uuid="cfb9bcfc-e46f-445f-aa68-0c9e5da41a49" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.278Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -607,7 +607,7 @@
                                jcr:lastModifiedBy="pam"
                                jcr:mixinTypes="jmix:image"
                                jcr:primaryType="jnt:file"
-                               jcr:uuid="4c790fe2-1093-4feb-b721-3057b762a2ce">
+                               jcr:uuid="4c790fe2-1093-4feb-b721-3057b762a2ce" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.282Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -624,7 +624,7 @@
                                jcr:lastModifiedBy="pam"
                                jcr:mixinTypes="jmix:image"
                                jcr:primaryType="jnt:file"
-                               jcr:uuid="524a606e-ac7b-4902-823a-852bd851ef48">
+                               jcr:uuid="524a606e-ac7b-4902-823a-852bd851ef48" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.285Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -641,7 +641,7 @@
                                jcr:lastModifiedBy="pam"
                                jcr:mixinTypes="jmix:image"
                                jcr:primaryType="jnt:file"
-                               jcr:uuid="6129a8ff-4c66-4ac7-8044-5fffac9ff69f">
+                               jcr:uuid="6129a8ff-4c66-4ac7-8044-5fffac9ff69f" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.289Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -658,7 +658,7 @@
                                jcr:lastModifiedBy="pam"
                                jcr:mixinTypes="jmix:image"
                                jcr:primaryType="jnt:file"
-                               jcr:uuid="63e1fca6-9fc0-40ae-8d38-e5cc5df0fe43">
+                               jcr:uuid="63e1fca6-9fc0-40ae-8d38-e5cc5df0fe43" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.292Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -675,7 +675,7 @@
                                jcr:lastModifiedBy="pam"
                                jcr:mixinTypes="jmix:image"
                                jcr:primaryType="jnt:file"
-                               jcr:uuid="0eb1acd6-320f-4bc5-b628-f32d01151657">
+                               jcr:uuid="0eb1acd6-320f-4bc5-b628-f32d01151657" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.296Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -703,7 +703,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="4f025773-75b5-44b8-a0b5-8cc9d7451846">
+                              jcr:uuid="4f025773-75b5-44b8-a0b5-8cc9d7451846" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.305Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -720,7 +720,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="d2e19b3e-907d-4825-bd48-4b9186884cf9">
+                              jcr:uuid="d2e19b3e-907d-4825-bd48-4b9186884cf9" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.310Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -737,7 +737,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="fa4b960b-9432-41ae-9b82-875f2a9dd854">
+                              jcr:uuid="fa4b960b-9432-41ae-9b82-875f2a9dd854" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.315Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -754,7 +754,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="6f40f274-f96a-428c-b37a-73fc8f060c37">
+                              jcr:uuid="6f40f274-f96a-428c-b37a-73fc8f060c37" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.319Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -771,7 +771,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="3f7fa0d9-4375-4179-a85e-8ecbb995f2c2">
+                              jcr:uuid="3f7fa0d9-4375-4179-a85e-8ecbb995f2c2" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.323Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -788,7 +788,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="36acf1f4-db04-41d4-bd4b-818a1c66415c">
+                              jcr:uuid="36acf1f4-db04-41d4-bd4b-818a1c66415c" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.327Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -805,7 +805,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="415ac862-d11e-4c3b-9251-7946099046b9">
+                              jcr:uuid="415ac862-d11e-4c3b-9251-7946099046b9" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.332Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -822,7 +822,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="60284865-8d6b-4264-b54a-20667436cc2b">
+                              jcr:uuid="60284865-8d6b-4264-b54a-20667436cc2b" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.337Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -839,7 +839,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="c3ea2581-142f-4f26-a543-d4bbde8f703b">
+                              jcr:uuid="c3ea2581-142f-4f26-a543-d4bbde8f703b" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.342Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -856,7 +856,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="fe9b1ec9-7110-4580-ada5-3c3fef52e249">
+                              jcr:uuid="fe9b1ec9-7110-4580-ada5-3c3fef52e249" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.352Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -873,7 +873,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="ab8d9f10-1d13-4e40-8fd4-43ae8dc8771c">
+                              jcr:uuid="ab8d9f10-1d13-4e40-8fd4-43ae8dc8771c" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.361Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -890,7 +890,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="6433b674-f3de-4b5e-9988-393173fc233b">
+                              jcr:uuid="6433b674-f3de-4b5e-9988-393173fc233b" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.368Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -907,7 +907,7 @@
                               jcr:lastModifiedBy="pam"
                               jcr:mixinTypes="jmix:image"
                               jcr:primaryType="jnt:file"
-                              jcr:uuid="60c68794-09ff-4299-8228-18e99347af65">
+                              jcr:uuid="60c68794-09ff-4299-8228-18e99347af65" j:height="695" j:width="1140">
                   <jcr:content jcr:lastModified="2025-09-18T09:25:34.373Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -1987,7 +1987,7 @@
                                  jcr:lastModifiedBy="robin"
                                  jcr:mixinTypes="jmix:image"
                                  jcr:primaryType="jnt:file"
-                                 jcr:uuid="374f14fa-df99-4568-968d-8ea84c522b93">
+                                 jcr:uuid="374f14fa-df99-4568-968d-8ea84c522b93" j:height="695" j:width="1140">
                      <jcr:content jcr:lastModified="2025-09-18T09:25:35.390Z"
                                   jcr:lastModifiedBy="pam"
                                   jcr:mimeType="image/webp"
@@ -2004,7 +2004,7 @@
                                  jcr:lastModifiedBy="robin"
                                  jcr:mixinTypes="jmix:image"
                                  jcr:primaryType="jnt:file"
-                                 jcr:uuid="239e0ac7-2780-4b31-af21-3f2973053d62">
+                                 jcr:uuid="239e0ac7-2780-4b31-af21-3f2973053d62" j:height="695" j:width="1140">
                      <jcr:content jcr:lastModified="2025-09-18T09:25:35.394Z"
                                   jcr:lastModifiedBy="pam"
                                   jcr:mimeType="image/webp"
@@ -8204,7 +8204,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="4d1c37a4-93ce-459d-8edc-0c9dca7d09e4">
+                                jcr:uuid="4d1c37a4-93ce-459d-8edc-0c9dca7d09e4" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.847Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8221,7 +8221,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="4dfbfd4b-3371-4e89-9478-e856c9705ade">
+                                jcr:uuid="4dfbfd4b-3371-4e89-9478-e856c9705ade" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.851Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8238,7 +8238,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="744878ff-f9d2-461e-bdfe-7c7a3b8e0f83">
+                                jcr:uuid="744878ff-f9d2-461e-bdfe-7c7a3b8e0f83" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.854Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8255,7 +8255,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="f1c66462-72b5-4889-92b0-9025bf7016af">
+                                jcr:uuid="f1c66462-72b5-4889-92b0-9025bf7016af" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.857Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8272,7 +8272,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="af89118b-8e4f-4772-959f-96b1390a5942">
+                                jcr:uuid="af89118b-8e4f-4772-959f-96b1390a5942" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.860Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8289,7 +8289,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="f6c325f7-1dab-4ae2-bcb4-e7654d938495">
+                                jcr:uuid="f6c325f7-1dab-4ae2-bcb4-e7654d938495" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.864Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8306,7 +8306,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="fb78b25a-034e-47f8-ad93-f7b01f8259d9">
+                                jcr:uuid="fb78b25a-034e-47f8-ad93-f7b01f8259d9" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.867Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8323,7 +8323,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="c3feb771-61fc-4f7b-86f5-c7e99770cb98">
+                                jcr:uuid="c3feb771-61fc-4f7b-86f5-c7e99770cb98" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.870Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"
@@ -8340,7 +8340,7 @@
                                 jcr:lastModifiedBy="pam"
                                 jcr:mixinTypes="jmix:image"
                                 jcr:primaryType="jnt:file"
-                                jcr:uuid="a3e6ef64-af7d-4a39-b798-81822ee20236">
+                                jcr:uuid="a3e6ef64-af7d-4a39-b798-81822ee20236" j:height="500" j:width="500">
                   <jcr:content jcr:lastModified="2025-09-18T09:26:03.873Z"
                                jcr:lastModifiedBy="pam"
                                jcr:mimeType="image/webp"

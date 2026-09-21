@@ -14,7 +14,9 @@ const baseConfig = {
 } as QueryConfig;
 
 /** Sync fake capturing the GraphQL variables and returning a canned payload. */
-const fakeFetch = (data: any = { jcr: { nodesByCriteria: { nodes: [], pageInfo: { totalCount: 0 } } } }) => {
+const fakeFetch = (
+	data: any = { jcr: { nodesByCriteria: { nodes: [], pageInfo: { totalCount: 0 } } } },
+) => {
 	const calls: { query: unknown; variables: any }[] = [];
 	const f = (opts: any) => {
 		calls.push(opts);
@@ -104,7 +106,14 @@ describe("fetchEstate response processing", () => {
 							bedrooms: { longValue: 3 },
 							images: { refNodes: [{ url: "/img.jpg" }] },
 						},
-						{ url: "/estate-2.html", title: null, price: null, surface: null, bedrooms: null, images: null },
+						{
+							url: "/estate-2.html",
+							title: null,
+							price: null,
+							surface: null,
+							bedrooms: null,
+							images: null,
+						},
 						null,
 					],
 					pageInfo: { totalCount: 42 },
