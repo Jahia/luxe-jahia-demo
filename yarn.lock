@@ -858,8 +858,8 @@ __metadata:
   linkType: hard
 
 "@jahia/cypress@npm:^8.5.0":
-  version: 8.5.0
-  resolution: "@jahia/cypress@npm:8.5.0"
+  version: 8.6.1
+  resolution: "@jahia/cypress@npm:8.6.1"
   dependencies:
     "@apollo/client": "npm:^3.4.9"
     "@faker-js/faker": "npm:^10.3.0"
@@ -873,7 +873,7 @@ __metadata:
     ci.startup: ./ci.startup.sh
     env.debug: ./env.debug.sh
     env.run: ./env.run.sh
-  checksum: 10c0/f703c7908e3da23d84af52035030f8ec9eccdc8073f38ef7b9fc5dc84e1ff06d5adb7e6f423477e709a917809248454537dd052289aae0c24ac029c05ae9d92f
+  checksum: 10c0/ec2b605e1454eb139c14621a7c109d26b868506295a1b75f0b573172590281bc6f9525e2ceccef264377f62d5f4c7c23b60cc1fbc7275987ba4e0bed139d4976
   languageName: node
   linkType: hard
 
