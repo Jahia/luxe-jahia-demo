@@ -1,7 +1,9 @@
 /* Forms built with Formidable, in the luxe design.
-   Formidable only ships functional rules (validation, step navigation, spinner, authoring cues)
-   and exposes every value it hard-codes as a variable; the site gives forms their look through
-   the stable class hooks documented in the module (docs/styling.md). Plain CSS on purpose: the
+   Formidable ships functional rules (validation, step navigation, spinner, authoring cues) and a
+   look of its own for its buttons, and exposes every value it hard-codes as a variable: its button
+   rules load after this file, so the buttons take the luxe look through those variables. The site
+   gives forms their look through the stable class hooks documented in the module
+   (docs/styling.md). Plain CSS on purpose: the
    hooks are fixed names, not module classes. Mirrors form.module.css, button.module.css and
    alert.module.css so a Formidable form and the site's own forms look the same.
    Seventeen of the hooks below are not in that document yet — they exist in the module's source,
@@ -472,6 +474,17 @@ select.fmdb-form-control[multiple] {
 	--luxe-btn-disabled-color: var(--luxe-color-secondary);
 	--luxe-btn-disabled-bg: transparent;
 	--luxe-btn-disabled-border-color: var(--luxe-border-color);
+	/* Formidable styles its buttons itself, after this file and at the same specificity: its variables
+	   carry the luxe values, on the button, so the message's button (beside the form) gets them too */
+	--fmdb-btn-padding: 0.375rem 0.75rem;
+	--fmdb-btn-radius: var(--luxe-border-radius);
+	--fmdb-btn-border-width: var(--luxe-border-width);
+	--fmdb-btn-font-weight: 400;
+	--fmdb-btn-transition:
+		color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+	--fmdb-btn-focus-outline-width: 0;
+	--fmdb-btn-disabled-opacity: 0.65;
 	display: block;
 	width: 100%;
 	padding: 0.375rem 0.75rem;
@@ -527,6 +540,9 @@ select.fmdb-form-control[multiple] {
 	--luxe-btn-disabled-color: #000;
 	--luxe-btn-disabled-bg: var(--luxe-color-gold);
 	--luxe-btn-disabled-border-color: var(--luxe-color-gold);
+	--fmdb-btn-primary-bg: var(--luxe-btn-bg);
+	--fmdb-btn-primary-color: var(--luxe-btn-color);
+	--fmdb-btn-primary-hover-bg: var(--luxe-btn-hover-bg);
 }
 
 .fmdb-btn-secondary {
@@ -535,6 +551,10 @@ select.fmdb-form-control[multiple] {
 	--luxe-btn-hover-color: var(--luxe-color-darkBlue);
 	--luxe-btn-hover-bg: rgba(var(--luxe-color-gold-rgb), 0.15);
 	--luxe-btn-hover-border-color: var(--luxe-color-gold);
+	--fmdb-btn-secondary-bg: var(--luxe-btn-bg);
+	--fmdb-btn-secondary-color: var(--luxe-btn-color);
+	--fmdb-btn-secondary-border: var(--luxe-btn-border-color);
+	--fmdb-btn-secondary-hover-bg: var(--luxe-btn-hover-bg);
 }
 
 /* Submission feedback (alert.module.css) */
