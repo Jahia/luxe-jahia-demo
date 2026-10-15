@@ -1,6 +1,6 @@
 import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
 import { ClickableCard } from "design-system";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 import type { EstateProps } from "./types";
 import { useTranslation } from "react-i18next";
 

@@ -1,7 +1,7 @@
 import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
 import type { BlogPostProps } from "./types";
 import classes from "./card.module.css";
-import { LuxeImage } from "~/commons/LuxeImage";
+import { LuxeImage } from "~/commons/image/LuxeImage";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(

@@ -2,7 +2,7 @@ import { buildModuleFileUrl, server, useServerContext } from "@jahia/javascript-
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 import type { ComponentProps } from "react";
 import { Image } from "design-system";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
+import { imageNodeToImgProps } from "~/commons/image/imgProps";
 import defaultFallback from "/static/img/img-placeholder.jpg";
 
 type LuxeImageProps = {
@@ -17,14 +17,18 @@ type LuxeImageProps = {
 } & Omit<ComponentProps<typeof Image>, "src" | "srcSet" | "width" | "height" | "alt">;
 
 /**
- * Server-side bridge between a JCR image node and the design-system `Image`:
- * - registers an SSR cache dependency on the node,
- * - maps the node to img props (src, srcSet, intrinsic width/height) via
- *   {@link imageNodeToImgProps},
- * - falls back to a bundled placeholder when the node is missing.
+ * Renders a JCR image node: registers the SSR cache dependency, maps the node
+ * to `<img>` props (src, srcSet, intrinsic width/height) through
+ * {@link imageNodeToImgProps}, and falls back to a bundled placeholder when the
+ * node is missing. Pass `sizes` (native prop) to describe the layout slot, and
+ * `priority` for the LCP/hero image.
  *
- * Pass `sizes` (native prop) to describe the layout slot, and `priority` for
- * the LCP/hero image.
+ * **This component is the way to render a JCR image.** The one exception is an
+ * image that has to cross an `Island` boundary: `Island` props are serialized
+ * (devalue), so JSX cannot be one, and passing the image as `Island` children
+ * would wrap it in a `<jsm-children>` element. Those call sites — `Gallery` in
+ * `Estate/fullPage`, `AnimateClient` in `Realtor/animate` — call
+ * {@link imageNodeToImgProps} directly and register their own cache dependency.
  */
 export const LuxeImage = ({
 	node,
