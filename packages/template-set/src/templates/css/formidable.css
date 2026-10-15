@@ -545,6 +545,12 @@ select.fmdb-form-control[multiple] {
 	--fmdb-btn-primary-hover-bg: var(--luxe-btn-hover-bg);
 }
 
+/* Formidable draws the hover border of its primary button in the hover background, with no variable
+   of its own, from a selector of specificity 0,3,0 */
+.fmdb-btn.fmdb-btn-primary:hover:not(:disabled) {
+	border-color: var(--luxe-btn-hover-border-color);
+}
+
 .fmdb-btn-secondary {
 	--luxe-btn-color: var(--luxe-color-heading);
 	--luxe-btn-border-color: var(--luxe-color-gold);
