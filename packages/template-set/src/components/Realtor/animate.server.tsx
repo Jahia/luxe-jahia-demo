@@ -2,6 +2,7 @@ import {
 	buildModuleFileUrl,
 	buildNodeUrl,
 	getImageProps,
+	getLinkProps,
 	type ImgProps,
 	Island,
 	jahiaComponent,
@@ -47,8 +48,9 @@ jahiaComponent(
 					fullName: fullName || currentNode.getDisplayableName(),
 					jobPosition: jobPosition ? jobPositionLanguagesTranslation[jobPosition] : undefined,
 					image: imageProps,
+					// A media source, not a link: buildNodeUrl is still the right call for it
 					videoUrl: videoNode ? buildNodeUrl(videoNode) : undefined,
-					currentNodeUrl: buildNodeUrl(currentNode),
+					anchor: getLinkProps(currentNode, {}, context).anchor,
 				}}
 			/>
 		);

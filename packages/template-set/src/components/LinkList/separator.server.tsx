@@ -2,9 +2,8 @@ import { Fragment } from "react";
 import {
 	AddContentButtons,
 	getChildNodes,
-	getNodeProps,
 	jahiaComponent,
-	Render,
+	JLink,
 } from "@jahia/javascript-modules-library";
 import type { JCRNodeWrapper } from "org.jahia.services.content";
 
@@ -27,22 +26,15 @@ jahiaComponent(
 
 		return (
 			<>
-				{links.map((node, index) => {
-					const { "j:node": internalNode } = getNodeProps(node as JCRNodeWrapper, ["j:node"]);
-					const node2Render = internalNode ? internalNode : node;
-					if (index > 0) {
-						return (
-							<Fragment key={node2Render.getIdentifier()}>
-								<span> / </span>
-								<Render node={node2Render} view="link" readOnly />
-							</Fragment>
-						);
-					}
-
-					return (
-						<Render key={node2Render.getIdentifier()} node={node2Render} view="link" readOnly />
-					);
-				})}
+				{links.map((node, index) => (
+					<Fragment key={node.getIdentifier()}>
+						{index > 0 && <span> / </span>}
+						{/* Both node types are what the resolver reads by default: `j:node` for
+						    jnt:nodeLink, `j:url` for jnt:externalLink, jcr:title / j:linkTitle for
+						    the label, and `j:target` for the anchor target. */}
+						<JLink content={node as JCRNodeWrapper} />
+					</Fragment>
+				))}
 				<AddContentButtons />
 			</>
 		);

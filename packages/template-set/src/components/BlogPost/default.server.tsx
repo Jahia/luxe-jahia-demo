@@ -1,4 +1,4 @@
-import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage, JLink } from "@jahia/javascript-modules-library";
 import type { BlogPostProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/img-placeholder.jpg";
@@ -16,7 +16,7 @@ jahiaComponent(
 		const { t } = useTranslation();
 
 		return (
-			<a className={classes.card} href={buildNodeUrl(currentNode)}>
+			<JLink node={currentNode} className={classes.card}>
 				<JImage
 					node={imageNode}
 					alt={t("alt.blog", { blog: title })}
@@ -29,7 +29,7 @@ jahiaComponent(
 					<h2 className={classes.title}>{title}</h2>
 					{subtitle && <p>{subtitle}</p>}
 				</div>
-			</a>
+			</JLink>
 		);
 	},
 );
