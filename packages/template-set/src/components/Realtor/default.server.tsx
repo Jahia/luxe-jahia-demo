@@ -1,8 +1,9 @@
-import { buildNodeUrl, jahiaComponent } from "@jahia/javascript-modules-library";
+import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
 import type { RealtorProps } from "./types.js";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agent-placeholder.jpg";
-import { LuxeImage } from "~/commons/image/LuxeImage";
+import { imageClass } from "design-system";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -23,13 +24,13 @@ jahiaComponent(
 
 		return (
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
-				<LuxeImage
+				<JImage
 					node={imageNode}
 					alt={t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() })}
 					fallback={placeholder}
-					className={classes.image}
-					widths={[300, 600]} // 600 is for double density screens
-					sizes="300px"
+					className={clsx(imageClass, classes.image)}
+					layout="fixed"
+					slotWidth={300}
 				/>
 				<div className={classes.main}>
 					<h3>{fullName || currentNode.getDisplayableName()}</h3>
