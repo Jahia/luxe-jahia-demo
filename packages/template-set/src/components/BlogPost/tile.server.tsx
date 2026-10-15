@@ -18,9 +18,10 @@ jahiaComponent(
 			<a href={buildNodeUrl(currentNode)}>
 				<figure className={classes.card}>
 					<LuxeImage
-						node={imageNode}
+						src={imageNode}
 						alt={t("alt.blog", { blog: title })}
-						sizes="(max-width: 576px) 100vw,(max-width: 1320px) 50vw, 880px"
+						// One or two tiles per row, capped at 880px
+						sizes={["(max-width: 576px) 100vw", "(max-width: 1320px) 50vw", "880px"]}
 					/>
 					<figcaption>{title}</figcaption>
 				</figure>

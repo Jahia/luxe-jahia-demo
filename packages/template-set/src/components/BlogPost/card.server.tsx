@@ -17,11 +17,10 @@ jahiaComponent(
 		return (
 			<a href={buildNodeUrl(currentNode)} className={classes.card}>
 				<LuxeImage
-					node={imageNode}
+					src={imageNode}
 					alt={t("alt.blog", { blog: title })}
 					className={classes.image}
-					widths={[200, 400]}
-					sizes="200px"
+					width={200}
 				/>
 				<h3>{title}</h3>
 				{subtitle && <p>{subtitle}</p>}

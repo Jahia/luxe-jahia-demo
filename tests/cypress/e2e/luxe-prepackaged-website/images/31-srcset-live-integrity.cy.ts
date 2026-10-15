@@ -2,15 +2,15 @@ import { LUXE_SITE_KEY } from '../../../support/constants'
 
 /**
  * Guard against the core srcset URL-rewriting corruption (SrcSetURLReplacer
- * splits on every comma): the module percent-encodes commas inside srcset
- * URLs, so every candidate served in live mode must stay parseable —
+ * splits on every comma): the platform image API percent-encodes commas inside
+ * srcset URLs, so every candidate served in live mode must stay parseable —
  * `<absolute url> [<width descriptor>]`, separated by ", ".
  */
 describe('Images - 31 srcset integrity in live', () => {
 	const CANDIDATE_PATTERN = /^\S+(\s+\d+(\.\d+)?[wx])?$/
 
-	// Pages known to serve srcSet in live: the home page (hero + estate cards
-	// through LuxeImage) and a blog post detail. The buy page is NOT covered:
+	// Pages known to serve srcSet in live: the home page (hero + estate cards)
+	// and a blog post detail. The buy page is NOT covered:
 	// its estate cards come from the SearchEstate client island, which renders
 	// plain src URLs without srcSet.
 	;[`/sites/${LUXE_SITE_KEY}/home.html`, `/sites/${LUXE_SITE_KEY}/home/blog/main/blog-posts/geneva.html`].forEach(
@@ -21,7 +21,7 @@ describe('Images - 31 srcset integrity in live', () => {
 					.should('have.length.greaterThan', 0)
 					.each(($img) => {
 						const srcset = $img.attr('srcset') ?? ''
-						// Deliberately split on ", " only (not bare commas): the module's
+						// Deliberately split on ", " only (not bare commas): the platform's
 						// contract is to percent-encode commas inside URLs and separate
 						// candidates with ", ". Treating a bare comma as a separator would
 						// slice a corrupted srcset into fragments that each look like a

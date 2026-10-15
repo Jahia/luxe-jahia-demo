@@ -50,10 +50,12 @@ jahiaComponent(
 						<Row>
 							<Figure layout="imgFull">
 								<LuxeImage
-									node={imageNode}
+									src={imageNode}
 									alt={t("alt.blog", { blog: title })}
-									sizes="(max-width: 1320px) 100vw, 1320px"
-									priority
+									sizes={["(max-width: 1320px) 100vw", "1320px"]}
+									// Above the fold: the LCP candidate
+									loading="eager"
+									fetchPriority="high"
 								/>
 							</Figure>
 						</Row>

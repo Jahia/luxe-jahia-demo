@@ -13,6 +13,8 @@ jahiaComponent(
 		{ renderContext },
 	) => {
 		const mode = renderContext.getMode();
-		return <Island component={ContactClient} props={{ target, feedbackMsg: feedbackMsg ?? "", mode }} />;
+		return (
+			<Island component={ContactClient} props={{ target, feedbackMsg: feedbackMsg ?? "", mode }} />
+		);
 	},
 );
