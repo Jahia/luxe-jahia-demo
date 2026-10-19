@@ -176,7 +176,8 @@
 		"estate": "vista de la propiedad: {{estate}}",
 		"realtor": "retrato del agente: {{realtor}}",
 		"agency": "vista de la agencia: {{agency}}",
-		"blog": "ilustración del blog: {{blog}}"
+		"blog": "ilustración del blog: {{blog}}",
+		"illustration": "ilustración de la sección: {{title}}"
 	},
 	"maps": {
 		"error": {
