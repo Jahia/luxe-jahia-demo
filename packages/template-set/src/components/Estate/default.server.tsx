@@ -1,4 +1,4 @@
-import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage, JLink } from "@jahia/javascript-modules-library";
 import { ClickableCard } from "design-system";
 import placeholder from "/static/img/img-placeholder.jpg";
 import type { EstateProps } from "./types";
@@ -15,29 +15,31 @@ jahiaComponent(
 		const locale = currentResource.getLocale().getLanguage();
 
 		return (
-			<ClickableCard
-				href={buildNodeUrl(currentNode)}
-				title={title}
-				image={({ className }) => (
-					<JImage
-						node={images?.[0]}
-						alt={t("alt.estate", { estate: title })}
-						fallback={placeholder}
-						className={className}
-						layout="constrained"
-						// The card is one cell of a grid that goes from one to three columns, which
-						// no single slot width describes
-						sizes="(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px"
-					/>
-				)}
-				description={
-					<>
-						{bedrooms} {t("estate.bedrooms.label")} <span>✦</span> {surface?.toLocaleString(locale)}{" "}
-						m<sup>2</sup>
-					</>
-				}
-				footer={price != null ? `${price.toLocaleString(locale)}€` : undefined}
-			/>
+			// The card is the anchor, so the link is handed to it rather than wrapped around it
+			<JLink node={currentNode} asChild>
+				<ClickableCard
+					title={title}
+					image={({ className }) => (
+						<JImage
+							node={images?.[0]}
+							alt={t("alt.estate", { estate: title })}
+							fallback={placeholder}
+							className={className}
+							layout="constrained"
+							// The card is one cell of a grid that goes from one to three columns, which
+							// no single slot width describes
+							sizes="(max-width: 768px) 100vw,(max-width: 992px) 50vw,(max-width: 1320px) 30vw, 400px"
+						/>
+					)}
+					description={
+						<>
+							{bedrooms} {t("estate.bedrooms.label")} <span>✦</span>{" "}
+							{surface?.toLocaleString(locale)} m<sup>2</sup>
+						</>
+					}
+					footer={price != null ? `${price.toLocaleString(locale)}€` : undefined}
+				/>
+			</JLink>
 		);
 	},
 );

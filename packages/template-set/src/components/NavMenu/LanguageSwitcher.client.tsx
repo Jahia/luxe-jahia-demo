@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import type { AnchorProps } from "@jahia/javascript-modules-library";
 import classes from "./LanguageSwitcher.client.module.css";
 
 export default function LanguageSwitcherClient({
@@ -9,9 +10,10 @@ export default function LanguageSwitcherClient({
 }: {
 	currentLocaleName: string;
 	localesAndUrls: {
+		language: string;
 		localeName: string;
 		isCurrent: boolean;
-		url: string;
+		anchor: AnchorProps;
 	}[];
 	mode: string;
 }) {
@@ -34,15 +36,18 @@ export default function LanguageSwitcherClient({
 				{currentLocaleName}
 			</button>
 			<ul className={clsx(classes.menu, { show: isOpen })}>
-				{localesAndUrls?.map(({ localeName, isCurrent, url }) => {
+				{localesAndUrls?.map(({ language, localeName, isCurrent, anchor }) => {
 					return (
-						<li key={localeName}>
+						<li key={language}>
 							<a
-								href={url}
+								{...anchor}
+								// The target is the same page in another language, which is what
+								// hreflang states — and it is how the tests find the locale links
+								hrefLang={language}
 								className={clsx(classes.item, {
 									active: isCurrent,
 								})}
-								aria-current={isCurrent}
+								aria-current={isCurrent ? "page" : undefined}
 								suppressHydrationWarning={suppressHydrationWarning}
 							>
 								{localeName}

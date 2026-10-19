@@ -22,12 +22,14 @@ describe('Content - 25 Layout shell', () => {
 		Footer.get().getCopyright().should('contain.text', `2002-${new Date().getFullYear()}`)
 	})
 
-	it('opens external footer links in a new tab with rel=noreferrer', () => {
+	it('opens external footer links in a new tab with rel=noopener noreferrer', () => {
+		// The platform link API adds `noopener` to every `_blank` link: the hand-written anchors
+		// only carried `noreferrer`, which leaves the opened page a handle on this one
 		Footer.get()
 			.getResourceLinks()
 			.should('have.length.at.least', 3)
 			.each(($link) => {
-				cy.wrap($link).should('have.attr', 'target', '_blank').and('have.attr', 'rel', 'noreferrer')
+				cy.wrap($link).should('have.attr', 'target', '_blank').and('have.attr', 'rel', 'noopener noreferrer')
 			})
 	})
 

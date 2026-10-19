@@ -1,4 +1,4 @@
-import { buildNodeUrl, jahiaComponent, JImage } from "@jahia/javascript-modules-library";
+import { jahiaComponent, JImage, JLink } from "@jahia/javascript-modules-library";
 import type { AgencyProps } from "./types";
 import classes from "./default.module.css";
 import placeholder from "/static/img/agency-placeholder.jpg";
@@ -16,7 +16,7 @@ jahiaComponent(
 		const { t } = useTranslation();
 
 		return (
-			<a className={classes.card} href={buildNodeUrl(currentNode)}>
+			<JLink node={currentNode} className={classes.card}>
 				<JImage
 					node={imageNode}
 					alt={t("alt.agency", { agency: name })}
@@ -30,7 +30,7 @@ jahiaComponent(
 					{address && <p>{address}</p>}
 					{phone && <p>{phone}</p>}
 				</div>
-			</a>
+			</JLink>
 		);
 	},
 );
