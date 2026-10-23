@@ -1,13 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ContentHeader } from "./index.tsx";
+import { Image } from "../Image/index.tsx";
+import type { ComponentProps } from "react";
 
-// Sample image using placehold.co
-const sampleImage = {
-	src: "https://placehold.co/500x500?text=Sample+Image",
-	alt: "Sample placeholder image",
-	width: 500,
-	height: 500,
-};
+// Sample image using placehold.co, rendered through the header's image slot
+const sampleImage = (props: ComponentProps<typeof Image>) => (
+	<Image
+		src="https://placehold.co/500x500?text=Sample+Image"
+		alt="Sample placeholder image"
+		width={500}
+		height={500}
+		{...props}
+	/>
+);
 
 const meta = {
 	title: "Molecules/ContentHeader",
@@ -44,8 +49,8 @@ const meta = {
 			description: "Optional description (supports HTML)",
 		},
 		image: {
-			control: { type: "object" },
-			description: "Image properties (src, alt, width, height, etc.)",
+			control: false,
+			description: "Image slot: a component receiving the header's class and loading attributes",
 		},
 		className: {
 			control: { type: "text" },

@@ -1,15 +1,13 @@
 import {
 	buildModuleFileUrl,
 	buildNodeUrl,
+	getImageProps,
 	Island,
 	jahiaComponent,
-	server,
 } from "@jahia/javascript-modules-library";
 import type { RealtorProps } from "./types.js";
 import placeholder from "/static/img/agent-placeholder.jpg";
 import AnimateClient from "~/components/Realtor/Animate.client";
-import { imageNodeToImgProps } from "~/commons/libs/imageNodeToProps";
-import type { ImgHTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 
 jahiaComponent(
@@ -21,22 +19,17 @@ jahiaComponent(
 	},
 	(
 		{ firstName, lastName, jobPosition, image: imageNode, animate: videoNode }: RealtorProps,
-		{ currentNode, renderContext },
+		{ currentNode },
 	) => {
 		const { t } = useTranslation();
 		const fullName = [firstName, lastName].filter(Boolean).join(" ");
-		let imageProps: ImgHTMLAttributes<HTMLImageElement> = {
-			src: buildModuleFileUrl(placeholder),
-		};
-		if (imageNode) {
-			// Cache dependency for all nodes involved
-			server.render.addCacheDependency({ node: imageNode }, renderContext);
-			imageProps = imageNodeToImgProps(imageNode, {
-				alt: t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() }),
-				widths: [300, 600], // 600 is for double density screens
-			});
-			imageProps.sizes = "300px"; // Ensure the image is always 300px wide
-		}
+		const alt = t("alt.realtor", { realtor: fullName || currentNode.getDisplayableName() });
+
+		// The card is an island, so it receives serializable props: getImageProps is the tier
+		// below <JImage>. The placeholder describes the realtor too, so the card is never unlabelled.
+		const imageProps = imageNode
+			? getImageProps(imageNode, { alt, width: 300 })
+			: { src: buildModuleFileUrl(placeholder), alt };
 
 		const jobPositionLanguagesTranslation = {
 			junior: t("realtor.jobPosition.junior"),

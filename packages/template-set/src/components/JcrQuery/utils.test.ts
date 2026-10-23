@@ -44,9 +44,9 @@ const renderContext = {
 
 const baseQuery: JcrQueryProps = {
 	"jcr:title": "My Query",
-	type: "luxe:blogPost",
-	criteria: "jcr:created",
-	sortDirection: "asc",
+	"type": "luxe:blogPost",
+	"criteria": "jcr:created",
+	"sortDirection": "asc",
 } as JcrQueryProps;
 
 const build = (overrides: Partial<JcrQueryProps> = {}) =>
@@ -72,9 +72,7 @@ describe("buildQuery", () => {
 			getPath: () => "/sites/mysite/contents/blog",
 		} as unknown as JCRNodeWrapper;
 		const { jcrQuery } = build({ startNode });
-		expect(normalize(jcrQuery)).toContain(
-			"WHERE ISDESCENDANTNODE('/sites/mysite/contents/blog')",
-		);
+		expect(normalize(jcrQuery)).toContain("WHERE ISDESCENDANTNODE('/sites/mysite/contents/blog')");
 	});
 
 	it("injects the queried type and the ordering criteria", () => {

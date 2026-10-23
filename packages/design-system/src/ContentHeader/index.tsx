@@ -1,24 +1,26 @@
 import clsx from "clsx";
 import classes from "./styles.module.css";
-import { Image } from "../Image";
-import type { ImgHTMLAttributes } from "react";
+import type { JSXElementConstructor } from "react";
 
 /* eslint-disable @eslint-react/dom/no-dangerously-set-innerhtml */
 export const ContentHeader = ({
 	title,
 	description,
-	image: { className: imageClassName, ...imageProps },
+	image: Image,
 	className,
 }: {
 	title: string;
 	description?: string;
-	image: ImgHTMLAttributes<HTMLImageElement>;
+	/**
+	 * The header image, rendered with the class and the loading attributes the header owns: a
+	 * content header is above the fold, so its image is the LCP candidate.
+	 */
+	image: JSXElementConstructor<{ className: string; loading: "eager"; fetchPriority: "high" }>;
 	className?: string;
 }) => {
 	return (
 		<header className={clsx(classes.main, className)}>
-			{/* A content header is above the fold by definition: its image is the LCP candidate */}
-			<Image className={clsx(classes.image, imageClassName)} priority {...imageProps} />
+			<Image className={classes.image} loading="eager" fetchPriority="high" />
 			<div className={classes.content}>
 				<h1 className={classes.title}>{title}</h1>
 				{description && (

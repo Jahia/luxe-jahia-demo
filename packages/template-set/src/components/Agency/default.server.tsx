@@ -17,12 +17,11 @@ jahiaComponent(
 		return (
 			<a className={classes.card} href={buildNodeUrl(currentNode)}>
 				<LuxeImage
-					node={imageNode}
+					src={imageNode}
 					alt={t("alt.agency", { agency: name })}
 					fallback={placeholder}
 					className={classes.image}
-					widths={[200, 400]} // 400 is for double density screens
-					sizes="200px"
+					width={200}
 				/>
 				<div className={classes.containerText}>
 					<h2 className={classes.title}>{name}</h2>

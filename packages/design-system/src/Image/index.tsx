@@ -2,6 +2,9 @@ import type { ImgHTMLAttributes, RefObject } from "react";
 import classes from "./styles.module.css";
 import clsx from "clsx";
 
+/** The Luxe image look, for an `<img>` rendered outside this component (the platform `<JImage>`). */
+export const imageClass = classes.img;
+
 /**
  * Image
  * - Accepts native <img> props only.
@@ -25,9 +28,11 @@ export const Image = ({
 	/** Set on the LCP/hero image so it is not lazy-loaded. */
 	priority?: boolean;
 }) => {
-	// Only set loading="lazy" if both width and height exist and user didn't specify loading.
-	const finalLoading =
-		loading ?? (priority ? "eager" : width != null && height != null ? "lazy" : undefined);
+	// `priority` wins over a `loading` carried by the props (`getImageProps` defaults it to "lazy");
+	// otherwise set loading="lazy" only if both width and height exist and the caller did not say.
+	const finalLoading = priority
+		? "eager"
+		: (loading ?? (width != null && height != null ? "lazy" : undefined));
 
 	return (
 		<img
