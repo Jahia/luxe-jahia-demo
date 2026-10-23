@@ -49,18 +49,15 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 					filteredPath: 'luxe.zip',
 				})
 			})
-			// Fixtures resolve from cypress/fixtures/, the artifacts are in ./artifacts/
-			.then(() => cy.fixture('../../artifacts/luxe.zip', 'binary'))
-			.then((siteArchive: string) => {
+			.then(() => {
 				cy.log('Importing luxe.zip...')
-				// The provisioning script refers to the uploaded file by its name
-				return cy.runProvisioningScript({
-					script: {
-						fileContent: '- importSite: "luxe.zip"',
-						type: 'application/yaml',
-					},
-					files: [{ fileName: 'luxe.zip', fileContent: siteArchive, type: 'application/zip' }],
-				})
+				// The site archive is too large for cy.runProvisioningScript, which uploads from the
+				// browser. The provisioning script refers to the uploaded file by its name.
+				return cy.task(
+					'provisionWithFile',
+					{ script: '- importSite: "luxe.zip"', artifactFilename: 'luxe.zip' },
+					{ timeout: 300000 },
+				)
 			})
 			.then(() => {
 				cy.log(`Publishing site '${siteKey}'...`)
