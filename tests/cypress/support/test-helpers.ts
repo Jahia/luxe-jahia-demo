@@ -34,34 +34,37 @@ export const createLuxeSite = (siteKey: string, prepackagedSiteURL: string) => {
 			},
 		}).then(() => publishAndWaitJobEnding(`/sites/${siteKey}`, ['en', 'fr']))
 	} else {
-		// Otherwise, assume it's a glob filename related to the ./artifacts/ folder
+		// Otherwise, assume it's a glob filename related to the ./artifacts/ folder: the module jar
+		// holds META-INF/prepackagedSites/luxe.zip, which wraps the site export luxe.zip
 		cy.log(`Unzipping ${prepackagedSiteURL}...`)
-		const prepackagedArchivePath = 'META-INF/prepackagedSites/luxe-prepackaged.zip'
+		const prepackagedArchivePath = 'META-INF/prepackagedSites/luxe.zip'
 		cy.task('unzipArtifact', {
 			artifactFilename: prepackagedSiteURL,
 			filteredPath: prepackagedArchivePath,
 		})
 			.then(() => {
-				cy.log(`Extracting site.zip from ${prepackagedArchivePath}...`)
+				cy.log(`Extracting luxe.zip from ${prepackagedArchivePath}...`)
 				return cy.task('unzipArtifact', {
 					artifactFilename: prepackagedArchivePath,
-					filteredPath: 'site.zip',
+					filteredPath: 'luxe.zip',
 				})
 			})
-			.then(() => {
-				cy.log('Importing site.zip...')
-				const siteArchivePath = '../artifacts/site.zip'
+			// Fixtures resolve from cypress/fixtures/, the artifacts are in ./artifacts/
+			.then(() => cy.fixture('../../artifacts/luxe.zip', 'binary'))
+			.then((siteArchive: string) => {
+				cy.log('Importing luxe.zip...')
+				// The provisioning script refers to the uploaded file by its name
 				return cy.runProvisioningScript({
 					script: {
-						fileContent: `- importSite: "${siteArchivePath}"`,
+						fileContent: '- importSite: "luxe.zip"',
 						type: 'application/yaml',
 					},
-					files: [{ fileName: siteArchivePath }],
+					files: [{ fileName: 'luxe.zip', fileContent: siteArchive, type: 'application/zip' }],
 				})
 			})
 			.then(() => {
 				cy.log(`Publishing site '${siteKey}'...`)
-				publishAndWaitJobEnding(`/sites/${siteKey}`, ['en'])
+				publishAndWaitJobEnding(`/sites/${siteKey}`, ['en', 'fr'])
 			})
 	}
 }
