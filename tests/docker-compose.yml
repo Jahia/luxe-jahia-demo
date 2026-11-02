@@ -22,6 +22,7 @@ services:
             - jahia
         environment:
             - MANIFEST=${MANIFEST}
+            - MODULE_ID=luxe-jahia-demo
             - SUPER_USER_PASSWORD=${SUPER_USER_PASSWORD}
             - JAHIA_URL=http://jahia:8080
             - NEXUS_USERNAME=${NEXUS_USERNAME}
