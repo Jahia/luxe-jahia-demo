@@ -95,6 +95,13 @@ describe('Editing - 81 Page Builder CRUD', () => {
 
 	it('edits the textIllustrated title and sees the render update', () => {
 		const pb = openPageBuilder()
+		// The page-builder box of jContent binds the dblclick listener when it mounts, and marks
+		// that mount with the enablePointerEvents class (a hashed CSS-module name).
+		// force: true skips the actionability check, so wait for the class first.
+		pb.getModule(illustratedPath)
+			.get()
+			.should('have.attr', 'class')
+			.and('match', /enablePointerEvents/)
 		// Double-clicking a module is the canonical way to open its editor
 		pb.getModule(illustratedPath).doubleClick({ force: true })
 
