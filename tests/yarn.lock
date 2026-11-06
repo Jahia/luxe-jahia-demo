@@ -1805,8 +1805,8 @@ __metadata:
   linkType: hard
 
 "@jahia/eslint-config@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "@jahia/eslint-config@npm:2.1.2"
+  version: 2.2.0
+  resolution: "@jahia/eslint-config@npm:2.2.0"
   dependencies:
     "@babel/core": "npm:^7.22.5"
     "@babel/eslint-parser": "npm:^7.21.8"
@@ -1825,12 +1825,12 @@ __metadata:
   peerDependencies:
     eslint: ">= 5.15.1"
     eslint-plugin-import: ">=2.25.2"
-    eslint-plugin-jest: "*"
+    eslint-plugin-jest: ">=27.2.1"
     eslint-plugin-n: ">=15.0.0"
     eslint-plugin-promise: ">=6.0.0"
     eslint-plugin-react: ">=7.32.2"
     eslint-plugin-react-hooks: ">=4.6.0"
-  checksum: 10c0/a9968e17b035b63e34283941fc2abc60392d8143ac025369b11cd2ea5e58d02b85c9156570fe4c943205e5bd826f672e73f647b77204cf1397a8758c65f2c605
+  checksum: 10c0/75e919986059ecfbbd9d0a1bf36051251cd72c842afea012446e5271381b5a1772e80f5927d9f9bfe93140fc31c277e4e9d23af55c9bdf1074a40b11579f14eb
   languageName: node
   linkType: hard
 
