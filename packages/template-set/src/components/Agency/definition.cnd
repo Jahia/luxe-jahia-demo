@@ -7,5 +7,6 @@
  - address (string)
  - phone (string)
  - email (string)
+ - openingHours (string) multiple indexed=no
  - realtors (weakreference) multiple < 'luxe:realtor'
  + * (luxe:estate) = luxe:estate
