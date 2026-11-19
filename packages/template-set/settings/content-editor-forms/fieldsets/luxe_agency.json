@@ -8,10 +8,15 @@
 				"type": "image",
 				"accordionItem": {
 					"picker-media": {
-						"rootPath": "/sites/{site}/files",
+						"rootPath": "/sites/{site}/files/agencies",
 						"treeConfig": {
 							"hideRoot": false
 						}
+					}
+				},
+				"pickerConfig": {
+					"pickerDialog": {
+						"displaySiteSwitcher": false
 					}
 				}
 			}
@@ -40,6 +45,10 @@
 					}
 				}
 			}
+		},
+		{
+			"name": "openingHours",
+			"selectorType": "OpeningHoursSelector"
 		}
 	]
 }

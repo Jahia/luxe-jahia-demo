@@ -1,0 +1,25 @@
+{
+	"nodeType": "luxe:agency",
+	"priority": 2.0,
+	"sections": [{
+		"name":"content",
+		"fieldSets": [
+			{
+				"name": "<main>",
+				"fields": [{
+					"name": "image",
+					"rank": "1.5"
+				}]
+			},
+			{
+				"name": "agencyContact",
+				"labelKey": "luxe_agency.fieldset.contact",
+				"fields": [
+					{ "name": "address", "rank": 1 },
+					{ "name": "email", "rank": 2 },
+					{ "name": "phone", "rank": 3 }
+				]
+			}
+		]
+	}]
+}
